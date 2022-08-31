@@ -1,6 +1,6 @@
 {
-  "name": "frontend-starter",
-  "version": "1.0.0",
+  "name": "sealcaster-frontend",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "start": "vite",
@@ -9,8 +9,7 @@
     "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
     "generate-css-types": "tailwindcss-classnames -o src/classnames/tailwind.ts && prettier --write src/classnames/tailwind.ts",
     "prestart": "yarn generate-css-types",
-    "prebuild": "yarn generate-css-types",
-    "update": "yarn build && git add . && git commit -m 'update' && git push"
+    "prebuild": "yarn generate-css-types"
   },
   "browserslist": {
     "production": [
@@ -26,9 +25,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^2.0.1",
-    "preact": "^10.10.6",
-    "unfetch": "^4.2.0",
-    "valtio": "^1.6.4"
+    "preact": "^10.10.6"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.3.0",
