@@ -21,10 +21,10 @@
   --primary-background: #1a0259;
   --primary-dark-red: #210030;
 
-  --accent-light-transparent: #ff7bed69;
-  --secondary-light-transparent: #fed82369;
-  --accent-light-active-transparent: #ff7bed9e;
-  --secondary-light-active-transparent: #fed8239e;
+  --accent-light-transparent: #fed82369;
+  --secondary-light-transparent: #ff7bed69;
+  --accent-light-active-transparent: #fed8239e;
+  --secondary-light-active-transparent: #ff7bed9e;
 
   --accent-semi-transparent: rgba(254, 216, 35, 0.4);
   --primary-semi-transparent: rgba(21, 161, 252, 0.5);
