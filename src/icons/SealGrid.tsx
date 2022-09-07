@@ -1,10 +1,10 @@
-import classnames, { stroke } from 'classnames/tailwind'
+import { stroke } from 'classnames/tailwind'
 
-const strokeSecondaryDimmed = classnames(stroke('stroke-secondary-dimmed'))
-const strokeLine = classnames(stroke('stroke-accent'))
-const strokeSecondaryLine = classnames(stroke('stroke-secondary'))
-const strokePrimaryLine = classnames(stroke('stroke-primary'))
-const strokeTertiaryLine = classnames(stroke('stroke-tertiary'))
+const strokeSecondaryDimmed = stroke('stroke-secondary-dimmed')
+const strokeLine = stroke('stroke-accent')
+const strokeSecondaryLine = stroke('stroke-secondary')
+const strokePrimaryLine = stroke('stroke-primary')
+const strokeTertiaryLine = stroke('stroke-tertiary')
 
 export default function () {
   return (
@@ -13,7 +13,6 @@ export default function () {
       width="406"
       height="126"
       viewBox="0 0 406 126"
-      fill="none"
     >
       <path
         d="M71.5099 82.086C71.5099 77.2659 75.312 73.3584 80.002 73.3584C84.6921 73.3584 88.4941 77.2659 88.4941 82.086C88.4941 86.9061 84.6921 82.0861 80.002 82.0861C75.312 82.0861 71.5099 86.9061 71.5099 82.086Z"

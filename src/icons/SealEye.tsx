@@ -1,7 +1,7 @@
-import classnames, { stroke } from 'classnames/tailwind'
+import { stroke } from 'classnames/tailwind'
 
-const strokeSecondaryDimmed = classnames(stroke('stroke-secondary-dimmed'))
-const strokeTertiaryLine = classnames(stroke('stroke-tertiary'))
+const strokeSecondaryDimmed = stroke('stroke-secondary-dimmed')
+const strokeTertiaryLine = stroke('stroke-tertiary')
 
 export default function () {
   return (
@@ -10,7 +10,6 @@ export default function () {
       width="55"
       height="46"
       viewBox="0 0 55 46"
-      fill="none"
     >
       <path
         d="M27.4123 34.6991C28.791 34.6991 29.9086 34.8644 29.9086 33.283C29.9086 31.7016 28.791 30.4196 27.4123 30.4196C26.0336 30.4196 24.9159 31.7016 24.9159 33.283C24.9159 34.8644 26.0336 34.6991 27.4123 34.6991ZM27.4123 34.6991C27.4123 35.6501 27.4123 37.7661 27.4123 38.622M27.4123 38.622C27.4123 41.475 30.9785 41.4749 30.9785 38.622M27.4123 38.622C27.4123 41.475 23.8461 41.475 23.8461 38.622"

@@ -1,9 +1,9 @@
-import classnames, { fill } from 'classnames/tailwind'
+import { fill } from 'classnames/tailwind'
 
-const fillAccent = classnames(fill('fill-accent'))
-const fillSecondary = classnames(fill('fill-secondary'))
-const fillPrimary = classnames(fill('fill-primary'))
-const fillTertiary = classnames(fill('fill-tertiary'))
+const fillAccent = fill('fill-accent')
+const fillSecondary = fill('fill-secondary')
+const fillPrimary = fill('fill-primary')
+const fillTertiary = fill('fill-tertiary')
 
 export default function () {
   return (
@@ -12,12 +12,11 @@ export default function () {
       width="36"
       height="6"
       viewBox="0 0 36 6"
-      fill="none"
     >
-      <circle cx="3" cy="3.00024" r="3" className={fillAccent} />
-      <circle cx="13" cy="3.00024" r="3" className={fillTertiary} />
-      <circle cx="23" cy="3.00024" r="3" className={fillPrimary} />
-      <circle cx="33" cy="3.00024" r="3" className={fillSecondary} />
+      <circle cx="3" cy="3" r="3" className={fillAccent} />
+      <circle cx="13" cy="3" r="3" className={fillTertiary} />
+      <circle cx="23" cy="3" r="3" className={fillPrimary} />
+      <circle cx="33" cy="3" r="3" className={fillSecondary} />
     </svg>
   )
 }
