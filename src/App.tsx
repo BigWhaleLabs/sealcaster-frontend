@@ -1,8 +1,8 @@
-import AllSeeingSealEye from 'icons/AllSeeingSealEye'
 import Dots from 'icons/Dots'
-import Eye from 'icons/Eye'
 import Logo from 'icons/Logo'
+import OpenEye from 'icons/OpenEye'
 import Root from 'components/Root'
+import SealEye from 'icons/SealEye'
 import SealGrid from 'icons/SealGrid'
 
 export default function () {
@@ -10,8 +10,8 @@ export default function () {
     <Root>
       <Logo />
       <SealGrid />
-      <AllSeeingSealEye />
-      <Eye />
+      <SealEye />
+      <OpenEye />
       <Dots />
     </Root>
   )
