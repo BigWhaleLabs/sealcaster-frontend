@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./index.html', './src/**/!(tailwind).{ts,tsx}'],
   theme: {
+    fontFamily: {
+      primary: ['"Space Grotesk"', 'sans-serif'],
+    },
     extend: {
       colors: {
         orb: 'var(--orb)',

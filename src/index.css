@@ -61,6 +61,8 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--formal-accent);
 }
 
 @media screen and (max-width: 600px) {
