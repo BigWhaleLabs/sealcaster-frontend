@@ -1,5 +1,4 @@
 import { BodyText, HeaderText } from 'components/Text'
-import { Suspense } from 'preact/compat'
 import classnames, {
   alignItems,
   display,
