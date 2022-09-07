@@ -34,10 +34,40 @@
   --error-semi-transparent: rgba(255, 123, 131, 0.2);
   --selection: #ff7bed35;
   --transparent: #00000000;
+
+  --bg-grid: conic-gradient(
+    from 90deg at 0.06rem 0.06rem,
+    var(--primary-dark) 90deg,
+    var(--primary-background) 0
+  );
+}
+
+html {
+  background-color: var(--primary-dark);
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+  background-size: 100% auto, 100% auto, 3rem 3rem;
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-position: top, top, 0;
+  background-image: url(), url('/img/background.webp'), var(--bg-grid);
+  caret-color: var(--primary);
 }
 
 body {
+  overflow: overlay;
+  scroll-behavior: smooth;
   margin: 0;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (max-width: 600px) {
+  /* Grid for mobiles */
+  html {
+    background-color: var(--primary-dark);
+    background-size: auto auto, 100% 30%, 2rem, 2rem;
+    background-position: top, top, 0;
+    background-image: url(), url('/img/background.webp'), var(--bg-grid);
+  }
 }
