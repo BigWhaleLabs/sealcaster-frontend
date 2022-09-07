@@ -20,6 +20,7 @@ module.exports = {
         'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
         'primary-background': 'var(--primary-background)',
         'primary-dark-red': 'var(--primary-dark-red)',
+        'secondary-dimmed': 'var(--secondary-dimmed)',
 
         'accent-light-transparent': 'var(--accent-light-transparent)',
         'accent-light-active-transparent':
