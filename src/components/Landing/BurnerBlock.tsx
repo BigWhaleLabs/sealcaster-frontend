@@ -12,6 +12,13 @@ import classnames, {
   textColor,
 } from 'classnames/tailwind'
 
+const wrapper = classnames(
+  space('space-y-6'),
+  display('flex'),
+  flexDirection('flex-col'),
+  alignItems('items-center')
+)
+
 const buttonContentWrapper = classnames(
   display('flex'),
   flexDirection('flex-row'),
@@ -27,14 +34,7 @@ const buttonWrapper = classnames(
 
 export default function () {
   return (
-    <div
-      className={classnames(
-        space('space-y-6'),
-        display('flex'),
-        flexDirection('flex-col'),
-        alignItems('items-center')
-      )}
-    >
+    <div className={wrapper}>
       <SealGrid />
       <div className={space('space-y-2')}>
         <HeaderText center big extraLeading>
