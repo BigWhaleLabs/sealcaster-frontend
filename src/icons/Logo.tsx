@@ -1,4 +1,4 @@
-import { fill, stroke } from 'classnames/tailwind'
+import { stroke } from 'classnames/tailwind'
 
 const strokeLine = stroke('stroke-accent')
 const strokeSecondaryLine = stroke('stroke-secondary')
