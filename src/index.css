@@ -76,3 +76,12 @@ body {
     background-image: url(), url('/img/background.webp'), var(--bg-grid);
   }
 }
+
+svg:not(.Toastify__toast-icon svg) {
+  fill: none;
+}
+path:not(.walletconnect-qrcode__image path),
+circle {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

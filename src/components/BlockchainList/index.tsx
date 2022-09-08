@@ -1,5 +1,5 @@
 import { AccentText, BodyText } from 'components/Text'
-import Eye from 'components/Icons/Eye'
+import OpenEye from 'icons/OpenEye'
 import PostsList from 'components/BlockchainList/PostsList'
 import classnames, {
   alignItems,
@@ -7,14 +7,6 @@ import classnames, {
   flexDirection,
   gap,
 } from 'classnames/tailwind'
-// import { useSnapshot } from 'valtio'
-// import AgeWarning from 'components/BlockchainList/AgeWarning'
-// import FilterBySelectedToken from 'components/BlockchainList/FilterBySelectedToken'
-// import HintCard from 'components/HintCard'
-// import NotificationStore from 'stores/NotificationStore'
-// import PostsList from 'components/BlockchainList/PostsList'
-// import PreviousTweetsLayout from 'components/PostsLayout'
-// import classNamesToString from 'helpers/classNamesToString'
 
 const blockchainListWrapper = classnames(
   display('flex'),
@@ -38,7 +30,7 @@ export default function () {
     <div className={blockchainListWrapper}>
       <div className={listHeader}>
         <div className={listTitleWithIcon}>
-          <Eye />
+          <OpenEye />
           <BodyText>Recent Casts</BodyText>
         </div>
         <AccentText small primary color="text-primary-semi-dimmed">
