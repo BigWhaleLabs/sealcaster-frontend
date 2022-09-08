@@ -15,6 +15,7 @@ export default function () {
         needNetworkChange={false}
         getENSName={(address) => undefined}
         logoText="SealCaster"
+        noWalletText={'Connect burner wallet'}
       />
       <Logo />
       <SealGrid />

@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "@big-whale-labs/ui-kit": "^1.0.1",
+    "@big-whale-labs/ui-kit": "^1.0.4",
     "@vitejs/plugin-react": "^2.0.1",
     "preact": "^10.10.6"
   },

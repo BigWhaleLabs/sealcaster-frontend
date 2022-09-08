@@ -2823,15 +2823,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/ui-kit@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@big-whale-labs/ui-kit@npm:1.0.1"
+"@big-whale-labs/ui-kit@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@big-whale-labs/ui-kit@npm:1.0.4"
   dependencies:
     "@vitejs/plugin-react": ^2.0.1
     preact: ^10.10.6
     react-router-dom: ^6.3.0
     unfetch: ^4.2.0
-  checksum: 6425052d322597c4e05d98d7c6882b48ae97a9d49b8e5f397aad49d4450dd6be9415aa44a0cc42f5acb24e7e7befbb526c039ec64125b2520ce7980e81795e44
+  checksum: 0f14fdb823d417adf8fc53ce071056c177cc28c6b70830dc8baf564de99abf389674e8e1b2f0f644cc8c466f9e31c6f4132bbc2e0ab362b97a912427ffaf2221
   languageName: node
   linkType: hard
 
@@ -13268,7 +13268,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "sealcaster-frontend@workspace:."
   dependencies:
-    "@big-whale-labs/ui-kit": ^1.0.1
+    "@big-whale-labs/ui-kit": ^1.0.4
     "@preact/preset-vite": ^2.3.0
     "@types/node": ^18.7.14
     "@typescript-eslint/eslint-plugin": ^5.36.1
