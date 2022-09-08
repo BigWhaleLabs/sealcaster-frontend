@@ -2980,15 +2980,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/ui-kit@npm:^1.0.11":
-  version: 1.0.11
-  resolution: "@big-whale-labs/ui-kit@npm:1.0.11"
+"@big-whale-labs/ui-kit@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "@big-whale-labs/ui-kit@npm:1.0.12"
   dependencies:
     "@vitejs/plugin-react": ^2.0.1
     preact: ^10.10.6
     react-router-dom: ^6.3.0
     unfetch: ^4.2.0
-  checksum: 8b07b42bee6fc7ec18df1372f8fb1bf7cd7f9e1af83e9f4113450ff20bfe7bb8005f37dc78d163122ea0323aa71bc1011ebbdf009a9a3d8b33c3ed82eff0b2ab
+  checksum: 89aeb0d88fc61edfc0e43f23c7367f97321a1797c4f6fdc10bf8ef5d7a464b7953e084f5407f6dce22f8df1f6ead958b3453a8c461595c79337260f07677bcad
   languageName: node
   linkType: hard
 
@@ -17877,7 +17877,7 @@ __metadata:
     "@big-whale-labs/frontend-utils": ^0.0.8
     "@big-whale-labs/seal-cred-posts-contract": ^0.0.13
     "@big-whale-labs/stores": ^0.1.16
-    "@big-whale-labs/ui-kit": ^1.0.11
+    "@big-whale-labs/ui-kit": ^1.0.12
     "@coinbase/wallet-sdk": ^3.5.2
     "@esbuild-plugins/node-globals-polyfill": ^0.1.1
     "@esbuild-plugins/node-modules-polyfill": ^0.1.4
