@@ -13,6 +13,8 @@ module.exports = {
         secondary: 'var(--secondary)',
         tertiary: 'var(--tertiary)',
         'formal-accent': 'var(--formal-accent)',
+        'light-grey': 'var(--light-grey)',
+        'half-grey': 'var(--half-grey)',
 
         error: 'var(--error)',
         'error-dark': 'var(--error-dark)',
@@ -47,6 +49,24 @@ module.exports = {
         chart: '108px',
         time: '95px',
         glass: '107px',
+      },
+      lineHeight: {
+        3: '0.875rem',
+        5: '1.125rem',
+        6: '1.313rem',
+        7: '1.438rem',
+        8: '1.938rem',
+        11: '3.188rem',
+      },
+      screens: {
+        xxs: '17.5rem',
+        xs: '22.5rem',
+        sm: '28.125rem',
+        md: '37.5rem',
+        body: '41rem',
+      },
+      strokeWidth: {
+        1.5: '1.5',
       },
     },
     container: {

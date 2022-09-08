@@ -10,6 +10,8 @@
   --secondary: #ff7bed;
   --tertiary: #01feb6;
   --formal-accent: #efecd6;
+  --light-grey: #8899a6;
+  --half-grey: #505050;
 
   --error: #ff7b83;
   --error-dark: #3e1b1e;
@@ -73,4 +75,13 @@ body {
     background-position: top, top, 0;
     background-image: url(), url('/img/background.webp'), var(--bg-grid);
   }
+}
+
+svg:not(.Toastify__toast-icon svg) {
+  fill: none;
+}
+path:not(.walletconnect-qrcode__image path),
+circle {
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
