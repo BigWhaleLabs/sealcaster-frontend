@@ -1,4 +1,6 @@
+import BlockchainList from 'components/BlockchainList'
 import Dots from 'icons/Dots'
+import HowItWorks from 'components/HowItWorks'
 import Logo from 'icons/Logo'
 import OpenEye from 'icons/OpenEye'
 import Root from 'components/Root'
@@ -13,6 +15,8 @@ export default function () {
       <SealEye />
       <OpenEye />
       <Dots />
+      <HowItWorks />
+      <BlockchainList />
     </Root>
   )
 }
