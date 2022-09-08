@@ -58,6 +58,9 @@ module.exports = {
         8: '1.938rem',
         11: '3.188rem',
       },
+      fontSize: {
+        '4.5xl': '2rem',
+      },
       screens: {
         xxs: '17.5rem',
         xs: '22.5rem',

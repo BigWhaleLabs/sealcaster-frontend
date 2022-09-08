@@ -155,11 +155,16 @@ export function BodyText({
   )
 }
 
-const headerText = (accent = false, center?: boolean, extraLeading = false) =>
+const headerText = (
+  accent = false,
+  center?: boolean,
+  extraLeading = false,
+  big = false
+) =>
   classnames(
     fontFamily('font-primary'),
     fontWeight('font-bold'),
-    fontSize('text-2xl', 'xs:text-3xl', 'sm:text-4xl'),
+    fontSize(big ? 'text-3xl' : 'text-2xl', 'xs:text-3xl', 'sm:text-4xl'),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
       ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-11')
@@ -170,14 +175,18 @@ export function HeaderText({
   accent,
   center,
   extraLeading,
+  big,
   children,
 }: ChildrenProp & {
   accent?: boolean
   center?: boolean
   extraLeading?: boolean
+  big?: boolean
 }) {
   return (
-    <h1 className={headerText(accent, center, extraLeading)}>{children}</h1>
+    <h1 className={headerText(accent, center, extraLeading, big)}>
+      {children}
+    </h1>
   )
 }
 
@@ -238,4 +247,13 @@ const postText = classnames(
 )
 export function PostText({ children }: ChildrenProp) {
   return <p className={postText}>{children}</p>
+}
+
+const subHeaderContainer = classnames(
+  fontSize('text-sm'),
+  fontWeight('font-normal')
+)
+
+export function SubHeaderText({ children }: ChildrenProp) {
+  return <p className={subHeaderContainer}>{children}</p>
 }
