@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "start": "vite",
+    "start": "yarn generate-css-types && vite",
     "build": "cross-env NODE_ENV=production tsc && vite build",
     "pretty": "prettier --check src",
     "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
@@ -24,11 +24,27 @@
     ]
   },
   "dependencies": {
+    "@big-whale-labs/constants": "^0.1.28",
+    "@big-whale-labs/frontend-utils": "^0.0.8",
+    "@big-whale-labs/seal-cred-posts-contract": "^0.0.13",
+    "@big-whale-labs/stores": "^0.1.16",
+    "@coinbase/wallet-sdk": "^3.5.2",
     "@vitejs/plugin-react": "^2.0.1",
-    "preact": "^10.10.6"
+    "@walletconnect/web3-provider": "^1.8.0",
+    "dayjs": "^1.11.5",
+    "envalid": "^7.3.1",
+    "eth-rpc-errors": "^4.0.3",
+    "ethers": "^5.7.0",
+    "preact": "^10.10.6",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-intersection-observer": "^9.4.0",
+    "react-router-dom": "^6.3.0",
+    "valtio": "^1.7.0",
+    "web3modal": "^1.9.9"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.3.0",
+    "@typechain/ethers-v5": "^10.1.0",
     "@types/node": "^18.7.14",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",

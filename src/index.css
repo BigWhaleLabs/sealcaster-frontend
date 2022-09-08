@@ -10,6 +10,8 @@
   --secondary: #ff7bed;
   --tertiary: #01feb6;
   --formal-accent: #efecd6;
+  --light-grey: #8899a6;
+  --half-grey: #505050;
 
   --error: #ff7b83;
   --error-dark: #3e1b1e;
@@ -60,6 +62,8 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--formal-accent);
 }
 
 @media screen and (max-width: 600px) {
