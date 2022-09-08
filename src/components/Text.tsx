@@ -155,7 +155,7 @@ export function BodyText({
   )
 }
 
-const headerText = (accent = false, extraLeading = false) =>
+const headerText = (accent = false, center?: boolean, extraLeading = false) =>
   classnames(
     fontFamily('font-primary'),
     fontWeight('font-bold'),
@@ -163,17 +163,22 @@ const headerText = (accent = false, extraLeading = false) =>
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
       ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-11')
-      : lineHeight('leading-8')
+      : lineHeight('!leading-8'),
+    textAlign({ 'text-center': center })
   )
 export function HeaderText({
   accent,
+  center,
   extraLeading,
   children,
 }: ChildrenProp & {
   accent?: boolean
+  center?: boolean
   extraLeading?: boolean
 }) {
-  return <h1 className={headerText(accent, extraLeading)}>{children}</h1>
+  return (
+    <h1 className={headerText(accent, center, extraLeading)}>{children}</h1>
+  )
 }
 
 const loadingText = classnames(
