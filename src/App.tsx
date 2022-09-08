@@ -16,7 +16,7 @@ export default function () {
         account={undefined}
         needNetworkChange={false}
         logoText="SealCaster"
-        noWalletText={'Connect burner wallet'}
+        noWalletText="Connect burner wallet"
       />
       <Logo />
       <SealGrid />
