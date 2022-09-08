@@ -16,7 +16,7 @@ export default function () {
         account={undefined}
         needNetworkChange={false}
         getENSName={() => undefined}
-        logoText="SealCaster"
+        logoText=""
         noWalletText={'Connect burner wallet'}
       />
       <Logo />
