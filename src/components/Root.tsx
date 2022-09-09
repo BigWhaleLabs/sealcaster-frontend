@@ -1,10 +1,4 @@
-import {
-  classnames,
-  container,
-  margin,
-  maxWidth,
-  padding,
-} from 'classnames/tailwind'
+import { classnames, container, margin, padding } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
 
 const root = classnames(
