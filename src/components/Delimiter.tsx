@@ -1,29 +1,48 @@
+import { Size, displayFrom } from 'helpers/visibilityClassnames'
 import { StatusText } from 'components/Text'
 import classnames, {
   TArg,
   alignItems,
-  display,
   justifyContent,
   width,
 } from 'classnames/tailwind'
 
 const bottomSeparator = classnames(
   width('w-fit'),
-  display('hidden', 'xs:flex'),
   alignItems('items-center'),
   justifyContent('justify-center')
 )
 
 export default function ({
-  primary,
+  color = 'default',
   className,
+  showFrom = 'xs',
 }: {
-  primary?: boolean
+  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default'
   className?: TArg
+  showFrom?: Size
 }) {
   return (
-    <div className={classnames(bottomSeparator, className)}>
-      <StatusText color={primary ? 'primary' : 'default'}>|</StatusText>
+    <div
+      className={classnames(bottomSeparator, className, displayFrom(showFrom))}
+    >
+      <StatusText color={color}>|</StatusText>
     </div>
   )
 }
+
+// import { AccentText } from 'components/ui/Text'
+// import { displayFrom } from 'helpers/visibilityClassnames'
+// import classnames, { width } from 'classnames/tailwind'
+
+// const bottomSeparator = classnames(width('w-fit'), displayFrom('md'))
+
+// export default function () {
+//   return (
+//     <div className={bottomSeparator}>
+//       <AccentText small color="text-secondary">
+//         |
+//       </AccentText>
+//     </div>
+//   )
+// }

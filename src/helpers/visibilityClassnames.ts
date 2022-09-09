@@ -1,6 +1,6 @@
 import { display } from 'classnames/tailwind'
 
-type Size = 'xs' | 'sm' | 'md' | 'lg'
+export type Size = 'xs' | 'sm' | 'md' | 'lg'
 
 /**
  * If we put from/to into the classnames, it will break production build.
