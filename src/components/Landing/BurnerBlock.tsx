@@ -38,7 +38,7 @@ const buttonWrapper = classnames(
 const sealGridWrapper = classnames(
   display('flex'),
   justifyContent('justify-center'),
-  width('w-72', 'md:w-seal-grid')
+  width('w-60', 'sm:w-72', 'md:w-seal-grid')
 )
 
 export default function () {
