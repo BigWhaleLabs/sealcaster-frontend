@@ -68,6 +68,9 @@ module.exports = {
         md: '37.5rem',
         body: '41rem',
       },
+      padding: {
+        25: '6.25rem',
+      },
       strokeWidth: {
         1.5: '1.5',
       },

@@ -15,6 +15,7 @@ import {
   textAlign,
   textColor,
   textDecoration,
+  transitionProperty,
   whitespace,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
@@ -223,7 +224,7 @@ export function CardParagraph({ children }: ChildrenProp) {
 
 const statusText = (
   primary?: boolean,
-  color?: 'accent' | 'primary' | 'error' | 'default',
+  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default',
   textRight?: boolean
 ) =>
   classnames(
@@ -235,6 +236,7 @@ const statusText = (
       'text-primary': color === 'primary',
       'text-error': color === 'error',
       'text-formal-accent': color === 'default',
+      'text-primary-dimmed': color === 'dimmed',
     }),
     textAlign({ 'text-right': textRight })
   )
@@ -245,7 +247,7 @@ export function StatusText({
   children,
 }: ChildrenProp & {
   primary?: boolean
-  color?: 'accent' | 'primary' | 'error' | 'default'
+  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default'
   textRight?: boolean
 }) {
   return (
@@ -261,6 +263,52 @@ const postText = classnames(
 )
 export function PostText({ children }: ChildrenProp) {
   return <p className={postText}>{children}</p>
+}
+
+const footerLink = (active?: boolean) =>
+  classnames(
+    fontSize('text-sm'),
+    fontWeight('font-semibold'),
+    textDecoration({ underline: active, 'hover:underline': true }),
+    textColor({ 'text-accent': active, 'hover:text-accent': true }),
+    transitionProperty('transition-colors')
+  )
+export function FooterLink({
+  url,
+  children,
+  internal,
+}: ChildrenProp & { url: string; internal?: boolean }) {
+  if (internal)
+    return (
+      <Link
+        to={url}
+        className={({ isActive }: { isActive?: boolean }) =>
+          footerLink(isActive)
+        }
+      >
+        {children}
+      </Link>
+    )
+
+  return (
+    <a
+      className={footerLink()}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  )
+}
+
+const cardSubheaderContainer = classnames(
+  fontWeight('font-bold'),
+  fontFamily('font-primary'),
+  fontSize('text-lg')
+)
+export function CardSubheader({ children }: ChildrenProp) {
+  return <p className={cardSubheaderContainer}>{children}</p>
 }
 
 const subHeaderContainer = classnames(
