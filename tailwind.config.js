@@ -91,9 +91,9 @@ module.exports = {
       },
       boxShadow: {
         'button-active': '0rem 0rem 0.375rem #000000',
-        '2xl': '0rem 0.25rem 2.75rem 0rem rgb(0 0 0 / 0.25)',
-        lg: '0rem 0rem 1rem 0rem rgb(0 0 0 / 0.25)',
-        md: '0rem 0rem 0.375rem 0rem rgb(0 0 0 / 0.25)',
+        '2xl': '0rem 0.25rem 2.75rem 0rem #00000025',
+        lg: '0rem 0rem 1rem 0rem #00000025',
+        md: '0rem 0rem 0.375rem 0rem #00000025',
         button: '0rem 0rem 1.625rem #000000',
       },
     },
