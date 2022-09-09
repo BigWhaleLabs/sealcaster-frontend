@@ -38,9 +38,7 @@ const navbar = (visible?: boolean, withoutRightBlock?: boolean) =>
 
 const logoContainer = classnames(
   display('inline-flex'),
-  alignItems('items-center'),
-  space('sm:space-x-4', 'space-x-1'),
-  margin('mt-2')
+  alignItems('items-center')
 )
 
 const logoWithVersion = classnames(
