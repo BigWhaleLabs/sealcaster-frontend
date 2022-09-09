@@ -6,7 +6,6 @@ import classnames, {
   display,
   flexDirection,
   space,
-  textAlign,
 } from 'classnames/tailwind'
 
 const blocksWrapper = classnames(

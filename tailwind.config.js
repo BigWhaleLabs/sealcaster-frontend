@@ -51,6 +51,7 @@ module.exports = {
         glass: '107px',
         'full-105': '105%',
         body: '40.375rem',
+        'seal-grid': '25.313rem',
       },
       lineHeight: {
         3: '0.875rem',

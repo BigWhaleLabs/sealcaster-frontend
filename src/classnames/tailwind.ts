@@ -7252,6 +7252,7 @@ export type TWidth =
   | 'w-glass'
   | 'w-full-105'
   | 'w-body'
+  | 'w-seal-grid'
 
 export type TMinWidth =
   | 'min-w-0'

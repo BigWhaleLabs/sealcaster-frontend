@@ -11,6 +11,7 @@ import classnames, {
   justifyContent,
   space,
   textColor,
+  width,
 } from 'classnames/tailwind'
 
 const wrapper = classnames(
@@ -33,10 +34,18 @@ const buttonWrapper = classnames(
   justifyContent('justify-center')
 )
 
+const sealGridWrapper = classnames(
+  display('flex'),
+  justifyContent('justify-center'),
+  width('w-72', 'md:w-seal-grid')
+)
+
 export default function () {
   return (
     <div className={wrapper}>
-      <SealGrid />
+      <div className={sealGridWrapper}>
+        <SealGrid />
+      </div>
       <div className={space('space-y-2')}>
         <HeaderText center big extraLeading>
           Cast anonymously on Farcaster
