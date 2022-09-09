@@ -26,11 +26,12 @@ const navbar = (visible?: boolean, withoutRightBlock?: boolean) =>
     display('flex'),
     alignItems('items-center'),
     justifyContent(withoutRightBlock ? 'sm:justify-center' : 'justify-between'),
-    padding('py-4', 'px-4'),
+    padding('py-6', 'px-24'),
     space('xs:space-x-4', 'sm:space-x-9', 'lg:space-x-0'),
     zIndex('z-50'),
     backgroundColor(visible ? 'bg-primary-dark' : 'bg-transparent'),
-    transitionProperty('transition-all')
+    transitionProperty('transition-all'),
+    margin('mb-8')
   )
 
 const logoContainer = classnames(
