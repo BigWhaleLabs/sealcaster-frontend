@@ -1,4 +1,4 @@
-import { FooterLink } from 'components/Text'
+import { FooterLink } from 'components/ui/Text'
 import FooterLogo from 'icons/FooterLogo'
 import classnames, {
   alignItems,

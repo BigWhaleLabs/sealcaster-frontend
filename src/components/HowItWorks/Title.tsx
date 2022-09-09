@@ -1,4 +1,4 @@
-import { HeaderText } from 'components/Text'
+import { HeaderText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 
 export default function () {

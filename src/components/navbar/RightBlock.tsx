@@ -1,4 +1,4 @@
-import { SocialLink } from 'components/Text'
+import { SocialLink } from 'components/ui/Text'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
 import Discord from 'icons/Discord'

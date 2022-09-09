@@ -1,5 +1,5 @@
 import { Link } from 'wouter'
-import { LogoText } from 'components/Text'
+import { LogoText } from 'components/ui/Text'
 import { VNode } from 'preact'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { useCallback, useMemo, useState } from 'react'

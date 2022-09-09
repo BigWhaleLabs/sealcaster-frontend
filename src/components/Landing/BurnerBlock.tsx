@@ -1,4 +1,4 @@
-import { HeaderText, SubHeaderText } from 'components/Text'
+import { HeaderText, SubHeaderText } from 'components/ui/Text'
 import Button from 'components/ui/Button'
 import Dots from 'icons/Dots'
 import GradientBorder from 'components/ui/GradientBorder'
