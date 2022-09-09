@@ -49,6 +49,7 @@ module.exports = {
         chart: '108px',
         time: '95px',
         glass: '107px',
+        'full-105': '105%',
       },
       lineHeight: {
         3: '0.875rem',
@@ -67,6 +68,21 @@ module.exports = {
       },
       strokeWidth: {
         1.5: '1.5',
+      },
+      dropShadow: {
+        secondary: '0rem 0rem 0.625rem var(--secondary)',
+      },
+      keyframes: {
+        'pulse-horizontal': {
+          '0%, 100%': { transform: 'translateX(0.5rem)' },
+          '50%': { transform: 'translateX(0rem)' },
+        },
+      },
+      animation: {
+        'pulse-horizontal': 'pulse-horizontal 2s ease-in-out infinite',
+      },
+      inset: {
+        '-2.5': '-0.65rem',
       },
     },
     container: {
