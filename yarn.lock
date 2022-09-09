@@ -2980,18 +2980,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/ui-kit@npm:^1.0.13":
-  version: 1.0.13
-  resolution: "@big-whale-labs/ui-kit@npm:1.0.13"
-  dependencies:
-    "@vitejs/plugin-react": ^2.0.1
-    preact: ^10.10.6
-    react-router-dom: ^6.3.0
-    unfetch: ^4.2.0
-  checksum: a8f091ad090f1376f3086a820fd5d6e82f43b6f6926c1200bf4a635a7442f956d5f3c68471c71ea7aeddd7b91e196dda65f7aac410d71eb994f3004fa8b61fee
-  languageName: node
-  linkType: hard
-
 "@coinbase/wallet-sdk@npm:^3.5.2":
   version: 3.5.2
   resolution: "@coinbase/wallet-sdk@npm:3.5.2"
@@ -17877,7 +17865,6 @@ __metadata:
     "@big-whale-labs/frontend-utils": ^0.0.8
     "@big-whale-labs/seal-cred-posts-contract": ^0.0.13
     "@big-whale-labs/stores": ^0.1.16
-    "@big-whale-labs/ui-kit": ^1.0.13
     "@coinbase/wallet-sdk": ^3.5.2
     "@esbuild-plugins/node-globals-polyfill": ^0.1.1
     "@esbuild-plugins/node-modules-polyfill": ^0.1.4
@@ -19593,13 +19580,6 @@ __metadata:
     has-symbols: ^1.0.3
     which-boxed-primitive: ^1.0.2
   checksum: b7a1cf5862b5e4b5deb091672ffa579aa274f648410009c81cca63fed3b62b610c4f3b773f912ce545bb4e31edc3138975b5bc777fc6e4817dca51affb6380e9
-  languageName: node
-  linkType: hard
-
-"unfetch@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "unfetch@npm:4.2.0"
-  checksum: 6a4b2557e1d921eaa80c4425ce27a404945ec26491ed06e62598f333996a91a44c7908cb26dc7c2746d735762b13276cf4aa41829b4c8f438dde63add3045d7a
   languageName: node
   linkType: hard
 
