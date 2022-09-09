@@ -4,6 +4,7 @@ import { VNode } from 'preact'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { useCallback, useMemo, useState } from 'react'
 import RightBlock from 'components/navbar/RightBlock'
+import classNamesToString from 'helpers/classNamesToString'
 import classnames, {
   alignItems,
   backgroundColor,
@@ -76,17 +77,15 @@ export default function ({
 
   return (
     <nav className={navbar(backgroundVisible, hideWalletPart)}>
-      <Link to="/">
-        <a className={logoContainer}>
-          <div className={logoWrapper}>{logo}</div>
-          <div className={logoWithVersion}>
-            {typeof logoText === 'string' ? (
-              <LogoText>{logoText}</LogoText>
-            ) : (
-              { logoText }
-            )}
-          </div>
-        </a>
+      <Link to="/" className={classNamesToString(logoContainer)}>
+        <div className={logoWrapper}>{logo}</div>
+        <div className={logoWithVersion}>
+          {typeof logoText === 'string' ? (
+            <LogoText>{logoText}</LogoText>
+          ) : (
+            { logoText }
+          )}
+        </div>
       </Link>
       {!hideWalletPart && (
         <RightBlock
