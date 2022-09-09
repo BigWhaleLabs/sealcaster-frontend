@@ -50,6 +50,7 @@ module.exports = {
         time: '95px',
         glass: '107px',
         'full-105': '105%',
+        body: '40.375rem',
       },
       lineHeight: {
         3: '0.875rem',

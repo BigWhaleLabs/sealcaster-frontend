@@ -7251,6 +7251,7 @@ export type TWidth =
   | 'w-time'
   | 'w-glass'
   | 'w-full-105'
+  | 'w-body'
 
 export type TMinWidth =
   | 'min-w-0'

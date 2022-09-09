@@ -6,12 +6,14 @@ import classnames, {
   display,
   flexDirection,
   gap,
+  width,
 } from 'classnames/tailwind'
 
 const blockchainListWrapper = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  gap('gap-y-8')
+  gap('gap-y-8'),
+  width('w-full')
 )
 const listHeader = classnames(
   display('flex'),
