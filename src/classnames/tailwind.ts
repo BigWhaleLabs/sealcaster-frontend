@@ -4108,6 +4108,8 @@ export type TBoxShadow =
   | 'shadow-2xl'
   | 'shadow-inner'
   | 'shadow-none'
+  | 'shadow-button'
+  | 'shadow-button-active'
 
 export type TBoxShadowColor =
   | 'shadow-inherit'
@@ -4482,6 +4484,7 @@ export type TDropShadow =
   | 'drop-shadow-xl'
   | 'drop-shadow-2xl'
   | 'drop-shadow-none'
+  | 'drop-shadow-accent-secondary-gradient'
 
 export type TGrayscale = 'grayscale-0' | 'grayscale'
 
@@ -7239,6 +7242,7 @@ export type TWidth =
   | 'w-chart'
   | 'w-time'
   | 'w-glass'
+  | 'w-body'
 
 export type TMinWidth =
   | 'min-w-0'
@@ -7249,6 +7253,7 @@ export type TMinWidth =
 
 export type TMaxWidth =
   | 'max-w-0'
+  | 'max-w-84'
   | 'max-w-none'
   | 'max-w-xs'
   | 'max-w-sm'

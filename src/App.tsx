@@ -1,30 +1,44 @@
 import { Navbar } from '@big-whale-labs/ui-kit'
-import BlockchainList from 'components/BlockchainList'
-import Dots from 'icons/Dots'
-import HowItWorks from 'components/HowItWorks'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Logo from 'icons/Logo'
-import OpenEye from 'icons/OpenEye'
-import Root from 'components/Root'
-import SealEye from 'icons/SealEye'
-import SealGrid from 'icons/SealGrid'
+import Main from 'pages/Main'
+import classnames, {
+  display,
+  flexDirection,
+  gap,
+  margin,
+  minHeight,
+  width,
+} from 'classnames/tailwind'
+
+const pageContainer = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  minHeight('min-h-screen')
+)
+const bodyContainer = classnames(
+  width('md:w-body'),
+  gap('gap-y-4'),
+  margin('md:mx-auto', 'mx-4', 'mb-auto')
+)
 
 export default function () {
   return (
-    <Root>
-      <Navbar
-        logo={<Logo />}
-        account={undefined}
-        needNetworkChange={false}
-        logoText="SealCaster"
-        noWalletText="Connect burner wallet"
-      />
-      <Logo />
-      <SealGrid />
-      <SealEye />
-      <OpenEye />
-      <Dots />
-      <HowItWorks />
-      <BlockchainList />
-    </Root>
+    <Router>
+      <div className={pageContainer}>
+        <Navbar
+          logo={<Logo />}
+          account={undefined}
+          needNetworkChange={false}
+          logoText="SealCaster"
+          noWalletText="Connect burner wallet"
+        />
+        <div className={bodyContainer}>
+          <Routes>
+            <Route path="/" element={<Main />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   )
 }

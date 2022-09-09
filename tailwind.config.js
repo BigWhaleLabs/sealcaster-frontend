@@ -49,6 +49,10 @@ module.exports = {
         chart: '108px',
         time: '95px',
         glass: '107px',
+        body: '35rem',
+      },
+      maxWidth: {
+        84: '21rem',
       },
       lineHeight: {
         3: '0.875rem',
@@ -64,6 +68,17 @@ module.exports = {
         sm: '28.125rem',
         md: '37.5rem',
         body: '41rem',
+      },
+      boxShadow: {
+        '2xl': '0rem 0.25rem 2.75rem 0rem rgb(0 0 0 / 0.25)',
+        lg: '0rem 0rem 1rem 0rem rgb(0 0 0 / 0.25)',
+        md: '0rem 0rem 0.375rem 0rem rgb(0 0 0 / 0.25)',
+        button: '0rem 0rem 1.625rem rgb(0 0 0 / 1)',
+        'button-active': '0rem 0rem 0.375rem rgb(0 0 0 / 1)',
+      },
+      dropShadow: {
+        'accent-secondary-gradient':
+          '-1.25rem -1.25rem 4.62rem var(--secondary-transparent), 1.25rem 1.25rem 4.62rem var(--accent-transparent)',
       },
       strokeWidth: {
         1.5: '1.5',
