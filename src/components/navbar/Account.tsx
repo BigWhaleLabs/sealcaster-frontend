@@ -1,4 +1,5 @@
 import { AccentText } from 'components/Text'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import ENSAddress from 'components/ui/ENSAddress'
 import Network from 'models/Network'
 
@@ -6,18 +7,19 @@ export default function ({
   account,
   needNetworkChange,
   eNSName,
-  noWalletText = 'No wallet',
 }: {
   account?: string
   needNetworkChange: boolean
   eNSName?: string
-  noWalletText?: string
 }) {
   const NotConnected = () =>
     needNetworkChange ? (
       <span>Change network</span>
     ) : (
-      <span>{noWalletText}</span>
+      <>
+        <span className={displayTo('lg')}>No wallet</span>
+        <span className={displayFrom('lg')}>Connect burner wallet</span>
+      </>
     )
 
   return (

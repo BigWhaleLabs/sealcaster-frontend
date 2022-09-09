@@ -26,7 +26,7 @@ const navbar = (visible?: boolean, withoutRightBlock?: boolean) =>
     display('flex'),
     alignItems('items-center'),
     justifyContent(withoutRightBlock ? 'sm:justify-center' : 'justify-between'),
-    padding('py-6', 'px-24'),
+    padding('py-4', 'sm:py-6', 'px-6', 'sm:px-24'),
     space('xs:space-x-4', 'sm:space-x-9', 'lg:space-x-0'),
     zIndex('z-50'),
     backgroundColor(visible ? 'bg-primary-dark' : 'bg-transparent'),
@@ -56,7 +56,6 @@ export default function ({
   needNetworkChange,
   eNSName,
   hideWalletPart,
-  noWalletText,
 }: {
   logo: VNode
   logoText: VNode | string
@@ -64,7 +63,6 @@ export default function ({
   needNetworkChange: boolean
   eNSName?: string
   hideWalletPart?: boolean
-  noWalletText?: string
 }) {
   const [backgroundVisible, setBackgroundVisible] = useState(false)
   const onScroll = useCallback(() => {
@@ -94,7 +92,6 @@ export default function ({
           eNSName={eNSName}
           needNetworkChange={needNetworkChange}
           account={account}
-          noWalletText={noWalletText}
         />
       )}
     </nav>

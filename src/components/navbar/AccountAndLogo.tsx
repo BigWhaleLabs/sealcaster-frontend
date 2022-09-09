@@ -12,13 +12,11 @@ export default function ({
   connected,
   needNetworkChange,
   eNSName,
-  noWalletText,
 }: {
   account?: string
   needNetworkChange: boolean
   connected: boolean
   eNSName?: string
-  noWalletText?: string
 }) {
   return (
     <>
@@ -27,7 +25,6 @@ export default function ({
           eNSName={eNSName}
           account={account}
           needNetworkChange={needNetworkChange}
-          noWalletText={noWalletText}
         />
       </div>
       <div className={width('w-fit')}>

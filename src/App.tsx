@@ -2,13 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
 import Navbar from 'components/navbar/Navbar'
-import classnames, {
-  display,
-  flexDirection,
-  margin,
-  minHeight,
-  width,
-} from 'classnames/tailwind'
+import classnames, { margin, width } from 'classnames/tailwind'
 
 const bodyContainer = classnames(
   width('md:w-body'),
@@ -23,7 +17,6 @@ export default function () {
         account={undefined}
         needNetworkChange={false}
         logoText="SealCaster"
-        noWalletText="Connect burner wallet"
       />
       <div className={bodyContainer}>
         <Routes>

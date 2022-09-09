@@ -45,20 +45,18 @@ const delimiterContainer = classnames(
   height('h-4')
 )
 const lastDelimiterContainer = classnames(delimiterContainer, displayFrom('xs'))
-const socialLinksContainer = classnames(socialContainer, displayFrom('md'))
+const socialLinksContainer = classnames(socialContainer, displayFrom('lg'))
 
 const AccountContainer = ({
   account,
   onChangeNetwork,
   needNetworkChange,
   eNSName,
-  noWalletText,
 }: {
   account?: string
   onChangeNetwork?: () => Promise<void>
   needNetworkChange: boolean
   eNSName?: string
-  noWalletText?: string
 }) => {
   if (account)
     return (
@@ -69,7 +67,6 @@ const AccountContainer = ({
             account={account}
             eNSName={eNSName}
             connected={true}
-            noWalletText={noWalletText}
           />
         </div>
       </ExternalLink>
@@ -81,7 +78,6 @@ const AccountContainer = ({
         eNSName={eNSName}
         needNetworkChange={needNetworkChange}
         connected={false}
-        noWalletText={noWalletText}
       />
     </div>
   )
@@ -91,12 +87,10 @@ export default function ({
   account,
   needNetworkChange,
   eNSName,
-  noWalletText,
 }: {
   account?: string
   needNetworkChange: boolean
   eNSName?: string
-  noWalletText?: string
 }) {
   return (
     <div className={walletContainer}>
@@ -116,7 +110,6 @@ export default function ({
         eNSName={eNSName}
         needNetworkChange={needNetworkChange}
         account={account}
-        noWalletText={noWalletText}
       />
     </div>
   )
