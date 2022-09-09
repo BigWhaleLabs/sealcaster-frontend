@@ -1,7 +1,7 @@
-import { Navbar } from '@big-whale-labs/ui-kit'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
+import Navbar from 'components/navbar/Navbar'
 import Root from 'components/Root'
 
 export default function () {

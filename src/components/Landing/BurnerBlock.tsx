@@ -1,6 +1,7 @@
-import { Button, GradientBorder } from '@big-whale-labs/ui-kit'
 import { HeaderText, SubHeaderText } from 'components/Text'
+import Button from 'components/ui/Button'
 import Dots from 'icons/Dots'
+import GradientBorder from 'components/ui/GradientBorder'
 import SealGrid from 'icons/SealGrid'
 import classnames, {
   alignItems,
