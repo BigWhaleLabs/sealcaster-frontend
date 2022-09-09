@@ -1,3 +1,4 @@
+import { Link } from 'wouter'
 import { LogoText } from 'components/Text'
 import { VNode } from 'preact'
 import { displayFrom } from 'helpers/visibilityClassnames'
@@ -75,8 +76,8 @@ export default function ({
 
   return (
     <nav className={navbar(backgroundVisible, hideWalletPart)}>
-      <>
-        <div className={logoContainer}>
+      <Link to="/">
+        <a className={logoContainer}>
           <div className={logoWrapper}>{logo}</div>
           <div className={logoWithVersion}>
             {typeof logoText === 'string' ? (
@@ -85,8 +86,8 @@ export default function ({
               { logoText }
             )}
           </div>
-        </div>
-      </>
+        </a>
+      </Link>
       {!hideWalletPart && (
         <RightBlock
           eNSName={eNSName}
