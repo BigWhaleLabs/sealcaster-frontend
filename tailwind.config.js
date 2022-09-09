@@ -87,8 +87,8 @@ module.exports = {
         '-2.5': '-0.65rem',
       },
       boxShadow: {
-        'button-active': '0rem 0rem 0.375rem rgb(0 0 0 / 1)',
-        button: '0rem 0rem 1.625rem rgb(0 0 0 / 1)',
+        'button-active': '0rem 0rem 0.375rem #000000',
+        button: '0rem 0rem 1.625rem #000000',
       },
     },
     container: {
