@@ -4108,6 +4108,8 @@ export type TBoxShadow =
   | 'shadow-2xl'
   | 'shadow-inner'
   | 'shadow-none'
+  | 'shadow-button-active'
+  | 'shadow-button'
 
 export type TBoxShadowColor =
   | 'shadow-inherit'
@@ -4429,6 +4431,7 @@ export type TAnimation =
   | 'animate-ping'
   | 'animate-pulse'
   | 'animate-bounce'
+  | 'animate-pulse-horizontal'
 
 export type TTransitionsAndAnimations =
   | TTransitionProperty
@@ -4482,6 +4485,7 @@ export type TDropShadow =
   | 'drop-shadow-xl'
   | 'drop-shadow-2xl'
   | 'drop-shadow-none'
+  | 'drop-shadow-secondary'
 
 export type TGrayscale = 'grayscale-0' | 'grayscale'
 
@@ -7147,6 +7151,13 @@ export type TInset =
   | 'right-full'
   | 'bottom-full'
   | 'left-full'
+  | '-inset-2.5'
+  | '-inset-x-2.5'
+  | '-inset-y-2.5'
+  | '-top-2.5'
+  | '-right-2.5'
+  | '-bottom-2.5'
+  | '-left-2.5'
 
 export type TZIndex =
   | 'z-0'
@@ -7281,6 +7292,9 @@ export type TWidth =
   | 'w-chart'
   | 'w-time'
   | 'w-glass'
+  | 'w-full-105'
+  | 'w-body'
+  | 'w-seal-grid'
 
 export type TMinWidth =
   | 'min-w-0'

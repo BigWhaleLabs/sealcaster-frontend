@@ -1,30 +1,38 @@
-import { Navbar } from '@big-whale-labs/ui-kit'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Route, Router } from 'wouter'
 import Footer from 'components/Footer'
+import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
-import Main from 'pages/Main'
+import Navbar from 'components/navbar/Navbar'
 import Privacy from 'pages/Privacy'
-import Root from 'components/Root'
 import Terms from 'pages/Terms'
+import classnames, { margin, width } from 'classnames/tailwind'
+
+const bodyContainer = classnames(
+  width('md:w-body'),
+  margin('md:mx-auto', 'mx-4', 'mb-auto')
+)
 
 export default function () {
   return (
-    <Root>
-      <Router>
-        <Navbar
-          logo={<Logo />}
-          account={undefined}
-          needNetworkChange={false}
-          logoText="SealCaster"
-          noWalletText="Connect burner wallet"
-        />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<Privacy />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </Root>
+    <Router>
+      <Navbar
+        logo={<Logo />}
+        account={undefined}
+        needNetworkChange={false}
+        logoText="SealCaster"
+      />
+      <div className={bodyContainer}>
+        <Route path="/">
+          <Landing />
+        </Route>
+        <Route path="/terms">
+          <Terms />
+        </Route>
+        <Route path="/privacy">
+          <Privacy />
+        </Route>
+      </div>
+      <Footer />
+    </Router>
   )
 }
