@@ -1,30 +1,28 @@
-import { Navbar } from '@big-whale-labs/ui-kit'
-import BlockchainList from 'components/BlockchainList'
-import Dots from 'icons/Dots'
-import HowItWorks from 'components/HowItWorks'
+import { Route, Router } from 'wouter'
+import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
-import OpenEye from 'icons/OpenEye'
-import Root from 'components/Root'
-import SealEye from 'icons/SealEye'
-import SealGrid from 'icons/SealGrid'
+import Navbar from 'components/navbar/Navbar'
+import classnames, { margin, width } from 'classnames/tailwind'
+
+const bodyContainer = classnames(
+  width('md:w-body'),
+  margin('md:mx-auto', 'mx-4', 'mb-auto')
+)
 
 export default function () {
   return (
-    <Root>
+    <Router>
       <Navbar
         logo={<Logo />}
         account={undefined}
         needNetworkChange={false}
         logoText="SealCaster"
-        noWalletText="Connect burner wallet"
       />
-      <Logo />
-      <SealGrid />
-      <SealEye />
-      <OpenEye />
-      <Dots />
-      <HowItWorks />
-      <BlockchainList />
-    </Root>
+      <div className={bodyContainer}>
+        <Route path="/">
+          <Landing />
+        </Route>
+      </div>
+    </Router>
   )
 }

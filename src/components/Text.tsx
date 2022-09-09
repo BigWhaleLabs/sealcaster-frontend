@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link } from 'wouter'
 import {
   TDropShadow,
   TGradientColorStops,
@@ -18,19 +18,29 @@ import {
   whitespace,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
+import classNamesToString from 'helpers/classNamesToString'
 
 const accentText = (
   color: TTextColor,
   bold?: boolean,
   small?: boolean,
   primary?: boolean,
-  shadow?: TDropShadow
+  shadow?: TDropShadow,
+  extraSmall?: boolean
 ) =>
   classnames(
-    textColor(color),
+    textColor(
+      color === 'text-primary-semi-dimmed'
+        ? { 'selection:text-primary': true, 'text-primary-semi-dimmed': true }
+        : color
+    ),
     fontFamily(primary ? 'font-primary' : undefined),
     fontWeight(bold ? 'font-bold' : 'font-normal'),
-    fontSize(small ? 'text-sm' : undefined),
+    fontSize({
+      'text-sm': small,
+      'text-xs': extraSmall,
+      'xs:text-base': extraSmall,
+    }),
     dropShadow(shadow)
   )
 export function AccentText({
@@ -40,15 +50,19 @@ export function AccentText({
   primary,
   shadow,
   children,
+  extraSmall,
 }: ChildrenProp & {
   color: TTextColor
   bold?: boolean
   small?: boolean
   primary?: boolean
   shadow?: TDropShadow
+  extraSmall?: boolean
 }) {
   return (
-    <span className={accentText(color, bold, small, primary, shadow)}>
+    <span
+      className={accentText(color, bold, small, primary, shadow, extraSmall)}
+    >
       {children}
     </span>
   )
@@ -95,12 +109,12 @@ export function LinkText({
 }) {
   if (internal)
     return (
-      <NavLink
+      <Link
         to={url}
         className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
       >
         {children}
-      </NavLink>
+      </Link>
     )
   return (
     <a
@@ -155,11 +169,16 @@ export function BodyText({
   )
 }
 
-const headerText = (accent = false, center?: boolean, extraLeading = false) =>
+const headerText = (
+  accent = false,
+  center?: boolean,
+  extraLeading = false,
+  big = false
+) =>
   classnames(
     fontFamily('font-primary'),
     fontWeight('font-bold'),
-    fontSize('text-2xl', 'xs:text-3xl', 'sm:text-4xl'),
+    fontSize(big ? 'text-3xl' : 'text-2xl', 'xs:text-3xl', 'sm:text-4xl'),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
       ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-11')
@@ -170,14 +189,18 @@ export function HeaderText({
   accent,
   center,
   extraLeading,
+  big,
   children,
 }: ChildrenProp & {
   accent?: boolean
   center?: boolean
   extraLeading?: boolean
+  big?: boolean
 }) {
   return (
-    <h1 className={headerText(accent, center, extraLeading)}>{children}</h1>
+    <h1 className={headerText(accent, center, extraLeading, big)}>
+      {children}
+    </h1>
   )
 }
 
@@ -238,4 +261,42 @@ const postText = classnames(
 )
 export function PostText({ children }: ChildrenProp) {
   return <p className={postText}>{children}</p>
+}
+
+const subHeaderContainer = classnames(
+  fontSize('text-sm'),
+  fontWeight('font-normal')
+)
+
+export function SubHeaderText({ children }: ChildrenProp) {
+  return <p className={subHeaderContainer}>{children}</p>
+}
+
+const logoText = classnames(
+  textColor('text-accent'),
+  fontWeight('font-bold'),
+  fontSize('text-sm', 'xs:text-lg'),
+  lineHeight('leading-none')
+)
+export function LogoText({ children }: ChildrenProp) {
+  return <span className={logoText}>{children}</span>
+}
+
+const socialLink = classnames(
+  lineHeight('leading-6'),
+  fontSize('text-base'),
+  textDecoration('no-underline', 'active:underline'),
+  textColor('hover:text-tertiary', 'text-formal-accent')
+)
+export function SocialLink({ url, children }: ChildrenProp & { url: string }) {
+  return (
+    <a
+      className={classNamesToString(socialLink, 'hover-tertiary')}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  )
 }

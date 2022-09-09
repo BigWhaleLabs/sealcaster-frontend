@@ -27,7 +27,7 @@ const cardContainer = (small?: boolean) => {
     maxWidth('max-w-full'),
     maxHeight('max-h-full'),
     height('h-fit'),
-    width('w-auto'),
+    width('w-full'),
     space('space-y-4'),
     wordBreak('break-words'),
     zIndex('z-20')
