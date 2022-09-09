@@ -1,19 +1,23 @@
-import { AccentText, BodyText, HeaderText } from 'components/Text'
+import { AccentText, BodyText, HeaderText } from 'components/ui/Text'
+import { toast } from 'react-toastify'
 import { useState } from 'preact/hooks'
 import BurnerWalletDivider from 'icons/BurnerWalletDivider'
 import BurnerWalletHeaderLogo from 'components/BurnerWalletCard/BurnerWalletHeaderLogo'
-import Button from 'components/Button'
+import Button from 'components/ui/Button'
 import CardContainer from 'components/BurnerWalletCard/CardContainer'
 import ColorfulEye from 'icons/ColorfulEye'
 import Copy from 'icons/Copy'
 import CreateFirstCastButton from 'components/BurnerWalletCard/CreateFirstCastButton'
 import classnames, {
   alignItems,
+  blur,
   display,
   flexDirection,
   gap,
   justifyContent,
   padding,
+  transitionProperty,
+  userSelect,
   width,
   wordBreak,
 } from 'classnames/tailwind'
@@ -22,7 +26,7 @@ const container = classnames(
   display('flex'),
   flexDirection('flex-col'),
   alignItems('items-center'),
-  gap('gap-y-10'),
+  gap('gap-y-6', 'xs:gap-y-10'),
   width('w-full')
 )
 
@@ -32,26 +36,37 @@ const privateContainer = classnames(
   gap('gap-y-4'),
   padding('p-0', 'xs:p-2.5')
 )
-const privateKey = classnames(
+const privateKeyText = classnames(
   display('flex'),
   flexDirection('flex-col'),
   gap('gap-y-1'),
   wordBreak('break-all')
 )
-const buttonsContainer = classnames(
-  display('flex'),
-  flexDirection('flex-row'),
-  justifyContent('justify-center'),
-  gap('gap-x-4')
-)
+const buttonsContainer = (closed?: boolean) =>
+  classnames(
+    display('flex'),
+    flexDirection('flex-row'),
+    justifyContent('justify-center'),
+    gap(closed ? 'gap-x-2' : 'gap-x-6', closed ? 'xs:gap-x-4' : 'xs:gap-x-8')
+  )
 const buttonContent = classnames(
   display('flex'),
   flexDirection('flex-row'),
+  alignItems('items-center'),
   gap('gap-x-1', 'xs:gap-x-2')
 )
+const privateKeyBlur = (closed?: boolean) =>
+  classnames(
+    userSelect({ 'select-none': closed }),
+    blur({ 'blur-sm': closed }),
+    transitionProperty('transition-all')
+  )
 
 export default function () {
-  const [isKeyOpen, setKeyOpen] = useState(false)
+  const [isKeyClosed, setKeyClosed] = useState(true)
+  const [privateKey] = useState(
+    '0xb794f5ea0ba39494ce89268ce89268ce89268e89268e89268e89268e892689'
+  )
 
   return (
     <CardContainer>
@@ -59,29 +74,39 @@ export default function () {
       <div className={container}>
         <HeaderText center>Your new wallet:</HeaderText>
         <div className={privateContainer}>
-          <div className={privateKey}>
+          <div className={privateKeyText}>
             <BodyText center semiBold>
               Private key
             </BodyText>
-            <AccentText color="text-secondary">
-              <BodyText center semiBold inheritColor>
-                0xb794f5ea0ba39494ce89268ce89268ce89268e89268e89268e89268e892689
-              </BodyText>
-            </AccentText>
+            <div className={privateKeyBlur(isKeyClosed)}>
+              <AccentText color="text-secondary">
+                <BodyText center semiBold inheritColor>
+                  {privateKey}
+                </BodyText>
+              </AccentText>
+            </div>
           </div>
-          <div className={buttonsContainer}>
+          <div className={buttonsContainer(isKeyClosed)}>
             <Button
               small
               gradientFont
               type="tertiary"
-              onClick={() => setKeyOpen(!isKeyOpen)}
+              onClick={() => setKeyClosed(!isKeyClosed)}
             >
               <div className={buttonContent}>
-                <ColorfulEye open={!isKeyOpen} />{' '}
-                {isKeyOpen ? 'Hide key' : 'Reveal key'}
+                <ColorfulEye open={isKeyClosed} />{' '}
+                {isKeyClosed ? 'Reveal key' : 'Hide key'}
               </div>
             </Button>
-            <Button small gradientFont type="tertiary">
+            <Button
+              small
+              gradientFont
+              type="tertiary"
+              onClick={async () => {
+                await navigator.clipboard.writeText(privateKey)
+                toast('Private key copied 🎉')
+              }}
+            >
               <div className={buttonContent}>
                 <Copy /> Copy key
               </div>

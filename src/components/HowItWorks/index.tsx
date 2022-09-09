@@ -1,5 +1,5 @@
-import { AccentText, CardParagraph, LinkText } from 'components/Text'
-import Card from 'components/Card'
+import { AccentText, CardParagraph, LinkText } from 'components/ui/Text'
+import Card from 'components/ui/Card'
 import SealEye from 'icons/SealEye'
 import StepList from 'components/HowItWorks/StepList'
 import Title from 'components/HowItWorks/Title'

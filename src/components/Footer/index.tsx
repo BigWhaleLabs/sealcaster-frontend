@@ -2,7 +2,7 @@ import { SocialLink } from 'components/Text'
 import { displayTo } from 'helpers/visibilityClassnames'
 import Delimiter from 'components/Delimiter'
 import Discord from 'icons/Discord'
-import FooterButton from 'components/FooterButton'
+import FooterButton from 'components/Footer/FooterButton'
 import FooterOptions from 'components/Footer/FooterOptions'
 import Twitter from 'icons/Twitter'
 import classnames, {

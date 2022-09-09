@@ -1,4 +1,5 @@
 import { Route, Router } from 'wouter'
+import { ToastContainer } from 'react-toastify'
 import Footer from 'components/Footer'
 import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
@@ -36,6 +37,7 @@ export default function () {
         </div>
         <Footer />
       </ScrollToTop>
+      <ToastContainer position="bottom-right" theme="dark" />
     </Router>
   )
 }

@@ -1,13 +1,15 @@
 import {
   alignItems,
   backgroundColor,
+  backgroundImage,
+  borderColor,
   borderRadius,
   borderWidth,
   classnames,
   display,
-  dropShadow,
   flexDirection,
   gap,
+  gradientColorStops,
   maxWidth,
   padding,
   position,
@@ -16,6 +18,7 @@ import {
   zIndex,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
+import classNamesToString from 'helpers/classNamesToString'
 
 const cardContainer = classnames(
   display('flex'),
@@ -24,16 +27,37 @@ const cardContainer = classnames(
   alignItems('items-center'),
   position('relative'),
   borderWidth('border'),
-  dropShadow('drop-shadow-accent-secondary-gradient'),
+  borderColor('border-transparent'),
   borderRadius('rounded-2xl'),
-  backgroundColor('bg-primary-background'),
-  padding('py-10', 'px-6'),
-  maxWidth('max-w-full'),
-  width('w-auto'),
+  padding('py-6', 'px-6', 'xs:py-10'),
   wordBreak('break-words'),
   zIndex('z-20')
 )
+const parentButtonWrapper = classnames(
+  maxWidth('max-w-full'),
+  width('w-auto'),
+  borderRadius('rounded-2xl'),
+  backgroundImage('bg-gradient-to-br'),
+  padding('p-px'),
+  gradientColorStops('from-secondary', 'to-accent')
+)
+const innerButtonWrapper = classnames(
+  width('w-full'),
+  borderRadius('rounded-2xl'),
+  backgroundColor('bg-primary-background')
+)
 
 export default function ({ children }: ChildrenProp & { small?: boolean }) {
-  return <div className={cardContainer}>{children}</div>
+  return (
+    <div
+      className={classNamesToString(
+        parentButtonWrapper,
+        'double-gradient-shadow'
+      )}
+    >
+      <div className={innerButtonWrapper}>
+        <div className={cardContainer}>{children}</div>
+      </div>
+    </div>
+  )
 }

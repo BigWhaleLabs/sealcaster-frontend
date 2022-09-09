@@ -1,5 +1,5 @@
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import Button from 'components/Button'
+import Button from 'components/ui/Button'
 
 export default function () {
   return (

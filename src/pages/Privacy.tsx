@@ -3,8 +3,8 @@ import {
   CardSubheader,
   HeaderText,
   LinkText,
-} from 'components/Text'
-import Card from 'components/Card'
+} from 'components/ui/Text'
+import Card from 'components/ui/Card'
 import classnames, {
   display,
   flexDirection,
