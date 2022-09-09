@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link } from 'wouter'
 import {
   TDropShadow,
   TGradientColorStops,
@@ -15,22 +15,33 @@ import {
   textAlign,
   textColor,
   textDecoration,
+  transitionProperty,
   whitespace,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
+import classNamesToString from 'helpers/classNamesToString'
 
 const accentText = (
   color: TTextColor,
   bold?: boolean,
   small?: boolean,
   primary?: boolean,
-  shadow?: TDropShadow
+  shadow?: TDropShadow,
+  extraSmall?: boolean
 ) =>
   classnames(
-    textColor(color),
+    textColor(
+      color === 'text-primary-semi-dimmed'
+        ? { 'selection:text-primary': true, 'text-primary-semi-dimmed': true }
+        : color
+    ),
     fontFamily(primary ? 'font-primary' : undefined),
     fontWeight(bold ? 'font-bold' : 'font-normal'),
-    fontSize(small ? 'text-sm' : undefined),
+    fontSize({
+      'text-sm': small,
+      'text-xs': extraSmall,
+      'xs:text-base': extraSmall,
+    }),
     dropShadow(shadow)
   )
 export function AccentText({
@@ -40,15 +51,19 @@ export function AccentText({
   primary,
   shadow,
   children,
+  extraSmall,
 }: ChildrenProp & {
   color: TTextColor
   bold?: boolean
   small?: boolean
   primary?: boolean
   shadow?: TDropShadow
+  extraSmall?: boolean
 }) {
   return (
-    <span className={accentText(color, bold, small, primary, shadow)}>
+    <span
+      className={accentText(color, bold, small, primary, shadow, extraSmall)}
+    >
       {children}
     </span>
   )
@@ -95,12 +110,12 @@ export function LinkText({
 }) {
   if (internal)
     return (
-      <NavLink
+      <Link
         to={url}
         className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
       >
         {children}
-      </NavLink>
+      </Link>
     )
   return (
     <a
@@ -168,11 +183,16 @@ export function BodyText({
   )
 }
 
-const headerText = (accent = false, center?: boolean, extraLeading = false) =>
+const headerText = (
+  accent = false,
+  center?: boolean,
+  extraLeading = false,
+  big = false
+) =>
   classnames(
     fontFamily('font-primary'),
     fontWeight('font-bold'),
-    fontSize('text-2xl', 'xs:text-3xl', 'sm:text-4xl'),
+    fontSize(big ? 'text-3xl' : 'text-2xl', 'xs:text-3xl', 'sm:text-4xl'),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
       ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-11')
@@ -183,14 +203,18 @@ export function HeaderText({
   accent,
   center,
   extraLeading,
+  big,
   children,
 }: ChildrenProp & {
   accent?: boolean
   center?: boolean
   extraLeading?: boolean
+  big?: boolean
 }) {
   return (
-    <h1 className={headerText(accent, center, extraLeading)}>{children}</h1>
+    <h1 className={headerText(accent, center, extraLeading, big)}>
+      {children}
+    </h1>
   )
 }
 
@@ -213,7 +237,7 @@ export function CardParagraph({ children }: ChildrenProp) {
 
 const statusText = (
   primary?: boolean,
-  color?: 'accent' | 'primary' | 'error' | 'default',
+  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default',
   textRight?: boolean
 ) =>
   classnames(
@@ -225,6 +249,7 @@ const statusText = (
       'text-primary': color === 'primary',
       'text-error': color === 'error',
       'text-formal-accent': color === 'default',
+      'text-primary-dimmed': color === 'dimmed',
     }),
     textAlign({ 'text-right': textRight })
   )
@@ -235,7 +260,7 @@ export function StatusText({
   children,
 }: ChildrenProp & {
   primary?: boolean
-  color?: 'accent' | 'primary' | 'error' | 'default'
+  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default'
   textRight?: boolean
 }) {
   return (
@@ -251,4 +276,88 @@ const postText = classnames(
 )
 export function PostText({ children }: ChildrenProp) {
   return <p className={postText}>{children}</p>
+}
+
+const footerLink = (active?: boolean) =>
+  classnames(
+    fontSize('text-sm'),
+    fontWeight('font-semibold'),
+    textDecoration({ underline: active, 'hover:underline': true }),
+    textColor({ 'text-accent': active, 'hover:text-accent': true }),
+    transitionProperty('transition-colors')
+  )
+export function FooterLink({
+  url,
+  children,
+  internal,
+}: ChildrenProp & { url: string; internal?: boolean }) {
+  if (internal)
+    return (
+      <Link
+        to={url}
+        className={({ isActive }: { isActive?: boolean }) =>
+          footerLink(isActive)
+        }
+      >
+        {children}
+      </Link>
+    )
+
+  return (
+    <a
+      className={footerLink()}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  )
+}
+
+const cardSubheaderContainer = classnames(
+  fontWeight('font-bold'),
+  fontFamily('font-primary'),
+  fontSize('text-lg')
+)
+export function CardSubheader({ children }: ChildrenProp) {
+  return <p className={cardSubheaderContainer}>{children}</p>
+}
+
+const subHeaderContainer = classnames(
+  fontSize('text-sm'),
+  fontWeight('font-normal')
+)
+
+export function SubHeaderText({ children }: ChildrenProp) {
+  return <p className={subHeaderContainer}>{children}</p>
+}
+
+const logoText = classnames(
+  textColor('text-accent'),
+  fontWeight('font-bold'),
+  fontSize('text-sm', 'xs:text-lg'),
+  lineHeight('leading-none')
+)
+export function LogoText({ children }: ChildrenProp) {
+  return <span className={logoText}>{children}</span>
+}
+
+const socialLink = classnames(
+  lineHeight('leading-6'),
+  fontSize('text-base'),
+  textDecoration('no-underline', 'active:underline'),
+  textColor('hover:text-tertiary', 'text-formal-accent')
+)
+export function SocialLink({ url, children }: ChildrenProp & { url: string }) {
+  return (
+    <a
+      className={classNamesToString(socialLink, 'hover-tertiary')}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  )
 }

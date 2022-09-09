@@ -49,7 +49,9 @@ module.exports = {
         chart: '108px',
         time: '95px',
         glass: '107px',
-        body: '35rem',
+        'full-105': '105%',
+        body: '40.375rem',
+        'seal-grid': '25.313rem',
       },
       maxWidth: {
         84: '21rem',
@@ -69,6 +71,9 @@ module.exports = {
         md: '37.5rem',
         body: '41rem',
       },
+      padding: {
+        25: '6.25rem',
+      },
       boxShadow: {
         '2xl': '0rem 0.25rem 2.75rem 0rem rgb(0 0 0 / 0.25)',
         lg: '0rem 0rem 1rem 0rem rgb(0 0 0 / 0.25)',
@@ -82,6 +87,28 @@ module.exports = {
       },
       strokeWidth: {
         1.5: '1.5',
+      },
+      dropShadow: {
+        secondary: '0rem 0rem 0.625rem var(--secondary)',
+      },
+      keyframes: {
+        'pulse-horizontal': {
+          '0%, 100%': { transform: 'translateX(0.5rem)' },
+          '50%': { transform: 'translateX(0rem)' },
+        },
+      },
+      animation: {
+        'pulse-horizontal': 'pulse-horizontal 2s ease-in-out infinite',
+      },
+      inset: {
+        '-2.5': '-0.65rem',
+      },
+      boxShadow: {
+        'button-active': '0rem 0rem 0.375rem #000000',
+        '2xl': '0rem 0.25rem 2.75rem 0rem #00000025',
+        lg: '0rem 0rem 1rem 0rem #00000025',
+        md: '0rem 0rem 0.375rem 0rem #00000025',
+        button: '0rem 0rem 1.625rem #000000',
       },
     },
     container: {
