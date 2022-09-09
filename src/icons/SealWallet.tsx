@@ -14,14 +14,16 @@ const svgClasses = classnames(
   boxShadowColor('shadow-secondary'),
   borderRadius('rounded-full')
 )
-const walletClasses = (connected?: boolean, isFilled?: boolean) =>
-  classnames(
-    strokeWidth('stroke-2'),
-    stroke(connected ? 'stroke-secondary' : 'stroke-primary-semi-dimmed'),
-    fill({ 'fill-primary-dark': isFilled })
-  )
+
+const fillStyle = (isFilled: boolean) => fill({ 'fill-primary-dark': isFilled })
 
 export default function ({ connected }: { connected?: boolean }) {
+  const walletClasses = (connected?: boolean) =>
+    classnames(
+      strokeWidth('stroke-2'),
+      stroke(connected ? 'stroke-secondary' : 'stroke-primary-semi-dimmed')
+    )
+
   return connected ? (
     <svg
       width="42"
@@ -34,7 +36,7 @@ export default function ({ connected }: { connected?: boolean }) {
         cx="21"
         cy="21"
         r="20"
-        className={walletClasses(connected, true)}
+        className={classnames(walletClasses(connected), fillStyle(true))}
       />
       <path
         d="M36 34V21.4483C36 12.9164 29.2843 6 21 6C12.7157 6 6 12.9164 6 21.4483V34"
@@ -81,7 +83,7 @@ export default function ({ connected }: { connected?: boolean }) {
         cx="21"
         cy="21"
         r="20"
-        className={walletClasses(connected, true)}
+        className={classnames(walletClasses(connected), fillStyle(true))}
       />
       <path
         d="M36 34V21.4483C36 12.9164 29.2843 6 21 6C12.7157 6 6 12.9164 6 21.4483V34"

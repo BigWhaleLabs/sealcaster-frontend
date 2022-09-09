@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link } from 'wouter'
 import {
   TDropShadow,
   TGradientColorStops,
@@ -109,12 +109,12 @@ export function LinkText({
 }) {
   if (internal)
     return (
-      <NavLink
+      <Link
         to={url}
         className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
       >
         {children}
-      </NavLink>
+      </Link>
     )
   return (
     <a
@@ -286,7 +286,7 @@ const socialLink = classnames(
   lineHeight('leading-6'),
   fontSize('text-base'),
   textDecoration('no-underline', 'active:underline'),
-  textColor('active:text-tertiary', 'text-formal-accent')
+  textColor('hover:text-tertiary', 'text-formal-accent')
 )
 export function SocialLink({ url, children }: ChildrenProp & { url: string }) {
   return (

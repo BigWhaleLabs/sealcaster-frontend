@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Route, Router } from 'wouter'
 import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
 import Navbar from 'components/navbar/Navbar'
@@ -19,9 +19,9 @@ export default function () {
         logoText="SealCaster"
       />
       <div className={bodyContainer}>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-        </Routes>
+        <Route path="/">
+          <Landing />
+        </Route>
       </div>
     </Router>
   )
