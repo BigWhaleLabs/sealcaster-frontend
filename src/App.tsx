@@ -4,6 +4,7 @@ import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
 import Navbar from 'components/navbar/Navbar'
 import Privacy from 'pages/Privacy'
+import ScrollToTop from 'components/ui/ScrollToTop'
 import Terms from 'pages/Terms'
 import classnames, { margin, width } from 'classnames/tailwind'
 
@@ -15,24 +16,26 @@ const bodyContainer = classnames(
 export default function () {
   return (
     <Router>
-      <Navbar
-        logo={<Logo />}
-        account={undefined}
-        needNetworkChange={false}
-        logoText="SealCaster"
-      />
-      <div className={bodyContainer}>
-        <Route path="/">
-          <Landing />
-        </Route>
-        <Route path="/terms">
-          <Terms />
-        </Route>
-        <Route path="/privacy">
-          <Privacy />
-        </Route>
-      </div>
-      <Footer />
+      <ScrollToTop>
+        <Navbar
+          logo={<Logo />}
+          account={undefined}
+          needNetworkChange={false}
+          logoText="SealCaster"
+        />
+        <div className={bodyContainer}>
+          <Route path="/">
+            <Landing />
+          </Route>
+          <Route path="/terms">
+            <Terms />
+          </Route>
+          <Route path="/privacy">
+            <Privacy />
+          </Route>
+        </div>
+        <Footer />
+      </ScrollToTop>
     </Router>
   )
 }
