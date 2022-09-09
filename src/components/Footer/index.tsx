@@ -9,6 +9,7 @@ import classnames, {
   alignItems,
   display,
   flexDirection,
+  margin,
   padding,
   space,
 } from 'classnames/tailwind'
@@ -18,7 +19,8 @@ const socialContainerCard = classnames(
   commonClasses,
   flexDirection('flex-col', 'md:flex-row'),
   padding('py-8', 'px-4', 'lg:px-25'),
-  space('space-y-4', 'md:space-x-4', 'md:space-y-0')
+  space('space-y-4', 'md:space-x-4', 'md:space-y-0'),
+  margin('mt-20')
 )
 
 const socialContainer = classnames(
