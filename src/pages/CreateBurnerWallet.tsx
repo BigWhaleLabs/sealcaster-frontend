@@ -47,10 +47,34 @@ const buttonWithStatus = classnames(
 const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
 
 export default function () {
-  const [username, setUsername] = useState('whets')
-  const [hasError, setHasError] = useState(false)
+  const [state, setState] = useState(0)
+  const [username, setUsername] = useState('')
+  const [hasError, setHasError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [status, setStatus] = useState('Obtaining token from attestor...')
+  const [status, setStatus] = useState<string | undefined>()
+
+  const checkUsername = () => {
+    setHasError('')
+    setLoading(true)
+    setState(state + 1)
+
+    if (state === 2) {
+      setStatus('Obtaining token from attestor...')
+    }
+    setTimeout(() => {
+      if (!username.length) {
+        setHasError('Username cannot be empty')
+      }
+      if (state === 2) {
+        setStatus('')
+        setHasError('')
+      }
+      if (state === 1) {
+        setHasError('Some test error to notify user')
+      }
+      setLoading(false)
+    }, 2000)
+  }
 
   const hintText =
     'You can see what eth address you have connected to Farcaster in profile settings.'
@@ -77,13 +101,11 @@ export default function () {
         <TextInput
           withAtSign
           value={username}
-          isError={hasError}
+          isError={!!hasError.length}
           disabled={loading}
           onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
           onKeyDown={(event) =>
-            event.code === 'Enter'
-              ? console.log('Enter username:', username)
-              : undefined
+            event.code === 'Enter' ? checkUsername() : undefined
           }
         />
         <PostText>
@@ -98,7 +120,8 @@ export default function () {
               loadingOverflow
               type="primary"
               loading={loading}
-              onClick={() => setLoading(true)}
+              disabled={!username.length}
+              onClick={checkUsername}
             >
               Connect & verify
             </Button>
@@ -109,6 +132,11 @@ export default function () {
             </AccentText>
           )}
         </div>
+        {hasError && (
+          <AccentText small color="text-error">
+            {hasError}
+          </AccentText>
+        )}
       </div>
     </div>
   )
