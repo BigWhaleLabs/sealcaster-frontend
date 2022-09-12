@@ -1,4 +1,4 @@
-import { AccentText } from 'components/Text'
+import { AccentText } from 'components/ui/Text'
 import ChildrenProp from 'models/ChildrenProp'
 import classnames, { display, flexDirection, gap } from 'classnames/tailwind'
 

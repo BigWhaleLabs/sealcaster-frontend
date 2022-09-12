@@ -56,6 +56,9 @@ module.exports = {
         body: '40.375rem',
         'seal-grid': '25.313rem',
       },
+      maxWidth: {
+        84: '21rem',
+      },
       lineHeight: {
         3: '0.875rem',
         5: '1.125rem',
@@ -74,11 +77,24 @@ module.exports = {
       padding: {
         25: '6.25rem',
       },
-      strokeWidth: {
-        1.5: '1.5',
+      gap: {
+        7.5: '1.875rem',
+      },
+      boxShadow: {
+        '2xl': '0rem 0.25rem 2.75rem 0rem rgb(0 0 0 / 0.25)',
+        lg: '0rem 0rem 1rem 0rem rgb(0 0 0 / 0.25)',
+        md: '0rem 0rem 0.375rem 0rem rgb(0 0 0 / 0.25)',
+        button: '0rem 0rem 1.625rem rgb(0 0 0 / 1)',
+        'button-active': '0rem 0rem 0.375rem rgb(0 0 0 / 1)',
       },
       dropShadow: {
         secondary: '0rem 0rem 0.625rem var(--secondary)',
+        'accent-gradient': '1.25rem 1.25rem 4.62rem var(--accent-transparent)',
+        'secondary-gradient':
+          '-1.25rem -1.25rem 4.62rem var(--secondary-transparent)',
+      },
+      strokeWidth: {
+        1.5: '1.5',
       },
       keyframes: {
         'pulse-horizontal': {

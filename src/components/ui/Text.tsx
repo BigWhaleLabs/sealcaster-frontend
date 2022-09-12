@@ -134,6 +134,7 @@ export function LinkText({
 const bodyText = (
   primary?: boolean,
   bold?: boolean,
+  semiBold?: boolean,
   small?: boolean,
   noWrap?: boolean,
   center?: boolean,
@@ -143,7 +144,7 @@ const bodyText = (
     fontFamily({ 'font-primary': primary }),
     textColor(inheritColor ? 'text-inherit' : 'text-formal-accent'),
     textAlign({ 'text-center': center }),
-    fontWeight({ 'font-bold': bold }),
+    fontWeight({ 'font-bold': bold, 'font-semibold': semiBold }),
     lineHeight('!leading-5'),
     fontSize(small ? 'text-xs' : 'text-sm'),
     whitespace({ 'whitespace-nowrap': noWrap })
@@ -151,6 +152,7 @@ const bodyText = (
 export function BodyText({
   primary,
   bold,
+  semiBold,
   small,
   noWrap,
   center,
@@ -159,13 +161,24 @@ export function BodyText({
 }: ChildrenProp & {
   primary?: boolean
   bold?: boolean
+  semiBold?: boolean
   small?: boolean
   noWrap?: boolean
   center?: boolean
   inheritColor?: boolean
 }) {
   return (
-    <p className={bodyText(primary, bold, small, noWrap, center, inheritColor)}>
+    <p
+      className={bodyText(
+        primary,
+        bold,
+        semiBold,
+        small,
+        noWrap,
+        center,
+        inheritColor
+      )}
+    >
       {children}
     </p>
   )

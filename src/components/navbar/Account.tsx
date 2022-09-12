@@ -1,4 +1,4 @@
-import { AccentText } from 'components/Text'
+import { AccentText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import ENSAddress from 'components/ui/ENSAddress'
 import Network from 'models/Network'

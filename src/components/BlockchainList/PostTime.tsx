@@ -1,4 +1,4 @@
-import { StatusText } from 'components/Text'
+import { StatusText } from 'components/ui/Text'
 import { useSnapshot } from 'valtio'
 import TimeStore from 'stores/TimeStore'
 import formatDate from 'helpers/formatDate'

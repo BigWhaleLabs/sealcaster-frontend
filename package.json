@@ -42,6 +42,7 @@
     "preact": "^10.10.6",
     "react-infinite-scroll-component": "^6.1.0",
     "react-intersection-observer": "^9.4.0",
+    "react-toastify": "^9.0.8",
     "valtio": "^1.7.0",
     "web3modal": "^1.9.9",
     "wouter": "^2.8.0-alpha.2"

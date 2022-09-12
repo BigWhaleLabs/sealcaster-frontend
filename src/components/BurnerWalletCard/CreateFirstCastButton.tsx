@@ -1,14 +1,16 @@
-import { HeaderText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import Button from 'components/ui/Button'
 
 export default function () {
   return (
     <>
       <div className={displayTo('xs')}>
-        <HeaderText center>How this works in 3 easy steps</HeaderText>
+        <Button small type="primary">
+          Create your first cast
+        </Button>
       </div>
       <div className={displayFrom('xs')}>
-        <HeaderText>How this works in 3 easy steps</HeaderText>
+        <Button type="primary">Create your first cast</Button>
       </div>
     </>
   )

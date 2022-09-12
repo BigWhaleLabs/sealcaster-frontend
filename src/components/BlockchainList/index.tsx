@@ -1,4 +1,4 @@
-import { AccentText, BodyText } from 'components/Text'
+import { AccentText, BodyText } from 'components/ui/Text'
 import OpenEye from 'icons/OpenEye'
 import PostsList from 'components/BlockchainList/PostsList'
 import classnames, {

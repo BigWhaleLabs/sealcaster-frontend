@@ -1,4 +1,4 @@
-import { HeaderText, SubHeaderText } from 'components/Text'
+import { HeaderText, SubHeaderText } from 'components/ui/Text'
 import { Link } from 'wouter'
 import Button from 'components/ui/Button'
 import Dots from 'icons/Dots'
@@ -8,11 +8,9 @@ import classnames, {
   alignItems,
   display,
   flexDirection,
-  gap,
   justifyContent,
   space,
   textAlign,
-  textColor,
   width,
 } from 'classnames/tailwind'
 
@@ -20,14 +18,6 @@ const wrapper = classnames(
   space('space-y-6'),
   display('flex'),
   flexDirection('flex-col'),
-  alignItems('items-center')
-)
-
-const buttonContentWrapper = classnames(
-  display('flex'),
-  flexDirection('flex-row'),
-  gap('gap-x-3'),
-  textColor('text-inherit'),
   alignItems('items-center')
 )
 
@@ -70,7 +60,7 @@ export default function () {
         <div className={buttonWrapper}>
           <GradientBorder>
             <Button gradientFont type="secondary" small>
-              <div className={buttonContentWrapper}>Connect Burner</div>
+              Connect Burner
             </Button>
           </GradientBorder>
         </div>

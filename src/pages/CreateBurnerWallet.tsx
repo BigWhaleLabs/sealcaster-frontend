@@ -1,4 +1,4 @@
-import { AccentText, HeaderText, PostText } from 'components/Text'
+import { AccentText, HeaderText, PostText } from 'components/ui/Text'
 import { Sizes } from 'models/CharInCircle'
 import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'

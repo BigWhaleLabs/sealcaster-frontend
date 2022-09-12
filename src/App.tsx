@@ -1,4 +1,5 @@
 import { Route, Router } from 'wouter'
+import { ToastContainer } from 'react-toastify'
 import CreateBurnerWallet from 'pages/CreateBurnerWallet'
 import Footer from 'components/Footer'
 import Landing from 'pages/Landing'
@@ -53,6 +54,7 @@ export default function () {
           <Footer />
         </div>
       </ScrollToTop>
+      <ToastContainer position="bottom-right" theme="dark" />
     </Router>
   )
 }
