@@ -15,6 +15,12 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 
+enum Scenes {
+  'Landing',
+  'Error',
+  'CastPost',
+}
+
 const wrapper = classnames(
   display('flex'),
   flexDirection('flex-col'),
@@ -47,7 +53,7 @@ const buttonWithStatus = classnames(
 const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
 
 export default function () {
-  const [state, setState] = useState(0)
+  const [state, setState] = useState<Scenes>(Scenes.Landing)
   const [username, setUsername] = useState('')
   const [hasError, setHasError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -55,21 +61,26 @@ export default function () {
 
   const checkUsername = () => {
     setHasError('')
-    setLoading(true)
-    setState(state + 1)
-
-    if (state === 2) {
-      setStatus('Obtaining token from attestor...')
+    if (!username.length) {
+      setHasError('Username cannot be empty')
+      return
     }
+    setLoading(true)
+
+    if (state === Scenes.Error) {
+      setStatus('Obtaining token from attestor...')
+      setState(Scenes.CastPost)
+    }
+    if (state === Scenes.Landing) {
+      setState(Scenes.Error)
+    }
+
     setTimeout(() => {
-      if (!username.length) {
-        setHasError('Username cannot be empty')
-      }
-      if (state === 2) {
+      if (state === Scenes.CastPost) {
         setStatus('')
         setHasError('')
       }
-      if (state === 1) {
+      if (state === Scenes.Error) {
         setHasError('Some test error to notify user')
       }
       setLoading(false)
@@ -104,9 +115,7 @@ export default function () {
           isError={!!hasError.length}
           disabled={loading}
           onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
-          onKeyDown={(event) =>
-            event.code === 'Enter' ? checkUsername() : undefined
-          }
+          onKeyDown={(event) => event.code === 'Enter' && checkUsername()}
         />
         <PostText>
           You’ll verify your username and profile by connecting the same wallet

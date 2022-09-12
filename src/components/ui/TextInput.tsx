@@ -68,7 +68,6 @@ const atSign = (error?: boolean, disabled?: boolean, hasValue?: boolean) =>
     textColor({
       'text-formal-accent-semi-transparent': disabled,
       'text-error': error,
-
       'text-formal-accent': hasValue,
       'text-formal-accent-light-transparent': !hasValue,
     })
