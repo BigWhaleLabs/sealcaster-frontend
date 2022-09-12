@@ -3,20 +3,27 @@ import {
   TDropShadow,
   TGradientColorStops,
   TTextColor,
+  alignItems,
   backgroundClip,
   backgroundImage,
+  caretColor,
   classnames,
+  display,
   dropShadow,
   fontFamily,
   fontSize,
   fontWeight,
   gradientColorStops,
   lineHeight,
+  placeholderColor,
+  space,
   textAlign,
   textColor,
   textDecoration,
   transitionProperty,
   whitespace,
+  width,
+  wordBreak,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
 import classNamesToString from 'helpers/classNamesToString'
@@ -361,3 +368,79 @@ export function SocialLink({ url, children }: ChildrenProp & { url: string }) {
     </a>
   )
 }
+
+const textareaText = (dark?: boolean) =>
+  classnames(
+    display('flex'),
+    fontFamily('font-primary'),
+    alignItems('items-center'),
+    textColor({
+      'text-formal-accent-semi-transparent': dark,
+      'text-formal-accent': !dark,
+    }),
+    placeholderColor('placeholder-formal-accent-dimmed'),
+    caretColor('caret-primary')
+  )
+export function TextareaText({
+  dark,
+  children,
+}: ChildrenProp & { dark?: boolean }) {
+  return <div className={textareaText(dark)}>{children}</div>
+}
+
+const errorTextBox = (visible?: boolean) =>
+  classnames(
+    display(visible ? 'flex' : 'hidden'),
+    alignItems('items-center'),
+    space('space-x-2')
+  )
+const errorText = (centered?: boolean) =>
+  classnames(
+    textColor('text-error'),
+    fontWeight('font-medium'),
+    fontFamily('font-primary'),
+    textAlign({ 'text-center': centered })
+  )
+export function ErrorText({
+  children,
+  withExclamation,
+  visible,
+  centered,
+}: ChildrenProp & {
+  centered?: boolean
+  withExclamation?: boolean
+  visible?: boolean
+}) {
+  const error = <p className={errorText(centered)}>{children}</p>
+
+  if (withExclamation)
+    return (
+      <div className={errorTextBox(visible)}>
+        {/* <ExclamationInCircle /> */}
+        {error}
+      </div>
+    )
+
+  return error
+}
+
+const suffixText = classnames(
+  fontSize('text-sm'),
+  lineHeight('leading-5'),
+  textColor('text-formal-accent-semi-transparent'),
+  wordBreak('break-all')
+)
+export function SuffixText({ children }: ChildrenProp) {
+  return <span className={suffixText}>{children}</span>
+}
+
+export const highlightedText = (bold?: boolean, center?: boolean) =>
+  classnames(
+    width('w-fit'),
+    textColor('text-primary-dark'),
+    fontWeight(bold ? 'font-bold' : 'font-semibold'),
+    fontFamily(bold ? 'font-primary' : undefined),
+    fontSize(bold ? 'text-base' : 'text-sm'),
+    lineHeight(bold ? 'leading-6' : 'leading-5'),
+    textAlign(center ? 'text-center' : 'text-left')
+  )
