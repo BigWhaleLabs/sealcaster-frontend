@@ -100,7 +100,7 @@ export default function ({
               }}
               disabled={disabled}
               maxLength={maxLength}
-              minRows={5}
+              minRows={3}
               spellcheck={true}
               {...restProps}
             />
