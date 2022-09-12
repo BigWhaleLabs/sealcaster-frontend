@@ -37,12 +37,7 @@ export default function () {
       <div className={sealGridWrapper}>
         <SealGrid />
       </div>
-      <div
-        className={classnames(
-          space('space-y-2'),
-          textAlign('text-center', 'sm:text-left')
-        )}
-      >
+      <div className={classnames(space('space-y-2'), textAlign('text-center'))}>
         <HeaderText center big extraLeading>
           Cast anonymously on Farcaster
         </HeaderText>

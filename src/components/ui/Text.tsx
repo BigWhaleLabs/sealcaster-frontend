@@ -47,7 +47,6 @@ const accentText = (
     fontSize({
       'text-sm': small,
       'text-xs': extraSmall,
-      'xs:text-base': extraSmall,
     }),
     dropShadow(shadow)
   )
@@ -199,10 +198,10 @@ const headerText = (
   classnames(
     fontFamily('font-primary'),
     fontWeight('font-bold'),
-    fontSize(big ? 'text-3xl' : 'text-2xl', 'xs:text-3xl', 'sm:text-4xl'),
+    fontSize(big ? 'text-3.5xl' : 'text-2xl', 'xs:text-3.5xl', 'sm:text-4xl'),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
-      ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-11')
+      ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-10.5')
       : lineHeight('!leading-8'),
     textAlign({ 'text-center': center })
   )

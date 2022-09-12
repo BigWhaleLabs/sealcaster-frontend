@@ -62,6 +62,7 @@ module.exports = {
         6: '1.313rem',
         7: '1.438rem',
         8: '1.938rem',
+        10.5: '2.563rem',
         11: '3.188rem',
       },
       screens: {
@@ -111,6 +112,9 @@ module.exports = {
         lg: '0rem 0rem 1rem 0rem #00000025',
         md: '0rem 0rem 0.375rem 0rem #00000025',
         button: '0rem 0rem 1.625rem #000000',
+      },
+      fontSize: {
+        '3.5xl': '2rem',
       },
     },
     container: {

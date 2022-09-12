@@ -7855,6 +7855,7 @@ export type TFontSize =
   | 'text-7xl'
   | 'text-8xl'
   | 'text-9xl'
+  | 'text-3.5xl'
 
 export type TFontWeight =
   | 'font-thin'
@@ -7891,6 +7892,7 @@ export type TLineHeight =
   | 'leading-normal'
   | 'leading-relaxed'
   | 'leading-loose'
+  | 'leading-10.5'
 
 export type TListStyleType = 'list-none' | 'list-disc' | 'list-decimal'
 
