@@ -1,5 +1,5 @@
 import { PostStatus, PostStatusText } from 'models/PostStatus'
-import { StatusText } from 'components/Text'
+import { StatusText } from 'components/ui/Text'
 import classnames, { alignItems, display } from 'classnames/tailwind'
 
 const statusContainer = classnames(display('flex'), alignItems('items-center'))

@@ -1,5 +1,5 @@
-import { AccentText, CardParagraph, LinkText } from 'components/Text'
-import Card from 'components/Card'
+import { AccentText, CardParagraph, LinkText } from 'components/ui/Text'
+import Card from 'components/ui/Card'
 import SealEye from 'icons/SealEye'
 import StepList from 'components/HowItWorks/StepList'
 import Title from 'components/HowItWorks/Title'
@@ -15,7 +15,7 @@ const cardContainer = classnames(
   display('flex'),
   flexDirection('flex-col', 'xs:flex-row'),
   alignItems('items-center', 'xs:items-start'),
-  gap('gap-y-4', 'xs:gap-x-4', 'xs:gap-y-0')
+  gap('gap-y-4', 'xs:gap-x-4')
 )
 const cardTextBox = classnames(
   display('flex'),

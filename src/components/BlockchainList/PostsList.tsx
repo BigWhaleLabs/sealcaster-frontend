@@ -1,4 +1,4 @@
-import { BodyText, LoadingText } from 'components/Text'
+import { BodyText, LoadingText } from 'components/ui/Text'
 import { Suspense, useState } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import InfiniteScroll from 'react-infinite-scroll-component'

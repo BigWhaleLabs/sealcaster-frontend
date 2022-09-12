@@ -1,4 +1,4 @@
-import { CardParagraph } from 'components/Text'
+import { CardParagraph } from 'components/ui/Text'
 import OrderedList from 'components/OrderedList'
 
 export default function () {

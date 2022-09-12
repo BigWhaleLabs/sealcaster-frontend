@@ -30,7 +30,6 @@ import {
   transitionTimingFunction,
   width,
 } from 'classnames/tailwind'
-import Arrow from 'icons/Arrow'
 import Loading from 'icons/Loading'
 import React from 'react'
 
@@ -160,7 +159,6 @@ interface ButtonProps {
   disabled?: boolean
   loading?: boolean
   small?: boolean
-  withArrow?: boolean
   gradientFont?: boolean
   loadingOverflow?: boolean
   url?: string
@@ -174,7 +172,6 @@ export default function ({
   fullWidth,
   center,
   small,
-  withArrow,
   type = 'tertiary',
   loading,
   disabled,
@@ -210,15 +207,6 @@ export default function ({
             <span className={textGradient(available)}>{children}</span>
           ) : (
             <div>{children}</div>
-          )}
-          {withArrow && (
-            <div className={width('w-4')}>
-              <Arrow
-                horizontal
-                pulseDisabled={disabled || loading}
-                openDisabled
-              />
-            </div>
           )}
         </>
       )}

@@ -1,5 +1,5 @@
-import { CardParagraph, HeaderText } from 'components/Text'
-import Card from 'components/Card'
+import { CardParagraph, HeaderText } from 'components/ui/Text'
+import Card from 'components/ui/Card'
 
 export default function () {
   return (

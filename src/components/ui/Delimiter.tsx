@@ -1,5 +1,5 @@
 import { Size, displayFrom } from 'helpers/visibilityClassnames'
-import { StatusText } from 'components/Text'
+import { StatusText } from 'components/ui/Text'
 import classnames, {
   TArg,
   alignItems,
