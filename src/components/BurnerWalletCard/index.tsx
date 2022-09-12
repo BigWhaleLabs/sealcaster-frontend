@@ -11,6 +11,7 @@ import CreateFirstCastButton from 'components/BurnerWalletCard/CreateFirstCastBu
 import classnames, {
   alignItems,
   blur,
+  cursor,
   display,
   flexDirection,
   gap,
@@ -53,7 +54,8 @@ const buttonContent = classnames(
   display('flex'),
   flexDirection('flex-row'),
   alignItems('items-center'),
-  gap('gap-x-1', 'xs:gap-x-2')
+  gap('gap-x-1', 'xs:gap-x-2'),
+  cursor('cursor-pointer')
 )
 const privateKeyBlur = (closed?: boolean) =>
   classnames(
@@ -87,30 +89,27 @@ export default function () {
             </div>
           </div>
           <div className={buttonsContainer(isKeyClosed)}>
-            <Button
-              small
-              gradientFont
-              type="tertiary"
+            <div
+              className={buttonContent}
               onClick={() => setKeyClosed(!isKeyClosed)}
             >
-              <div className={buttonContent}>
-                <ColorfulEye open={isKeyClosed} />{' '}
+              <ColorfulEye open={isKeyClosed} />
+              <Button small gradientFont type="tertiary">
                 {isKeyClosed ? 'Reveal key' : 'Hide key'}
-              </div>
-            </Button>
-            <Button
-              small
-              gradientFont
-              type="tertiary"
+              </Button>
+            </div>
+            <div
+              className={buttonContent}
               onClick={async () => {
                 await navigator.clipboard.writeText(privateKey)
                 toast('Private key copied 🎉')
               }}
             >
-              <div className={buttonContent}>
-                <Copy /> Copy key
-              </div>
-            </Button>
+              <Copy />
+              <Button small gradientFont type="tertiary">
+                Copy key
+              </Button>
+            </div>
           </div>
         </div>
         <BodyText center primary semiBold>
