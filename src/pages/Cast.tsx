@@ -5,6 +5,7 @@ import {
   SubHeaderText,
 } from 'components/ui/Text'
 import { useState } from 'preact/hooks'
+import BlockchainList from 'components/BlockchainList'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
 import Input from 'components/ui/Input'
@@ -16,6 +17,7 @@ import classnames, {
   display,
   gap,
   justifyContent,
+  margin,
   space,
   textDecoration,
 } from 'classnames/tailwind'
@@ -39,52 +41,59 @@ export default function () {
     'You’re casting from the burner you just created. You’re anonymous now. This will persist between page loads until you disconnect.'
 
   return (
-    <div className={space('space-y-6')}>
-      <div className={space('space-y-4')}>
-        <HeaderText big extraLeading>
-          Cast anonymously on Farcaster
-        </HeaderText>
-        <SubHeaderText>
-          Everything will cast from{' '}
-          <LinkText url={farcasterEchoUrl}>@echo</LinkText> (SealCredEcho) on
-          Farcaster.
-        </SubHeaderText>
-      </div>
-      <div className={space('space-y-2')}>
-        <TextArea
-          text={text}
-          placeholder="Write something here..."
-          onTextChange={(newText) => {
-            setText(newText)
-          }}
-          setSuffix={setSuffix}
-          maxLength={maxLength}
-          currentAddress={'asd'}
-          disabled={false}
-          error={false}
-        />
-        <div
-          className={classnames(
-            display('flex'),
-            justifyContent('justify-between')
-          )}
-        >
-          <AccentText extraSmall color="text-accent">
-            <ToolTip position="bottom" fitContainer text={zkProofText}>
-              <span className={hintWrapper}>
-                <span>Posting from burner wallet</span>
-                <CharInCircle size={Sizes.Small} char="?" />
-              </span>
-            </ToolTip>
-          </AccentText>
-          <Button type="tertiary">
-            <AccentText extraSmall color="text-secondary">
-              <span className={textDecoration('underline')}>Trash Burner</span>
-            </AccentText>
-          </Button>
+    <>
+      <div className={space('space-y-6')}>
+        <div className={space('space-y-4')}>
+          <HeaderText big extraLeading>
+            Cast anonymously on Farcaster
+          </HeaderText>
+          <SubHeaderText>
+            Everything will cast from{' '}
+            <LinkText url={farcasterEchoUrl}>@echo</LinkText> (SealCredEcho) on
+            Farcaster.
+          </SubHeaderText>
         </div>
+        <div className={space('space-y-2')}>
+          <TextArea
+            text={text}
+            placeholder="Write something here..."
+            onTextChange={(newText) => {
+              setText(newText)
+            }}
+            setSuffix={setSuffix}
+            maxLength={maxLength}
+            currentAddress={'asd'}
+            disabled={false}
+            error={false}
+          />
+          <div
+            className={classnames(
+              display('flex'),
+              justifyContent('justify-between')
+            )}
+          >
+            <AccentText extraSmall color="text-accent">
+              <ToolTip position="bottom" fitContainer text={zkProofText}>
+                <span className={hintWrapper}>
+                  <span>Posting from burner wallet</span>
+                  <CharInCircle size={Sizes.Small} char="?" />
+                </span>
+              </ToolTip>
+            </AccentText>
+            <Button type="tertiary">
+              <AccentText extraSmall color="text-secondary">
+                <span className={textDecoration('underline')}>
+                  Trash Burner
+                </span>
+              </AccentText>
+            </Button>
+          </div>
+        </div>
+        <Button type="primary">Cast</Button>
       </div>
-      <Button type="primary">Cast</Button>
-    </div>
+      <div className={margin('mt-24')}>
+        <BlockchainList />
+      </div>
+    </>
   )
 }
