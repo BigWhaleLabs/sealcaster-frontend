@@ -10,6 +10,7 @@
   --secondary: #ff7bed;
   --tertiary: #01feb6;
   --formal-accent: #efecd6;
+  --formal-accent-dimmed: #efecd680;
   --light-grey: #8899a6;
   --half-grey: #505050;
 
@@ -28,6 +29,7 @@
   --secondary-light-transparent: #ff7bed69;
   --accent-light-active-transparent: #fed8239e;
   --secondary-light-active-transparent: #ff7bed9e;
+  --formal-accent-light-transparent: #efecd6cc;
 
   --accent-semi-transparent: rgba(254, 216, 35, 0.4);
   --primary-semi-transparent: rgba(21, 161, 252, 0.5);
@@ -84,4 +86,12 @@ path:not(.walletconnect-qrcode__image path),
 circle {
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.inputWithAt::before {
+  content: '@';
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  color: var(--formal-accent);
 }

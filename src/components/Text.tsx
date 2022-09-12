@@ -17,6 +17,7 @@ import {
   textDecoration,
   transitionProperty,
   whitespace,
+  width,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
 import classNamesToString from 'helpers/classNamesToString'
@@ -347,4 +348,25 @@ export function SocialLink({ url, children }: ChildrenProp & { url: string }) {
       {children}
     </a>
   )
+}
+
+export const highlightedText = (bold?: boolean, center?: boolean) =>
+  classnames(
+    width('w-fit'),
+    textColor('text-primary-dark'),
+    fontWeight(bold ? 'font-bold' : 'font-semibold'),
+    fontFamily(bold ? 'font-primary' : undefined),
+    fontSize(bold ? 'text-base' : 'text-sm'),
+    lineHeight(bold ? 'leading-6' : 'leading-5'),
+    textAlign(center ? 'text-center' : 'text-left')
+  )
+export function HighlightedText({
+  bold,
+  center,
+  children,
+}: ChildrenProp & {
+  bold?: boolean
+  center?: boolean
+}) {
+  return <div className={highlightedText(bold, center)}>{children}</div>
 }

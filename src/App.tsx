@@ -1,4 +1,5 @@
 import { Route, Router } from 'wouter'
+import CreateBurnerWallet from 'pages/CreateBurnerWallet'
 import Footer from 'components/Footer'
 import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
@@ -26,6 +27,9 @@ export default function () {
         <div className={bodyContainer}>
           <Route path="/">
             <Landing />
+          </Route>
+          <Route path="/create">
+            <CreateBurnerWallet />
           </Route>
           <Route path="/terms">
             <Terms />
