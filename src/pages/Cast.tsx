@@ -4,6 +4,7 @@ import {
   LinkText,
   SubHeaderText,
 } from 'components/ui/Text'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
 import Button from 'components/ui/Button'
@@ -14,7 +15,9 @@ import TextArea from 'components/ui/TextArea'
 import ToolTip from 'components/ui/ToolTip'
 import classnames, {
   alignItems,
+  alignSelf,
   display,
+  flexDirection,
   gap,
   justifyContent,
   margin,
@@ -53,7 +56,7 @@ export default function () {
             Farcaster.
           </SubHeaderText>
         </div>
-        <div className={space('space-y-2')}>
+        <div className={space('md:space-y-2', 'space-y-4')}>
           <TextArea
             text={text}
             placeholder="Write something here..."
@@ -69,7 +72,10 @@ export default function () {
           <div
             className={classnames(
               display('flex'),
-              justifyContent('justify-between')
+              justifyContent('justify-between'),
+              flexDirection('md:flex-row', 'flex-col'),
+              alignItems('md:items-center'),
+              space('space-y-4')
             )}
           >
             <AccentText extraSmall color="text-accent">
@@ -80,16 +86,40 @@ export default function () {
                 </span>
               </ToolTip>
             </AccentText>
-            <Button type="tertiary">
-              <AccentText extraSmall color="text-secondary">
-                <span className={textDecoration('underline')}>
-                  Trash Burner
-                </span>
-              </AccentText>
-            </Button>
+            <div className={displayTo('md')}>
+              <Button fullWidth center type="primary">
+                Cast
+              </Button>
+            </div>
+            <span
+              className={classnames(alignSelf('self-center'), margin('mt-2'))}
+            >
+              <Button type="tertiary">
+                <AccentText extraSmall color="text-secondary">
+                  <span
+                    className={classnames(
+                      textDecoration('underline'),
+                      displayFrom('md')
+                    )}
+                  >
+                    Trash Burner
+                  </span>
+                  <span
+                    className={classnames(
+                      textDecoration('underline'),
+                      displayTo('md')
+                    )}
+                  >
+                    Trash Burner and disconnect
+                  </span>
+                </AccentText>
+              </Button>
+            </span>
           </div>
         </div>
-        <Button type="primary">Cast</Button>
+        <div className={displayFrom('md')}>
+          <Button type="primary">Cast</Button>
+        </div>
       </div>
       <div className={margin('mt-24')}>
         <BlockchainList />
