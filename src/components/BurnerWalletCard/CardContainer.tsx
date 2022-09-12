@@ -33,7 +33,7 @@ const cardContainer = classnames(
   wordBreak('break-words'),
   zIndex('z-20')
 )
-const parentButtonWrapper = classnames(
+const parentWrapper = classnames(
   maxWidth('max-w-full'),
   width('w-auto'),
   borderRadius('rounded-2xl'),
@@ -41,7 +41,7 @@ const parentButtonWrapper = classnames(
   padding('p-px'),
   gradientColorStops('from-secondary', 'to-accent')
 )
-const innerButtonWrapper = classnames(
+const innerWrapper = classnames(
   width('w-full'),
   borderRadius('rounded-2xl'),
   backgroundColor('bg-primary-background')
@@ -50,12 +50,9 @@ const innerButtonWrapper = classnames(
 export default function ({ children }: ChildrenProp & { small?: boolean }) {
   return (
     <div
-      className={classNamesToString(
-        parentButtonWrapper,
-        'double-gradient-shadow'
-      )}
+      className={classNamesToString(parentWrapper, 'double-gradient-shadow')}
     >
-      <div className={innerButtonWrapper}>
+      <div className={innerWrapper}>
         <div className={cardContainer}>{children}</div>
       </div>
     </div>

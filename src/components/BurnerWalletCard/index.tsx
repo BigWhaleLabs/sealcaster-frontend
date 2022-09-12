@@ -65,7 +65,7 @@ const privateKeyBlur = (closed?: boolean) =>
 export default function () {
   const [isKeyClosed, setKeyClosed] = useState(true)
   const [privateKey] = useState(
-    '0xb794f5ea0ba39494ce89268ce89268ce89268e89268e89268e89268e892689'
+    '0x0000000000000000000000000000000000000000000000000000000000000000'
   )
 
   return (
