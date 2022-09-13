@@ -1,13 +1,11 @@
 import { ErrorList, handleError } from '@big-whale-labs/frontend-utils'
 import { ExternalProvider, Web3Provider } from '@ethersproject/providers'
 import { PersistableStore } from '@big-whale-labs/stores'
-import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract'
 import { proxy } from 'valtio'
 import { serializeError } from 'eth-rpc-errors'
 import chainForWallet from 'helpers/chainForWallet'
 import env from 'helpers/env'
 import networkChainIdToName from 'models/networkChainIdToName'
-import parsePostLogData from 'helpers/parsePostLogData'
 import relayProvider from 'helpers/providers/relayProvider'
 import web3Modal from 'helpers/web3Modal'
 
@@ -94,39 +92,20 @@ class WalletStore extends PersistableStore {
     this.walletLoading = false
   }
 
-  get provider() {
-    return provider
+  async signMessage(message: string) {
+    if (!provider) throw new Error('No provider')
+
+    const signer = provider.getSigner()
+    const signature = await signer.signMessage(message)
+    return signature
   }
 
-  async createPost({
-    text,
-    original,
-  }: {
-    text: string
-    ledgerType: string
-    original: string
-  }) {
+  async getProvider() {
     if (!provider) throw new Error(ErrorList.noProvider)
 
     const gsnProvider = await relayProvider(provider)
 
-    const ethersProvider = new Web3Provider(
-      gsnProvider as unknown as ExternalProvider
-    )
-
-    const contract = SCPostStorage__factory.connect(
-      env.VITE_SC_FARCASTER_POSTS_CONTRACT_ADDRESS,
-      ethersProvider.getSigner(0)
-    )
-    const transaction = await contract.savePost(text, original)
-    const result = await transaction.wait()
-
-    return Promise.all(
-      result.logs
-        .filter(({ address }) => address === contract.address)
-        .map(({ data, topics }) => parsePostLogData({ data, topics }))
-        .map(({ args }) => args)
-    )
+    return new Web3Provider(gsnProvider as unknown as ExternalProvider)
   }
 
   private subscribeProvider(provider: Web3Provider) {

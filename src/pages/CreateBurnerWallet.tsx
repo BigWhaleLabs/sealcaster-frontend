@@ -1,6 +1,7 @@
 import { AccentText, HeaderText, PostText } from 'components/ui/Text'
 import { Sizes } from 'models/CharInCircle'
 import { useState } from 'preact/hooks'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
 import TextInput from 'components/ui/TextInput'
@@ -14,6 +15,7 @@ import classnames, {
   textAlign,
   width,
 } from 'classnames/tailwind'
+import walletStore from 'stores/WalletStore'
 
 enum Scenes {
   'Landing',
@@ -59,32 +61,15 @@ export default function () {
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<string | undefined>()
 
-  const checkUsername = () => {
+  const generate = async () => {
     setHasError('')
-    if (!username.length) {
-      setHasError('Username cannot be empty')
-      return
-    }
+    if (!username.length) return setHasError('Username cannot be empty')
     setLoading(true)
 
-    if (state === Scenes.Error) {
-      setStatus('Obtaining token from attestor...')
-      setState(Scenes.CastPost)
-    }
-    if (state === Scenes.Landing) {
-      setState(Scenes.Error)
-    }
+    await walletStore.connect(true)
+    if (!walletStore.account) return setHasError('Connect account!')
 
-    setTimeout(() => {
-      if (state === Scenes.CastPost) {
-        setStatus('')
-        setHasError('')
-      }
-      if (state === Scenes.Error) {
-        setHasError('Some test error to notify user')
-      }
-      setLoading(false)
-    }, 2000)
+    await BurnerWalletStore.generateBurnerWallet(username, walletStore.account)
   }
 
   const hintText =
@@ -115,7 +100,7 @@ export default function () {
           isError={!!hasError.length}
           disabled={loading}
           onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
-          onKeyDown={(event) => event.code === 'Enter' && checkUsername()}
+          onKeyDown={(event) => event.code === 'Enter' && generate()}
         />
         <PostText>
           You’ll verify your username and profile by connecting the same wallet
@@ -130,7 +115,7 @@ export default function () {
               type="primary"
               loading={loading}
               disabled={!username.length}
-              onClick={checkUsername}
+              onClick={generate}
             >
               Connect & verify
             </Button>

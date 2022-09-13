@@ -31,7 +31,7 @@ export default function () {
   return (
     <Router>
       <ScrollToTop>
-      <div className={pageContainer}>
+        <div className={pageContainer}>
           <Navbar
             logo={<Logo />}
             account={undefined}
@@ -39,18 +39,18 @@ export default function () {
             logoText="SealCaster"
           />
           <div className={bodyContainer}>
-          <Route path="/">
-            <Landing />
-          </Route>
-          <Route path="/cast">
-            <Cast />
-          </Route>
-          <Route path="/terms">
-            <Terms />
-          </Route>
-          <Route path="/privacy">
-            <Privacy />
-          </Route>
+            <Route path="/">
+              <Landing />
+            </Route>
+            <Route path="/cast">
+              <Cast />
+            </Route>
+            <Route path="/terms">
+              <Terms />
+            </Route>
+            <Route path="/privacy">
+              <Privacy />
+            </Route>
             <Route path="/">
               <Landing />
             </Route>
@@ -71,5 +71,3 @@ export default function () {
     </Router>
   )
 }
-
-
