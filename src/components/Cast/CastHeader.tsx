@@ -3,7 +3,8 @@ import { displayFrom } from 'helpers/visibilityClassnames'
 import classnames, { display, space, width } from 'classnames/tailwind'
 
 export default function () {
-  const farcasterEchoUrl = 'https://echo.sealcred.xyz'
+  const farcasterEchoUrl =
+    'farcaster://profiles/0xAD81Fb97FEcaFA3A9830d4e2F424aC1776024DA8/posts'
 
   return (
     <div
