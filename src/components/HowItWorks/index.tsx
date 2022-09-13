@@ -21,10 +21,8 @@ const cardTextBox = classnames(
   flexDirection('flex-col'),
   gap('gap-y-4')
 )
-
-export default function () {
-  // This state is used to show the second card "How does this work?" after generating burner wallet
-  const hasWallet = true
+// Prop `hasWallet` is used to show the second card "How does this work?" after generating burner wallet
+export default function ({ hasWallet }: { hasWallet?: boolean }) {
   return (
     <Card>
       <div className={cardContainer}>
