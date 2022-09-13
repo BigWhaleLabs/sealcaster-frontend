@@ -44,7 +44,7 @@ export default function () {
           textAlign('text-center', 'sm:text-left')
         )}
       >
-        <HeaderText center big extraLeading>
+        <HeaderText center extraLeading size="large">
           Cast anonymously on Farcaster
         </HeaderText>
         <SubHeaderText>
