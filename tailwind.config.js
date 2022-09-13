@@ -33,6 +33,9 @@ module.exports = {
         'secondary-light-transparent': 'var(--secondary-light-transparent)',
         'secondary-light-active-transparent':
           'var(--secondary-light-active-transparent)',
+        'formal-accent-light-transparent':
+          'var(--formal-accent-light-transparent)',
+        'formal-accent-dimmed': 'var(--formal-accent-dimmed)',
 
         'accent-semi-transparent': 'var(--accent-semi-transparent)',
         'primary-semi-transparent': 'var(--primary-semi-transparent)',

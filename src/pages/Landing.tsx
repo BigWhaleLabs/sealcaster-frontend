@@ -5,14 +5,14 @@ import classnames, {
   alignItems,
   display,
   flexDirection,
-  space,
+  gap,
 } from 'classnames/tailwind'
 
 const blocksWrapper = classnames(
   display('flex'),
   flexDirection('flex-col'),
   alignItems('items-center'),
-  space('space-y-12')
+  gap('gap-y-12')
 )
 
 export default function () {
