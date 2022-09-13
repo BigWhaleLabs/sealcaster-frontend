@@ -1,5 +1,3 @@
-import { StateUpdater, Suspense } from 'preact/compat'
-import { SuffixText } from 'components/ui/Text'
 import {
   alignItems,
   alignSelf,
@@ -11,9 +9,6 @@ import {
   space,
 } from 'classnames/tailwind'
 import Counter from 'components/ui/Counter'
-import truncateMiddleIfNeeded from 'helpers/truncateMiddleIfNeeded'
-// import useContractSymbols from 'hooks/useContractSymbols'
-// import useDerivativeAddressesOwned from 'hooks/useDerivativeAddressesOwned'
 
 const footerBox = classnames(
   display('flex'),

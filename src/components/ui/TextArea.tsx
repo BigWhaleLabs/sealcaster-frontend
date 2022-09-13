@@ -1,4 +1,4 @@
-import { ChangeEvent, StateUpdater } from 'preact/compat'
+import { ChangeEvent } from 'preact/compat'
 import { ErrorText, TextareaText } from 'components/ui/Text'
 import {
   alignItems,
@@ -11,8 +11,6 @@ import {
   flexDirection,
   flexGrow,
   justifyContent,
-  margin,
-  minHeight,
   outlineColor,
   outlineStyle,
   padding,
