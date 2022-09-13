@@ -9,7 +9,6 @@ import TextareaInfo from 'components/Cast/TextareaInfo'
 
 export default function () {
   const [text, setText] = useState('')
-
   const [suffix, setSuffix] = useState('')
 
   const maxLength = 280 - suffix.length

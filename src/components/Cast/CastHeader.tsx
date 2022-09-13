@@ -1,11 +1,7 @@
 import { HeaderText, LinkText, SubHeaderText } from 'components/ui/Text'
 import { displayFrom } from 'helpers/visibilityClassnames'
-import classnames, {
-  display,
-  flexDirection,
-  gap,
-  width,
-} from 'classnames/tailwind'
+import classnames, { display, flexDirection, gap } from 'classnames/tailwind'
+import env from 'helpers/env'
 
 const castHeaderWrapper = classnames(
   display('flex'),
@@ -16,9 +12,6 @@ const castHeaderWrapper = classnames(
 const optionalTextWrapper = classnames(displayFrom('md'), display('md:!inline'))
 
 export default function () {
-  const farcasterEchoUrl =
-    'farcaster://profiles/0xAD81Fb97FEcaFA3A9830d4e2F424aC1776024DA8/posts'
-
   return (
     <div className={castHeaderWrapper}>
       <HeaderText big extraLeading>
@@ -26,7 +19,7 @@ export default function () {
       </HeaderText>
       <SubHeaderText>
         Everything will cast from{' '}
-        <LinkText underline url={farcasterEchoUrl}>
+        <LinkText underline url={env.VITE_FARCASTER_PROFILE_URL}>
           @echo
         </LinkText>{' '}
         <div className={optionalTextWrapper}>(SealCredEcho)</div> on Farcaster.

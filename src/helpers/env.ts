@@ -23,4 +23,8 @@ export default cleanEnv(import.meta.env, {
     default: GSN_PAYMASTER_CONTRACT_ADDRESS,
   }),
   VITE_GSN_SC_RELAY: str({ default: GSN_SC_RELAY }),
+  VITE_FARCASTER_PROFILE_URL: str({
+    default:
+      'farcaster://profiles/0xAD81Fb97FEcaFA3A9830d4e2F424aC1776024DA8/posts',
+  }),
 })
