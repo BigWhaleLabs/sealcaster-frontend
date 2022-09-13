@@ -3,21 +3,26 @@ import {
   TDropShadow,
   TGradientColorStops,
   TTextColor,
+  alignItems,
   backgroundClip,
   backgroundImage,
+  caretColor,
   classnames,
+  display,
   dropShadow,
   fontFamily,
   fontSize,
   fontWeight,
   gradientColorStops,
   lineHeight,
+  placeholderColor,
   textAlign,
   textColor,
   textDecoration,
   transitionProperty,
   whitespace,
   width,
+  wordBreak,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
 import classNamesToString from 'helpers/classNamesToString'
@@ -41,7 +46,6 @@ const accentText = (
     fontSize({
       'text-sm': small,
       'text-xs': extraSmall,
-      'xs:text-base': extraSmall,
     }),
     dropShadow(shadow)
   )
@@ -74,12 +78,12 @@ const linkText = (
   small?: boolean,
   extraSmall?: boolean,
   bold?: boolean,
-  underline?: boolean,
   gradientFrom?: TGradientColorStops,
-  gradientTo?: TGradientColorStops
+  gradientTo?: TGradientColorStops,
+  underline?: boolean
 ) =>
   classnames(
-    textDecoration({ 'hover:underline': underline }),
+    textDecoration({ underline }),
     textColor(gradientFrom && gradientTo ? 'text-transparent' : 'text-primary'),
     backgroundImage(
       gradientFrom && gradientTo ? 'bg-gradient-to-r' : undefined
@@ -96,48 +100,40 @@ export function LinkText({
   small,
   extraSmall,
   internal,
-  underline,
   title,
   children,
   gradientFrom,
   gradientTo,
+  underline,
 }: ChildrenProp & {
   url: string
   small?: boolean
   extraSmall?: boolean
   internal?: boolean
-  underline?: boolean
   bold?: boolean
   title?: string
   gradientFrom?: TGradientColorStops
   gradientTo?: TGradientColorStops
+  underline?: boolean
 }) {
+  const linkClassnames = linkText(
+    small,
+    extraSmall,
+    bold,
+    gradientFrom,
+    gradientTo,
+    underline
+  )
+
   if (internal)
     return (
-      <Link
-        to={url}
-        className={linkText(
-          small,
-          extraSmall,
-          bold,
-          underline,
-          gradientFrom,
-          gradientTo
-        )}
-      >
+      <Link to={url} className={linkClassnames}>
         {children}
       </Link>
     )
   return (
     <a
-      className={linkText(
-        small,
-        extraSmall,
-        bold,
-        underline,
-        gradientFrom,
-        gradientTo
-      )}
+      className={linkClassnames}
       href={url}
       title={title}
       target="_blank"
@@ -212,16 +208,16 @@ const headerText = (
     fontWeight('font-bold'),
     fontSize(
       {
-        'text-3xl': size === 'large',
+        'text-3.5xl': size === 'large',
         'text-2xl': size === 'medium',
         'text-xl': size === 'small',
       },
       size === 'small' ? 'xs:text-2xl' : 'xs:text-3xl',
       size === 'small' ? 'sm:text-2xl' : 'sm:text-4xl'
     ),
-    textColor({ 'text-accent': accent }),
+    textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
-      ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-11')
+      ? lineHeight('leading-10', 'md:leading-10.5')
       : lineHeight({ '!leading-8': size !== 'small' }),
     textAlign({ 'text-center': center })
   )
@@ -350,13 +346,8 @@ export function CardSubheader({ children }: ChildrenProp) {
   return <p className={cardSubheaderContainer}>{children}</p>
 }
 
-const subHeaderContainer = classnames(
-  fontSize('text-sm'),
-  fontWeight('font-normal')
-)
-
 export function SubHeaderText({ children }: ChildrenProp) {
-  return <p className={subHeaderContainer}>{children}</p>
+  return <p className={fontFamily('font-primary')}>{children}</p>
 }
 
 const logoText = classnames(
@@ -386,6 +377,53 @@ export function SocialLink({ url, children }: ChildrenProp & { url: string }) {
       {children}
     </a>
   )
+}
+
+const textareaText = (dark?: boolean) =>
+  classnames(
+    display('flex'),
+    fontFamily('font-primary'),
+    alignItems('items-center'),
+    textColor({
+      'text-formal-accent-semi-transparent': dark,
+      'text-formal-accent': !dark,
+    }),
+    placeholderColor('placeholder-formal-accent-dimmed'),
+    caretColor('caret-primary')
+  )
+export function TextareaText({
+  dark,
+  children,
+}: ChildrenProp & { dark?: boolean }) {
+  return <div className={textareaText(dark)}>{children}</div>
+}
+
+const errorText = (centered?: boolean) =>
+  classnames(
+    textColor('text-error'),
+    fontWeight('font-medium'),
+    fontFamily('font-primary'),
+    textAlign({ 'text-center': centered })
+  )
+export function ErrorText({
+  children,
+  centered,
+}: ChildrenProp & {
+  centered?: boolean
+  withExclamation?: boolean
+  visible?: boolean
+}) {
+  return <p className={errorText(centered)}>{children}</p>
+}
+
+const suffixText = classnames(
+  fontSize('text-sm'),
+  lineHeight('leading-5'),
+  textColor('text-formal-accent-semi-transparent'),
+  wordBreak('break-all')
+)
+export function SuffixText({ children }: ChildrenProp) {
+  return <span className={suffixText}>{children}</span>
 }
 
 export const highlightedText = (bold?: boolean, center?: boolean) =>
