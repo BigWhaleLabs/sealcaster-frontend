@@ -29,7 +29,7 @@ export default function () {
   return (
     <div className={wrapper}>
       <div className={textWrapper}>
-        <HeaderText small center>
+        <HeaderText center size="small">
           Your cast is processing
         </HeaderText>
         <div className={descriptionText}>

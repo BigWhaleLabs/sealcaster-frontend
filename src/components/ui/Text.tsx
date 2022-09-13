@@ -188,36 +188,40 @@ const headerText = (
   accent = false,
   center?: boolean,
   extraLeading = false,
-  small = false
+  size = 'medium'
 ) =>
   classnames(
     fontFamily('font-primary'),
     fontWeight('font-bold'),
     fontSize(
-      small ? 'text-xl' : 'text-2xl',
-      small ? 'xs:text-2xl' : 'xs:text-3xl',
-      small ? 'sm:text-2xl' : 'sm:text-4xl'
+      {
+        'text-3xl': size === 'large',
+        'text-2xl': size === 'medium',
+        'text-xl': size === 'small',
+      },
+      size === 'small' ? 'xs:text-2xl' : 'xs:text-3xl',
+      size === 'small' ? 'sm:text-2xl' : 'sm:text-4xl'
     ),
     textColor({ 'text-accent': accent }),
     extraLeading
       ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-11')
-      : lineHeight({ '!leading-8': !small }),
+      : lineHeight({ '!leading-8': size !== 'small' }),
     textAlign({ 'text-center': center })
   )
 export function HeaderText({
   accent,
   center,
   extraLeading,
-  small,
+  size,
   children,
 }: ChildrenProp & {
   accent?: boolean
   center?: boolean
   extraLeading?: boolean
-  small?: boolean
+  size?: 'large' | 'medium' | 'small'
 }) {
   return (
-    <h1 className={headerText(accent, center, extraLeading, small)}>
+    <h1 className={headerText(accent, center, extraLeading, size)}>
       {children}
     </h1>
   )

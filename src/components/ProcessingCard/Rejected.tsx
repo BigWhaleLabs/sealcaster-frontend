@@ -29,7 +29,7 @@ export default function ({ urlToCast }: { urlToCast?: string }) {
   return (
     <div className={wrapper}>
       <div className={textWrapper}>
-        <HeaderText small center>
+        <HeaderText center size="small">
           Cast rejected—that’s embarrassing
         </HeaderText>
         <div className={descriptionText}>
