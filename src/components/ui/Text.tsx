@@ -22,6 +22,7 @@ import {
   textDecoration,
   transitionProperty,
   whitespace,
+  width,
   wordBreak,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
