@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --rotate {
+  syntax: '<angle>';
+  initial-value: 132deg;
+  inherits: false;
+}
+
 :root {
   --orb: #ffffff;
   --accent: #fed823;
@@ -96,6 +102,47 @@ circle {
 }
 
 .double-gradient-shadow {
+  position: relative;
   box-shadow: -20px -20px 74px var(--secondary-transparent),
     20px 20px 74px var(--accent-transparent);
+}
+
+.double-gradient-shadow::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  background-image: linear-gradient(var(--rotate), #ff7bed, #fed823);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  animation: spinShadow 3.5s linear infinite;
+}
+
+.double-gradient-shadow::after {
+  position: absolute;
+  content: '';
+  top: calc(100% / 15);
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.8);
+  filter: blur(calc(65vh / 6));
+  background-image: linear-gradient(var(--rotate), #ff7bed, #fed823);
+  opacity: 1;
+  transition: opacity 0.5s;
+  animation: spinShadow 3.5s linear infinite;
+}
+
+@keyframes spinShadow {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
 }

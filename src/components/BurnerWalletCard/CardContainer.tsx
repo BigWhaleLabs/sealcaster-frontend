@@ -33,24 +33,34 @@ const cardContainer = classnames(
   wordBreak('break-words'),
   zIndex('z-20')
 )
-const parentWrapper = classnames(
-  maxWidth('max-w-full'),
-  width('w-auto'),
-  borderRadius('rounded-2xl'),
-  backgroundImage('bg-gradient-to-br'),
-  padding('p-px'),
-  gradientColorStops('from-secondary', 'to-accent')
-)
+const parentWrapper = (notAChrome?: boolean) =>
+  classnames(
+    maxWidth('max-w-full'),
+    width('w-auto'),
+    borderRadius('rounded-2xl'),
+    padding('p-px'),
+    backgroundImage({ 'bg-gradient-to-br': notAChrome }),
+    gradientColorStops({
+      'from-secondary': notAChrome,
+      'to-accent': notAChrome,
+    })
+  )
 const innerWrapper = classnames(
   width('w-full'),
   borderRadius('rounded-2xl'),
+  padding('p-px'),
   backgroundColor('bg-primary-background')
 )
 
 export default function ({ children }: ChildrenProp & { small?: boolean }) {
+  const notAChromeBrowser = navigator.userAgent.indexOf('Chrome/') == -1
+
   return (
     <div
-      className={classNamesToString(parentWrapper, 'double-gradient-shadow')}
+      className={classNamesToString(
+        parentWrapper(notAChromeBrowser),
+        'double-gradient-shadow'
+      )}
     >
       <div className={innerWrapper}>
         <div className={cardContainer}>{children}</div>
