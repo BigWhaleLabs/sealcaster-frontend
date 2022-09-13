@@ -44,7 +44,7 @@ export default function () {
         <SealGrid />
       </div>
       <div className={headerTextWrapper}>
-        <HeaderText center big extraLeading>
+        <HeaderText center extraLeading size="large">
           Cast anonymously on Farcaster
         </HeaderText>
         <SubHeaderText>

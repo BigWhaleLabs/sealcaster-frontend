@@ -60,6 +60,7 @@ module.exports = {
       },
       maxWidth: {
         84: '21rem',
+        'processing-content': '27.875rem',
       },
       lineHeight: {
         3: '0.875rem',
@@ -104,9 +105,14 @@ module.exports = {
           '0%, 100%': { transform: 'translateX(0.5rem)' },
           '50%': { transform: 'translateX(0rem)' },
         },
+        rotate: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'pulse-horizontal': 'pulse-horizontal 2s ease-in-out infinite',
+        rotate: 'rotate linear 3.5s infinite',
       },
       inset: {
         '-2.5': '-0.65rem',

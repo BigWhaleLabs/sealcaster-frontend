@@ -92,6 +92,10 @@ circle {
   stroke-linejoin: round;
 }
 
+.loading-pause:hover {
+  animation-play-state: paused;
+}
+
 .double-gradient-shadow {
   box-shadow: -20px -20px 74px var(--secondary-transparent),
     20px 20px 74px var(--accent-transparent);
