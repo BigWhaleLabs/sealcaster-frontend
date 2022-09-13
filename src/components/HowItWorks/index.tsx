@@ -27,7 +27,7 @@ export default function ({ hasWallet }: { hasWallet?: boolean }) {
     <Card>
       <div className={cardContainer}>
         <div className={width('w-14')}>
-          <SealEye reversed={hasWallet} />
+          <SealEye upsideDown={hasWallet} />
         </div>
 
         <div className={cardTextBox}>
