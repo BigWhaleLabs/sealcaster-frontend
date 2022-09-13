@@ -36,6 +36,8 @@ export default defineConfig({
   },
   optimizeDeps: {
     esbuildOptions: {
+      target: 'es2020',
+      supported: { bigint: true },
       define: {
         global: 'globalThis',
       },
