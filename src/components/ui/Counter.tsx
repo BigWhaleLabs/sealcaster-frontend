@@ -7,14 +7,14 @@ import classnames, {
 const counterText = (error?: boolean) =>
   classnames(
     textColor(error ? 'text-error' : 'text-formal-accent'),
-    fontSize('text-xs'),
+    fontSize('text-sm'),
     whitespace('whitespace-nowrap')
   )
 
 export default function ({ max, value }: { max: number; value: number }) {
   return (
     <div className={counterText(value > max)}>
-      {value} / {max}
+      {value}/{max}
     </div>
   )
 }

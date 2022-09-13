@@ -80,10 +80,11 @@ const linkText = (
   extraSmall?: boolean,
   bold?: boolean,
   gradientFrom?: TGradientColorStops,
-  gradientTo?: TGradientColorStops
+  gradientTo?: TGradientColorStops,
+  underline?: boolean
 ) =>
   classnames(
-    textDecoration('no-underline'),
+    textDecoration(underline ? 'underline' : 'no-underline'),
     textColor(gradientFrom && gradientTo ? 'text-transparent' : 'text-primary'),
     backgroundImage(
       gradientFrom && gradientTo ? 'bg-gradient-to-r' : undefined
@@ -104,6 +105,7 @@ export function LinkText({
   children,
   gradientFrom,
   gradientTo,
+  underline,
 }: ChildrenProp & {
   url: string
   small?: boolean
@@ -113,19 +115,34 @@ export function LinkText({
   title?: string
   gradientFrom?: TGradientColorStops
   gradientTo?: TGradientColorStops
+  underline?: boolean
 }) {
   if (internal)
     return (
       <Link
         to={url}
-        className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
+        className={linkText(
+          small,
+          extraSmall,
+          bold,
+          gradientFrom,
+          gradientTo,
+          underline
+        )}
       >
         {children}
       </Link>
     )
   return (
     <a
-      className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
+      className={linkText(
+        small,
+        extraSmall,
+        bold,
+        gradientFrom,
+        gradientTo,
+        underline
+      )}
       href={url}
       title={title}
       target="_blank"
@@ -201,7 +218,7 @@ const headerText = (
     fontSize(big ? 'text-3.5xl' : 'text-2xl', 'xs:text-3.5xl', 'sm:text-4xl'),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
-      ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-10.5')
+      ? lineHeight('leading-10', 'md:leading-10.5')
       : lineHeight('!leading-8'),
     textAlign({ 'text-center': center })
   )
@@ -331,8 +348,8 @@ export function CardSubheader({ children }: ChildrenProp) {
 }
 
 const subHeaderContainer = classnames(
-  fontSize('text-sm'),
-  fontWeight('font-normal')
+  fontWeight('font-normal'),
+  fontFamily('font-primary')
 )
 
 export function SubHeaderText({ children }: ChildrenProp) {
