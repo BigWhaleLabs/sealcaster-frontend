@@ -3,7 +3,7 @@ import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
 import Sizes from 'models/MarkSizes'
-import ToolTip from 'components/ui/ToolTip'
+import Tooltip from 'components/ui/Tooltip'
 import classnames, {
   alignItems,
   alignSelf,
@@ -50,13 +50,13 @@ export default function () {
   return (
     <div className={textAreaInfoWrapper}>
       <AccentText extraSmall color="text-accent">
-        <ToolTip position="bottom" fitContainer text={zkProofText}>
+        <Tooltip position="bottom" fitContainer text={zkProofText}>
           <span className={hintWrapper}>
             <span>Posting from burner wallet</span>
             <br />
             <CharInCircle size={Sizes.Small} char="?" />
           </span>
-        </ToolTip>
+        </Tooltip>
       </AccentText>
       <div className={displayTo('md')}>
         <Button disabled fullWidth center type="primary">

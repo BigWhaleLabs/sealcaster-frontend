@@ -10,7 +10,7 @@ import classnames, {
   zIndex,
 } from 'classnames/tailwind'
 
-const tooltipClasses = classnames(
+const TooltipClasses = classnames(
   backgroundColor('bg-formal-accent'),
   padding('py-2', 'px-4'),
   zIndex('z-50'),
@@ -35,7 +35,7 @@ export default function ({
   return (
     <Tooltip
       offset={10}
-      className={tooltipClasses}
+      className={TooltipClasses}
       content={text}
       children={children}
       placement={position}
