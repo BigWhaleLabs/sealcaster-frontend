@@ -6,52 +6,54 @@ const fillClasses = classnames(
 )
 
 export default function ({ open }: { open?: boolean }) {
-  return open ? (
-    <svg
-      width="24"
-      height="17"
-      viewBox="0 0 24 17"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M23 8.5C23 8.5 18.875 16 12 16C5.125 16 1 8.5 1 8.5C1 8.5 5.125 1 12 1C18.875 1 23 8.5 23 8.5Z"
-        stroke="url(#eye_gradient_0)"
-        className={fillClasses}
-      />
-      <ellipse
-        cx="12"
-        cy="8.5"
-        rx="3"
-        ry="3..5"
-        stroke="url(#eye_gradient_1)"
-        className={fillClasses}
-      />
-      <defs>
-        <linearGradient
-          id="eye_gradient_0"
-          x1="4.3"
-          y1="8.5"
-          x2="23"
-          y2="8.5"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="var(--secondary)" />
-          <stop offset="1" stop-color="var(--accent)" />
-        </linearGradient>
-        <linearGradient
-          id="eye_gradient_1"
-          x1="10"
-          y1="8.5"
-          x2="15"
-          y2="8.5"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="var(--secondary)" />
-          <stop offset="1" stop-color="var(--accent)" />
-        </linearGradient>
-      </defs>
-    </svg>
-  ) : (
+  if (open)
+    return (
+      <svg
+        width="24"
+        height="17"
+        viewBox="0 0 24 17"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M23 8.5C23 8.5 18.875 16 12 16C5.125 16 1 8.5 1 8.5C1 8.5 5.125 1 12 1C18.875 1 23 8.5 23 8.5Z"
+          stroke="url(#eye_gradient_0)"
+          className={fillClasses}
+        />
+        <ellipse
+          cx="12"
+          cy="8.5"
+          rx="3"
+          ry="3..5"
+          stroke="url(#eye_gradient_1)"
+          className={fillClasses}
+        />
+        <defs>
+          <linearGradient
+            id="eye_gradient_0"
+            x1="4.3"
+            y1="8.5"
+            x2="23"
+            y2="8.5"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="var(--secondary)" />
+            <stop offset="1" stop-color="var(--accent)" />
+          </linearGradient>
+          <linearGradient
+            id="eye_gradient_1"
+            x1="10"
+            y1="8.5"
+            x2="15"
+            y2="8.5"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="var(--secondary)" />
+            <stop offset="1" stop-color="var(--accent)" />
+          </linearGradient>
+        </defs>
+      </svg>
+    )
+  return (
     <svg
       width="24"
       height="12"

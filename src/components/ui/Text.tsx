@@ -22,7 +22,6 @@ import {
   textDecoration,
   transitionProperty,
   whitespace,
-  width,
   wordBreak,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
@@ -438,8 +437,18 @@ export const highlightedText = (bold?: boolean, center?: boolean) =>
     width('w-fit'),
     textColor('text-primary-dark'),
     fontWeight(bold ? 'font-bold' : 'font-semibold'),
-    fontFamily(bold ? 'font-primary' : undefined),
-    fontSize(bold ? 'text-base' : 'text-sm'),
+    fontFamily({ 'font-primary': bold }),
+    fontSize({ 'text-sm': bold }),
     lineHeight(bold ? 'leading-6' : 'leading-5'),
-    textAlign(center ? 'text-center' : 'text-left')
+    textAlign({ 'text-center': center })
   )
+export function HighlightedText({
+  bold,
+  center,
+  children,
+}: ChildrenProp & {
+  bold?: boolean
+  center?: boolean
+}) {
+  return <div className={highlightedText(bold, center)}>{children}</div>
+}
