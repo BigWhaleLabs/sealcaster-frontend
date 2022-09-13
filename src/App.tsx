@@ -12,6 +12,7 @@ import classnames, {
   display,
   flexDirection,
   margin,
+  maxWidth,
   minHeight,
   width,
 } from 'classnames/tailwind'
@@ -22,8 +23,9 @@ const pageContainer = classnames(
   minHeight('min-h-screen')
 )
 const bodyContainer = classnames(
-  width('md:w-body'),
-  margin('md:mx-auto', 'mx-4', 'mb-auto')
+  width('w-full'),
+  maxWidth('max-w-fit', 'body:max-w-body'),
+  margin('body:mx-auto', 'mx-4', 'mb-auto')
 )
 
 export default function () {

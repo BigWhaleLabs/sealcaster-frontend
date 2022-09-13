@@ -53,12 +53,12 @@ module.exports = {
         time: '95px',
         glass: '107px',
         'full-105': '105%',
-        body: '40.375rem',
         'seal-grid': '25.313rem',
       },
       maxWidth: {
         84: '21rem',
         'processing-content': '27.875rem',
+        body: '40.375rem',
       },
       lineHeight: {
         3: '0.875rem',
@@ -73,7 +73,7 @@ module.exports = {
         xs: '22.5rem',
         sm: '28.125rem',
         md: '37.5rem',
-        body: '41rem',
+        body: '42.375rem',
       },
       padding: {
         25: '6.25rem',
