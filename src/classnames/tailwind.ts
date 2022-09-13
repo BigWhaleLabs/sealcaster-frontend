@@ -4458,6 +4458,7 @@ export type TAnimation =
   | 'animate-pulse'
   | 'animate-bounce'
   | 'animate-pulse-horizontal'
+  | 'animate-rotate'
 
 export type TTransitionsAndAnimations =
   | TTransitionProperty
@@ -7402,6 +7403,7 @@ export type TMaxWidth =
   | 'max-w-screen-lg'
   | 'max-w-screen-xl'
   | 'max-w-screen-2xl'
+  | 'max-w-processing-content'
   | 'max-w-screen-xxs'
   | 'max-w-screen-xs'
   | 'max-w-screen-body'
