@@ -4,12 +4,11 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn generate-css-types && vite",
-    "build": "cross-env NODE_ENV=production tsc && vite build",
+    "build": "cross-env NODE_ENV=production yarn generate-css-types && tsc && vite build",
     "pretty": "prettier --check src",
     "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
     "generate-css-types": "tailwindcss-classnames -o src/classnames/tailwind.ts && prettier --write src/classnames/tailwind.ts",
-    "prestart": "yarn generate-css-types",
-    "prebuild": "yarn generate-css-types"
+    "preview": "yarn build && yarn vite preview"
   },
   "browserslist": {
     "production": [
@@ -27,7 +26,7 @@
     "@big-whale-labs/constants": "^0.1.29",
     "@big-whale-labs/frontend-utils": "^0.0.8",
     "@big-whale-labs/seal-cred-posts-contract": "^0.0.13",
-    "@big-whale-labs/stores": "^0.1.16",
+    "@big-whale-labs/stores": "^0.1.17",
     "@coinbase/wallet-sdk": "^3.5.2",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@material-tailwind/react": "^1.2.4",
