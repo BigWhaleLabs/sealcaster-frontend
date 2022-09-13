@@ -74,11 +74,12 @@ const linkText = (
   small?: boolean,
   extraSmall?: boolean,
   bold?: boolean,
+  underline?: boolean,
   gradientFrom?: TGradientColorStops,
   gradientTo?: TGradientColorStops
 ) =>
   classnames(
-    textDecoration('no-underline'),
+    textDecoration({ 'hover:underline': underline }),
     textColor(gradientFrom && gradientTo ? 'text-transparent' : 'text-primary'),
     backgroundImage(
       gradientFrom && gradientTo ? 'bg-gradient-to-r' : undefined
@@ -95,6 +96,7 @@ export function LinkText({
   small,
   extraSmall,
   internal,
+  underline,
   title,
   children,
   gradientFrom,
@@ -104,6 +106,7 @@ export function LinkText({
   small?: boolean
   extraSmall?: boolean
   internal?: boolean
+  underline?: boolean
   bold?: boolean
   title?: string
   gradientFrom?: TGradientColorStops
@@ -113,14 +116,28 @@ export function LinkText({
     return (
       <Link
         to={url}
-        className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
+        className={linkText(
+          small,
+          extraSmall,
+          bold,
+          underline,
+          gradientFrom,
+          gradientTo
+        )}
       >
         {children}
       </Link>
     )
   return (
     <a
-      className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
+      className={linkText(
+        small,
+        extraSmall,
+        bold,
+        underline,
+        gradientFrom,
+        gradientTo
+      )}
       href={url}
       title={title}
       target="_blank"

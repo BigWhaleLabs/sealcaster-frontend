@@ -1,7 +1,6 @@
-import { AccentText, CardParagraph, LinkText } from 'components/ui/Text'
+import Body from 'components/HowItWorks/Body'
 import Card from 'components/ui/Card'
 import SealEye from 'icons/SealEye'
-import StepList from 'components/HowItWorks/StepList'
 import Title from 'components/HowItWorks/Title'
 import classnames, {
   alignItems,
@@ -24,21 +23,18 @@ const cardTextBox = classnames(
 )
 
 export default function () {
+  // This state is used to show the second card "How does this work?" after generating burner wallet
+  const hasWallet = true
   return (
     <Card>
       <div className={cardContainer}>
         <div className={width('w-14')}>
-          <SealEye />
+          <SealEye reversed={hasWallet} />
         </div>
 
         <div className={cardTextBox}>
-          <Title />
-          <StepList />
-          <CardParagraph>
-            <AccentText color="text-accent">Bonus: </AccentText>
-            Add more zk badges to your burnerwallet with{' '}
-            <LinkText url="https://sealcred.xyz">SealCred</LinkText>.
-          </CardParagraph>
+          <Title hasWallet={hasWallet} />
+          <Body hasWallet={hasWallet} />
         </div>
       </div>
     </Card>
