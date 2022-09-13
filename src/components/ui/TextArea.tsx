@@ -10,6 +10,7 @@ import {
   display,
   flexDirection,
   flexGrow,
+  gap,
   justifyContent,
   outlineColor,
   outlineStyle,
@@ -29,7 +30,7 @@ const containerWithFooter = classnames(
   display('flex'),
   flexDirection('flex-col', 'md:flex-row'),
   alignItems('items-stretch', 'md:items-start'),
-  space('space-y-2', 'md:space-x-2', 'md:space-y-0')
+  gap('gap-y-2', 'md:gap-x-2', 'md:gap-y-0')
 )
 const innerWrapper = (isValid?: boolean) =>
   classnames(

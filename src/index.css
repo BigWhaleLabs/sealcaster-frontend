@@ -51,7 +51,6 @@
 }
 
 html {
-  color: var(--formal-accent);
   background-color: var(--primary-dark);
   scrollbar-color: var(--accent) transparent;
   scrollbar-width: thin;
