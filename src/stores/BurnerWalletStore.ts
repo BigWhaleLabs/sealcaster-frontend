@@ -1,5 +1,5 @@
 import { PersistableStore } from '@big-whale-labs/stores'
-import { Wallet } from 'ethers'
+import { Wallet, ethers } from 'ethers'
 import {
   getEddsaPublicKey,
   requestAddressOwnershipAttestation,
@@ -14,7 +14,7 @@ import getNullifierMessage from 'helpers/getNullifierMessage'
 import walletStore from 'stores/WalletStore'
 
 class BurnerWalletStore extends PersistableStore {
-  wallet?: Wallet
+  privateKey?: string
 
   async generateBurnerWallet(username: string, address: string) {
     const farcasterSignature = await requestFarcasterAttestation(
@@ -34,8 +34,31 @@ class BurnerWalletStore extends PersistableStore {
       farcasterSignature
     )
 
-    this.wallet = Wallet.createRandom().connect(defaultProvider)
-    if (this.wallet) await createFarcasterBadge(this.wallet, result)
+    const wallet = this.privateKey
+      ? new Wallet(this.privateKey)
+      : Wallet.createRandom()
+
+    console.log('address', wallet.address)
+
+    if (!this.privateKey) {
+      this.privateKey = wallet.privateKey
+    }
+
+    if (wallet) {
+      // TODO: get farcaster derivative address inside ledger
+      const abi = ['function balanceOf(address owner) view returns (uint256)']
+      const contract = new ethers.Contract(
+        '0xbc9d096f78d737fa969a7385b011f84dbb909291',
+        abi,
+        defaultProvider
+      )
+      const balance = await contract.balanceOf(wallet.address)
+
+      if (!balance.eq(0)) return
+
+      // TODO: connect with relay provider!
+      await createFarcasterBadge(wallet, result)
+    }
   }
 }
 

@@ -1,11 +1,13 @@
 import { AccentText, HeaderText, PostText } from 'components/ui/Text'
 import { Sizes } from 'models/CharInCircle'
+import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
 import TextInput from 'components/ui/TextInput'
-import Tooltip from 'components/ui/Tooltip'
+import Tooltip from 'components/ui/ToolTip'
+import axios, { AxiosError } from 'axios'
 import classnames, {
   alignItems,
   display,
@@ -66,10 +68,26 @@ export default function () {
     if (!username.length) return setHasError('Username cannot be empty')
     setLoading(true)
 
-    await walletStore.connect(true)
-    if (!walletStore.account) return setHasError('Connect account!')
+    try {
+      await walletStore.connect(true)
+      if (!walletStore.account) return setHasError('Connect account!')
 
-    await BurnerWalletStore.generateBurnerWallet(username, walletStore.account)
+      await BurnerWalletStore.generateBurnerWallet(
+        username,
+        walletStore.account
+      )
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message =
+          (error as AxiosError<{ message: string }>).response?.data.message ||
+          'Verification failed'
+        setHasError(message)
+      }
+
+      console.log('error', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const hintText =
