@@ -14,7 +14,7 @@ const optionalTextWrapper = classnames(displayFrom('md'), display('md:!inline'))
 export default function () {
   return (
     <div className={castHeaderWrapper}>
-      <HeaderText big extraLeading>
+      <HeaderText size="large" extraLeading>
         Create your anonymous cast
       </HeaderText>
       <SubHeaderText>
