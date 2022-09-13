@@ -7367,7 +7367,6 @@ export type TWidth =
   | 'w-time'
   | 'w-glass'
   | 'w-full-105'
-  | 'w-body'
   | 'w-seal-grid'
   | 'w-7.5'
 
@@ -7404,6 +7403,7 @@ export type TMaxWidth =
   | 'max-w-screen-xl'
   | 'max-w-screen-2xl'
   | 'max-w-processing-content'
+  | 'max-w-body'
   | 'max-w-screen-xxs'
   | 'max-w-screen-xs'
   | 'max-w-screen-body'

@@ -1,14 +1,17 @@
 import { HeaderText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 
-export default function () {
+export default function ({ hasWallet }: { hasWallet?: boolean }) {
+  const title = hasWallet
+    ? 'How does this work?'
+    : 'How this works in 3 easy steps'
   return (
     <>
       <div className={displayTo('xs')}>
-        <HeaderText center>How this works in 3 easy steps</HeaderText>
+        <HeaderText center>{title}</HeaderText>
       </div>
       <div className={displayFrom('xs')}>
-        <HeaderText>How this works in 3 easy steps</HeaderText>
+        <HeaderText>{title}</HeaderText>
       </div>
     </>
   )
