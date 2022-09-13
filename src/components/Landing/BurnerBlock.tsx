@@ -32,18 +32,18 @@ const sealGridWrapper = classnames(
   width('w-60', 'sm:w-72', 'md:w-seal-grid')
 )
 
+const headerTextWrapper = classnames(
+  space('space-y-2'),
+  textAlign('text-center')
+)
+
 export default function () {
   return (
     <div className={wrapper}>
       <div className={sealGridWrapper}>
         <SealGrid />
       </div>
-      <div
-        className={classnames(
-          space('space-y-2'),
-          textAlign('text-center', 'sm:text-left')
-        )}
-      >
+      <div className={headerTextWrapper}>
         <HeaderText center extraLeading size="large">
           Cast anonymously on Farcaster
         </HeaderText>

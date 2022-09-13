@@ -1,5 +1,6 @@
 import { Route, Router } from 'wouter'
 import { ToastContainer } from 'react-toastify'
+import Cast from 'pages/Cast'
 import CreateBurnerWallet from 'pages/CreateBurnerWallet'
 import Footer from 'components/Footer'
 import Landing from 'pages/Landing'
@@ -43,6 +44,9 @@ export default function () {
             </Route>
             <Route path="/create">
               <CreateBurnerWallet />
+            </Route>
+            <Route path="/cast">
+              <Cast />
             </Route>
             <Route path="/terms">
               <Terms />
