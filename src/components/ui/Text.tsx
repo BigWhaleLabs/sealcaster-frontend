@@ -84,7 +84,7 @@ const linkText = (
   underline?: boolean
 ) =>
   classnames(
-    textDecoration(underline ? 'underline' : 'no-underline'),
+    textDecoration({ underline: underline }),
     textColor(gradientFrom && gradientTo ? 'text-transparent' : 'text-primary'),
     backgroundImage(
       gradientFrom && gradientTo ? 'bg-gradient-to-r' : undefined
@@ -347,13 +347,8 @@ export function CardSubheader({ children }: ChildrenProp) {
   return <p className={cardSubheaderContainer}>{children}</p>
 }
 
-const subHeaderContainer = classnames(
-  fontWeight('font-normal'),
-  fontFamily('font-primary')
-)
-
 export function SubHeaderText({ children }: ChildrenProp) {
-  return <p className={subHeaderContainer}>{children}</p>
+  return <p className={fontFamily('font-primary')}>{children}</p>
 }
 
 const logoText = classnames(
@@ -404,12 +399,6 @@ export function TextareaText({
   return <div className={textareaText(dark)}>{children}</div>
 }
 
-const errorTextBox = (visible?: boolean) =>
-  classnames(
-    display(visible ? 'flex' : 'hidden'),
-    alignItems('items-center'),
-    space('space-x-2')
-  )
 const errorText = (centered?: boolean) =>
   classnames(
     textColor('text-error'),
@@ -419,25 +408,13 @@ const errorText = (centered?: boolean) =>
   )
 export function ErrorText({
   children,
-  withExclamation,
-  visible,
   centered,
 }: ChildrenProp & {
   centered?: boolean
   withExclamation?: boolean
   visible?: boolean
 }) {
-  const error = <p className={errorText(centered)}>{children}</p>
-
-  if (withExclamation)
-    return (
-      <div className={errorTextBox(visible)}>
-        {/* <ExclamationInCircle /> */}
-        {error}
-      </div>
-    )
-
-  return error
+  return <p className={errorText(centered)}>{children}</p>
 }
 
 const suffixText = classnames(

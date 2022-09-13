@@ -22,9 +22,7 @@ export default function () {
           <TextArea
             text={text}
             placeholder="Write something here..."
-            onTextChange={(newText) => {
-              setText(newText)
-            }}
+            onTextChange={setText}
             setSuffix={setSuffix}
             maxLength={maxLength}
           />

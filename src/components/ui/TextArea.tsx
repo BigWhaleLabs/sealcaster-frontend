@@ -50,7 +50,6 @@ const innerWrapper = (isValid?: boolean) =>
     transitionProperty('transition-colors'),
     backgroundColor('bg-primary-dark')
   )
-const textWithErrorWrapper = classnames(space('space-y-4'))
 
 const textBox = classnames(
   backgroundColor('bg-primary-dark'),
@@ -80,7 +79,7 @@ export default function ({
   const isValid = !error && text.length <= maxLength
 
   return (
-    <div className={textWithErrorWrapper}>
+    <div className={space('space-y-4')}>
       <div className={containerWithFooter}>
         <div className={innerWrapper(isValid)}>
           <TextareaText dark={disabled}>

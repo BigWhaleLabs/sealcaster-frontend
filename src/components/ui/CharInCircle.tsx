@@ -27,7 +27,7 @@ const questionStyles = (size?: Sizes, disabled?: boolean) =>
 
 const borderWrapper = (size?: Sizes) =>
   classnames(
-    boxSizing('box-content'),
+    boxSizing('box-border'),
     borderRadius('rounded-full'),
     borderWidth('border'),
     borderColor('border-current'),

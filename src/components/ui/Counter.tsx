@@ -6,7 +6,7 @@ import classnames, {
 
 const counterText = (error?: boolean) =>
   classnames(
-    textColor(error ? 'text-error' : 'text-formal-accent'),
+    textColor({ 'text-error': error }),
     fontSize('text-sm'),
     whitespace('whitespace-nowrap')
   )

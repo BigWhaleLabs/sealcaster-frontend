@@ -25,14 +25,10 @@ interface SuffixProps {
   text: string
 }
 
-function SuspendedSuffix({ maxCount, text }: SuffixProps) {
+export default function ({ maxCount, text }: SuffixProps) {
   return (
     <div className={footerBox}>
       <Counter max={maxCount} value={text.length} />
     </div>
   )
-}
-
-export default function ({ maxCount, text }: SuffixProps) {
-  return <SuspendedSuffix maxCount={maxCount} text={text} />
 }
