@@ -1,4 +1,5 @@
 import { HeaderText, SubHeaderText } from 'components/ui/Text'
+import { Link } from 'wouter'
 import Button from 'components/ui/Button'
 import Dots from 'icons/Dots'
 import GradientBorder from 'components/ui/GradientBorder'
@@ -45,7 +46,9 @@ export default function () {
           Protect your identity by creating a burner wallet.
         </SubHeaderText>
       </div>
-      <Button type="primary">Create Burner Wallet</Button>
+      <Link href="/create">
+        <Button type="primary">Create Burner Wallet</Button>
+      </Link>
       <Dots />
       <div className={space('space-y-4')}>
         <SubHeaderText>Already have a burner?</SubHeaderText>

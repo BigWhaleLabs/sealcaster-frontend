@@ -1,5 +1,4 @@
-import CharTypes from 'models/CharTypes'
-import Sizes from 'models/MarkSizes'
+import { CharTypes, Sizes } from 'models/CharInCircle'
 import classnames, {
   alignItems,
   borderColor,
@@ -15,19 +14,18 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 
-const questionStyles = (size?: Sizes, disabled?: boolean) =>
+const questionStyles = (size?: Sizes) =>
   classnames(
     display('flex'),
     justifyContent('justify-center'),
     alignItems('items-center'),
     fontSize({ 'text-xs': Sizes.Small === size }),
-    fontFamily('font-primary'),
-    cursor({ 'cursor-pointer': !disabled })
+    fontFamily('font-primary')
   )
 
-const borderWrapper = (size?: Sizes) =>
+const borderWrapper = (size?: Sizes, disabled?: boolean) =>
   classnames(
-    boxSizing('box-content'),
+    boxSizing('box-border'),
     borderRadius('rounded-full'),
     borderWidth('border'),
     borderColor('border-current'),
@@ -42,7 +40,8 @@ const borderWrapper = (size?: Sizes) =>
       'h-6': !size,
     }),
     display('flex'),
-    justifyContent('justify-center')
+    justifyContent('justify-center'),
+    cursor({ 'cursor-pointer': !disabled })
   )
 
 export default function ({
@@ -55,8 +54,8 @@ export default function ({
   char: CharTypes
 }) {
   return (
-    <div className={borderWrapper(size)}>
-      <div className={questionStyles(size, disabled)}>{char}</div>
+    <div className={borderWrapper(size, disabled)}>
+      <div className={questionStyles(size)}>{char}</div>
     </div>
   )
 }
