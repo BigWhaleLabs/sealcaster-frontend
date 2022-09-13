@@ -1,7 +1,5 @@
-import { ComponentChildren } from 'preact'
 import { HTMLAttributes } from 'preact/compat'
 import classnames, {
-  alignItems,
   backgroundColor,
   borderColor,
   borderRadius,
@@ -38,14 +36,6 @@ const groupContainer = (error?: boolean, disabled?: boolean) =>
     borderRadius('rounded-md'),
     height('h-12')
   )
-
-const iconContainer = classnames(
-  position('absolute'),
-  height('h-full'),
-  display('flex'),
-  alignItems('items-center'),
-  padding('pl-3')
-)
 
 const inputContainer = (
   hasIcon?: boolean,
