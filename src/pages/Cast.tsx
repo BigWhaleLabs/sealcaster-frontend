@@ -62,7 +62,11 @@ export default function () {
             <LinkText underline url={farcasterEchoUrl}>
               @echo
             </LinkText>{' '}
-            <div className={displayFrom('md')}>(SealCredEcho)</div>
+            <div
+              className={classnames(displayFrom('md'), display('md:!inline'))}
+            >
+              (SealCredEcho)
+            </div>{' '}
             on Farcaster.
           </SubHeaderText>
         </div>
