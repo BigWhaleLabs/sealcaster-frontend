@@ -16,6 +16,8 @@ module.exports = {
         'light-grey': 'var(--light-grey)',
         'half-grey': 'var(--half-grey)',
 
+        'formal-accent-dimmed': 'var(--formal-accent-dimmed)',
+
         error: 'var(--error)',
         'error-dark': 'var(--error-dark)',
 

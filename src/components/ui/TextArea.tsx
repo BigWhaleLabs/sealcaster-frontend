@@ -26,7 +26,6 @@ import SuffixBlock from 'components/ui/SuffixBlock'
 import TextareaAutosize, {
   TextareaAutosizeProps,
 } from 'react-textarea-autosize'
-import classNamesToString from 'helpers/classNamesToString'
 
 const containerWithFooter = classnames(
   display('flex'),
@@ -51,8 +50,7 @@ const innerWrapper = (isValid?: boolean) =>
     borderRadius('rounded-lg'),
     padding('py-3', 'px-4'),
     transitionProperty('transition-colors'),
-    backgroundColor('bg-primary-dark'),
-    minHeight('min-h-text-input')
+    backgroundColor('bg-primary-dark')
   )
 const textWithErrorWrapper = classnames(space('space-y-4'))
 
@@ -66,9 +64,7 @@ const textBox = classnames(
 
 interface TextAreaProps {
   text: string
-  currentAddress: string
   onTextChange: (text: string) => void
-  setSuffix: StateUpdater<string>
   maxLength: number
   disabled?: boolean
   error?: unknown
@@ -80,9 +76,7 @@ export default function ({
   onTextChange,
   disabled,
   error,
-  currentAddress,
   maxLength,
-  setSuffix,
   ...restProps
 }: TextAreaProps & TextareaAutosizeProps) {
   const isValid = !error && text.length <= maxLength
@@ -93,7 +87,7 @@ export default function ({
         <div className={innerWrapper(isValid)}>
           <TextareaText dark={disabled}>
             <TextareaAutosize
-              className={classNamesToString('no-scrollbar', textBox)}
+              className={textBox}
               value={text}
               onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
                 onTextChange(event.currentTarget.value)
@@ -105,12 +99,7 @@ export default function ({
               {...restProps}
             />
           </TextareaText>
-          <SuffixBlock
-            maxCount={maxLength}
-            text={text}
-            currentAddress={currentAddress}
-            setSuffix={setSuffix}
-          />
+          <SuffixBlock maxCount={maxLength} text={text} />
         </div>
       </div>
       <ErrorText visible={!!error} withExclamation>

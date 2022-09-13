@@ -9,7 +9,6 @@ import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
-import Input from 'components/ui/Input'
 import Sizes from 'models/MarkSizes'
 import TextArea from 'components/ui/TextArea'
 import ToolTip from 'components/ui/ToolTip'
@@ -65,9 +64,6 @@ export default function () {
             }}
             setSuffix={setSuffix}
             maxLength={maxLength}
-            currentAddress={'asd'}
-            disabled={false}
-            error={false}
           />
           <div
             className={classnames(

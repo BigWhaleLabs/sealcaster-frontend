@@ -27,17 +27,10 @@ const footerBox = classnames(
 
 interface SuffixProps {
   maxCount: number
-  currentAddress: string
   text: string
-  setSuffix: StateUpdater<string>
 }
 
-function SuspendedSuffix({
-  maxCount,
-  currentAddress,
-  text,
-  setSuffix,
-}: SuffixProps) {
+function SuspendedSuffix({ maxCount, text }: SuffixProps) {
   return (
     <div className={footerBox}>
       <Counter max={maxCount} value={text.length} />
@@ -45,20 +38,6 @@ function SuspendedSuffix({
   )
 }
 
-export default function ({
-  currentAddress,
-  maxCount,
-  text,
-  setSuffix,
-}: SuffixProps) {
-  return (
-    <Suspense fallback={<SuffixText>{currentAddress}</SuffixText>}>
-      <SuspendedSuffix
-        currentAddress={currentAddress}
-        maxCount={maxCount}
-        text={text}
-        setSuffix={setSuffix}
-      />
-    </Suspense>
-  )
+export default function ({ maxCount, text }: SuffixProps) {
+  return <SuspendedSuffix maxCount={maxCount} text={text} />
 }
