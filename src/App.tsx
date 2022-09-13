@@ -26,7 +26,7 @@ const pageContainer = classnames(
 const bodyContainer = classnames(
   width('w-full'),
   maxWidth('max-w-fit', 'body:max-w-body'),
-  margin('body:mx-auto', 'mx-4', 'mb-auto')
+  margin('mx-4', 'mb-auto', 'body:mx-auto')
 )
 
 export default function () {

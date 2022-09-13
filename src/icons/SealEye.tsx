@@ -7,10 +7,11 @@ enum SealEyeColor {
 }
 
 const commonStrokeWidth = strokeWidth('stroke-1.5')
-const strokeClass = (color: SealEyeColor) =>
-  classnames(commonStrokeWidth, stroke(color))
 
 export default function ({ reversed }: { reversed?: boolean }) {
+  const strokeClass = (color: SealEyeColor) =>
+    classnames(commonStrokeWidth, stroke(color))
+
   if (reversed)
     return (
       <svg
