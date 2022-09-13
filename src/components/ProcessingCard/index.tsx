@@ -18,16 +18,16 @@ const cardWrapper = classnames(
 
 const CastState = ({
   status,
-  urlToCast,
+  castId,
 }: {
   status: CastStatus
-  urlToCast?: string
+  castId?: string
 }) => {
   switch (status) {
     case CastStatus.approved:
       return <div>Approved card</div>
     case CastStatus.rejected:
-      return <Rejected urlToCast={urlToCast} />
+      return <Rejected id={castId} />
     default:
       return <Pending />
   }
@@ -36,10 +36,7 @@ const CastState = ({
 export default function () {
   return (
     <div className={cardWrapper}>
-      <CastState
-        status={CastStatus.rejected}
-        urlToCast="https://sealcaster.xyz/?id=123"
-      />
+      <CastState status={CastStatus.rejected} castId="123" />
     </div>
   )
 }

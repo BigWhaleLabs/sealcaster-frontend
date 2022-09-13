@@ -25,7 +25,7 @@ const descriptionText = classnames(
   margin('mx-2', 'sm:mx-0')
 )
 
-export default function ({ urlToCast }: { urlToCast?: string }) {
+export default function ({ id }: { id?: string }) {
   return (
     <div className={wrapper}>
       <div className={textWrapper}>
@@ -40,7 +40,7 @@ export default function ({ urlToCast }: { urlToCast?: string }) {
         </div>
       </div>
 
-      {urlToCast && <LinkButton internal url={urlToCast} />}
+      {id && <LinkButton internal url={`/cast#id=${id}`} />}
     </div>
   )
 }
