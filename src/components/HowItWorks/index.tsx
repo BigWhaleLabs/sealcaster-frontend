@@ -1,6 +1,5 @@
 import Body from 'components/HowItWorks/Body'
 import Card from 'components/ui/Card'
-import CardContainer from 'components/BurnerWalletCard/CardContainer'
 import SealEye from 'icons/SealEye'
 import Title from 'components/HowItWorks/Title'
 import classnames, {
@@ -25,19 +24,17 @@ const cardTextBox = classnames(
 // Prop `hasWallet` is used to show the second card "How does this work?" after generating burner wallet
 export default function ({ hasWallet }: { hasWallet?: boolean }) {
   return (
-    <CardContainer>
-      <Card>
-        <div className={cardContainer}>
-          <div className={width('w-14')}>
-            <SealEye upsideDown={hasWallet} />
-          </div>
-
-          <div className={cardTextBox}>
-            <Title hasWallet={hasWallet} />
-            <Body hasWallet={hasWallet} />
-          </div>
+    <Card>
+      <div className={cardContainer}>
+        <div className={width('w-14')}>
+          <SealEye upsideDown={hasWallet} />
         </div>
-      </Card>
-    </CardContainer>
+
+        <div className={cardTextBox}>
+          <Title hasWallet={hasWallet} />
+          <Body hasWallet={hasWallet} />
+        </div>
+      </div>
+    </Card>
   )
 }
