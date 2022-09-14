@@ -91,6 +91,11 @@ circle {
   stroke-linejoin: round;
 }
 
+/* Wallet select menu for dark and light theme */
+.web3modal-modal-lightbox {
+  z-index: 100 !important;
+}
+
 .loading-pause:hover {
   animation-play-state: paused;
 }
