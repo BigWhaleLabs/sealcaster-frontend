@@ -25,24 +25,31 @@ export default function () {
   if (!isBurned) setLocation('/')
 
   async function createPost() {
-    const result = await PostStore.createPost(text)
+    setIsLoading(true)
+    try {
+      const result = await PostStore.createPost(text)
 
-    const posts = await PostStore.posts
-    const numberOfPosts = await PostStore.postsAmount
-    PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
-    for (const { id, post, derivativeAddress, sender, timestamp } of result) {
-      PostStore.posts = Promise.resolve([
-        {
-          id,
-          post,
-          derivativeAddress,
-          sender,
-          timestamp,
-        } as PostStructOutput,
-        ...posts,
-      ])
+      const posts = await PostStore.posts
+      const numberOfPosts = await PostStore.postsAmount
+      PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
+      for (const { id, post, derivativeAddress, sender, timestamp } of result) {
+        PostStore.posts = Promise.resolve([
+          {
+            id,
+            post,
+            derivativeAddress,
+            sender,
+            timestamp,
+          } as PostStructOutput,
+          ...posts,
+        ])
 
-      setText('')
+        setText('')
+      }
+    } catch (error) {
+      handleError(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -63,18 +70,10 @@ export default function () {
         </div>
         <div className={displayFrom('md')}>
           <Button
-            disabled={!text || isLoading}
+            disabled={!text}
+            loading={isLoading}
             type="primary"
-            onClick={async () => {
-              setIsLoading(true)
-              try {
-                await createPost()
-              } catch (error) {
-                handleError(error)
-              } finally {
-                setIsLoading(false)
-              }
-            }}
+            onClick={createPost}
           >
             Cast
           </Button>
