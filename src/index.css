@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@property --rotate {
-  syntax: '<angle>';
-  initial-value: 132deg;
-  inherits: false;
-}
-
 :root {
   --orb: #ffffff;
   --accent: #fed823;
@@ -109,15 +103,16 @@ circle {
 
 .double-gradient-shadow::before {
   content: '';
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  background-image: linear-gradient(var(--rotate), #ff7bed, #fed823);
   position: absolute;
-  z-index: -1;
   top: 0;
   left: 0;
-  animation: spinShadow 3.5s linear infinite;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: linear-gradient(90deg, #ff7bed, #fed823);
+  background-size: 200% 200%;
+  border-radius: 16px;
+  animation: spin-background 3.5s linear infinite;
 }
 
 .double-gradient-shadow::after {
@@ -126,23 +121,32 @@ circle {
   top: calc(100% / 15);
   left: 0;
   right: 0;
-  z-index: -1;
   height: 100%;
   width: 100%;
-  margin: 0 auto;
+  z-index: -1;
   transform: scale(0.8);
   filter: blur(calc(65vh / 6));
-  background-image: linear-gradient(var(--rotate), #ff7bed, #fed823);
-  opacity: 1;
-  transition: opacity 0.5s;
-  animation: spinShadow 3.5s linear infinite;
+  background-image: linear-gradient(90deg, #ff7bed, #fed823);
+  background-size: 200% 200%;
+  animation: spin-background 3.5s ease-in-out infinite,
+    rescale 3.5s ease-in-out infinite;
 }
 
-@keyframes spinShadow {
-  0% {
-    --rotate: 0deg;
-  }
+@keyframes spin-background {
+  0%,
   100% {
-    --rotate: 360deg;
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes rescale {
+  0%,
+  100% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(0.85);
   }
 }
