@@ -1,7 +1,5 @@
 import {
   alignItems,
-  backgroundColor,
-  backgroundImage,
   borderColor,
   borderRadius,
   borderWidth,
@@ -9,11 +7,8 @@ import {
   display,
   flexDirection,
   gap,
-  gradientColorStops,
-  maxWidth,
   padding,
   position,
-  width,
   wordBreak,
   zIndex,
 } from 'classnames/tailwind'
@@ -33,38 +28,11 @@ const cardContainer = classnames(
   wordBreak('break-words'),
   zIndex('z-20')
 )
-const parentWrapper = (notAChrome?: boolean) =>
-  classnames(
-    maxWidth('max-w-full'),
-    width('w-auto'),
-    borderRadius('rounded-2xl'),
-    padding('p-px'),
-    backgroundImage({ 'bg-gradient-to-br': notAChrome }),
-    gradientColorStops({
-      'from-secondary': notAChrome,
-      'to-accent': notAChrome,
-    })
-  )
-const innerWrapper = classnames(
-  width('w-full'),
-  borderRadius('rounded-2xl'),
-  padding('p-px'),
-  backgroundColor('bg-primary-background')
-)
 
-export default function ({ children }: ChildrenProp & { small?: boolean }) {
-  const notAChromeBrowser = navigator.userAgent.indexOf('Chrome/') == -1
-
+export default function ({ children }: ChildrenProp) {
   return (
-    <div
-      className={classNamesToString(
-        parentWrapper(notAChromeBrowser),
-        'double-gradient-shadow'
-      )}
-    >
-      <div className={innerWrapper}>
-        <div className={cardContainer}>{children}</div>
-      </div>
+    <div className={classNamesToString('double-gradient-shadow')}>
+      {children}
     </div>
   )
 }
