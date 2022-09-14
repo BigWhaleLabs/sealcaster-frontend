@@ -1,3 +1,4 @@
+import Approved from 'components/ProcessingCard/Approved'
 import CastStatus from 'models/CastStatus'
 import Pending from 'components/ProcessingCard/Pending'
 import Rejected from 'components/ProcessingCard/Rejected'
@@ -25,7 +26,7 @@ const CastState = ({
 }) => {
   switch (status) {
     case CastStatus.approved:
-      return <div>Approved card</div>
+      return <Approved id={castId} />
     case CastStatus.rejected:
       return <Rejected id={castId} />
     default:
