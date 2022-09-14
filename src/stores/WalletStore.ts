@@ -107,7 +107,7 @@ class WalletStore extends PersistableStore {
   async getProvider() {
     if (!provider) throw new Error(ErrorList.noProvider)
 
-    const gsnProvider = await relayProvider(provider.getSigner(), provider)
+    const gsnProvider = await relayProvider(provider)
 
     return new Web3Provider(gsnProvider as unknown as ExternalProvider)
   }
