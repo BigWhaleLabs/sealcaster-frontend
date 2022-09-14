@@ -16,6 +16,8 @@ module.exports = {
         'light-grey': 'var(--light-grey)',
         'half-grey': 'var(--half-grey)',
 
+        'formal-accent-dimmed': 'var(--formal-accent-dimmed)',
+
         error: 'var(--error)',
         'error-dark': 'var(--error-dark)',
 
@@ -53,11 +55,12 @@ module.exports = {
         time: '95px',
         glass: '107px',
         'full-105': '105%',
-        body: '40.375rem',
         'seal-grid': '25.313rem',
       },
       maxWidth: {
         84: '21rem',
+        'processing-content': '27.875rem',
+        body: '40.375rem',
       },
       lineHeight: {
         3: '0.875rem',
@@ -65,7 +68,7 @@ module.exports = {
         6: '1.313rem',
         7: '1.438rem',
         8: '1.938rem',
-        10.5: '2.563rem',
+        10.5: '2.6rem',
         11: '3.188rem',
       },
       screens: {
@@ -73,7 +76,7 @@ module.exports = {
         xs: '22.5rem',
         sm: '28.125rem',
         md: '37.5rem',
-        body: '41rem',
+        body: '42.375rem',
       },
       padding: {
         25: '6.25rem',
@@ -102,9 +105,14 @@ module.exports = {
           '0%, 100%': { transform: 'translateX(0.5rem)' },
           '50%': { transform: 'translateX(0rem)' },
         },
+        rotate: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'pulse-horizontal': 'pulse-horizontal 2s ease-in-out infinite',
+        rotate: 'rotate linear 3.5s infinite',
       },
       inset: {
         '-2.5': '-0.65rem',

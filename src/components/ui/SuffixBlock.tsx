@@ -1,5 +1,3 @@
-import { StateUpdater, Suspense } from 'preact/compat'
-import { SuffixText } from 'components/ui/Text'
 import {
   alignItems,
   alignSelf,
@@ -11,9 +9,6 @@ import {
   space,
 } from 'classnames/tailwind'
 import Counter from 'components/ui/Counter'
-import truncateMiddleIfNeeded from 'helpers/truncateMiddleIfNeeded'
-// import useContractSymbols from 'hooks/useContractSymbols'
-// import useDerivativeAddressesOwned from 'hooks/useDerivativeAddressesOwned'
 
 const footerBox = classnames(
   display('flex'),
@@ -27,38 +22,13 @@ const footerBox = classnames(
 
 interface SuffixProps {
   maxCount: number
-  currentAddress: string
   text: string
-  setSuffix: StateUpdater<string>
 }
 
-function SuspendedSuffix({
-  maxCount,
-  currentAddress,
-  text,
-  setSuffix,
-}: SuffixProps) {
+export default function ({ maxCount, text }: SuffixProps) {
   return (
     <div className={footerBox}>
       <Counter max={maxCount} value={text.length} />
     </div>
-  )
-}
-
-export default function ({
-  currentAddress,
-  maxCount,
-  text,
-  setSuffix,
-}: SuffixProps) {
-  return (
-    <Suspense fallback={<SuffixText>{currentAddress}</SuffixText>}>
-      <SuspendedSuffix
-        currentAddress={currentAddress}
-        maxCount={maxCount}
-        text={text}
-        setSuffix={setSuffix}
-      />
-    </Suspense>
   )
 }

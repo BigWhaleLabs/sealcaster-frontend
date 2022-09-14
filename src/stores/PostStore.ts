@@ -2,25 +2,19 @@ import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/
 import { Result } from 'ethers/lib/utils'
 import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract'
 import { proxy } from 'valtio'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import env from 'helpers/env'
 import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
 import parsePostLogData from 'helpers/parsePostLogData'
 import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
-import walletStore from 'stores/WalletStore'
 
 interface PostStoreType {
   limit: number
   posts: Promise<PostStructOutput[]>
   postsAmount: Promise<number>
   selectedToken?: string
-  createPost: ({
-    text,
-    original,
-  }: {
-    text: string
-    original: string
-  }) => Promise<Result[]>
+  createPost: (text: string) => Promise<Result[]>
 }
 
 const limit = 100
@@ -33,20 +27,16 @@ const PostStore = proxy<PostStoreType>({
     limitAmount: limit,
   }),
   selectedToken: undefined,
-  createPost: async ({
-    text,
-    original,
-  }: {
-    text: string
-    original: string
-  }) => {
-    const provider = await walletStore.getProvider()
+  createPost: async (text: string) => {
+    const signer = await BurnerWalletStore.getSigner()
+
+    if (!signer) throw new Error('Not found burner wallet!')
 
     const contract = SCPostStorage__factory.connect(
       env.VITE_SC_FARCASTER_POSTS_CONTRACT_ADDRESS,
-      provider.getSigner(0)
+      signer
     )
-    const transaction = await contract.savePost(text, original)
+    const transaction = await contract.savePost(text, 'farcaster')
     const result = await transaction.wait()
 
     return Promise.all(

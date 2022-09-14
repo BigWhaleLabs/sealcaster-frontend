@@ -24,7 +24,7 @@ export default function ({
 
   return (
     <AccentText
-      extraSmall
+      small
       color={account ? 'text-accent' : 'text-primary-semi-dimmed'}
     >
       {account ? (

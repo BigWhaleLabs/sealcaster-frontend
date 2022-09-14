@@ -1,4 +1,4 @@
-import { ChangeEvent, StateUpdater } from 'preact/compat'
+import { ChangeEvent } from 'preact/compat'
 import { ErrorText, TextareaText } from 'components/ui/Text'
 import {
   alignItems,
@@ -10,9 +10,8 @@ import {
   display,
   flexDirection,
   flexGrow,
+  gap,
   justifyContent,
-  margin,
-  minHeight,
   outlineColor,
   outlineStyle,
   padding,
@@ -26,13 +25,12 @@ import SuffixBlock from 'components/ui/SuffixBlock'
 import TextareaAutosize, {
   TextareaAutosizeProps,
 } from 'react-textarea-autosize'
-import classNamesToString from 'helpers/classNamesToString'
 
 const containerWithFooter = classnames(
   display('flex'),
   flexDirection('flex-col', 'md:flex-row'),
   alignItems('items-stretch', 'md:items-start'),
-  space('space-y-2', 'md:space-x-2', 'md:space-y-0')
+  gap('gap-y-2', 'md:gap-x-2', 'md:gap-y-0')
 )
 const innerWrapper = (isValid?: boolean) =>
   classnames(
@@ -51,10 +49,8 @@ const innerWrapper = (isValid?: boolean) =>
     borderRadius('rounded-lg'),
     padding('py-3', 'px-4'),
     transitionProperty('transition-colors'),
-    backgroundColor('bg-primary-dark'),
-    minHeight('min-h-text-input')
+    backgroundColor('bg-primary-dark')
   )
-const textWithErrorWrapper = classnames(space('space-y-4'))
 
 const textBox = classnames(
   backgroundColor('bg-primary-dark'),
@@ -66,9 +62,7 @@ const textBox = classnames(
 
 interface TextAreaProps {
   text: string
-  currentAddress: string
   onTextChange: (text: string) => void
-  setSuffix: StateUpdater<string>
   maxLength: number
   disabled?: boolean
   error?: unknown
@@ -80,20 +74,18 @@ export default function ({
   onTextChange,
   disabled,
   error,
-  currentAddress,
   maxLength,
-  setSuffix,
   ...restProps
 }: TextAreaProps & TextareaAutosizeProps) {
   const isValid = !error && text.length <= maxLength
 
   return (
-    <div className={textWithErrorWrapper}>
+    <div className={space('space-y-4')}>
       <div className={containerWithFooter}>
         <div className={innerWrapper(isValid)}>
           <TextareaText dark={disabled}>
             <TextareaAutosize
-              className={classNamesToString('no-scrollbar', textBox)}
+              className={textBox}
               value={text}
               onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
                 onTextChange(event.currentTarget.value)
@@ -105,17 +97,14 @@ export default function ({
               {...restProps}
             />
           </TextareaText>
-          <SuffixBlock
-            maxCount={maxLength}
-            text={text}
-            currentAddress={currentAddress}
-            setSuffix={setSuffix}
-          />
+          <SuffixBlock maxCount={maxLength} text={text} />
         </div>
       </div>
-      <ErrorText visible={!!error} withExclamation>
-        {parseErrorText(error)}
-      </ErrorText>
+      {error && (
+        <ErrorText visible={!!error} withExclamation>
+          {parseErrorText(error)}
+        </ErrorText>
+      )}
     </div>
   )
 }

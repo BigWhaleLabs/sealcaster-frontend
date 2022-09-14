@@ -25,4 +25,5 @@ export default cleanEnv(import.meta.env, {
   }),
   VITE_GSN_SC_RELAY: str({ default: GSN_SC_RELAY }),
   VITE_VERIFY_URL: str({ default: VERIFY_URL }),
+  VITE_FARCASTER_PROFILE_URL: str(),
 })

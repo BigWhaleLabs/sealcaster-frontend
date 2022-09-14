@@ -16,7 +16,6 @@ import {
   gradientColorStops,
   lineHeight,
   placeholderColor,
-  space,
   textAlign,
   textColor,
   textDecoration,
@@ -80,10 +79,11 @@ const linkText = (
   extraSmall?: boolean,
   bold?: boolean,
   gradientFrom?: TGradientColorStops,
-  gradientTo?: TGradientColorStops
+  gradientTo?: TGradientColorStops,
+  underline?: boolean
 ) =>
   classnames(
-    textDecoration('no-underline'),
+    textDecoration({ underline }),
     textColor(gradientFrom && gradientTo ? 'text-transparent' : 'text-primary'),
     backgroundImage(
       gradientFrom && gradientTo ? 'bg-gradient-to-r' : undefined
@@ -104,6 +104,7 @@ export function LinkText({
   children,
   gradientFrom,
   gradientTo,
+  underline,
 }: ChildrenProp & {
   url: string
   small?: boolean
@@ -113,19 +114,26 @@ export function LinkText({
   title?: string
   gradientFrom?: TGradientColorStops
   gradientTo?: TGradientColorStops
+  underline?: boolean
 }) {
+  const linkClassnames = linkText(
+    small,
+    extraSmall,
+    bold,
+    gradientFrom,
+    gradientTo,
+    underline
+  )
+
   if (internal)
     return (
-      <Link
-        to={url}
-        className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
-      >
+      <Link to={url} className={linkClassnames}>
         {children}
       </Link>
     )
   return (
     <a
-      className={linkText(small, extraSmall, bold, gradientFrom, gradientTo)}
+      className={linkClassnames}
       href={url}
       title={title}
       target="_blank"
@@ -193,32 +201,40 @@ const headerText = (
   accent = false,
   center?: boolean,
   extraLeading = false,
-  big = false
+  size = 'medium'
 ) =>
   classnames(
     fontFamily('font-primary'),
     fontWeight('font-bold'),
-    fontSize(big ? 'text-3.5xl' : 'text-2xl', 'xs:text-3.5xl', 'sm:text-4xl'),
+    fontSize(
+      {
+        'text-3.5xl': size === 'large',
+        'text-2xl': size === 'medium',
+        'text-xl': size === 'small',
+      },
+      size === 'small' ? 'xs:text-2xl' : 'xs:text-3xl',
+      size === 'small' ? 'sm:text-2xl' : 'sm:text-4xl'
+    ),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
-      ? lineHeight('leading-9', 'sm:leading-10', 'md:leading-10.5')
-      : lineHeight('!leading-8'),
+      ? lineHeight('leading-10', 'md:leading-10.5')
+      : lineHeight({ '!leading-8': size !== 'small' }),
     textAlign({ 'text-center': center })
   )
 export function HeaderText({
   accent,
   center,
   extraLeading,
-  big,
+  size,
   children,
 }: ChildrenProp & {
   accent?: boolean
   center?: boolean
   extraLeading?: boolean
-  big?: boolean
+  size?: 'large' | 'medium' | 'small'
 }) {
   return (
-    <h1 className={headerText(accent, center, extraLeading, big)}>
+    <h1 className={headerText(accent, center, extraLeading, size)}>
       {children}
     </h1>
   )
@@ -330,13 +346,8 @@ export function CardSubheader({ children }: ChildrenProp) {
   return <p className={cardSubheaderContainer}>{children}</p>
 }
 
-const subHeaderContainer = classnames(
-  fontSize('text-sm'),
-  fontWeight('font-normal')
-)
-
 export function SubHeaderText({ children }: ChildrenProp) {
-  return <p className={subHeaderContainer}>{children}</p>
+  return <p className={fontFamily('font-primary')}>{children}</p>
 }
 
 const logoText = classnames(
@@ -387,12 +398,6 @@ export function TextareaText({
   return <div className={textareaText(dark)}>{children}</div>
 }
 
-const errorTextBox = (visible?: boolean) =>
-  classnames(
-    display(visible ? 'flex' : 'hidden'),
-    alignItems('items-center'),
-    space('space-x-2')
-  )
 const errorText = (centered?: boolean) =>
   classnames(
     textColor('text-error'),
@@ -402,25 +407,13 @@ const errorText = (centered?: boolean) =>
   )
 export function ErrorText({
   children,
-  withExclamation,
-  visible,
   centered,
 }: ChildrenProp & {
   centered?: boolean
   withExclamation?: boolean
   visible?: boolean
 }) {
-  const error = <p className={errorText(centered)}>{children}</p>
-
-  if (withExclamation)
-    return (
-      <div className={errorTextBox(visible)}>
-        {/* <ExclamationInCircle /> */}
-        {error}
-      </div>
-    )
-
-  return error
+  return <p className={errorText(centered)}>{children}</p>
 }
 
 const suffixText = classnames(

@@ -10,11 +10,9 @@ import { proxy } from 'valtio'
 import ProofResult from 'models/ProofResult'
 import buildFarcasterProof from 'helpers/buildFarcasterProof'
 import createFarcasterBadge from 'helpers/createFarcasterBadge'
-import defaultProvider from 'helpers/providers/defaultProvider'
 import env from 'helpers/env'
 import getNullifierMessage from 'helpers/getNullifierMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
-import httpProvider from 'helpers/providers/httpProvider'
 import relayProvider from 'helpers/providers/relayProvider'
 import walletStore from 'stores/WalletStore'
 
@@ -22,7 +20,45 @@ class BurnerWalletStore extends PersistableStore {
   privateKey?: string
   proof?: ProofResult
 
+  burn() {
+    delete this.privateKey
+  }
+
+  get account() {
+    return this.privateKey && new Wallet(this.privateKey).address
+  }
+
+  async getSigner() {
+    if (this.privateKey) return (await this.privateSigner()).signer
+
+    if (walletStore.account && (await hasFarcasterBadge(walletStore.account))) {
+      return (await walletStore.getProvider()).getSigner(0)
+    }
+  }
+
+  async privateSigner() {
+    const wallet = this.privateKey
+      ? new Wallet(this.privateKey)
+      : Wallet.createRandom()
+
+    const gsnProvider = await relayProvider()
+    gsnProvider.addAccount(wallet.privateKey)
+
+    const etherProvider = new Web3Provider(
+      gsnProvider as unknown as ExternalProvider
+    )
+
+    return {
+      signer: etherProvider.getSigner(wallet.address),
+      wallet,
+    }
+  }
+
   async generateBurnerWallet(username: string, address: string) {
+    const { signer, wallet } = await this.privateSigner()
+
+    if (await hasFarcasterBadge(wallet.address)) return
+
     if (!this.proof) {
       const farcasterSignature = await requestFarcasterAttestation(
         username,
@@ -42,27 +78,11 @@ class BurnerWalletStore extends PersistableStore {
       )
     }
 
-    const wallet = this.privateKey
-      ? new Wallet(this.privateKey)
-      : Wallet.createRandom()
+    await createFarcasterBadge(signer, this.proof)
+
+    delete this.proof
 
     if (!this.privateKey) this.privateKey = wallet.privateKey
-    if (await hasFarcasterBadge(wallet.address)) {
-      console.log('has', wallet.address)
-      return
-    }
-
-    const gsnProvider = await relayProvider()
-    gsnProvider.addAccount(wallet.privateKey)
-
-    const etherProvider = new Web3Provider(
-      gsnProvider as unknown as ExternalProvider
-    )
-
-    await createFarcasterBadge(
-      etherProvider.getSigner(wallet.address),
-      this.proof
-    )
   }
 }
 
