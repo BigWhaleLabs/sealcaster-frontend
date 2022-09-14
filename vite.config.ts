@@ -21,6 +21,9 @@ export default defineConfig({
         removeConsole(),
       ] as unknown[] as Plugin[],
     },
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
   },
   optimizeDeps: {
     esbuildOptions: {
