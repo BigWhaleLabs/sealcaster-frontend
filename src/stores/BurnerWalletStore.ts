@@ -25,19 +25,8 @@ class BurnerWalletStore extends PersistableStore {
     void walletStore.exit()
   }
 
-  get hasBurnedWallet() {
-    return !!this.privateKey || walletStore.isBurnedWallet
-  }
-
-  get account() {
-    console.log(this.privateKey, walletStore.account)
-    return this.privateKey
-      ? new Wallet(this.privateKey).address
-      : walletStore.account
-  }
-
   async getSigner() {
-    if (!this.hasBurnedWallet) return
+    if (!this.privateKey && !walletStore.isBurnedWallet) return
     if (this.privateKey) return (await this.privateSigner()).signer
     return (await walletStore.getProvider()).getSigner(0)
   }

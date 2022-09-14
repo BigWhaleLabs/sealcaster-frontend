@@ -19,9 +19,9 @@ const blocksWrapper = classnames(
 
 export default function () {
   const [_, setLocation] = useLocation()
-  const { isBurned } = useAccount()
+  const { account, isBurned } = useAccount()
 
-  if (isBurned) setLocation('/cast')
+  if (account) setLocation(isBurned ? '/cast' : '/create')
 
   return (
     <div className={blocksWrapper}>
