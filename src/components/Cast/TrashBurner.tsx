@@ -21,7 +21,7 @@ const trashBurnerWrapper = classnames(
 export default function () {
   return (
     <span className={trashBurnerWrapper}>
-      <Button type="tertiary" onClick={BurnerWalletStore.burn}>
+      <Button type="tertiary" onClick={() => BurnerWalletStore.burn()}>
         <AccentText extraSmall color="text-secondary">
           <span className={displayFrom('md')}>Trash Burner</span>
           <span className={mobileBurnerButtonWrapper}>

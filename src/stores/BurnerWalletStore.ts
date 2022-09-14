@@ -21,7 +21,12 @@ class BurnerWalletStore extends PersistableStore {
   proof?: ProofResult
 
   burn() {
-    delete this.privateKey
+    this.privateKey = undefined
+    void walletStore.exit()
+  }
+
+  get hasBurnedWallet() {
+    return !!this.privateKey || walletStore.isBurnedWallet
   }
 
   get account() {
@@ -29,11 +34,9 @@ class BurnerWalletStore extends PersistableStore {
   }
 
   async getSigner() {
+    if (!this.hasBurnedWallet) return
     if (this.privateKey) return (await this.privateSigner()).signer
-
-    if (walletStore.account && (await hasFarcasterBadge(walletStore.account))) {
-      return (await walletStore.getProvider()).getSigner(0)
-    }
+    return (await walletStore.getProvider()).getSigner(0)
   }
 
   async privateSigner() {
@@ -78,11 +81,12 @@ class BurnerWalletStore extends PersistableStore {
       )
     }
 
-    await createFarcasterBadge(signer, this.proof)
-
-    delete this.proof
-
-    if (!this.privateKey) this.privateKey = wallet.privateKey
+    try {
+      await createFarcasterBadge(signer, this.proof)
+      if (!this.privateKey) this.privateKey = wallet.privateKey
+    } finally {
+      this.proof = undefined
+    }
   }
 }
 

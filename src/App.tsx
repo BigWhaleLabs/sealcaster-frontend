@@ -1,5 +1,6 @@
 import { Route, Router } from 'wouter'
 import { ToastContainer } from 'react-toastify'
+import { useSnapshot } from 'valtio'
 import Cast from 'pages/Cast'
 import CreateBurnerWallet from 'pages/CreateBurnerWallet'
 import Footer from 'components/Footer'
@@ -17,6 +18,7 @@ import classnames, {
   minHeight,
   width,
 } from 'classnames/tailwind'
+import walletStore from 'stores/WalletStore'
 
 const pageContainer = classnames(
   display('flex'),
@@ -30,13 +32,15 @@ const bodyContainer = classnames(
 )
 
 export default function () {
+  const { account } = useSnapshot(walletStore)
+
   return (
     <Router>
       <ScrollToTop>
         <div className={pageContainer}>
           <Navbar
             logo={<Logo />}
-            account={undefined}
+            account={account}
             needNetworkChange={false}
             logoText="SealCaster"
           />

@@ -1,12 +1,14 @@
-import { AccentText, HeaderText, PostText } from 'components/ui/Text'
+import { AccentText, BodyText, HeaderText, PostText } from 'components/ui/Text'
 import { Sizes } from 'models/CharInCircle'
 import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
+import BurnerWalletCard from 'components/BurnerWalletCard'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
+import HowItWorks from 'components/HowItWorks'
 import TextInput from 'components/ui/TextInput'
-import Tooltip from 'components/ui/ToolTip'
+import Tooltip from 'components/ui/Tooltip'
 import axios, { AxiosError } from 'axios'
 import classnames, {
   alignItems,
@@ -57,6 +59,7 @@ const buttonWithStatus = classnames(
 const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
 
 export default function () {
+  const { privateKey } = useSnapshot(BurnerWalletStore)
   const [state, setState] = useState<Scenes>(Scenes.Landing)
   const [username, setUsername] = useState('')
   const [hasError, setHasError] = useState('')
@@ -96,60 +99,78 @@ export default function () {
   return (
     <div className={wrapper}>
       <div className={topPart}>
-        <HeaderText>
-          Now let’s verify that you have a Farcaster profile
-        </HeaderText>
-        <PostText>
-          We’ll need to match your Farcaster username with the wallet you
-          connected to your Farcaster profile.{' '}
-          <AccentText color="text-accent">
-            <Tooltip position="bottom" text={hintText}>
-              <span className={hintWrapper}>
-                <CharInCircle size={Sizes.Small} char="?" />
-              </span>
-            </Tooltip>
-          </AccentText>
-        </PostText>
+        {privateKey ? (
+          <>
+            <HeaderText>Voilà—your burner wallet</HeaderText>
+            <PostText>
+              This wallet verifies that you are a user of Farcaster, but won’t
+              reveal who you are. Connect with this wallet in the future to
+              create anonymous casts.
+            </PostText>
+            <BurnerWalletCard privateKey={privateKey} />
+          </>
+        ) : (
+          <>
+            <HeaderText>
+              Now let’s verify that you have a Farcaster profile
+            </HeaderText>
+            <PostText>
+              We’ll need to match your Farcaster username with the wallet you
+              connected to your Farcaster profile.{' '}
+              <AccentText color="text-accent">
+                <Tooltip position="bottom" text={hintText}>
+                  <span className={hintWrapper}>
+                    <CharInCircle size={Sizes.Small} char="?" />
+                  </span>
+                </Tooltip>
+              </AccentText>
+            </PostText>
+          </>
+        )}
       </div>
-      <div className={bottomPart}>
-        <TextInput
-          withAtSign
-          value={username}
-          isError={!!hasError.length}
-          disabled={loading}
-          onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
-          onKeyDown={(event) => event.code === 'Enter' && generate()}
-        />
-        <PostText>
-          You’ll verify your username and profile by connecting the same wallet
-          you connected to Farcaster.
-        </PostText>
-        <div className={buttonWithStatus}>
-          <div className={buttonClass}>
-            <Button
-              center
-              fullWidth
-              loadingOverflow
-              type="primary"
-              loading={loading}
-              disabled={!username.length}
-              onClick={generate}
-            >
-              Connect & verify
-            </Button>
+      {privateKey ? (
+        <HowItWorks />
+      ) : (
+        <div className={bottomPart}>
+          <TextInput
+            withAtSign
+            value={username}
+            isError={!!hasError.length}
+            disabled={loading}
+            onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
+            onKeyDown={(event) => event.code === 'Enter' && generate()}
+          />
+          <PostText>
+            You’ll verify your username and profile by connecting the same
+            wallet you connected to Farcaster.
+          </PostText>
+          <div className={buttonWithStatus}>
+            <div className={buttonClass}>
+              <Button
+                center
+                fullWidth
+                loadingOverflow
+                type="primary"
+                loading={loading}
+                disabled={!username.length}
+                onClick={generate}
+              >
+                Connect & verify
+              </Button>
+            </div>
+            {status && (
+              <AccentText small color="text-tertiary">
+                {status}
+              </AccentText>
+            )}
           </div>
-          {status && (
-            <AccentText small color="text-tertiary">
-              {status}
+          {hasError && (
+            <AccentText small color="text-error">
+              {hasError}
             </AccentText>
           )}
         </div>
-        {hasError && (
-          <AccentText small color="text-error">
-            {hasError}
-          </AccentText>
-        )}
-      </div>
+      )}
     </div>
   )
 }

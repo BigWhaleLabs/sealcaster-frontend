@@ -1,8 +1,10 @@
 import { AccentText, BodyText, HeaderText } from 'components/ui/Text'
 import { toast } from 'react-toastify'
+import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import BurnerWalletDivider from 'icons/BurnerWalletDivider'
 import BurnerWalletHeaderLogo from 'components/BurnerWalletCard/BurnerWalletHeaderLogo'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CardContainer from 'components/BurnerWalletCard/CardContainer'
 import ColorfulEye from 'icons/ColorfulEye'
@@ -64,11 +66,8 @@ const privateKeyBlur = (closed?: boolean) =>
     transitionProperty('transition-all')
   )
 
-export default function () {
+export default function ({ privateKey }: { privateKey: string }) {
   const [isKeyClosed, setKeyClosed] = useState(true)
-  const [privateKey] = useState(
-    '0x0000000000000000000000000000000000000000000000000000000000000000'
-  )
 
   return (
     <CardContainer>

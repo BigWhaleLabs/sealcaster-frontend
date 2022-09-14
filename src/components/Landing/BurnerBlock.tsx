@@ -13,6 +13,7 @@ import classnames, {
   textAlign,
   width,
 } from 'classnames/tailwind'
+import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
   space('space-y-6'),
@@ -57,7 +58,12 @@ export default function () {
       <Dots />
       <div className={space('space-y-4')}>
         <SubHeaderText>Already have a burner?</SubHeaderText>
-        <div className={buttonWrapper}>
+        <div
+          className={buttonWrapper}
+          onClick={async () => {
+            await walletStore.connect(true)
+          }}
+        >
           <GradientBorder>
             <Button gradientFont type="secondary" small>
               Connect Burner

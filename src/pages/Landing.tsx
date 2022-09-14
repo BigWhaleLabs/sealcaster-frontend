@@ -1,5 +1,8 @@
+import { useLocation } from 'wouter'
+import { useSnapshot } from 'valtio'
 import BlockchainList from 'components/BlockchainList'
 import BurnerBlock from 'components/Landing/BurnerBlock'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import HowItWorks from 'components/HowItWorks'
 import classnames, {
   alignItems,
@@ -16,6 +19,11 @@ const blocksWrapper = classnames(
 )
 
 export default function () {
+  const [_, setLocation] = useLocation()
+  const { hasBurnedWallet } = useSnapshot(BurnerWalletStore)
+
+  if (hasBurnedWallet) setLocation('/cast')
+
   return (
     <div className={blocksWrapper}>
       <BurnerBlock />
