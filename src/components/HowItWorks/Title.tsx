@@ -1,8 +1,8 @@
 import { HeaderText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 
-export default function ({ hasWallet }: { hasWallet?: boolean }) {
-  const title = hasWallet
+export default function ({ hasBurnerWallet }: { hasBurnerWallet?: boolean }) {
+  const title = hasBurnerWallet
     ? 'How does this work?'
     : 'How this works in 3 easy steps'
   return (
