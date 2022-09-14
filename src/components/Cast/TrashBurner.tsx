@@ -1,6 +1,5 @@
 import { AccentText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { useSnapshot } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import classnames, {

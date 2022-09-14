@@ -1,7 +1,5 @@
 import { Route, Router } from 'wouter'
 import { ToastContainer } from 'react-toastify'
-import { useSnapshot } from 'valtio'
-import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Cast from 'pages/Cast'
 import CreateBurnerWallet from 'pages/CreateBurnerWallet'
 import Footer from 'components/Footer'
@@ -19,6 +17,7 @@ import classnames, {
   minHeight,
   width,
 } from 'classnames/tailwind'
+import useAccount from 'hooks/useAccount'
 
 const pageContainer = classnames(
   display('flex'),
@@ -32,7 +31,7 @@ const bodyContainer = classnames(
 )
 
 export default function () {
-  const { account } = useSnapshot(BurnerWalletStore)
+  const { account } = useAccount()
 
   return (
     <Router>

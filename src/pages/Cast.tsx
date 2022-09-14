@@ -2,26 +2,25 @@ import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { margin, space } from 'classnames/tailwind'
 import { useLocation } from 'wouter'
-import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
-import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CastHeader from 'components/Cast/CastHeader'
 import PostStore from 'stores/PostStore'
 import TextArea from 'components/ui/TextArea'
 import TextareaInfo from 'components/Cast/TextareaInfo'
+import useAccount from 'hooks/useAccount'
 
 export default function () {
-  const [_, setLocation] = useLocation()
-  const { hasBurnedWallet } = useSnapshot(BurnerWalletStore)
+  const [location, setLocation] = useLocation()
+  const { isBurned } = useAccount()
 
   const [text, setText] = useState('')
   const [suffix, setSuffix] = useState('')
 
   const maxLength = 280 - suffix.length
 
-  if (!hasBurnedWallet) setLocation('/')
+  if (!isBurned) setLocation('/')
 
   async function createPost() {
     const result = await PostStore.createPost(text)

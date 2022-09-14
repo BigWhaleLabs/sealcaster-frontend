@@ -30,7 +30,10 @@ class BurnerWalletStore extends PersistableStore {
   }
 
   get account() {
-    return this.privateKey && new Wallet(this.privateKey).address
+    console.log(this.privateKey, walletStore.account)
+    return this.privateKey
+      ? new Wallet(this.privateKey).address
+      : walletStore.account
   }
 
   async getSigner() {

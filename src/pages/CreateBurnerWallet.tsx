@@ -1,4 +1,4 @@
-import { AccentText, BodyText, HeaderText, PostText } from 'components/ui/Text'
+import { AccentText, HeaderText, PostText } from 'components/ui/Text'
 import { Sizes } from 'models/CharInCircle'
 import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
