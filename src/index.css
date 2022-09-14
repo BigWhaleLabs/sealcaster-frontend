@@ -97,7 +97,6 @@ circle {
 
 .double-gradient-shadow {
   position: relative;
-  background-clip: padding-box;
   box-shadow: -20px -20px 74px var(--secondary-transparent),
     20px 20px 74px var(--accent-transparent);
 }
@@ -111,8 +110,8 @@ circle {
   height: 100%;
   z-index: -1;
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
-  border-radius: 16px;
   background-size: 200% 200%;
+  border-radius: 16px;
   animation: spin-background 3.5s linear infinite;
 }
 
