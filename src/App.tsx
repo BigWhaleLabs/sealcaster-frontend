@@ -65,13 +65,11 @@ export default function () {
             <Route path="/">
               <Landing />
             </Route>
-            <Route path="/cast">
+            <ProtectedRoute path="/cast">
               <Suspense fallback="Loading...">
-                <ProtectedRoute>
-                  <Cast />
-                </ProtectedRoute>
+                <Cast />
               </Suspense>
-            </Route>
+            </ProtectedRoute>
             <Route path="/terms">
               <Terms />
             </Route>
