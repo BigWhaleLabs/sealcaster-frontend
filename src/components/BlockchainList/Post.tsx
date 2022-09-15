@@ -1,10 +1,8 @@
 import { BodyText, LinkText, PostText, StatusText } from 'components/ui/Text'
-import { useSnapshot } from 'valtio'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
 import PostTime from 'components/BlockchainList/PostTime'
 import Status from 'components/BlockchainList/Status'
-import WalletStore from 'stores/WalletStore'
 import classnames, {
   alignItems,
   display,
@@ -16,6 +14,7 @@ import classnames, {
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 import truncateMiddleIfNeeded from 'helpers/truncateMiddleIfNeeded'
+import useAccount from 'hooks/useAccount'
 
 const container = classnames(
   display('flex'),
@@ -38,7 +37,7 @@ const postInfo = classnames(
 )
 
 function Sender({ sender }: { sender: string }) {
-  const { account } = useSnapshot(WalletStore)
+  const { account } = useAccount()
   return (
     <LinkText extraSmall title={sender} url={getEtherscanAddressUrl(sender)}>
       {sender === account ? 'you' : truncateMiddleIfNeeded(sender, 13)}

@@ -1,3 +1,4 @@
+import { ErrorText } from 'components/ui/Text'
 import { HTMLAttributes } from 'preact/compat'
 import classnames, {
   backgroundColor,
@@ -6,6 +7,7 @@ import classnames, {
   borderWidth,
   display,
   flexDirection,
+  gap,
   height,
   inset,
   outlineColor,
@@ -17,6 +19,12 @@ import classnames, {
   textColor,
   width,
 } from 'classnames/tailwind'
+
+const wrapper = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  gap('gap-y-2')
+)
 
 const groupContainer = (error?: boolean, disabled?: boolean) =>
   classnames(
@@ -70,26 +78,35 @@ const atSign = (noValue: boolean) =>
 
 export default function ({
   value,
-  isError,
+  errorMessage,
   disabled,
   withAtSign,
   ...rest
 }: {
   value?: string
-  isError?: boolean
+  errorMessage?: string
   disabled?: boolean
   withAtSign?: boolean
 } & HTMLAttributes<HTMLInputElement>) {
+  const isError = !!errorMessage
+
   return (
-    <div className={groupContainer(isError, disabled)}>
-      {withAtSign && <span className={atSign(!value)}>@</span>}
-      <input
-        placeholder="username"
-        value={value}
-        disabled={disabled}
-        className={inputContainer(isError)}
-        {...rest}
-      />
+    <div className={wrapper}>
+      <div className={groupContainer(isError, disabled)}>
+        {withAtSign && <span className={atSign(!value)}>@</span>}
+        <input
+          placeholder="username"
+          value={value}
+          disabled={disabled}
+          className={inputContainer(isError)}
+          {...rest}
+        />
+      </div>
+      {isError && (
+        <ErrorText visible={isError} withExclamation>
+          {errorMessage}
+        </ErrorText>
+      )}
     </div>
   )
 }

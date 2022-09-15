@@ -36,13 +36,13 @@ export default function () {
   return (
     <div className={textAreaInfoWrapper}>
       <AccentText extraSmall color="text-accent">
-        <Tooltip position="bottom" fitContainer text={castingHintText}>
-          <span className={hintWrapper}>
-            <span>Posting from burner wallet</span>
-            <br />
+        <span className={hintWrapper}>
+          Posting from burner wallet
+          <br />
+          <Tooltip position="bottom" fitContainer text={castingHintText}>
             <CharInCircle size={Sizes.Small} char="?" />
-          </span>
-        </Tooltip>
+          </Tooltip>
+        </span>
       </AccentText>
       <div className={displayTo('md')}>
         <Button disabled fullWidth center type="primary">

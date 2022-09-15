@@ -1,4 +1,6 @@
+import { useSnapshot } from 'valtio'
 import Body from 'components/HowItWorks/Body'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Card from 'components/ui/Card'
 import SealEye from 'icons/SealEye'
 import Title from 'components/HowItWorks/Title'
@@ -21,18 +23,21 @@ const cardTextBox = classnames(
   flexDirection('flex-col'),
   gap('gap-y-4')
 )
-// Prop `hasWallet` is used to show the second card "How does this work?" after generating burner wallet
-export default function ({ hasWallet }: { hasWallet?: boolean }) {
+
+export default function () {
+  const { privateKey } = useSnapshot(BurnerWalletStore)
+  const hasBurnerWallet = !!privateKey
+
   return (
     <Card>
       <div className={cardContainer}>
         <div className={width('w-14')}>
-          <SealEye upsideDown={hasWallet} />
+          <SealEye upsideDown={hasBurnerWallet} />
         </div>
 
         <div className={cardTextBox}>
-          <Title hasWallet={hasWallet} />
-          <Body hasWallet={hasWallet} />
+          <Title hasBurnerWallet={hasBurnerWallet} />
+          <Body hasWallet={hasBurnerWallet} />
         </div>
       </div>
     </Card>

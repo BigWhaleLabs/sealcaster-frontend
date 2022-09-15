@@ -78,11 +78,8 @@ const cardContainer = classnames(
   padding('py-6', 'px-6', 'xs:py-10')
 )
 
-export default function () {
+export default function ({ privateKey }: { privateKey: string }) {
   const [isKeyClosed, setKeyClosed] = useState(true)
-  const [privateKey] = useState(
-    '0x0000000000000000000000000000000000000000000000000000000000000000'
-  )
 
   return (
     <MagicCardWrapper>

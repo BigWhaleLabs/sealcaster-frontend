@@ -100,9 +100,11 @@ export default function ({
           <SuffixBlock maxCount={maxLength} text={text} />
         </div>
       </div>
-      <ErrorText visible={!!error} withExclamation>
-        {parseErrorText(error)}
-      </ErrorText>
+      {error && (
+        <ErrorText visible={!!error} withExclamation>
+          {parseErrorText(error)}
+        </ErrorText>
+      )}
     </div>
   )
 }

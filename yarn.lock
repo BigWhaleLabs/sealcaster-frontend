@@ -2732,7 +2732,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.14.8, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.5.5":
+"@babel/runtime@npm:^7.14.8, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.4.5, @babel/runtime@npm:^7.5.5":
   version: 7.19.0
   resolution: "@babel/runtime@npm:7.19.0"
   dependencies:
@@ -4222,7 +4222,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-inject@npm:^4.0.0":
+"@rollup/plugin-inject@npm:^4.0.0, @rollup/plugin-inject@npm:^4.0.4":
   version: 4.0.4
   resolution: "@rollup/plugin-inject@npm:4.0.4"
   dependencies:
@@ -4651,6 +4651,15 @@ __metadata:
   dependencies:
     postcss: 5 - 7
   checksum: 183fa4c41d82c32ef4ddd7ead1eabfa911d0c4ecdcbe78d0289167bf83b129fee0c7160c7247f07163579a4b584b92eda664bbf021b14836370e00c0e437ae19
+  languageName: node
+  linkType: hard
+
+"@types/entropy-string@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "@types/entropy-string@npm:4.2.0"
+  dependencies:
+    "@types/node": "*"
+  checksum: 70e03d51ad5af4542dd9e3e1ca6dac99e18659cb8586430e40120047ac62d082608b7295907bc8310eea85409535a2a1495baef155f06c88b6e43c783763efc6
   languageName: node
   linkType: hard
 
@@ -9154,6 +9163,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"entropy-string@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "entropy-string@npm:4.2.0"
+  dependencies:
+    "@babel/runtime": ^7.4.5
+  checksum: 8cf1e27ded17baa5e3f7849378d52b17a885e99d1250dd6f4b82275efdde9bdddfb8f90713e7352e750d55ca913ccab5aca6a153d1c2d1034076159c11465662
+  languageName: node
+  linkType: hard
+
 "env-paths@npm:^2.2.0":
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
@@ -11146,6 +11164,17 @@ __metadata:
   version: 4.2.3
   resolution: "fecha@npm:4.2.3"
   checksum: f94e2fb3acf5a7754165d04549460d3ae6c34830394d20c552197e3e000035d69732d74af04b9bed3283bf29fe2a9ebdcc0085e640b0be3cc3658b9726265e31
+  languageName: node
+  linkType: hard
+
+"ffjavascript@npm:^0.2.55":
+  version: 0.2.56
+  resolution: "ffjavascript@npm:0.2.56"
+  dependencies:
+    wasmbuilder: 0.0.16
+    wasmcurves: 0.2.0
+    web-worker: ^1.2.0
+  checksum: d4e02263db4a94d111cdc7c1211ae96769370f5c8c3c338331e0ef99faed7b55e640bedf23fa8a83fc9a77f0e81140ea8f32e392812a00e15ca504221b879a4f
   languageName: node
   linkType: hard
 
@@ -18277,7 +18306,9 @@ __metadata:
     "@opengsn/provider": ^3.0.0-beta.1
     "@originjs/vite-plugin-commonjs": ^1.0.3
     "@preact/preset-vite": ^2.4.0
+    "@rollup/plugin-inject": ^4.0.4
     "@typechain/ethers-v5": ^10.1.0
+    "@types/entropy-string": ^4.2.0
     "@types/node": ^18.7.17
     "@typescript-eslint/eslint-plugin": ^5.37.0
     "@typescript-eslint/parser": ^5.37.0
@@ -18287,6 +18318,7 @@ __metadata:
     autoprefixer: ^10.4.10
     cross-env: ^7.0.3
     dayjs: ^1.11.5
+    entropy-string: ^4.2.0
     envalid: ^7.3.1
     eslint: ^8.23.1
     eslint-config-prettier: ^8.5.0
@@ -18299,6 +18331,7 @@ __metadata:
     eslint-plugin-valtio: ^0.6.0
     eth-rpc-errors: ^4.0.3
     ethers: ^5.7.0
+    ffjavascript: ^0.2.55
     postcss: ^8.4.16
     preact: ^10.11.0
     prettier: ^2.7.1
@@ -18315,6 +18348,7 @@ __metadata:
     vite: ^3.1.0
     vite-plugin-remove-console: ^1.1.0
     vite-tsconfig-paths: ^3.5.0
+    web3-providers-http: ^1.7.5
     web3modal: ^1.9.9
     wouter: ^2.8.0-alpha.2
   languageName: unknown
@@ -20451,6 +20485,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"wasmbuilder@npm:0.0.16":
+  version: 0.0.16
+  resolution: "wasmbuilder@npm:0.0.16"
+  checksum: a9c8ef4a0a770f71865dc7a75bc22e5204227ff6d70bed90e57f7df5939a013d4177947ea4c2c3fdfe6761b92d975908ea846c463ee635d1c95e1a3c434b7ee1
+  languageName: node
+  linkType: hard
+
+"wasmcurves@npm:0.2.0":
+  version: 0.2.0
+  resolution: "wasmcurves@npm:0.2.0"
+  dependencies:
+    wasmbuilder: 0.0.16
+  checksum: 0769ca2d0c2f99619436f86dcab16294d94cc0c8a114b0c5e6ed71df49625a6ad35000011fee57471b7647838eeb75f631e74b200996ac2513e8ca0c47e5b8d0
+  languageName: node
+  linkType: hard
+
 "watchpack@npm:^2.3.1":
   version: 2.3.1
   resolution: "watchpack@npm:2.3.1"
@@ -20476,6 +20526,13 @@ __metadata:
   dependencies:
     defaults: ^1.0.3
   checksum: 814e9d1ddcc9798f7377ffa448a5a3892232b9275ebb30a41b529607691c0491de47cba426e917a4d08ded3ee7e9ba2f3fe32e62ee3cd9c7d3bafb7754bd553c
+  languageName: node
+  linkType: hard
+
+"web-worker@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "web-worker@npm:1.2.0"
+  checksum: 1bb28348ddcf9b2e7c62c5fd02e49a84098795856cd905456de957271bba288e9618941cf69d8960f0a7ae81f5dfb74b427c0634be47ec69e3e955c4ec5213be
   languageName: node
   linkType: hard
 
@@ -20706,7 +20763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-providers-http@npm:1.7.5":
+"web3-providers-http@npm:1.7.5, web3-providers-http@npm:^1.7.5":
   version: 1.7.5
   resolution: "web3-providers-http@npm:1.7.5"
   dependencies:

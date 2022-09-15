@@ -1,13 +1,12 @@
 import { ErrorList, handleError } from '@big-whale-labs/frontend-utils'
 import { ExternalProvider, Web3Provider } from '@ethersproject/providers'
 import { PersistableStore } from '@big-whale-labs/stores'
-import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract'
 import { proxy } from 'valtio'
 import { serializeError } from 'eth-rpc-errors'
 import chainForWallet from 'helpers/chainForWallet'
 import env from 'helpers/env'
+import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
 import networkChainIdToName from 'models/networkChainIdToName'
-import parsePostLogData from 'helpers/parsePostLogData'
 import relayProvider from 'helpers/providers/relayProvider'
 import web3Modal from 'helpers/web3Modal'
 
@@ -15,10 +14,18 @@ let provider: Web3Provider
 
 class WalletStore extends PersistableStore {
   account?: string
+  isBurnedWallet?: Promise<boolean>
   walletLoading = false
   needNetworkChange = false
   walletsToNotifiedOfBeingDoxxed = {} as {
     [address: string]: boolean
+  }
+
+  changeAccount(account?: string) {
+    this.account = account
+    this.isBurnedWallet = account
+      ? hasFarcasterBadge(account)
+      : Promise.resolve(false)
   }
 
   replacer = (key: string, value: unknown) => {
@@ -27,6 +34,7 @@ class WalletStore extends PersistableStore {
       'cachedProvider',
       'provider',
       'walletLoading',
+      'isBurnedWallet',
     ]
     return disallowList.includes(key) ? undefined : value
   }
@@ -48,7 +56,8 @@ class WalletStore extends PersistableStore {
         throw new Error(
           ErrorList.wrongNetwork(userNetwork, env.VITE_ETH_NETWORK)
         )
-      this.account = (await provider.listAccounts())[0]
+      const account = (await provider.listAccounts())[0]
+      this.changeAccount(account)
       this.subscribeProvider(instance)
     } catch (error) {
       if (error === 'Modal closed by user') return
@@ -90,43 +99,30 @@ class WalletStore extends PersistableStore {
 
     this.walletLoading = true
     const accounts = await provider.listAccounts()
-    this.account = accounts[0]
+    const account = accounts[0]
+    this.changeAccount(account)
     this.walletLoading = false
+  }
+
+  signMessage(message: string) {
+    if (!provider) throw new Error('No provider')
+
+    const signer = provider.getSigner()
+    return signer.signMessage(message)
   }
 
   get provider() {
     return provider
   }
 
-  async createPost({
-    text,
-    original,
-  }: {
-    text: string
-    ledgerType: string
-    original: string
-  }) {
+  async getSigner() {
     if (!provider) throw new Error(ErrorList.noProvider)
 
     const gsnProvider = await relayProvider(provider)
 
-    const ethersProvider = new Web3Provider(
+    return new Web3Provider(
       gsnProvider as unknown as ExternalProvider
-    )
-
-    const contract = SCPostStorage__factory.connect(
-      env.VITE_SC_FARCASTER_POSTS_CONTRACT_ADDRESS,
-      ethersProvider.getSigner(0)
-    )
-    const transaction = await contract.savePost(text, original)
-    const result = await transaction.wait()
-
-    return Promise.all(
-      result.logs
-        .filter(({ address }) => address === contract.address)
-        .map(({ data, topics }) => parsePostLogData({ data, topics }))
-        .map(({ args }) => args)
-    )
+    ).getSigner(0)
   }
 
   private subscribeProvider(provider: Web3Provider) {
@@ -139,7 +135,7 @@ class WalletStore extends PersistableStore {
     provider.on('accountsChanged', (accounts: string[]) => {
       if (!accounts.length) this.clearData()
 
-      this.account = undefined
+      this.changeAccount()
       void this.handleAccountChanged()
     })
     provider.on('disconnect', (error: unknown) => {
@@ -148,14 +144,18 @@ class WalletStore extends PersistableStore {
       this.clearData()
     })
     provider.on('chainChanged', async () => {
-      this.account = undefined
+      this.changeAccount()
       await this.connect()
     })
   }
 
   private clearData() {
     web3Modal.clearCachedProvider()
-    this.account = undefined
+    this.changeAccount()
+  }
+
+  exit() {
+    this.clearData()
   }
 }
 

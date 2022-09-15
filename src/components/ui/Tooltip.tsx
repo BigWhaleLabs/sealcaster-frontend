@@ -12,11 +12,11 @@ import classnames, {
 
 const tooltipClasses = classnames(
   backgroundColor('bg-formal-accent'),
-  padding('py-2', 'px-4'),
+  padding('py-2', 'px-5'),
   zIndex('z-50'),
   borderRadius('rounded-lg'),
   highlightedText(false),
-  width('w-3/4', 'md:w-80')
+  width('w-3/4', 'md:w-seal-grid')
 )
 
 export default function ({

@@ -1,5 +1,6 @@
 import { AccentText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import classnames, {
   alignSelf,
@@ -19,7 +20,7 @@ const trashBurnerWrapper = classnames(
 export default function () {
   return (
     <span className={trashBurnerWrapper}>
-      <Button type="tertiary">
+      <Button type="tertiary" onClick={() => BurnerWalletStore.burn()}>
         <AccentText extraSmall color="text-secondary">
           <span className={displayFrom('md')}>Trash Burner</span>
           <span className={mobileBurnerButtonWrapper}>

@@ -16,6 +16,7 @@ import {
   gradientColorStops,
   lineHeight,
   placeholderColor,
+  space,
   textAlign,
   textColor,
   textDecoration,
@@ -25,6 +26,7 @@ import {
   wordBreak,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
+import ExclamationInCircle from 'icons/ExclamationInCircle'
 import classNamesToString from 'helpers/classNamesToString'
 
 const accentText = (
@@ -212,8 +214,7 @@ const headerText = (
         'text-2xl': size === 'medium',
         'text-xl': size === 'small',
       },
-      size === 'small' ? 'xs:text-2xl' : 'xs:text-3xl',
-      size === 'small' ? 'sm:text-2xl' : 'sm:text-4xl'
+      size === 'small' ? 'xs:text-2xl' : 'xs:text-3.5xl'
     ),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
@@ -351,8 +352,13 @@ export function CardSubheader({ children }: ChildrenProp) {
   return <p className={cardSubheaderContainer}>{children}</p>
 }
 
-export function SubHeaderText({ children }: ChildrenProp) {
-  return <p className={fontFamily('font-primary')}>{children}</p>
+export function SubHeaderText({
+  children,
+  defaultFont,
+}: ChildrenProp & { defaultFont?: boolean }) {
+  return (
+    <p className={fontFamily({ 'font-primary': !defaultFont })}>{children}</p>
+  )
 }
 
 const logoText = classnames(
@@ -403,6 +409,12 @@ export function TextareaText({
   return <div className={textareaText(dark)}>{children}</div>
 }
 
+const errorTextBox = (visible?: boolean) =>
+  classnames(
+    display(visible ? 'flex' : 'hidden'),
+    alignItems('items-center'),
+    space('space-x-2')
+  )
 const errorText = (centered?: boolean) =>
   classnames(
     textColor('text-error'),
@@ -412,13 +424,25 @@ const errorText = (centered?: boolean) =>
   )
 export function ErrorText({
   children,
+  withExclamation,
+  visible,
   centered,
 }: ChildrenProp & {
   centered?: boolean
   withExclamation?: boolean
   visible?: boolean
 }) {
-  return <p className={errorText(centered)}>{children}</p>
+  const error = <p className={errorText(centered)}>{children}</p>
+
+  if (withExclamation)
+    return (
+      <div className={errorTextBox(visible)}>
+        <ExclamationInCircle />
+        {error}
+      </div>
+    )
+
+  return error
 }
 
 const suffixText = classnames(

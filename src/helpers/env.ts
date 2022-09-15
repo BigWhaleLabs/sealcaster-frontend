@@ -5,6 +5,8 @@ import {
   GSN_SC_RELAY,
   SC_FARCASTER_LEDGER_CONTRACT_ADDRESS,
   SC_FARCASTER_POSTS_CONTRACT_ADDRESS,
+  TWITTER_URL,
+  VERIFY_URL,
 } from '@big-whale-labs/constants'
 import { cleanEnv, str } from 'envalid'
 
@@ -23,5 +25,7 @@ export default cleanEnv(import.meta.env, {
     default: GSN_PAYMASTER_CONTRACT_ADDRESS,
   }),
   VITE_GSN_SC_RELAY: str({ default: GSN_SC_RELAY }),
+  VITE_VERIFY_URL: str({ default: VERIFY_URL }),
   VITE_FARCASTER_PROFILE_URL: str(),
+  VITE_TWITTER_POSTER_URL: str({ default: TWITTER_URL }),
 })

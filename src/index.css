@@ -91,6 +91,11 @@ circle {
   stroke-linejoin: round;
 }
 
+/* Wallet select menu for dark and light theme */
+.web3modal-modal-lightbox {
+  z-index: 100 !important;
+}
+
 .loading-pause:hover {
   animation-play-state: paused;
 }
@@ -130,6 +135,28 @@ circle {
   background-size: 200% 200%;
   animation: spin-background 3.5s ease-in-out infinite,
     rescale 3.5s ease-in-out infinite;
+}
+
+.dots-loading::after {
+  content: '';
+  animation: dots 3s linear infinite;
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60% {
+    content: '...';
+  }
+  90%,
+  100% {
+    content: '';
+  }
 }
 
 @keyframes spin-background {
