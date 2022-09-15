@@ -13,7 +13,7 @@ import TextareaInfo from 'components/Cast/TextareaInfo'
 import useAccount from 'hooks/useAccount'
 
 export default function () {
-  const [location, setLocation] = useLocation()
+  const [, setLocation] = useLocation()
   const { isBurned } = useAccount()
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
