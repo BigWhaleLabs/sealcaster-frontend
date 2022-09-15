@@ -1,17 +1,15 @@
 import { AccentText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import LastDelimiter from 'components/ui/LastDelimiter'
 import Logo from 'components/navbar/Logo'
 import SealVerse from 'components/navbar/SealVerse'
 import SocialLinks from 'components/navbar/SocialLinks'
 import classnames, {
   alignItems,
-  backgroundColor,
-  borderWidth,
   cursor,
   display,
   flexDirection,
   gap,
-  height,
   lineHeight,
   textAlign,
   width,
@@ -24,13 +22,6 @@ const walletContainer = classnames(
   gap('gap-x-3', 'sm:gap-x-4'),
   cursor('cursor-pointer')
 )
-const delimiterContainer = classnames(
-  borderWidth('border-0'),
-  backgroundColor('bg-primary-dimmed'),
-  width('w-px'),
-  height('h-4')
-)
-const lastDelimiterContainer = classnames(delimiterContainer, displayFrom('xs'))
 
 const walletAccount = classnames(
   textAlign('text-right'),
@@ -42,8 +33,7 @@ export default function () {
     <div className={walletContainer}>
       <SocialLinks />
       <SealVerse />
-      <hr className={lastDelimiterContainer} />
-
+      <LastDelimiter />
       <div className={walletAccount}>
         <AccentText small color="text-primary-semi-dimmed">
           <span className={displayTo('lg')}>Fetching...</span>
