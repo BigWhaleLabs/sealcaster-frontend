@@ -16,13 +16,13 @@ import {
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
 
-const cardContainer = (small?: boolean) => {
+const cardContainer = (small?: boolean, blueBg?: boolean) => {
   return classnames(
     position('relative'),
-    borderWidth('border'),
+    borderWidth(blueBg ? 'border-0' : 'border'),
     borderColor('border-half-grey'),
     borderRadius('rounded-2xl'),
-    backgroundColor('bg-primary-dark'),
+    backgroundColor(blueBg ? 'bg-primary-background' : 'bg-primary-dark'),
     padding(small ? 'p-4' : 'p-6'),
     maxWidth('max-w-full'),
     maxHeight('max-h-full'),
@@ -37,6 +37,7 @@ const cardContainer = (small?: boolean) => {
 export default function ({
   children,
   small,
-}: ChildrenProp & { small?: boolean }) {
-  return <div className={cardContainer(small)}>{children}</div>
+  blueBg,
+}: ChildrenProp & { small?: boolean; blueBg?: boolean }) {
+  return <div className={cardContainer(small, blueBg)}>{children}</div>
 }
