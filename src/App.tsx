@@ -27,7 +27,7 @@ const pageContainer = classnames(
   minHeight('min-h-screen')
 )
 const bodyContainer = classnames(
-  width('w-full'),
+  width('xs:w-full'),
   maxWidth('max-w-fit', 'body:max-w-body'),
   margin('mx-4', 'mb-auto', 'body:mx-auto')
 )
