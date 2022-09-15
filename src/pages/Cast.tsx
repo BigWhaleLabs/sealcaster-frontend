@@ -73,37 +73,35 @@ export default function () {
   }
 
   return (
-    <>
-      <div className={processingCardWrapper}>
-        <PostProcessing />
-        <div className={space('space-y-6')}>
-          <CastHeader />
-          <div className={space('md:space-y-2', 'space-y-4')}>
-            <TextArea
-              text={text}
-              disabled={isLoading}
-              placeholder="Write something here..."
-              onTextChange={setText}
-              setSuffix={setSuffix}
-              maxLength={maxLength}
-            />
-            <TextareaInfo />
-          </div>
-          <div className={displayFrom('md')}>
-            <Button
-              disabled={!text}
-              loading={isLoading}
-              type="primary"
-              onClick={createPost}
-            >
-              Cast
-            </Button>
-          </div>
+    <div className={processingCardWrapper}>
+      <PostProcessing />
+      <div className={space('space-y-6')}>
+        <CastHeader />
+        <div className={space('md:space-y-2', 'space-y-4')}>
+          <TextArea
+            text={text}
+            disabled={isLoading}
+            placeholder="Write something here..."
+            onTextChange={setText}
+            setSuffix={setSuffix}
+            maxLength={maxLength}
+          />
+          <TextareaInfo />
         </div>
-        <div className={margin('mt-24')}>
-          <BlockchainList />
+        <div className={displayFrom('md')}>
+          <Button
+            disabled={!text}
+            loading={isLoading}
+            type="primary"
+            onClick={createPost}
+          >
+            Cast
+          </Button>
         </div>
       </div>
-    </>
+      <div className={margin('mt-24')}>
+        <BlockchainList />
+      </div>
+    </div>
   )
 }

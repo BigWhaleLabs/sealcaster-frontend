@@ -104,12 +104,11 @@ class WalletStore extends PersistableStore {
     this.walletLoading = false
   }
 
-  async signMessage(message: string) {
+  signMessage(message: string) {
     if (!provider) throw new Error('No provider')
 
     const signer = provider.getSigner()
-    const signature = await signer.signMessage(message)
-    return signature
+    return signer.signMessage(message)
   }
 
   get provider() {

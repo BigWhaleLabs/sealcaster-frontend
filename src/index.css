@@ -177,8 +177,3 @@ circle {
     transform: scale(0.85);
   }
 }
-
-/* Wallet select menu for dark and light theme */
-.web3modal-modal-lightbox {
-  z-index: 100 !important;
-}

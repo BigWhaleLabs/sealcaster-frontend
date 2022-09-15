@@ -139,8 +139,10 @@ export default function () {
             value={username}
             errorMessage={error}
             disabled={loading}
-            onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
-            onKeyDown={(event) => event.code === 'Enter' && generate()}
+            onChange={({ target }) =>
+              setUsername((target as HTMLInputElement).value)
+            }
+            onKeyDown={({ code }) => code === 'Enter' && generate()}
           />
           <PostText>
             You’ll verify your username and profile by connecting the same
