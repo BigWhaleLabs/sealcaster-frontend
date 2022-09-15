@@ -55,7 +55,7 @@ export default function () {
             <HeaderText center extraLeading size="large">
               It looks like you connected a wallet without the correct zk badge
             </HeaderText>
-            <SubHeaderText>
+            <SubHeaderText defaultFont>
               Create a burner wallet with the Farcaster zk badge to continue, or
               reconnect with the correct burner wallet.
             </SubHeaderText>
