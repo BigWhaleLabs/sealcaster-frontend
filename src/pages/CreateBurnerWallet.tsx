@@ -84,7 +84,7 @@ export default function () {
             'Verification failed'
         )
 
-      console.log('error', error)
+      console.error('error', error)
     } finally {
       setStatus(undefined)
       setLoading(false)
