@@ -73,6 +73,7 @@ export default function () {
         walletStore.account,
         setStatus
       )
+      walletStore.exit()
     } catch (error) {
       setError(
         'We could not verify this username with the wallet you have connected. Please review them and try again.'

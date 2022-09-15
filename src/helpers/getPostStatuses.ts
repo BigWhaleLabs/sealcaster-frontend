@@ -9,7 +9,7 @@ export default async function (ids: number[]) {
     {
       blockchainId: number
       status: PostStatus
-      tweetId?: number
+      serviceId?: number
     }[]
   >(
     `${baseURL}/${env.VITE_SC_FARCASTER_POSTS_CONTRACT_ADDRESS}/farcaster/list`,

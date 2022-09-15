@@ -5,13 +5,13 @@ import getPostStatuses from 'helpers/getPostStatuses'
 
 interface PostData {
   status: PostStatus
-  tweetId?: number | undefined
+  serviceId?: number | undefined
 }
 
 export interface LastUserPostData {
   blockchainId: number
   status: PostStatus
-  tweetId?: number
+  serviceId?: number
 }
 
 interface PostStatusStoreType {
@@ -32,10 +32,10 @@ const postStatusStore = proxy<PostStatusStoreType>({
 export async function updateStatuses(ids: number[]) {
   const updatedStatuses = await getPostStatuses(ids)
 
-  for (const { blockchainId, status, tweetId } of updatedStatuses) {
+  for (const { blockchainId, status, serviceId } of updatedStatuses) {
     postStatusStore.statuses[blockchainId] = Promise.resolve({
       status,
-      tweetId,
+      serviceId,
     })
 
     const lastUserPost = postStatusStore.lastUserPost
@@ -52,7 +52,7 @@ export async function updateStatuses(ids: number[]) {
       postStatusStore.lastUserPost[account] = {
         blockchainId,
         status,
-        tweetId,
+        serviceId,
       }
     })
   }
