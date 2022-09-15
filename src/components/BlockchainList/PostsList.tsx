@@ -50,7 +50,7 @@ export function PostListSuspended() {
       dataLength={amountOfLoadedPosts}
       hasMore={amountOfLoadedPosts < postsAmount}
       loader={<LoadingText>Fetching more posts...</LoadingText>}
-      endMessage={<CustomizeCard />}
+      endMessage={postsAmount < 3 ? <CustomizeCard /> : undefined}
     >
       {postsLoaded.map((post, index) => (
         <>
