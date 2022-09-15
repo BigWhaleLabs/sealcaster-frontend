@@ -60,7 +60,7 @@ export default function ({
   derivativeAddress: string
 }) {
   return (
-    <div data-anchor={`#id=${blockchainId}`} style={{ height: 'fit-content' }}>
+    <div data-anchor={`#id=${blockchainId}`}>
       <Card>
         <div className={container}>
           <PostText>{text}</PostText>
