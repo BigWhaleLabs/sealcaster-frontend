@@ -60,31 +60,33 @@ export default function ({
   derivativeAddress: string
 }) {
   return (
-    <Card>
-      <div className={container}>
-        <PostText>{text}</PostText>
-        <div className={postBottom}>
-          <BodyText primary>
-            <span className={postInfo}>
-              <StatusText>Posted by: </StatusText>
-              <Sender sender={sender} />
-              <Delimiter />
-              <LinkText
-                extraSmall
-                title={derivativeAddress}
-                url={getEtherscanAddressUrl(derivativeAddress)}
-              >
-                Etherscan
-              </LinkText>
-              <Delimiter />
-              <Status blockchainId={blockchainId} />
-            </span>
-          </BodyText>
-          <BodyText primary noWrap>
-            <PostTime timestamp={timestamp} />
-          </BodyText>
+    <div data-anchor={`#id=${blockchainId}`} style={{ height: 'fit-content' }}>
+      <Card>
+        <div className={container}>
+          <PostText>{text}</PostText>
+          <div className={postBottom}>
+            <BodyText primary>
+              <span className={postInfo}>
+                <StatusText>Posted by: </StatusText>
+                <Sender sender={sender} />
+                <Delimiter />
+                <LinkText
+                  extraSmall
+                  title={derivativeAddress}
+                  url={getEtherscanAddressUrl(derivativeAddress)}
+                >
+                  Etherscan
+                </LinkText>
+                <Delimiter />
+                <Status blockchainId={blockchainId} />
+              </span>
+            </BodyText>
+            <BodyText primary noWrap>
+              <PostTime timestamp={timestamp} />
+            </BodyText>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   )
 }
