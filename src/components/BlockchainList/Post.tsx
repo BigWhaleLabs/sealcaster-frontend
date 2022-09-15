@@ -1,5 +1,4 @@
 import { BodyText, LinkText, PostText, StatusText } from 'components/ui/Text'
-import { useInView } from 'react-intersection-observer'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
 import PostTime from 'components/BlockchainList/PostTime'
@@ -59,42 +58,34 @@ export default function ({
   sender: string
   derivativeAddress: string
 }) {
-  const { ref, inView } = useInView()
-
   return (
-    <div
-      ref={ref}
-      data-anchor={`#id=${blockchainId}`}
-      style={{ height: inView ? 'fit-content' : '168px' }}
-    >
-      {inView && (
-        <Card>
-          <div className={container}>
-            <PostText>{text}</PostText>
-            <div className={postBottom}>
-              <BodyText primary>
-                <span className={postInfo}>
-                  <StatusText>Posted by: </StatusText>
-                  <Sender sender={sender} />
-                  <Delimiter />
-                  <LinkText
-                    extraSmall
-                    title={derivativeAddress}
-                    url={getEtherscanAddressUrl(derivativeAddress)}
-                  >
-                    Etherscan
-                  </LinkText>
-                  <Delimiter />
-                  <Status blockchainId={blockchainId} />
-                </span>
-              </BodyText>
-              <BodyText primary noWrap>
-                <PostTime timestamp={timestamp} />
-              </BodyText>
-            </div>
+    <div data-anchor={`#id=${blockchainId}`}>
+      <Card>
+        <div className={container}>
+          <PostText>{text}</PostText>
+          <div className={postBottom}>
+            <BodyText primary>
+              <span className={postInfo}>
+                <StatusText>Posted by: </StatusText>
+                <Sender sender={sender} />
+                <Delimiter />
+                <LinkText
+                  extraSmall
+                  title={derivativeAddress}
+                  url={getEtherscanAddressUrl(derivativeAddress)}
+                >
+                  Etherscan
+                </LinkText>
+                <Delimiter />
+                <Status blockchainId={blockchainId} />
+              </span>
+            </BodyText>
+            <BodyText primary noWrap>
+              <PostTime timestamp={timestamp} />
+            </BodyText>
           </div>
-        </Card>
-      )}
+        </div>
+      </Card>
     </div>
   )
 }

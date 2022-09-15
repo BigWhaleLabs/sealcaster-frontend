@@ -289,14 +289,18 @@ export function StatusText({
   )
 }
 
-const postText = classnames(
-  fontFamily('font-primary'),
-  fontSize('text-base'),
-  lineHeight('leading-6'),
-  whitespace('whitespace-pre-wrap')
-)
-export function PostText({ children }: ChildrenProp) {
-  return <p className={postText}>{children}</p>
+const postText = (small?: boolean) =>
+  classnames(
+    fontFamily('font-primary'),
+    fontSize({ 'text-sm': small }),
+    lineHeight(small ? 'leading-5' : 'leading-6'),
+    whitespace('whitespace-pre-wrap')
+  )
+export function PostText({
+  small,
+  children,
+}: ChildrenProp & { small?: boolean }) {
+  return <p className={postText(small)}>{children}</p>
 }
 
 const footerLink = (active?: boolean) =>
@@ -339,7 +343,8 @@ export function FooterLink({
 const cardSubheaderContainer = classnames(
   fontWeight('font-bold'),
   fontFamily('font-primary'),
-  fontSize('text-lg')
+  fontSize('text-lg'),
+  lineHeight('leading-7')
 )
 export function CardSubheader({ children }: ChildrenProp) {
   return <p className={cardSubheaderContainer}>{children}</p>

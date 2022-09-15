@@ -1,6 +1,7 @@
 import { BodyText, LoadingText } from 'components/ui/Text'
 import { Suspense, useState } from 'preact/compat'
 import { useSnapshot } from 'valtio'
+import CustomizeCard from 'components/BlockchainList/CustomizeCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import NoPosts from 'components/BlockchainList/NoPosts'
 import Post from 'components/BlockchainList/Post'
@@ -50,16 +51,20 @@ export function PostListSuspended() {
       dataLength={amountOfLoadedPosts}
       hasMore={amountOfLoadedPosts < postsAmount}
       loader={<LoadingText>Fetching more posts...</LoadingText>}
+      endMessage={<CustomizeCard />}
     >
-      {postsLoaded.map((post) => (
-        <Post
-          key={post.id}
-          blockchainId={Number(post.id)}
-          timestamp={Number(post.timestamp)}
-          text={post.post}
-          sender={post.sender}
-          derivativeAddress={post.derivativeAddress}
-        />
+      {postsLoaded.map((post, index) => (
+        <>
+          <Post
+            key={post.id}
+            blockchainId={Number(post.id)}
+            timestamp={Number(post.timestamp)}
+            text={post.post}
+            sender={post.sender}
+            derivativeAddress={post.derivativeAddress}
+          />
+          {index === 2 && <CustomizeCard />}
+        </>
       ))}
     </InfiniteScroll>
   ) : (
