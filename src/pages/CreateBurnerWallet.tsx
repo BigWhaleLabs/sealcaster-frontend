@@ -56,41 +56,43 @@ export default function () {
   const { account } = useSnapshot(walletStore)
   const { privateKey } = useSnapshot(BurnerWalletStore)
   const [username, setUsername] = useState('')
-  const [hasError, setHasError] = useState('')
+  const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<string | undefined>()
 
   const generate = async () => {
-    setHasError('')
-    if (!username.length) return setHasError('Username cannot be empty')
+    setError('')
+    if (!username.length) return setError('Username cannot be empty')
     setLoading(true)
 
     try {
       await walletStore.connect(true)
-      if (!walletStore.account) return setHasError('Connect account!')
-
+      if (!walletStore.account) return setError('Please, connect the wallet')
       await BurnerWalletStore.generateBurnerWallet(
         username,
         walletStore.account,
         setStatus
       )
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const message =
+      setError(
+        'We could not verify this username with the wallet you have connected. Please review them and try again.'
+      )
+      if (axios.isAxiosError(error))
+        setError(
           (error as AxiosError<{ message: string }>).response?.data.message ||
-          'Verification failed'
-        setHasError(message)
-      }
+            'Verification failed'
+        )
 
       console.log('error', error)
     } finally {
+      setStatus(undefined)
       setLoading(false)
     }
   }
 
   useEffect(() => {
     setStatus('')
-    setHasError('')
+    setError('')
   }, [account])
 
   const hintText =
@@ -135,7 +137,7 @@ export default function () {
           <TextInput
             withAtSign
             value={username}
-            errorMessage={hasError}
+            errorMessage={error}
             disabled={loading}
             onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
             onKeyDown={(event) => event.code === 'Enter' && generate()}
