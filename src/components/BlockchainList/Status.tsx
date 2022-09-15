@@ -2,11 +2,11 @@ import { PostStatus, PostStatusText } from 'models/PostStatus'
 import { StatusText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
+import classNamesToString from 'helpers/classNamesToString'
 import classnames, { alignItems, display } from 'classnames/tailwind'
 import postIdsStatuses from 'stores/PostIdsStatuses'
 
-const statusContainer = () =>
-  classnames(display('flex'), alignItems('items-center'))
+const statusContainer = classnames(display('flex'), alignItems('items-center'))
 
 const statusColor = (status: PostStatus) => {
   switch (status) {
@@ -26,7 +26,7 @@ export function StatusSuspended({ blockchainId }: { blockchainId: number }) {
   const status = statuses[blockchainId]?.status
 
   return (
-    <a href={`#&id=${blockchainId}`} className={statusContainer()}>
+    <a href={`#&id=${blockchainId}`} className={statusContainer}>
       <StatusText color={statusColor(status || PostStatus.pending)}>
         {PostStatusText[status] || 'Loading...'}
       </StatusText>
@@ -38,9 +38,9 @@ export default function ({ blockchainId }: { blockchainId: number }) {
   return (
     <Suspense
       fallback={
-        <div className={statusContainer()}>
+        <div className={statusContainer}>
           <StatusText color={statusColor(PostStatus.pending)}>
-            <span>Loading...</span>
+            <span className={classNamesToString('dots-loading')}>Loading</span>
           </StatusText>
         </div>
       }

@@ -137,6 +137,28 @@ circle {
     rescale 3.5s ease-in-out infinite;
 }
 
+.dots-loading::after {
+  content: '';
+  animation: dots 3s linear infinite;
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60% {
+    content: '...';
+  }
+  90%,
+  100% {
+    content: '';
+  }
+}
+
 @keyframes spin-background {
   0%,
   100% {
@@ -154,4 +176,9 @@ circle {
   50% {
     transform: scale(0.85);
   }
+}
+
+/* Wallet select menu for dark and light theme */
+.web3modal-modal-lightbox {
+  z-index: 100 !important;
 }

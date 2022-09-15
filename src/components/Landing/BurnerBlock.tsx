@@ -100,17 +100,22 @@ export default function () {
         <>
           <div className={space('space-y-4')}>
             <SubHeaderText>Already have a burner?</SubHeaderText>
-            <div
-              className={buttonWrapper}
-              onClick={async () => {
-                await walletStore.connect(true)
-                if ((await walletStore.isBurnedWallet) && location !== '/cast')
-                  setLocation('/cast')
-              }}
-            >
+            <div className={buttonWrapper}>
               <GradientBorder>
-                <Button gradientFont type="secondary" small>
-                  Connect Burner
+                <Button
+                  gradientFont
+                  type="secondary"
+                  small
+                  onClick={async () => {
+                    await walletStore.connect(true)
+                    if (
+                      (await walletStore.isBurnedWallet) &&
+                      location !== '/cast'
+                    )
+                      setLocation('/cast')
+                  }}
+                >
+                  Connect burner
                 </Button>
               </GradientBorder>
             </div>
