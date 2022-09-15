@@ -1,5 +1,6 @@
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { displayFrom } from 'helpers/visibilityClassnames'
+import { handleError } from '@big-whale-labs/frontend-utils'
 import { margin, space } from 'classnames/tailwind'
 import { useLocation } from 'wouter'
 import { useState } from 'preact/hooks'
@@ -14,10 +15,9 @@ import useAccount from 'hooks/useAccount'
 export default function () {
   const [location, setLocation] = useLocation()
   const { isBurned } = useAccount()
-
+  const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
   const [suffix, setSuffix] = useState('')
-  const [loading, setLoading] = useState(false)
 
   const maxLength = 280 - suffix.length
 
@@ -25,7 +25,7 @@ export default function () {
 
   async function createPost() {
     try {
-      setLoading(true)
+      setIsLoading(true)
       const result = await PostStore.createPost(text)
 
       const posts = await PostStore.posts
@@ -43,9 +43,11 @@ export default function () {
           ...posts,
         ])
       }
-    } finally {
-      setLoading(false)
       setText('')
+    } catch (error) {
+      handleError(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -56,6 +58,7 @@ export default function () {
         <div className={space('md:space-y-2', 'space-y-4')}>
           <TextArea
             text={text}
+            disabled={isLoading}
             placeholder="Write something here..."
             onTextChange={setText}
             setSuffix={setSuffix}
@@ -66,7 +69,7 @@ export default function () {
         <div className={displayFrom('md')}>
           <Button
             disabled={!text}
-            loading={loading}
+            loading={isLoading}
             type="primary"
             onClick={createPost}
           >
