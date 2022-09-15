@@ -10,10 +10,11 @@ import { proxy } from 'valtio'
 import ProofResult from 'models/ProofResult'
 import buildFarcasterProof from 'helpers/buildFarcasterProof'
 import createFarcasterBadge from 'helpers/createFarcasterBadge'
+import defaultProvider from 'helpers/providers/defaultProvider'
 import env from 'helpers/env'
 import getNullifierMessage from 'helpers/getNullifierMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
-import httpRelayProvider from 'helpers/providers/httpRelayProvider'
+import relayProvider from 'helpers/providers/relayProvider'
 import walletStore from 'stores/WalletStore'
 
 class BurnerWalletStore extends PersistableStore {
@@ -35,7 +36,7 @@ class BurnerWalletStore extends PersistableStore {
       ? new Wallet(this.privateKey)
       : Wallet.createRandom()
 
-    const gsnProvider = await httpRelayProvider()
+    const gsnProvider = await relayProvider(defaultProvider)
     gsnProvider.addAccount(wallet.privateKey)
 
     const etherProvider = new Web3Provider(

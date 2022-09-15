@@ -28,7 +28,7 @@ const navbar = (visible?: boolean, withoutRightBlock?: boolean) =>
     display('flex'),
     alignItems('items-center'),
     justifyContent(withoutRightBlock ? 'sm:justify-center' : 'justify-between'),
-    padding('py-4', 'sm:py-6', 'px-6', 'sm:px-24'),
+    padding('py-4', 'sm:py-6', 'px-6', 'lg:px-24'),
     space('xs:space-x-4', 'sm:space-x-9', 'lg:space-x-0'),
     zIndex('z-50'),
     backgroundColor(visible ? 'bg-primary-dark' : 'bg-transparent'),
