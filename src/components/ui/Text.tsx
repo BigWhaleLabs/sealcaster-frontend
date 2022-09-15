@@ -212,8 +212,7 @@ const headerText = (
         'text-2xl': size === 'medium',
         'text-xl': size === 'small',
       },
-      size === 'small' ? 'xs:text-2xl' : 'xs:text-3xl',
-      size === 'small' ? 'sm:text-2xl' : 'sm:text-4xl'
+      size === 'small' ? 'xs:text-2xl' : 'xs:text-3.5xl'
     ),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
@@ -346,8 +345,13 @@ export function CardSubheader({ children }: ChildrenProp) {
   return <p className={cardSubheaderContainer}>{children}</p>
 }
 
-export function SubHeaderText({ children }: ChildrenProp) {
-  return <p className={fontFamily('font-primary')}>{children}</p>
+export function SubHeaderText({
+  children,
+  defaultFont,
+}: ChildrenProp & { defaultFont?: boolean }) {
+  return (
+    <p className={fontFamily({ 'font-primary': !defaultFont })}>{children}</p>
+  )
 }
 
 const logoText = classnames(
