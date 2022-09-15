@@ -135,7 +135,7 @@ export default function () {
           <TextInput
             withAtSign
             value={username}
-            isError={!!hasError.length}
+            errorMessage={hasError}
             disabled={loading}
             onChange={(e) => setUsername((e.target as HTMLInputElement).value)}
             onKeyDown={(event) => event.code === 'Enter' && generate()}
@@ -164,11 +164,6 @@ export default function () {
               </AccentText>
             )}
           </div>
-          {hasError && (
-            <AccentText small color="text-error">
-              {hasError}
-            </AccentText>
-          )}
         </div>
       )}
     </div>
