@@ -1,6 +1,8 @@
+import { PostStatus } from 'models/PostStatus'
+import { useSnapshot } from 'valtio'
 import Approved from 'components/ProcessingCard/Approved'
-import CastStatus from 'models/CastStatus'
 import Pending from 'components/ProcessingCard/Pending'
+import PostIdsStatuses from 'stores/PostIdsStatuses'
 import Rejected from 'components/ProcessingCard/Rejected'
 import classnames, {
   backgroundColor,
@@ -8,6 +10,7 @@ import classnames, {
   padding,
   width,
 } from 'classnames/tailwind'
+import walletStore from 'stores/WalletStore'
 
 const cardWrapper = classnames(
   width('w-full'),
@@ -21,13 +24,13 @@ const CastState = ({
   status,
   castId,
 }: {
-  status: CastStatus
+  status: PostStatus
   castId?: string
 }) => {
   switch (status) {
-    case CastStatus.approved:
+    case PostStatus.approved:
       return <Approved id={castId} />
-    case CastStatus.rejected:
+    case PostStatus.rejected:
       return <Rejected id={castId} />
     default:
       return <Pending />
@@ -35,9 +38,16 @@ const CastState = ({
 }
 
 export default function () {
+  const { lastUserPost } = useSnapshot(PostIdsStatuses)
+  const { account } = useSnapshot(walletStore)
+
+  if (!account || !lastUserPost || !lastUserPost[account]) return null
+
+  const lastUserPostData = lastUserPost[account]
+
   return (
     <div className={cardWrapper}>
-      <CastState status={CastStatus.rejected} castId="123" />
+      <CastState status={lastUserPostData.status} castId="123" />
     </div>
   )
 }

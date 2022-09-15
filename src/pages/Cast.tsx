@@ -1,16 +1,21 @@
+import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { displayFrom } from 'helpers/visibilityClassnames'
+import { gap, margin, space } from 'classnames/tailwind'
 import { handleError } from '@big-whale-labs/frontend-utils'
-import { margin, space } from 'classnames/tailwind'
 import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
 import Button from 'components/ui/Button'
 import CastHeader from 'components/Cast/CastHeader'
+import PostIdsStatuses from 'stores/PostIdsStatuses'
+import PostProcessing from 'components/ProcessingCard'
 import PostStore from 'stores/PostStore'
 import TextArea from 'components/ui/TextArea'
 import TextareaInfo from 'components/Cast/TextareaInfo'
+import useAccount from 'hooks/useAccount'
 
 export default function () {
+  const { account } = useAccount()
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
   const [suffix, setSuffix] = useState('')
@@ -19,6 +24,8 @@ export default function () {
 
   async function createPost() {
     try {
+      if (!account) return
+
       setIsLoading(true)
       const result = await PostStore.createPost(text)
 
@@ -36,6 +43,14 @@ export default function () {
           } as PostStructOutput,
           ...posts,
         ])
+
+        PostIdsStatuses.lastUserPost = {
+          [account]: {
+            blockchainId: id.toNumber(),
+            status: PostStatus.pending,
+          },
+          ...PostIdsStatuses.lastUserPost,
+        }
       }
       setText('')
     } catch (error) {
@@ -47,32 +62,35 @@ export default function () {
 
   return (
     <>
-      <div className={space('space-y-6')}>
-        <CastHeader />
-        <div className={space('md:space-y-2', 'space-y-4')}>
-          <TextArea
-            text={text}
-            disabled={isLoading}
-            placeholder="Write something here..."
-            onTextChange={setText}
-            setSuffix={setSuffix}
-            maxLength={maxLength}
-          />
-          <TextareaInfo />
+      <div className={gap('gap-y-6', 'sm:gap-y-12')}>
+        <PostProcessing />
+        <div className={space('space-y-6')}>
+          <CastHeader />
+          <div className={space('md:space-y-2', 'space-y-4')}>
+            <TextArea
+              text={text}
+              disabled={isLoading}
+              placeholder="Write something here..."
+              onTextChange={setText}
+              setSuffix={setSuffix}
+              maxLength={maxLength}
+            />
+            <TextareaInfo />
+          </div>
+          <div className={displayFrom('md')}>
+            <Button
+              disabled={!text}
+              loading={isLoading}
+              type="primary"
+              onClick={createPost}
+            >
+              Cast
+            </Button>
+          </div>
         </div>
-        <div className={displayFrom('md')}>
-          <Button
-            disabled={!text}
-            loading={isLoading}
-            type="primary"
-            onClick={createPost}
-          >
-            Cast
-          </Button>
+        <div className={margin('mt-24')}>
+          <BlockchainList />
         </div>
-      </div>
-      <div className={margin('mt-24')}>
-        <BlockchainList />
       </div>
     </>
   )
