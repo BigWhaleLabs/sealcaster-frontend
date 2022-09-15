@@ -50,7 +50,7 @@ export function PostListSuspended() {
       dataLength={amountOfLoadedPosts}
       hasMore={amountOfLoadedPosts < postsAmount}
       loader={<LoadingText>Fetching more posts...</LoadingText>}
-      endMessage={postsLoaded.length > 7 ? <CustomizeCard /> : undefined}
+      endMessage={postsAmount < 3 ? <CustomizeCard /> : undefined}
     >
       {postsLoaded.map((post, index) => (
         <>
@@ -62,7 +62,7 @@ export function PostListSuspended() {
             sender={post.sender}
             derivativeAddress={post.derivativeAddress}
           />
-          {index === 2 && postsLoaded.length !== index + 1 && <CustomizeCard />}
+          {index === 2 && <CustomizeCard />}
         </>
       ))}
     </InfiniteScroll>
