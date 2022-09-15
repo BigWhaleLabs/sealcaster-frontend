@@ -13,7 +13,7 @@ import createFarcasterBadge from 'helpers/createFarcasterBadge'
 import env from 'helpers/env'
 import getNullifierMessage from 'helpers/getNullifierMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
-import relayProvider from 'helpers/providers/relayProvider'
+import httpRelayProvider from 'helpers/providers/httpRelayProvider'
 import walletStore from 'stores/WalletStore'
 
 class BurnerWalletStore extends PersistableStore {
@@ -26,9 +26,8 @@ class BurnerWalletStore extends PersistableStore {
   }
 
   async getSigner() {
-    if (!this.privateKey && !walletStore.isBurnedWallet) return
-    if (this.privateKey) return (await this.privateSigner()).signer
-    return (await walletStore.getProvider()).getSigner(0)
+    if (!this.privateKey) return
+    return (await this.privateSigner()).signer
   }
 
   async privateSigner() {
@@ -36,7 +35,7 @@ class BurnerWalletStore extends PersistableStore {
       ? new Wallet(this.privateKey)
       : Wallet.createRandom()
 
-    const gsnProvider = await relayProvider()
+    const gsnProvider = await httpRelayProvider()
     gsnProvider.addAccount(wallet.privateKey)
 
     const etherProvider = new Web3Provider(

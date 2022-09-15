@@ -8,6 +8,7 @@ import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
 import parsePostLogData from 'helpers/parsePostLogData'
 import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
+import walletStore from 'stores/WalletStore'
 
 interface PostStoreType {
   limit: number
@@ -28,7 +29,11 @@ const PostStore = proxy<PostStoreType>({
   }),
   selectedToken: undefined,
   createPost: async (text: string) => {
-    const signer = await BurnerWalletStore.getSigner()
+    let signer = await BurnerWalletStore.getSigner()
+
+    if (!signer && walletStore.isBurnedWallet) {
+      signer = await walletStore.getSigner()
+    }
 
     if (!signer) throw new Error('Not found burner wallet!')
 
@@ -36,6 +41,7 @@ const PostStore = proxy<PostStoreType>({
       env.VITE_SC_FARCASTER_POSTS_CONTRACT_ADDRESS,
       signer
     )
+
     const transaction = await contract.savePost(text, 'farcaster')
     const result = await transaction.wait()
 

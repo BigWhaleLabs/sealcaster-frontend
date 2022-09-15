@@ -1,13 +1,15 @@
-import { Eip1193Bridge } from '@ethersproject/experimental'
+import { ETH_RPC } from '@big-whale-labs/constants'
 import { RelayProvider } from '@opengsn/provider'
-import { Web3Provider } from '@ethersproject/providers'
-import { WrapBridge } from '@opengsn/provider/dist/WrapContract'
+import HttpProvider from 'web3-providers-http'
 import env from 'helpers/env'
 
-export default function relayProvider(provider: Web3Provider) {
+export default function () {
+  // @ts-ignore:next-line
+  const provider = new HttpProvider(ETH_RPC)
   return RelayProvider.newProvider({
-    provider: new WrapBridge(new Eip1193Bridge(provider.getSigner(), provider)),
+    provider,
     config: {
+      minMaxPriorityFeePerGas: 11000000000,
       paymasterAddress: env.VITE_GSN_PAYMASTER_CONTRACT_ADDRESS,
       preferredRelays: [env.VITE_GSN_SC_RELAY],
       blacklistedRelays: ['https://goerli.v3.opengsn.org/v3'],

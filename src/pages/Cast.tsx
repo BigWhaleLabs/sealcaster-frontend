@@ -17,29 +17,34 @@ export default function () {
 
   const [text, setText] = useState('')
   const [suffix, setSuffix] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const maxLength = 280 - suffix.length
 
   if (!isBurned) setLocation('/')
 
   async function createPost() {
-    const result = await PostStore.createPost(text)
+    try {
+      setLoading(true)
+      const result = await PostStore.createPost(text)
 
-    const posts = await PostStore.posts
-    const numberOfPosts = await PostStore.postsAmount
-    PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
-    for (const { id, post, derivativeAddress, sender, timestamp } of result) {
-      PostStore.posts = Promise.resolve([
-        {
-          id,
-          post,
-          derivativeAddress,
-          sender,
-          timestamp,
-        } as PostStructOutput,
-        ...posts,
-      ])
-
+      const posts = await PostStore.posts
+      const numberOfPosts = await PostStore.postsAmount
+      PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
+      for (const { id, post, derivativeAddress, sender, timestamp } of result) {
+        PostStore.posts = Promise.resolve([
+          {
+            id,
+            post,
+            derivativeAddress,
+            sender,
+            timestamp,
+          } as PostStructOutput,
+          ...posts,
+        ])
+      }
+    } finally {
+      setLoading(false)
       setText('')
     }
   }
@@ -59,7 +64,12 @@ export default function () {
           <TextareaInfo />
         </div>
         <div className={displayFrom('md')}>
-          <Button disabled={!text} type="primary" onClick={createPost}>
+          <Button
+            disabled={!text}
+            loading={loading}
+            type="primary"
+            onClick={createPost}
+          >
             Cast
           </Button>
         </div>
