@@ -50,9 +50,10 @@ export function PostListSuspended() {
       dataLength={amountOfLoadedPosts}
       hasMore={amountOfLoadedPosts < postsAmount}
       loader={<LoadingText>Fetching more posts...</LoadingText>}
+      endMessage={<CustomizeCard />}
     >
       {postsLoaded.map((post, index) => (
-        <div className={scrollContainer}>
+        <>
           <Post
             key={post.id}
             blockchainId={Number(post.id)}
@@ -61,12 +62,8 @@ export function PostListSuspended() {
             sender={post.sender}
             derivativeAddress={post.derivativeAddress}
           />
-          {postsAmount < 3 && postsAmount === index - 1 ? (
-            <CustomizeCard />
-          ) : index === 2 ? (
-            <CustomizeCard />
-          ) : undefined}
-        </div>
+          {index === 2 && <CustomizeCard />}
+        </>
       ))}
     </InfiniteScroll>
   ) : (
