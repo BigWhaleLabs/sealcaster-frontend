@@ -1,10 +1,9 @@
 export default function ({ small }: { small?: boolean }) {
   return small ? (
     <svg
-      width="auto"
+      width="fit-content"
       height="auto"
-      viewBox="0 0 348 111"
-      fill="none"
+      viewBox="0 0 348 95"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g filter="url(#filter0_d_57_17099)">
@@ -647,7 +646,6 @@ export default function ({ small }: { small?: boolean }) {
       width="492"
       height="111"
       viewBox="0 0 492 111"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g filter="url(#filter0_d_71_12778)">
