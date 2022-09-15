@@ -14,16 +14,18 @@ let provider: Web3Provider
 
 class WalletStore extends PersistableStore {
   account?: string
-  isBurnedWallet?: boolean
+  isBurnedWallet?: Promise<boolean>
   walletLoading = false
   needNetworkChange = false
   walletsToNotifiedOfBeingDoxxed = {} as {
     [address: string]: boolean
   }
 
-  async changeAccount(account?: string) {
-    this.isBurnedWallet = account ? await hasFarcasterBadge(account) : false
+  changeAccount(account?: string) {
     this.account = account
+    this.isBurnedWallet = account
+      ? hasFarcasterBadge(account)
+      : Promise.resolve(false)
   }
 
   replacer = (key: string, value: unknown) => {
@@ -32,6 +34,7 @@ class WalletStore extends PersistableStore {
       'cachedProvider',
       'provider',
       'walletLoading',
+      'isBurnedWallet',
     ]
     return disallowList.includes(key) ? undefined : value
   }

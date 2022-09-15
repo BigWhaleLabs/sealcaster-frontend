@@ -1,4 +1,5 @@
 import { Route, Router } from 'wouter'
+import { Suspense } from 'preact/compat'
 import { ToastContainer } from 'react-toastify'
 import Cast from 'pages/Cast'
 import CreateBurnerWallet from 'pages/CreateBurnerWallet'
@@ -7,6 +8,7 @@ import Landing from 'pages/Landing'
 import Logo from 'icons/Logo'
 import Navbar from 'components/navbar/Navbar'
 import Privacy from 'pages/Privacy'
+import ProtectedRoute from 'components/ui/ProtectedRoute'
 import ScrollToTop from 'components/ui/ScrollToTop'
 import Terms from 'pages/Terms'
 import classnames, {
@@ -30,25 +32,45 @@ const bodyContainer = classnames(
   margin('mx-4', 'mb-auto', 'body:mx-auto')
 )
 
-export default function () {
+function NavBarSuspended() {
   const { account } = useAccount()
 
+  return (
+    <Navbar
+      logo={<Logo />}
+      account={account}
+      needNetworkChange={false}
+      logoText="SealCaster"
+    />
+  )
+}
+
+export default function () {
   return (
     <Router>
       <ScrollToTop>
         <div className={pageContainer}>
-          <Navbar
-            logo={<Logo />}
-            account={account}
-            needNetworkChange={false}
-            logoText="SealCaster"
-          />
+          <Suspense
+            fallback={
+              <Navbar
+                logo={<Logo />}
+                needNetworkChange={false}
+                logoText="SealCaster"
+              />
+            }
+          >
+            <NavBarSuspended />
+          </Suspense>
           <div className={bodyContainer}>
             <Route path="/">
               <Landing />
             </Route>
             <Route path="/cast">
-              <Cast />
+              <Suspense fallback="Loading...">
+                <ProtectedRoute>
+                  <Cast />
+                </ProtectedRoute>
+              </Suspense>
             </Route>
             <Route path="/terms">
               <Terms />

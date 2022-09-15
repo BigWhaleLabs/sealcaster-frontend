@@ -31,7 +31,7 @@ const PostStore = proxy<PostStoreType>({
   createPost: async (text: string) => {
     let signer = await BurnerWalletStore.getSigner()
 
-    if (!signer && walletStore.isBurnedWallet) {
+    if (!signer && (await walletStore.isBurnedWallet)) {
       signer = await walletStore.getSigner()
     }
 

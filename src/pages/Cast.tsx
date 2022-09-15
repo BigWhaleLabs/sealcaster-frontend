@@ -2,7 +2,6 @@ import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { handleError } from '@big-whale-labs/frontend-utils'
 import { margin, space } from 'classnames/tailwind'
-import { useLocation } from 'wouter'
 import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
 import Button from 'components/ui/Button'
@@ -10,18 +9,13 @@ import CastHeader from 'components/Cast/CastHeader'
 import PostStore from 'stores/PostStore'
 import TextArea from 'components/ui/TextArea'
 import TextareaInfo from 'components/Cast/TextareaInfo'
-import useAccount from 'hooks/useAccount'
 
 export default function () {
-  const [location, setLocation] = useLocation()
-  const { isBurned } = useAccount()
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
   const [suffix, setSuffix] = useState('')
 
   const maxLength = 280 - suffix.length
-
-  if (!isBurned) setLocation('/')
 
   async function createPost() {
     try {

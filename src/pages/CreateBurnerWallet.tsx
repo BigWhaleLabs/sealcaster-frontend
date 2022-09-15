@@ -21,12 +21,6 @@ import classnames, {
 } from 'classnames/tailwind'
 import walletStore from 'stores/WalletStore'
 
-enum Scenes {
-  'Landing',
-  'Error',
-  'CastPost',
-}
-
 const wrapper = classnames(
   display('flex'),
   flexDirection('flex-col'),
@@ -60,7 +54,6 @@ const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
 
 export default function () {
   const { privateKey } = useSnapshot(BurnerWalletStore)
-  const [state, setState] = useState<Scenes>(Scenes.Landing)
   const [username, setUsername] = useState('')
   const [hasError, setHasError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -77,7 +70,8 @@ export default function () {
 
       await BurnerWalletStore.generateBurnerWallet(
         username,
-        walletStore.account
+        walletStore.account,
+        setStatus
       )
     } catch (error) {
       if (axios.isAxiosError(error)) {
