@@ -66,7 +66,7 @@ export default function () {
     setLoading(true)
 
     try {
-      await walletStore.connect(true)
+      if (!walletStore.account) await walletStore.connect(true)
       if (!walletStore.account) return setError('Please, connect the wallet')
       await BurnerWalletStore.generateBurnerWallet(
         username,
