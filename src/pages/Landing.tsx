@@ -1,4 +1,3 @@
-import { Suspense } from 'preact/compat'
 import BlockchainList from 'components/BlockchainList'
 import BurnerBlock from 'components/Landing/BurnerBlock'
 import HowItWorks from 'components/HowItWorks'
@@ -19,9 +18,7 @@ const blocksWrapper = classnames(
 export default function () {
   return (
     <div className={blocksWrapper}>
-      <Suspense fallback="Loading">
-        <BurnerBlock />
-      </Suspense>
+      <BurnerBlock />
       <HowItWorks />
       <BlockchainList />
     </div>

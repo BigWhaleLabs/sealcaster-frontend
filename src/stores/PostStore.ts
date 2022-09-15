@@ -18,7 +18,7 @@ interface PostStoreType {
   createPost: (text: string) => Promise<Result[]>
 }
 
-const limit = 5
+const limit = 100
 
 const PostStore = proxy<PostStoreType>({
   limit,

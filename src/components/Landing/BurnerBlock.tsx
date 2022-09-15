@@ -1,18 +1,18 @@
-import { HeaderText, SubHeaderText } from 'components/ui/Text'
 import { Link, useLocation } from 'wouter'
+import { SubHeaderText } from 'components/ui/Text'
+import { Suspense } from 'preact/compat'
+import BurnerNotConnected from 'components/Landing/BurnerNotConnected'
+import BurnerNotCorrect from 'components/Landing/BurnerNotCorrect'
 import Button from 'components/ui/Button'
 import Dots from 'icons/Dots'
 import GradientBorder from 'components/ui/GradientBorder'
-import SealGrid from 'icons/SealGrid'
-import SealSad from 'icons/SealSad'
+import Loading from 'icons/Loading'
 import classnames, {
   alignItems,
   display,
   flexDirection,
   justifyContent,
   space,
-  textAlign,
-  width,
 } from 'classnames/tailwind'
 import useAccount from 'hooks/useAccount'
 import walletStore from 'stores/WalletStore'
@@ -29,53 +29,13 @@ const buttonWrapper = classnames(
   justifyContent('justify-center')
 )
 
-const sealGridWrapper = classnames(
-  display('flex'),
-  justifyContent('justify-center'),
-  width('w-60', 'sm:w-72', 'md:w-seal-grid')
-)
-
-const headerTextWrapper = classnames(
-  space('space-y-2'),
-  textAlign('text-center')
-)
-
-export default function () {
+function BurnBlockSuspended() {
   const { account, isBurned, hasPrivate } = useAccount()
   const [location, setLocation] = useLocation()
 
   return (
-    <div className={wrapper}>
-      {account && !isBurned ? (
-        <>
-          <div className={sealGridWrapper}>
-            <SealSad />
-          </div>
-          <div className={headerTextWrapper}>
-            <HeaderText center extraLeading size="large">
-              It looks like you connected a wallet without the correct zk badge
-            </HeaderText>
-            <SubHeaderText defaultFont>
-              Create a burner wallet with the Farcaster zk badge to continue, or
-              reconnect with the correct burner wallet.
-            </SubHeaderText>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className={sealGridWrapper}>
-            <SealGrid />
-          </div>
-          <div className={headerTextWrapper}>
-            <HeaderText center extraLeading size="large">
-              Cast anonymously on Farcaster
-            </HeaderText>
-            <SubHeaderText>
-              Protect your identity by creating a burner wallet.
-            </SubHeaderText>
-          </div>
-        </>
-      )}
+    <>
+      {account && !isBurned ? <BurnerNotCorrect /> : <BurnerNotConnected />}
       {!hasPrivate && (
         <Link href="/create">
           <Button type="primary">Create Burner Wallet</Button>
@@ -83,7 +43,7 @@ export default function () {
       )}
       {(!account || isBurned) && <Dots />}
       {account ? (
-        isBurned ? (
+        isBurned && (
           <>
             <Link href="/cast">
               <div className={buttonWrapper}>
@@ -95,33 +55,48 @@ export default function () {
               </div>
             </Link>
           </>
-        ) : null
+        )
       ) : (
-        <>
-          <div className={space('space-y-4')}>
-            <SubHeaderText>Already have a burner?</SubHeaderText>
-            <div className={buttonWrapper}>
-              <GradientBorder>
-                <Button
-                  gradientFont
-                  type="secondary"
-                  small
-                  onClick={async () => {
-                    await walletStore.connect(true)
-                    if (
-                      (await walletStore.isBurnedWallet) &&
-                      location !== '/cast'
-                    )
-                      setLocation('/cast')
-                  }}
-                >
-                  Connect burner
-                </Button>
-              </GradientBorder>
-            </div>
+        <div className={space('space-y-4')}>
+          <SubHeaderText>Already have a burner?</SubHeaderText>
+          <div className={buttonWrapper}>
+            <GradientBorder>
+              <Button
+                gradientFont
+                type="secondary"
+                small
+                onClick={async () => {
+                  await walletStore.connect(true)
+                  if (
+                    (await walletStore.isBurnedWallet) &&
+                    location !== '/cast'
+                  )
+                    setLocation('/cast')
+                }}
+              >
+                Connect burner
+              </Button>
+            </GradientBorder>
           </div>
-        </>
+        </div>
       )}
+    </>
+  )
+}
+
+export default function () {
+  return (
+    <div className={wrapper}>
+      <Suspense
+        fallback={
+          <>
+            <BurnerNotConnected />
+            <Loading />
+          </>
+        }
+      >
+        <BurnBlockSuspended />
+      </Suspense>
     </div>
   )
 }
