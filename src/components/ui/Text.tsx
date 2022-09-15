@@ -212,8 +212,7 @@ const headerText = (
         'text-2xl': size === 'medium',
         'text-xl': size === 'small',
       },
-      size === 'small' ? 'xs:text-2xl' : 'xs:text-3.5xl',
-      size === 'small' ? 'sm:text-2xl' : 'sm:text-4xl'
+      size === 'small' ? 'xs:text-2xl' : 'xs:text-3.5xl'
     ),
     textColor(accent ? 'text-accent' : 'text-formal-accent'),
     extraLeading
