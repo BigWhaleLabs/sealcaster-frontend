@@ -43,17 +43,15 @@ function BurnBlockSuspended() {
       {(!account || isBurned) && <Dots />}
       {account ? (
         isBurned && (
-          <>
-            <Link href="/cast">
-              <div className={buttonWrapper}>
-                <GradientBorder>
-                  <Button gradientFont type="secondary" small>
-                    Create cast
-                  </Button>
-                </GradientBorder>
-              </div>
-            </Link>
-          </>
+          <Link href="/cast">
+            <div className={buttonWrapper}>
+              <GradientBorder>
+                <Button gradientFont type="secondary" small>
+                  Create cast
+                </Button>
+              </GradientBorder>
+            </div>
+          </Link>
         )
       ) : (
         <div className={space('space-y-4')}>
