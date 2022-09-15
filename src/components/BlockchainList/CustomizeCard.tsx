@@ -1,7 +1,6 @@
 import { AccentText, HeaderText, PostText } from 'components/ui/Text'
 import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
-import ExternalLink from 'components/ui/ExternalLink'
 import classnames, {
   alignItems,
   display,
