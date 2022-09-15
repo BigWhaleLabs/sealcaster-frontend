@@ -1,8 +1,7 @@
 import { Link, useLocation } from 'wouter'
 import { SubHeaderText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
-import BurnerNotConnected from 'components/Landing/BurnerNotConnected'
-import BurnerNotCorrect from 'components/Landing/BurnerNotCorrect'
+import BurnerStatus from 'components/Landing/BurnerStatus'
 import Button from 'components/ui/Button'
 import Dots from 'icons/Dots'
 import GradientBorder from 'components/ui/GradientBorder'
@@ -35,7 +34,7 @@ function BurnBlockSuspended() {
 
   return (
     <>
-      {account && !isBurned ? <BurnerNotCorrect /> : <BurnerNotConnected />}
+      <BurnerStatus account={account} isBurned={isBurned} />
       {!hasPrivate && (
         <Link href="/create">
           <Button type="primary">Create Burner Wallet</Button>
@@ -90,7 +89,7 @@ export default function () {
       <Suspense
         fallback={
           <>
-            <BurnerNotConnected />
+            <BurnerStatus />
             <Loading />
           </>
         }
