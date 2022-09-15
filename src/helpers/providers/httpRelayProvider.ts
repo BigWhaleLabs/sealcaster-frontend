@@ -4,8 +4,8 @@ import HttpProvider from 'web3-providers-http'
 import env from 'helpers/env'
 
 export default function () {
-  // @ts-ignore:next-line
   const provider = new HttpProvider(ETH_RPC)
+
   return RelayProvider.newProvider({
     provider,
     config: {
