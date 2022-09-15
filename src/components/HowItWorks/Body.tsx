@@ -19,6 +19,20 @@ export default function ({ hasWallet }: { hasWallet?: boolean }) {
           that details the complicated stuff that actually isn’t that
           complicated. But it does a damn good job of hiding your identity.
         </CardParagraph>
+        <CardParagraph>
+          <AccentText color="text-accent">Additionally: </AccentText>You can add
+          more zk badges to your burner wallet with{' '}
+          <LinkText underline url="https://sealcred.xyz">
+            SealCred
+          </LinkText>
+          {'.'}
+        </CardParagraph>
+        <CardParagraph>
+          SealCred is an open-source privacy-preserving social protocol powered
+          by zero-knowledge proofs. We allow users to easily create pseudonymous
+          identities/wallets and transfer social capital from wallet A to wallet
+          B using anonymous but verified, soulbound zkNFTs or zkBadges.
+        </CardParagraph>
       </>
     )
   return (
