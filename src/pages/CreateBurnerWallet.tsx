@@ -57,7 +57,7 @@ export default function () {
   const [username, setUsername] = useState('')
   const [hasError, setHasError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [status, setStatus] = useState<string | undefined>()
+  const [status] = useState<string | undefined>()
 
   const generate = async () => {
     setHasError('')
