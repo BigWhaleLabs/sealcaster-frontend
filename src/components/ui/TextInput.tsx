@@ -1,11 +1,16 @@
+import { AccentText } from 'components/ui/Text'
 import { HTMLAttributes } from 'preact/compat'
+import CharInCircle from 'components/ui/CharInCircle'
+import Sizes from 'models/MarkSizes'
 import classnames, {
+  alignItems,
   backgroundColor,
   borderColor,
   borderRadius,
   borderWidth,
   display,
   flexDirection,
+  gap,
   height,
   inset,
   outlineColor,
@@ -17,6 +22,12 @@ import classnames, {
   textColor,
   width,
 } from 'classnames/tailwind'
+
+const wrapper = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  gap('gap-y-2')
+)
 
 const groupContainer = (error?: boolean, disabled?: boolean) =>
   classnames(
@@ -68,28 +79,45 @@ const atSign = (noValue: boolean) =>
     textColor({ 'text-formal-accent-light-transparent': noValue })
   )
 
+const errorWrapper = (visible: boolean) =>
+  classnames(
+    display(visible ? 'flex' : 'hidden'),
+    alignItems('items-center'),
+    gap('gap-x-2')
+  )
+
 export default function ({
   value,
-  isError,
+  errorMessage,
   disabled,
   withAtSign,
   ...rest
 }: {
   value?: string
-  isError?: boolean
+  errorMessage?: string
   disabled?: boolean
   withAtSign?: boolean
 } & HTMLAttributes<HTMLInputElement>) {
+  const isError = !!errorMessage
+
   return (
-    <div className={groupContainer(isError, disabled)}>
-      {withAtSign && <span className={atSign(!value)}>@</span>}
-      <input
-        placeholder="username"
-        value={value}
-        disabled={disabled}
-        className={inputContainer(isError)}
-        {...rest}
-      />
+    <div className={wrapper}>
+      <div className={groupContainer(isError, disabled)}>
+        {withAtSign && <span className={atSign(!value)}>@</span>}
+        <input
+          placeholder="username"
+          value={value}
+          disabled={disabled}
+          className={inputContainer(isError)}
+          {...rest}
+        />
+      </div>
+      <div className={errorWrapper(isError)}>
+        <CharInCircle size={Sizes.Small} char="!" />
+        <AccentText small color="text-error">
+          {errorMessage}
+        </AccentText>
+      </div>
     </div>
   )
 }
