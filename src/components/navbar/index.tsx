@@ -21,7 +21,6 @@ export default function () {
     <Suspense
       fallback={
         <Navbar
-          loading
           logo={<Logo />}
           needNetworkChange={false}
           logoText="SealCaster"

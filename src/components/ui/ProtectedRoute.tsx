@@ -7,7 +7,7 @@ function ProtectedSuspended({ ...rest }: RouteProps) {
 
   if (walletLoading) return <></>
 
-  if (!account || !isBurned) return <Redirect to="/" />
+  if (!account && !isBurned) return <Redirect to="/" />
 
   return <Route {...rest} />
 }
