@@ -9,6 +9,7 @@ export default function () {
 
   return {
     account: privateKey ? new Wallet(privateKey).address : account,
+    hasPrivate: !!privateKey,
     isBurned: !!privateKey || isBurnedWallet,
     walletLoading,
   }

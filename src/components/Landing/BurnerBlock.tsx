@@ -41,7 +41,7 @@ const headerTextWrapper = classnames(
 )
 
 export default function () {
-  const { account, isBurned } = useAccount()
+  const { account, isBurned, hasPrivate } = useAccount()
   const [location, setLocation] = useLocation()
 
   return (
@@ -76,13 +76,15 @@ export default function () {
           </div>
         </>
       )}
-      <Link href="/create">
-        <Button type="primary">Create Burner Wallet</Button>
-      </Link>
+      {!hasPrivate && (
+        <Link href="/create">
+          <Button type="primary">Create Burner Wallet</Button>
+        </Link>
+      )}
+      {(!account || isBurned) && <Dots />}
       {account ? (
         isBurned ? (
           <>
-            <Dots />
             <Link href="/cast">
               <div className={buttonWrapper}>
                 <GradientBorder>
@@ -96,7 +98,6 @@ export default function () {
         ) : null
       ) : (
         <>
-          <Dots />
           <div className={space('space-y-4')}>
             <SubHeaderText>Already have a burner?</SubHeaderText>
             <div

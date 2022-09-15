@@ -1,7 +1,7 @@
 import { AccentText, HeaderText, PostText } from 'components/ui/Text'
 import { Sizes } from 'models/CharInCircle'
+import { useEffect, useState } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
-import { useState } from 'preact/hooks'
 import BurnerWalletCard from 'components/BurnerWalletCard'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
@@ -53,6 +53,7 @@ const buttonWithStatus = classnames(
 const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
 
 export default function () {
+  const { account } = useSnapshot(walletStore)
   const { privateKey } = useSnapshot(BurnerWalletStore)
   const [username, setUsername] = useState('')
   const [hasError, setHasError] = useState('')
@@ -86,6 +87,11 @@ export default function () {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    setStatus('')
+    setHasError('')
+  }, [account])
 
   const hintText =
     'You can see what eth address you have connected to Farcaster in profile settings.'

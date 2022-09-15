@@ -57,7 +57,7 @@ class WalletStore extends PersistableStore {
           ErrorList.wrongNetwork(userNetwork, env.VITE_ETH_NETWORK)
         )
       const account = (await provider.listAccounts())[0]
-      await this.changeAccount(account)
+      this.changeAccount(account)
       this.subscribeProvider(instance)
     } catch (error) {
       if (error === 'Modal closed by user') return
@@ -100,7 +100,7 @@ class WalletStore extends PersistableStore {
     this.walletLoading = true
     const accounts = await provider.listAccounts()
     const account = accounts[0]
-    await this.changeAccount(account)
+    this.changeAccount(account)
     this.walletLoading = false
   }
 
@@ -136,7 +136,7 @@ class WalletStore extends PersistableStore {
     provider.on('accountsChanged', (accounts: string[]) => {
       if (!accounts.length) this.clearData()
 
-      void this.changeAccount()
+      this.changeAccount()
       void this.handleAccountChanged()
     })
     provider.on('disconnect', (error: unknown) => {
@@ -145,14 +145,14 @@ class WalletStore extends PersistableStore {
       this.clearData()
     })
     provider.on('chainChanged', async () => {
-      void this.changeAccount()
+      this.changeAccount()
       await this.connect()
     })
   }
 
   private clearData() {
     web3Modal.clearCachedProvider()
-    void this.changeAccount()
+    this.changeAccount()
   }
 
   exit() {
