@@ -1,9 +1,6 @@
-import { AccentText } from 'components/ui/Text'
+import { ErrorText } from 'components/ui/Text'
 import { HTMLAttributes } from 'preact/compat'
-import CharInCircle from 'components/ui/CharInCircle'
-import Sizes from 'models/MarkSizes'
 import classnames, {
-  alignItems,
   backgroundColor,
   borderColor,
   borderRadius,
@@ -79,13 +76,6 @@ const atSign = (noValue: boolean) =>
     textColor({ 'text-formal-accent-light-transparent': noValue })
   )
 
-const errorWrapper = (visible: boolean) =>
-  classnames(
-    display(visible ? 'flex' : 'hidden'),
-    alignItems('items-center'),
-    gap('gap-x-2')
-  )
-
 export default function ({
   value,
   errorMessage,
@@ -112,12 +102,11 @@ export default function ({
           {...rest}
         />
       </div>
-      <div className={errorWrapper(isError)}>
-        <CharInCircle size={Sizes.Small} char="!" />
-        <AccentText small color="text-error">
+      {isError && (
+        <ErrorText visible={isError} withExclamation>
           {errorMessage}
-        </AccentText>
-      </div>
+        </ErrorText>
+      )}
     </div>
   )
 }
