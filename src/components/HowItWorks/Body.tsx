@@ -25,7 +25,7 @@ export default function ({ hasWallet }: { hasWallet?: boolean }) {
           <LinkText underline url="https://sealcred.xyz">
             SealCred
           </LinkText>
-          {'.'}
+          .
         </CardParagraph>
         <CardParagraph>
           SealCred is an open-source privacy-preserving social protocol powered
