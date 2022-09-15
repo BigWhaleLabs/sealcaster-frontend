@@ -1,7 +1,6 @@
 import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { displayFrom } from 'helpers/visibilityClassnames'
-import { gap, margin, space } from 'classnames/tailwind'
 import { handleError } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
@@ -12,7 +11,20 @@ import PostProcessing from 'components/ProcessingCard'
 import PostStore from 'stores/PostStore'
 import TextArea from 'components/ui/TextArea'
 import TextareaInfo from 'components/Cast/TextareaInfo'
+import classnames, {
+  display,
+  flexDirection,
+  gap,
+  margin,
+  space,
+} from 'classnames/tailwind'
 import useAccount from 'hooks/useAccount'
+
+const processingCardWrapper = classnames(
+  flexDirection('flex-col'),
+  display('flex'),
+  gap('gap-y-6', 'sm:gap-y-12')
+)
 
 export default function () {
   const { account } = useAccount()
@@ -62,7 +74,7 @@ export default function () {
 
   return (
     <>
-      <div className={gap('gap-y-6', 'sm:gap-y-12')}>
+      <div className={processingCardWrapper}>
         <PostProcessing />
         <div className={space('space-y-6')}>
           <CastHeader />
