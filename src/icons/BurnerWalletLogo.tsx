@@ -1,6 +1,11 @@
 export default function ({ small }: { small?: boolean }) {
   return small ? (
-    <svg viewBox="0 0 348 111" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="fit-content"
+      height="auto"
+      viewBox="0 0 348 95"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g filter="url(#filter0_d_57_17099)">
         <path
           d="M139.706 81.9185L171.584 29.6054C173.143 27.0473 176.857 27.0473 178.416 29.6054L210.294 81.9185C211.918 84.5841 210 88 206.878 88H143.122C140 88 138.082 84.584 139.706 81.9185Z"
@@ -641,7 +646,6 @@ export default function ({ small }: { small?: boolean }) {
       width="492"
       height="111"
       viewBox="0 0 492 111"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g filter="url(#filter0_d_71_12778)">
