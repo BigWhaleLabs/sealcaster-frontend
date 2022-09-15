@@ -3,6 +3,7 @@ import { LogoText } from 'components/ui/Text'
 import { VNode } from 'preact'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { useCallback, useMemo, useState } from 'react'
+import LoadingWallet from 'components/navbar/LoadingWallet'
 import RightBlock from 'components/navbar/RightBlock'
 import classNamesToString from 'helpers/classNamesToString'
 import classnames, {
@@ -51,6 +52,7 @@ const logoWrapper = classnames(display('flex'), width('w-full'))
 
 export default function ({
   logo,
+  loading,
   logoText,
   account,
   needNetworkChange,
@@ -58,6 +60,7 @@ export default function ({
   hideWalletPart,
 }: {
   logo: VNode
+  loading?: boolean
   logoText: VNode | string
   account?: string
   needNetworkChange: boolean
@@ -86,11 +89,17 @@ export default function ({
         </div>
       </Link>
       {!hideWalletPart && (
-        <RightBlock
-          eNSName={eNSName}
-          needNetworkChange={needNetworkChange}
-          account={account}
-        />
+        <>
+          {loading ? (
+            <LoadingWallet />
+          ) : (
+            <RightBlock
+              eNSName={eNSName}
+              needNetworkChange={needNetworkChange}
+              account={account}
+            />
+          )}
+        </>
       )}
     </nav>
   )

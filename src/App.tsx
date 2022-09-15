@@ -1,12 +1,10 @@
 import { Route, Router } from 'wouter'
-import { Suspense } from 'preact/compat'
 import { ToastContainer } from 'react-toastify'
-import Cast from 'pages/Cast'
+import { lazy } from 'preact/compat'
 import CreateBurnerWallet from 'pages/CreateBurnerWallet'
 import Footer from 'components/Footer'
-import Landing from 'pages/Landing'
-import Logo from 'icons/Logo'
-import Navbar from 'components/navbar/Navbar'
+import LazyComponent from 'components/LazyComponent'
+import Navbar from 'components/navbar'
 import Privacy from 'pages/Privacy'
 import ProtectedRoute from 'components/ui/ProtectedRoute'
 import ScrollToTop from 'components/ui/ScrollToTop'
@@ -19,7 +17,9 @@ import classnames, {
   minHeight,
   width,
 } from 'classnames/tailwind'
-import useAccount from 'hooks/useAccount'
+
+const Cast = lazy(() => import('pages/Cast'))
+const Landing = lazy(() => import('pages/Landing'))
 
 const pageContainer = classnames(
   display('flex'),
@@ -32,43 +32,18 @@ const bodyContainer = classnames(
   margin('mx-4', 'mb-auto', 'body:mx-auto')
 )
 
-function NavBarSuspended() {
-  const { account } = useAccount()
-
-  return (
-    <Navbar
-      logo={<Logo />}
-      account={account}
-      needNetworkChange={false}
-      logoText="SealCaster"
-    />
-  )
-}
-
 export default function () {
   return (
     <Router>
       <ScrollToTop>
         <div className={pageContainer}>
-          <Suspense
-            fallback={
-              <Navbar
-                logo={<Logo />}
-                needNetworkChange={false}
-                logoText="SealCaster"
-              />
-            }
-          >
-            <NavBarSuspended />
-          </Suspense>
+          <Navbar />
           <div className={bodyContainer}>
             <Route path="/">
-              <Landing />
+              <LazyComponent lazyImported={<Landing />} />
             </Route>
             <ProtectedRoute path="/cast">
-              <Suspense fallback="Loading...">
-                <Cast />
-              </Suspense>
+              <LazyComponent lazyImported={<Cast />} />
             </ProtectedRoute>
             <Route path="/terms">
               <Terms />
