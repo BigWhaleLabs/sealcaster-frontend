@@ -1,3 +1,4 @@
+import { forwardRef } from 'preact/compat'
 import CharTypes from 'models/CharTypes'
 import Sizes from 'models/MarkSizes'
 import classnames, {
@@ -45,18 +46,19 @@ const borderWrapper = (size?: Sizes) =>
     justifyContent('justify-center')
   )
 
-export default function ({
-  size,
-  disabled,
-  char,
-}: {
-  size?: Sizes
-  disabled?: boolean
-  char: CharTypes
-}) {
+const CharInCircle = forwardRef<
+  HTMLDivElement,
+  {
+    size?: Sizes
+    disabled?: boolean
+    char: CharTypes
+  }
+>(({ size, disabled, char }, ref) => {
   return (
-    <div className={borderWrapper(size)}>
+    <div ref={ref} className={borderWrapper(size)}>
       <div className={questionStyles(size, disabled)}>{char}</div>
     </div>
   )
-}
+})
+
+export default CharInCircle

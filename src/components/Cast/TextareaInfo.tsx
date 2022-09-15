@@ -37,12 +37,10 @@ export default function () {
     <div className={textAreaInfoWrapper}>
       <AccentText extraSmall color="text-accent">
         <span className={hintWrapper}>
-          <span>Posting from burner wallet</span>
+          Posting from burner wallet
           <br />
           <Tooltip position="bottom" fitContainer text={castingHintText}>
-            <div>
-              <CharInCircle size={Sizes.Small} char="?" />
-            </div>
+            <CharInCircle size={Sizes.Small} char="?" />
           </Tooltip>
         </span>
       </AccentText>
