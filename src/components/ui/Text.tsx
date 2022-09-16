@@ -352,13 +352,18 @@ export function CardSubheader({ children }: ChildrenProp) {
   return <p className={cardSubheaderContainer}>{children}</p>
 }
 
+const subHeader = (primary?: boolean, small?: boolean) =>
+  classnames(
+    fontFamily({ 'font-primary': !primary }),
+    fontSize({ 'text-sm': small })
+  )
+
 export function SubHeaderText({
   children,
-  defaultFont,
-}: ChildrenProp & { defaultFont?: boolean }) {
-  return (
-    <p className={fontFamily({ 'font-primary': !defaultFont })}>{children}</p>
-  )
+  primary,
+  small,
+}: ChildrenProp & { primary?: boolean; small?: boolean }) {
+  return <p className={subHeader(primary, small)}>{children}</p>
 }
 
 const logoText = classnames(

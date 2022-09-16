@@ -43,7 +43,9 @@ export default function ({
         <HeaderText center extraLeading size="large">
           {headerText}
         </HeaderText>
-        <SubHeaderText defaultFont>{subHeaderText}</SubHeaderText>
+        <SubHeaderText small primary>
+          {subHeaderText}
+        </SubHeaderText>
       </div>
     </>
   )
