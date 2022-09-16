@@ -26,7 +26,7 @@ export function StatusSuspended({ blockchainId }: { blockchainId: number }) {
   const status = statuses[blockchainId]?.status
 
   return (
-    <a href={`#&id=${blockchainId}`} className={statusContainer}>
+    <a href={`#id=${blockchainId}`} className={statusContainer}>
       <StatusText color={statusColor(status || PostStatus.pending)}>
         {PostStatusText[status] || <LoadingWithDots />}
       </StatusText>
