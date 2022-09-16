@@ -18348,7 +18348,6 @@ __metadata:
     vite: ^3.1.0
     vite-plugin-remove-console: ^1.1.0
     vite-tsconfig-paths: ^3.5.0
-    web3-providers-http: ^1.7.5
     web3modal: ^1.9.9
     wouter: ^2.8.0-alpha.2
   languageName: unknown
@@ -20763,7 +20762,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-providers-http@npm:1.7.5, web3-providers-http@npm:^1.7.5":
+"web3-providers-http@npm:1.7.5":
   version: 1.7.5
   resolution: "web3-providers-http@npm:1.7.5"
   dependencies:

@@ -28,9 +28,10 @@ const postBottom = classnames(
   gap('gap-x-1'),
   alignItems('items-start')
 )
+//
 const postInfo = classnames(
   display('flex'),
-  flexDirection('flex-col', 'xs:flex-row'),
+  flexDirection('flex-col', 'sm:flex-row'),
   alignItems('items-baseline'),
   flexWrap('flex-wrap'),
   gap('gap-x-1')
@@ -68,7 +69,7 @@ export default function ({
               <span className={postInfo}>
                 <StatusText>Posted by: </StatusText>
                 <Sender sender={sender} />
-                <Delimiter />
+                <Delimiter showFrom="sm" />
                 <LinkText
                   extraSmall
                   title={derivativeAddress}
@@ -76,7 +77,7 @@ export default function ({
                 >
                   Etherscan
                 </LinkText>
-                <Delimiter />
+                <Delimiter showFrom="sm" />
                 <Status blockchainId={blockchainId} />
               </span>
             </BodyText>
