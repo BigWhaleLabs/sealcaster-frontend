@@ -1,6 +1,7 @@
 import { Link } from 'wouter'
 import {
   TDropShadow,
+  TFontSize,
   TGradientColorStops,
   TTextColor,
   alignItems,
@@ -352,13 +353,15 @@ export function CardSubheader({ children }: ChildrenProp) {
   return <p className={cardSubheaderContainer}>{children}</p>
 }
 
+const subHeader = (defaultFont?: boolean, textSize?: TFontSize) =>
+  classnames(fontFamily({ 'font-primary': !defaultFont }), fontSize(textSize))
+
 export function SubHeaderText({
   children,
   defaultFont,
-}: ChildrenProp & { defaultFont?: boolean }) {
-  return (
-    <p className={fontFamily({ 'font-primary': !defaultFont })}>{children}</p>
-  )
+  textSize,
+}: ChildrenProp & { defaultFont?: boolean; textSize?: TFontSize }) {
+  return <p className={subHeader(defaultFont, textSize)}>{children}</p>
 }
 
 const logoText = classnames(

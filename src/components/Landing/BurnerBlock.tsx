@@ -55,7 +55,9 @@ function BurnBlockSuspended() {
         )
       ) : (
         <div className={space('space-y-4')}>
-          <SubHeaderText>Already have a burner?</SubHeaderText>
+          <SubHeaderText textSize="text-sm">
+            Already have a burner?
+          </SubHeaderText>
           <div className={buttonWrapper}>
             <GradientBorder>
               <Button
