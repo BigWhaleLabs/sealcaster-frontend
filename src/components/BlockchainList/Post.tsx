@@ -28,7 +28,7 @@ const postBottom = classnames(
   gap('gap-x-1'),
   alignItems('items-start')
 )
-//
+
 const postInfo = classnames(
   display('flex'),
   flexDirection('flex-col', 'sm:flex-row'),
