@@ -375,6 +375,14 @@ const logoText = classnames(
 export function LogoText({ children }: ChildrenProp) {
   return <span className={logoText}>{children}</span>
 }
+const logoSubText = classnames(
+  textColor('text-primary-semi-dimmed', 'selection:text-primary'),
+  fontWeight('font-bold'),
+  fontSize('text-xs')
+)
+export function LogoSubText({ children }: ChildrenProp) {
+  return <span className={logoSubText}>{children}</span>
+}
 
 const socialLink = classnames(
   lineHeight('leading-6'),

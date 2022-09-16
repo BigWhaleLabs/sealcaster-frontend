@@ -1,5 +1,5 @@
 import { Link } from 'wouter'
-import { LogoText } from 'components/ui/Text'
+import { LogoSubText, LogoText } from 'components/ui/Text'
 import { Player } from '@lottiefiles/react-lottie-player'
 import { VNode } from 'preact'
 import { displayFrom } from 'helpers/visibilityClassnames'
@@ -87,7 +87,10 @@ export default function ({
         </div>
         <div className={logoWithVersion}>
           {typeof logoText === 'string' ? (
-            <LogoText>{logoText}</LogoText>
+            <>
+              <LogoText>{logoText}</LogoText>
+              <LogoSubText>(ALPHA)</LogoSubText>
+            </>
           ) : (
             { logoText }
           )}
