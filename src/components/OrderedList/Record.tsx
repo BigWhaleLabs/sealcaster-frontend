@@ -1,6 +1,11 @@
 import { AccentText } from 'components/ui/Text'
 import ChildrenProp from 'models/ChildrenProp'
-import classnames, { display, flexDirection, gap } from 'classnames/tailwind'
+import classnames, {
+  display,
+  flex,
+  flexDirection,
+  gap,
+} from 'classnames/tailwind'
 
 const recordContainer = classnames(
   display('flex'),
@@ -17,7 +22,7 @@ export default function ({
       <AccentText bold color="text-accent">
         {index}—
       </AccentText>
-      <span>{children}</span>
+      <span className={flex('flex-1')}>{children}</span>
     </p>
   )
 }
