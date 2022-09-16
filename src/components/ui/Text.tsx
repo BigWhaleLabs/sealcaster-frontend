@@ -1,7 +1,6 @@
 import { Link } from 'wouter'
 import {
   TDropShadow,
-  TFontSize,
   TGradientColorStops,
   TTextColor,
   alignItems,
