@@ -1,5 +1,6 @@
 import { AccentText, HeaderText, PostText } from 'components/ui/Text'
 import { Sizes } from 'models/CharInCircle'
+import { handleError } from '@big-whale-labs/frontend-utils'
 import { useEffect, useState } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
 import BurnerWalletCard from 'components/BurnerWalletCard'
@@ -52,6 +53,13 @@ const buttonWithStatus = classnames(
 )
 const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
 
+const getAxiosErrorMessage = (error: unknown) => {
+  return (
+    (error as AxiosError<{ message: string }>).response?.data.message ||
+    'Verification failed'
+  )
+}
+
 export default function () {
   const { account } = useSnapshot(walletStore)
   const { privateKey } = useSnapshot(BurnerWalletStore)
@@ -75,16 +83,12 @@ export default function () {
       )
       walletStore.exit()
     } catch (error) {
-      setError(
-        'We could not verify this username with the wallet you have connected. Please review them and try again.'
-      )
-      if (axios.isAxiosError(error))
-        setError(
-          (error as AxiosError<{ message: string }>).response?.data.message ||
-            'Verification failed'
-        )
+      const errorMessage = axios.isAxiosError(error)
+        ? getAxiosErrorMessage(error)
+        : 'We could not verify this username with the wallet you have connected. Please review them and try again.'
 
-      console.log('error', error)
+      setError(errorMessage)
+      handleError(error)
     } finally {
       setStatus(undefined)
       setLoading(false)
