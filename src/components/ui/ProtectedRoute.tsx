@@ -1,13 +1,14 @@
 import { Redirect, Route, RouteProps } from 'wouter'
 import { Suspense } from 'preact/compat'
+import Loading from 'icons/Loading'
 import useAccount from 'hooks/useAccount'
 
 function ProtectedSuspended({ ...rest }: RouteProps) {
-  const { isBurned, account, walletLoading } = useAccount()
+  const { isBurned, walletLoading } = useAccount()
 
-  if (walletLoading) return <></>
+  if (walletLoading) return <Loading screenCentre />
 
-  if (!account && !isBurned) return <Redirect to="/" />
+  if (!isBurned) return <Redirect to="/" />
 
   return <Route {...rest} />
 }

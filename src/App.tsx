@@ -43,7 +43,7 @@ export default function () {
               <LazyComponent lazyImported={<Landing />} />
             </Route>
             <ProtectedRoute path="/cast">
-              <LazyComponent lazyImported={<Cast />} />
+              <Cast />
             </ProtectedRoute>
             <Route path="/terms">
               <Terms />
