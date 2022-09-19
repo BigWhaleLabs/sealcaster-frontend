@@ -2,7 +2,7 @@ import { PostStatus } from 'models/PostStatus'
 import axios from 'axios'
 import env from 'helpers/env'
 
-const baseURL = `${env.VITE_TWITTER_POSTER_URL}/posts`
+const baseURL = `${env.VITE_POSTER_URL}/posts`
 
 export default async function (ids: number[]) {
   const { data } = await axios.post<
