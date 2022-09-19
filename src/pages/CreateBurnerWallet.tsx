@@ -10,7 +10,7 @@ import CharInCircle from 'components/ui/CharInCircle'
 import HowItWorks from 'components/HowItWorks'
 import TextInput from 'components/ui/TextInput'
 import Tooltip from 'components/ui/Tooltip'
-import axios, { AxiosError } from 'axios'
+import checkErrorMessage from 'helpers/checkErrorMessage'
 import classnames, {
   alignItems,
   display,
@@ -52,13 +52,8 @@ const buttonWithStatus = classnames(
   gap('gap-y-4', 'sm:gap-x-4')
 )
 const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
-
-const getAxiosErrorMessage = (error: unknown) => {
-  return (
-    (error as AxiosError<{ message: string }>).response?.data.message ||
-    'Verification failed'
-  )
-}
+const defaultMessage =
+  'We could not verify this username with the wallet you have connected. Please review them and try again.'
 
 export default function () {
   const { account } = useSnapshot(walletStore)
@@ -83,11 +78,8 @@ export default function () {
       )
       walletStore.exit()
     } catch (error) {
-      const errorMessage = axios.isAxiosError(error)
-        ? getAxiosErrorMessage(error)
-        : 'We could not verify this username with the wallet you have connected. Please review them and try again.'
-
-      setError(errorMessage)
+      const errorMessage = checkErrorMessage(error)
+      setError(typeof errorMessage === 'string' ? errorMessage : defaultMessage)
       handleError(error)
     } finally {
       setStatus(undefined)
