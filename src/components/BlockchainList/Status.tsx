@@ -10,14 +10,13 @@ const statusContainer = classnames(display('flex'), alignItems('items-center'))
 
 const statusColor = (status: PostStatus) => {
   switch (status) {
-    case PostStatus.pending:
-      return 'accent'
-    case PostStatus.approved:
-      return 'accent'
     case PostStatus.rejected:
+    case PostStatus.failedToPost:
       return 'error'
     case PostStatus.published:
       return 'primary'
+    default:
+      return 'accent'
   }
 }
 
