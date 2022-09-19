@@ -1,4 +1,5 @@
 import { BodyText, LinkText, PostText, StatusText } from 'components/ui/Text'
+import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
 import PostTime from 'components/BlockchainList/PostTime'
@@ -13,7 +14,6 @@ import classnames, {
   space,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
-import truncateMiddleIfNeeded from 'helpers/truncateMiddleIfNeeded'
 import useAccount from 'hooks/useAccount'
 
 const container = classnames(
