@@ -15,6 +15,7 @@ const statusColor = (status: PostStatus) => {
     case PostStatus.approved:
       return 'accent'
     case PostStatus.rejected:
+    case PostStatus.failedToPost:
       return 'error'
     case PostStatus.published:
       return 'primary'
