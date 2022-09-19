@@ -1,7 +1,11 @@
 import axios from 'axios'
 
 export default function (error: unknown) {
-  return error instanceof Error || axios.isAxiosError(error)
-    ? error.message
-    : error
+  // we need to cast type to get real axios error message
+  if (axios.isAxiosError(error) && error.response?.data) {
+    return (error.response.data as { [key: string]: unknown }).message ?? error
+  }
+  if (error instanceof Error) return error.message
+
+  return error
 }
