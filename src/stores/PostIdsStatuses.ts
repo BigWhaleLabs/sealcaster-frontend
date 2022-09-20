@@ -71,12 +71,10 @@ async function checkStatuses({ ids, force }: CheckStatusesStoreProps) {
   }
 }
 
-async function updateStatusesForSelectedPosts() {
+async function updateStatusesForAllPosts() {
   const ids = (await PostStore.posts).map(({ id }) => id.toNumber())
   void checkStatuses({ ids, force: true })
 }
-
-setInterval(() => updateStatusesForSelectedPosts(), 5000)
 
 setInterval(async () => {
   if (!postStatusStore.statuses) return
@@ -98,5 +96,7 @@ setInterval(async () => {
     force: false,
   })
 }, 5000)
+
+void updateStatusesForAllPosts()
 
 export default postStatusStore
