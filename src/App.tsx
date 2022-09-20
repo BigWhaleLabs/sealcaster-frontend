@@ -7,7 +7,6 @@ import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
 import Privacy from 'pages/Privacy'
 import ProtectedRoute from 'components/ui/ProtectedRoute'
-import ScrollToTop from 'components/ui/ScrollToTop'
 import Terms from 'pages/Terms'
 import classnames, {
   display,
