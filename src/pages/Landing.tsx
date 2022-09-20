@@ -1,6 +1,7 @@
 import BlockchainList from 'components/BlockchainList'
 import BurnerBlock from 'components/Landing/BurnerBlock'
 import HowItWorks from 'components/HowItWorks'
+import ScrollToTop from 'components/ui/ScrollToTop'
 import classnames, {
   alignItems,
   display,
@@ -21,6 +22,7 @@ export default function () {
       <BurnerBlock />
       <HowItWorks />
       <BlockchainList />
+      <ScrollToTop />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import {
   LinkText,
 } from 'components/ui/Text'
 import Card from 'components/ui/Card'
+import ScrollToTop from 'components/ui/ScrollToTop'
 import classnames, {
   display,
   flexDirection,
@@ -163,6 +164,7 @@ export default function () {
           </section>
         </div>
       </div>
+      <ScrollToTop />
     </Card>
   )
 }

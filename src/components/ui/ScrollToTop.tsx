@@ -1,14 +1,12 @@
 import { useEffect } from 'react'
 import { useLocation } from 'wouter'
-import ChildrenProp from 'models/ChildrenProp'
 
-export default ({ children }: ChildrenProp) => {
+export default () => {
   const [location] = useLocation()
+
   useEffect(() => {
-    const linksNeedsToScroll = ['/', '/terms', '/privacy']
-    if (linksNeedsToScroll.includes(location))
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo(0, 0)
   }, [location])
 
-  return <>{children}</>
+  return null
 }
