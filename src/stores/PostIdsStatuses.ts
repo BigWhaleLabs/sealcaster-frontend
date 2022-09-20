@@ -84,10 +84,8 @@ setInterval(async () => {
     Object.entries(postStatusStore.statuses).map(
       async ([blockchainId, postData]) => {
         const { status } = await postData
-        if (status === PostStatus.pending || status === PostStatus.approved) {
-          console.log(blockchainId)
+        if (status === PostStatus.pending || status === PostStatus.approved)
           ids.push(Number(blockchainId))
-        }
       }
     )
   )
