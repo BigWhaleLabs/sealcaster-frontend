@@ -53,7 +53,7 @@ const buttonWithStatus = classnames(
 )
 const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
 const defaultMessage =
-  'We could not verify this username with the wallet you have connected. Please review them and try again.'
+  'We could not match the username with the wallet you have connected. Please review them and try again.'
 
 export default function () {
   const { account } = useSnapshot(walletStore)
@@ -70,7 +70,7 @@ export default function () {
 
     try {
       if (!walletStore.account) await walletStore.connect(true)
-      if (!walletStore.account) return setError('Please, connect the wallet')
+      if (!walletStore.account) return setError('Please connect the wallet')
       await BurnerWalletStore.generateBurnerWallet(
         username,
         walletStore.account,
@@ -100,7 +100,7 @@ export default function () {
       <div className={topPart}>
         {privateKey ? (
           <>
-            <HeaderText>Voilà—your burner wallet</HeaderText>
+            <HeaderText>Voilà — your burner wallet</HeaderText>
             <PostText>
               This wallet verifies that you are a user of Farcaster, but won’t
               reveal who you are. Connect with this wallet in the future to

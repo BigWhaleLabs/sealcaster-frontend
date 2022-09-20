@@ -6,10 +6,10 @@ export default function ({ hasWallet }: { hasWallet?: boolean }) {
     return (
       <>
         <CardParagraph>
-          We specialize in zero-knowledge proof. We generated a wallet for you
-          (locally) and minted a zk badge of the Farcaster verification onto it.
+          We specialize in zero-knowledge. We generated a wallet for you
+          (locally) and minted a ZK badge of the Farcaster verification onto it.
           Meaning, this wallet proves its owner is a user of Farcaster, but
-          won’t say who. Aka, not a snitch.{' '}
+          won’t say who. Aka, not a snitch.
         </CardParagraph>
         <CardParagraph>
           If you’re interested in a deep dive, check out this{' '}
@@ -21,7 +21,7 @@ export default function ({ hasWallet }: { hasWallet?: boolean }) {
         </CardParagraph>
         <CardParagraph>
           <AccentText color="text-accent">Additionally: </AccentText>You can add
-          more zk badges to your burner wallet with{' '}
+          more ZK badges to your burner wallet with{' '}
           <LinkText underline url="https://sealcred.xyz">
             SealCred
           </LinkText>
@@ -31,7 +31,7 @@ export default function ({ hasWallet }: { hasWallet?: boolean }) {
           SealCred is an open-source privacy-preserving social protocol powered
           by zero-knowledge proofs. We allow users to easily create pseudonymous
           identities/wallets and transfer social capital from wallet A to wallet
-          B using anonymous but verified, soulbound zkNFTs or zkBadges.
+          B using anonymous but verified, soulbound zkNFTs or ZK badges.
         </CardParagraph>
       </>
     )
@@ -40,7 +40,7 @@ export default function ({ hasWallet }: { hasWallet?: boolean }) {
       <StepList />
       <CardParagraph>
         <AccentText color="text-accent">Bonus: </AccentText>
-        Add more zk badges to your burnerwallet with{' '}
+        Add more ZK badges to your burnerwallet with{' '}
         <LinkText underline url="https://sealcred.xyz">
           SealCred
         </LinkText>

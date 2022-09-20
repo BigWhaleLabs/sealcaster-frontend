@@ -29,7 +29,7 @@ export default function () {
           SealCred is an open-source privacy-preserving social protocol powered
           by zero-knowledge proofs. We allow users to easily create pseudonymous
           identities/wallets and transfer social capital from wallet A to wallet
-          B using anonymous but verified, soulbound zkNFTs or zkBadges.
+          B using anonymous but verified, soulbound zkNFTs or ZK badges.
         </PostText>
       </div>
       <Button type="primary" small url="https://sealcred.xyz">

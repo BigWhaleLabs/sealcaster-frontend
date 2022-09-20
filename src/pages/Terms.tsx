@@ -100,6 +100,7 @@ export default function () {
               <LinkText internal url="/privacy">
                 Privacy Policy
               </LinkText>
+              .
             </CardParagraph>
           </section>
           <section className={sectionClasses}>
@@ -107,13 +108,6 @@ export default function () {
             <CardParagraph>
               Any claim related to Service's Website shall be governed by the
               laws of ca without regards to its conflict of law provisions.
-            </CardParagraph>
-          </section>
-          <section className={sectionClasses}>
-            <CardSubheader>Encryption</CardSubheader>
-            <CardParagraph>
-              In case if the user enables encryption, there is no way to decrypt
-              the data without the password specified by the user.
             </CardParagraph>
           </section>
         </div>

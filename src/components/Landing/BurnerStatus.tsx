@@ -29,11 +29,11 @@ export default function ({
   const incorrect = account && !isBurned
 
   const headerText = incorrect
-    ? 'It looks like you connected a wallet without the correct zk badge'
+    ? 'It looks like you connected a wallet without the correct ZK badge'
     : 'Cast anonymously on Farcaster'
   const subHeaderText = incorrect
-    ? 'Create a burner wallet with the Farcaster zk badge to continue, or reconnect with the correct burner wallet.'
-    : 'Protect your identity by creating a burner wallet.'
+    ? 'Create a burner wallet with a Farcaster ZK badge to continue, or reconnect with the correct burner wallet'
+    : 'Protect your identity by creating a burner wallet'
   const statusIcon = incorrect ? <SealSad /> : <SealGrid />
 
   return (

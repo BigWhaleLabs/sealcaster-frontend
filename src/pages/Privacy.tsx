@@ -30,7 +30,7 @@ export default function () {
         <div className={verticalSpace}>
           <section className={sectionClasses}>
             <CardParagraph>
-              Project operates the website listed at echo.sealcred.xyz, which
+              Project operates the website listed at sealcaster.xyz, which
               provides the SERVICE.
             </CardParagraph>
             <CardParagraph>
