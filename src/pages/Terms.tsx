@@ -5,13 +5,13 @@ import {
   LinkText,
 } from 'components/ui/Text'
 import Card from 'components/ui/Card'
-import ScrollToTop from 'components/ui/ScrollToTop'
 import classnames, {
   display,
   flexDirection,
   gap,
   space,
 } from 'classnames/tailwind'
+import useScrollToTop from 'hooks/useScrollToTop'
 
 const sectionClasses = classnames(
   display('flex'),
@@ -21,6 +21,8 @@ const sectionClasses = classnames(
 
 const verticalSpace = space('space-y-4')
 export default function () {
+  useScrollToTop()
+
   return (
     <Card>
       <div className={verticalSpace}>
@@ -116,7 +118,6 @@ export default function () {
           </section>
         </div>
       </div>
-      <ScrollToTop />
     </Card>
   )
 }
