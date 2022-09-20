@@ -10,7 +10,6 @@ import CharInCircle from 'components/ui/CharInCircle'
 import HowItWorks from 'components/HowItWorks'
 import TextInput from 'components/ui/TextInput'
 import Tooltip from 'components/ui/Tooltip'
-import checkErrorMessage from 'helpers/checkErrorMessage'
 import classnames, {
   alignItems,
   display,
@@ -20,6 +19,7 @@ import classnames, {
   textAlign,
   width,
 } from 'classnames/tailwind'
+import getErrorMessage from 'helpers/getErrorMessage'
 import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
@@ -78,7 +78,7 @@ export default function () {
       )
       walletStore.exit()
     } catch (error) {
-      const errorMessage = checkErrorMessage(error)
+      const errorMessage = getErrorMessage(error)
       setError(typeof errorMessage === 'string' ? errorMessage : defaultMessage)
       handleError(error)
     } finally {
