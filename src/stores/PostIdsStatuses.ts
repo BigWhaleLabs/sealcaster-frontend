@@ -29,7 +29,7 @@ const postStatusStore = proxy<PostStatusStoreType>({
   statuses: {},
 })
 
-export async function updateStatuses(ids: number[]) {
+async function updateStatuses(ids: number[]) {
   const updatedStatuses = await getPostStatuses(ids)
 
   for (const { blockchainId, status, serviceId } of updatedStatuses) {
@@ -84,8 +84,10 @@ setInterval(async () => {
     Object.entries(postStatusStore.statuses).map(
       async ([blockchainId, postData]) => {
         const { status } = await postData
-        if (status === PostStatus.pending || status === PostStatus.approved)
+        if (status === PostStatus.pending || status === PostStatus.approved) {
+          console.log(blockchainId)
           ids.push(Number(blockchainId))
+        }
       }
     )
   )
