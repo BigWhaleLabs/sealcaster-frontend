@@ -30,9 +30,8 @@ export default function () {
   const { account } = useAccount()
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
-  const [suffix, setSuffix] = useState('')
 
-  const maxLength = 280 - suffix.length
+  const maxLength = 280
 
   async function createPost() {
     try {
@@ -83,7 +82,6 @@ export default function () {
             disabled={isLoading}
             placeholder="Write something here..."
             onTextChange={setText}
-            setSuffix={setSuffix}
             maxLength={maxLength}
           />
           <TextareaInfo />
