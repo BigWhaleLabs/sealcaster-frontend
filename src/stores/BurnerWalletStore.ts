@@ -66,7 +66,7 @@ class BurnerWalletStore extends PersistableStore {
       )
       const eddsaPublicKey = await getEddsaPublicKey()
       const nullifierMessage = getNullifierMessage()
-      onChange('Requires signiture...')
+      onChange('Requesting signature...')
       const nullifierSignature = await walletStore.signMessage(nullifierMessage)
       onChange('Obtaining token from attestor...')
       const ownershipSignature = await requestAddressOwnershipAttestation(
