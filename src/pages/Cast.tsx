@@ -31,7 +31,7 @@ export default function () {
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
 
-  const maxLength = 280
+  const maxLength = 279
 
   async function createPost() {
     try {
