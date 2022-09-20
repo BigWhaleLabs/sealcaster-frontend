@@ -80,6 +80,7 @@ const cardContainer = classnames(
 
 export default function ({ privateKey }: { privateKey: string }) {
   const [isKeyClosed, setKeyClosed] = useState(true)
+  const fakePrivateKey = '0x'.padEnd(66, '0')
 
   return (
     <MagicCardWrapper>
@@ -95,7 +96,7 @@ export default function ({ privateKey }: { privateKey: string }) {
               <div className={privateKeyBlur(isKeyClosed)}>
                 <AccentText color="text-secondary">
                   <BodyText center semiBold inheritColor>
-                    {privateKey}
+                    {isKeyClosed ? fakePrivateKey : privateKey}
                   </BodyText>
                 </AccentText>
               </div>
