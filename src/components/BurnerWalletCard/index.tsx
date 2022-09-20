@@ -80,7 +80,7 @@ const cardContainer = classnames(
 
 export default function ({ privateKey }: { privateKey: string }) {
   const [isKeyClosed, setKeyClosed] = useState(true)
-  const fakePrivateKey = '0x'.padEnd(66, '0')
+  const fakePrivateKey = '0x'.padEnd(52, '0').padEnd(66, 'lifeAnswerIs42')
 
   return (
     <MagicCardWrapper>
