@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "@big-whale-labs/constants": "^0.1.31",
+    "@big-whale-labs/constants": "^0.1.32",
     "@big-whale-labs/frontend-utils": "^0.0.10",
     "@big-whale-labs/seal-cred-posts-contract": "^0.0.13",
     "@big-whale-labs/stores": "^0.1.17",
