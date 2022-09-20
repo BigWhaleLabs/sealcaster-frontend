@@ -62,6 +62,9 @@ export default function () {
           },
           ...PostIdsStatuses.lastUserPost,
         }
+        PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve({
+          status: PostStatus.pending,
+        })
       }
       setText('')
     } catch (error) {
