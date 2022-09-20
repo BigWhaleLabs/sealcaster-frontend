@@ -11,6 +11,7 @@ import classnames, {
   gap,
   space,
 } from 'classnames/tailwind'
+import useScrollToTop from 'hooks/useScrollToTop'
 
 const sectionClasses = classnames(
   display('flex'),
@@ -20,6 +21,8 @@ const sectionClasses = classnames(
 
 const verticalSpace = space('space-y-4')
 export default function () {
+  useScrollToTop()
+
   return (
     <Card>
       <div className={verticalSpace}>

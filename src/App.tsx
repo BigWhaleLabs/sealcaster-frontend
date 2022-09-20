@@ -7,7 +7,6 @@ import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
 import Privacy from 'pages/Privacy'
 import ProtectedRoute from 'components/ui/ProtectedRoute'
-import ScrollToTop from 'components/ui/ScrollToTop'
 import Terms from 'pages/Terms'
 import classnames, {
   display,
@@ -35,29 +34,27 @@ const bodyContainer = classnames(
 export default function () {
   return (
     <Router>
-      <ScrollToTop>
-        <div className={pageContainer}>
-          <Navbar />
-          <div className={bodyContainer}>
-            <Route path="/">
-              <LazyComponent lazyImported={<Landing />} />
-            </Route>
-            <ProtectedRoute path="/cast">
-              <Cast />
-            </ProtectedRoute>
-            <Route path="/terms">
-              <Terms />
-            </Route>
-            <Route path="/privacy">
-              <Privacy />
-            </Route>
-            <Route path="/create">
-              <CreateBurnerWallet />
-            </Route>
-          </div>
-          <Footer />
+      <div className={pageContainer}>
+        <Navbar />
+        <div className={bodyContainer}>
+          <Route path="/">
+            <LazyComponent lazyImported={<Landing />} />
+          </Route>
+          <ProtectedRoute path="/cast">
+            <Cast />
+          </ProtectedRoute>
+          <Route path="/terms">
+            <Terms />
+          </Route>
+          <Route path="/privacy">
+            <Privacy />
+          </Route>
+          <Route path="/create">
+            <CreateBurnerWallet />
+          </Route>
         </div>
-      </ScrollToTop>
+        <Footer />
+      </div>
       <ToastContainer position="bottom-right" theme="dark" />
     </Router>
   )

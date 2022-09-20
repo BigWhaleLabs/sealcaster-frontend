@@ -7,6 +7,7 @@ import classnames, {
   flexDirection,
   gap,
 } from 'classnames/tailwind'
+import useScrollToTop from 'hooks/useScrollToTop'
 
 const blocksWrapper = classnames(
   display('flex'),
@@ -16,6 +17,8 @@ const blocksWrapper = classnames(
 )
 
 export default function () {
+  useScrollToTop()
+
   return (
     <div className={blocksWrapper}>
       <BurnerBlock />
