@@ -89,7 +89,7 @@ setInterval(async () => {
       }
     )
   )
-  if (!ids) return
+  if (!ids.length) return
 
   await checkStatuses({
     ids,
