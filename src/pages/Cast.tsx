@@ -55,15 +55,18 @@ export default function () {
           ...posts,
         ])
 
+        const blockchainId = id.toNumber()
+        const status = PostStatus.pending
+
         PostIdsStatuses.lastUserPost = {
           [account]: {
-            blockchainId: id.toNumber(),
-            status: PostStatus.pending,
+            blockchainId,
+            status,
           },
           ...PostIdsStatuses.lastUserPost,
         }
-        PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve({
-          status: PostStatus.pending,
+        PostIdsStatuses.statuses[blockchainId] = Promise.resolve({
+          status,
         })
       }
       setText('')
