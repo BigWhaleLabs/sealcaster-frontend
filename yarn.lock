@@ -1538,10 +1538,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/constants@npm:^0.1.30":
-  version: 0.1.30
-  resolution: "@big-whale-labs/constants@npm:0.1.30"
-  checksum: 96e126edae6fe400386ae15465fe09aad4c4a1c11ebb360e840eb989ebaeec66ecda029cea950d6d57643c519ceb20239d28be74d6951b79cc22f60727947b5a
+"@big-whale-labs/constants@npm:^0.1.31":
+  version: 0.1.31
+  resolution: "@big-whale-labs/constants@npm:0.1.31"
+  checksum: 4a6669eadf1c13697fd45c14e6fbda0ff6be0d6bf5c50f82e81a535c420287618b5ccf46de1799c95518d76a1e1911d4f9dabc8d6c8bca42af41805a2246380a
   languageName: node
   linkType: hard
 
@@ -15899,7 +15899,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "sealcaster-frontend@workspace:."
   dependencies:
-    "@big-whale-labs/constants": ^0.1.30
+    "@big-whale-labs/constants": ^0.1.31
     "@big-whale-labs/frontend-utils": ^0.0.10
     "@big-whale-labs/seal-cred-posts-contract": ^0.0.13
     "@big-whale-labs/stores": ^0.1.17

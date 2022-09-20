@@ -125,11 +125,13 @@ export default function ({ privateKey }: { privateKey: string }) {
             </div>
           </div>
           <BodyText center primary semiBold>
-            <AccentText color="text-accent">Save this key—seriously</AccentText>
+            <AccentText color="text-accent">
+              Save this key — seriously
+            </AccentText>
             . Otherwise, you’ll lose it to the endless digital void where no
             wallets return from. This wallet is generated locally, so we will
-            never know this key, and it won’t be saved if you leave this
-            page—kinda sad if you think about it.
+            never know this key. However, unless you clean the website data,
+            this key will persist between page reloads in your browser.
           </BodyText>
           <CreateFirstCastButton />
           <BurnerWalletDivider />

@@ -66,14 +66,14 @@ class BurnerWalletStore extends PersistableStore {
       )
       const eddsaPublicKey = await getEddsaPublicKey()
       const nullifierMessage = getNullifierMessage()
-      onChange('Requires signiture...')
+      onChange('Requesting signature...')
       const nullifierSignature = await walletStore.signMessage(nullifierMessage)
       onChange('Obtaining token from attestor...')
       const ownershipSignature = await requestAddressOwnershipAttestation(
         nullifierSignature,
         nullifierMessage
       )
-      onChange('Generating Farcaster zk proof')
+      onChange('Generating Farcaster ZK proof')
       this.proof = await buildFarcasterProof(
         eddsaPublicKey,
         ownershipSignature,
@@ -82,7 +82,7 @@ class BurnerWalletStore extends PersistableStore {
     }
 
     try {
-      onChange('Applying Farcaster zk badge...')
+      onChange('Minting Farcaster ZK badge...')
       await createFarcasterBadge(signer, this.proof)
       if (!this.privateKey) this.privateKey = wallet.privateKey
     } finally {
