@@ -30,7 +30,7 @@ export default function ({ id }: { id?: string }) {
     <div className={wrapper}>
       <div className={textWrapper}>
         <HeaderText center size="small">
-          Cast rejected—that’s embarrassing
+          Cast rejected — that’s embarrassing
         </HeaderText>
         <div className={descriptionText}>
           <BodyText center>
