@@ -1,4 +1,4 @@
-# SealCaster frontend code
+# Sealcaster frontend code
 
 ## Local launch
 
