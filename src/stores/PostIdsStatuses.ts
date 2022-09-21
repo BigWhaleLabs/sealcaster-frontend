@@ -29,7 +29,7 @@ const postStatusStore = proxy<PostStatusStoreType>({
   statuses: {},
 })
 
-export async function updateStatuses(ids: number[]) {
+async function updateStatuses(ids: number[]) {
   const updatedStatuses = await getPostStatuses(ids)
 
   for (const { blockchainId, status, serviceId } of updatedStatuses) {
@@ -71,12 +71,10 @@ async function checkStatuses({ ids, force }: CheckStatusesStoreProps) {
   }
 }
 
-async function updateStatusesForSelectedPosts() {
+async function updateStatusesForAllPosts() {
   const ids = (await PostStore.posts).map(({ id }) => id.toNumber())
   void checkStatuses({ ids, force: true })
 }
-
-setInterval(() => updateStatusesForSelectedPosts(), 5000)
 
 setInterval(async () => {
   if (!postStatusStore.statuses) return
@@ -91,12 +89,14 @@ setInterval(async () => {
       }
     )
   )
-  if (!ids) return
+  if (!ids.length) return
 
   await checkStatuses({
     ids,
     force: false,
   })
 }, 5000)
+
+void updateStatusesForAllPosts()
 
 export default postStatusStore
