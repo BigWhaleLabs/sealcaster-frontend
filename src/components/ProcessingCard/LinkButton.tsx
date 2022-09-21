@@ -16,7 +16,7 @@ export default function ({
 }: LinkButtonProps) {
   const linkTitle = approved
     ? 'View cast on Farcaster'
-    : 'View cast on SealCaster'
+    : 'View cast on Sealcaster'
 
   return (
     <LinkText

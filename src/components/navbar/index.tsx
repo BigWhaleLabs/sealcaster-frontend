@@ -6,14 +6,14 @@ function NavBarSuspended() {
   const { account } = useAccount()
 
   return (
-    <Navbar account={account} needNetworkChange={false} logoText="SealCaster" />
+    <Navbar account={account} needNetworkChange={false} logoText="Sealcaster" />
   )
 }
 
 export default function () {
   return (
     <Suspense
-      fallback={<Navbar needNetworkChange={false} logoText="SealCaster" />}
+      fallback={<Navbar needNetworkChange={false} logoText="Sealcaster" />}
     >
       <NavBarSuspended />
     </Suspense>
