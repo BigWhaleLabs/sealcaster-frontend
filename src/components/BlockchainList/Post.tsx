@@ -1,8 +1,9 @@
-import { BodyText, LinkText, PostText, StatusText } from 'components/ui/Text'
-import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
+import { BodyText, PostText, StatusText } from 'components/ui/Text'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
+import EtherScanLink from 'components/BlockchainList/EtherScanLink'
 import PostTime from 'components/BlockchainList/PostTime'
+import Sender from 'components/BlockchainList/Sender'
 import Status from 'components/BlockchainList/Status'
 import classnames, {
   alignItems,
@@ -13,8 +14,6 @@ import classnames, {
   justifyContent,
   space,
 } from 'classnames/tailwind'
-import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
-import useAccount from 'hooks/useAccount'
 
 const container = classnames(
   display('flex'),
@@ -35,15 +34,6 @@ const postInfo = classnames(
   flexWrap('flex-wrap'),
   gap('gap-x-1')
 )
-
-function Sender({ sender }: { sender: string }) {
-  const { account } = useAccount()
-  return (
-    <LinkText extraSmall title={sender} url={getEtherscanAddressUrl(sender)}>
-      {sender === account ? 'you' : truncateMiddleIfNeeded(sender, 13)}
-    </LinkText>
-  )
-}
 
 export default function ({
   blockchainId,
@@ -69,13 +59,7 @@ export default function ({
                 <StatusText>Posted by: </StatusText>
                 <Sender sender={sender} />
                 <Delimiter />
-                <LinkText
-                  extraSmall
-                  title={derivativeAddress}
-                  url={getEtherscanAddressUrl(derivativeAddress)}
-                >
-                  Etherscan
-                </LinkText>
+                <EtherScanLink address={derivativeAddress} />
                 <Delimiter />
                 <Status blockchainId={blockchainId} />
               </span>
