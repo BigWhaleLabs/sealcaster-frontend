@@ -20,7 +20,7 @@ export default function () {
       <SubHeaderText>
         Everything will cast from{' '}
         <LinkText underline url={env.VITE_FARCASTER_PROFILE_URL}>
-          @echo
+          @sealcaster
         </LinkText>{' '}
         <div className={optionalTextWrapper}>(SealCredEcho)</div> on Farcaster.
       </SubHeaderText>
