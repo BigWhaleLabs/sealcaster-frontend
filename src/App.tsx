@@ -1,4 +1,4 @@
-import { Route, Router } from 'wouter'
+import { Route, Router, Switch } from 'wouter'
 import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import CreateBurnerWallet from 'pages/CreateBurnerWallet'
@@ -37,21 +37,23 @@ export default function () {
       <div className={pageContainer}>
         <Navbar />
         <div className={bodyContainer}>
-          <Route path="/">
-            <LazyComponent lazyImported={<Landing />} />
-          </Route>
-          <ProtectedRoute path="/cast">
-            <Cast />
-          </ProtectedRoute>
-          <Route path="/terms">
-            <Terms />
-          </Route>
-          <Route path="/privacy">
-            <Privacy />
-          </Route>
-          <Route path="/create">
-            <CreateBurnerWallet />
-          </Route>
+          <Switch>
+            <Route path="/">
+              <LazyComponent lazyImported={<Landing />} />
+            </Route>
+            <ProtectedRoute path="/cast">
+              <Cast />
+            </ProtectedRoute>
+            <Route path="/terms">
+              <Terms />
+            </Route>
+            <Route path="/privacy">
+              <Privacy />
+            </Route>
+            <Route path="/create">
+              <CreateBurnerWallet />
+            </Route>
+          </Switch>
         </div>
         <Footer />
       </div>
