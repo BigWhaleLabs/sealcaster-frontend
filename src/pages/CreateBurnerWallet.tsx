@@ -1,12 +1,10 @@
 import { HeaderText, PostText } from 'components/ui/Text'
 import { Redirect } from 'wouter'
-import { useEffect, useState } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
 import BurnerWalletCard from 'components/BurnerWalletCard'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import HowItWorks from 'components/HowItWorks'
 import classnames, { display, flexDirection, gap } from 'classnames/tailwind'
-import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
   display('flex'),
@@ -20,15 +18,7 @@ const topPart = classnames(
 )
 
 export default function () {
-  const { account } = useSnapshot(walletStore)
   const { privateKey } = useSnapshot(BurnerWalletStore)
-  const [error, setError] = useState('')
-  const [status, setStatus] = useState<string | undefined>()
-
-  useEffect(() => {
-    setStatus('')
-    setError('')
-  }, [account])
 
   return (
     <div className={wrapper}>
