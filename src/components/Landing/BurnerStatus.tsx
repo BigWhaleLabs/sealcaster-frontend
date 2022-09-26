@@ -33,7 +33,7 @@ export default function ({
     : 'Cast anonymously on Farcaster'
   const subHeaderText = incorrect
     ? 'Create a burner wallet with a Farcaster ZK badge to continue, or reconnect with the correct burner wallet'
-    : 'Protect your identity by creating a burner wallet'
+    : 'Protect your identity and cast anonymously with a burner wallet. Start by connecting the same wallet you connected to Farcaster.'
   const statusIcon = incorrect ? <SealSad /> : <SealGrid />
 
   return (

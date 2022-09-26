@@ -10,6 +10,7 @@ import classnames, {
 const recordContainer = classnames(
   display('flex'),
   flexDirection('flex-row'),
+  flex('flex-1'),
   gap('gap-x-4')
 )
 

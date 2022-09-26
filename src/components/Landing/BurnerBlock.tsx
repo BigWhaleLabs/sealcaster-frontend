@@ -37,13 +37,13 @@ const buttonWrapper = classnames(
 
 const buttonWithStatus = classnames(
   display('flex'),
-  flexDirection('flex-col', 'sm:flex-row'),
+  flexDirection('flex-col'),
   alignItems('items-center'),
-  textAlign('text-center', 'sm:text-left'),
-  gap('gap-y-4', 'sm:gap-x-4')
+  textAlign('text-center'),
+  gap('gap-y-4')
 )
 
-const buttonClass = classnames(display('block'), width('w-full', 'sm:w-64'))
+const buttonClass = classnames(display('block'), width('w-full'))
 const defaultMessage =
   'We could not match the username with the wallet you have connected. Please review them and try again.'
 
@@ -91,19 +91,19 @@ function BurnBlockSuspended() {
               loading={loading}
               onClick={generate}
             >
-              Create Burner Wallet
+              Connect & create burner wallet
             </Button>
-            {error && (
-              <ErrorText visible={!!error} withExclamation>
-                {error}
-              </ErrorText>
-            )}
-            {status && (
-              <AccentText small color="text-tertiary">
-                {status}
-              </AccentText>
-            )}
           </div>
+          {error && (
+            <ErrorText visible={!!error} withExclamation>
+              {error}
+            </ErrorText>
+          )}
+          {status && (
+            <AccentText small color="text-tertiary">
+              {status}
+            </AccentText>
+          )}
         </div>
       )}
       {(!account || isBurned) && <Dots />}

@@ -4,7 +4,7 @@ import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 export default function ({ hasBurnerWallet }: { hasBurnerWallet?: boolean }) {
   const title = hasBurnerWallet
     ? 'How does this work?'
-    : 'How this works in 2 easy steps'
+    : 'How this works in 3 easy steps'
   return (
     <>
       <div className={displayTo('xs')}>
