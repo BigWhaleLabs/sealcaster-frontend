@@ -43,7 +43,7 @@ const buttonWithStatus = classnames(
   gap('gap-y-4')
 )
 
-const buttonClass = classnames(display('block'), width('w-full'))
+const buttonClass = classnames(display('block'), width('w-full', 'sm:w-80'))
 const defaultMessage =
   'We could not match the username with the wallet you have connected. Please review them and try again.'
 
