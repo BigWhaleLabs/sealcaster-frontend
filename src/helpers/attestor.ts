@@ -31,12 +31,8 @@ export async function requestBalanceAttestation(
   return data
 }
 
-export async function requestFarcasterAttestation(
-  username: string,
-  address: string
-) {
+export async function requestFarcasterAttestation(address: string) {
   const { data } = await axios.post<BalanceSignature>(`${baseURL}/farcaster`, {
-    username,
     address,
   })
   return data
