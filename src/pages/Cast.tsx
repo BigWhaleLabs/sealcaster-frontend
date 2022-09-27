@@ -1,3 +1,4 @@
+import { AccentText } from 'components/ui/Text'
 import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Redirect } from 'wouter'
@@ -13,6 +14,7 @@ import PostStore from 'stores/PostStore'
 import TextArea from 'components/ui/TextArea'
 import TextareaInfo from 'components/Cast/TextareaInfo'
 import classnames, {
+  alignItems,
   display,
   flexDirection,
   gap,
@@ -101,7 +103,15 @@ export default function () {
                 disabled={!text}
               />
             </div>
-            <div className={displayFrom('md')}>
+            <div
+              className={classnames(
+                displayFrom('md'),
+                display('flex'),
+                flexDirection('flex-col'),
+                alignItems('items-start'),
+                gap('gap-y-2')
+              )}
+            >
               <Button
                 disabled={!text}
                 loading={isLoading}
@@ -110,6 +120,11 @@ export default function () {
               >
                 Cast
               </Button>
+              {isLoading && (
+                <AccentText extraSmall color="text-accent">
+                  Hang on, this often takes a minute or two...
+                </AccentText>
+              )}
             </div>
           </div>
           <div className={margin('mt-20', 'sm:mt-14')}>
