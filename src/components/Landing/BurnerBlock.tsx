@@ -20,7 +20,7 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 import getErrorMessage from 'helpers/getErrorMessage'
-import useAccount from 'hooks/useAccount'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
@@ -47,8 +47,8 @@ const buttonClass = classnames(display('block'), width('w-full', 'sm:w-80'))
 const defaultMessage =
   'We could not match the username with the wallet you have connected. Please review them and try again.'
 
-function BurnBlockSuspended() {
-  const { account, isBurned, hasPrivate } = useAccount()
+function BurnerBlockSuspended() {
+  const { account, isBurner, hasFarcasterBadge } = useBadgeAccount()
   const [location, setLocation] = useLocation()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -66,6 +66,7 @@ function BurnBlockSuspended() {
         setStatus
       )
       walletStore.exit()
+      setLocation('/wallet')
     } catch (error) {
       const errorMessage = getErrorMessage(error)
       setError(typeof errorMessage === 'string' ? errorMessage : defaultMessage)
@@ -73,14 +74,13 @@ function BurnBlockSuspended() {
     } finally {
       setStatus(undefined)
       setLoading(false)
-      setLocation('/create')
     }
   }
 
   return (
     <>
-      <BurnerStatus account={account} isBurned={isBurned} />
-      {!hasPrivate && (
+      <BurnerStatus loading={loading} />
+      {(!account || !hasFarcasterBadge || loading) && (
         <div className={buttonWithStatus}>
           <div className={buttonClass}>
             <Button
@@ -91,7 +91,9 @@ function BurnBlockSuspended() {
               loading={loading}
               onClick={generate}
             >
-              Connect & create burner wallet
+              {account
+                ? 'Create burner wallet'
+                : 'Connect & create burner wallet'}
             </Button>
           </div>
           {error && (
@@ -106,42 +108,46 @@ function BurnBlockSuspended() {
           )}
         </div>
       )}
-      {(!account || isBurned) && <Dots />}
-      {account ? (
-        isBurned && (
-          <Link href="/cast">
-            <div className={buttonWrapper}>
-              <GradientBorder>
-                <Button gradientFont type="secondary" small>
-                  Create cast
-                </Button>
-              </GradientBorder>
+      {!loading && (
+        <>
+          {(!account || isBurner) && <Dots />}
+          {account ? (
+            isBurner && (
+              <Link href="/cast">
+                <div className={buttonWrapper}>
+                  <GradientBorder>
+                    <Button gradientFont type="secondary" small>
+                      Create cast
+                    </Button>
+                  </GradientBorder>
+                </div>
+              </Link>
+            )
+          ) : (
+            <div className={space('space-y-4')}>
+              <SubHeaderText small>Already have a burner?</SubHeaderText>
+              <div className={buttonWrapper}>
+                <GradientBorder>
+                  <Button
+                    gradientFont
+                    type="secondary"
+                    small
+                    onClick={async () => {
+                      await walletStore.connect(true)
+                      if (
+                        (await walletStore.hasFarcasterBadge) &&
+                        location !== '/cast'
+                      )
+                        setLocation('/cast')
+                    }}
+                  >
+                    Connect burner
+                  </Button>
+                </GradientBorder>
+              </div>
             </div>
-          </Link>
-        )
-      ) : (
-        <div className={space('space-y-4')}>
-          <SubHeaderText small>Already have a burner?</SubHeaderText>
-          <div className={buttonWrapper}>
-            <GradientBorder>
-              <Button
-                gradientFont
-                type="secondary"
-                small
-                onClick={async () => {
-                  await walletStore.connect(true)
-                  if (
-                    (await walletStore.isBurnedWallet) &&
-                    location !== '/cast'
-                  )
-                    setLocation('/cast')
-                }}
-              >
-                Connect burner
-              </Button>
-            </GradientBorder>
-          </div>
-        </div>
+          )}
+        </>
       )}
     </>
   )
@@ -150,15 +156,8 @@ function BurnBlockSuspended() {
 export default function () {
   return (
     <div className={wrapper}>
-      <Suspense
-        fallback={
-          <>
-            <BurnerStatus />
-            <Loading />
-          </>
-        }
-      >
-        <BurnBlockSuspended />
+      <Suspense fallback={<Loading />}>
+        <BurnerBlockSuspended />
       </Suspense>
     </div>
   )

@@ -69,7 +69,7 @@ class BurnerWalletStore extends PersistableStore {
         nullifierSignature,
         nullifierMessage
       )
-      onChange('Generating Farcaster ZK proof')
+      onChange('Generating Farcaster ZK proof...')
       this.proof = await buildFarcasterProof(
         eddsaPublicKey,
         ownershipSignature,
