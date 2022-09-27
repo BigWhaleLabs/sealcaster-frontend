@@ -65,9 +65,11 @@ export default function ({
         </Button>
       </div>
       {loading && (
-        <AccentText extraSmall color="text-accent">
-          Hang on, this often takes a minute or two...
-        </AccentText>
+        <div className={displayTo('md')}>
+          <AccentText extraSmall color="text-accent">
+            Hang on, this often takes a minute or two...
+          </AccentText>
+        </div>
       )}
       <TrashBurner />
     </div>
