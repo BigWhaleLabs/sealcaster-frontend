@@ -55,12 +55,11 @@ function BurnerBlockSuspended() {
   return (
     <>
       <BurnerStatus loading={loading || burnerLoading} />
-      {(!account || !hasFarcasterBadge || loading) && (
+      {(!account || !hasFarcasterBadge || loading || burnerLoading) && (
         <div className={buttonWithStatus}>
           <div className={buttonClass}>
             <ConnectAndCreateButton
-              loading={loading}
-              burnerLoading={burnerLoading}
+              loading={loading || burnerLoading}
               onError={setError}
               onLoading={setLoading}
               account={account}
