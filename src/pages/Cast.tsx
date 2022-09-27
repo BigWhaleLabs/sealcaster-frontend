@@ -106,7 +106,7 @@ export default function () {
               </Button>
             </div>
           </div>
-          <div className={margin('mt-24')}>
+          <div className={margin('mt-20', 'sm:mt-14')}>
             <BlockchainList />
           </div>
         </>
