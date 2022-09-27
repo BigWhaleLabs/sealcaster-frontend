@@ -5,6 +5,7 @@ import ChildrenProp from 'models/ChildrenProp'
 import classnames, {
   backgroundColor,
   borderRadius,
+  fontFamily,
   padding,
   width,
   zIndex,
@@ -17,7 +18,8 @@ const tooltipClasses = classnames(
   zIndex('z-50'),
   borderRadius('rounded-lg'),
   highlightedText(false),
-  width('w-3/4', 'md:w-seal-grid')
+  width('w-3/4', 'md:w-seal-grid'),
+  fontFamily('font-primary')
 )
 
 export default function ({
@@ -37,6 +39,7 @@ export default function ({
 
   return (
     <Tooltip
+      open
       offset={offset}
       className={tooltipClasses}
       content={text}
