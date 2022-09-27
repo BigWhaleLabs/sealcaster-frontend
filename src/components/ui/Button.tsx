@@ -62,11 +62,13 @@ const commonClasses = ({
     cursor({ 'cursor-not-allowed': !available }),
     outlineStyle('focus:outline-none'),
     opacity({ 'opacity-50': !available }),
-    boxShadow({
-      'shadow-2xl': available,
-      'hover:shadow-lg': available,
-      'active:shadow-button-active': available && !gradientFont,
-    }),
+    type !== 'tertiary'
+      ? boxShadow({
+          'shadow-2xl': available,
+          'hover:shadow-lg': available,
+          'active:shadow-button-active': available && !gradientFont,
+        })
+      : undefined,
     width({ 'w-full': fullWidth }),
     textAlign({ 'text-center': center }),
     fontSize(small ? 'text-sm' : 'text-lg'),
