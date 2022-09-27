@@ -13,7 +13,10 @@ export default function ({ hasWallet }: { hasWallet?: boolean }) {
         </CardParagraph>
         <CardParagraph>
           If you’re interested in a deep dive, check out this{' '}
-          <LinkText underline url="https://blog.bigwhalelabs.com">
+          <LinkText
+            underline
+            url="https://blog.bigwhalelabs.com/introducing-sealcaster/"
+          >
             blog article
           </LinkText>{' '}
           that details the complicated stuff that actually isn’t that
