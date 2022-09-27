@@ -8,9 +8,6 @@ const castHeaderWrapper = classnames(
   flexDirection('flex-col'),
   gap('gap-y-4')
 )
-
-const optionalTextWrapper = classnames(displayFrom('md'), display('md:!inline'))
-
 export default function () {
   return (
     <div className={castHeaderWrapper}>
@@ -22,7 +19,7 @@ export default function () {
         <LinkText underline url={env.VITE_FARCASTER_PROFILE_URL}>
           @sealcaster
         </LinkText>{' '}
-        <div className={optionalTextWrapper}>(SealCredEcho)</div> on Farcaster.
+        on Farcaster.
       </SubHeaderText>
     </div>
   )
