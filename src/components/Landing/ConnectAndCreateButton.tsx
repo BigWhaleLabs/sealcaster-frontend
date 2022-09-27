@@ -30,13 +30,12 @@ export default function ({
   const createBurnerWallet = async () => {
     onError('')
     onLoading(true)
-    const { account: userAccount } = walletStore
 
     try {
-      if (!userAccount) await walletStore.connect(true)
-      if (!userAccount) return onError('Please connect the wallet')
+      if (!walletStore.account) await walletStore.connect(true)
+      if (!walletStore.account) return onError('Please connect the wallet')
 
-      await BurnerWalletStore.generateBurnerWallet(userAccount)
+      await BurnerWalletStore.generateBurnerWallet(walletStore.account)
       walletStore.exit()
       setLocation('/wallet')
     } catch (error) {
