@@ -34,7 +34,7 @@ export default function ({
     try {
       if (!walletStore.account) await walletStore.connect(true)
       if (!walletStore.account) return onError('Please connect the wallet')
-
+      if (await walletStore.hasFarcasterBadge) return
       await BurnerWalletStore.generateBurnerWallet(walletStore.account)
       walletStore.exit()
       setLocation('/wallet')
