@@ -31,7 +31,7 @@ const textAreaInfoWrapper = classnames(
 
 export default function () {
   const castingHintText =
-    'You’re casting from a burner wallet. Burner wallet is an anonymous wallet that’s not tied to your identity. This will persist between page loads until you disconnect.'
+    'You’re casting from a burner wallet. Burner wallet is an anonymous wallet that’s not tied to your identity. It will persist between page loads until you disconnect.'
 
   return (
     <div className={textAreaInfoWrapper}>
