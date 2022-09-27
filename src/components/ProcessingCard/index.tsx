@@ -28,8 +28,6 @@ const CastState = ({
   status: PostStatus
   castId?: number
 }) => {
-  console.log(status)
-
   switch (status) {
     case PostStatus.approved:
       return <Approved id={castId} />
