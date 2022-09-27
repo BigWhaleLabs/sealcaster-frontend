@@ -6,9 +6,6 @@ import Button from 'components/ui/Button'
 import getErrorMessage from 'helpers/getErrorMessage'
 import walletStore from 'stores/WalletStore'
 
-const defaultMessage =
-  'We could not match the username with the wallet you have connected. Please review them and try again.'
-
 export default function ({
   account,
   loading,
@@ -34,14 +31,28 @@ export default function ({
     try {
       if (!walletStore.account) await walletStore.connect(true)
       if (!walletStore.account) return onError('Please connect the wallet')
-
+      if (await walletStore.hasFarcasterBadge) return
       await BurnerWalletStore.generateBurnerWallet(walletStore.account)
       walletStore.exit()
       setLocation('/wallet')
     } catch (error) {
-      const errorMessage = getErrorMessage(error)
-      onError(typeof errorMessage === 'string' ? errorMessage : defaultMessage)
-      handleError(error)
+      let errorMessage = getErrorMessage(error)
+      if (
+        typeof errorMessage === 'string' &&
+        errorMessage.includes('user rejected signing')
+      ) {
+        errorMessage = 'Please sign the transaction to create a burner wallet'
+      }
+      onError(
+        typeof errorMessage === 'string'
+          ? errorMessage
+          : 'We could not match the username with the wallet you have connected. Please review them and try again.'
+      )
+      handleError(
+        typeof errorMessage === 'string'
+          ? new Error(errorMessage)
+          : errorMessage
+      )
     } finally {
       onLoading(false)
     }
