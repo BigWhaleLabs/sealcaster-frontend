@@ -75,12 +75,14 @@ function BurnerBlockSuspended() {
                   if (!walletStore.account) await walletStore.connect(true)
                   if (!walletStore.account)
                     return setError('Please connect the wallet')
+                  BurnerWalletStore.status = 'Connecting wallet...'
                   await BurnerWalletStore.generateBurnerWallet(
                     walletStore.account
                   )
                   walletStore.exit()
                   setLocation('/wallet')
                 } catch (error) {
+                  BurnerWalletStore.status = ''
                   const errorMessage = getErrorMessage(error)
                   setError(
                     typeof errorMessage === 'string'

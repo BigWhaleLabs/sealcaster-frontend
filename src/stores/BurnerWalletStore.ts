@@ -56,6 +56,7 @@ class BurnerWalletStore extends PersistableStore {
     try {
       const { signer, wallet } = await this.privateSigner()
 
+      this.status = 'Checking farcaster badge...'
       if (await hasFarcasterBadge(wallet.address)) return
 
       if (!this.proof) {
