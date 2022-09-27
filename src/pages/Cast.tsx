@@ -93,7 +93,11 @@ export default function () {
                 onTextChange={setText}
                 maxLength={maxLength}
               />
-              <TextareaInfo />
+              <TextareaInfo
+                loading={isLoading}
+                onButtonClick={createPost}
+                disabled={!text}
+              />
             </div>
             <div className={displayFrom('md')}>
               <Button
