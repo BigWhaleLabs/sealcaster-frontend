@@ -1,4 +1,4 @@
-import { Link } from 'wouter'
+import { Link, useRoute } from 'wouter'
 import {
   TDropShadow,
   TGradientColorStops,
@@ -318,17 +318,15 @@ export function FooterLink({
   children,
   internal,
 }: ChildrenProp & { url: string; internal?: boolean }) {
-  if (internal)
+  if (internal) {
+    const [isActive] = useRoute(url)
+
     return (
-      <Link
-        to={url}
-        className={({ isActive }: { isActive?: boolean }) =>
-          footerLink(isActive)
-        }
-      >
+      <Link to={url} className={footerLink(isActive)}>
         {children}
       </Link>
     )
+  }
 
   return (
     <a
