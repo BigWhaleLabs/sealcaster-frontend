@@ -1,5 +1,6 @@
 import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
+import { Redirect } from 'wouter'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { handleError } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
@@ -27,7 +28,7 @@ const processingCardWrapper = classnames(
 )
 
 export default function () {
-  const { account } = useBadgeAccount()
+  const { account, isBurner, hasFarcasterBadge } = useBadgeAccount()
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
 
@@ -79,33 +80,39 @@ export default function () {
 
   return (
     <div className={processingCardWrapper}>
-      <PostProcessing />
-      <div className={space('space-y-6')}>
-        <CastHeader />
-        <div className={space('md:space-y-2', 'space-y-4')}>
-          <TextArea
-            text={text}
-            disabled={isLoading}
-            placeholder="Write something here..."
-            onTextChange={setText}
-            maxLength={maxLength}
-          />
-          <TextareaInfo />
-        </div>
-        <div className={displayFrom('md')}>
-          <Button
-            disabled={!text}
-            loading={isLoading}
-            type="primary"
-            onClick={createPost}
-          >
-            Cast
-          </Button>
-        </div>
-      </div>
-      <div className={margin('mt-24')}>
-        <BlockchainList />
-      </div>
+      {isBurner || hasFarcasterBadge ? (
+        <>
+          <PostProcessing />
+          <div className={space('space-y-6')}>
+            <CastHeader />
+            <div className={space('md:space-y-2', 'space-y-4')}>
+              <TextArea
+                text={text}
+                disabled={isLoading}
+                placeholder="Write something here..."
+                onTextChange={setText}
+                maxLength={maxLength}
+              />
+              <TextareaInfo />
+            </div>
+            <div className={displayFrom('md')}>
+              <Button
+                disabled={!text}
+                loading={isLoading}
+                type="primary"
+                onClick={createPost}
+              >
+                Cast
+              </Button>
+            </div>
+          </div>
+          <div className={margin('mt-24')}>
+            <BlockchainList />
+          </div>
+        </>
+      ) : (
+        <Redirect to="/" />
+      )}
     </div>
   )
 }

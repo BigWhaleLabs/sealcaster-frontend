@@ -114,7 +114,8 @@ function BurnerBlockSuspended() {
         <>
           {(!account || isBurner) && <Dots />}
           {account ? (
-            isBurner && (
+            isBurner ||
+            (hasFarcasterBadge && (
               <Link href="/cast">
                 <div className={buttonWrapper}>
                   <GradientBorder>
@@ -124,7 +125,7 @@ function BurnerBlockSuspended() {
                   </GradientBorder>
                 </div>
               </Link>
-            )
+            ))
           ) : (
             <div className={space('space-y-4')}>
               <SubHeaderText small>Already have a burner?</SubHeaderText>
