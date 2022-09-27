@@ -30,6 +30,7 @@ const CastState = ({
 }) => {
   switch (status) {
     case PostStatus.approved:
+    case PostStatus.published:
       return <Approved id={castId} />
     case PostStatus.rejected:
       return <Rejected id={castId} />

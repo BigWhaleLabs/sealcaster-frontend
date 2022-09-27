@@ -29,7 +29,15 @@ const textAreaInfoWrapper = classnames(
   gap('gap-y-4', 'md:gap-y-0')
 )
 
-export default function () {
+export default function ({
+  loading,
+  disabled,
+  onButtonClick,
+}: {
+  loading?: boolean
+  disabled?: boolean
+  onButtonClick?: () => void
+}) {
   const castingHintText =
     'You’re casting from a burner wallet. Burner wallet is an anonymous wallet that’s not tied to your identity. It will persist between page loads until you disconnect.'
 
@@ -45,10 +53,24 @@ export default function () {
         </span>
       </AccentText>
       <div className={displayTo('md')}>
-        <Button disabled fullWidth center type="primary">
+        <Button
+          loading={loading}
+          fullWidth
+          center
+          type="primary"
+          disabled={disabled}
+          onClick={onButtonClick}
+        >
           Cast
         </Button>
       </div>
+      {loading && (
+        <div className={displayTo('md')}>
+          <AccentText extraSmall color="text-accent">
+            Hang on, this often takes a minute or two...
+          </AccentText>
+        </div>
+      )}
       <TrashBurner />
     </div>
   )
