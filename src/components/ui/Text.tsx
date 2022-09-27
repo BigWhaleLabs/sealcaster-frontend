@@ -486,3 +486,17 @@ export function HighlightedText({
 }) {
   return <div className={highlightedText(bold, center)}>{children}</div>
 }
+
+const trashButtonText = classnames(
+  textColor('text-secondary', 'active:text-secondary-light-transparent'),
+  fontSize('text-xs'),
+  textDecoration('underline'),
+  fontWeight('font-normal')
+)
+export function TrashButtonText({ children }: ChildrenProp) {
+  return (
+    <span className={classNamesToString(trashButtonText, 'hover-secondary')}>
+      {children}
+    </span>
+  )
+}
