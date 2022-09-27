@@ -80,16 +80,18 @@ function BurnerBlockSuspended() {
       {!loading && !burnerLoading && (
         <>
           {(!account || isBurner) && <Dots />}
-          {account && hasFarcasterBadge ? (
-            <Link href="/cast">
-              <div className={buttonWrapper}>
-                <GradientBorder>
-                  <Button gradientFont type="secondary" small>
-                    Create cast
-                  </Button>
-                </GradientBorder>
-              </div>
-            </Link>
+          {account ? (
+            hasFarcasterBadge && (
+              <Link href="/cast">
+                <div className={buttonWrapper}>
+                  <GradientBorder>
+                    <Button gradientFont type="secondary" small>
+                      Create cast
+                    </Button>
+                  </GradientBorder>
+                </div>
+              </Link>
+            )
           ) : (
             <div className={space('space-y-4')}>
               <SubHeaderText small>Already have a burner?</SubHeaderText>
@@ -129,3 +131,15 @@ export default function () {
     </div>
   )
 }
+
+/*
+
+Если есть приватный кошелек то показываем его
+
+Метамаск подключен
+- Есть бейджик?
+  Тогда каст
+- Нет бейджика
+  Тогда плашка что акк надо поменять
+
+*/
