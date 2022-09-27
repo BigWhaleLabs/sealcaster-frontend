@@ -6,7 +6,6 @@ import Footer from 'components/Footer'
 import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
 import Privacy from 'pages/Privacy'
-import ProtectedRoute from 'components/ui/ProtectedRoute'
 import Terms from 'pages/Terms'
 import classnames, {
   display,
@@ -41,9 +40,9 @@ export default function () {
             <Route path="/">
               <LazyComponent lazyImported={<Landing />} />
             </Route>
-            <ProtectedRoute path="/cast">
-              <Cast />
-            </ProtectedRoute>
+            <Route path="/cast">
+              <LazyComponent lazyImported={<Cast />} />
+            </Route>
             <Route path="/terms">
               <Terms />
             </Route>
