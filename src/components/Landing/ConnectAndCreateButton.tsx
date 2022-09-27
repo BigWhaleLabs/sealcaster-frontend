@@ -26,11 +26,16 @@ export default function ({
     : 'Connect & create burner wallet'
 
   const checkBadgeAndSignature = async (address: string) => {
+    BurnerWalletStore.burnerLoading = true
     try {
+      BurnerWalletStore.status = 'Checking Farcaster account...'
       await requestFarcasterAttestation(address)
       return true
     } catch (error) {
       return false
+    } finally {
+      BurnerWalletStore.burnerLoading = false
+      BurnerWalletStore.status = ''
     }
   }
 
