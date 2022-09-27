@@ -108,6 +108,7 @@ export function LinkText({
   gradientFrom,
   gradientTo,
   underline,
+  anchor,
 }: ChildrenProp & {
   url: string
   small?: boolean
@@ -118,6 +119,7 @@ export function LinkText({
   gradientFrom?: TGradientColorStops
   gradientTo?: TGradientColorStops
   underline?: boolean
+  anchor?: boolean
 }) {
   const linkClassnames = linkText(
     small,
@@ -129,7 +131,11 @@ export function LinkText({
   )
 
   if (internal)
-    return (
+    return anchor ? (
+      <a href={url} className={linkClassnames}>
+        {children}
+      </a>
+    ) : (
       <Link to={url} className={linkClassnames}>
         {children}
       </Link>

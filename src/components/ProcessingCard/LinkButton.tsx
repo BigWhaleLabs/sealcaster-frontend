@@ -8,12 +8,7 @@ interface LinkButtonProps {
   onClick?: () => void
 }
 
-export default function ({
-  url,
-  internal,
-  approved,
-  onClick,
-}: LinkButtonProps) {
+export default function ({ url, internal, approved }: LinkButtonProps) {
   const linkTitle = approved
     ? 'View cast on Farcaster'
     : 'View cast on Sealcaster'
@@ -25,14 +20,9 @@ export default function ({
       internal={internal}
       gradientFrom="from-secondary"
       gradientTo="to-accent"
+      anchor
     >
-      <Button
-        small
-        withArrow
-        gradientFont
-        type="tertiary"
-        onClick={() => onClick && onClick()}
-      >
+      <Button small withArrow gradientFont type="tertiary">
         {linkTitle}
       </Button>
     </LinkText>
