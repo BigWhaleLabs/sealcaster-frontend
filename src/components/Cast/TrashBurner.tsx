@@ -18,14 +18,14 @@ export default function () {
         type="tertiary"
         onClick={() => {
           const confirmation = window.confirm(
-            'Are you sure you want to trash burner wallet and disconnect?'
+            'Are you sure you want to trash the burner wallet? You cannot undo this action!'
           )
           if (!confirmation) return
           BurnerWalletStore.burn()
           setLocation('/')
         }}
       >
-        <TrashButtonText>Trash wallet and disconnect</TrashButtonText>
+        <TrashButtonText>Trash wallet</TrashButtonText>
       </Button>
     </span>
   )
