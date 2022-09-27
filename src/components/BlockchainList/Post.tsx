@@ -65,7 +65,9 @@ export default function ({
               </span>
             </BodyText>
             <BodyText primary noWrap>
-              <PostTime timestamp={timestamp} />
+              <span className={postInfo}>
+                <PostTime timestamp={timestamp} />
+              </span>
             </BodyText>
           </div>
         </div>
