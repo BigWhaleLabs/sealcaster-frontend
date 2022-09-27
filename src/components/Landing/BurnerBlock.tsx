@@ -63,6 +63,7 @@ function BurnerBlockSuspended() {
               burnerLoading={burnerLoading}
               onError={setError}
               onLoading={setLoading}
+              account={account}
             />
           </div>
           {error && (
