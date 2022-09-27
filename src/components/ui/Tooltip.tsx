@@ -39,7 +39,6 @@ export default function ({
 
   return (
     <Tooltip
-      open
       offset={offset}
       className={tooltipClasses}
       content={text}
