@@ -25,7 +25,7 @@ const descriptionText = classnames(
   margin('mx-2', 'sm:mx-0')
 )
 
-export default function ({ id }: { id?: string }) {
+export default function ({ id }: { id?: number }) {
   return (
     <div className={wrapper}>
       <div className={textWrapper}>

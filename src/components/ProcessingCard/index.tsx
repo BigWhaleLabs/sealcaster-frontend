@@ -1,6 +1,7 @@
 import { PostStatus } from 'models/PostStatus'
 import { useSnapshot } from 'valtio'
 import Approved from 'components/ProcessingCard/Approved'
+import FailedToPost from 'components/ProcessingCard/FailedToPost'
 import Pending from 'components/ProcessingCard/Pending'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
 import Rejected from 'components/ProcessingCard/Rejected'
@@ -25,13 +26,17 @@ const CastState = ({
   castId,
 }: {
   status: PostStatus
-  castId?: string
+  castId?: number
 }) => {
+  console.log(status)
+
   switch (status) {
     case PostStatus.approved:
       return <Approved id={castId} />
     case PostStatus.rejected:
       return <Rejected id={castId} />
+    case PostStatus.failedToPost:
+      return <FailedToPost id={castId} />
     default:
       return <Pending />
   }
@@ -43,11 +48,11 @@ export default function () {
 
   if (!account || !lastUserPost || !lastUserPost[account]) return null
 
-  const { status } = lastUserPost[account]
+  const { status, blockchainId } = lastUserPost[account]
 
   return (
     <div className={cardWrapper}>
-      <CastState status={status} castId="123" />
+      <CastState status={status} castId={blockchainId} />
     </div>
   )
 }
