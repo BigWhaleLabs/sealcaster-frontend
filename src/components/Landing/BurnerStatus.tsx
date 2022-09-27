@@ -21,6 +21,7 @@ const headerTextWrapper = classnames(
 )
 export default function ({ loading }: { loading: boolean }) {
   const { account, hasFarcasterBadge } = useBadgeAccount()
+  console.log('loading inside BurnerStatus', loading)
   const accountWithoutBadgeConnected = account && !hasFarcasterBadge && !loading
   return (
     <>
