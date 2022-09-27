@@ -1,4 +1,4 @@
-import { BodyText, HeaderText } from 'components/ui/Text'
+import { BodyText, HeaderText, LinkText } from 'components/ui/Text'
 import LinkButton from 'components/ProcessingCard/LinkButton'
 import classnames, {
   alignItems,
@@ -30,12 +30,13 @@ export default function ({ id }: { id?: number }) {
     <div className={wrapper}>
       <div className={textWrapper}>
         <HeaderText center size="small">
-          Cast rejected — that’s embarrassing
+          Failed to post :(
         </HeaderText>
         <div className={descriptionText}>
           <BodyText center>
-            Casts are rejected if they contain extreme profanity, are duplicates
-            of recent posts, or are spam.
+            Looks like something happened during casting, please try again or{' '}
+            <LinkText url="https://discord.gg/NHk96pPZUV">contact us</LinkText>{' '}
+            :)
           </BodyText>
         </div>
       </div>
