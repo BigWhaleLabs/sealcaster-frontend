@@ -5,13 +5,13 @@ export default function () {
   return (
     <OrderedList>
       <CardParagraph>
-        You'll verify that you have a profile on Farcaster by connecting the
-        wallet you connected to Farcaster.
+        You verify that you have a profile on Farcaster by connecting a wallet
+        you connected to Farcaster.
       </CardParagraph>
       <CardParagraph>
-        We'll create your burner wallet with a Farcaster zk badge.
+        We create your burner wallet with a Farcaster ZK badge.
       </CardParagraph>
-      <CardParagraph>Create a cast that will be anonymous.</CardParagraph>
+      <CardParagraph>You create a cast that will be anonymous.</CardParagraph>
     </OrderedList>
   )
 }
