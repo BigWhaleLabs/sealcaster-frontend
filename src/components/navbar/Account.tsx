@@ -23,7 +23,7 @@ export default function ({
       <div
         onClick={async () => {
           await walletStore.connect(true)
-          if ((await walletStore.isBurnedWallet) && location !== '/cast')
+          if ((await walletStore.hasFarcasterBadge) && location !== '/cast')
             setLocation('/cast')
         }}
       >

@@ -50,7 +50,6 @@ class BurnerWalletStore extends PersistableStore {
   }
 
   async generateBurnerWallet(
-    username: string,
     address: string,
     onChange: (status: string) => void
   ) {
@@ -60,10 +59,7 @@ class BurnerWalletStore extends PersistableStore {
 
     if (!this.proof) {
       onChange('Checking farcaster account...')
-      const farcasterSignature = await requestFarcasterAttestation(
-        username,
-        address
-      )
+      const farcasterSignature = await requestFarcasterAttestation(address)
       const eddsaPublicKey = await getEddsaPublicKey()
       const nullifierMessage = getNullifierMessage()
       onChange('Requesting signature...')
@@ -73,7 +69,7 @@ class BurnerWalletStore extends PersistableStore {
         nullifierSignature,
         nullifierMessage
       )
-      onChange('Generating Farcaster ZK proof')
+      onChange('Generating Farcaster ZK proof...')
       this.proof = await buildFarcasterProof(
         eddsaPublicKey,
         ownershipSignature,

@@ -8,6 +8,7 @@ import classnames, {
   textAlign,
   width,
 } from 'classnames/tailwind'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const sealGridWrapper = classnames(
   display('flex'),
@@ -18,33 +19,28 @@ const headerTextWrapper = classnames(
   space('space-y-2'),
   textAlign('text-center')
 )
-
-export default function ({
-  account,
-  isBurned,
-}: {
-  account?: string
-  isBurned?: boolean
-}) {
-  const incorrect = account && !isBurned
-
-  const headerText = incorrect
-    ? 'It looks like you connected a wallet without the correct ZK badge'
-    : 'Cast anonymously on Farcaster'
-  const subHeaderText = incorrect
-    ? 'Create a burner wallet with a Farcaster ZK badge to continue, or reconnect with the correct burner wallet'
-    : 'Protect your identity by creating a burner wallet'
-  const statusIcon = incorrect ? <SealSad /> : <SealGrid />
-
+export default function ({ loading }: { loading: boolean }) {
+  const { account, hasFarcasterBadge } = useBadgeAccount()
+  const accountWithoutBadgeConnected = account && !hasFarcasterBadge && !loading
   return (
     <>
-      <div className={sealGridWrapper}>{statusIcon}</div>
+      <div className={sealGridWrapper}>
+        {accountWithoutBadgeConnected ? <SealSad /> : <SealGrid />}
+      </div>
       <div className={headerTextWrapper}>
         <HeaderText center extraLeading size="large">
-          {headerText}
+          {accountWithoutBadgeConnected
+            ? 'It looks like you connected a wallet without a correct ZK badge'
+            : 'Cast anonymously on Farcaster'}
         </HeaderText>
         <SubHeaderText small primary>
-          {subHeaderText}
+          {accountWithoutBadgeConnected
+            ? 'Create a burner wallet with a Farcaster ZK badge to continue, or reconnect with a correct burner wallet'
+            : `Protect your identity and cast anonymously with a burner wallet.${
+                account
+                  ? ''
+                  : ' Start by connecting the same wallet you connected to Farcaster.'
+              }`}
         </SubHeaderText>
       </div>
     </>

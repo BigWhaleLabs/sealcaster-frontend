@@ -5,13 +5,10 @@ import farcasterLedger from 'helpers/farcasterLedger'
 export default async function (address: string) {
   const farcatesterDerivativeAddress =
     await farcasterLedger.originalToDerivative('farcaster')
-
   const contract = SCFarcasterDerivative__factory.connect(
     farcatesterDerivativeAddress,
     defaultProvider
   )
-
   const balance = await contract.balanceOf(address)
-
-  return !balance.eq(0)
+  return balance.gt(0)
 }

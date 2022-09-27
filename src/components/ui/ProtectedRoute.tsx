@@ -1,16 +1,14 @@
 import { Redirect, Route, RouteProps, useLocation } from 'wouter'
 import { Suspense } from 'preact/compat'
 import Loading from 'icons/Loading'
-import useAccount from 'hooks/useAccount'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 
 function ProtectedSuspended({ ...rest }: RouteProps) {
-  const { isBurned, walletLoading } = useAccount()
+  const { isBurner, walletLoading } = useBadgeAccount()
   const [location] = useLocation()
 
   if (walletLoading) return <Loading screenCentre />
-
-  if (!isBurned && rest.path === location) return <Redirect to="/" />
-
+  if (!isBurner && rest.path === location) return <Redirect to="/" />
   return <Route {...rest} />
 }
 

@@ -1,7 +1,7 @@
 import { Route, Router, Switch } from 'wouter'
 import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
-import CreateBurnerWallet from 'pages/CreateBurnerWallet'
+import BurnerWallet from 'pages/BurnerWallet'
 import Footer from 'components/Footer'
 import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
@@ -50,8 +50,8 @@ export default function () {
             <Route path="/privacy">
               <Privacy />
             </Route>
-            <Route path="/create">
-              <CreateBurnerWallet />
+            <Route path="/wallet">
+              <BurnerWallet />
             </Route>
           </Switch>
         </div>

@@ -18,7 +18,7 @@ import classnames, {
   margin,
   space,
 } from 'classnames/tailwind'
-import useAccount from 'hooks/useAccount'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const processingCardWrapper = classnames(
   flexDirection('flex-col'),
@@ -27,7 +27,7 @@ const processingCardWrapper = classnames(
 )
 
 export default function () {
-  const { account } = useAccount()
+  const { account } = useBadgeAccount()
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
 

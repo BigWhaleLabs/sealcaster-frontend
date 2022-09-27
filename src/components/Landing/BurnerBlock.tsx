@@ -1,7 +1,10 @@
+import { AccentText, ErrorText, SubHeaderText } from 'components/ui/Text'
 import { Link, useLocation } from 'wouter'
-import { SubHeaderText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
+import { handleError } from '@big-whale-labs/frontend-utils'
+import { useState } from 'preact/hooks'
 import BurnerStatus from 'components/Landing/BurnerStatus'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import Dots from 'icons/Dots'
 import GradientBorder from 'components/ui/GradientBorder'
@@ -10,10 +13,14 @@ import classnames, {
   alignItems,
   display,
   flexDirection,
+  gap,
   justifyContent,
   space,
+  textAlign,
+  width,
 } from 'classnames/tailwind'
-import useAccount from 'hooks/useAccount'
+import getErrorMessage from 'helpers/getErrorMessage'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
@@ -28,54 +35,119 @@ const buttonWrapper = classnames(
   justifyContent('justify-center')
 )
 
-function BurnBlockSuspended() {
-  const { account, isBurned, hasPrivate } = useAccount()
+const buttonWithStatus = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  alignItems('items-center'),
+  textAlign('text-center'),
+  gap('gap-y-4')
+)
+
+const buttonClass = classnames(display('block'), width('w-full', 'sm:w-80'))
+const defaultMessage =
+  'We could not match the username with the wallet you have connected. Please review them and try again.'
+
+function BurnerBlockSuspended() {
+  const { account, isBurner, hasFarcasterBadge } = useBadgeAccount()
   const [location, setLocation] = useLocation()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [status, setStatus] = useState<string | undefined>()
+
+  const generate = async () => {
+    setError('')
+    setLoading(true)
+
+    try {
+      if (!walletStore.account) await walletStore.connect(true)
+      if (!walletStore.account) return setError('Please connect the wallet')
+      await BurnerWalletStore.generateBurnerWallet(
+        walletStore.account,
+        setStatus
+      )
+      walletStore.exit()
+      setLocation('/wallet')
+    } catch (error) {
+      const errorMessage = getErrorMessage(error)
+      setError(typeof errorMessage === 'string' ? errorMessage : defaultMessage)
+      handleError(error)
+    } finally {
+      setStatus(undefined)
+      setLoading(false)
+    }
+  }
 
   return (
     <>
-      <BurnerStatus account={account} isBurned={isBurned} />
-      {!hasPrivate && (
-        <Link href="/create">
-          <Button type="primary">Create Burner Wallet</Button>
-        </Link>
-      )}
-      {(!account || isBurned) && <Dots />}
-      {account ? (
-        isBurned && (
-          <Link href="/cast">
-            <div className={buttonWrapper}>
-              <GradientBorder>
-                <Button gradientFont type="secondary" small>
-                  Create cast
-                </Button>
-              </GradientBorder>
-            </div>
-          </Link>
-        )
-      ) : (
-        <div className={space('space-y-4')}>
-          <SubHeaderText small>Already have a burner?</SubHeaderText>
-          <div className={buttonWrapper}>
-            <GradientBorder>
-              <Button
-                gradientFont
-                type="secondary"
-                small
-                onClick={async () => {
-                  await walletStore.connect(true)
-                  if (
-                    (await walletStore.isBurnedWallet) &&
-                    location !== '/cast'
-                  )
-                    setLocation('/cast')
-                }}
-              >
-                Connect burner
-              </Button>
-            </GradientBorder>
+      <BurnerStatus loading={loading} />
+      {(!account || !hasFarcasterBadge || loading) && (
+        <div className={buttonWithStatus}>
+          <div className={buttonClass}>
+            <Button
+              type="primary"
+              center
+              fullWidth
+              loadingOverflow
+              loading={loading}
+              onClick={generate}
+            >
+              {account
+                ? 'Create burner wallet'
+                : 'Connect & create burner wallet'}
+            </Button>
           </div>
+          {error && (
+            <ErrorText visible={!!error} withExclamation>
+              {error}
+            </ErrorText>
+          )}
+          {status && (
+            <AccentText small color="text-tertiary">
+              {status}
+            </AccentText>
+          )}
         </div>
+      )}
+      {!loading && (
+        <>
+          {(!account || isBurner) && <Dots />}
+          {account ? (
+            isBurner && (
+              <Link href="/cast">
+                <div className={buttonWrapper}>
+                  <GradientBorder>
+                    <Button gradientFont type="secondary" small>
+                      Create cast
+                    </Button>
+                  </GradientBorder>
+                </div>
+              </Link>
+            )
+          ) : (
+            <div className={space('space-y-4')}>
+              <SubHeaderText small>Already have a burner?</SubHeaderText>
+              <div className={buttonWrapper}>
+                <GradientBorder>
+                  <Button
+                    gradientFont
+                    type="secondary"
+                    small
+                    onClick={async () => {
+                      await walletStore.connect(true)
+                      if (
+                        (await walletStore.hasFarcasterBadge) &&
+                        location !== '/cast'
+                      )
+                        setLocation('/cast')
+                    }}
+                  >
+                    Connect burner
+                  </Button>
+                </GradientBorder>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </>
   )
@@ -84,15 +156,8 @@ function BurnBlockSuspended() {
 export default function () {
   return (
     <div className={wrapper}>
-      <Suspense
-        fallback={
-          <>
-            <BurnerStatus />
-            <Loading />
-          </>
-        }
-      >
-        <BurnBlockSuspended />
+      <Suspense fallback={<Loading />}>
+        <BurnerBlockSuspended />
       </Suspense>
     </div>
   )
