@@ -10,13 +10,11 @@ import walletStore from 'stores/WalletStore'
 export default function ({
   account,
   loading,
-  burnerLoading,
   onError,
   onLoading,
 }: {
   account?: string
   loading: boolean
-  burnerLoading: boolean
   onError: (error: string) => void
   onLoading: (loading: boolean) => void
 }) {
@@ -88,7 +86,7 @@ export default function ({
           fullWidth
           loadingOverflow
           type="primary"
-          loading={loading || burnerLoading}
+          loading={loading}
           onClick={createBurnerWallet}
         >
           {buttonTitle}
@@ -100,7 +98,7 @@ export default function ({
           fullWidth
           loadingOverflow
           type="primary"
-          loading={loading || burnerLoading}
+          loading={loading}
           onClick={createBurnerWallet}
         >
           {buttonTitle}

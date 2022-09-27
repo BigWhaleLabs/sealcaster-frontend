@@ -59,8 +59,7 @@ function BurnerBlockSuspended() {
         <div className={buttonWithStatus}>
           <div className={buttonClass}>
             <ConnectAndCreateButton
-              loading={loading}
-              burnerLoading={burnerLoading}
+              loading={loading || burnerLoading}
               onError={setError}
               onLoading={setLoading}
               account={account}
