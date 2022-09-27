@@ -20,6 +20,8 @@ import walletStore from 'stores/WalletStore'
 class BurnerWalletStore extends PersistableStore {
   privateKey?: string
   proof?: ProofResult
+  burnerLoading = false
+  status = ''
 
   burn() {
     this.privateKey = undefined
@@ -49,40 +51,45 @@ class BurnerWalletStore extends PersistableStore {
     }
   }
 
-  async generateBurnerWallet(
-    address: string,
-    onChange: (status: string) => void
-  ) {
-    const { signer, wallet } = await this.privateSigner()
-
-    if (await hasFarcasterBadge(wallet.address)) return
-
-    if (!this.proof) {
-      onChange('Checking farcaster account...')
-      const farcasterSignature = await requestFarcasterAttestation(address)
-      const eddsaPublicKey = await getEddsaPublicKey()
-      const nullifierMessage = getNullifierMessage()
-      onChange('Requesting signature...')
-      const nullifierSignature = await walletStore.signMessage(nullifierMessage)
-      onChange('Obtaining token from attestor...')
-      const ownershipSignature = await requestAddressOwnershipAttestation(
-        nullifierSignature,
-        nullifierMessage
-      )
-      onChange('Generating Farcaster ZK proof...')
-      this.proof = await buildFarcasterProof(
-        eddsaPublicKey,
-        ownershipSignature,
-        farcasterSignature
-      )
-    }
-
+  async generateBurnerWallet(address: string) {
+    this.burnerLoading = true
     try {
-      onChange('Minting Farcaster ZK badge...')
-      await createFarcasterBadge(signer, this.proof)
-      if (!this.privateKey) this.privateKey = wallet.privateKey
+      const { signer, wallet } = await this.privateSigner()
+
+      if (await hasFarcasterBadge(wallet.address)) return
+
+      if (!this.proof) {
+        this.status = 'Checking farcaster account...'
+        const farcasterSignature = await requestFarcasterAttestation(address)
+        const eddsaPublicKey = await getEddsaPublicKey()
+        const nullifierMessage = getNullifierMessage()
+        this.status = 'Requesting signature...'
+        const nullifierSignature = await walletStore.signMessage(
+          nullifierMessage
+        )
+        this.status = 'Obtaining token from attestor...'
+        const ownershipSignature = await requestAddressOwnershipAttestation(
+          nullifierSignature,
+          nullifierMessage
+        )
+        this.status = 'Generating Farcaster ZK proof...'
+        this.proof = await buildFarcasterProof(
+          eddsaPublicKey,
+          ownershipSignature,
+          farcasterSignature
+        )
+      }
+
+      try {
+        this.status = 'Minting Farcaster ZK badge...'
+        await createFarcasterBadge(signer, this.proof)
+        if (!this.privateKey) this.privateKey = wallet.privateKey
+      } finally {
+        this.proof = undefined
+      }
     } finally {
-      this.proof = undefined
+      this.burnerLoading = false
+      this.status = ''
     }
   }
 }

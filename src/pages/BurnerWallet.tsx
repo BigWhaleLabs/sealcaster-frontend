@@ -35,7 +35,7 @@ export default function () {
           </>
         </div>
       ) : (
-        <Redirect to={'/'} />
+        <Redirect to="/" />
       )}
       <HowItWorks />
     </div>

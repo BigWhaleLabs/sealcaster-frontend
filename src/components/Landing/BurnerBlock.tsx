@@ -2,6 +2,7 @@ import { AccentText, ErrorText, SubHeaderText } from 'components/ui/Text'
 import { Link, useLocation } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { handleError } from '@big-whale-labs/frontend-utils'
+import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import BurnerStatus from 'components/Landing/BurnerStatus'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
@@ -52,34 +53,11 @@ function BurnerBlockSuspended() {
   const [location, setLocation] = useLocation()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [status, setStatus] = useState<string | undefined>()
-
-  const generate = async () => {
-    setError('')
-    setLoading(true)
-
-    try {
-      if (!walletStore.account) await walletStore.connect(true)
-      if (!walletStore.account) return setError('Please connect the wallet')
-      await BurnerWalletStore.generateBurnerWallet(
-        walletStore.account,
-        setStatus
-      )
-      walletStore.exit()
-      setLocation('/wallet')
-    } catch (error) {
-      const errorMessage = getErrorMessage(error)
-      setError(typeof errorMessage === 'string' ? errorMessage : defaultMessage)
-      handleError(error)
-    } finally {
-      setStatus(undefined)
-      setLoading(false)
-    }
-  }
+  const { burnerLoading, status } = useSnapshot(BurnerWalletStore)
 
   return (
     <>
-      <BurnerStatus loading={loading} />
+      <BurnerStatus loading={loading || burnerLoading} />
       {(!account || !hasFarcasterBadge || loading) && (
         <div className={buttonWithStatus}>
           <div className={buttonClass}>
@@ -88,8 +66,32 @@ function BurnerBlockSuspended() {
               center
               fullWidth
               loadingOverflow
-              loading={loading}
-              onClick={generate}
+              loading={loading || burnerLoading}
+              onClick={async () => {
+                setError('')
+                setLoading(true)
+
+                try {
+                  if (!walletStore.account) await walletStore.connect(true)
+                  if (!walletStore.account)
+                    return setError('Please connect the wallet')
+                  await BurnerWalletStore.generateBurnerWallet(
+                    walletStore.account
+                  )
+                  walletStore.exit()
+                  setLocation('/wallet')
+                } catch (error) {
+                  const errorMessage = getErrorMessage(error)
+                  setError(
+                    typeof errorMessage === 'string'
+                      ? errorMessage
+                      : defaultMessage
+                  )
+                  handleError(error)
+                } finally {
+                  setLoading(false)
+                }
+              }}
             >
               {account
                 ? 'Create burner wallet'
