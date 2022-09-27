@@ -23,15 +23,20 @@ export default function ({
   onLoading: (loading: boolean) => void
 }) {
   const [, setLocation] = useLocation()
+  const buttonTitle = account
+    ? 'Create burner wallet'
+    : 'Connect & create burner wallet'
 
   const createBurnerWallet = async () => {
     onError('')
     onLoading(true)
+    const { account: userAccount } = walletStore
 
     try {
-      if (!walletStore.account) await walletStore.connect(true)
-      if (!walletStore.account) return onError('Please connect the wallet')
-      await BurnerWalletStore.generateBurnerWallet(walletStore.account)
+      if (!userAccount) await walletStore.connect(true)
+      if (!userAccount) return onError('Please connect the wallet')
+
+      await BurnerWalletStore.generateBurnerWallet(userAccount)
       walletStore.exit()
       setLocation('/wallet')
     } catch (error) {
@@ -55,7 +60,7 @@ export default function ({
           loading={loading || burnerLoading}
           onClick={createBurnerWallet}
         >
-          {account ? 'Create burner wallet' : 'Connect & create burner wallet'}
+          {buttonTitle}
         </Button>
       </div>
       <div className={displayFrom('md')}>
@@ -67,7 +72,7 @@ export default function ({
           loading={loading || burnerLoading}
           onClick={createBurnerWallet}
         >
-          {account ? 'Create burner wallet' : 'Connect & create burner wallet'}
+          {buttonTitle}
         </Button>
       </div>
     </>
