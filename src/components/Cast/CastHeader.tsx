@@ -22,7 +22,7 @@ export default function () {
         <LinkText underline url={env.VITE_FARCASTER_PROFILE_URL}>
           @sealcaster
         </LinkText>{' '}
-        <div className={optionalTextWrapper}>(SealCredEcho)</div> on Farcaster.
+        <div className={optionalTextWrapper}>(Sealcaster)</div> on Farcaster.
       </SubHeaderText>
     </div>
   )
