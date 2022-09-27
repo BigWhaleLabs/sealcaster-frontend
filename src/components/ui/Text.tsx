@@ -15,6 +15,7 @@ import {
   fontWeight,
   gradientColorStops,
   lineHeight,
+  margin,
   placeholderColor,
   space,
   textAlign,
@@ -423,7 +424,7 @@ export function TextareaText({
 const errorTextBox = (visible?: boolean) =>
   classnames(
     display(visible ? 'flex' : 'hidden'),
-    alignItems('items-center'),
+    alignItems('items-start'),
     space('space-x-2')
   )
 const errorText = (centered?: boolean) =>
@@ -433,6 +434,7 @@ const errorText = (centered?: boolean) =>
     fontFamily('font-primary'),
     textAlign({ 'text-center': centered })
   )
+const exclamation = margin('mt-1.5')
 export function ErrorText({
   children,
   withExclamation,
@@ -448,7 +450,9 @@ export function ErrorText({
   if (withExclamation)
     return (
       <div className={errorTextBox(visible)}>
-        <ExclamationInCircle />
+        <div className={exclamation}>
+          <ExclamationInCircle />
+        </div>
         {error}
       </div>
     )
