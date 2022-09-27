@@ -1,3 +1,4 @@
+import { Link } from 'wouter'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
 import ExternalLink from 'components/ui/ExternalLink'
 import LastDelimiter from 'components/ui/LastDelimiter'
@@ -13,6 +14,7 @@ import classnames, {
   space,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const walletContainer = classnames(
   display('flex'),
@@ -39,17 +41,23 @@ const AccountContainer = ({
   needNetworkChange: boolean
   eNSName?: string
 }) => {
+  const { isBurner } = useBadgeAccount()
+  const content = (
+    <div className={accountLinkContainer}>
+      <AccountAndLogo
+        needNetworkChange={needNetworkChange}
+        account={account}
+        eNSName={eNSName}
+        connected={true}
+      />
+    </div>
+  )
   if (account)
-    return (
+    return isBurner ? (
+      <Link href="/wallet">{content}</Link>
+    ) : (
       <ExternalLink url={getEtherscanAddressUrl(account, Network.Goerli)}>
-        <div className={accountLinkContainer}>
-          <AccountAndLogo
-            needNetworkChange={needNetworkChange}
-            account={account}
-            eNSName={eNSName}
-            connected={true}
-          />
-        </div>
+        {content}
       </ExternalLink>
     )
 
