@@ -15,7 +15,7 @@ export default function ({
   approved,
   cleanQuery = true,
 }: LinkButtonProps) {
-  const [location, setLocation] = useLocation()
+  const [, setLocation] = useLocation()
   const linkTitle = approved
     ? 'View cast on Farcaster'
     : 'View cast on Sealcaster'
@@ -35,7 +35,8 @@ export default function ({
         gradientFont
         type="tertiary"
         onClick={() => {
-          if (cleanQuery) setLocation(location.split('#')[0])
+          if (cleanQuery)
+            setLocation(window.location.origin + window.location.pathname)
         }}
       >
         {linkTitle}
