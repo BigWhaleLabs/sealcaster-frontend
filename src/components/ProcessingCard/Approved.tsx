@@ -19,7 +19,7 @@ const textWrapper = classnames(
   gap('gap-y-4')
 )
 
-export default function ({ id }: { id?: string }) {
+export default function ({ id }: { id?: number }) {
   return (
     <div className={wrapper}>
       <div className={textWrapper}>

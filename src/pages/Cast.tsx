@@ -39,6 +39,8 @@ export default function () {
       if (!account) return
 
       setIsLoading(true)
+      if (PostIdsStatuses.lastUserPost)
+        delete PostIdsStatuses.lastUserPost[account]
       const result = await PostStore.createPost(text)
 
       const posts = await PostStore.posts
