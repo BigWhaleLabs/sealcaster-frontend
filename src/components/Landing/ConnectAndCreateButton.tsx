@@ -1,5 +1,6 @@
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { handleError } from '@big-whale-labs/frontend-utils'
+import { requestFarcasterAttestation } from 'helpers/attestor'
 import { useLocation } from 'wouter'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
@@ -27,6 +28,15 @@ export default function ({
     ? 'Create burner wallet'
     : 'Connect & create burner wallet'
 
+  const checkBadgeAndSignature = async (address: string) => {
+    try {
+      await requestFarcasterAttestation(address)
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
   const createBurnerWallet = async () => {
     onError('')
     onLoading(true)
@@ -34,7 +44,13 @@ export default function ({
     try {
       if (!walletStore.account) await walletStore.connect(true)
       if (!walletStore.account) return onError('Please connect the wallet')
-      if (await walletStore.hasFarcasterBadge) return
+      const hasFarcaster = await checkBadgeAndSignature(walletStore.account)
+      if (!hasFarcaster) {
+        if (await walletStore.hasFarcasterBadge) {
+          setLocation('/cast')
+          return
+        }
+      }
       await BurnerWalletStore.generateBurnerWallet(walletStore.account)
       walletStore.exit()
       setLocation('/wallet')
