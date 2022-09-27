@@ -9,6 +9,7 @@ import classnames, {
   width,
   zIndex,
 } from 'classnames/tailwind'
+import useOffsetOrientation from 'hooks/useOffsetOrientation'
 
 const tooltipClasses = classnames(
   backgroundColor('bg-formal-accent'),
@@ -32,9 +33,11 @@ export default function ({
   disabled?: boolean
 }) {
   if (disabled) return <>{children}</>
+  const { offset } = useOffsetOrientation()
+
   return (
     <Tooltip
-      offset={10}
+      offset={offset}
       className={tooltipClasses}
       content={text}
       children={children}

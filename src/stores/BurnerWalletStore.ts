@@ -54,8 +54,10 @@ class BurnerWalletStore extends PersistableStore {
   async generateBurnerWallet(address: string) {
     this.burnerLoading = true
     try {
+      this.status = 'Getting account data...'
       const { signer, wallet } = await this.privateSigner()
 
+      this.status = 'Checking farcaster badge...'
       if (await hasFarcasterBadge(wallet.address)) return
 
       if (!this.proof) {
