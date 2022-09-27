@@ -25,6 +25,10 @@ export default function () {
       <Button
         type="tertiary"
         onClick={() => {
+          const confirmation = window.confirm(
+            'Are you sure you want to trash burner wallet and disconnect?'
+          )
+          if (!confirmation) return
           BurnerWalletStore.burn()
           setLocation('/')
         }}
