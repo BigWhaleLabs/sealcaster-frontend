@@ -48,8 +48,9 @@ const commonClasses = ({
   available?: boolean
   small?: boolean
   gradientFont?: boolean
-}) =>
-  classnames(
+}) => {
+  const isNotTertiary = type !== 'tertiary'
+  return classnames(
     display('flex'),
     flexDirection('flex-row'),
     justifyContent({ 'justify-center': center }),
@@ -62,16 +63,18 @@ const commonClasses = ({
     cursor({ 'cursor-not-allowed': !available }),
     outlineStyle('focus:outline-none'),
     opacity({ 'opacity-50': !available }),
-    boxShadow({
-      'shadow-2xl': available,
-      'hover:shadow-lg': available,
-      'active:shadow-button-active': available && !gradientFont,
-    }),
+    isNotTertiary
+      ? boxShadow({
+          'shadow-2xl': available,
+          'hover:shadow-lg': available,
+          'active:shadow-button-active': available && !gradientFont,
+        })
+      : undefined,
     width({ 'w-full': fullWidth }),
     textAlign({ 'text-center': center }),
     fontSize(small ? 'text-sm' : 'text-lg'),
     lineHeight(small ? 'leading-5' : 'leading-7'),
-    type !== 'tertiary'
+    isNotTertiary
       ? padding(
           small
             ? { 'py-2': true, 'px-4': true }
@@ -80,6 +83,7 @@ const commonClasses = ({
       : undefined,
     space('space-x-2')
   )
+}
 
 const button = ({
   fullWidth,

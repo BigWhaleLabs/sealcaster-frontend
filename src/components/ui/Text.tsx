@@ -1,4 +1,4 @@
-import { Link } from 'wouter'
+import { Link, useRoute } from 'wouter'
 import {
   TDropShadow,
   TGradientColorStops,
@@ -318,17 +318,15 @@ export function FooterLink({
   children,
   internal,
 }: ChildrenProp & { url: string; internal?: boolean }) {
-  if (internal)
+  if (internal) {
+    const [isActive] = useRoute(url)
+
     return (
-      <Link
-        to={url}
-        className={({ isActive }: { isActive?: boolean }) =>
-          footerLink(isActive)
-        }
-      >
+      <Link to={url} className={footerLink(isActive)}>
         {children}
       </Link>
     )
+  }
 
   return (
     <a
@@ -487,4 +485,18 @@ export function HighlightedText({
   center?: boolean
 }) {
   return <div className={highlightedText(bold, center)}>{children}</div>
+}
+
+const trashButtonText = classnames(
+  textColor('text-secondary', 'active:text-secondary-light-transparent'),
+  fontSize('text-xs'),
+  textDecoration('underline'),
+  fontWeight('font-normal')
+)
+export function TrashButtonText({ children }: ChildrenProp) {
+  return (
+    <span className={classNamesToString(trashButtonText, 'hover-secondary')}>
+      {children}
+    </span>
+  )
 }

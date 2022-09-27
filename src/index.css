@@ -86,6 +86,16 @@ body {
   }
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .hover-tertiary:hover {
+    color: var(--tertiary);
+    text-decoration: underline;
+  }
+  .hover-secondary:hover {
+    color: var(--secondary-light-active-transparent);
+  }
+}
+
 svg:not(.Toastify__toast-icon svg) {
   fill: none;
 }
