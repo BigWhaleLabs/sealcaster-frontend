@@ -6,6 +6,7 @@ import { displayFrom } from 'helpers/visibilityClassnames'
 import { handleError } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CastHeader from 'components/Cast/CastHeader'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
@@ -74,6 +75,7 @@ export default function () {
           status,
         })
       }
+      if (!BurnerWalletStore.used) BurnerWalletStore.used = true
       setText('')
     } catch (error) {
       handleError(error)
