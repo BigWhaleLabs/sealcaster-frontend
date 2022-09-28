@@ -1,4 +1,4 @@
-import { AccentText, ErrorText, SubHeaderText } from 'components/ui/Text'
+import { AccentText, SubHeaderText } from 'components/ui/Text'
 import { Link, useLocation } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
@@ -8,6 +8,7 @@ import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import ConnectAndCreateButton from 'components/Landing/ConnectAndCreateButton'
 import Dots from 'icons/Dots'
+import ErrorMessage from 'components/ui/ErrorMessage'
 import GradientBorder from 'components/ui/GradientBorder'
 import Loading from 'icons/Loading'
 import classnames, {
@@ -65,11 +66,7 @@ function BurnerBlockSuspended() {
               account={account}
             />
           </div>
-          {error && (
-            <ErrorText visible={!!error} withExclamation>
-              {error}
-            </ErrorText>
-          )}
+          {error && <ErrorMessage truncated text={error} />}
           {status && (
             <AccentText small color="text-tertiary">
               {status}

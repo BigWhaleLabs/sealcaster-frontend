@@ -3422,6 +3422,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tailwindcss/line-clamp@npm:^0.4.2":
+  version: 0.4.2
+  resolution: "@tailwindcss/line-clamp@npm:0.4.2"
+  peerDependencies:
+    tailwindcss: ">=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1"
+  checksum: 26b8135df24fff51c3d3790ae795bdc12bc4a7113fa22dcab80568ae6ee00710e2ed4154048958c472bb654061f0f1573b7ac5e004ae6222cbd5ac6fcf199478
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:1":
   version: 1.1.2
   resolution: "@tootallnate/once@npm:1.1.2"
@@ -15914,6 +15923,7 @@ __metadata:
     "@originjs/vite-plugin-commonjs": ^1.0.3
     "@preact/preset-vite": ^2.4.0
     "@rollup/plugin-inject": ^4.0.4
+    "@tailwindcss/line-clamp": ^0.4.2
     "@typechain/ethers-v5": ^10.1.0
     "@types/entropy-string": ^4.2.0
     "@types/node": ^18.7.18
