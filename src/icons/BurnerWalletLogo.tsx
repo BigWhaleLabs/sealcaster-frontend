@@ -1,8 +1,8 @@
 export default function ({ small }: { small?: boolean }) {
   return small ? (
     <svg
-      width="fit-content"
-      height="auto"
+      width="288"
+      height="110"
       viewBox="0 0 348 95"
       xmlns="http://www.w3.org/2000/svg"
     >
