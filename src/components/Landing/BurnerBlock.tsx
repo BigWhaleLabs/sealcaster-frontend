@@ -66,7 +66,7 @@ function BurnerBlockSuspended() {
               account={account}
             />
           </div>
-          {error && <ErrorMessage truncated text={error} />}
+          {error && <ErrorMessage truncated withExclamation text={error} />}
           {status && (
             <AccentText small color="text-tertiary">
               {status}
