@@ -297,7 +297,8 @@ const postText = (small?: boolean) =>
     fontFamily('font-primary'),
     fontSize({ 'text-sm': small }),
     lineHeight(small ? 'leading-5' : 'leading-6'),
-    whitespace('whitespace-pre-wrap')
+    whitespace('whitespace-pre-wrap'),
+    wordBreak('break-all')
   )
 export function PostText({
   small,
