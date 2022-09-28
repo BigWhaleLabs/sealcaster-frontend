@@ -45,8 +45,6 @@ export default function () {
       if (PostIdsStatuses.lastUserPost)
         delete PostIdsStatuses.lastUserPost[account]
       const result = await PostStore.createPost(text)
-      console.log('reeee' + result)
-
       const posts = await PostStore.posts
       const numberOfPosts = await PostStore.postsAmount
       PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
