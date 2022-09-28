@@ -1,6 +1,7 @@
 import { AccentText } from 'components/ui/Text'
 import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
 import ExternalLink from 'components/ui/ExternalLink'
 import LastDelimiter from 'components/ui/LastDelimiter'
@@ -102,7 +103,8 @@ export default function ({
           <div className={accountLinkContainer}>
             <div className={walletAccount}>
               <AccentText small color="text-primary-semi-dimmed">
-                Fetching account...
+                <span className={displayTo('lg')}>Fetching...</span>
+                <span className={displayFrom('lg')}>Fetching account...</span>
               </AccentText>
             </div>
             <div className={width('w-fit')}>
