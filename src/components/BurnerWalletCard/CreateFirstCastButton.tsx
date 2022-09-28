@@ -6,16 +6,17 @@ import Button from 'components/ui/Button'
 
 export default function () {
   const { used } = useSnapshot(BurnerWalletStore)
+  const firstCastMessage = `Create your ${!used && 'first'} cast`
 
   return (
     <Link href="/cast">
       <div className={displayTo('xs')}>
         <Button small type="primary">
-          Create your {!used && 'first'} cast
+          {firstCastMessage}
         </Button>
       </div>
       <div className={displayFrom('xs')}>
-        <Button type="primary">Create your {!used && 'first'} cast</Button>
+        <Button type="primary">{firstCastMessage}</Button>
       </div>
     </Link>
   )
