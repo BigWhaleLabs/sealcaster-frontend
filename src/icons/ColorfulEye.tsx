@@ -23,7 +23,7 @@ export default function ({ open }: { open?: boolean }) {
           cx="12"
           cy="8.5"
           rx="3"
-          ry="3..5"
+          ry="3.5"
           stroke="url(#eye_gradient_1)"
           className={fillClasses}
         />
