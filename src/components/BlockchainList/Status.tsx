@@ -23,6 +23,8 @@ const statusColor = (status: PostStatus) => {
 export function StatusSuspended({ blockchainId }: { blockchainId: number }) {
   const { statuses } = useSnapshot(postIdsStatuses)
   const status = statuses[blockchainId]?.status
+  const serviceId = statuses[blockchainId]?.serviceId
+  console.log('is this it?' + serviceId + ' ' + blockchainId)
 
   return (
     <a href={`#id=${blockchainId}`} className={statusContainer}>
