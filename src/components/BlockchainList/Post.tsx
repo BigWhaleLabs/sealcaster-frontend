@@ -40,14 +40,12 @@ export default function ({
   timestamp,
   text,
   sender,
-  derivativeAddress,
   tx,
 }: {
   blockchainId: number
   timestamp: number
   text: string
   sender: string
-  derivativeAddress: string
   tx: string
 }) {
   return (
@@ -61,11 +59,9 @@ export default function ({
                 <StatusText>Posted by: </StatusText>
                 <Sender sender={sender} />
                 <Delimiter />
-                <EtherScanLink address={derivativeAddress} />
+                <EtherScanLink tx={tx} />
                 <Delimiter />
                 <Status blockchainId={blockchainId} />
-                <Delimiter />
-                <EtherScanLink tx={tx} />
               </span>
             </BodyText>
             <BodyText primary noWrap>

@@ -61,7 +61,6 @@ export function PostListSuspended() {
             timestamp={Number(post.timestamp)}
             text={post.post}
             sender={post.sender}
-            derivativeAddress={post.derivativeAddress}
             tx={idToPostTx[Number(post.id)]}
           />
           {index === 2 && <CustomizeCard />}
