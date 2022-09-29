@@ -6,6 +6,7 @@ type AllowedExtraClassnames =
   | 'double-gradient-shadow'
   | 'loading-pause'
   | 'dots-loading'
+  | 'break-words'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]

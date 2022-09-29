@@ -299,11 +299,12 @@ export function StatusText({
 }
 
 const postText = (small?: boolean) =>
-  classnames(
+  classNamesToString(
     fontFamily('font-primary'),
     fontSize({ 'text-sm': small }),
     lineHeight(small ? 'leading-5' : 'leading-6'),
-    whitespace('whitespace-pre-wrap')
+    whitespace('whitespace-pre-wrap'),
+    'break-words'
   )
 export function PostText({
   small,

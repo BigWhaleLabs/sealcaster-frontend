@@ -20,7 +20,8 @@ const scrollContainer = classnames(
 )
 
 export function PostListSuspended() {
-  const { posts, selectedToken, postsAmount, limit } = useSnapshot(PostStore)
+  const { posts, selectedToken, postsAmount, limit, idToPostTx } =
+    useSnapshot(PostStore)
   const hashId = useHashParams()
   const [scrolledLimit, setScrolledLimit] = useState(limit)
   const amountOfLoadedPosts = posts.length
@@ -60,7 +61,7 @@ export function PostListSuspended() {
             timestamp={Number(post.timestamp)}
             text={post.post}
             sender={post.sender}
-            derivativeAddress={post.derivativeAddress}
+            tx={idToPostTx[Number(post.id)]}
           />
           {index === 2 && <CustomizeCard />}
         </>
