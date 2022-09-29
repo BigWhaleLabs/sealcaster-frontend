@@ -190,6 +190,10 @@ circle {
   animation: dots 3s linear infinite;
 }
 
+.break-words {
+  word-break: break-word;
+}
+
 @keyframes dots {
   0%,
   20% {
