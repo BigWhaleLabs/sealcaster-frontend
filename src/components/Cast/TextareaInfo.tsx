@@ -1,5 +1,5 @@
 import { AccentText } from 'components/ui/Text'
-import { displayTo } from 'helpers/visibilityClassnames'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { parseErrorText } from '@big-whale-labs/frontend-utils'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
@@ -76,9 +76,24 @@ export default function ({
         </div>
       )}
       {!!error && (
-        <div className={displayTo('md')}>
-          <ErrorMessage small centered truncated text={parseErrorText(error)} />
-        </div>
+        <>
+          <div className={displayTo('md')}>
+            <ErrorMessage
+              small
+              centered
+              truncated
+              text={parseErrorText(error)}
+            />
+          </div>
+          <div className={displayFrom('md')}>
+            <ErrorMessage
+              small
+              centered
+              truncated
+              text={parseErrorText(error)}
+            />
+          </div>
+        </>
       )}
       <TrashBurner />
     </div>
