@@ -32,7 +32,7 @@ const navbar = (visible?: boolean, withoutRightBlock?: boolean) =>
     justifyContent(withoutRightBlock ? 'sm:justify-center' : 'justify-between'),
     padding('py-4', 'sm:py-6', 'px-6', 'lg:px-24'),
     space('xs:space-x-4', 'sm:space-x-9', 'lg:space-x-0'),
-    zIndex('z-50'),
+    zIndex('z-40'),
     backgroundColor(visible ? 'bg-primary-dark' : 'bg-transparent'),
     transitionProperty('transition-all'),
     margin('mb-8')

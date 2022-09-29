@@ -1,10 +1,14 @@
 import { AccentText } from 'components/ui/Text'
 import { displayTo } from 'helpers/visibilityClassnames'
+import { useEffect, useState } from 'preact/hooks'
+import { useLocation } from 'wouter'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
 import Sizes from 'models/MarkSizes'
 import Tooltip from 'components/ui/Tooltip'
 import TrashBurner from 'components/Cast/TrashBurner'
+import WarningPopup from 'components/ui/WarningPopup'
 import classnames, {
   alignItems,
   display,
@@ -38,8 +42,19 @@ export default function ({
   disabled?: boolean
   onButtonClick?: () => void
 }) {
+  const [, setLocation] = useLocation()
+  const [isWarningShown, setIsWarningShown] = useState(false)
+  const acceptTrashing = () => {
+    setIsWarningShown(false)
+    BurnerWalletStore.burn()
+    setLocation('/')
+  }
   const castingHintText =
     'You’re casting from a burner wallet. Burner wallet is an anonymous wallet that’s not tied to your identity. It will persist between page loads until you disconnect.'
+
+  useEffect(() => {
+    document.body.classList.toggle('overflow-hidden', isWarningShown)
+  }, [isWarningShown])
 
   return (
     <div className={textAreaInfoWrapper}>
@@ -71,7 +86,13 @@ export default function ({
           </AccentText>
         </div>
       )}
-      <TrashBurner />
+      <TrashBurner onClick={() => setIsWarningShown(true)} />
+      {isWarningShown && (
+        <WarningPopup
+          onAccept={acceptTrashing}
+          onReject={() => setIsWarningShown(false)}
+        />
+      )}
     </div>
   )
 }
