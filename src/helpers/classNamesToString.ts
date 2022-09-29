@@ -7,6 +7,7 @@ type AllowedExtraClassnames =
   | 'loading-pause'
   | 'dots-loading'
   | 'line-clamp-2'
+  | 'break-words'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]

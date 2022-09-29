@@ -22,6 +22,7 @@ class BurnerWalletStore extends PersistableStore {
   proof?: ProofResult
   burnerLoading = false
   status = ''
+  used = false
 
   burn() {
     this.privateKey = undefined
@@ -85,7 +86,10 @@ class BurnerWalletStore extends PersistableStore {
       try {
         this.status = 'Minting Farcaster ZK badge...'
         await createFarcasterBadge(signer, this.proof)
-        if (!this.privateKey) this.privateKey = wallet.privateKey
+        if (!this.privateKey) {
+          this.privateKey = wallet.privateKey
+          this.used = false
+        }
       } finally {
         this.proof = undefined
       }
