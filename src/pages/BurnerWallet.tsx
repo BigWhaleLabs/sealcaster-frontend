@@ -22,21 +22,21 @@ export default function () {
 
   return (
     <div className={wrapper}>
-      {privateKey ? (
-        <div className={topPart}>
-          <>
-            <HeaderText>Voilà — your burner wallet</HeaderText>
-            <PostText>
-              This wallet verifies that you are a user of Farcaster, but won’t
-              reveal who you are. Connect with this wallet in the future to
-              create anonymous casts.
-            </PostText>
-            <BurnerWalletCard privateKey={privateKey} />
-          </>
-        </div>
-      ) : (
-        <Redirect to="/" />
-      )}
+      {/* {privateKey ? ( */}
+      <div className={topPart}>
+        <>
+          <HeaderText>Voilà — your burner wallet</HeaderText>
+          <PostText>
+            This wallet verifies that you are a user of Farcaster, but won’t
+            reveal who you are. Connect with this wallet in the future to create
+            anonymous casts.
+          </PostText>
+          <BurnerWalletCard privateKey={'123'} />
+        </>
+      </div>
+      {/* ) : ( */}
+      {/* <Redirect to="/" /> */}
+      {/* )} */}
       <HowItWorks />
     </div>
   )

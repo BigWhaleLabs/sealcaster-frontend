@@ -3,10 +3,11 @@ import { TTailwindString } from 'classnames/tailwind'
 type AllowedExtraClassnames =
   | 'hover-tertiary'
   | 'hover-secondary'
-  | 'double-gradient-shadow'
   | 'loading-pause'
   | 'dots-loading'
   | 'break-words'
+  | 'animated-blur'
+  | 'animated-border'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]
