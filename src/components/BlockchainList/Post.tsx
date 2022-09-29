@@ -41,12 +41,14 @@ export default function ({
   text,
   sender,
   derivativeAddress,
+  tx,
 }: {
   blockchainId: number
   timestamp: number
   text: string
   sender: string
   derivativeAddress: string
+  tx: string
 }) {
   return (
     <div data-anchor={`#id=${blockchainId}`}>
@@ -62,6 +64,8 @@ export default function ({
                 <EtherScanLink address={derivativeAddress} />
                 <Delimiter />
                 <Status blockchainId={blockchainId} />
+                <Delimiter />
+                <EtherScanLink tx={tx} />
               </span>
             </BodyText>
             <BodyText primary noWrap>
