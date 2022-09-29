@@ -4,6 +4,7 @@ import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract
 import { proxy } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import env from 'helpers/env'
+import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
 import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
 import parsePostLogData from 'helpers/parsePostLogData'
@@ -16,6 +17,7 @@ interface PostStoreType {
   postsAmount: Promise<number>
   selectedToken?: string
   createPost: (text: string) => Promise<Result[]>
+  idToPostTx: Promise<string[]>
 }
 
 const limit = 100
@@ -28,6 +30,7 @@ const PostStore = proxy<PostStoreType>({
     limitAmount: limit,
   }),
   selectedToken: undefined,
+  idToPostTx: getIdsToPostsTx(getPostStorage()),
   createPost: async (text: string) => {
     let signer = await BurnerWalletStore.getSigner()
 

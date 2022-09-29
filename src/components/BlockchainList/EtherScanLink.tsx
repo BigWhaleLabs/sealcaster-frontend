@@ -1,14 +1,10 @@
 import { LinkText, StatusText } from 'components/ui/Text'
-import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
+import getEtherscanTxUrl from 'helpers/network/getEtherscanTxUrl'
 
-export default function ({ address }: { address: string }) {
+export default function ({ tx }: { tx: string }) {
   return (
     <StatusText primary>
-      <LinkText
-        extraSmall
-        title={address}
-        url={getEtherscanAddressUrl(address)}
-      >
+      <LinkText extraSmall title={tx} url={getEtherscanTxUrl(tx)}>
         Etherscan
       </LinkText>
     </StatusText>
