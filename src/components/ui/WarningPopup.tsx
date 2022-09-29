@@ -9,7 +9,6 @@ import SealWarning from 'icons/SealWarning'
 import classnames, {
   alignItems,
   backgroundColor,
-  borderRadius,
   display,
   flexDirection,
   gap,
@@ -19,7 +18,6 @@ import classnames, {
   margin,
   maxWidth,
   opacity,
-  padding,
   position,
   textAlign,
   width,
@@ -28,19 +26,17 @@ import classnames, {
 import useClickOutside from 'hooks/useClickOutside'
 
 const container = classnames(
-  position('absolute'),
+  position('fixed'),
   display('flex'),
   justifyContent('justify-center'),
   inset('inset-0'),
-  padding('py-1.5'),
-  zIndex('z-30')
+  zIndex('z-40')
 )
 const overlay = classnames(
   position('absolute'),
   inset('inset-0'),
   backgroundColor('bg-primary-dark'),
-  opacity('opacity-50'),
-  borderRadius('rounded-2xl')
+  opacity('opacity-50')
 )
 const cardContainer = classnames(
   display('flex'),
