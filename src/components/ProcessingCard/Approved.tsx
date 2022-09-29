@@ -28,7 +28,7 @@ export default function ({ id }: { id?: number }) {
         </HeaderText>
       </div>
 
-      {id && <LinkButton internal url={`/cast#id=${id}`} />}
+      {id && <LinkButton url={`/cast#id=${id}`} />}
     </div>
   )
 }
