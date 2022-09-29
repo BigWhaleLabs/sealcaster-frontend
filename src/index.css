@@ -165,7 +165,7 @@ circle {
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
   background-size: 200% 200%;
   border-radius: 16px;
-  animation: spin-background 3.5s linear infinite;
+  /* animation: spin-background 3.5s linear infinite; */
 }
 
 .double-gradient-shadow::after {
@@ -181,8 +181,8 @@ circle {
   filter: blur(calc(65vh / 6));
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
   background-size: 200% 200%;
-  animation: spin-background 3.5s ease-in-out infinite,
-    rescale 3.5s ease-in-out infinite;
+  /* animation: spin-background 3.5s ease-in-out infinite,
+    rescale 3.5s ease-in-out infinite; */
 }
 
 .dots-loading::after {
