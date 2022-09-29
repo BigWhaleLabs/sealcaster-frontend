@@ -1,10 +1,11 @@
 import { LargeText, LinkText, StatusText } from 'components/ui/Text' //LargeText
+import { createRef } from 'preact'
 import { useSnapshot } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
 import GradientBorder from 'components/ui/GradientBorder'
-import SealLogo from 'icons/SealLogo'
+import SealWarning from 'icons/SealWarning'
 import classnames, {
   alignItems,
   backgroundColor,
@@ -24,6 +25,7 @@ import classnames, {
   width,
   zIndex,
 } from 'classnames/tailwind'
+import useClickOutside from 'hooks/useClickOutside'
 
 const container = classnames(
   position('absolute'),
@@ -70,14 +72,16 @@ export default function ({
   onReject: () => void
 }) {
   const { privateKey } = useSnapshot(BurnerWalletStore)
+  const ref = createRef<HTMLDivElement>()
+  useClickOutside(ref, onReject)
 
   return (
     <div className={container}>
       <div className={overlay} />
-      <div className={cardContainer}>
+      <div ref={ref} className={cardContainer}>
         <Card>
           <div className={warningCard}>
-            <SealLogo />
+            <SealWarning />
             <LargeText>
               Are you sure you want to trash the burner wallet? You cannot undo
               this action
