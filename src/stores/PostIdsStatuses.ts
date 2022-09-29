@@ -5,13 +5,13 @@ import getPostStatuses from 'helpers/getPostStatuses'
 
 interface PostData {
   status: PostStatus
-  serviceId?: number | undefined
+  serviceId?: string | undefined
 }
 
 export interface LastUserPostData {
   blockchainId: number
   status: PostStatus
-  serviceId?: number
+  serviceId?: string
 }
 
 interface PostStatusStoreType {
