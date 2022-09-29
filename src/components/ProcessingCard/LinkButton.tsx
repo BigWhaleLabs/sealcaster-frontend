@@ -1,21 +1,14 @@
 import { LinkText } from 'components/ui/Text'
-import { useLocation } from 'wouter'
+import { scrollToHashElement } from 'hooks/useScrollToAnchor'
 import Button from 'components/ui/Button'
 
 interface LinkButtonProps {
   url: string
   internal?: boolean
   approved?: boolean
-  cleanQuery?: boolean
 }
 
-export default function ({
-  url,
-  internal,
-  approved,
-  cleanQuery = true,
-}: LinkButtonProps) {
-  const [, setLocation] = useLocation()
+export default function ({ url, internal, approved }: LinkButtonProps) {
   const linkTitle = approved
     ? 'View cast on Farcaster'
     : 'View cast on Sealcaster'
@@ -34,10 +27,7 @@ export default function ({
         withArrow
         gradientFont
         type="tertiary"
-        onClick={() => {
-          if (cleanQuery)
-            setLocation(window.location.origin + window.location.pathname)
-        }}
+        onClick={() => scrollToHashElement()}
       >
         {linkTitle}
       </Button>
