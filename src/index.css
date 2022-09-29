@@ -167,7 +167,7 @@ circle {
   border-radius: 16px;
   /* animation: spin-background 3.5s linear infinite; */
 }
-
+/* TODO: animation (background-position/transform) consumes CPU a lot. Need to find another way to animate magic card */
 .double-gradient-shadow::after {
   position: absolute;
   content: '';
