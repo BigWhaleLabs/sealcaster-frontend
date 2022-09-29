@@ -1,7 +1,9 @@
 import { AccentText } from 'components/ui/Text'
 import { displayTo } from 'helpers/visibilityClassnames'
+import { parseErrorText } from '@big-whale-labs/frontend-utils'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
+import ErrorMessage from 'components/ui/ErrorMessage'
 import Sizes from 'models/MarkSizes'
 import Tooltip from 'components/ui/Tooltip'
 import TrashBurner from 'components/Cast/TrashBurner'
@@ -30,10 +32,12 @@ const textAreaInfoWrapper = classnames(
 )
 
 export default function ({
+  error,
   loading,
   disabled,
   onButtonClick,
 }: {
+  error?: unknown
   loading?: boolean
   disabled?: boolean
   onButtonClick?: () => void
@@ -69,6 +73,11 @@ export default function ({
           <AccentText extraSmall color="text-accent">
             Hang on, this often takes a minute or two...
           </AccentText>
+        </div>
+      )}
+      {!!error && (
+        <div className={displayTo('md')}>
+          <ErrorMessage small centered truncated text={parseErrorText(error)} />
         </div>
       )}
       <TrashBurner />

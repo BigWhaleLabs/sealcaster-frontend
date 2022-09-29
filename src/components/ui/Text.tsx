@@ -428,25 +428,30 @@ const errorTextBox = (visible?: boolean) =>
     alignItems('items-start'),
     space('space-x-2')
   )
-const errorText = (centered?: boolean) =>
+const errorText = (centered?: boolean, small?: boolean) =>
   classnames(
     textColor('text-error'),
     fontWeight('font-medium'),
     fontFamily('font-primary'),
+    fontSize({
+      'text-sm': small,
+    }),
     textAlign({ 'text-center': centered })
   )
 const exclamation = margin('mt-1.5')
 export function ErrorText({
   children,
   withExclamation,
+  small,
   visible,
   centered,
 }: ChildrenProp & {
   centered?: boolean
+  small?: boolean
   withExclamation?: boolean
   visible?: boolean
 }) {
-  const error = <p className={errorText(centered)}>{children}</p>
+  const error = <p className={errorText(centered, small)}>{children}</p>
 
   if (withExclamation)
     return (

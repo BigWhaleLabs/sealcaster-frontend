@@ -22,6 +22,7 @@ import classnames, {
   margin,
   space,
 } from 'classnames/tailwind'
+import getErrorMessage from 'helpers/getErrorMessage'
 import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const processingCardWrapper = classnames(
@@ -33,11 +34,13 @@ const processingCardWrapper = classnames(
 export default function () {
   const { account, isBurner, hasFarcasterBadge } = useBadgeAccount()
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<unknown>()
   const [text, setText] = useState('')
 
   const maxLength = 279
 
   async function createPost() {
+    setError(null)
     try {
       if (!account) return
 
@@ -78,6 +81,7 @@ export default function () {
       if (!BurnerWalletStore.used) BurnerWalletStore.used = true
       setText('')
     } catch (error) {
+      setError(getErrorMessage(error))
       handleError(error)
     } finally {
       setIsLoading(false)
@@ -103,6 +107,7 @@ export default function () {
                 loading={isLoading}
                 onButtonClick={createPost}
                 disabled={!text}
+                error={error}
               />
             </div>
             <div

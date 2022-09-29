@@ -1,6 +1,7 @@
 import { AccentText, SubHeaderText } from 'components/ui/Text'
 import { Link, useLocation } from 'wouter'
 import { Suspense } from 'preact/compat'
+import { parseErrorText } from '@big-whale-labs/frontend-utils'
 import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import BurnerStatus from 'components/Landing/BurnerStatus'
@@ -66,7 +67,13 @@ function BurnerBlockSuspended() {
               account={account}
             />
           </div>
-          {error && <ErrorMessage truncated withExclamation text={error} />}
+          {error && (
+            <ErrorMessage
+              truncated
+              withExclamation
+              text={parseErrorText(error)}
+            />
+          )}
           {status && (
             <AccentText small color="text-tertiary">
               {status}

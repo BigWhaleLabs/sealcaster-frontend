@@ -11,11 +11,15 @@ const truncateClass = (truncate?: boolean) =>
 
 export default function ({
   text,
+  centered,
   truncated,
+  small,
   withExclamation,
 }: {
   text: string
+  centered?: boolean
   truncated?: boolean
+  small?: boolean
   withExclamation?: boolean
 }) {
   const [isErrorClosed, setOpenError] = useState(true)
@@ -24,14 +28,24 @@ export default function ({
   if (truncated)
     return (
       <button onClick={() => setOpenError(!isErrorClosed)}>
-        <ErrorText visible={isVisible} withExclamation={withExclamation}>
+        <ErrorText
+          centered={centered}
+          small={small}
+          visible={isVisible}
+          withExclamation={withExclamation}
+        >
           <span className={truncateClass(isErrorClosed)}>{text}</span>
         </ErrorText>
       </button>
     )
 
   return (
-    <ErrorText visible={isVisible} withExclamation={withExclamation}>
+    <ErrorText
+      centered={centered}
+      small={small}
+      visible={isVisible}
+      withExclamation={withExclamation}
+    >
       {text}
     </ErrorText>
   )
