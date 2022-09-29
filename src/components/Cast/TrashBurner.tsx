@@ -1,6 +1,4 @@
 import { TrashButtonText } from 'components/ui/Text'
-import { useLocation } from 'wouter'
-import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import classnames, { alignSelf, margin } from 'classnames/tailwind'
 
@@ -9,22 +7,10 @@ const buttonWrapper = classnames(
   margin('mt-2', 'md:mt-0')
 )
 
-export default function () {
-  const [, setLocation] = useLocation()
-
+export default function ({ onClick }: { onClick: () => void }) {
   return (
     <span className={buttonWrapper}>
-      <Button
-        type="tertiary"
-        onClick={() => {
-          const confirmation = window.confirm(
-            'Are you sure you want to trash the burner wallet? You cannot undo this action!'
-          )
-          if (!confirmation) return
-          BurnerWalletStore.burn()
-          setLocation('/')
-        }}
-      >
+      <Button type="tertiary" onClick={onClick}>
         <TrashButtonText>Trash wallet</TrashButtonText>
       </Button>
     </span>

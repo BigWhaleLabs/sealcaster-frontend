@@ -2,6 +2,7 @@ import { PostStatus, PostStatusText } from 'models/PostStatus'
 import { StatusText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
+import ExternalLink from 'components/ui/ExternalLink'
 import LoadingWithDots from 'components/ui/LoadingWithDots'
 import classnames, { alignItems, display } from 'classnames/tailwind'
 import postIdsStatuses from 'stores/PostIdsStatuses'
@@ -23,13 +24,16 @@ const statusColor = (status: PostStatus) => {
 export function StatusSuspended({ blockchainId }: { blockchainId: number }) {
   const { statuses } = useSnapshot(postIdsStatuses)
   const status = statuses[blockchainId]?.status
+  const serviceId = statuses[blockchainId]?.serviceId
 
   return (
-    <a href={`#id=${blockchainId}`} className={statusContainer}>
-      <StatusText color={statusColor(status || PostStatus.pending)}>
-        {PostStatusText[status] || <LoadingWithDots />}
-      </StatusText>
-    </a>
+    <div className={statusContainer}>
+      <ExternalLink url={`farcaster://casts/${serviceId}`}>
+        <StatusText color={statusColor(status || PostStatus.pending)}>
+          {PostStatusText[status] || <LoadingWithDots />}
+        </StatusText>
+      </ExternalLink>
+    </div>
   )
 }
 
