@@ -26,13 +26,18 @@ export function StatusSuspended({ blockchainId }: { blockchainId: number }) {
   const status = statuses[blockchainId]?.status
   const serviceId = statuses[blockchainId]?.serviceId
 
+  const statusOrLoading = PostStatusText[status] || <LoadingWithDots />
+  const farcasterCastUrl = `farcaster://casts/${serviceId}`
+
   return (
     <div className={statusContainer}>
-      <ExternalLink url={`farcaster://casts/${serviceId}`}>
-        <StatusText color={statusColor(status || PostStatus.pending)}>
-          {PostStatusText[status] || <LoadingWithDots />}
-        </StatusText>
-      </ExternalLink>
+      {status === PostStatus.published ? (
+        <ExternalLink url={farcasterCastUrl}>
+          <StatusText color={statusColor(status)}>{statusOrLoading}</StatusText>
+        </ExternalLink>
+      ) : (
+        <StatusText color={statusColor(status)}>{statusOrLoading}</StatusText>
+      )}
     </div>
   )
 }
