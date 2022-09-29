@@ -134,6 +134,7 @@ export function LinkText({
         {children}
       </Link>
     )
+
   return (
     <a
       className={linkClassnames}
