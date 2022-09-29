@@ -44,6 +44,7 @@ export default function ({
 }) {
   const castingHintText =
     'You’re casting from a burner wallet. Burner wallet is an anonymous wallet that’s not tied to your identity. It will persist between page loads until you disconnect.'
+  const errorMessage = !!error && parseErrorText(error)
 
   return (
     <div className={textAreaInfoWrapper}>
@@ -75,23 +76,13 @@ export default function ({
           </AccentText>
         </div>
       )}
-      {!!error && (
+      {!!errorMessage && (
         <>
           <div className={displayTo('md')}>
-            <ErrorMessage
-              small
-              centered
-              truncated
-              text={parseErrorText(error)}
-            />
+            <ErrorMessage small centered truncated text={errorMessage} />
           </div>
           <div className={displayFrom('md')}>
-            <ErrorMessage
-              small
-              centered
-              truncated
-              text={parseErrorText(error)}
-            />
+            <ErrorMessage small centered truncated text={errorMessage} />
           </div>
         </>
       )}
