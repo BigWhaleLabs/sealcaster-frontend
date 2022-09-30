@@ -1,3 +1,4 @@
+import { HTMLAttributes } from 'preact/compat'
 import {
   alignItems,
   backgroundClip,
@@ -17,6 +18,7 @@ import {
   fontSize,
   fontWeight,
   gradientColorStops,
+  height,
   justifyContent,
   lineHeight,
   opacity,
@@ -32,7 +34,6 @@ import {
 } from 'classnames/tailwind'
 import Arrow from 'icons/Arrow'
 import Loading from 'icons/Loading'
-import React from 'react'
 
 const commonClasses = ({
   type,
@@ -41,6 +42,7 @@ const commonClasses = ({
   available,
   small,
   gradientFont,
+  heightFit,
 }: {
   type: ButtonType
   fullWidth?: boolean
@@ -48,6 +50,7 @@ const commonClasses = ({
   available?: boolean
   small?: boolean
   gradientFont?: boolean
+  heightFit?: boolean
 }) => {
   const isNotTertiary = type !== 'tertiary'
   return classnames(
@@ -71,6 +74,7 @@ const commonClasses = ({
         })
       : undefined,
     width({ 'w-full': fullWidth }),
+    height({ 'h-fit': heightFit }),
     textAlign({ 'text-center': center }),
     fontSize(small ? 'text-sm' : 'text-lg'),
     lineHeight(small ? 'leading-5' : 'leading-7'),
@@ -92,9 +96,18 @@ const button = ({
   type,
   small,
   gradientFont,
+  heightFit,
 }: ButtonProps & { available?: boolean }) =>
   classnames(
-    commonClasses({ type, fullWidth, center, available, small, gradientFont }),
+    commonClasses({
+      type,
+      fullWidth,
+      center,
+      available,
+      small,
+      gradientFont,
+      heightFit,
+    }),
     colorClasses(type, available, gradientFont)
   )
 
@@ -170,6 +183,7 @@ interface ButtonProps {
   url?: string
   fullWidth?: boolean
   center?: boolean
+  heightFit?: boolean
 }
 
 type ButtonType = 'primary' | 'secondary' | 'tertiary'
@@ -186,8 +200,9 @@ export default function ({
   gradientFont,
   loadingOverflow,
   url,
+  heightFit,
   ...rest
-}: Omit<React.HTMLAttributes<HTMLButtonElement>, 'loading'> & ButtonProps) {
+}: Omit<HTMLAttributes<HTMLButtonElement>, 'loading'> & ButtonProps) {
   const showContent = !loadingOverflow || !loading
   const available = !loading && !disabled
 
@@ -200,6 +215,7 @@ export default function ({
         type,
         small,
         gradientFont,
+        heightFit,
       })}
       onClick={() => {
         if (url) window.open(url, '_blank')

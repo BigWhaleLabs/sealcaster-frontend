@@ -5,6 +5,7 @@ import BurnerWalletCard from 'components/BurnerWalletCard'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import HowItWorks from 'components/HowItWorks'
 import classnames, { display, flexDirection, gap } from 'classnames/tailwind'
+import useScrollToTop from 'hooks/useScrollToTop'
 
 const wrapper = classnames(
   display('flex'),
@@ -19,6 +20,7 @@ const topPart = classnames(
 
 export default function () {
   const { privateKey } = useSnapshot(BurnerWalletStore)
+  useScrollToTop()
 
   return (
     <div className={wrapper}>
