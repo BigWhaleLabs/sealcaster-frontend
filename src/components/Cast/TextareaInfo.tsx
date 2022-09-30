@@ -89,12 +89,12 @@ export default function ({
           </AccentText>
         </div>
       )}
+      <TrashBurner onClick={() => setIsWarningShown(true)} />
       {!!error && (
         <div className={displayTo('md')}>
-          <ErrorMessage small centered truncated text={error} />
+          <ErrorMessage small centered text={error} />
         </div>
       )}
-      <TrashBurner onClick={() => setIsWarningShown(true)} />
       {isWarningShown && (
         <WarningPopup
           onAccept={acceptTrashing}

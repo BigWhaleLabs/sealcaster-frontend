@@ -6,7 +6,6 @@ type AllowedExtraClassnames =
   | 'double-gradient-shadow'
   | 'loading-pause'
   | 'dots-loading'
-  | 'line-clamp-2'
   | 'break-words'
 
 export default function (

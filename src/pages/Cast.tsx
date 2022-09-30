@@ -31,6 +31,7 @@ const processingCardWrapper = classnames(
   display('flex'),
   gap('gap-y-6', 'sm:gap-y-12')
 )
+const buttonWithError = classnames(display('flex'), gap('gap-x-4'))
 
 export default function () {
   const { account, isBurner, hasFarcasterBadge } = useBadgeAccount()
@@ -121,21 +122,22 @@ export default function () {
                 gap('gap-y-2')
               )}
             >
-              <Button
-                disabled={!text}
-                loading={isLoading}
-                type="primary"
-                onClick={createPost}
-              >
-                Cast
-              </Button>
+              <div className={buttonWithError}>
+                <Button
+                  disabled={!text}
+                  loading={isLoading}
+                  type="primary"
+                  onClick={createPost}
+                  heightFit
+                >
+                  Cast
+                </Button>
+                {!!errorMessage && <ErrorMessage small text={errorMessage} />}
+              </div>
               {isLoading && (
                 <AccentText extraSmall color="text-accent">
                   Hang on, this often takes a minute or two...
                 </AccentText>
-              )}
-              {!!errorMessage && (
-                <ErrorMessage small centered truncated text={errorMessage} />
               )}
             </div>
           </div>

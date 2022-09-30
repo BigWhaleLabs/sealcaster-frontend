@@ -57,7 +57,6 @@
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@preact/preset-vite": "^2.4.0",
     "@rollup/plugin-inject": "^4.0.4",
-    "@tailwindcss/line-clamp": "^0.4.2",
     "@typechain/ethers-v5": "^10.1.0",
     "@types/entropy-string": "^4.2.0",
     "@types/node": "^18.7.18",

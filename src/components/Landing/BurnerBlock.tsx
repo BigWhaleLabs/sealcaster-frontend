@@ -68,11 +68,7 @@ function BurnerBlockSuspended() {
             />
           </div>
           {error && (
-            <ErrorMessage
-              truncated
-              withExclamation
-              text={parseErrorText(error)}
-            />
+            <ErrorMessage withExclamation text={parseErrorText(error)} />
           )}
           {status && (
             <AccentText small color="text-tertiary">
