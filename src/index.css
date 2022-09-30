@@ -95,6 +95,9 @@ body {
   .hover-secondary:hover {
     color: var(--secondary-light-active-transparent);
   }
+  .hover-button-scroll:hover {
+    filter: drop-shadow(0rem 0rem 4rem var(--primary));
+  }
 }
 
 svg:not(.Toastify__toast-icon svg) {
