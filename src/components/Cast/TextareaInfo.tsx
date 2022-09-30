@@ -5,6 +5,7 @@ import { useState } from 'preact/hooks'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
+import ErrorMessage from 'components/ui/ErrorMessage'
 import Sizes from 'models/MarkSizes'
 import Tooltip from 'components/ui/Tooltip'
 import TrashBurner from 'components/Cast/TrashBurner'
@@ -34,10 +35,12 @@ const textAreaInfoWrapper = classnames(
 )
 
 export default function ({
+  error,
   loading,
   disabled,
   onButtonClick,
 }: {
+  error?: string
   loading?: boolean
   disabled?: boolean
   onButtonClick?: () => void
@@ -83,6 +86,11 @@ export default function ({
         </div>
       )}
       <TrashBurner onClick={() => setIsWarningShown(true)} />
+      {!!error && (
+        <div className={displayTo('md')}>
+          <ErrorMessage small centered text={error} />
+        </div>
+      )}
       {isWarningShown && (
         <WarningPopup
           onAccept={acceptTrashing}
