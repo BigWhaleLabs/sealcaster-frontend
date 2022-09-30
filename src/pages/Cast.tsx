@@ -23,6 +23,7 @@ import classnames, {
   space,
 } from 'classnames/tailwind'
 import useBadgeAccount from 'hooks/useBadgeAccount'
+import useScrollToTop from 'hooks/useScrollToTop'
 
 const processingCardWrapper = classnames(
   flexDirection('flex-col'),
@@ -34,6 +35,7 @@ export default function () {
   const { account, isBurner, hasFarcasterBadge } = useBadgeAccount()
   const [isLoading, setIsLoading] = useState(false)
   const [text, setText] = useState('')
+  useScrollToTop()
 
   const maxLength = 279
 
