@@ -1,5 +1,5 @@
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { useState } from 'preact/hooks'
+import { useCallback, useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
 import SimpleArrow from 'icons/SimpleArrow'
 import classNamesToString from 'helpers/classNamesToString'
@@ -43,7 +43,7 @@ const arrowButton = (shown: boolean, fromMd?: boolean) =>
     height('h-12', 'md:h-20'),
     dropShadow('drop-shadow-primary-dimmed'),
     borderRadius('rounded-full'),
-    opacity(!shown ? 'opacity-0' : 'opacity-60', 'active:opacity-100'),
+    opacity(shown ? 'opacity-60' : 'opacity-0', 'active:opacity-100'),
     pointerEvents({ 'pointer-events-none': !shown }),
     backgroundColor('bg-primary-dimmed')
   )
@@ -53,9 +53,9 @@ const arrowWrapper = (shown: boolean, fromMd?: boolean) =>
 export default function () {
   const [visible, setVisible] = useState(false)
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
-  const onScroll = () => {
+  const onScroll = useCallback(() => {
     setVisible(document.documentElement.scrollTop > 150)
-  }
+  }, [])
   useOnScroll(onScroll)
 
   return (

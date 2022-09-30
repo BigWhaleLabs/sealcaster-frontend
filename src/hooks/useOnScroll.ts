@@ -1,8 +1,8 @@
-import { useEffect } from 'preact/hooks'
+import { useMemo } from 'preact/hooks'
 
 export default function (callback: () => void) {
-  useEffect(() => {
-    document.addEventListener('scroll', callback)
-    return () => document.removeEventListener('scroll', callback)
+  useMemo(() => {
+    window.addEventListener('scroll', callback, { passive: true })
+    return () => window.removeEventListener('scroll', callback)
   }, [callback])
 }
