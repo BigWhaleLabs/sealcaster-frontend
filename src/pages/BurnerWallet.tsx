@@ -31,7 +31,7 @@ export default function () {
               reveal who you are. Connect with this wallet in the future to
               create anonymous casts.
             </PostText>
-            <BurnerWalletCard privateKey={'123'} />
+            <BurnerWalletCard privateKey={privateKey} />
           </>
         </div>
       ) : (
