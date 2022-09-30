@@ -1,4 +1,4 @@
-import { Route, Router, Switch } from 'wouter'
+import { Route, Router, Switch, useLocation } from 'wouter'
 import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import BurnerWallet from 'pages/BurnerWallet'
@@ -6,6 +6,7 @@ import Footer from 'components/Footer'
 import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
 import Privacy from 'pages/Privacy'
+import ScrollToTopButton from 'components/ui/ScrollToTopButton'
 import Terms from 'pages/Terms'
 import classnames, {
   display,
@@ -31,6 +32,9 @@ const bodyContainer = classnames(
 )
 
 export default function () {
+  const [location] = useLocation()
+  const hasBlockchainList = location === '/' || location === '/cast'
+
   return (
     <Router>
       <div className={pageContainer}>
@@ -54,7 +58,8 @@ export default function () {
             </Route>
           </Switch>
         </div>
-        <Footer />
+        {hasBlockchainList && <ScrollToTopButton />}
+        <Footer noExtraPadding={hasBlockchainList} />
       </div>
       <ToastContainer position="bottom-right" theme="dark" />
     </Router>
