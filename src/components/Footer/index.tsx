@@ -15,13 +15,14 @@ import classnames, {
 } from 'classnames/tailwind'
 
 const commonClasses = classnames(display('flex'), alignItems('items-center'))
-const socialContainerCard = classnames(
-  commonClasses,
-  flexDirection('flex-col', 'md:flex-row'),
-  padding('py-8', 'px-4', 'lg:px-25'),
-  space('space-y-4', 'md:space-x-4', 'md:space-y-0'),
-  margin('mt-20')
-)
+const socialContainerCard = (noExtraPadding?: boolean) =>
+  classnames(
+    commonClasses,
+    flexDirection('flex-col', 'md:flex-row'),
+    padding('py-8', 'px-4', 'lg:px-25'),
+    space('space-y-4', 'md:space-x-4', 'md:space-y-0'),
+    margin(noExtraPadding ? { 'mt-5': true, 'md:mt-0': true } : 'mt-20')
+  )
 
 const socialContainer = classnames(
   commonClasses,
@@ -35,10 +36,11 @@ const linkContainer = classnames(
 )
 const socialLinksContainer = classnames(displayTo('md'), socialContainer)
 
-export default function () {
+export default function ({ noExtraPadding }: { noExtraPadding?: boolean }) {
   const linkList = Object.keys(FooterOptions)
+
   return (
-    <div className={socialContainerCard}>
+    <div className={socialContainerCard(noExtraPadding)}>
       <div className={linkContainer}>
         {linkList.map((key, index) => (
           <>

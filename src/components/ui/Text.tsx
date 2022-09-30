@@ -134,6 +134,7 @@ export function LinkText({
         {children}
       </Link>
     )
+
   return (
     <a
       className={linkClassnames}
@@ -261,7 +262,7 @@ export function CardParagraph({ children }: ChildrenProp) {
 
 const statusText = (
   primary?: boolean,
-  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default',
+  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default' | 'tertiary',
   textRight?: boolean
 ) =>
   classnames(
@@ -271,6 +272,7 @@ const statusText = (
     textColor({
       'text-accent': color === 'accent',
       'text-primary': color === 'primary',
+      'text-tertiary': color === 'tertiary',
       'text-error': color === 'error',
       'text-formal-accent': color === 'default',
       'text-primary-dimmed': color === 'dimmed',
@@ -284,7 +286,7 @@ export function StatusText({
   children,
 }: ChildrenProp & {
   primary?: boolean
-  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default'
+  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default' | 'tertiary'
   textRight?: boolean
 }) {
   return (
@@ -428,25 +430,30 @@ const errorTextBox = (visible?: boolean) =>
     alignItems('items-start'),
     space('space-x-2')
   )
-const errorText = (centered?: boolean) =>
+const errorText = (centered?: boolean, small?: boolean) =>
   classnames(
     textColor('text-error'),
     fontWeight('font-medium'),
     fontFamily('font-primary'),
+    fontSize({
+      'text-sm': small,
+    }),
     textAlign({ 'text-center': centered })
   )
 const exclamation = margin('mt-1.5')
 export function ErrorText({
   children,
   withExclamation,
+  small,
   visible,
   centered,
 }: ChildrenProp & {
   centered?: boolean
+  small?: boolean
   withExclamation?: boolean
   visible?: boolean
 }) {
-  const error = <p className={errorText(centered)}>{children}</p>
+  const error = <p className={errorText(centered, small)}>{children}</p>
 
   if (withExclamation)
     return (
@@ -504,4 +511,14 @@ export function TrashButtonText({ children }: ChildrenProp) {
       {children}
     </span>
   )
+}
+
+const largeText = classnames(
+  fontFamily('font-primary'),
+  fontWeight('font-bold'),
+  fontSize('text-lg', 'sm:text-xl', 'md:text-2xl'),
+  textAlign('text-center')
+)
+export function LargeText({ children }: ChildrenProp) {
+  return <h2 className={largeText}>{children}</h2>
 }

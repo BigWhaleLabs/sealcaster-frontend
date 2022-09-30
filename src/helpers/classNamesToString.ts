@@ -7,6 +7,7 @@ type AllowedExtraClassnames =
   | 'loading-pause'
   | 'dots-loading'
   | 'break-words'
+  | 'hover-button-scroll'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]

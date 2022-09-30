@@ -95,6 +95,9 @@ body {
   .hover-secondary:hover {
     color: var(--secondary-light-active-transparent);
   }
+  .hover-button-scroll:hover {
+    opacity: 1;
+  }
 }
 
 svg:not(.Toastify__toast-icon svg) {
@@ -165,9 +168,9 @@ circle {
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
   background-size: 200% 200%;
   border-radius: 16px;
-  animation: spin-background 3.5s linear infinite;
+  /* animation: spin-background 3.5s linear infinite; */
 }
-
+/* TODO: animation (background-position/transform) consumes CPU a lot. Need to find another way to animate magic card */
 .double-gradient-shadow::after {
   position: absolute;
   content: '';
@@ -181,8 +184,8 @@ circle {
   filter: blur(calc(65vh / 6));
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
   background-size: 200% 200%;
-  animation: spin-background 3.5s ease-in-out infinite,
-    rescale 3.5s ease-in-out infinite;
+  /* animation: spin-background 3.5s ease-in-out infinite,
+    rescale 3.5s ease-in-out infinite; */
 }
 
 .dots-loading::after {

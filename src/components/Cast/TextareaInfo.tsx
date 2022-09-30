@@ -1,10 +1,15 @@
 import { AccentText } from 'components/ui/Text'
 import { displayTo } from 'helpers/visibilityClassnames'
+import { useLocation } from 'wouter'
+import { useState } from 'preact/hooks'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
+import ErrorMessage from 'components/ui/ErrorMessage'
 import Sizes from 'models/MarkSizes'
 import Tooltip from 'components/ui/Tooltip'
 import TrashBurner from 'components/Cast/TrashBurner'
+import WarningPopup from 'components/ui/WarningPopup'
 import classnames, {
   alignItems,
   display,
@@ -30,14 +35,23 @@ const textAreaInfoWrapper = classnames(
 )
 
 export default function ({
+  error,
   loading,
   disabled,
   onButtonClick,
 }: {
+  error?: string
   loading?: boolean
   disabled?: boolean
   onButtonClick?: () => void
 }) {
+  const [, setLocation] = useLocation()
+  const [isWarningShown, setIsWarningShown] = useState(false)
+  const acceptTrashing = () => {
+    setIsWarningShown(false)
+    BurnerWalletStore.burn()
+    setLocation('/')
+  }
   const castingHintText =
     'You’re casting from a burner wallet. Burner wallet is an anonymous wallet that’s not tied to your identity. It will persist between page loads until you disconnect.'
 
@@ -71,7 +85,18 @@ export default function ({
           </AccentText>
         </div>
       )}
-      <TrashBurner />
+      <TrashBurner onClick={() => setIsWarningShown(true)} />
+      {!!error && (
+        <div className={displayTo('md')}>
+          <ErrorMessage small centered text={error} />
+        </div>
+      )}
+      {isWarningShown && (
+        <WarningPopup
+          onAccept={acceptTrashing}
+          onReject={() => setIsWarningShown(false)}
+        />
+      )}
     </div>
   )
 }
