@@ -6,7 +6,7 @@ import Button from 'components/ui/Button'
 
 export default function () {
   const { used } = useSnapshot(BurnerWalletStore)
-  const firstCastMessage = `Create your ${!used && 'first'} cast`
+  const firstCastMessage = `Create your ${used ? '' : 'first'} cast`
 
   return (
     <Link href="/cast">
