@@ -13,6 +13,7 @@ import classnames, {
   margin,
   maxWidth,
   minHeight,
+  overflow,
   width,
 } from 'classnames/tailwind'
 
@@ -24,6 +25,7 @@ const pageContainer = classnames(
   flexDirection('flex-col'),
   minHeight('min-h-screen')
 )
+const overflowEffects = overflow('overflow-hidden')
 const bodyContainer = classnames(
   width('xs:w-full'),
   maxWidth('max-w-fit', 'body:max-w-body'),
@@ -35,26 +37,28 @@ export default function () {
     <Router>
       <div className={pageContainer}>
         <Navbar />
-        <div className={bodyContainer}>
-          <Switch>
-            <Route path="/">
-              <LazyComponent lazyImported={<Landing />} />
-            </Route>
-            <Route path="/cast">
-              <LazyComponent lazyImported={<Cast />} />
-            </Route>
-            <Route path="/terms">
-              <Terms />
-            </Route>
-            <Route path="/privacy">
-              <Privacy />
-            </Route>
-            <Route path="/wallet">
-              <BurnerWallet />
-            </Route>
-          </Switch>
+        <div className={overflowEffects}>
+          <div className={bodyContainer}>
+            <Switch>
+              <Route path="/">
+                <LazyComponent lazyImported={<Landing />} />
+              </Route>
+              <Route path="/cast">
+                <LazyComponent lazyImported={<Cast />} />
+              </Route>
+              <Route path="/terms">
+                <Terms />
+              </Route>
+              <Route path="/privacy">
+                <Privacy />
+              </Route>
+              <Route path="/wallet">
+                <BurnerWallet />
+              </Route>
+            </Switch>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
       <ToastContainer position="bottom-right" theme="dark" />
     </Router>
