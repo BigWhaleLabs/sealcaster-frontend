@@ -96,7 +96,7 @@ body {
     color: var(--secondary-light-active-transparent);
   }
   .hover-button-scroll:hover {
-    filter: drop-shadow(0rem 0rem 4rem var(--primary));
+    opacity: 1;
   }
 }
 

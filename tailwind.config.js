@@ -93,7 +93,7 @@ module.exports = {
         'button-active': '0rem 0rem 0.375rem rgb(0 0 0 / 1)',
       },
       dropShadow: {
-        primary: '0rem 0rem 4rem var(--primary)',
+        'primary-dimmed': '0rem 0rem 4rem var(--primary-dimmed)',
         secondary: '0rem 0rem 0.625rem var(--secondary)',
         'accent-gradient': '1.25rem 1.25rem 4.62rem var(--accent-transparent)',
         'secondary-gradient':

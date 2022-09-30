@@ -4525,7 +4525,7 @@ export type TDropShadow =
   | 'drop-shadow-xl'
   | 'drop-shadow-2xl'
   | 'drop-shadow-none'
-  | 'drop-shadow-primary'
+  | 'drop-shadow-primary-dimmed'
   | 'drop-shadow-secondary'
   | 'drop-shadow-accent-gradient'
   | 'drop-shadow-secondary-gradient'

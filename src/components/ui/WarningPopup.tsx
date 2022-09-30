@@ -85,9 +85,9 @@ export default function ({
             {!!privateKey && (
               <div className={textAlign('text-center')}>
                 <StatusText primary color="tertiary">
-                  You may copy your private key in{' '}
+                  You may copy your private key{' '}
                   <LinkText internal url="/wallet">
-                    Wallet
+                    here
                   </LinkText>
                 </StatusText>
               </div>

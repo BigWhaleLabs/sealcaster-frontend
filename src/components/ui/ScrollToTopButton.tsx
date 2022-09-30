@@ -13,6 +13,8 @@ import classnames, {
   height,
   inset,
   justifyContent,
+  margin,
+  opacity,
   padding,
   position,
   width,
@@ -22,7 +24,8 @@ import classnames, {
 const scrollContainer = classnames(
   position('sticky'),
   inset('bottom-0'),
-  width('w-full'),
+  width('w-fit'),
+  margin('ml-auto'),
   display('flex'),
   flexDirection('flex-row'),
   padding('p-4'),
@@ -36,9 +39,10 @@ const arrowButton = (fromMd?: boolean) =>
     alignItems('items-center'),
     width('w-12', 'md:w-20'),
     height('h-12', 'md:h-20'),
-    dropShadow('active:drop-shadow-primary'),
+    dropShadow('drop-shadow-primary-dimmed'),
     borderRadius('rounded-full'),
-    backgroundColor('bg-primary')
+    opacity('opacity-60', 'active:opacity-100'),
+    backgroundColor('bg-primary-dimmed')
   )
 const arrowWrapper = (fromMd?: boolean) =>
   classNamesToString(arrowButton(fromMd), 'hover-button-scroll')
