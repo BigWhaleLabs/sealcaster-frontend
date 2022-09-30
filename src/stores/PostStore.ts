@@ -20,17 +20,19 @@ interface PostStoreType {
   idToPostTx: Promise<string[]>
 }
 
+const farcasterContract = getPostStorage()
+
 const limit = 100
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  postsAmount: safeGetPostsAmountFromContract(getPostStorage()),
+  postsAmount: safeGetPostsAmountFromContract(farcasterContract),
   posts: getMorePosts({
-    contract: getPostStorage(),
+    contract: farcasterContract,
     limitAmount: limit,
   }),
   selectedToken: undefined,
-  idToPostTx: getIdsToPostsTx(getPostStorage()),
+  idToPostTx: getIdsToPostsTx(farcasterContract),
   createPost: async (text: string) => {
     let signer = await BurnerWalletStore.getSigner()
 
@@ -55,5 +57,22 @@ const PostStore = proxy<PostStoreType>({
     )
   },
 })
+
+farcasterContract.on(
+  farcasterContract.filters.PostSaved(),
+  async (id, post, derivativeAddress, sender, timestamp) => {
+    const posts = await PostStore.posts
+    PostStore.posts = Promise.resolve([
+      {
+        id,
+        post,
+        derivativeAddress,
+        sender,
+        timestamp,
+      } as PostStructOutput,
+      ...posts,
+    ])
+  }
+)
 
 export default PostStore
