@@ -25,6 +25,7 @@ import classnames, {
 } from 'classnames/tailwind'
 import getErrorMessage from 'helpers/getErrorMessage'
 import useBadgeAccount from 'hooks/useBadgeAccount'
+import useScrollToTop from 'hooks/useScrollToTop'
 
 const processingCardWrapper = classnames(
   flexDirection('flex-col'),
@@ -38,6 +39,7 @@ export default function () {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<unknown>()
   const [text, setText] = useState('')
+  useScrollToTop()
 
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
