@@ -77,22 +77,6 @@ body {
   color: var(--formal-accent);
 }
 
-@media screen and (max-width: 600px) {
-  /* Grid for mobiles */
-  html {
-    background-color: var(--primary-dark);
-    background-size: auto auto, 100% 100%, 0/2rem, 2rem;
-    background-position: top, top, 0;
-    background-image: url(), url('/img/background.webp'), var(--bg-grid);
-  }
-  .animated-blur::before {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-  }
-}
-
 @media (hover: hover) and (pointer: fine) {
   .hover-tertiary:hover {
     color: var(--tertiary);
@@ -174,7 +158,7 @@ circle {
   height: 300%;
   z-index: -1;
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
-  animation: rotate 12s linear infinite;
+  animation: rotate 12s ease-in-out infinite;
 }
 
 .animated-blur {
@@ -187,12 +171,12 @@ circle {
 .animated-blur::before {
   position: absolute;
   content: '';
-  top: calc(100% / 7);
+  top: 20%;
   left: 10%;
   height: 80%;
   width: 80%;
   z-index: -2;
-  filter: blur(calc(65vh / 6));
+  filter: blur(6rem);
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
   animation: rotate 12s ease-in-out infinite;
 }
@@ -226,5 +210,25 @@ circle {
 @keyframes rotate {
   100% {
     transform: rotate(1turn);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .animated-blur::before {
+    top: 8%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  /* Grid for mobiles */
+  html {
+    background-color: var(--primary-dark);
+    background-size: auto auto, 100% 100%, 0/2rem, 2rem;
+    background-position: top, top, 0;
+    background-image: url(), url('/img/background.webp'), var(--bg-grid);
+  }
+  .animated-blur::before {
+    top: 30%;
+    width: 140%;
   }
 }
