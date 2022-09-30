@@ -3,7 +3,7 @@ export default function (element?: HTMLAnchorElement, position?: number) {
 
   const makePostPulse = () => {
     element.classList.toggle('animate-pulse')
-    setTimeout(() => element.classList.toggle('animate-pulse'), 3000)
+    setTimeout(() => element.classList.toggle('animate-pulse'), 4000)
     return
   }
   if (!position) makePostPulse()
