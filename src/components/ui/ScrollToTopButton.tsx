@@ -1,7 +1,7 @@
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { useEffect, useState } from 'preact/hooks'
-import ArrowUp from 'icons/ArrowUp'
+import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
+import SimpleArrow from 'icons/SimpleArrow'
 import classNamesToString from 'helpers/classNamesToString'
 import classnames, {
   alignItems,
@@ -16,10 +16,12 @@ import classnames, {
   margin,
   opacity,
   padding,
+  pointerEvents,
   position,
   width,
   zIndex,
 } from 'classnames/tailwind'
+import useOnScroll from 'hooks/useOnScroll'
 
 const scrollContainer = classnames(
   position('sticky'),
@@ -32,7 +34,7 @@ const scrollContainer = classnames(
   justifyContent('justify-end'),
   zIndex('z-30')
 )
-const arrowButton = (fromMd?: boolean) =>
+const arrowButton = (shown: boolean, fromMd?: boolean) =>
   classnames(
     fromMd ? displayFrom('md') : displayTo('md'),
     justifyContent('justify-center'),
@@ -41,11 +43,12 @@ const arrowButton = (fromMd?: boolean) =>
     height('h-12', 'md:h-20'),
     dropShadow('drop-shadow-primary-dimmed'),
     borderRadius('rounded-full'),
-    opacity('opacity-60', 'active:opacity-100'),
+    opacity(!shown ? 'opacity-0' : 'opacity-60', 'active:opacity-100'),
+    pointerEvents({ 'pointer-events-none': !shown }),
     backgroundColor('bg-primary-dimmed')
   )
-const arrowWrapper = (fromMd?: boolean) =>
-  classNamesToString(arrowButton(fromMd), 'hover-button-scroll')
+const arrowWrapper = (shown: boolean, fromMd?: boolean) =>
+  classNamesToString(arrowButton(shown, fromMd), 'hover-button-scroll')
 
 export default function () {
   const [visible, setVisible] = useState(false)
@@ -53,21 +56,18 @@ export default function () {
   const onScroll = () => {
     setVisible(document.documentElement.scrollTop > 150)
   }
-  useEffect(() => {
-    document.addEventListener('scroll', onScroll)
-    return () => document.removeEventListener('scroll', onScroll)
-  }, [])
+  useOnScroll(onScroll)
 
-  return visible ? (
+  return (
     <div className={scrollContainer}>
       <Button type="tertiary" onClick={scrollToTop}>
-        <div className={arrowWrapper(false)}>
-          <ArrowUp small />
+        <div className={arrowWrapper(visible, false)}>
+          <SimpleArrow small />
         </div>
-        <div className={arrowWrapper(true)}>
-          <ArrowUp />
+        <div className={arrowWrapper(visible, true)}>
+          <SimpleArrow />
         </div>
       </Button>
     </div>
-  ) : null
+  )
 }
