@@ -1,7 +1,7 @@
 import { AccentText } from 'components/ui/Text'
 import { displayTo } from 'helpers/visibilityClassnames'
-import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'wouter'
+import { useState } from 'preact/hooks'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CharInCircle from 'components/ui/CharInCircle'
@@ -51,10 +51,6 @@ export default function ({
   }
   const castingHintText =
     'You’re casting from a burner wallet. Burner wallet is an anonymous wallet that’s not tied to your identity. It will persist between page loads until you disconnect.'
-
-  useEffect(() => {
-    document.body.classList.toggle('overflow-hidden', isWarningShown)
-  }, [isWarningShown])
 
   return (
     <div className={textAreaInfoWrapper}>
