@@ -1,6 +1,5 @@
 import { AccentText } from 'components/ui/Text'
-import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { parseErrorText } from '@big-whale-labs/frontend-utils'
+import { displayTo } from 'helpers/visibilityClassnames'
 import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from 'wouter'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
@@ -41,7 +40,7 @@ export default function ({
   disabled,
   onButtonClick,
 }: {
-  error?: unknown
+  error?: string
   loading?: boolean
   disabled?: boolean
   onButtonClick?: () => void
@@ -55,7 +54,6 @@ export default function ({
   }
   const castingHintText =
     'You’re casting from a burner wallet. Burner wallet is an anonymous wallet that’s not tied to your identity. It will persist between page loads until you disconnect.'
-  const errorMessage = !!error && parseErrorText(error)
 
   useEffect(() => {
     document.body.classList.toggle('overflow-hidden', isWarningShown)
@@ -91,15 +89,10 @@ export default function ({
           </AccentText>
         </div>
       )}
-      {!!errorMessage && (
-        <>
-          <div className={displayTo('md')}>
-            <ErrorMessage small centered truncated text={errorMessage} />
-          </div>
-          <div className={displayFrom('md')}>
-            <ErrorMessage small centered truncated text={errorMessage} />
-          </div>
-        </>
+      {!!error && (
+        <div className={displayTo('md')}>
+          <ErrorMessage small centered truncated text={error} />
+        </div>
       )}
       <TrashBurner onClick={() => setIsWarningShown(true)} />
       {isWarningShown && (

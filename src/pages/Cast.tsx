@@ -3,12 +3,13 @@ import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Redirect } from 'wouter'
 import { displayFrom } from 'helpers/visibilityClassnames'
-import { handleError } from '@big-whale-labs/frontend-utils'
+import { handleError, parseErrorText } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import CastHeader from 'components/Cast/CastHeader'
+import ErrorMessage from 'components/ui/ErrorMessage'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
 import PostProcessing from 'components/ProcessingCard'
 import PostStore from 'stores/PostStore'
@@ -38,6 +39,7 @@ export default function () {
   const [text, setText] = useState('')
 
   const maxLength = 279
+  const errorMessage = error ? parseErrorText(error) : ''
 
   async function createPost() {
     setError(null)
@@ -107,7 +109,7 @@ export default function () {
                 loading={isLoading}
                 onButtonClick={createPost}
                 disabled={!text}
-                error={error}
+                error={errorMessage}
               />
             </div>
             <div
@@ -131,6 +133,9 @@ export default function () {
                 <AccentText extraSmall color="text-accent">
                   Hang on, this often takes a minute or two...
                 </AccentText>
+              )}
+              {!!errorMessage && (
+                <ErrorMessage small centered truncated text={errorMessage} />
               )}
             </div>
           </div>
