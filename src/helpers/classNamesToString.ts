@@ -8,6 +8,7 @@ type AllowedExtraClassnames =
   | 'break-words'
   | 'animated-blur'
   | 'animated-border'
+  | 'hover-button-scroll'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]

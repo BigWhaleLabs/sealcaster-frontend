@@ -52,13 +52,11 @@ module.exports = {
         avatar: '6rem',
       },
       width: {
-        chart: '108px',
-        time: '95px',
-        glass: '107px',
         'full-105': '105%',
         'seal-grid': '25.313rem',
       },
       maxWidth: {
+        14: '3.5rem',
         84: '21rem',
         'processing-content': '27.875rem',
         body: '40.375rem',
@@ -93,6 +91,7 @@ module.exports = {
         'button-active': '0rem 0rem 0.375rem rgb(0 0 0 / 1)',
       },
       dropShadow: {
+        'primary-dimmed': '0rem 0rem 4rem var(--primary-dimmed)',
         secondary: '0rem 0rem 0.625rem var(--secondary)',
         'accent-gradient': '1.25rem 1.25rem 4.62rem var(--accent-transparent)',
         'secondary-gradient':
@@ -100,6 +99,7 @@ module.exports = {
       },
       strokeWidth: {
         1.5: '1.5',
+        4: '4',
       },
       keyframes: {
         'pulse-horizontal': {

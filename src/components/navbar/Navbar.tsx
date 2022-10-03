@@ -3,7 +3,7 @@ import { LogoSubText, LogoText } from 'components/ui/Text'
 import { Player } from '@lottiefiles/react-lottie-player'
 import { VNode } from 'preact'
 import { displayFrom } from 'helpers/visibilityClassnames'
-import { useCallback, useMemo, useRef, useState } from 'preact/hooks'
+import { useCallback, useRef, useState } from 'preact/hooks'
 import AnimatedLogo from 'icons/AnimatedLogo'
 import RightBlock from 'components/navbar/RightBlock'
 import classNamesToString from 'helpers/classNamesToString'
@@ -15,6 +15,7 @@ import classnames, {
   inset,
   justifyContent,
   margin,
+  maxWidth,
   padding,
   position,
   space,
@@ -22,6 +23,7 @@ import classnames, {
   width,
   zIndex,
 } from 'classnames/tailwind'
+import useOnScroll from 'hooks/useOnScroll'
 
 const navbar = (visible?: boolean, withoutRightBlock?: boolean) =>
   classnames(
@@ -49,7 +51,11 @@ const logoWithVersion = classnames(
   displayFrom('md')
 )
 
-const logoWrapper = classnames(display('flex'), width('w-full'))
+const logoWrapper = classnames(
+  display('flex'),
+  maxWidth('max-w-14'),
+  width('w-full')
+)
 
 export default function ({
   logoText,
@@ -69,10 +75,7 @@ export default function ({
   const onScroll = useCallback(() => {
     setBackgroundVisible(window.scrollY > 20)
   }, [])
-  useMemo(() => {
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [onScroll])
+  useOnScroll(onScroll)
 
   return (
     <nav className={navbar(backgroundVisible, hideWalletPart)}>

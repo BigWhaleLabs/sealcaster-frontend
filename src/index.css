@@ -85,6 +85,9 @@ body {
   .hover-secondary:hover {
     color: var(--secondary-light-active-transparent);
   }
+  .hover-button-scroll:hover {
+    opacity: 1;
+  }
 }
 
 svg:not(.Toastify__toast-icon svg) {

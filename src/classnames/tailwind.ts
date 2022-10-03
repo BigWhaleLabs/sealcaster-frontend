@@ -4525,6 +4525,7 @@ export type TDropShadow =
   | 'drop-shadow-xl'
   | 'drop-shadow-2xl'
   | 'drop-shadow-none'
+  | 'drop-shadow-primary-dimmed'
   | 'drop-shadow-secondary'
   | 'drop-shadow-accent-gradient'
   | 'drop-shadow-secondary-gradient'
@@ -7394,6 +7395,7 @@ export type TMinWidth =
 
 export type TMaxWidth =
   | 'max-w-0'
+  | 'max-w-14'
   | 'max-w-84'
   | 'max-w-none'
   | 'max-w-xs'
@@ -7661,7 +7663,12 @@ export type TStroke =
   | 'stroke-light-formal-accent'
   | 'stroke-error-semi-transparent'
 
-export type TStrokeWidth = 'stroke-0' | 'stroke-1' | 'stroke-2' | 'stroke-1.5'
+export type TStrokeWidth =
+  | 'stroke-0'
+  | 'stroke-1'
+  | 'stroke-2'
+  | 'stroke-4'
+  | 'stroke-1.5'
 
 export type TSVG = TFill | TStroke | TStrokeWidth
 
