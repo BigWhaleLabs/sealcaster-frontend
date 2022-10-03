@@ -5,6 +5,7 @@ import classnames, {
   borderRadius,
   cursor,
   inset,
+  margin,
   opacity,
   padding,
   position,
@@ -16,15 +17,20 @@ import classnames, {
   zIndex,
 } from 'classnames/tailwind'
 
-const container = (closed: boolean, fitToItemSize?: boolean) =>
+const container = (
+  closed: boolean,
+  fitToItemSize?: boolean,
+  extraSpacing?: boolean
+) =>
   classnames(
     position('absolute'),
     inset(
-      'top-7',
+      { 'top-7': !extraSpacing },
       fitToItemSize
         ? { 'right-0': true, 'xs:right-auto': true, 'xs:left-0': true }
         : '-left-2.5'
     ),
+    extraSpacing ? margin('mt-2.5') : undefined,
     opacity({ 'opacity-0': closed }),
     visibility({ invisible: closed }),
     zIndex('z-40'),
@@ -53,15 +59,17 @@ export default function ({
   selected,
   onSelect,
   fitToItemSize,
+  extraSpacing,
 }: {
   open: boolean
   options: Option[]
   onSelect: (option: Option) => void
   fitToItemSize?: boolean
   selected?: string
+  extraSpacing?: boolean
 }) {
   return (
-    <div className={container(!open, fitToItemSize)}>
+    <div className={container(!open, fitToItemSize, extraSpacing)}>
       <ItemContainer>
         {options.map((option) => (
           <button

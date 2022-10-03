@@ -1,12 +1,12 @@
 import { AccentText } from 'components/ui/Text'
-import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { useLocation } from 'wouter'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
-import ExternalLink from 'components/ui/ExternalLink'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
+import Dropdown from 'components/Dropdown'
 import LastDelimiter from 'components/ui/LastDelimiter'
 import Logo from 'components/navbar/Logo'
-import Network from 'models/Network'
 import SealVerse from 'components/navbar/SealVerse'
 import SocialLinks from 'components/navbar/SocialLinks'
 import classnames, {
@@ -20,8 +20,8 @@ import classnames, {
   textAlign,
   width,
 } from 'classnames/tailwind'
-import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
 import useBadgeAccount from 'hooks/useBadgeAccount'
+import walletOptions from 'helpers/walletOptions'
 
 const walletContainer = classnames(
   display('flex'),
@@ -52,7 +52,22 @@ const AccountContainer = ({
   needNetworkChange: boolean
   eNSName?: string
 }) => {
+  const [, setLocation] = useLocation()
   const { isBurner } = useBadgeAccount()
+  const onSelectOption = (option: string) => {
+    switch (option) {
+      case 'disconnect':
+        BurnerWalletStore.burn()
+        setLocation('/')
+        break
+      case '/wallet':
+        setLocation('/wallet')
+        break
+      default:
+        window.open(option, '_blank')
+    }
+  }
+
   const content = (
     <div className={accountLinkContainer}>
       <AccountAndLogo
@@ -64,12 +79,15 @@ const AccountContainer = ({
     </div>
   )
   if (account)
-    return isBurner ? (
-      <Link href="/wallet">{content}</Link>
-    ) : (
-      <ExternalLink url={getEtherscanAddressUrl(account, Network.Goerli)}>
-        {content}
-      </ExternalLink>
+    return (
+      <Dropdown
+        extraSpacing
+        fitToItemSize
+        currentValue={window.location.origin}
+        options={walletOptions(account, isBurner)}
+        staticPlaceholder={content}
+        onChange={onSelectOption}
+      />
     )
 
   return (
