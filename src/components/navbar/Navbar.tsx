@@ -15,6 +15,7 @@ import classnames, {
   inset,
   justifyContent,
   margin,
+  maxWidth,
   padding,
   position,
   space,
@@ -50,7 +51,11 @@ const logoWithVersion = classnames(
   displayFrom('md')
 )
 
-const logoWrapper = classnames(display('flex'), width('w-full'))
+const logoWrapper = classnames(
+  display('flex'),
+  maxWidth('max-w-14'),
+  width('w-full')
+)
 
 export default function ({
   logoText,

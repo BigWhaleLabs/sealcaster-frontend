@@ -52,13 +52,11 @@ module.exports = {
         avatar: '6rem',
       },
       width: {
-        chart: '108px',
-        time: '95px',
-        glass: '107px',
         'full-105': '105%',
         'seal-grid': '25.313rem',
       },
       maxWidth: {
+        14: '3.5rem',
         84: '21rem',
         'processing-content': '27.875rem',
         body: '40.375rem',
