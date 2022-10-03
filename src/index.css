@@ -77,16 +77,6 @@ body {
   color: var(--formal-accent);
 }
 
-@media screen and (max-width: 600px) {
-  /* Grid for mobiles */
-  html {
-    background-color: var(--primary-dark);
-    background-size: auto auto, 100% 100%, 0/2rem, 2rem;
-    background-position: top, top, 0;
-    background-image: url(), url('/img/background.webp'), var(--bg-grid);
-  }
-}
-
 @media (hover: hover) and (pointer: fine) {
   .hover-tertiary:hover {
     color: var(--tertiary);
@@ -157,35 +147,41 @@ circle {
     20px 20px 74px var(--accent-transparent);
 }
 
-.double-gradient-shadow::before {
+.animated-border {
+  position: relative;
+  padding: 0.15rem;
+}
+
+.animated-border::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
   z-index: -1;
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
-  background-size: 200% 200%;
-  border-radius: 16px;
-  /* animation: spin-background 3.5s linear infinite; */
+  animation: rotate 12s ease-in-out infinite;
 }
-/* TODO: animation (background-position/transform) consumes CPU a lot. Need to find another way to animate magic card */
-.double-gradient-shadow::after {
+
+.animated-blur {
   position: absolute;
-  content: '';
-  top: calc(100% / 15);
   left: 0;
   right: 0;
   height: 100%;
   width: 100%;
-  z-index: -1;
-  transform: scale(0.8);
-  filter: blur(calc(65vh / 6));
+}
+.animated-blur::before {
+  position: absolute;
+  content: '';
+  top: 20%;
+  left: 10%;
+  height: 80%;
+  width: 80%;
+  z-index: -2;
+  filter: blur(6rem);
   background-image: linear-gradient(90deg, #ff7bed, #fed823);
-  background-size: 200% 200%;
-  /* animation: spin-background 3.5s ease-in-out infinite,
-    rescale 3.5s ease-in-out infinite; */
+  animation: rotate 12s ease-in-out infinite;
 }
 
 .dots-loading::after {
@@ -214,21 +210,28 @@ circle {
   }
 }
 
-@keyframes spin-background {
-  0%,
+@keyframes rotate {
   100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    transform: rotate(1turn);
   }
 }
-@keyframes rescale {
-  0%,
-  100% {
-    transform: scale(0.8);
+
+@media screen and (max-width: 400px) {
+  .animated-blur::before {
+    top: 8%;
   }
-  50% {
-    transform: scale(0.85);
+}
+
+@media screen and (max-width: 600px) {
+  /* Grid for mobiles */
+  html {
+    background-color: var(--primary-dark);
+    background-size: auto auto, 100% 100%, 0/2rem, 2rem;
+    background-position: top, top, 0;
+    background-image: url(), url('/img/background.webp'), var(--bg-grid);
+  }
+  .animated-blur::before {
+    top: 30%;
+    width: 140%;
   }
 }
