@@ -59,6 +59,7 @@ module.exports = {
         'seal-grid': '25.313rem',
       },
       maxWidth: {
+        14: '3.5rem',
         84: '21rem',
         'processing-content': '27.875rem',
         body: '40.375rem',
