@@ -27,10 +27,10 @@ const scrollContainer = classnames(
   position('sticky'),
   inset('bottom-0'),
   width('w-fit'),
-  margin('ml-auto'),
+  margin('ml-auto', 'lg:mr-12'),
   display('flex'),
   flexDirection('flex-row'),
-  padding('p-4'),
+  padding('pt-4', 'pb-6', 'pr-5', 'md:pr-6', 'md:pb-8'),
   justifyContent('justify-end'),
   zIndex('z-30')
 )

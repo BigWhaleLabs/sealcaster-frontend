@@ -52,9 +52,6 @@ module.exports = {
         avatar: '6rem',
       },
       width: {
-        chart: '108px',
-        time: '95px',
-        glass: '107px',
         'full-105': '105%',
         'seal-grid': '25.313rem',
       },
