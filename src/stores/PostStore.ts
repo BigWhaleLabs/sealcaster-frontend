@@ -8,6 +8,7 @@ import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
 import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
 import parsePostLogData from 'helpers/parsePostLogData'
+import relayProvider from 'helpers/providers/relayProvider'
 import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
 import walletStore from 'stores/WalletStore'
 
@@ -35,7 +36,7 @@ const PostStore = proxy<PostStoreType>({
     let signer = await BurnerWalletStore.getSigner()
 
     if (!signer && (await walletStore.hasFarcasterBadge))
-      signer = await walletStore.getSigner()
+      signer = await walletStore.getSigner(relayProvider)
 
     if (!signer) throw new Error('Not found burner wallet!')
 

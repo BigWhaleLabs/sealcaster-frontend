@@ -22,7 +22,10 @@ export default function ({
     ) : (
       <div
         onClick={async () => {
-          await walletStore.connect(true)
+          await walletStore.changeNetworkOrConnect({
+            clearCachedProvider: true,
+            needNetworkChange: walletStore.needNetworkChange,
+          })
           if ((await walletStore.hasFarcasterBadge) && location !== '/cast')
             setLocation('/cast')
         }}

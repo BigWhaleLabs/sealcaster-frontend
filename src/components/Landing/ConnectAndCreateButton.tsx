@@ -42,7 +42,11 @@ export default function ({
     onLoading(true)
 
     try {
-      if (!walletStore.account) await walletStore.connect(true)
+      if (!walletStore.account)
+        await walletStore.changeNetworkOrConnect({
+          clearCachedProvider: true,
+          needNetworkChange: walletStore.needNetworkChange,
+        })
       if (!walletStore.account) return onError('Please connect the wallet')
       const hasFarcaster = await checkBadgeAndSignature(walletStore.account)
       if (!hasFarcaster) {

@@ -102,7 +102,10 @@ function BurnerBlockSuspended() {
                     type="secondary"
                     small
                     onClick={async () => {
-                      await walletStore.connect(true)
+                      await walletStore.changeNetworkOrConnect({
+                        clearCachedProvider: true,
+                        needNetworkChange: walletStore.needNetworkChange,
+                      })
                       if (
                         (await walletStore.hasFarcasterBadge) &&
                         location !== '/cast'
