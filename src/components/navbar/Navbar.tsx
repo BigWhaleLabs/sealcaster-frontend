@@ -1,26 +1,18 @@
-import { Link } from 'wouter'
-import { LogoSubText, LogoText } from 'components/ui/Text'
-import { Player } from '@lottiefiles/react-lottie-player'
 import { VNode } from 'preact'
-import { displayFrom } from 'helpers/visibilityClassnames'
-import { useCallback, useRef, useState } from 'preact/hooks'
-import AnimatedLogo from 'icons/AnimatedLogo'
+import { useCallback, useState } from 'preact/hooks'
 import RightBlock from 'components/navbar/RightBlock'
-import classNamesToString from 'helpers/classNamesToString'
+import SiteLogo from 'components/navbar/SiteLogo'
 import classnames, {
   alignItems,
   backgroundColor,
   display,
-  flexDirection,
   inset,
   justifyContent,
   margin,
-  maxWidth,
   padding,
   position,
   space,
   transitionProperty,
-  width,
   zIndex,
 } from 'classnames/tailwind'
 import useOnScroll from 'hooks/useOnScroll'
@@ -40,23 +32,6 @@ const navbar = (visible?: boolean, withoutRightBlock?: boolean) =>
     margin('mb-8')
   )
 
-const logoContainer = classnames(
-  display('inline-flex'),
-  alignItems('items-center')
-)
-
-const logoWithVersion = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  displayFrom('md')
-)
-
-const logoWrapper = classnames(
-  display('flex'),
-  maxWidth('max-w-14'),
-  width('w-full')
-)
-
 export default function ({
   logoText,
   account,
@@ -70,7 +45,6 @@ export default function ({
   eNSName?: string
   hideWalletPart?: boolean
 }) {
-  const lottieRef = useRef<Player>()
   const [backgroundVisible, setBackgroundVisible] = useState(false)
   const onScroll = useCallback(() => {
     setBackgroundVisible(window.scrollY > 20)
@@ -79,26 +53,7 @@ export default function ({
 
   return (
     <nav className={navbar(backgroundVisible, hideWalletPart)}>
-      <Link to="/" className={classNamesToString(logoContainer)}>
-        <div
-          className={logoWrapper}
-          onTouchStart={() => {
-            lottieRef.current?.play()
-          }}
-        >
-          <Player ref={lottieRef} hover src={AnimatedLogo} />
-        </div>
-        <div className={logoWithVersion}>
-          {typeof logoText === 'string' ? (
-            <>
-              <LogoText>{logoText}</LogoText>
-              <LogoSubText>(ALPHA)</LogoSubText>
-            </>
-          ) : (
-            { logoText }
-          )}
-        </div>
-      </Link>
+      <SiteLogo logoText={logoText} />
       {!hideWalletPart && (
         <RightBlock
           eNSName={eNSName}
