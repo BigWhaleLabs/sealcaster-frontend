@@ -22,7 +22,6 @@ import {
   justifyContent,
   lineHeight,
   opacity,
-  outlineStyle,
   padding,
   space,
   textAlign,
@@ -64,7 +63,6 @@ const commonClasses = ({
     transitionTimingFunction('ease-in-out'),
     transitionDuration('duration-100'),
     cursor({ 'cursor-not-allowed': !available }),
-    outlineStyle('focus:outline-none'),
     opacity({ 'opacity-50': !available }),
     isNotTertiary
       ? boxShadow({
