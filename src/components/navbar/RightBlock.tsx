@@ -28,7 +28,8 @@ const walletContainer = classnames(
   flexDirection('flex-col-reverse', 'xs:flex-row'),
   alignItems('items-center'),
   gap('gap-x-3', 'sm:gap-x-4'),
-  cursor('cursor-pointer')
+  cursor('cursor-pointer'),
+  displayFrom('xs')
 )
 const accountLinkContainer = classnames(
   display('inline-flex'),
@@ -40,6 +41,12 @@ const walletAccount = classnames(
   textAlign('text-right'),
   lineHeight('leading-5')
 )
+
+interface AccountProps {
+  account?: string
+  needNetworkChange: boolean
+  eNSName?: string
+}
 
 const AccountContainer = ({
   account,
@@ -83,43 +90,63 @@ const AccountContainer = ({
   )
 }
 
+const SuspendedAccount = ({
+  account,
+  needNetworkChange,
+  eNSName,
+}: AccountProps) => {
+  return (
+    <Suspense
+      fallback={
+        <div className={accountLinkContainer}>
+          <div className={walletAccount}>
+            <AccentText small color="text-primary-semi-dimmed">
+              <span className={displayTo('lg')}>Fetching...</span>
+              <span className={displayFrom('lg')}>Fetching account...</span>
+            </AccentText>
+          </div>
+          <div className={width('w-fit')}>
+            <Logo connected={false} />
+          </div>
+        </div>
+      }
+    >
+      <AccountContainer
+        eNSName={eNSName}
+        needNetworkChange={needNetworkChange}
+        account={account}
+      />
+    </Suspense>
+  )
+}
+
 export default function ({
   account,
   needNetworkChange,
   eNSName,
-}: {
-  account?: string
-  needNetworkChange: boolean
-  eNSName?: string
-}) {
+}: AccountProps) {
   return (
     <>
       <div className={walletContainer}>
         <SocialLinks />
         <SealVerse />
         <LastDelimiter />
+        <SuspendedAccount
+          account={account}
+          needNetworkChange={needNetworkChange}
+          eNSName={eNSName}
+        />
+      </div>
 
-        <Suspense
-          fallback={
-            <div className={accountLinkContainer}>
-              <div className={walletAccount}>
-                <AccentText small color="text-primary-semi-dimmed">
-                  <span className={displayTo('lg')}>Fetching...</span>
-                  <span className={displayFrom('lg')}>Fetching account...</span>
-                </AccentText>
-              </div>
-              <div className={width('w-fit')}>
-                <Logo connected={false} />
-              </div>
-            </div>
-          }
-        >
-          <AccountContainer
-            eNSName={eNSName}
-            needNetworkChange={needNetworkChange}
-            account={account}
-          />
-        </Suspense>
+      <div className={displayTo('xs')}>
+        <SuspendedAccount
+          account={account}
+          needNetworkChange={needNetworkChange}
+          eNSName={eNSName}
+        />
+      </div>
+      <div className={displayTo('xs')}>
+        <SealVerse />
       </div>
     </>
   )

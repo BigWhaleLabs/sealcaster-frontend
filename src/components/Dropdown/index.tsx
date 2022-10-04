@@ -1,4 +1,4 @@
-import { createRef } from 'react'
+import { JSX, createRef } from 'react'
 import { useState } from 'react'
 import Arrow from 'icons/Arrow'
 import Menu from 'components/Dropdown/Menu'
@@ -55,7 +55,7 @@ export default function ({
   options: Option[]
   onChange: (selectedValue: string) => void
   disabled?: boolean
-  staticPlaceholder?: string
+  staticPlaceholder?: string | JSX.Element
   fitToItemSize?: boolean
   colorfulCurrentValue?: boolean
 }) {
