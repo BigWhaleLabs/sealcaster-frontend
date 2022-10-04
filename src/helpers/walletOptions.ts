@@ -18,7 +18,7 @@ export default function (account: string, isBurner?: boolean): Option[] {
     return [
       {
         label: 'Wallet',
-        value: '/wallet',
+        value: 'wallet',
       },
       ...options,
     ]

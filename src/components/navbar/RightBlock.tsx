@@ -60,7 +60,7 @@ const AccountContainer = ({
         BurnerWalletStore.burn()
         setLocation('/')
         break
-      case '/wallet':
+      case 'wallet':
         setLocation('/wallet')
         break
       default:

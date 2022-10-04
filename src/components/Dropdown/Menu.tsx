@@ -30,7 +30,7 @@ const container = (
         ? { 'right-0': true, 'xs:right-auto': true, 'xs:left-0': true }
         : '-left-2.5'
     ),
-    extraSpacing ? margin('mt-2.5') : undefined,
+    margin({ 'mt-2.5': extraSpacing }),
     opacity({ 'opacity-0': closed }),
     visibility({ invisible: closed }),
     zIndex('z-40'),

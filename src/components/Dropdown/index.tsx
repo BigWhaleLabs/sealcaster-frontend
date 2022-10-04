@@ -75,7 +75,7 @@ export default function ({
       <span className={textStyles(colorfulCurrentValue)}>
         {staticPlaceholder || currentValue}
       </span>
-      {staticPlaceholder === 'string' && (
+      {typeof staticPlaceholder === 'string' && (
         <div className={width('w-4')}>
           <Arrow pulseDisabled open={open} />
         </div>
