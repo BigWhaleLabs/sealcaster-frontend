@@ -77,16 +77,30 @@ export function AccentText({
   )
 }
 
+const gradientText = classnames(
+  textColor('text-transparent'),
+  backgroundImage('bg-gradient-to-r'),
+  backgroundClip('bg-clip-text'),
+  gradientColorStops('from-secondary', 'to-accent'),
+  fontWeight('font-bold'),
+  fontFamily('font-primary')
+)
+export function GradientText({ children }: ChildrenProp) {
+  return <span className={gradientText}>{children}</span>
+}
+
 const linkText = (
   small?: boolean,
   extraSmall?: boolean,
   bold?: boolean,
   gradientFrom?: TGradientColorStops,
   gradientTo?: TGradientColorStops,
-  underline?: boolean
+  underline?: boolean,
+  primary?: boolean
 ) =>
   classnames(
     textDecoration({ underline }),
+    fontFamily({ 'font-primary': primary }),
     textColor(gradientFrom && gradientTo ? 'text-transparent' : 'text-primary'),
     backgroundImage(
       gradientFrom && gradientTo ? 'bg-gradient-to-r' : undefined
@@ -108,6 +122,7 @@ export function LinkText({
   gradientFrom,
   gradientTo,
   underline,
+  primary,
 }: ChildrenProp & {
   url: string
   small?: boolean
@@ -118,6 +133,7 @@ export function LinkText({
   gradientFrom?: TGradientColorStops
   gradientTo?: TGradientColorStops
   underline?: boolean
+  primary?: boolean
 }) {
   const linkClassnames = linkText(
     small,
@@ -125,7 +141,8 @@ export function LinkText({
     bold,
     gradientFrom,
     gradientTo,
-    underline
+    underline,
+    primary
   )
 
   if (internal)

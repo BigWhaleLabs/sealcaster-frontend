@@ -8,6 +8,7 @@ import Navbar from 'components/navbar'
 import Privacy from 'pages/Privacy'
 import ScrollToTopButton from 'components/ui/ScrollToTopButton'
 import Terms from 'pages/Terms'
+import Thread from 'components/Thread'
 import classnames, {
   display,
   flexDirection,
@@ -58,6 +59,9 @@ export default function () {
               </Route>
               <Route path="/wallet">
                 <BurnerWallet />
+              </Route>
+              <Route path="/thread">
+                <Thread />
               </Route>
             </Switch>
           </div>

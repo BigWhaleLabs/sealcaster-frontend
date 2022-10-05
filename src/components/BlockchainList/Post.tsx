@@ -1,10 +1,12 @@
 import { BodyText, PostText, StatusText } from 'components/ui/Text'
+import { Delimiter } from 'components/ui/LastDelimiter'
 import Card from 'components/ui/Card'
-import Delimiter from 'components/ui/Delimiter'
 import EtherScanLink from 'components/BlockchainList/EtherScanLink'
 import PostTime from 'components/BlockchainList/PostTime'
+import Replies from 'components/BlockchainList/Replies'
 import Sender from 'components/BlockchainList/Sender'
 import Status from 'components/BlockchainList/Status'
+import ThreadPart from 'components/BlockchainList/ThreadPart'
 import classnames, {
   alignItems,
   display,
@@ -71,6 +73,12 @@ export default function ({
             </BodyText>
           </div>
         </div>
+
+        <Delimiter color="bg-half-grey" />
+
+        <Replies />
+
+        <ThreadPart />
       </Card>
     </div>
   )
