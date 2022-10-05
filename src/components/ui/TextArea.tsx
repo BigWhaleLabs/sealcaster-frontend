@@ -56,8 +56,7 @@ const textBox = classnames(
   backgroundColor('bg-primary-dark'),
   resize('resize-none'),
   width('w-full'),
-  transitionProperty('transition-colors'),
-  outlineStyle('outline-none', 'focus:outline-none')
+  transitionProperty('transition-colors')
 )
 
 interface TextAreaProps {
