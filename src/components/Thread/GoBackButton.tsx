@@ -2,6 +2,7 @@ import { GradientText, LinkText } from 'components/ui/Text'
 import Arrow from 'icons/Arrow'
 import classnames, {
   alignItems,
+  cursor,
   display,
   gap,
   width,
@@ -10,12 +11,13 @@ import classnames, {
 const wrapper = classnames(
   display('flex'),
   gap('gap-x-2'),
-  alignItems('items-center')
+  alignItems('items-center'),
+  cursor('cursor-pointer')
 )
 
 export default function () {
   return (
-    <LinkText url="/">
+    <LinkText internal url="/">
       <div className={wrapper} href="/">
         <div className={width('w-2')}>
           <Arrow horizontal reversed pulseDisabled />

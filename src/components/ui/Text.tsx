@@ -78,7 +78,7 @@ export function AccentText({
 }
 
 const gradientText = classnames(
-  textColor('text-transparent'),
+  textColor('text-transparent', 'hover:text-accent', 'active:text-secondary'),
   backgroundImage('bg-gradient-to-r'),
   backgroundClip('bg-clip-text'),
   gradientColorStops('from-secondary', 'to-accent'),
