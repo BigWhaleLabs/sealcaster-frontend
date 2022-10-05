@@ -66,9 +66,6 @@ export default function () {
           },
           ...PostIdsStatuses.lastUserPost,
         }
-        PostIdsStatuses.statuses[blockchainId] = Promise.resolve({
-          status,
-        })
       }
       if (!BurnerWalletStore.used) BurnerWalletStore.used = true
       setText('')
