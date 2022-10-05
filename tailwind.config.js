@@ -38,6 +38,8 @@ module.exports = {
         'formal-accent-light-transparent':
           'var(--formal-accent-light-transparent)',
         'formal-accent-dimmed': 'var(--formal-accent-dimmed)',
+        'primary-semi-dimmed-transparent':
+          'var(--primary-semi-dimmed-transparent)',
 
         'accent-semi-transparent': 'var(--accent-semi-transparent)',
         'primary-semi-transparent': 'var(--primary-semi-transparent)',
