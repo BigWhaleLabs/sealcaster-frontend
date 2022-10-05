@@ -2,11 +2,13 @@ import { AccentText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useLocation } from 'wouter'
+import { walletOptions } from 'models/WalletOptions'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Dropdown from 'components/Dropdown'
 import LastDelimiter from 'components/ui/LastDelimiter'
 import Logo from 'components/navbar/Logo'
+import Network from 'models/Network'
 import SealVerse from 'components/navbar/SealVerse'
 import SocialLinks from 'components/navbar/SocialLinks'
 import classnames, {
@@ -20,8 +22,9 @@ import classnames, {
   textAlign,
   width,
 } from 'classnames/tailwind'
+import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
+import getWalletOption from 'helpers/getWalletOption'
 import useBadgeAccount from 'hooks/useBadgeAccount'
-import walletOptions from 'helpers/walletOptions'
 
 const walletContainer = classnames(
   display('flex'),
@@ -54,18 +57,24 @@ const AccountContainer = ({
 }) => {
   const [, setLocation] = useLocation()
   const { isBurner } = useBadgeAccount()
-  const onSelectOption = (option: string) => {
-    switch (option) {
-      case 'disconnect':
-        BurnerWalletStore.burn()
-        setLocation('/')
-        break
-      case 'wallet':
-        setLocation('/wallet')
-        break
-      default:
-        window.open(option, '_blank')
-    }
+
+  const WalletActionOption = {
+    wallet: () => setLocation('/wallet'),
+    disconnect: () => {
+      BurnerWalletStore.burn()
+      setLocation('/')
+    },
+    etherscan: () =>
+      !!account &&
+      window.open(getEtherscanAddressUrl(account, Network.Goerli), '_blank'),
+  } as { [key: string]: () => void }
+
+  const onSelect = (selectedValue: string) => {
+    const value = Object.keys(walletOptions).find(
+      (key) => key === selectedValue
+    )
+    if (!value) return
+    WalletActionOption[value]
   }
 
   const content = (
@@ -84,9 +93,9 @@ const AccountContainer = ({
         extraSpacing
         fitToItemSize
         currentValue={window.location.origin}
-        options={walletOptions(account, isBurner)}
+        options={getWalletOption(isBurner)}
         staticPlaceholder={content}
-        onChange={onSelectOption}
+        onChange={onSelect}
       />
     )
 
