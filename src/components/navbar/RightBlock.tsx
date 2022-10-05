@@ -74,7 +74,7 @@ const AccountContainer = ({
       (key) => key === selectedValue
     )
     if (!value) return
-    WalletActionOption[value]
+    WalletActionOption[value]()
   }
 
   const content = (
