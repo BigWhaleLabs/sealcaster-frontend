@@ -36,7 +36,8 @@ const bodyContainer = classnames(
 
 export default function () {
   const [location] = useLocation()
-  const hasBlockchainList = location === '/' || location === '/cast'
+  const displayScrollToTop =
+    location === '/' || location === '/cast' || location === '/thread'
 
   return (
     <Router>
@@ -65,9 +66,9 @@ export default function () {
               </Route>
             </Switch>
           </div>
-          <Footer noExtraPadding={hasBlockchainList} />
+          <Footer noExtraPadding={displayScrollToTop} />
         </div>
-        {hasBlockchainList && <ScrollToTopButton />}
+        {displayScrollToTop && <ScrollToTopButton />}
       </div>
       <ToastContainer position="bottom-right" theme="dark" />
     </Router>
