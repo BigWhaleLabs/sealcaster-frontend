@@ -66,7 +66,7 @@ export default function () {
               </Route>
             </Switch>
           </div>
-          <Footer noExtraPadding={displayScrollToTop} />
+          <Footer />
         </div>
         {displayScrollToTop && <ScrollToTopButton />}
       </div>
