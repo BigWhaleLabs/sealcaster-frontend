@@ -7,6 +7,7 @@ import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Dropdown from 'components/Dropdown'
 import LastDelimiter from 'components/ui/LastDelimiter'
 import Logo from 'components/navbar/Logo'
+import Network from 'models/Network'
 import SealVerse from 'components/navbar/SealVerse'
 import SocialLinks from 'components/navbar/SocialLinks'
 import classnames, {
@@ -20,8 +21,9 @@ import classnames, {
   textAlign,
   width,
 } from 'classnames/tailwind'
+import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
+import getWalletOption from 'helpers/getWalletOption'
 import useBadgeAccount from 'hooks/useBadgeAccount'
-import walletOptions from 'helpers/walletOptions'
 
 const walletContainer = classnames(
   display('flex'),
@@ -54,8 +56,8 @@ const AccountContainer = ({
 }) => {
   const [, setLocation] = useLocation()
   const { isBurner } = useBadgeAccount()
-  const onSelectOption = (option: string) => {
-    switch (option) {
+  const onSelectOption = (selectedValue: string) => {
+    switch (selectedValue) {
       case 'disconnect':
         BurnerWalletStore.burn()
         setLocation('/')
@@ -64,7 +66,8 @@ const AccountContainer = ({
         setLocation('/wallet')
         break
       default:
-        window.open(option, '_blank')
+        account &&
+          window.open(getEtherscanAddressUrl(account, Network.Goerli), '_blank')
     }
   }
 
@@ -84,7 +87,7 @@ const AccountContainer = ({
         extraSpacing
         fitToItemSize
         currentValue={window.location.origin}
-        options={walletOptions(account, isBurner)}
+        options={getWalletOption(isBurner)}
         staticPlaceholder={content}
         onChange={onSelectOption}
       />
