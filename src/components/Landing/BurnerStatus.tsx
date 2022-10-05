@@ -1,5 +1,4 @@
 import { HeaderText, SubHeaderText } from 'components/ui/Text'
-import SealGrid from 'icons/SealGrid'
 import SealSad from 'icons/SealSad'
 import classnames, {
   display,
@@ -8,7 +7,6 @@ import classnames, {
   textAlign,
   width,
 } from 'classnames/tailwind'
-import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const sealGridWrapper = classnames(
   display('flex'),
@@ -19,28 +17,19 @@ const headerTextWrapper = classnames(
   space('space-y-2'),
   textAlign('text-center')
 )
-export default function ({ loading }: { loading: boolean }) {
-  const { account, hasFarcasterBadge } = useBadgeAccount()
-  const accountWithoutBadgeConnected = account && !hasFarcasterBadge && !loading
+export default function () {
   return (
     <>
       <div className={sealGridWrapper}>
-        {accountWithoutBadgeConnected ? <SealSad /> : <SealGrid />}
+        <SealSad />
       </div>
       <div className={headerTextWrapper}>
         <HeaderText center extraLeading size="large">
-          {accountWithoutBadgeConnected
-            ? 'It looks like you connected a wallet without a correct ZK badge'
-            : 'Cast anonymously on Farcaster'}
+          It looks like you connected a wallet without a correct ZK badge
         </HeaderText>
         <SubHeaderText small primary>
-          {accountWithoutBadgeConnected
-            ? 'Create a burner wallet with a Farcaster ZK badge to continue, or reconnect with a correct burner wallet'
-            : `Protect your identity and cast anonymously with a burner wallet.${
-                account
-                  ? ''
-                  : ' Start by connecting the same wallet you connected to Farcaster.'
-              }`}
+          Create a burner wallet with a Farcaster ZK badge to continue, or
+          reconnect with a correct burner wallet
         </SubHeaderText>
       </div>
     </>
