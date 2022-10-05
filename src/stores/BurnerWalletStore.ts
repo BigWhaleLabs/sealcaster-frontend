@@ -20,7 +20,6 @@ import walletStore from 'stores/WalletStore'
 class BurnerWalletStore extends PersistableStore {
   privateKey?: string
   proof?: ProofResult
-  burnerLoading = false
   status = ''
   used = false
 
@@ -53,7 +52,6 @@ class BurnerWalletStore extends PersistableStore {
   }
 
   async generateBurnerWallet(address: string) {
-    this.burnerLoading = true
     try {
       this.status = 'Getting account data...'
       const { signer, wallet } = await this.privateSigner()
@@ -94,7 +92,6 @@ class BurnerWalletStore extends PersistableStore {
         this.proof = undefined
       }
     } finally {
-      this.burnerLoading = false
       this.status = ''
     }
   }

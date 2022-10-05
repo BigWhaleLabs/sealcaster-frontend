@@ -2,7 +2,9 @@ import { AccentText } from 'components/ui/Text'
 import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { useSnapshot } from 'valtio'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import ExternalLink from 'components/ui/ExternalLink'
 import LastDelimiter from 'components/ui/LastDelimiter'
 import Logo from 'components/navbar/Logo'
@@ -21,7 +23,6 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
-import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const walletContainer = classnames(
   display('flex'),
@@ -52,7 +53,8 @@ const AccountContainer = ({
   needNetworkChange: boolean
   eNSName?: string
 }) => {
-  const { isBurner } = useBadgeAccount()
+  const { privateKey } = useSnapshot(BurnerWalletStore)
+
   const content = (
     <div className={accountLinkContainer}>
       <AccountAndLogo
@@ -63,10 +65,11 @@ const AccountContainer = ({
       />
     </div>
   )
+
+  if (privateKey) return <Link href="/wallet">{content}</Link>
+
   if (account)
-    return isBurner ? (
-      <Link href="/wallet">{content}</Link>
-    ) : (
+    return (
       <ExternalLink url={getEtherscanAddressUrl(account, Network.Goerli)}>
         {content}
       </ExternalLink>
