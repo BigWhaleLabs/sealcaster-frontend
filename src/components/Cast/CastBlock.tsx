@@ -1,5 +1,4 @@
 import { PostStatus } from 'models/PostStatus'
-import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Wallet } from 'ethers'
 import { handleError, parseErrorText } from '@big-whale-labs/frontend-utils'
 import { space } from 'classnames/tailwind'
@@ -43,35 +42,19 @@ export default function () {
 
       BurnerWalletStore.status = 'Posting cast'
       const result = await PostStore.createPost(text)
-      const posts = await PostStore.posts
       const numberOfPosts = await PostStore.postsAmount
-
       PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
-      for (const { id, post, derivativeAddress, sender, timestamp } of result) {
-        PostStore.posts = Promise.resolve([
-          {
-            id,
-            post,
-            derivativeAddress,
-            sender,
-            timestamp,
-          } as PostStructOutput,
-          ...posts,
-        ])
-
+      for (const { id } of result) {
         const blockchainId = id.toNumber()
         const status = PostStatus.pending
 
         PostIdsStatuses.lastUserPost = {
+          ...PostIdsStatuses.lastUserPost,
           [currentAccount]: {
             blockchainId,
             status,
           },
-          ...PostIdsStatuses.lastUserPost,
         }
-        PostIdsStatuses.statuses[blockchainId] = Promise.resolve({
-          status,
-        })
       }
       if (!BurnerWalletStore.used) BurnerWalletStore.used = true
       setText('')
@@ -102,11 +85,7 @@ export default function () {
           text={
             BurnerWalletStore.status === 'Posting cast'
               ? 'Hang tight! We’re casting now.'
-              : `
-            We need to verify that you are indeed a Farcaster user. Please connect
-            the wallet you have connected to Farcaster to attest your identity.
-            Don’t worry, we will not use this wallet to post or to point back to you
-            in any way.`
+              : 'We need to verify that you are indeed a Farcaster user. Please connect the wallet you have connected to Farcaster to attest your identity. Don’t worry, we will not use this wallet to post or to point back to you in any way.'
           }
         />
       ) : (
