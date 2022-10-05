@@ -51,6 +51,7 @@ module.exports = {
         green: 'var(--green)',
         blue: 'var(--blue)',
         divider: 'var(--divider)',
+        'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
       },
       borderRadius: {
         avatar: '6rem',

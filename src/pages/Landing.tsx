@@ -1,11 +1,18 @@
-import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
+import {
+  AccentText,
+  HeaderText,
+  QuestionOfDayText,
+  StatusText,
+} from 'components/ui/Text'
 import BlockchainList from 'components/BlockchainList'
+import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
 import CastBlock from 'components/Cast/CastBlock'
 import CastHeader from 'components/Cast/CastHeader'
 import Delimiter from 'components/ui/Delimiter'
 import PostProcessing from 'components/ProcessingCard'
 import Sender from 'components/BlockchainList/Sender'
+import Thread from 'icons/Thread'
 import VertialDelimiter from 'components/ui/VertialDelimiter'
 import classnames, {
   alignItems,
@@ -45,11 +52,27 @@ export default function () {
           </HeaderText>
           <span className={postInfo}>
             <StatusText>Posted by: </StatusText>
-            <Sender sender={'Sealcaster'} />
+            <Sender sender="Sealcaster" />
             <Delimiter />
-            <Sender sender={'Farcaster'} />
+            <Sender sender="Farcaster" />
           </span>
           <VertialDelimiter />
+          <Button type="tertiary">
+            <AccentText small color="text-formal-accent">
+              <div
+                className={classnames(
+                  display('flex'),
+                  flexDirection('flex-row'),
+                  gap('gap-x-1'),
+                  alignItems('items-center')
+                )}
+              >
+                <Thread />
+                Answer anonymously
+                <AccentText color="text-primary-semi-dimmed">(0)</AccentText>
+              </div>
+            </AccentText>
+          </Button>
         </Card>
         <PostProcessing />
         <div className={space('space-y-6')}>
