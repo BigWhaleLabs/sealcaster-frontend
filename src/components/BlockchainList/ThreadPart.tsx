@@ -7,7 +7,7 @@ import {
   gap,
   padding,
 } from 'classnames/tailwind'
-import Comment from 'components/BlockchainList/Comment'
+import Comment from 'components/BlockchainList/CommentWithReplies'
 import Reply from 'icons/Reply'
 
 const wrapper = classnames(

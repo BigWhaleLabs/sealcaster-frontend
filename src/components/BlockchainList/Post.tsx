@@ -1,5 +1,5 @@
 import { BodyText, PostText, StatusText } from 'components/ui/Text'
-import { Delimiter } from 'components/ui/LastDelimiter'
+import { Delimiter } from 'components/ui/Delimiter'
 import Card from 'components/ui/Card'
 import EtherScanLink from 'components/BlockchainList/EtherScanLink'
 import PostTime from 'components/BlockchainList/PostTime'
@@ -32,9 +32,9 @@ const postBottom = classnames(
 const postInfo = classnames(
   display('flex'),
   flexDirection('flex-col', 'xs:flex-row'),
-  alignItems('items-baseline'),
+  alignItems('items-center'),
   flexWrap('flex-wrap'),
-  gap('gap-x-1')
+  gap('gap-x-2')
 )
 
 export default function ({
@@ -60,9 +60,9 @@ export default function ({
               <span className={postInfo}>
                 <StatusText>Posted by: </StatusText>
                 <Sender sender={sender} />
-                <Delimiter />
+                <Delimiter color="bg-formal-accent" />
                 <EtherScanLink tx={tx} />
-                <Delimiter />
+                <Delimiter color="bg-formal-accent" />
                 <Status blockchainId={blockchainId} />
               </span>
             </BodyText>
@@ -74,7 +74,7 @@ export default function ({
           </div>
         </div>
 
-        <Delimiter color="bg-half-grey" />
+        <Delimiter color="bg-half-grey" horizontal />
 
         <Replies />
 

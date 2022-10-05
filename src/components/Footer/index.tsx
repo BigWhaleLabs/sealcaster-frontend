@@ -1,6 +1,6 @@
 import { SocialLink } from 'components/ui/Text'
 import { displayTo } from 'helpers/visibilityClassnames'
-import Delimiter from 'components/ui/Delimiter'
+import Delimiter from 'components/ui/VerticalDelimiter'
 import Discord from 'icons/Discord'
 import FooterButton from 'components/Footer/FooterButton'
 import FooterOptions from 'components/Footer/FooterOptions'

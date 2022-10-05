@@ -1,6 +1,6 @@
 import { AccentText } from 'components/ui/Text'
+import { LastDelimiter } from 'components/ui/Delimiter'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import LastDelimiter from 'components/ui/LastDelimiter'
 import Logo from 'components/navbar/Logo'
 import SealVerse from 'components/navbar/SealVerse'
 import SocialLinks from 'components/navbar/SocialLinks'
