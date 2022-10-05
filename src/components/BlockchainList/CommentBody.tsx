@@ -2,8 +2,10 @@ import { BodyText, LinkText, StatusText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useSnapshot } from 'valtio'
+import { useState } from 'preact/hooks'
 import Delimiter from 'components/ui/Delimiter'
 import Reply from 'icons/Reply'
+import ReplyInput from 'components/BlockchainList/ReplyInput'
 import SmallArrow from 'components/ui/SmallArrow'
 import TimeStore from 'stores/TimeStore'
 import classnames, {
@@ -19,15 +21,20 @@ import classnames, {
 import formatDate from 'helpers/formatDate'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 
+const commentWithInput = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  gap('gap-y-6'),
+  backgroundColor('bg-primary-background'),
+  borderRadius('rounded-lg'),
+  padding('p-4')
+)
 const commentWithReplyButton = classnames(
   display('flex'),
   flexDirection('flex-col', 'md:flex-row'),
   alignItems('items-start', 'md:items-center'),
   gap('gap-y-2', 'md:gap-x-2'),
-  justifyContent('justify-between'),
-  backgroundColor('bg-primary-background'),
-  borderRadius('rounded-lg'),
-  padding('p-4')
+  justifyContent('justify-between')
 )
 const commentWithData = classnames(
   display('flex'),
@@ -67,23 +74,30 @@ export default function ({
   timestamp: number
 }) {
   const { current } = useSnapshot(TimeStore)
+  const [inputOpen, setInputOpen] = useState(false)
   const formattedTime = formatDate(timestamp, current)
 
   return (
-    <div className={commentWithReplyButton}>
-      <div className={commentWithData}>
-        <BodyText>{content}</BodyText>
-        <div className={infoBlock}>
-          <TruncatedAddress address={replier} />
-          <SmallArrow />
-          <TruncatedAddress address={repliedTo} />
-          <Delimiter color="bg-formal-accent" />
-          <StatusText primary>{formattedTime}</StatusText>
+    <div className={commentWithInput}>
+      <div className={commentWithReplyButton}>
+        <div className={commentWithData}>
+          <BodyText>{content}</BodyText>
+          <div className={infoBlock}>
+            <TruncatedAddress address={replier} />
+            <SmallArrow />
+            <TruncatedAddress address={repliedTo} />
+            <Delimiter color="bg-formal-accent" />
+            <StatusText primary>{formattedTime}</StatusText>
+          </div>
         </div>
+        <button
+          className={display('flex')}
+          onClick={() => setInputOpen(!inputOpen)}
+        >
+          <Reply />
+        </button>
       </div>
-      <div className={display('flex')}>
-        <Reply />
-      </div>
+      <ReplyInput replyingTo={repliedTo} inputOpen={inputOpen} />
     </div>
   )
 }
