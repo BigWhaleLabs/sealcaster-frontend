@@ -1,4 +1,5 @@
 import { BodyText, LinkText, StatusText } from 'components/ui/Text'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useSnapshot } from 'valtio'
 import Delimiter from 'components/ui/Delimiter'
@@ -20,21 +21,38 @@ import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 
 const commentWithReplyButton = classnames(
   display('flex'),
-  alignItems('items-center'),
+  flexDirection('flex-col', 'md:flex-row'),
+  alignItems('items-start', 'md:items-center'),
+  gap('gap-y-2', 'md:gap-x-2'),
   justifyContent('justify-between'),
   backgroundColor('bg-primary-background'),
   borderRadius('rounded-lg'),
   padding('p-4')
 )
-const leftPart = classnames(
+const commentWithData = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  gap('gap-y-3')
+  gap('gap-y-1')
 )
 const infoBlock = classnames(
   display('flex'),
   alignItems('items-center'),
   gap('gap-x-2')
+)
+
+const TruncatedAddress = ({ address }: { address: string }) => (
+  <>
+    <div className={displayFrom('md')}>
+      <LinkText url={getEtherscanAddressUrl(address)} extraSmall primary>
+        {truncateMiddleIfNeeded(address, 12)}
+      </LinkText>
+    </div>
+    <div className={displayTo('md')}>
+      <LinkText url={getEtherscanAddressUrl(address)} extraSmall primary>
+        {truncateMiddleIfNeeded(address, 8)}
+      </LinkText>
+    </div>
+  </>
 )
 
 export default function ({
@@ -53,20 +71,14 @@ export default function ({
 
   return (
     <div className={commentWithReplyButton}>
-      <div className={leftPart}>
+      <div className={commentWithData}>
         <BodyText>{content}</BodyText>
         <div className={infoBlock}>
-          <LinkText url={getEtherscanAddressUrl(replier)} extraSmall primary>
-            {truncateMiddleIfNeeded(replier, 12)}
-          </LinkText>
+          <TruncatedAddress address={replier} />
           <SmallArrow />
-          <LinkText url={getEtherscanAddressUrl(repliedTo)} extraSmall primary>
-            {truncateMiddleIfNeeded(repliedTo, 12)}
-          </LinkText>
+          <TruncatedAddress address={repliedTo} />
           <Delimiter color="bg-formal-accent" />
-          <StatusText primary textRight>
-            {formattedTime}
-          </StatusText>
+          <StatusText primary>{formattedTime}</StatusText>
         </div>
       </div>
       <div className={display('flex')}>
