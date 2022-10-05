@@ -30,7 +30,7 @@ export default function () {
     const { account } = walletStore
 
     if (privateKey) currentAccount = new Wallet(privateKey).address
-    if (account && hasFarcasterBadge(account)) currentAccount = account
+    if (account && (await hasFarcasterBadge(account))) currentAccount = account
 
     setError(null)
     try {
