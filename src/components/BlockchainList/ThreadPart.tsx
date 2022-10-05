@@ -1,5 +1,6 @@
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
+import Replies from 'components/BlockchainList/Replies'
 
 const wrapper = classnames(
   display('flex'),
@@ -69,6 +70,7 @@ export default function () {
 
   return (
     <div className={wrapper}>
+      <Replies count={comments.length} />
       {comments.map(({ timestamp, content, replier, repliedTo, replies }) => (
         <CommentWithReplies
           timestamp={timestamp}
