@@ -56,6 +56,7 @@ const AccountContainer = ({
 }) => {
   const [, setLocation] = useLocation()
   const { isBurner } = useBadgeAccount()
+
   const onSelectOption = (selectedValue: string) => {
     switch (selectedValue) {
       case 'disconnect':
