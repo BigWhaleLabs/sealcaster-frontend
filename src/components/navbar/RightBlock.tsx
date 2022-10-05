@@ -1,9 +1,10 @@
 import { AccentText } from 'components/ui/Text'
-import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { useLocation } from 'wouter'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
-import ExternalLink from 'components/ui/ExternalLink'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
+import Dropdown from 'components/Dropdown'
 import LastDelimiter from 'components/ui/LastDelimiter'
 import Logo from 'components/navbar/Logo'
 import Network from 'models/Network'
@@ -21,6 +22,7 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
+import getWalletOption from 'helpers/getWalletOption'
 import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const walletContainer = classnames(
@@ -52,7 +54,24 @@ const AccountContainer = ({
   needNetworkChange: boolean
   eNSName?: string
 }) => {
+  const [, setLocation] = useLocation()
   const { isBurner } = useBadgeAccount()
+
+  const onSelectOption = (selectedValue: string) => {
+    switch (selectedValue) {
+      case 'disconnect':
+        BurnerWalletStore.burn()
+        setLocation('/')
+        break
+      case 'wallet':
+        setLocation('/wallet')
+        break
+      default:
+        account &&
+          window.open(getEtherscanAddressUrl(account, Network.Goerli), '_blank')
+    }
+  }
+
   const content = (
     <div className={accountLinkContainer}>
       <AccountAndLogo
@@ -64,12 +83,15 @@ const AccountContainer = ({
     </div>
   )
   if (account)
-    return isBurner ? (
-      <Link href="/wallet">{content}</Link>
-    ) : (
-      <ExternalLink url={getEtherscanAddressUrl(account, Network.Goerli)}>
-        {content}
-      </ExternalLink>
+    return (
+      <Dropdown
+        extraSpacing
+        fitToItemSize
+        currentValue={window.location.origin}
+        options={getWalletOption(isBurner)}
+        staticPlaceholder={content}
+        onChange={onSelectOption}
+      />
     )
 
   return (
