@@ -15,7 +15,7 @@ import getErrorMessage from 'helpers/getErrorMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
 import walletStore from 'stores/WalletStore'
 
-export default function () {
+export default function ({ placeHolder = 'Write something here...' }) {
   const { status } = useSnapshot(BurnerWalletStore)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<unknown>()
@@ -91,7 +91,7 @@ export default function () {
       <TextArea
         text={text}
         disabled={isLoading || waitBurner}
-        placeholder="Write something here..."
+        placeholder={placeHolder}
         onTextChange={setText}
         maxLength={maxLength}
       />
