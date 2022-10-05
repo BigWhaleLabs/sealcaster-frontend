@@ -1,4 +1,5 @@
 import { AccentText } from 'components/ui/Text'
+import { JSX } from 'preact/jsx-runtime'
 import { displayTo } from 'helpers/visibilityClassnames'
 import { useLocation } from 'wouter'
 import { useState } from 'preact/hooks'
@@ -39,11 +40,15 @@ export default function ({
   loading,
   disabled,
   onButtonClick,
+  leftBlock,
+  rightBlock,
 }: {
   error?: string
   loading?: boolean
   disabled?: boolean
   onButtonClick?: () => void
+  leftBlock?: JSX.Element | string
+  rightBlock?: JSX.Element | string
 }) {
   const [, setLocation] = useLocation()
   const [isWarningShown, setIsWarningShown] = useState(false)
@@ -57,45 +62,58 @@ export default function ({
 
   return (
     <div className={textAreaInfoWrapper}>
-      <AccentText extraSmall color="text-accent">
-        <span className={hintWrapper}>
-          Posting from burner wallet
-          <br />
-          <Tooltip position="bottom" fitContainer text={castingHintText}>
-            <CharInCircle size={Sizes.Small} char="?" />
-          </Tooltip>
-        </span>
-      </AccentText>
-      <div className={displayTo('md')}>
-        <Button
-          loading={loading}
-          fullWidth
-          center
-          type="primary"
-          disabled={disabled}
-          onClick={onButtonClick}
-        >
-          Cast
-        </Button>
-      </div>
-      {loading && (
-        <div className={displayTo('md')}>
+      {leftBlock ? (
+        leftBlock
+      ) : (
+        <>
           <AccentText extraSmall color="text-accent">
-            Hang on, this often takes a minute or two...
+            <span className={hintWrapper}>
+              Posting from burner wallet
+              <br />
+              <Tooltip position="bottom" fitContainer text={castingHintText}>
+                <CharInCircle size={Sizes.Small} char="?" />
+              </Tooltip>
+            </span>
           </AccentText>
-        </div>
+          <div className={displayTo('md')}>
+            <Button
+              loading={loading}
+              fullWidth
+              center
+              type="primary"
+              disabled={disabled}
+              onClick={onButtonClick}
+            >
+              Cast
+            </Button>
+          </div>
+          {loading && (
+            <div className={displayTo('md')}>
+              <AccentText extraSmall color="text-accent">
+                Hang on, this often takes a minute or two...
+              </AccentText>
+            </div>
+          )}
+        </>
       )}
-      <TrashBurner onClick={() => setIsWarningShown(true)} />
-      {!!error && (
-        <div className={displayTo('md')}>
-          <ErrorMessage small centered text={error} />
-        </div>
-      )}
-      {isWarningShown && (
-        <WarningPopup
-          onAccept={acceptTrashing}
-          onReject={() => setIsWarningShown(false)}
-        />
+
+      {rightBlock ? (
+        rightBlock
+      ) : (
+        <>
+          <TrashBurner onClick={() => setIsWarningShown(true)} />
+          {!!error && (
+            <div className={displayTo('md')}>
+              <ErrorMessage small centered text={error} />
+            </div>
+          )}
+          {isWarningShown && (
+            <WarningPopup
+              onAccept={acceptTrashing}
+              onReject={() => setIsWarningShown(false)}
+            />
+          )}
+        </>
       )}
     </div>
   )

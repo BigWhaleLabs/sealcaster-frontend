@@ -8,7 +8,7 @@ const wrapper = classnames(
   gap('gap-y-3')
 )
 
-export default function () {
+export default function ({ replyingTo }: { replyingTo: string }) {
   const comments = [
     {
       timestamp: 1664908789068,
@@ -70,7 +70,7 @@ export default function () {
 
   return (
     <div className={wrapper}>
-      <Replies count={comments.length} />
+      <Replies count={comments.length} replyingTo={replyingTo} />
       {comments.map(({ timestamp, content, replier, repliedTo, replies }) => (
         <CommentWithReplies
           timestamp={timestamp}

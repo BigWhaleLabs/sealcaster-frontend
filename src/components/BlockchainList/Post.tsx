@@ -75,7 +75,7 @@ export default function ({
 
         <Delimiter color="bg-half-grey" horizontal />
 
-        <ThreadPart />
+        <ThreadPart replyingTo={sender} />
       </Card>
     </div>
   )
