@@ -1,4 +1,3 @@
-import { displayFrom } from 'helpers/visibilityClassnames'
 import classnames, {
   TBackgroundColor,
   backgroundColor,
@@ -18,7 +17,7 @@ const delimiterContainer = (
     height(horizontal ? 'h-px' : 'h-4')
   )
 
-export function Delimiter({
+export default function ({
   color,
   horizontal,
 }: {
@@ -26,12 +25,4 @@ export function Delimiter({
   horizontal?: boolean
 }) {
   return <hr className={delimiterContainer(color, horizontal)} />
-}
-
-export function LastDelimiter({ color }: { color?: TBackgroundColor }) {
-  return (
-    <div className={displayFrom('xs')}>
-      <hr className={delimiterContainer(color)} />
-    </div>
-  )
 }

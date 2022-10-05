@@ -1,9 +1,9 @@
 import { AccentText } from 'components/ui/Text'
-import { LastDelimiter } from 'components/ui/Delimiter'
 import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
+import Delimiter from 'components/ui/Delimiter'
 import ExternalLink from 'components/ui/ExternalLink'
 import Logo from 'components/navbar/Logo'
 import Network from 'models/Network'
@@ -96,7 +96,9 @@ export default function ({
     <div className={walletContainer}>
       <SocialLinks />
       <SealVerse />
-      <LastDelimiter />
+      <div className={displayFrom('xs')}>
+        <Delimiter />
+      </div>
 
       <Suspense
         fallback={

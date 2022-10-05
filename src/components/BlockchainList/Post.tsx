@@ -1,6 +1,6 @@
 import { BodyText, PostText, StatusText } from 'components/ui/Text'
-import { Delimiter } from 'components/ui/Delimiter'
 import Card from 'components/ui/Card'
+import Delimiter from 'components/ui/Delimiter'
 import EtherScanLink from 'components/BlockchainList/EtherScanLink'
 import PostTime from 'components/BlockchainList/PostTime'
 import Replies from 'components/BlockchainList/Replies'

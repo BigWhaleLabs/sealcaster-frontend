@@ -1,6 +1,6 @@
 import { SocialLink } from 'components/ui/Text'
-import { displayTo } from 'helpers/visibilityClassnames'
-import Delimiter from 'components/ui/VerticalDelimiter'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import Delimiter from 'components/ui/Delimiter'
 import Discord from 'icons/Discord'
 import FooterButton from 'components/Footer/FooterButton'
 import FooterOptions from 'components/Footer/FooterOptions'
@@ -49,7 +49,9 @@ export default function ({ noExtraPadding }: { noExtraPadding?: boolean }) {
               content={FooterOptions[key].text}
             />
             {linkList.length - 1 !== index && (
-              <Delimiter color="dimmed" showFrom="md" />
+              <div className={displayFrom('md')}>
+                <Delimiter color="bg-primary-dimmed" />
+              </div>
             )}
           </>
         ))}

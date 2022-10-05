@@ -1,7 +1,7 @@
 import { BodyText, LinkText, StatusText } from 'components/ui/Text'
-import { LastDelimiter } from 'components/ui/Delimiter'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useSnapshot } from 'valtio'
+import Delimiter from 'components/ui/Delimiter'
 import SmallArrow from 'components/ui/SmallArrow'
 import TimeStore from 'stores/TimeStore'
 import classnames, {
@@ -64,7 +64,7 @@ export default function ({
         <LinkText url={getEtherscanAddressUrl(repliedTo)} extraSmall primary>
           {truncateMiddleIfNeeded(repliedTo, 12)}
         </LinkText>
-        <LastDelimiter color="bg-formal-accent" />
+        <Delimiter color="bg-formal-accent" />
         <StatusText primary textRight>
           {formattedTime}
         </StatusText>
