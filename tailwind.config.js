@@ -47,6 +47,10 @@ module.exports = {
           'var(--formal-accent-semi-transparent)',
         'light-formal-accent': 'var(--light-formal-accent)',
         'error-semi-transparent': 'var(--error-semi-transparent)',
+        'tertiary-subheader': 'var(--tertiary-subheader)',
+        green: 'var(--green)',
+        blue: 'var(--blue)',
+        divider: 'var(--divider)',
       },
       borderRadius: {
         avatar: '6rem',

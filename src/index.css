@@ -49,6 +49,11 @@
     var(--primary-dark) 90deg,
     var(--primary-background) 0
   );
+
+  --tertiary-subheader: linear-gradient(270deg, #01f5ff 3.96%, #01feb6 100%);
+  --blue: #01f5ff;
+  --green: #01feb6;
+  --divider: #353945;
 }
 
 * {
