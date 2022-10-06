@@ -11,7 +11,6 @@ import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
 import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import Sender from 'components/BlockchainList/Sender'
-import TextareaInfo from 'components/Cast/TextareaInfo'
 import Thread from 'icons/Thread'
 import VertialDelimiter from 'components/ui/VertialDelimiter'
 import classnames, {
@@ -33,18 +32,25 @@ const postInfo = classnames(
   gap('gap-x-1')
 )
 
+const badgeWrapper = classnames(
+  position('absolute'),
+  margin('ml-4/5', '-mt-1/6')
+)
+
+const threadWrapper = classnames(
+  display('flex'),
+  flexDirection('flex-row'),
+  gap('gap-x-1'),
+  alignItems('items-center')
+)
+
 export default function () {
   const [opened, setOpened] = useState(false)
 
   return (
-    <div className={classnames(margin('mt-24'))}>
+    <div className={margin('mt-24')}>
       <Card>
-        <div
-          className={classnames(
-            position('absolute'),
-            margin('ml-4/5', '-mt-1/6')
-          )}
-        >
+        <div className={badgeWrapper}>
           <QuestionOfTheDayLabel />
         </div>
         <QuestionOfDayText>Question of the day:</QuestionOfDayText>
@@ -52,6 +58,7 @@ export default function () {
           Hey VCs, what should startup do to capture your attention?
         </HeaderText>
         <span className={postInfo}>
+          // TODO: add real logic here with urls
           <StatusText>Posted by: </StatusText>
           <Sender sender="Sealcaster" />
           <Delimiter />
@@ -65,22 +72,16 @@ export default function () {
           }}
         >
           <AccentText small color="text-formal-accent">
-            <div
-              className={classnames(
-                display('flex'),
-                flexDirection('flex-row'),
-                gap('gap-x-1'),
-                alignItems('items-center')
-              )}
-            >
+            <div className={threadWrapper}>
               <Thread />
               <span
-                className={classnames(
-                  textColor(opened ? 'text-accent' : 'hover:text-accent')
+                className={textColor(
+                  opened ? 'text-accent' : 'hover:text-accent'
                 )}
               >
                 Answer anonymously
               </span>
+              // TODO: add real logic with threads number here
               <AccentText color="text-primary-semi-dimmed">(0)</AccentText>
             </div>
           </AccentText>
