@@ -42,15 +42,17 @@ export default function ({
   text,
   sender,
   tx,
+  limitThread,
 }: {
   blockchainId: number
   timestamp: number
   text: string
   sender: string
   tx: string
+  limitThread?: number
 }) {
   return (
-    <div data-anchor={`#id=${blockchainId}`}>
+    <div href={`/thread/${blockchainId}`} data-anchor={`#id=${blockchainId}`}>
       <Card>
         <div className={container}>
           <PostText>{text}</PostText>
@@ -75,7 +77,7 @@ export default function ({
 
         <Delimiter color="bg-half-grey" horizontal />
 
-        <ThreadPart replyingTo={sender} />
+        <ThreadPart replyingTo={sender} limitThread={limitThread} />
       </Card>
     </div>
   )

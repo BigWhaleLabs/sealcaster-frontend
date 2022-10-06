@@ -8,7 +8,13 @@ const wrapper = classnames(
   gap('gap-y-3')
 )
 
-export default function ({ replyingTo }: { replyingTo: string }) {
+export default function ({
+  replyingTo,
+  limitThread,
+}: {
+  replyingTo: string
+  limitThread?: number
+}) {
   const comments = [
     {
       timestamp: 1664908789068,
@@ -71,15 +77,27 @@ export default function ({ replyingTo }: { replyingTo: string }) {
   return (
     <div className={wrapper}>
       <Replies count={comments.length} replyingTo={replyingTo} />
-      {comments.map(({ timestamp, content, replier, repliedTo, replies }) => (
-        <CommentWithReplies
-          timestamp={timestamp}
-          content={content}
-          replier={replier}
-          repliedTo={repliedTo}
-          replies={replies}
-        />
-      ))}
+      {comments.map(
+        ({ timestamp, content, replier, repliedTo, replies }, index) =>
+          limitThread ? (
+            index < limitThread && (
+              <CommentWithReplies
+                timestamp={timestamp}
+                content={content}
+                replier={replier}
+                repliedTo={repliedTo}
+              />
+            )
+          ) : (
+            <CommentWithReplies
+              timestamp={timestamp}
+              content={content}
+              replier={replier}
+              repliedTo={repliedTo}
+              replies={replies}
+            />
+          )
+      )}
     </div>
   )
 }

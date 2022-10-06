@@ -61,7 +61,7 @@ export default function () {
               <Route path="/wallet">
                 <BurnerWallet />
               </Route>
-              <Route path="/thread">
+              <Route path="/thread/:blockchainId">
                 <Thread />
               </Route>
             </Switch>

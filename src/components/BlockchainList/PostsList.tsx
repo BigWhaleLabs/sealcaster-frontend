@@ -62,6 +62,7 @@ export function PostListSuspended() {
             text={post.post}
             sender={post.sender}
             tx={idToPostTx[Number(post.id)]}
+            limitThread={2}
           />
           {index === 2 && <CustomizeCard />}
         </>
