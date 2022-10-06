@@ -1,15 +1,12 @@
 import Comment from 'models/Comment'
 import CommentBody from 'components/BlockchainList/CommentBody'
 import classnames, {
-  backgroundColor,
   borderColor,
-  borderStyle,
   borderWidth,
   display,
   flex,
   flexDirection,
   gap,
-  height,
   margin,
   transitionProperty,
   width,
@@ -70,7 +67,7 @@ export default function CommentWithReplies({
 
       {hasReplies && (
         <div className={repliesWithLine}>
-          <a className={commentLine} href="#comment-1" />
+          <a className={commentLine} href="#reply-1" />
           <div className={repliesBlock}>
             {replies.map(
               ({ content, replier, repliedTo, timestamp, replies }) => (

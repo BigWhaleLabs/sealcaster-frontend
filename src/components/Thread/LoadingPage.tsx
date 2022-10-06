@@ -27,7 +27,7 @@ const castLoading = classnames(
   padding('p-6'),
   alignItems('items-center'),
   justifyContent('justify-between'),
-  gap('gap-y-1')
+  gap('gap-y-4')
 )
 const loadingBlock = classnames(
   display('flex'),
@@ -40,7 +40,7 @@ const threadLoading = classnames(
   borderRadius('rounded-2xl'),
   borderColor('border-half-grey'),
   borderWidth('border'),
-  padding('p-4')
+  padding('p-6')
 )
 
 const blocksLoading = classnames(
