@@ -135,6 +135,7 @@ module.exports = {
       margin: {
         '-12.5': '-3.125rem',
         '-30': '-7.5rem',
+        '-35': '-8.75rem',
       },
     },
     container: {
