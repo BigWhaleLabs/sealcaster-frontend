@@ -9,6 +9,7 @@ type AllowedExtraClassnames =
   | 'animated-blur'
   | 'animated-border'
   | 'hover-button-scroll'
+  | 'shadow-card'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]

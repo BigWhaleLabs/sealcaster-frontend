@@ -24,8 +24,8 @@ import classnames, {
 import useOnScroll from 'hooks/useOnScroll'
 
 const scrollContainer = classnames(
-  position('sticky'),
-  inset('bottom-0'),
+  position('fixed'),
+  inset('bottom-0', 'right-0'),
   width('w-fit'),
   margin('ml-auto', 'lg:mr-12'),
   display('flex'),

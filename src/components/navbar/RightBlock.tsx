@@ -1,11 +1,11 @@
-import { AccentText } from 'components/ui/Text'
-import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { useLocation } from 'wouter'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Delimiter from 'components/ui/Delimiter'
-import ExternalLink from 'components/ui/ExternalLink'
-import Logo from 'components/navbar/Logo'
+import Dropdown from 'components/Dropdown'
+import NavLoading from 'components/navbar/NavLoading'
 import Network from 'models/Network'
 import SealVerse from 'components/navbar/SealVerse'
 import SocialLinks from 'components/navbar/SocialLinks'
@@ -15,12 +15,10 @@ import classnames, {
   display,
   flexDirection,
   gap,
-  lineHeight,
   space,
-  textAlign,
-  width,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
+import getWalletOption from 'helpers/getWalletOption'
 import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const walletContainer = classnames(
@@ -28,7 +26,8 @@ const walletContainer = classnames(
   flexDirection('flex-col-reverse', 'xs:flex-row'),
   alignItems('items-center'),
   gap('gap-x-3', 'sm:gap-x-4'),
-  cursor('cursor-pointer')
+  cursor('cursor-pointer'),
+  displayFrom('xs')
 )
 const accountLinkContainer = classnames(
   display('inline-flex'),
@@ -36,10 +35,12 @@ const accountLinkContainer = classnames(
   space('xs:space-x-4', 'space-x-2'),
   cursor('cursor-pointer')
 )
-const walletAccount = classnames(
-  textAlign('text-right'),
-  lineHeight('leading-5')
-)
+
+interface AccountProps {
+  account?: string
+  needNetworkChange: boolean
+  eNSName?: string
+}
 
 const AccountContainer = ({
   account,
@@ -52,7 +53,24 @@ const AccountContainer = ({
   needNetworkChange: boolean
   eNSName?: string
 }) => {
+  const [, setLocation] = useLocation()
   const { isBurner } = useBadgeAccount()
+
+  const onSelectOption = (selectedValue: string) => {
+    switch (selectedValue) {
+      case 'disconnect':
+        BurnerWalletStore.burn()
+        setLocation('/')
+        break
+      case 'wallet':
+        setLocation('/wallet')
+        break
+      default:
+        account &&
+          window.open(getEtherscanAddressUrl(account, Network.Goerli), '_blank')
+    }
+  }
+
   const content = (
     <div className={accountLinkContainer}>
       <AccountAndLogo
@@ -64,12 +82,15 @@ const AccountContainer = ({
     </div>
   )
   if (account)
-    return isBurner ? (
-      <Link href="/wallet">{content}</Link>
-    ) : (
-      <ExternalLink url={getEtherscanAddressUrl(account, Network.Goerli)}>
-        {content}
-      </ExternalLink>
+    return (
+      <Dropdown
+        extraSpacing
+        fitToItemSize
+        currentValue={window.location.origin}
+        options={getWalletOption(isBurner)}
+        staticPlaceholder={content}
+        onChange={onSelectOption}
+      />
     )
 
   return (
@@ -83,44 +104,58 @@ const AccountContainer = ({
   )
 }
 
+const SuspendedAccount = ({
+  account,
+  needNetworkChange,
+  eNSName,
+}: AccountProps) => {
+  return (
+    <Suspense
+      fallback={
+        <div className={accountLinkContainer}>
+          <NavLoading />
+        </div>
+      }
+    >
+      <AccountContainer
+        eNSName={eNSName}
+        needNetworkChange={needNetworkChange}
+        account={account}
+      />
+    </Suspense>
+  )
+}
+
 export default function ({
   account,
   needNetworkChange,
   eNSName,
-}: {
-  account?: string
-  needNetworkChange: boolean
-  eNSName?: string
-}) {
+}: AccountProps) {
   return (
-    <div className={walletContainer}>
-      <SocialLinks />
-      <SealVerse />
-      <div className={displayFrom('xs')}>
-        <Delimiter />
+    <>
+      <div className={walletContainer}>
+        <SocialLinks />
+        <SealVerse />
+        <div className={displayFrom('xs')}>
+          <Delimiter />
+        </div>
+        <SuspendedAccount
+          account={account}
+          needNetworkChange={needNetworkChange}
+          eNSName={eNSName}
+        />
       </div>
 
-      <Suspense
-        fallback={
-          <div className={accountLinkContainer}>
-            <div className={walletAccount}>
-              <AccentText small color="text-primary-semi-dimmed">
-                <span className={displayTo('lg')}>Fetching...</span>
-                <span className={displayFrom('lg')}>Fetching account...</span>
-              </AccentText>
-            </div>
-            <div className={width('w-fit')}>
-              <Logo connected={false} />
-            </div>
-          </div>
-        }
-      >
-        <AccountContainer
-          eNSName={eNSName}
-          needNetworkChange={needNetworkChange}
+      <div className={displayTo('xs')}>
+        <SuspendedAccount
           account={account}
+          needNetworkChange={needNetworkChange}
+          eNSName={eNSName}
         />
-      </Suspense>
-    </div>
+      </div>
+      <div className={displayTo('xs')}>
+        <SealVerse />
+      </div>
+    </>
   )
 }

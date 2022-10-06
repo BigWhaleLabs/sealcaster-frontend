@@ -1,8 +1,10 @@
+import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Result } from 'ethers/lib/utils'
 import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract'
 import { proxy } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
+import PostIdsStatuses from 'stores/PostIdsStatuses'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
 import getMorePosts from 'helpers/getMorePosts'
@@ -72,6 +74,9 @@ farcasterContract.on(
       } as PostStructOutput,
       ...posts,
     ])
+    PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve({
+      status: PostStatus.pending,
+    })
   }
 )
 
