@@ -2,6 +2,9 @@ import Comment from 'models/Comment'
 import CommentBody from 'components/BlockchainList/CommentBody'
 import classnames, {
   backgroundColor,
+  borderColor,
+  borderStyle,
+  borderWidth,
   display,
   flex,
   flexDirection,
@@ -19,14 +22,12 @@ const repliesBlock = classnames(
   flex('flex-1'),
   gap('gap-y-3')
 )
-const indent = width('w-4')
 const commentLine = classnames(
-  display('flex'),
-  width('w-0.5'),
-  height('h-full'),
-  backgroundColor(
-    'bg-primary-semi-dimmed-transparent',
-    'hover:bg-primary-semi-dimmed'
+  width('w-4'),
+  borderWidth('border-l'),
+  borderColor(
+    'border-primary-semi-dimmed-transparent',
+    'hover:border-primary-semi-dimmed'
   ),
   transitionProperty('transition-colors')
 )
@@ -69,9 +70,7 @@ export default function CommentWithReplies({
 
       {hasReplies && (
         <div className={repliesWithLine}>
-          <div className={indent}>
-            <a href="#comment-1" className={commentLine} />
-          </div>
+          <a className={commentLine} href="#comment-1" />
           <div className={repliesBlock}>
             {replies.map(
               ({ content, replier, repliedTo, timestamp, replies }) => (

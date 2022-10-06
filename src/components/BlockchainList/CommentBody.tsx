@@ -78,7 +78,7 @@ export default function ({
   const formattedTime = formatDate(timestamp, current)
 
   return (
-    <div className={commentWithInput}>
+    <div className={commentWithInput} data-anchor={`#id=1`}>
       <div className={commentWithReplyButton}>
         <div className={commentWithData}>
           <BodyText>{content}</BodyText>
