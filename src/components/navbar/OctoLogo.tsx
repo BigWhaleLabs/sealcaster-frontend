@@ -33,7 +33,7 @@ export default function () {
       <OctoCorp />
       <div className={logoName}>
         <span className={logoText}>OCTOCORP</span>
-        <AccentText color="text-accent">
+        <AccentText color="text-formal-accent">
           <span className={strikethroughLogo}>Sealcaster</span>
         </AccentText>
       </div>
