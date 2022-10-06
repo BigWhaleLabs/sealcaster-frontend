@@ -2,6 +2,7 @@ import { Suspense } from 'preact/compat'
 import { space } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import GoBackButton from 'components/Thread/GoBackButton'
+import LoadingPage from 'components/Thread/LoadingPage'
 import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
 
@@ -23,7 +24,7 @@ const SuspendedThread = () => {
 
 export default function () {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LoadingPage />}>
       <div className={space('space-y-5')}>
         <GoBackButton />
         <SuspendedThread />

@@ -28,6 +28,8 @@ module.exports = {
         'primary-background': 'var(--primary-background)',
         'primary-dark-red': 'var(--primary-dark-red)',
         'secondary-dimmed': 'var(--secondary-dimmed)',
+        'secondary-dark': 'var(--secondary-dark)',
+        'secondary-semi-dark': 'var(--secondary-semi-dark)',
 
         'accent-light-transparent': 'var(--accent-light-transparent)',
         'accent-light-active-transparent':
