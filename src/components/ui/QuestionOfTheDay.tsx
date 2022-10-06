@@ -4,6 +4,7 @@ import {
   QuestionOfDayText,
   StatusText,
 } from 'components/ui/Text'
+import { displayFrom } from 'helpers/visibilityClassnames'
 import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
@@ -27,7 +28,7 @@ import classnames, {
 const postInfo = classnames(
   display('flex'),
   flexDirection('flex-col', 'xs:flex-row'),
-  alignItems('items-baseline'),
+  alignItems('items-baseline', 'xs:items-center'),
   flexWrap('flex-wrap'),
   gap('gap-x-1')
 )
@@ -61,7 +62,9 @@ export default function () {
           {/* // TODO: add real logic here with urls */}
           <StatusText>Posted by: </StatusText>
           <Sender sender="Sealcaster" />
-          <Delimiter />
+          <div className={displayFrom('xs')}>
+            <Delimiter color="bg-formal-accent" />
+          </div>
           <Sender sender="Farcaster" />
         </span>
         <HorizontalDelimiter />
