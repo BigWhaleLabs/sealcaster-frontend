@@ -9,11 +9,9 @@ import PostStore from 'stores/PostStore'
 
 const SuspendedThread = () => {
   const [location] = useLocation()
-  const blockchainId = location.split('/')[2]
+  const blockchainId = Number(location.split('/')[2])
   const { posts, idToPostTx } = useSnapshot(PostStore)
-  const postData = posts.find(
-    ({ derivativeAddress }) => derivativeAddress === blockchainId
-  )
+  const postData = posts.find(({ id }) => Number(id) === blockchainId)
 
   if (!postData) return null
 
@@ -36,7 +34,9 @@ export default function () {
     <Suspense fallback={<LoadingPage />}>
       <div className={space('space-y-5')}>
         <GoBackButton />
-        <SuspendedThread />
+        <div>
+          <SuspendedThread />
+        </div>
       </div>
     </Suspense>
   )

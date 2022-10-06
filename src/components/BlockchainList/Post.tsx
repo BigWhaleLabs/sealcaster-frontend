@@ -61,33 +61,35 @@ export default function ({
   limitThread?: number
 }) {
   return (
-    <div href={`/thread/${blockchainId}`} data-anchor={`#id=${blockchainId}`}>
-      <Card>
-        <div className={container}>
-          <PostText>{text}</PostText>
-          <div className={postBottom}>
-            <BodyText primary>
-              <span className={postInfo}>
-                <StatusText>Posted by: </StatusText>
-                <Sender sender={sender} />
-                <PostDelimiter />
-                <EtherScanLink tx={tx} />
-                <PostDelimiter />
-                <Status blockchainId={blockchainId} />
-              </span>
-            </BodyText>
-            <BodyText primary noWrap>
-              <span className={postInfo}>
-                <PostTime timestamp={timestamp} />
-              </span>
-            </BodyText>
+    <a href={`/thread/${blockchainId}`}>
+      <div data-anchor={`#id=${blockchainId}`}>
+        <Card>
+          <div className={container}>
+            <PostText>{text}</PostText>
+            <div className={postBottom}>
+              <BodyText primary>
+                <span className={postInfo}>
+                  <StatusText>Posted by: </StatusText>
+                  <Sender sender={sender} />
+                  <PostDelimiter />
+                  <EtherScanLink tx={tx} />
+                  <PostDelimiter />
+                  <Status blockchainId={blockchainId} />
+                </span>
+              </BodyText>
+              <BodyText primary noWrap>
+                <span className={postInfo}>
+                  <PostTime timestamp={timestamp} />
+                </span>
+              </BodyText>
+            </div>
           </div>
-        </div>
 
-        <Delimiter color="bg-half-grey" horizontal />
+          <Delimiter color="bg-half-grey" horizontal />
 
-        <ThreadPart replyingTo={sender} limitThread={limitThread} />
-      </Card>
-    </div>
+          <ThreadPart replyingTo={sender} limitThread={limitThread} />
+        </Card>
+      </div>
+    </a>
   )
 }
