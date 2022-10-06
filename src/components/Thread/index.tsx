@@ -8,16 +8,16 @@ import PostStore from 'stores/PostStore'
 
 const SuspendedThread = () => {
   const { posts, idToPostTx } = useSnapshot(PostStore)
-  const post = posts[0]
+  const { id, post, timestamp, sender } = posts[0]
 
   return (
     <Post
-      key={post.id}
-      blockchainId={Number(post.id)}
-      timestamp={Number(post.timestamp)}
-      text={post.post}
-      sender={post.sender}
-      tx={idToPostTx[Number(post.id)]}
+      key={id}
+      blockchainId={Number(id)}
+      timestamp={Number(timestamp)}
+      text={post}
+      sender={sender}
+      tx={idToPostTx[Number(id)]}
     />
   )
 }
