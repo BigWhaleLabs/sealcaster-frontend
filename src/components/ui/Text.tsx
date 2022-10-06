@@ -530,7 +530,7 @@ const questionOfDayText = classnames(
   backgroundImage('bg-gradient-to-r'),
   textColor('text-transparent'),
   backgroundClip('bg-clip-text'),
-  gradientColorStops('from-green', 'to-blue')
+  gradientColorStops('from-tertiary', 'to-primary-bright')
 )
 
 export function QuestionOfDayText({ children }: ChildrenProp) {
