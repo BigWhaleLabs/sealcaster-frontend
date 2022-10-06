@@ -9,10 +9,10 @@ import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
 import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
+import HorizontalDelimiter from 'components/ui/HorizontalDelimiter'
 import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import Sender from 'components/BlockchainList/Sender'
 import Thread from 'icons/Thread'
-import VertialDelimiter from 'components/ui/VertialDelimiter'
 import classnames, {
   alignItems,
   display,
@@ -64,7 +64,7 @@ export default function () {
           <Delimiter />
           <Sender sender="Farcaster" />
         </span>
-        <VertialDelimiter />
+        <HorizontalDelimiter />
         <Button
           type="tertiary"
           onClick={() => {
