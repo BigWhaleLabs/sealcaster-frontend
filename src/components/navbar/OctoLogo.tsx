@@ -1,4 +1,3 @@
-import { AccentText } from 'components/ui/Text'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import OctoCorp from 'icons/OctoCorp'
 import classnames, {
@@ -33,9 +32,7 @@ export default function () {
       <OctoCorp />
       <div className={logoName}>
         <span className={logoText}>OCTOCORP</span>
-        <AccentText color="text-formal-accent">
-          <span className={strikethroughLogo}>Sealcaster</span>
-        </AccentText>
+        <span className={strikethroughLogo}>Sealcaster</span>
       </div>
     </div>
   )
