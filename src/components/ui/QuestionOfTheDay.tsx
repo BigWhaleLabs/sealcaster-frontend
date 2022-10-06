@@ -10,9 +10,8 @@ import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
 import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
-import HorizontalDelimiter from 'components/ui/HorizontalDelimiter'
-import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import Sender from 'components/BlockchainList/Sender'
+import StickLabel from 'components/QuestionOfTheDay/StickLabel'
 import Thread from 'icons/Thread'
 import classnames, {
   alignItems,
@@ -33,11 +32,6 @@ const postInfo = classnames(
   gap('gap-x-1')
 )
 
-const badgeWrapper = classnames(
-  position('absolute'),
-  margin('ml-4/5', '-mt-1/6')
-)
-
 const threadWrapper = classnames(
   display('flex'),
   flexDirection('flex-row'),
@@ -49,10 +43,10 @@ export default function () {
   const [opened, setOpened] = useState(false)
 
   return (
-    <div className={margin('mt-24')}>
+    <div className={classnames(margin('mt-24'), position('relative'))}>
       <Card>
-        <div className={badgeWrapper}>
-          <QuestionOfTheDayLabel />
+        <div className={displayFrom('xs')}>
+          <StickLabel />
         </div>
         <QuestionOfDayText>Question of the day:</QuestionOfDayText>
         <HeaderText size="medium">
@@ -67,7 +61,7 @@ export default function () {
           </div>
           <Sender sender="Farcaster" />
         </span>
-        <HorizontalDelimiter />
+        <Delimiter horizontal color="bg-divider" />
         <Button
           type="tertiary"
           onClick={() => {
