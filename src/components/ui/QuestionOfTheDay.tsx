@@ -58,7 +58,7 @@ export default function () {
           Hey VCs, what should startup do to capture your attention?
         </HeaderText>
         <span className={postInfo}>
-          // TODO: add real logic here with urls
+          {/* // TODO: add real logic here with urls */}
           <StatusText>Posted by: </StatusText>
           <Sender sender="Sealcaster" />
           <Delimiter />
@@ -81,7 +81,7 @@ export default function () {
               >
                 Answer anonymously
               </span>
-              // TODO: add real logic with threads number here
+              {/* // TODO: add real logic with threads number here */}
               <AccentText color="text-primary-semi-dimmed">(0)</AccentText>
             </div>
           </AccentText>
