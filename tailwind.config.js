@@ -133,6 +133,10 @@ module.exports = {
       fontSize: {
         '3.5xl': '2rem',
       },
+      margin: {
+        '4/5': '80%',
+        '1/6': '15%',
+      },
     },
     container: {
       center: true,
