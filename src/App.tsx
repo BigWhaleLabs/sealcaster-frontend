@@ -1,10 +1,11 @@
-import { Route, Router, Switch, useLocation } from 'wouter'
+import { Redirect, Route, Router, Switch, useLocation } from 'wouter'
 import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import BurnerWallet from 'pages/BurnerWallet'
 import Footer from 'components/Footer'
 import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
+import NotFound from 'pages/NotFound'
 import Privacy from 'pages/Privacy'
 import ScrollToTopButton from 'components/ui/ScrollToTopButton'
 import Terms from 'pages/Terms'
@@ -59,6 +60,12 @@ export default function () {
               </Route>
               <Route path="/thread/:blockchainId">
                 <Thread />
+              </Route>
+              <Route path="/404">
+                <NotFound />
+              </Route>
+              <Route path="">
+                <Redirect to="/404" />
               </Route>
             </Switch>
           </div>
