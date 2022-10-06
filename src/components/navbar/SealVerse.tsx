@@ -15,6 +15,7 @@ export default function () {
           window.open(value, '_blank')
       }}
       fitToItemSize
+      withArrow
     />
   )
 }

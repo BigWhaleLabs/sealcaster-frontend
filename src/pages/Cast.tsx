@@ -1,6 +1,5 @@
 import { AccentText } from 'components/ui/Text'
 import { PostStatus } from 'models/PostStatus'
-import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Redirect } from 'wouter'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { handleError, parseErrorText } from '@big-whale-labs/frontend-utils'
@@ -54,21 +53,9 @@ export default function () {
         delete PostIdsStatuses.lastUserPost[account]
       const result = await PostStore.createPost(text)
 
-      const posts = await PostStore.posts
       const numberOfPosts = await PostStore.postsAmount
       PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
-      for (const { id, post, derivativeAddress, sender, timestamp } of result) {
-        PostStore.posts = Promise.resolve([
-          {
-            id,
-            post,
-            derivativeAddress,
-            sender,
-            timestamp,
-          } as PostStructOutput,
-          ...posts,
-        ])
-
+      for (const { id } of result) {
         const blockchainId = id.toNumber()
         const status = PostStatus.pending
 
@@ -79,9 +66,6 @@ export default function () {
           },
           ...PostIdsStatuses.lastUserPost,
         }
-        PostIdsStatuses.statuses[blockchainId] = Promise.resolve({
-          status,
-        })
       }
       if (!BurnerWalletStore.used) BurnerWalletStore.used = true
       setText('')

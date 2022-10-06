@@ -50,6 +50,8 @@ export default function ({
   staticPlaceholder,
   fitToItemSize,
   colorfulCurrentValue,
+  extraSpacing,
+  withArrow,
 }: {
   currentValue: string
   options: Option[]
@@ -58,6 +60,8 @@ export default function ({
   staticPlaceholder?: string | JSX.Element
   fitToItemSize?: boolean
   colorfulCurrentValue?: boolean
+  extraSpacing?: boolean
+  withArrow?: boolean
 }) {
   const [open, setOpen] = useState(false)
   const ref = createRef<HTMLDivElement>()
@@ -73,9 +77,11 @@ export default function ({
       <span className={textStyles(colorfulCurrentValue)}>
         {staticPlaceholder || currentValue}
       </span>
-      <div className={width('w-4')}>
-        <Arrow pulseDisabled open={open} />
-      </div>
+      {withArrow && (
+        <div className={width('w-4')}>
+          <Arrow pulseDisabled open={open} />
+        </div>
+      )}
     </button>
   )
 
@@ -91,6 +97,7 @@ export default function ({
           setOpen(false)
         }}
         fitToItemSize={fitToItemSize}
+        extraSpacing={extraSpacing}
       />
     </div>
   )
