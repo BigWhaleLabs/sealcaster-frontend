@@ -67,6 +67,7 @@ export default function CommentWithReplies({
 
       {hasReplies && (
         <div className={repliesWithLine}>
+          {/* TODO: href should be real */}
           <a className={commentLine} href="#reply-1" />
           <div className={repliesBlock}>
             {replies.map(

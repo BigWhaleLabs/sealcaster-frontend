@@ -15,6 +15,7 @@ export default function ({
   replyingTo: string
   limitThread?: number
 }) {
+  // TODO: replace with real data
   const comments = [
     {
       timestamp: 1664908789068,

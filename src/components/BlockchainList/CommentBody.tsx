@@ -78,6 +78,7 @@ export default function ({
   const formattedTime = formatDate(timestamp, current)
 
   return (
+    // TODO: anchor should be real
     <div className={commentWithInput} data-anchor={`#reply=1`}>
       <div className={commentWithReplyButton}>
         <div className={commentWithData}>
