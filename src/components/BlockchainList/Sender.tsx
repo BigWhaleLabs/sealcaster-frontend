@@ -4,7 +4,8 @@ import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 import useBadgeAccount from 'hooks/useBadgeAccount'
 
 export default function ({ sender }: { sender: string }) {
-  const { account } = useBadgeAccount()
+  const account = useBadgeAccount()
+
   return (
     <StatusText primary>
       <LinkText extraSmall title={sender} url={getEtherscanAddressUrl(sender)}>
