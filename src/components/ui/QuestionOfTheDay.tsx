@@ -4,7 +4,7 @@ import {
   QuestionOfDayText,
   StatusText,
 } from 'components/ui/Text'
-import { displayFrom } from 'helpers/visibilityClassnames'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
@@ -46,7 +46,12 @@ export default function () {
     <div className={classnames(margin('mt-24'), position('relative'))}>
       <Card>
         <div className={displayFrom('xs')}>
-          <StickLabel />
+          <div className={displayTo('lg')}>
+            <StickLabel mobile />
+          </div>
+          <div className={displayFrom('lg')}>
+            <StickLabel />
+          </div>
         </div>
         <QuestionOfDayText>Question of the day:</QuestionOfDayText>
         <HeaderText size="medium">

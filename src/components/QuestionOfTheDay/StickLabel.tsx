@@ -1,4 +1,3 @@
-import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import classnames, { inset, margin, position } from 'classnames/tailwind'
 
@@ -9,15 +8,10 @@ const badgeWrapper = (mobile?: boolean) =>
     margin(mobile ? '-mr-12.5' : '-mr-30', mobile ? '-mb-30' : '-mt-12.5')
   )
 
-export default function () {
+export default function ({ mobile }: { mobile?: boolean }) {
   return (
-    <>
-      <div className={classnames(displayTo('lg'), badgeWrapper(true))}>
-        <QuestionOfTheDayLabel />
-      </div>
-      <div className={classnames(displayFrom('lg'), badgeWrapper(false))}>
-        <QuestionOfTheDayLabel />
-      </div>
-    </>
+    <div className={badgeWrapper(mobile)}>
+      <QuestionOfTheDayLabel mobile={mobile} />
+    </div>
   )
 }

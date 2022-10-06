@@ -1,4 +1,5 @@
-export default function () {
+export default function ({ mobile }: { mobile?: boolean }) {
+  const id = mobile ? 'mobile' : 'desktop'
   return (
     <svg
       width="193"
@@ -7,20 +8,20 @@ export default function () {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g filter="url(#filter0_d_799_23933)">
+      <g filter={`url(#filter0_d_799_23933_${id})`}>
         <circle
           cx="96.5"
           cy="96.3218"
           r="61.5"
           transform="rotate(-15 96.5 96.3218)"
-          fill="url(#paint0_radial_799_23933)"
+          fill={`url(#paint0_radial_799_23933_${id})`}
         />
         <circle
           cx="96.5"
           cy="96.3218"
           r="61.5"
           transform="rotate(-15 96.5 96.3218)"
-          fill="url(#paint1_angular_799_23933)"
+          fill={`url(#paint1_angular_799_23933_${id})`}
           style="mix-blend-mode:difference"
         />
         <circle
@@ -28,12 +29,12 @@ export default function () {
           cy="96.3218"
           r="61.5"
           transform="rotate(-15 96.5 96.3218)"
-          fill="url(#paint2_angular_799_23933)"
+          fill={`url(#paint2_angular_799_23933_${id})`}
           style="mix-blend-mode:screen"
         />
       </g>
       <g style="mix-blend-mode:saturation">
-        <clipPath id="myClip">
+        <clipPath id={`myClip_${id}`}>
           <circle
             cx="96.5001"
             cy="96.3218"
@@ -43,7 +44,7 @@ export default function () {
           />
         </clipPath>
       </g>
-      <foreignObject width="193" height="192" clip-path="url(#myClip)">
+      <foreignObject width="193" height="192" clip-path={`url(#myClip_${id})`}>
         <div
           style="background: conic-gradient(from 180deg at 50% 50%, #000000 0deg, rgba(255, 255, 255, 0.72) 16.88deg, #000000 88.12deg, rgba(255, 255, 255, 0.72) 151.87deg, #000000 225deg, rgba(255, 255, 255, 0.72) 288.75deg, #000000 360deg), conic-gradient(from 180deg at 50% 50%, #000000 0deg, #FFFFFF 30deg, #000000 95.62deg, #FFFFFF 168.75deg, #000000 228.75deg, #FFFFFF 285deg, #000000 360deg), radial-gradient(79.79% 80.25% at 10.11% 28.24%, #F86EFB 7.61%, #7342FF 35.14%, #42E8FF 63.45%, #42FF6B 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
 background-blend-mode: screen, difference, normal; width: 192px; height: 192px; border-radius: 100%;"
@@ -182,7 +183,7 @@ background-blend-mode: screen, difference, normal; width: 192px; height: 192px; 
 
       <defs>
         <filter
-          id="filter0_d_799_23933"
+          id={`filter0_d_799_23933_${id}`}
           x="0.984741"
           y="0.806549"
           width="191.031"
@@ -217,7 +218,7 @@ background-blend-mode: screen, difference, normal; width: 192px; height: 192px; 
           />
         </filter>
         <radialGradient
-          id="paint0_radial_799_23933"
+          id={`paint0_radial_799_23933_${id}`}
           cx="0"
           cy="0"
           r="1"
@@ -230,7 +231,7 @@ background-blend-mode: screen, difference, normal; width: 192px; height: 192px; 
           <stop offset="1" stop-color="#42FF6B" />
         </radialGradient>
         <radialGradient
-          id="paint1_angular_799_23933"
+          id={`paint1_angular_799_23933_${id}`}
           cx="0"
           cy="0"
           r="1"
@@ -245,7 +246,7 @@ background-blend-mode: screen, difference, normal; width: 192px; height: 192px; 
           <stop offset="1" />
         </radialGradient>
         <radialGradient
-          id="paint2_angular_799_23933"
+          id={`paint2_angular_799_23933_${id}`}
           cx="0"
           cy="0"
           r="1"
