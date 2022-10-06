@@ -1,5 +1,7 @@
 import { VNode } from 'preact'
 import { useCallback, useState } from 'preact/hooks'
+import { useLocation } from 'wouter'
+import OctoLogo from 'components/navbar/OctoLogo'
 import RightBlock from 'components/navbar/RightBlock'
 import SiteLogo from 'components/navbar/SiteLogo'
 import classnames, {
@@ -50,10 +52,12 @@ export default function ({
     setBackgroundVisible(window.scrollY > 20)
   }, [])
   useOnScroll(onScroll)
+  const [location] = useLocation()
+  const is404 = location === '/404'
 
   return (
     <nav className={navbar(backgroundVisible, hideWalletPart)}>
-      <SiteLogo logoText={logoText} />
+      {is404 ? <OctoLogo /> : <SiteLogo logoText={logoText} />}
       {!hideWalletPart && (
         <RightBlock
           eNSName={eNSName}
