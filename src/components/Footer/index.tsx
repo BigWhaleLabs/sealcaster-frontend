@@ -1,5 +1,5 @@
 import { SocialLink } from 'components/ui/Text'
-import { displayTo } from 'helpers/visibilityClassnames'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import Delimiter from 'components/ui/Delimiter'
 import Discord from 'icons/Discord'
 import FooterButton from 'components/Footer/FooterButton'
@@ -48,7 +48,9 @@ export default function () {
               content={FooterOptions[key].text}
             />
             {linkList.length - 1 !== index && (
-              <Delimiter color="dimmed" showFrom="md" />
+              <div className={displayFrom('md')}>
+                <Delimiter />
+              </div>
             )}
           </>
         ))}

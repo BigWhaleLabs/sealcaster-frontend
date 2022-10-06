@@ -5,8 +5,8 @@ import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
+import Delimiter from 'components/ui/Delimiter'
 import Dropdown from 'components/Dropdown'
-import LastDelimiter from 'components/ui/LastDelimiter'
 import Logo from 'components/navbar/Logo'
 import Network from 'models/Network'
 import SealVerse from 'components/navbar/SealVerse'
@@ -119,7 +119,9 @@ export default function ({
     <div className={walletContainer}>
       <SocialLinks />
       <SealVerse />
-      <LastDelimiter />
+      <div className={displayFrom('xs')}>
+        <Delimiter />
+      </div>
 
       <Suspense
         fallback={

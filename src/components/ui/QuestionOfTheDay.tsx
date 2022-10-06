@@ -12,7 +12,6 @@ import Delimiter from 'components/ui/Delimiter'
 import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import Sender from 'components/BlockchainList/Sender'
 import Thread from 'icons/Thread'
-import VertialDelimiter from 'components/ui/VertialDelimiter'
 import classnames, {
   alignItems,
   display,
@@ -64,7 +63,7 @@ export default function () {
           <Delimiter />
           <Sender sender="Farcaster" />
         </span>
-        <VertialDelimiter />
+        <Delimiter color="bg-half-grey" horizontal />
         <Button
           type="tertiary"
           onClick={() => {

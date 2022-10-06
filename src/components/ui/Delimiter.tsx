@@ -1,32 +1,28 @@
-import { Size, displayFrom } from 'helpers/visibilityClassnames'
-import { StatusText } from 'components/ui/Text'
 import classnames, {
-  TArg,
-  alignItems,
-  justifyContent,
+  TBackgroundColor,
+  backgroundColor,
+  borderWidth,
+  height,
   width,
 } from 'classnames/tailwind'
 
-const bottomSeparator = classnames(
-  width('w-fit'),
-  alignItems('items-center'),
-  justifyContent('justify-center')
-)
+const delimiterContainer = (
+  color: TBackgroundColor = 'bg-primary-dimmed',
+  horizontal = false
+) =>
+  classnames(
+    borderWidth('border-0'),
+    backgroundColor(color),
+    width(horizontal ? 'w-full' : 'w-px'),
+    height(horizontal ? 'h-px' : 'h-4')
+  )
 
 export default function ({
-  color = 'default',
-  className,
-  showFrom = 'xs',
+  color,
+  horizontal,
 }: {
-  color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default'
-  className?: TArg
-  showFrom?: Size
+  color?: TBackgroundColor
+  horizontal?: boolean
 }) {
-  return (
-    <div
-      className={classnames(bottomSeparator, className, displayFrom(showFrom))}
-    >
-      <StatusText color={color}>|</StatusText>
-    </div>
-  )
+  return <hr className={delimiterContainer(color, horizontal)} />
 }

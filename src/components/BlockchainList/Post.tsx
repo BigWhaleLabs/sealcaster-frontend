@@ -30,7 +30,7 @@ const postBottom = classnames(
 const postInfo = classnames(
   display('flex'),
   flexDirection('flex-col', 'xs:flex-row'),
-  alignItems('items-baseline'),
+  alignItems('items-center'),
   flexWrap('flex-wrap'),
   gap('gap-x-1')
 )
@@ -58,9 +58,9 @@ export default function ({
               <span className={postInfo}>
                 <StatusText>Posted by: </StatusText>
                 <Sender sender={sender} />
-                <Delimiter />
+                <Delimiter color="bg-formal-accent" />
                 <EtherScanLink tx={tx} />
-                <Delimiter />
+                <Delimiter color="bg-formal-accent" />
                 <Status blockchainId={blockchainId} />
               </span>
             </BodyText>
