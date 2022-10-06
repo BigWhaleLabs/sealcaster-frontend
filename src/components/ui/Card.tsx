@@ -3,8 +3,6 @@ import {
   borderColor,
   borderRadius,
   borderWidth,
-  boxShadow,
-  boxShadowColor,
   classnames,
   height,
   maxHeight,
@@ -17,15 +15,14 @@ import {
   zIndex,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
+import classNamesToString from 'helpers/classNamesToString'
 
 const cardContainer = (small?: boolean, blueBg?: boolean) => {
-  return classnames(
+  const card = classnames(
     position('relative'),
     borderWidth(blueBg ? 'border-0' : 'border'),
     borderColor('border-half-grey'),
     borderRadius('rounded-2xl'),
-    boxShadow('shadow-inner'),
-    boxShadowColor('shadow-light-formal-accent'),
     backgroundColor(blueBg ? 'bg-primary-background' : 'bg-primary-dark'),
     padding(small ? 'p-4' : 'p-6'),
     maxWidth('max-w-full'),
@@ -36,6 +33,8 @@ const cardContainer = (small?: boolean, blueBg?: boolean) => {
     wordBreak('break-words'),
     zIndex('z-20')
   )
+  // added via css because tailwind class overwrites by material-ui
+  return classNamesToString(card, 'shadow-card')
 }
 
 export default function ({

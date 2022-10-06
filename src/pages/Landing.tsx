@@ -23,17 +23,15 @@ export default function () {
 
   return (
     <div className={processingCardWrapper}>
-      <>
-        <QuestionOfTheDay />
-        <PostProcessing />
-        <div className={space('space-y-6')}>
-          <CastHeader />
-          <CastBlock />
-        </div>
-        <div className={margin('mt-20', 'sm:mt-14')}>
-          <BlockchainList />
-        </div>
-      </>
+      <QuestionOfTheDay />
+      <PostProcessing />
+      <div className={space('space-y-6')}>
+        <CastHeader />
+        <CastBlock />
+      </div>
+      <div className={margin('mt-20', 'sm:mt-14')}>
+        <BlockchainList />
+      </div>
     </div>
   )
 }

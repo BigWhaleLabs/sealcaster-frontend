@@ -148,6 +148,9 @@ circle {
   position: relative;
   padding: 0.15rem;
 }
+.shadow-card {
+  box-shadow: inset 0rem 0rem 0.5rem 0 var(--light-formal-accent);
+}
 
 .animated-border::before {
   content: '';

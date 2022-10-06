@@ -1,4 +1,4 @@
-import { createRef } from 'react'
+import { JSX, createRef } from 'react'
 import { useState } from 'react'
 import Arrow from 'icons/Arrow'
 import Menu from 'components/Dropdown/Menu'
@@ -50,14 +50,16 @@ export default function ({
   staticPlaceholder,
   fitToItemSize,
   colorfulCurrentValue,
+  extraSpacing,
 }: {
   currentValue: string
   options: Option[]
   onChange: (selectedValue: string) => void
   disabled?: boolean
-  staticPlaceholder?: string
+  staticPlaceholder?: string | JSX.Element
   fitToItemSize?: boolean
   colorfulCurrentValue?: boolean
+  extraSpacing?: boolean
 }) {
   const [open, setOpen] = useState(false)
   const ref = createRef<HTMLDivElement>()
@@ -73,9 +75,11 @@ export default function ({
       <span className={textStyles(colorfulCurrentValue)}>
         {staticPlaceholder || currentValue}
       </span>
-      <div className={width('w-4')}>
-        <Arrow pulseDisabled open={open} />
-      </div>
+      {typeof staticPlaceholder === 'string' && (
+        <div className={width('w-4')}>
+          <Arrow pulseDisabled open={open} />
+        </div>
+      )}
     </button>
   )
 
@@ -91,6 +95,7 @@ export default function ({
           setOpen(false)
         }}
         fitToItemSize={fitToItemSize}
+        extraSpacing={extraSpacing}
       />
     </div>
   )

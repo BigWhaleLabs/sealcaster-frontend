@@ -57,7 +57,7 @@ export default function () {
               </Route>
             </Switch>
           </div>
-          <Footer noExtraPadding={hasBlockchainList} />
+          <Footer />
         </div>
         {hasBlockchainList && <ScrollToTopButton />}
       </div>
