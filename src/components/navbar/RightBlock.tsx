@@ -1,4 +1,3 @@
-import { AccentText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useLocation } from 'wouter'
@@ -7,7 +6,7 @@ import AccountAndLogo from 'components/navbar/AccountAndLogo'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Dropdown from 'components/Dropdown'
 import LastDelimiter from 'components/ui/LastDelimiter'
-import Logo from 'components/navbar/Logo'
+import NavLoading from 'components/navbar/NavLoading'
 import Network from 'models/Network'
 import SealVerse from 'components/navbar/SealVerse'
 import SocialLinks from 'components/navbar/SocialLinks'
@@ -17,10 +16,7 @@ import classnames, {
   display,
   flexDirection,
   gap,
-  lineHeight,
   space,
-  textAlign,
-  width,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
 import getWalletOption from 'helpers/getWalletOption'
@@ -30,7 +26,8 @@ const walletContainer = classnames(
   flexDirection('flex-col-reverse', 'xs:flex-row'),
   alignItems('items-center'),
   gap('gap-x-3', 'sm:gap-x-4'),
-  cursor('cursor-pointer')
+  cursor('cursor-pointer'),
+  displayFrom('xs')
 )
 const accountLinkContainer = classnames(
   display('inline-flex'),
@@ -38,10 +35,12 @@ const accountLinkContainer = classnames(
   space('xs:space-x-4', 'space-x-2'),
   cursor('cursor-pointer')
 )
-const walletAccount = classnames(
-  textAlign('text-right'),
-  lineHeight('leading-5')
-)
+
+interface AccountProps {
+  account?: string
+  needNetworkChange: boolean
+  eNSName?: string
+}
 
 const AccountContainer = ({
   account,
@@ -106,42 +105,56 @@ const AccountContainer = ({
   )
 }
 
+const SuspendedAccount = ({
+  account,
+  needNetworkChange,
+  eNSName,
+}: AccountProps) => {
+  return (
+    <Suspense
+      fallback={
+        <div className={accountLinkContainer}>
+          <NavLoading />
+        </div>
+      }
+    >
+      <AccountContainer
+        eNSName={eNSName}
+        needNetworkChange={needNetworkChange}
+        account={account}
+      />
+    </Suspense>
+  )
+}
+
 export default function ({
   account,
   needNetworkChange,
   eNSName,
-}: {
-  account?: string
-  needNetworkChange: boolean
-  eNSName?: string
-}) {
+}: AccountProps) {
   return (
-    <div className={walletContainer}>
-      <SocialLinks />
-      <SealVerse />
-      <LastDelimiter />
-
-      <Suspense
-        fallback={
-          <div className={accountLinkContainer}>
-            <div className={walletAccount}>
-              <AccentText small color="text-primary-semi-dimmed">
-                <span className={displayTo('lg')}>Fetching...</span>
-                <span className={displayFrom('lg')}>Fetching account...</span>
-              </AccentText>
-            </div>
-            <div className={width('w-fit')}>
-              <Logo connected={false} />
-            </div>
-          </div>
-        }
-      >
-        <AccountContainer
-          eNSName={eNSName}
-          needNetworkChange={needNetworkChange}
+    <>
+      <div className={walletContainer}>
+        <SocialLinks />
+        <SealVerse />
+        <LastDelimiter />
+        <SuspendedAccount
           account={account}
+          needNetworkChange={needNetworkChange}
+          eNSName={eNSName}
         />
-      </Suspense>
-    </div>
+      </div>
+
+      <div className={displayTo('xs')}>
+        <SuspendedAccount
+          account={account}
+          needNetworkChange={needNetworkChange}
+          eNSName={eNSName}
+        />
+      </div>
+      <div className={displayTo('xs')}>
+        <SealVerse />
+      </div>
+    </>
   )
 }

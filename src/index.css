@@ -51,7 +51,8 @@
   );
 }
 
-* {
+*,
+*:focus {
   -webkit-tap-highlight-color: var(--transparent);
   outline: 0;
 }
