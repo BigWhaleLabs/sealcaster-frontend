@@ -189,6 +189,10 @@ circle {
   word-break: break-word;
 }
 
+.stroke-text-secondary {
+  -webkit-text-stroke: 2px var(--secondary);
+}
+
 @keyframes dots {
   0%,
   20% {
