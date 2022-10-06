@@ -2,6 +2,7 @@ import BlockchainList from 'components/BlockchainList'
 import CastBlock from 'components/Cast/CastBlock'
 import CastHeader from 'components/Cast/CastHeader'
 import PostProcessing from 'components/ProcessingCard'
+import QuestionOfTheDay from 'components/ui/QuestionOfTheDay'
 import classnames, {
   display,
   flexDirection,
@@ -22,6 +23,7 @@ export default function () {
 
   return (
     <div className={processingCardWrapper}>
+      <QuestionOfTheDay />
       <PostProcessing />
       <div className={space('space-y-6')}>
         <CastHeader />

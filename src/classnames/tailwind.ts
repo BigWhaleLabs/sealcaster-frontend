@@ -306,6 +306,9 @@ export type TBackgroundColor =
   | 'bg-formal-accent-semi-transparent'
   | 'bg-light-formal-accent'
   | 'bg-error-semi-transparent'
+  | 'bg-tertiary-subheader'
+  | 'bg-primary-bright'
+  | 'bg-divider'
 
 export type TBackgroundPosition =
   | 'bg-bottom'
@@ -1097,6 +1100,15 @@ export type TGradientColorStops =
   | 'from-error-semi-transparent'
   | 'via-error-semi-transparent'
   | 'to-error-semi-transparent'
+  | 'from-tertiary-subheader'
+  | 'via-tertiary-subheader'
+  | 'to-tertiary-subheader'
+  | 'from-primary-bright'
+  | 'via-primary-bright'
+  | 'to-primary-bright'
+  | 'from-divider'
+  | 'via-divider'
+  | 'to-divider'
 
 export type TBackgrounds =
   | TBackgroundAttachment
@@ -2849,6 +2861,21 @@ export type TBorderColor =
   | 'border-r-error-semi-transparent'
   | 'border-b-error-semi-transparent'
   | 'border-l-error-semi-transparent'
+  | 'border-tertiary-subheader'
+  | 'border-t-tertiary-subheader'
+  | 'border-r-tertiary-subheader'
+  | 'border-b-tertiary-subheader'
+  | 'border-l-tertiary-subheader'
+  | 'border-primary-bright'
+  | 'border-t-primary-bright'
+  | 'border-r-primary-bright'
+  | 'border-b-primary-bright'
+  | 'border-l-primary-bright'
+  | 'border-divider'
+  | 'border-t-divider'
+  | 'border-r-divider'
+  | 'border-b-divider'
+  | 'border-l-divider'
 
 export type TBorderOpacity =
   | 'border-opacity-0'
@@ -3510,6 +3537,9 @@ export type TRingColor =
   | 'ring-formal-accent-semi-transparent'
   | 'ring-light-formal-accent'
   | 'ring-error-semi-transparent'
+  | 'ring-tertiary-subheader'
+  | 'ring-primary-bright'
+  | 'ring-divider'
 
 export type TRingWidth =
   | 'ring-0'
@@ -3794,6 +3824,9 @@ export type TRingOffsetColor =
   | 'ring-offset-formal-accent-semi-transparent'
   | 'ring-offset-light-formal-accent'
   | 'ring-offset-error-semi-transparent'
+  | 'ring-offset-tertiary-subheader'
+  | 'ring-offset-primary-bright'
+  | 'ring-offset-divider'
 
 export type TRingOffsetWidth =
   | 'ring-offset-0'
@@ -4072,6 +4105,9 @@ export type TOutlineColor =
   | 'outline-formal-accent-semi-transparent'
   | 'outline-light-formal-accent'
   | 'outline-error-semi-transparent'
+  | 'outline-tertiary-subheader'
+  | 'outline-primary-bright'
+  | 'outline-divider'
 
 export type TBorders =
   | TBorderStyle
@@ -4403,6 +4439,9 @@ export type TBoxShadowColor =
   | 'shadow-formal-accent-semi-transparent'
   | 'shadow-light-formal-accent'
   | 'shadow-error-semi-transparent'
+  | 'shadow-tertiary-subheader'
+  | 'shadow-primary-bright'
+  | 'shadow-divider'
 
 export type TOpacity =
   | 'opacity-0'
@@ -5373,6 +5412,9 @@ export type TMargin =
   | 'm-1.5'
   | 'm-2.5'
   | 'm-3.5'
+  | '-m-12.5'
+  | '-m-30'
+  | '-m-35'
   | 'm-7.5'
   | 'my-0'
   | 'my-1'
@@ -5411,6 +5453,9 @@ export type TMargin =
   | 'my-1.5'
   | 'my-2.5'
   | 'my-3.5'
+  | '-my-12.5'
+  | '-my-30'
+  | '-my-35'
   | 'my-7.5'
   | 'mx-0'
   | 'mx-1'
@@ -5449,6 +5494,9 @@ export type TMargin =
   | 'mx-1.5'
   | 'mx-2.5'
   | 'mx-3.5'
+  | '-mx-12.5'
+  | '-mx-30'
+  | '-mx-35'
   | 'mx-7.5'
   | 'mt-0'
   | 'mt-1'
@@ -5487,6 +5535,9 @@ export type TMargin =
   | 'mt-1.5'
   | 'mt-2.5'
   | 'mt-3.5'
+  | '-mt-12.5'
+  | '-mt-30'
+  | '-mt-35'
   | 'mt-7.5'
   | 'mr-0'
   | 'mr-1'
@@ -5525,6 +5576,9 @@ export type TMargin =
   | 'mr-1.5'
   | 'mr-2.5'
   | 'mr-3.5'
+  | '-mr-12.5'
+  | '-mr-30'
+  | '-mr-35'
   | 'mr-7.5'
   | 'mb-0'
   | 'mb-1'
@@ -5563,6 +5617,9 @@ export type TMargin =
   | 'mb-1.5'
   | 'mb-2.5'
   | 'mb-3.5'
+  | '-mb-12.5'
+  | '-mb-30'
+  | '-mb-35'
   | 'mb-7.5'
   | 'ml-0'
   | 'ml-1'
@@ -5601,6 +5658,9 @@ export type TMargin =
   | 'ml-1.5'
   | 'ml-2.5'
   | 'ml-3.5'
+  | '-ml-12.5'
+  | '-ml-30'
+  | '-ml-35'
   | 'ml-7.5'
 
 export type TSpace =
@@ -6017,6 +6077,9 @@ export type TCaretColor =
   | 'caret-formal-accent-semi-transparent'
   | 'caret-light-formal-accent'
   | 'caret-error-semi-transparent'
+  | 'caret-tertiary-subheader'
+  | 'caret-primary-bright'
+  | 'caret-divider'
 
 export type TWillChange =
   | 'will-change-auto'
@@ -6281,6 +6344,9 @@ export type TAccentColor =
   | 'accent-formal-accent-semi-transparent'
   | 'accent-light-formal-accent'
   | 'accent-error-semi-transparent'
+  | 'accent-tertiary-subheader'
+  | 'accent-primary-bright'
+  | 'accent-divider'
 
 export type TScrollPadding =
   | 'scroll-p-0'
@@ -7600,6 +7666,9 @@ export type TFill =
   | 'fill-formal-accent-semi-transparent'
   | 'fill-light-formal-accent'
   | 'fill-error-semi-transparent'
+  | 'fill-tertiary-subheader'
+  | 'fill-primary-bright'
+  | 'fill-divider'
 
 export type TStroke =
   | 'stroke-inherit'
@@ -7659,6 +7728,9 @@ export type TStroke =
   | 'stroke-formal-accent-semi-transparent'
   | 'stroke-light-formal-accent'
   | 'stroke-error-semi-transparent'
+  | 'stroke-tertiary-subheader'
+  | 'stroke-primary-bright'
+  | 'stroke-divider'
 
 export type TStrokeWidth =
   | 'stroke-0'
@@ -8209,6 +8281,9 @@ export type TPlaceholderColor =
   | 'placeholder-formal-accent-semi-transparent'
   | 'placeholder-light-formal-accent'
   | 'placeholder-error-semi-transparent'
+  | 'placeholder-tertiary-subheader'
+  | 'placeholder-primary-bright'
+  | 'placeholder-divider'
 
 export type TPlaceholderOpacity =
   | 'placeholder-opacity-0'
@@ -8483,6 +8558,9 @@ export type TTextColor =
   | 'text-formal-accent-semi-transparent'
   | 'text-light-formal-accent'
   | 'text-error-semi-transparent'
+  | 'text-tertiary-subheader'
+  | 'text-primary-bright'
+  | 'text-divider'
 
 export type TTextOpacity =
   | 'text-opacity-0'
@@ -8798,6 +8876,9 @@ export type TTextDecorationColor =
   | 'decoration-formal-accent-semi-transparent'
   | 'decoration-light-formal-accent'
   | 'decoration-error-semi-transparent'
+  | 'decoration-tertiary-subheader'
+  | 'decoration-primary-bright'
+  | 'decoration-divider'
 
 export type TTextDecorationThickness =
   | 'decoration-0'

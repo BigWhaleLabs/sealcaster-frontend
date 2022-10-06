@@ -7,7 +7,7 @@ import TextareaInfo from 'components/Cast/TextareaInfo'
 import VerifyWallet from 'components/Cast/VerifyWallet'
 import usePost from 'hooks/usePost'
 
-export default function () {
+export default function ({ placeHolder = 'Write something here...' }) {
   const { status } = useSnapshot(BurnerWalletStore)
   const { createPost, isLoading, error, text, setText, waitBurner } = usePost()
   const maxLength = 279
@@ -18,7 +18,7 @@ export default function () {
       <TextArea
         text={text}
         disabled={isLoading || waitBurner}
-        placeholder="Write something here..."
+        placeholder={placeHolder}
         onTextChange={setText}
         maxLength={maxLength}
       />
