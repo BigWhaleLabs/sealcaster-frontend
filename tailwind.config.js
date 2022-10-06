@@ -51,6 +51,10 @@ module.exports = {
           'var(--formal-accent-semi-transparent)',
         'light-formal-accent': 'var(--light-formal-accent)',
         'error-semi-transparent': 'var(--error-semi-transparent)',
+        'tertiary-subheader': 'var(--tertiary-subheader)',
+        'primary-bright': 'var(--primary-bright)',
+        divider: 'var(--divider)',
+        'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
       },
       borderRadius: {
         avatar: '6rem',
@@ -131,6 +135,11 @@ module.exports = {
       },
       fontSize: {
         '3.5xl': '2rem',
+      },
+      margin: {
+        '-12.5': '-3.125rem',
+        '-30': '-7.5rem',
+        '-35': '-8.75rem',
       },
     },
     container: {

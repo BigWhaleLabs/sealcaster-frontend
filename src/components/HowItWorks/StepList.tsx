@@ -5,13 +5,17 @@ export default function () {
   return (
     <OrderedList>
       <CardParagraph>
-        You verify that you have a profile on Farcaster by connecting a wallet
-        you connected to Farcaster.
+        When you initiate a ‘cast’, you’ll verify you’re on Farcaster by
+        connecting the wallet you have connected to Farcaster.
       </CardParagraph>
       <CardParagraph>
-        We create your burner wallet with a Farcaster ZK badge.
+        Once verified, we snap our magic fingers and post your cast using a
+        burner wallet.
       </CardParagraph>
-      <CardParagraph>You create a cast that will be anonymous.</CardParagraph>
+      <CardParagraph>
+        Done! Your cast is posted to Farcaster and the blockchain. Additionally,
+        you keep the burner if you wish to use it as your pseudonymous identity.{' '}
+      </CardParagraph>
     </OrderedList>
   )
 }

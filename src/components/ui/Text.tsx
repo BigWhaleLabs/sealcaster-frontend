@@ -539,3 +539,16 @@ const largeText = classnames(
 export function LargeText({ children }: ChildrenProp) {
   return <h2 className={largeText}>{children}</h2>
 }
+
+const questionOfDayText = classnames(
+  fontFamily('font-primary'),
+  fontWeight('font-bold'),
+  backgroundImage('bg-gradient-to-r'),
+  textColor('text-transparent'),
+  backgroundClip('bg-clip-text'),
+  gradientColorStops('from-tertiary', 'to-primary-bright')
+)
+
+export function QuestionOfDayText({ children }: ChildrenProp) {
+  return <h2 className={questionOfDayText}>{children}</h2>
+}

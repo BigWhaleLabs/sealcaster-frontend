@@ -1,4 +1,5 @@
 import { BodyText, PostText, StatusText } from 'components/ui/Text'
+import { displayFrom } from 'helpers/visibilityClassnames'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
 import EtherScanLink from 'components/BlockchainList/EtherScanLink'
@@ -31,10 +32,18 @@ const postBottom = classnames(
 const postInfo = classnames(
   display('flex'),
   flexDirection('flex-col', 'xs:flex-row'),
-  alignItems('items-center'),
+  alignItems('items-baseline', 'xs:items-center'),
   flexWrap('flex-wrap'),
   gap('gap-x-2')
 )
+
+function PostDelimiter() {
+  return (
+    <div className={displayFrom('xs')}>
+      <Delimiter color="bg-formal-accent" />
+    </div>
+  )
+}
 
 export default function ({
   blockchainId,
@@ -61,9 +70,9 @@ export default function ({
               <span className={postInfo}>
                 <StatusText>Posted by: </StatusText>
                 <Sender sender={sender} />
-                <Delimiter color="bg-formal-accent" />
+                <PostDelimiter />
                 <EtherScanLink tx={tx} />
-                <Delimiter color="bg-formal-accent" />
+                <PostDelimiter />
                 <Status blockchainId={blockchainId} />
               </span>
             </BodyText>

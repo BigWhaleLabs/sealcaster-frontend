@@ -49,7 +49,7 @@ export default function () {
             />
             {linkList.length - 1 !== index && (
               <div className={displayFrom('md')}>
-                <Delimiter color="bg-primary-dimmed" />
+                <Delimiter />
               </div>
             )}
           </>

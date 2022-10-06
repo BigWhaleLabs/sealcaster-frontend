@@ -19,7 +19,6 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 
-const Cast = lazy(() => import('pages/Cast'))
 const Landing = lazy(() => import('pages/Landing'))
 
 const pageContainer = classnames(
@@ -48,9 +47,6 @@ export default function () {
             <Switch>
               <Route path="/">
                 <LazyComponent lazyImported={<Landing />} />
-              </Route>
-              <Route path="/cast">
-                <LazyComponent lazyImported={<Cast />} />
               </Route>
               <Route path="/terms">
                 <Terms />
