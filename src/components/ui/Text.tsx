@@ -5,7 +5,6 @@ import {
   TTextColor,
   alignItems,
   backgroundClip,
-  backgroundColor,
   backgroundImage,
   caretColor,
   classnames,
