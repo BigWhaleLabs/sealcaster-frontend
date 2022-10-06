@@ -51,6 +51,7 @@ export default function ({
   fitToItemSize,
   colorfulCurrentValue,
   extraSpacing,
+  withArrow,
 }: {
   currentValue: string
   options: Option[]
@@ -60,6 +61,7 @@ export default function ({
   fitToItemSize?: boolean
   colorfulCurrentValue?: boolean
   extraSpacing?: boolean
+  withArrow?: boolean
 }) {
   const [open, setOpen] = useState(false)
   const ref = createRef<HTMLDivElement>()
@@ -75,7 +77,7 @@ export default function ({
       <span className={textStyles(colorfulCurrentValue)}>
         {staticPlaceholder || currentValue}
       </span>
-      {typeof staticPlaceholder === 'string' && (
+      {withArrow && (
         <div className={width('w-4')}>
           <Arrow pulseDisabled open={open} />
         </div>
