@@ -3,6 +3,7 @@ import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
+import BareCard from 'components/BareCard'
 import Delimiter from 'components/ui/Delimiter'
 import Reply from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
@@ -21,14 +22,6 @@ import classnames, {
 import formatDate from 'helpers/formatDate'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 
-const commentWithInput = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  gap('gap-y-6'),
-  backgroundColor('bg-primary-background'),
-  borderRadius('rounded-lg'),
-  padding('p-4')
-)
 const commentWithReplyButton = classnames(
   display('flex'),
   flexDirection('flex-col', 'md:flex-row'),
@@ -79,7 +72,7 @@ export default function ({
 
   return (
     // TODO: anchor should be real
-    <div className={commentWithInput} data-anchor={`#reply=1`}>
+    <BareCard data-anchor={`#reply=1`}>
       <div className={commentWithReplyButton}>
         <div className={commentWithData}>
           <BodyText>{content}</BodyText>
@@ -99,6 +92,6 @@ export default function ({
         </button>
       </div>
       <ReplyInput replyingTo={repliedTo} inputOpen={inputOpen} />
-    </div>
+    </BareCard>
   )
 }

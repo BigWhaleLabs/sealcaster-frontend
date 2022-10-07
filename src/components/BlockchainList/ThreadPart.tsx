@@ -1,4 +1,6 @@
+import { AccentText } from 'components/ui/Text'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
+import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
 
@@ -10,9 +12,11 @@ const wrapper = classnames(
 
 export default function ({
   replyingTo,
+  postId,
   limitThread,
 }: {
   replyingTo: string
+  postId: number
   limitThread?: number
 }) {
   // TODO: replace with real data
@@ -75,6 +79,8 @@ export default function ({
     },
   ]
 
+  const commentsLength = comments.length
+
   return (
     <div className={wrapper}>
       <Replies count={comments.length} replyingTo={replyingTo} />
@@ -98,6 +104,16 @@ export default function ({
               replies={replies}
             />
           )
+      )}
+      {limitThread && (
+        <a href={`/thread/${postId}`}>
+          <BareCard smallPaddings>
+            <AccentText color="text-accent" small>
+              + {commentsLength - limitThread}{' '}
+              {commentsLength - limitThread > 1 ? 'replies' : 'reply'}
+            </AccentText>
+          </BareCard>
+        </a>
       )}
     </div>
   )

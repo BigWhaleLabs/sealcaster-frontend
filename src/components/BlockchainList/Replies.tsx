@@ -1,4 +1,4 @@
-import { AccentText, BodyText } from 'components/ui/Text'
+import { AccentText } from 'components/ui/Text'
 import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
 import ReplyIcon from 'icons/ReplyIcon'
