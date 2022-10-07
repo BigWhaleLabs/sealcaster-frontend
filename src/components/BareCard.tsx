@@ -3,9 +3,6 @@ import ChildrenProp from 'models/ChildrenProp'
 import classnames, {
   backgroundColor,
   borderRadius,
-  display,
-  flexDirection,
-  gap,
   padding,
 } from 'classnames/tailwind'
 
@@ -15,9 +12,6 @@ interface BareCardProps {
 
 const bareCard = (smallPaddings?: boolean) =>
   classnames(
-    display('flex'),
-    flexDirection('flex-col'),
-    gap('gap-y-6'),
     backgroundColor('bg-primary-background'),
     borderRadius('rounded-lg'),
     padding(smallPaddings ? { 'py-2': true, 'px-4': true } : 'p-4')

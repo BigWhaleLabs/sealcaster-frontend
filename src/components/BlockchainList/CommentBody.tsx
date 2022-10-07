@@ -1,11 +1,12 @@
 import { BodyText, LinkText } from 'components/ui/Text'
+import { createRef } from 'preact'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
 import BareCard from 'components/BareCard'
 import Delimiter from 'components/ui/Delimiter'
 import PostTime from 'components/BlockchainList/PostTime'
-import Reply from 'icons/ReplyIcon'
+import ReplyIcon from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
 import SmallArrow from 'components/ui/SmallArrow'
 import classnames, {
@@ -14,8 +15,10 @@ import classnames, {
   flexDirection,
   gap,
   justifyContent,
+  space,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
+import useClickOutside from 'hooks/useClickOutside'
 
 const commentWithReplyButton = classnames(
   display('flex'),
@@ -62,33 +65,37 @@ export default function ({
   timestamp: number
 }) {
   const [inputOpen, setInputOpen] = useState(false)
+  const ref = createRef()
+  useClickOutside(ref, () => setInputOpen(false))
 
   return (
     // TODO: anchor should be real
     <BareCard data-anchor={`#reply=1`}>
-      <div className={commentWithReplyButton}>
-        <div className={commentWithData}>
-          <BodyText>{content}</BodyText>
-          <div className={infoBlock}>
-            <TruncatedAddress address={replier} />
-            <SmallArrow />
-            <TruncatedAddress address={repliedTo} />
-            <Delimiter color="bg-formal-accent" />
-            <PostTime timestamp={timestamp} />
+      <div className={space('space-y-2')} ref={ref}>
+        <div className={commentWithReplyButton}>
+          <div className={commentWithData}>
+            <BodyText>{content}</BodyText>
+            <div className={infoBlock}>
+              <TruncatedAddress address={replier} />
+              <SmallArrow />
+              <TruncatedAddress address={repliedTo} />
+              <Delimiter color="bg-formal-accent" />
+              <PostTime timestamp={timestamp} />
+            </div>
           </div>
+          <button
+            className={display('flex')}
+            onClick={() => setInputOpen(!inputOpen)}
+          >
+            <ReplyIcon />
+          </button>
         </div>
-        <button
-          className={display('flex')}
-          onClick={() => setInputOpen(!inputOpen)}
-        >
-          <Reply />
-        </button>
+        {inputOpen && (
+          <ReplyInput
+            placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 12)}`}
+          />
+        )}
       </div>
-      {inputOpen && (
-        <ReplyInput
-          placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 12)}`}
-        />
-      )}
     </BareCard>
   )
 }
