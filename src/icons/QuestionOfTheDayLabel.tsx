@@ -9,49 +9,53 @@ const pathClass = (withFill?: boolean) =>
 
 export default function ({ mobile }: { mobile?: boolean }) {
   const id = mobile ? 'mobile' : 'desktop'
+
+  const size = 123
+
   return (
     <svg
-      width="123"
-      height="123"
+      width={size}
+      height={size}
       viewBox="0 0 123 123"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g filter={`url(#filter0_d_799_23933_${id})`}>
         <circle
           cx="61.5"
-          cy="61.4998"
+          cy="61.5"
           r="61.5"
           fill={`url(#paint0_radial_799_23933_${id})`}
         />
         <circle
           cx="61.5"
-          cy="61.4998"
+          cy="61.5"
           r="61.5"
           fill={`url(#paint1_angular_799_23933_${id})`}
           style="mix-blend-mode:difference"
         />
         <circle
           cx="61.5"
-          cy="61.4998"
+          cy="61.5"
           r="61.5"
           fill={`url(#paint2_angular_799_23933_${id})`}
           style="mix-blend-mode:screen"
         />
       </g>
-      <g style="mix-blend-mode:saturation">
-        <clipPath id={`myClip_${id}`}>
-          <circle
-            cx="61.5"
-            cy="61.4998"
-            r="54.5"
-            className={fill('fill-secondary')}
-          />
-        </clipPath>
-      </g>
-      <foreignObject width="123" height="123" clip-path={`url(#myClip_${id})`}>
+      <foreignObject
+        width={size}
+        height={size}
+        clip-path={`url(#myClip_${id})`}
+      >
         <div
-          style="background: conic-gradient(from 180deg at 50% 50%, #000000 0deg, rgba(255, 255, 255, 0.72) 16.88deg, #000000 88.12deg, rgba(255, 255, 255, 0.72) 151.87deg, #000000 225deg, rgba(255, 255, 255, 0.72) 288.75deg, #000000 360deg), conic-gradient(from 180deg at 50% 50%, #000000 0deg, #FFFFFF 30deg, #000000 95.62deg, #FFFFFF 168.75deg, #000000 228.75deg, #FFFFFF 285deg, #000000 360deg), radial-gradient(79.79% 80.25% at 10.11% 28.24%, #F86EFB 7.61%, #7342FF 35.14%, #42E8FF 63.45%, #42FF6B 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-background-blend-mode: screen, difference, normal; width: 123px; height: 123px; border-radius: 100%;"
+          style={{
+            background:
+              'conic-gradient(from 180deg at 50% 50%, #000000 0deg, rgba(255, 255, 255, 0.72) 17deg, #000000 88deg, rgba(255, 255, 255, 0.72) 152deg, #000000 225deg, rgba(255, 255, 255, 0.72) 289deg, #000000 360deg), conic-gradient(from 180deg at 50% 50%, #000000 0deg, #FFFFFF 30deg, #000000 96deg, #FFFFFF 168.75deg, #000000 229deg, #FFFFFF 285deg, #000000 360deg), radial-gradient(79.79% 80.25% at 10.11% 28.24%, #F86EFB 7.61%, #7342FF 35.14%, #42E8FF 63.45%, #42FF6B 100%)',
+            backgroundBlendMode: 'screen, difference, normal',
+            width: size,
+            height: size,
+            borderRadius: '100%',
+            filter: 'brightness(1.15)',
+          }}
         />
       </foreignObject>
       <path
@@ -159,9 +163,9 @@ background-blend-mode: screen, difference, normal; width: 123px; height: 123px; 
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.4293 34.7369) rotate(29.6941) scale(112.977 113.755)"
         >
-          <stop offset="0.0760668" stop-color="#F86EFB" />
-          <stop offset="0.351413" stop-color="#7342FF" />
-          <stop offset="0.634538" stop-color="#42E8FF" />
+          <stop offset="0.08" stop-color="#F86EFB" />
+          <stop offset="0.35" stop-color="#7342FF" />
+          <stop offset="0.64" stop-color="#42E8FF" />
           <stop offset="1" stop-color="#42FF6B" />
         </radialGradient>
         <radialGradient
@@ -172,11 +176,11 @@ background-blend-mode: screen, difference, normal; width: 123px; height: 123px; 
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(61.5 61.4998) rotate(90) scale(61.5)"
         >
-          <stop offset="0.0833333" stop-color="white" />
-          <stop offset="0.265625" />
-          <stop offset="0.46875" stop-color="white" />
-          <stop offset="0.635417" />
-          <stop offset="0.791667" stop-color="white" />
+          <stop offset="0.08" stop-color="white" />
+          <stop offset="0.27" />
+          <stop offset="0.47" stop-color="white" />
+          <stop offset="0.64" />
+          <stop offset="0.8" stop-color="white" />
           <stop offset="1" />
         </radialGradient>
         <radialGradient
@@ -185,13 +189,13 @@ background-blend-mode: screen, difference, normal; width: 123px; height: 123px; 
           cy="0"
           r="1"
           gradientUnits="userSpaceOnUse"
-          gradientTransform="translate(61.5 61.4998) rotate(90) scale(61.5)"
+          gradientTransform="translate(62 62) rotate(90) scale(62)"
         >
-          <stop offset="0.046875" stop-color="white" stop-opacity="0.72" />
-          <stop offset="0.244792" />
-          <stop offset="0.421875" stop-color="white" stop-opacity="0.72" />
-          <stop offset="0.625" />
-          <stop offset="0.802083" stop-color="white" stop-opacity="0.72" />
+          <stop offset="0.047" stop-color="white" stop-opacity="0.72" />
+          <stop offset="0.25" />
+          <stop offset="0.42" stop-color="white" stop-opacity="0.72" />
+          <stop offset="0.63" />
+          <stop offset="0.8" stop-color="white" stop-opacity="0.72" />
           <stop offset="1" />
         </radialGradient>
       </defs>

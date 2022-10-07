@@ -19,7 +19,7 @@ const badgeWrapper = (mobile?: boolean) =>
     transforms('-rotate-15')
   )
 const imageFilter = (hueAngle: number) =>
-  `hue-rotate(${hueAngle}deg) drop-shadow(0px 0px 7rem var(--accent-light-transparent))`
+  `hue-rotate(${hueAngle}deg) drop-shadow(0px 0px 2.125rem var(--accent-light-transparent))`
 
 export default function ({ mobile }: { mobile?: boolean }) {
   const badge = useRef<HTMLDivElement>(null)
@@ -29,7 +29,7 @@ export default function ({ mobile }: { mobile?: boolean }) {
       <Tilt
         glareEnable
         glareMaxOpacity={0.4}
-        glareBorderRadius={'100%'}
+        glareBorderRadius="100%"
         tiltReverse
         perspective={500}
         onMove={({ tiltAngleX, tiltAngleY }) => {
