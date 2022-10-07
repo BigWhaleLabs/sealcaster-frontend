@@ -1,8 +1,12 @@
 import { AccentText } from 'components/ui/Text'
+import {
+  ErrorList,
+  handleError,
+  parseErrorText,
+} from '@big-whale-labs/frontend-utils'
 import { PostStatus } from 'models/PostStatus'
 import { Redirect } from 'wouter'
 import { displayFrom } from 'helpers/visibilityClassnames'
-import { handleError, parseErrorText } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
 import BlockchainList from 'components/BlockchainList'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
@@ -14,6 +18,7 @@ import PostProcessing from 'components/ProcessingCard'
 import PostStore from 'stores/PostStore'
 import TextArea from 'components/ui/TextArea'
 import TextareaInfo from 'components/Cast/TextareaInfo'
+import catchUnhandledRejection from 'hooks/catchUnhandledRejection'
 import classnames, {
   alignItems,
   display,
@@ -39,6 +44,12 @@ export default function () {
   const [error, setError] = useState<unknown>()
   const [text, setText] = useState('')
   useScrollToTop()
+
+  catchUnhandledRejection((error: unknown) => {
+    handleError(new Error(ErrorList.failedPost))
+    setIsLoading(false)
+    setError(error)
+  })
 
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
