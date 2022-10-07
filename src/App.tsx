@@ -42,8 +42,8 @@ export default function () {
 
   return (
     <Router>
+      <Navbar />
       <div className={pageContainer}>
-        <Navbar />
         <div className={bodyContainer(is404)}>
           <Switch>
             <Route path="/">
