@@ -29,7 +29,7 @@ export default function ({ mobile }: { mobile?: boolean }) {
       <Tilt
         glareEnable
         glareMaxOpacity={0.4}
-        glareBorderRadius={'100%'}
+        glareBorderRadius="100%"
         tiltReverse
         perspective={500}
         onMove={({ tiltAngleX, tiltAngleY }) => {
