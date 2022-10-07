@@ -61,6 +61,8 @@ export default function ({
             height: size,
             borderRadius: '100%',
             filter: 'brightness(1.15)',
+            willChange: 'rotate',
+            transitionDuration: '0.1s',
             rotate: `${rotation}deg`,
           }}
         />
