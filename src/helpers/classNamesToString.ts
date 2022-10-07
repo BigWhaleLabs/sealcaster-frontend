@@ -10,6 +10,7 @@ type AllowedExtraClassnames =
   | 'animated-border'
   | 'hover-button-scroll'
   | 'shadow-card'
+  | 'stroke-text-secondary'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]
