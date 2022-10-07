@@ -6,6 +6,7 @@ import EtherScanLink from 'components/BlockchainList/EtherScanLink'
 import PostTime from 'components/BlockchainList/PostTime'
 import Sender from 'components/BlockchainList/Sender'
 import Status from 'components/BlockchainList/Status'
+import ThreadPart from 'components/BlockchainList/ThreadPart'
 import classnames, {
   alignItems,
   display,
@@ -33,7 +34,7 @@ const postInfo = classnames(
   flexDirection('flex-col', 'xs:flex-row'),
   alignItems('items-baseline', 'xs:items-center'),
   flexWrap('flex-wrap'),
-  gap('gap-x-1')
+  gap('gap-x-2')
 )
 
 function PostDelimiter() {
@@ -50,18 +51,24 @@ export default function ({
   text,
   sender,
   tx,
+  limitThread,
 }: {
   blockchainId: number
   timestamp: number
   text: string
   sender: string
   tx: string
+  limitThread?: number
 }) {
   return (
+    // TODO: make it clickable only if user has an account with badge
     <div data-anchor={`#id=${blockchainId}`}>
       <Card>
         <div className={container}>
-          <PostText>{text}</PostText>
+          <a href={`/thread/${blockchainId}`}>
+            <PostText>{text}</PostText>
+          </a>
+
           <div className={postBottom}>
             <BodyText primary>
               <span className={postInfo}>
@@ -80,6 +87,16 @@ export default function ({
             </BodyText>
           </div>
         </div>
+
+        <Delimiter color="bg-half-grey" horizontal />
+
+        <ThreadPart
+          threadId={blockchainId}
+          threadCreator={sender}
+          replyingTo={sender}
+          limitThread={limitThread}
+          postId={blockchainId}
+        />
       </Card>
     </div>
   )

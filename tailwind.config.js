@@ -28,6 +28,8 @@ module.exports = {
         'primary-background': 'var(--primary-background)',
         'primary-dark-red': 'var(--primary-dark-red)',
         'secondary-dimmed': 'var(--secondary-dimmed)',
+        'secondary-dark': 'var(--secondary-dark)',
+        'secondary-semi-dark': 'var(--secondary-semi-dark)',
 
         'accent-light-transparent': 'var(--accent-light-transparent)',
         'accent-light-active-transparent':
@@ -38,6 +40,8 @@ module.exports = {
         'formal-accent-light-transparent':
           'var(--formal-accent-light-transparent)',
         'formal-accent-dimmed': 'var(--formal-accent-dimmed)',
+        'primary-semi-dimmed-transparent':
+          'var(--primary-semi-dimmed-transparent)',
 
         'accent-light-transparent': 'var(--accent-light-transparent)',
         'accent-semi-transparent': 'var(--accent-semi-transparent)',

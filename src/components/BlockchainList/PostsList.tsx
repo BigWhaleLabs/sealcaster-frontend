@@ -23,7 +23,7 @@ export function PostListSuspended() {
   const { posts, selectedToken, postsAmount, limit, idToPostTx } =
     useSnapshot(PostStore)
   const hashId = useHashParams()
-  const [scrolledLimit, setScrolledLimit] = useState(limit)
+  const [, setScrolledLimit] = useState(limit)
   const amountOfLoadedPosts = posts.length
 
   const postsLoaded = selectedToken
@@ -40,8 +40,6 @@ export function PostListSuspended() {
       next={async () => {
         const newPosts = await getMorePosts({
           contract: getPostStorage(),
-          limitAmount: scrolledLimit,
-          loadedPostAmount: amountOfLoadedPosts,
         })
         PostStore.posts = Promise.resolve([...posts, ...newPosts])
         setScrolledLimit(PostStore.limit)
@@ -62,6 +60,7 @@ export function PostListSuspended() {
             text={post.post}
             sender={post.sender}
             tx={idToPostTx[Number(post.id)]}
+            limitThread={2}
           />
           {index === 2 && <CustomizeCard />}
         </>

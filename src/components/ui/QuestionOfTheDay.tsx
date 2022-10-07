@@ -1,18 +1,11 @@
-import {
-  AccentText,
-  HeaderText,
-  QuestionOfDayText,
-  StatusText,
-} from 'components/ui/Text'
+import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
+import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { useState } from 'preact/hooks'
-import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
-import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
+import Replies from 'components/BlockchainList/Replies'
 import Sender from 'components/BlockchainList/Sender'
 import StickLabel from 'components/QuestionOfTheDay/StickLabel'
-import Thread from 'icons/Thread'
 import classnames, {
   alignItems,
   display,
@@ -21,8 +14,8 @@ import classnames, {
   gap,
   margin,
   position,
-  textColor,
 } from 'classnames/tailwind'
+import useThread from 'hooks/useThread'
 
 const postInfo = classnames(
   display('flex'),
@@ -32,15 +25,12 @@ const postInfo = classnames(
   gap('gap-x-1')
 )
 
-const threadWrapper = classnames(
-  display('flex'),
-  flexDirection('flex-row'),
-  gap('gap-x-1'),
-  alignItems('items-center')
-)
+function QuestionOfDaySuspended() {
+  const data = useThread()
 
-export default function () {
-  const [opened, setOpened] = useState(false)
+  if (!data) return null
+
+  const { post, sender, thread } = data
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -54,42 +44,26 @@ export default function () {
           </div>
         </div>
         <QuestionOfDayText>Question of the day:</QuestionOfDayText>
-        <HeaderText size="medium">
-          Hey VCs, what should startup do to capture your attention?
-        </HeaderText>
+        <HeaderText size="medium">{post}</HeaderText>
         <span className={postInfo}>
-          {/* // TODO: add real logic here with urls */}
           <StatusText>Posted by: </StatusText>
-          <Sender sender="Sealcaster" />
-          <div className={displayFrom('xs')}>
-            <Delimiter color="bg-formal-accent" />
-          </div>
-          <Sender sender="Farcaster" />
+          <Sender sender={sender} />
         </span>
         <Delimiter horizontal color="bg-divider" />
-        <Button
-          type="tertiary"
-          onClick={() => {
-            setOpened(!opened)
-          }}
-        >
-          <AccentText small color="text-formal-accent">
-            <div className={threadWrapper}>
-              <Thread />
-              <span
-                className={textColor(
-                  opened ? 'text-accent' : 'hover:text-accent'
-                )}
-              >
-                Answer anonymously
-              </span>
-              {/* // TODO: add real logic with threads number here */}
-              <AccentText color="text-primary-semi-dimmed">(0)</AccentText>
-            </div>
-          </AccentText>
-        </Button>
-        {opened && <CastBlock placeHolder="Answer today’s question..." />}
+        <Replies
+          count={Array.from(thread).length}
+          placeholder="Answer today’s question..."
+          withHowItWorks
+        />
       </Card>
     </div>
+  )
+}
+
+export default function () {
+  return (
+    <Suspense fallback="">
+      <QuestionOfDaySuspended />
+    </Suspense>
   )
 }

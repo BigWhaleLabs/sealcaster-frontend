@@ -11,14 +11,22 @@ import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
 import parsePostLogData from 'helpers/parsePostLogData'
 import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
+import safeGetThreadFromContract from 'helpers/safeGetThreadFromContract'
+import safeTransformPostOutput from 'helpers/safeTransformPostOutput'
 import walletStore from 'stores/WalletStore'
 
 interface PostStoreType {
   limit: number
+  questionDay: Promise<PostStructOutput>
   posts: Promise<PostStructOutput[]>
+  threads: { [threadId: number]: Promise<PostStructOutput[]> }
   postsAmount: Promise<number>
   selectedToken?: string
-  createPost: (text: string) => Promise<Result[]>
+  createPost: (
+    text: string,
+    threadId: number,
+    replyToId: number
+  ) => Promise<Result[]>
   idToPostTx: Promise<string[]>
 }
 
@@ -28,14 +36,15 @@ const limit = 100
 
 const PostStore = proxy<PostStoreType>({
   limit,
+  questionDay: farcasterContract.posts(0).then(safeTransformPostOutput),
   postsAmount: safeGetPostsAmountFromContract(farcasterContract),
+  threads: {},
   posts: getMorePosts({
     contract: farcasterContract,
-    limitAmount: limit,
   }),
   selectedToken: undefined,
   idToPostTx: getIdsToPostsTx(farcasterContract),
-  createPost: async (text: string) => {
+  createPost: async (text: string, threadId: number, replyToId: number) => {
     let signer = await BurnerWalletStore.getSigner()
 
     if (!signer && (await walletStore.hasFarcasterBadge))
@@ -48,7 +57,12 @@ const PostStore = proxy<PostStoreType>({
       signer
     )
 
-    const transaction = await contract.savePost(text, 'farcaster')
+    const transaction = await contract.savePost(
+      text,
+      'farcaster',
+      threadId,
+      replyToId
+    )
     const result = await transaction.wait()
 
     return Promise.all(
@@ -59,6 +73,14 @@ const PostStore = proxy<PostStoreType>({
     )
   },
 })
+
+export function fetchThread(threadId: number) {
+  if (typeof PostStore.threads[threadId] !== 'undefined') return
+  PostStore.threads[threadId] = safeGetThreadFromContract(
+    threadId,
+    farcasterContract
+  )
+}
 
 farcasterContract.on(
   farcasterContract.filters.PostSaved(),

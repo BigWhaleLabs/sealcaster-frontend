@@ -17,17 +17,20 @@ const arrowAnimation = (
     rotate({ 'rotate-180': !openDisabled && open }),
     transitionDuration('duration-300')
   )
-const svgInnerWrapper = classnames(
-  width('w-full'),
-  height('h-auto'),
-  dropShadow('drop-shadow-secondary')
-)
+const svgInnerWrapper = (reversed?: boolean) =>
+  classnames(
+    width('w-full'),
+    height('h-auto'),
+    dropShadow('drop-shadow-secondary'),
+    rotate({ 'rotate-180': reversed })
+  )
 
 interface ArrowProps {
   openDisabled?: boolean
   pulseDisabled?: boolean
   horizontal?: boolean
   open?: boolean
+  reversed?: boolean
 }
 
 export default function ({
@@ -35,14 +38,15 @@ export default function ({
   horizontal,
   openDisabled,
   open,
+  reversed,
 }: ArrowProps) {
   // same id of <linearGradient> will break multiple usage of this icon
   const strokeId = Math.random().toString()
 
   return (
-    <div className={svgInnerWrapper}>
+    <div className={svgInnerWrapper(reversed)}>
       <svg
-        viewBox={horizontal ? '0 0 14 14' : '0 0 14 7'}
+        viewBox={horizontal ? '0 0 7 14' : '0 0 14 7'}
         xmlns="http://www.w3.org/2000/svg"
         className={arrowAnimation(pulseDisabled, openDisabled, open)}
       >
@@ -55,10 +59,10 @@ export default function ({
         <defs>
           <linearGradient
             id={strokeId}
-            x1="3.89285"
-            y1="1.35547"
-            x2="3.89285"
-            y2="5.75"
+            x1="4"
+            y1="1.4"
+            x2="4"
+            y2="5.8"
             gradientUnits="userSpaceOnUse"
           >
             <stop stop-color="#FF7BED" />

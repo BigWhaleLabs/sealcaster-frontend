@@ -9,6 +9,7 @@ import NotFound from 'pages/NotFound'
 import Privacy from 'pages/Privacy'
 import ScrollToTopButton from 'components/ui/ScrollToTopButton'
 import Terms from 'pages/Terms'
+import Thread from 'components/Thread'
 import classnames, {
   display,
   flexDirection,
@@ -36,7 +37,8 @@ const bodyContainer = (marginTop?: boolean) =>
 
 export default function () {
   const [location] = useLocation()
-  const hasBlockchainList = location === '/' || location === '/cast'
+  const displayScrollToTop =
+    location === '/' || location === '/cast' || location === '/thread'
   const is404 = location === '/404'
 
   return (
@@ -57,6 +59,9 @@ export default function () {
             <Route path="/wallet">
               <BurnerWallet />
             </Route>
+            <Route path="/thread/:blockchainId">
+              <Thread />
+            </Route>
             <Route path="/404">
               <NotFound />
             </Route>
@@ -66,7 +71,7 @@ export default function () {
           </Switch>
         </div>
         <Footer />
-        {hasBlockchainList && <ScrollToTopButton />}
+        {displayScrollToTop && <ScrollToTopButton />}
       </div>
       <ToastContainer position="bottom-right" theme="dark" />
     </Router>

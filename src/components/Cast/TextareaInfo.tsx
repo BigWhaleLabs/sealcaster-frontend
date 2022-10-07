@@ -1,4 +1,5 @@
 import { AccentText } from 'components/ui/Text'
+import { JSX } from 'preact/jsx-runtime'
 import { useState } from 'preact/hooks'
 import Arrow from 'icons/Arrow'
 import Button from 'components/ui/Button'
@@ -12,7 +13,6 @@ import classnames, {
   gap,
   justifyContent,
   width,
-  zIndex,
 } from 'classnames/tailwind'
 
 const hintWrapper = classnames(
@@ -35,26 +35,40 @@ export default function ({
   loading,
   disabled,
   onButtonClick,
+  leftBlock,
+  buttonText,
 }: {
   error?: string
   loading?: boolean
   disabled?: boolean
   onButtonClick?: () => void
+  leftBlock?: JSX.Element | string
+  buttonText?: string
 }) {
   const [expanded, setExpanded] = useState(false)
 
   return (
     <>
       <div className={textAreaInfoWrapper}>
-        <AccentText extraSmall color="text-accent">
-          <span className={hintWrapper} onClick={() => setExpanded(!expanded)}>
-            How is it done anonymously?{' '}
-            <div className={width('w-4')}>
-              <Arrow pulseDisabled open={expanded} />
-            </div>
-          </span>
-        </AccentText>
-        <div className={zIndex('z-10')}>
+        {leftBlock ? (
+          leftBlock
+        ) : (
+          <>
+            <AccentText extraSmall color="text-accent">
+              <span
+                className={hintWrapper}
+                onClick={() => setExpanded(!expanded)}
+              >
+                How is it done anonymously?{' '}
+                <div className={width('w-4')}>
+                  <Arrow pulseDisabled open={expanded} />
+                </div>
+              </span>
+            </AccentText>
+          </>
+        )}
+
+        <>
           <Button
             loading={loading}
             center
@@ -63,10 +77,10 @@ export default function ({
             disabled={disabled}
             onClick={onButtonClick}
           >
-            Cast anonymously
+            {buttonText ? buttonText : 'Cast anonymously'}
           </Button>
-        </div>
-        {!!error && <ErrorMessage small centered text={error} />}
+          {!!error && <ErrorMessage small centered text={error} />}
+        </>
       </div>
       {expanded && <HowItWorks />}
     </>
