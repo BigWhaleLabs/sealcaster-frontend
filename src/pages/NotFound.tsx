@@ -67,28 +67,26 @@ function BackgroundBlur({ left }: { left?: boolean }) {
   if (left)
     return (
       <Background
-        inView
         width={625}
         height={416}
-        background="var(--red-background)"
         bottom={22}
         left={-4}
         rotate={-15}
         blur={150}
+        background="var(--red-background)"
       />
     )
 
   return (
     <div className={displayFromMd}>
       <Background
-        inView
         width={971}
         height={646}
-        background="var(--red-background)"
         bottom={-400}
         left={-110}
         rotate={-30}
         blur={150}
+        background="var(--red-background)"
       />
     </div>
   )

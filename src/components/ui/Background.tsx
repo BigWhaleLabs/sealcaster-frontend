@@ -1,3 +1,13 @@
+interface BackgroundProps {
+  width: number
+  height: number
+  background: string
+  bottom: number
+  left: number
+  rotate?: number
+  blur?: number
+}
+
 export default function ({
   width,
   height,
@@ -5,20 +15,8 @@ export default function ({
   bottom,
   left,
   rotate = 0,
-  reversedAppear,
-  inView,
   blur = 0,
-}: {
-  width: number
-  height: number
-  background: string
-  bottom: number
-  left: number
-  rotate?: number
-  reversedAppear?: boolean
-  inView?: boolean
-  blur?: number
-}) {
+}: BackgroundProps) {
   return (
     <div
       style={{
@@ -31,9 +29,6 @@ export default function ({
         rotate: `${rotate}deg`,
         borderRadius: '100%',
         filter: `blur(${blur}px)`,
-        opacity: reversedAppear ? (inView ? 0 : 0.6) : inView ? 0.6 : 0,
-        transitionDuration: '4s',
-        transitionProperty: 'opacity',
         zIndex: -1,
       }}
     />
