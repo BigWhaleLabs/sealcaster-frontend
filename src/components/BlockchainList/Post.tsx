@@ -91,6 +91,8 @@ export default function ({
         <Delimiter color="bg-half-grey" horizontal />
 
         <ThreadPart
+          threadId={blockchainId}
+          threadCreator={sender}
           replyingTo={sender}
           limitThread={limitThread}
           postId={blockchainId}

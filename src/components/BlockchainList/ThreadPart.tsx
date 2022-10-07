@@ -1,7 +1,10 @@
 import { AccentText } from 'components/ui/Text'
+import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
+import { useSnapshot } from 'valtio'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
+import PostStore, { fetchThread } from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
 
@@ -11,74 +14,101 @@ const wrapper = classnames(
   gap('gap-y-3')
 )
 
+type CommentNode = {
+  id: number
+  timestamp: number
+  content: string
+  replier: string
+  repliedTo: string
+  replies: CommentNode[]
+}
+
+function makeCommentNode(
+  {
+    id,
+    timestamp,
+    repliedTo,
+    replier,
+    content,
+  }: {
+    id: number
+    timestamp: number
+    content: string
+    replier: string
+    repliedTo: string
+  },
+  posts: PostStructOutput[]
+): CommentNode {
+  return {
+    id,
+    timestamp,
+    replier,
+    content,
+    repliedTo,
+    replies: posts
+      .filter((post) => post.replyToId && +post.replyToId === id)
+      .map(({ id, timestamp, sender: replier, post: content }) =>
+        makeCommentNode(
+          {
+            id: +id,
+            replier,
+            content,
+            repliedTo,
+            timestamp: +timestamp,
+          },
+          posts
+        )
+      ),
+  }
+}
+
+function buildCommentsTree(
+  threadId: number,
+  threadCreator: string,
+  posts: PostStructOutput[]
+) {
+  return posts
+    .filter((post) => post.replyToId && +post.replyToId === threadId)
+    .map(({ id, timestamp, sender: replier, post: content }) =>
+      makeCommentNode(
+        {
+          id: +id,
+          replier,
+          content,
+          timestamp: +timestamp,
+          repliedTo: threadCreator,
+        },
+        posts
+      )
+    )
+}
+
 export default function ({
+  threadCreator,
+  threadId,
   replyingTo,
   postId,
   limitThread,
 }: {
+  threadCreator: string
+  threadId: number
   replyingTo: string
   postId: number
   limitThread?: number
 }) {
-  // TODO: replace with real data
-  const comments = [
-    {
-      timestamp: 1664908789068,
-      replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-      repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-      content:
-        'Decentralized inputs electronic cash peer-to-peer satoshis segwit, hash block reward digital signature? Bitcoin Improvement Proposal sats Satoshi Nakamoto.',
-      replies: [
-        {
-          timestamp: 1124908789068,
-          replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-          repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-          content: 'Satoshi Nakamoto',
-        },
-      ],
-    },
-    {
-      timestamp: 1124908789068,
-      replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-      repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-      content: 'Decentralized inputs',
-    },
-    {
-      timestamp: 1124908789068,
-      replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-      repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-      content: 'Satoshi Nakamoto',
-      replies: [
-        {
-          timestamp: 1124908789068,
-          replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-          repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-          content: 'Vitalik Buterin',
-          replies: [
-            {
-              timestamp: 1124908789068,
-              replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-              repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-              content: 'Mota mota',
-            },
-            {
-              timestamp: 1124908789068,
-              replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-              repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-              content: 'Motorolla',
-            },
-          ],
-        },
-        {
-          timestamp: 1124908789068,
-          replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-          repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-          content:
-            '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',
-        },
-      ],
-    },
-  ]
+  const { threads } = useSnapshot(PostStore)
+  const thread = threads[threadId]
+
+  if (!thread) {
+    fetchThread(threadId)
+    return null
+  }
+
+  const comments = buildCommentsTree(
+    threadId,
+    threadCreator,
+    Array.from(thread)
+  )
 
   const commentsLength = comments.length
 

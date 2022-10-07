@@ -10,15 +10,22 @@ import usePost from 'hooks/usePost'
 
 export default function ({
   placeHolder = 'Write something here...',
+  threadId,
+  replyToId,
   buttonText,
   leftBlock,
 }: {
   placeHolder?: string
+  threadId: number
+  replyToId: number
   leftBlock?: JSX.Element | string
   buttonText?: string
 }) {
   const { status } = useSnapshot(BurnerWalletStore)
-  const { createPost, isLoading, error, text, setText, waitBurner } = usePost()
+  const { createPost, isLoading, error, text, setText, waitBurner } = usePost(
+    threadId,
+    replyToId
+  )
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
 
