@@ -15025,6 +15025,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-parallax-tilt@npm:^1.7.68":
+  version: 1.7.68
+  resolution: "react-parallax-tilt@npm:1.7.68"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 55b6b4009efdd34b4041125eb8dbd8ade330900bbe3eb31dbf42c771f4588e96b74f270e7f629e1b881d3319fd6ff546373d182701f14a6c6540b156843ec495
+  languageName: node
+  linkType: hard
+
 "react-refresh@npm:^0.11.0":
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
@@ -15943,6 +15953,7 @@ __metadata:
     preact: ^10.11.0
     prettier: ^2.7.1
     react-infinite-scroll-component: ^6.1.0
+    react-parallax-tilt: ^1.7.68
     react-scripts: ^5.0.1
     react-textarea-autosize: ^8.3.4
     react-toastify: ^9.0.8

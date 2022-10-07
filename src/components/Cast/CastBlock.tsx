@@ -1,3 +1,4 @@
+import { JSX } from 'preact/jsx-runtime'
 import { parseErrorText } from '@big-whale-labs/frontend-utils'
 import { space } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
@@ -11,10 +12,14 @@ export default function ({
   placeHolder = 'Write something here...',
   threadId,
   replyToId,
+  buttonText,
+  leftBlock,
 }: {
   placeHolder?: string
   threadId: number
   replyToId: number
+  leftBlock?: JSX.Element | string
+  buttonText?: string
 }) {
   const { status } = useSnapshot(BurnerWalletStore)
   const { createPost, isLoading, error, text, setText, waitBurner } = usePost(
@@ -49,6 +54,8 @@ export default function ({
           onButtonClick={createPost}
           disabled={!text}
           error={errorMessage}
+          leftBlock={leftBlock}
+          buttonText={buttonText}
         />
       )}
     </div>

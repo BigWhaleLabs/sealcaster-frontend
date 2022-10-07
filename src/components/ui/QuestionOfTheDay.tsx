@@ -90,9 +90,11 @@ function QuestionOfDaySuspended() {
                 Answer anonymously
               </span>
             </AccentText>
+
             <Replies
               count={Array.from(thread).length}
-              replyingTo={questionDay.sender}
+              placeholder="Answer today’s question..."
+              withHowItWorks
             />
           </div>
         </Button>

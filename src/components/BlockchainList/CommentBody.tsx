@@ -1,34 +1,22 @@
-import { BodyText, LinkText, StatusText } from 'components/ui/Text'
+import { BodyText, LinkText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
-import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
+import BareCard from 'components/BareCard'
 import Delimiter from 'components/ui/Delimiter'
+import PostTime from 'components/BlockchainList/PostTime'
 import Reply from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
 import SmallArrow from 'components/ui/SmallArrow'
-import TimeStore from 'stores/TimeStore'
 import classnames, {
   alignItems,
-  backgroundColor,
-  borderRadius,
   display,
   flexDirection,
   gap,
   justifyContent,
-  padding,
 } from 'classnames/tailwind'
-import formatDate from 'helpers/formatDate'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 
-const commentWithInput = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  gap('gap-y-6'),
-  backgroundColor('bg-primary-background'),
-  borderRadius('rounded-lg'),
-  padding('p-4')
-)
 const commentWithReplyButton = classnames(
   display('flex'),
   flexDirection('flex-col', 'md:flex-row'),
@@ -73,13 +61,11 @@ export default function ({
   repliedTo: string
   timestamp: number
 }) {
-  const { current } = useSnapshot(TimeStore)
   const [inputOpen, setInputOpen] = useState(false)
-  const formattedTime = formatDate(timestamp, current)
 
   return (
     // TODO: anchor should be real
-    <div className={commentWithInput} data-anchor={`#reply=1`}>
+    <BareCard data-anchor={`#reply=1`}>
       <div className={commentWithReplyButton}>
         <div className={commentWithData}>
           <BodyText>{content}</BodyText>
@@ -88,7 +74,7 @@ export default function ({
             <SmallArrow />
             <TruncatedAddress address={repliedTo} />
             <Delimiter color="bg-formal-accent" />
-            <StatusText primary>{formattedTime}</StatusText>
+            <PostTime timestamp={timestamp} />
           </div>
         </div>
         <button
@@ -98,7 +84,11 @@ export default function ({
           <Reply />
         </button>
       </div>
-      <ReplyInput replyingTo={repliedTo} inputOpen={inputOpen} />
-    </div>
+      {inputOpen && (
+        <ReplyInput
+          placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 12)}`}
+        />
+      )}
+    </BareCard>
   )
 }

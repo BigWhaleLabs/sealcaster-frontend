@@ -1,9 +1,12 @@
+import { AccentText } from 'components/ui/Text'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
+import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import PostStore, { fetchThread } from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
+import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
 
 const wrapper = classnames(
   display('flex'),
@@ -84,11 +87,13 @@ export default function ({
   threadCreator,
   threadId,
   replyingTo,
+  postId,
   limitThread,
 }: {
   threadCreator: string
   threadId: number
   replyingTo: string
+  postId: number
   limitThread?: number
 }) {
   const { threads } = useSnapshot(PostStore)
@@ -105,9 +110,14 @@ export default function ({
     Array.from(thread)
   )
 
+  const commentsLength = comments.length
+
   return (
     <div className={wrapper}>
-      <Replies count={comments.length} replyingTo={replyingTo} />
+      <Replies
+        count={comments.length}
+        placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
+      />
       {comments.map(
         ({ timestamp, content, replier, repliedTo, replies }, index) =>
           limitThread ? (
@@ -128,6 +138,16 @@ export default function ({
               replies={replies}
             />
           )
+      )}
+      {limitThread && (
+        <a href={`/thread/${postId}`}>
+          <BareCard smallPaddings>
+            <AccentText color="text-accent" small>
+              + {commentsLength - limitThread}{' '}
+              {commentsLength - limitThread > 1 ? 'replies' : 'reply'}
+            </AccentText>
+          </BareCard>
+        </a>
       )}
     </div>
   )

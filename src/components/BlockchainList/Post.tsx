@@ -62,40 +62,42 @@ export default function ({
 }) {
   return (
     // TODO: make it clickable only if user has an account with badge
-    <a href={`/thread/${blockchainId}`}>
-      <div data-anchor={`#id=${blockchainId}`}>
-        <Card>
-          <div className={container}>
+    <div data-anchor={`#id=${blockchainId}`}>
+      <Card>
+        <div className={container}>
+          <a href={`/thread/${blockchainId}`}>
             <PostText>{text}</PostText>
-            <div className={postBottom}>
-              <BodyText primary>
-                <span className={postInfo}>
-                  <StatusText>Posted by: </StatusText>
-                  <Sender sender={sender} />
-                  <PostDelimiter />
-                  <EtherScanLink tx={tx} />
-                  <PostDelimiter />
-                  <Status blockchainId={blockchainId} />
-                </span>
-              </BodyText>
-              <BodyText primary noWrap>
-                <span className={postInfo}>
-                  <PostTime timestamp={timestamp} />
-                </span>
-              </BodyText>
-            </div>
+          </a>
+
+          <div className={postBottom}>
+            <BodyText primary>
+              <span className={postInfo}>
+                <StatusText>Posted by: </StatusText>
+                <Sender sender={sender} />
+                <PostDelimiter />
+                <EtherScanLink tx={tx} />
+                <PostDelimiter />
+                <Status blockchainId={blockchainId} />
+              </span>
+            </BodyText>
+            <BodyText primary noWrap>
+              <span className={postInfo}>
+                <PostTime timestamp={timestamp} />
+              </span>
+            </BodyText>
           </div>
+        </div>
 
-          <Delimiter color="bg-half-grey" horizontal />
+        <Delimiter color="bg-half-grey" horizontal />
 
-          <ThreadPart
-            threadCreator={sender}
-            threadId={blockchainId}
-            replyingTo={sender}
-            limitThread={limitThread}
-          />
-        </Card>
-      </div>
-    </a>
+        <ThreadPart
+          threadId={blockchainId}
+          threadCreator={sender}
+          replyingTo={sender}
+          limitThread={limitThread}
+          postId={blockchainId}
+        />
+      </Card>
+    </div>
   )
 }

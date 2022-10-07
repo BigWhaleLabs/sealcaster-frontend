@@ -26,6 +26,7 @@ export default function (threadId: number, replyToId: number) {
     if (account && (await hasFarcasterBadge(account))) currentAccount = account
 
     setError(null)
+
     try {
       if (!currentAccount) return setWaitBurner(true)
       if (PostIdsStatuses.lastUserPost)
@@ -35,6 +36,7 @@ export default function (threadId: number, replyToId: number) {
       const result = await PostStore.createPost(text, threadId, replyToId)
       const numberOfPosts = await PostStore.postsAmount
       PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
+
       for (const { id } of result) {
         const blockchainId = id.toNumber()
         const status = PostStatus.pending
