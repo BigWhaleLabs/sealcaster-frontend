@@ -6,13 +6,11 @@ import {
 } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
 import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
-import PostStore, { fetchThread } from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
 import ReplyIcon from 'icons/ReplyIcon'
 import Sender from 'components/BlockchainList/Sender'
@@ -27,6 +25,7 @@ import classnames, {
   position,
   textColor,
 } from 'classnames/tailwind'
+import useThread from 'hooks/useThread'
 
 const postInfo = classnames(
   display('flex'),
@@ -45,15 +44,11 @@ const answerButtonWrapper = classnames(
 
 function QuestionOfDaySuspended() {
   const [inputOpen, setInputOpen] = useState(false)
-  const { questionDay } = useSnapshot(PostStore)
+  const data = useThread()
 
-  const { threads } = useSnapshot(PostStore)
-  const thread = threads[questionDay.id.toNumber()]
+  if (!data) return null
 
-  if (!thread) {
-    fetchThread(questionDay.id.toNumber())
-    return null
-  }
+  const { post, sender, thread, threadId } = data
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -67,10 +62,10 @@ function QuestionOfDaySuspended() {
           </div>
         </div>
         <QuestionOfDayText>Question of the day:</QuestionOfDayText>
-        <HeaderText size="medium">{questionDay.post}</HeaderText>
+        <HeaderText size="medium">{post}</HeaderText>
         <span className={postInfo}>
           <StatusText>Posted by: </StatusText>
-          <Sender sender={questionDay.sender} />
+          <Sender sender={sender} />
         </span>
         <Delimiter horizontal color="bg-divider" />
         <Button
@@ -100,8 +95,8 @@ function QuestionOfDaySuspended() {
         </Button>
         {inputOpen && (
           <CastBlock
-            threadId={+questionDay.id}
-            replyToId={+questionDay.id}
+            threadId={threadId}
+            replyToId={threadId}
             placeHolder="Answer today’s question..."
           />
         )}
