@@ -10,9 +10,9 @@ import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
 import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
+import ReplyIcon from 'icons/ReplyIcon'
 import Sender from 'components/BlockchainList/Sender'
 import StickLabel from 'components/QuestionOfTheDay/StickLabel'
-import Thread from 'icons/Thread'
 import classnames, {
   alignItems,
   display,
@@ -32,7 +32,7 @@ const postInfo = classnames(
   gap('gap-x-1')
 )
 
-const threadWrapper = classnames(
+const answerButtonWrapper = classnames(
   display('flex'),
   flexDirection('flex-row'),
   gap('gap-x-1'),
@@ -40,7 +40,7 @@ const threadWrapper = classnames(
 )
 
 export default function () {
-  const [opened, setOpened] = useState(false)
+  const [inputOpen, setInputOpen] = useState(false)
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -70,25 +70,27 @@ export default function () {
         <Button
           type="tertiary"
           onClick={() => {
-            setOpened(!opened)
+            setInputOpen(!inputOpen)
           }}
         >
-          <AccentText small color="text-formal-accent">
-            <div className={threadWrapper}>
-              <Thread />
+          <div className={answerButtonWrapper}>
+            <ReplyIcon />
+            <AccentText small color="text-formal-accent">
               <span
                 className={textColor(
-                  opened ? 'text-accent' : 'hover:text-accent'
+                  inputOpen ? 'text-accent' : 'hover:text-accent'
                 )}
               >
                 Answer anonymously
               </span>
-              {/* // TODO: add real logic with threads number here */}
-              <AccentText color="text-primary-semi-dimmed">(0)</AccentText>
-            </div>
-          </AccentText>
+            </AccentText>
+            {/* // TODO: add real logic with threads number here */}
+            <AccentText color="text-primary-semi-dimmed" extraSmall>
+              (0)
+            </AccentText>
+          </div>
         </Button>
-        {opened && <CastBlock placeHolder="Answer today’s question..." />}
+        {inputOpen && <CastBlock placeHolder="Answer today’s question..." />}
       </Card>
     </div>
   )
