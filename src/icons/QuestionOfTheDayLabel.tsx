@@ -7,7 +7,13 @@ const pathClass = (withFill?: boolean) =>
     strokeWidth('stroke-1.5')
   )
 
-export default function ({ mobile }: { mobile?: boolean }) {
+export default function ({
+  mobile,
+  rotation,
+}: {
+  mobile?: boolean
+  rotation?: number
+}) {
   const id = mobile ? 'mobile' : 'desktop'
 
   const size = 123
@@ -55,6 +61,7 @@ export default function ({ mobile }: { mobile?: boolean }) {
             height: size,
             borderRadius: '100%',
             filter: 'brightness(1.15)',
+            rotate: `${rotation}deg`,
           }}
         />
       </foreignObject>

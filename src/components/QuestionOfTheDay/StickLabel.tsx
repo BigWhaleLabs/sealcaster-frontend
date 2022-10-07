@@ -1,4 +1,4 @@
-import { useRef } from 'preact/hooks'
+import { useRef, useState } from 'preact/hooks'
 import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import Tilt from 'react-parallax-tilt'
 import classnames, {
@@ -18,11 +18,10 @@ const badgeWrapper = (mobile?: boolean) =>
     ),
     transforms('-rotate-15')
   )
-const imageFilter = (hueAngle: number) =>
-  `hue-rotate(${hueAngle}deg) drop-shadow(0px 0px 2.125rem var(--accent-light-transparent))`
 
 export default function ({ mobile }: { mobile?: boolean }) {
   const badge = useRef<HTMLDivElement>(null)
+  const [rotation, setRotation] = useState(0)
 
   return (
     <div className={badgeWrapper(mobile)}>
@@ -34,12 +33,12 @@ export default function ({ mobile }: { mobile?: boolean }) {
         perspective={500}
         onMove={({ tiltAngleX, tiltAngleY }) => {
           if (!badge.current) return
-          badge.current.style.filter = imageFilter(tiltAngleX + tiltAngleY)
+          setRotation(tiltAngleX + tiltAngleY)
         }}
         className={dropShadow('drop-shadow-accent-light-transparent')}
       >
         <div ref={badge}>
-          <QuestionOfTheDayLabel mobile={mobile} />
+          <QuestionOfTheDayLabel mobile={mobile} rotation={rotation} />
         </div>
       </Tilt>
     </div>
