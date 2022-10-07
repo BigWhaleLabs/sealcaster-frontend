@@ -11,13 +11,10 @@ import SmallArrow from 'components/ui/SmallArrow'
 import TimeStore from 'stores/TimeStore'
 import classnames, {
   alignItems,
-  backgroundColor,
-  borderRadius,
   display,
   flexDirection,
   gap,
   justifyContent,
-  padding,
 } from 'classnames/tailwind'
 import formatDate from 'helpers/formatDate'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
