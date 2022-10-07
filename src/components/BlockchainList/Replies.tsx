@@ -22,10 +22,12 @@ export default function ({
   count,
   placeholder,
   withHowItWorks,
+  replyText,
 }: {
   count: number
   placeholder: string
   withHowItWorks?: boolean
+  replyText?: string
 }) {
   const [inputOpen, setInputOpen] = useState(false)
 
@@ -36,7 +38,7 @@ export default function ({
           <ReplyIcon />
           <AccentText small color="text-formal-accent">
             <span className={textColor({ 'text-accent': inputOpen })}>
-              Reply
+              {replyText ? replyText : 'Reply'}
             </span>
           </AccentText>
           <AccentText primary color="text-primary-semi-dimmed" extraSmall>

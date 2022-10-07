@@ -71,7 +71,7 @@ export default function ({
   return (
     // TODO: anchor should be real
     <BareCard data-anchor={`#reply=1`}>
-      <div className={space('space-y-2')} ref={ref}>
+      <div className={space('space-y-4')} ref={ref}>
         <div className={commentWithReplyButton}>
           <div className={commentWithData}>
             <BodyText>{content}</BodyText>
@@ -84,7 +84,7 @@ export default function ({
             </div>
           </div>
           <button
-            className={display('flex')}
+            className={display({ hidden: inputOpen }, 'md:flex')}
             onClick={() => setInputOpen(!inputOpen)}
           >
             <ReplyIcon />

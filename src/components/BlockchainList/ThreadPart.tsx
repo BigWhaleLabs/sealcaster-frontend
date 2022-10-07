@@ -139,7 +139,7 @@ export default function ({
             />
           )
       )}
-      {limitThread && (
+      {limitThread && commentsLength > 3 && (
         <a href={`/thread/${postId}`}>
           <BareCard smallPaddings>
             <AccentText color="text-accent" small>

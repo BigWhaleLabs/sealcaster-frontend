@@ -1,18 +1,9 @@
-import {
-  AccentText,
-  HeaderText,
-  QuestionOfDayText,
-  StatusText,
-} from 'components/ui/Text'
+import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { useState } from 'preact/hooks'
-import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
-import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
 import Replies from 'components/BlockchainList/Replies'
-import ReplyIcon from 'icons/ReplyIcon'
 import Sender from 'components/BlockchainList/Sender'
 import StickLabel from 'components/QuestionOfTheDay/StickLabel'
 import classnames, {
@@ -23,7 +14,6 @@ import classnames, {
   gap,
   margin,
   position,
-  textColor,
 } from 'classnames/tailwind'
 import useThread from 'hooks/useThread'
 
@@ -35,20 +25,12 @@ const postInfo = classnames(
   gap('gap-x-1')
 )
 
-const answerButtonWrapper = classnames(
-  display('flex'),
-  flexDirection('flex-row'),
-  gap('gap-x-1'),
-  alignItems('items-center')
-)
-
 function QuestionOfDaySuspended() {
-  const [inputOpen, setInputOpen] = useState(false)
   const data = useThread()
 
   if (!data) return null
 
-  const { post, sender, thread, threadId } = data
+  const { post, sender, thread } = data
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -68,38 +50,11 @@ function QuestionOfDaySuspended() {
           <Sender sender={sender} />
         </span>
         <Delimiter horizontal color="bg-divider" />
-        <Button
-          type="tertiary"
-          onClick={() => {
-            setInputOpen(!inputOpen)
-          }}
-        >
-          <div className={answerButtonWrapper}>
-            <ReplyIcon />
-            <AccentText small color="text-formal-accent">
-              <span
-                className={textColor(
-                  inputOpen ? 'text-accent' : 'hover:text-accent'
-                )}
-              >
-                Answer anonymously
-              </span>
-            </AccentText>
-
-            <Replies
-              count={Array.from(thread).length}
-              placeholder="Answer today’s question..."
-              withHowItWorks
-            />
-          </div>
-        </Button>
-        {inputOpen && (
-          <CastBlock
-            threadId={threadId}
-            replyToId={threadId}
-            placeHolder="Answer today’s question..."
-          />
-        )}
+        <Replies
+          count={Array.from(thread).length}
+          placeholder="Answer today’s question..."
+          withHowItWorks
+        />
       </Card>
     </div>
   )
