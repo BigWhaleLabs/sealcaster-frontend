@@ -10,6 +10,7 @@ import classnames, {
 
 const wrapper = classnames(
   display('flex'),
+  width('w-fit'),
   gap('gap-x-2'),
   alignItems('items-center'),
   cursor('cursor-pointer')
