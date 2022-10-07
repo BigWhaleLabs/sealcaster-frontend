@@ -88,7 +88,11 @@ export default function ({
 
           <Delimiter color="bg-half-grey" horizontal />
 
-          <ThreadPart replyingTo={sender} limitThread={limitThread} />
+          <ThreadPart
+            threadId={blockchainId}
+            replyingTo={sender}
+            limitThread={limitThread}
+          />
         </Card>
       </div>
     </a>

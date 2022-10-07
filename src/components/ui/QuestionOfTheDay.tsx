@@ -12,7 +12,8 @@ import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
 import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
-import PostStore from 'stores/PostStore'
+import PostStore, { fetchThread } from 'stores/PostStore'
+import Replies from 'components/BlockchainList/Replies'
 import ReplyIcon from 'icons/ReplyIcon'
 import Sender from 'components/BlockchainList/Sender'
 import StickLabel from 'components/QuestionOfTheDay/StickLabel'
@@ -45,6 +46,14 @@ const answerButtonWrapper = classnames(
 function QuestionOfDaySuspended() {
   const [inputOpen, setInputOpen] = useState(false)
   const { questionDay } = useSnapshot(PostStore)
+
+  const { threads } = useSnapshot(PostStore)
+  const thread = threads[questionDay.id.toNumber()]
+
+  if (!thread) {
+    fetchThread(questionDay.id.toNumber())
+    return null
+  }
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -81,10 +90,10 @@ function QuestionOfDaySuspended() {
                 Answer anonymously
               </span>
             </AccentText>
-            {/* // TODO: add real logic with threads number here */}
-            <AccentText color="text-primary-semi-dimmed" extraSmall>
-              (0)
-            </AccentText>
+            <Replies
+              count={Array.from(thread).length}
+              replyingTo={questionDay.sender}
+            />
           </div>
         </Button>
         {inputOpen && (

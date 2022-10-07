@@ -1,5 +1,7 @@
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
+import { useSnapshot } from 'valtio'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
+import PostStore, { fetchThread } from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
 
 const wrapper = classnames(
@@ -9,72 +11,33 @@ const wrapper = classnames(
 )
 
 export default function ({
+  threadId,
   replyingTo,
   limitThread,
 }: {
+  threadId: number
   replyingTo: string
   limitThread?: number
 }) {
-  // TODO: replace with real data
-  const comments = [
-    {
-      timestamp: 1664908789068,
-      replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-      repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-      content:
-        'Decentralized inputs electronic cash peer-to-peer satoshis segwit, hash block reward digital signature? Bitcoin Improvement Proposal sats Satoshi Nakamoto.',
-      replies: [
-        {
-          timestamp: 1124908789068,
-          replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-          repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-          content: 'Satoshi Nakamoto',
-        },
-      ],
-    },
-    {
-      timestamp: 1124908789068,
-      replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-      repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-      content: 'Decentralized inputs',
-    },
-    {
-      timestamp: 1124908789068,
-      replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-      repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-      content: 'Satoshi Nakamoto',
-      replies: [
-        {
-          timestamp: 1124908789068,
-          replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-          repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-          content: 'Vitalik Buterin',
-          replies: [
-            {
-              timestamp: 1124908789068,
-              replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-              repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-              content: 'Mota mota',
-            },
-            {
-              timestamp: 1124908789068,
-              replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-              repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-              content: 'Motorolla',
-            },
-          ],
-        },
-        {
-          timestamp: 1124908789068,
-          replier: '0x237F45C309F37F8958DaeBc9B10630867876B71b',
-          repliedTo: '0x9F44Bd870c03Bda38bc18f277D04A1C9E9318FeA',
-          content:
-            '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',
-        },
-      ],
-    },
-  ]
+  const { threads } = useSnapshot(PostStore)
+  const thread = threads[threadId]
 
+  if (!thread) {
+    fetchThread(threadId)
+    return null
+  }
+
+  const comments = Array.from(thread).map(
+    ({ timestamp, sender: replier, post: content, replyToId }) => ({
+      replier,
+      content,
+      timestamp: +timestamp,
+      repliedTo: replyToId,
+      replies: [],
+    })
+  )
+
+  // TODO: change repliedTo="author" with post address
   return (
     <div className={wrapper}>
       <Replies count={comments.length} replyingTo={replyingTo} />
@@ -86,7 +49,7 @@ export default function ({
                 timestamp={timestamp}
                 content={content}
                 replier={replier}
-                repliedTo={repliedTo}
+                repliedTo="author"
               />
             )
           ) : (
@@ -94,7 +57,7 @@ export default function ({
               timestamp={timestamp}
               content={content}
               replier={replier}
-              repliedTo={repliedTo}
+              repliedTo="author"
               replies={replies}
             />
           )

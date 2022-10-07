@@ -11,6 +11,7 @@ import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
 import parsePostLogData from 'helpers/parsePostLogData'
 import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
+import safeGetThreadFromContract from 'helpers/safeGetThreadFromContract'
 import safeTransformPostOutput from 'helpers/safeTransformPostOutput'
 import walletStore from 'stores/WalletStore'
 
@@ -18,6 +19,7 @@ interface PostStoreType {
   limit: number
   questionDay: Promise<PostStructOutput>
   posts: Promise<PostStructOutput[]>
+  threads: { [threadId: number]: Promise<PostStructOutput[]> }
   postsAmount: Promise<number>
   selectedToken?: string
   createPost: (
@@ -36,6 +38,7 @@ const PostStore = proxy<PostStoreType>({
   limit,
   questionDay: farcasterContract.posts(0).then(safeTransformPostOutput),
   postsAmount: safeGetPostsAmountFromContract(farcasterContract),
+  threads: {},
   posts: getMorePosts({
     contract: farcasterContract,
     limitAmount: limit,
@@ -71,6 +74,14 @@ const PostStore = proxy<PostStoreType>({
     )
   },
 })
+
+export function fetchThread(threadId: number) {
+  if (typeof PostStore.threads[threadId] !== 'undefined') return
+  PostStore.threads[threadId] = safeGetThreadFromContract(
+    threadId,
+    farcasterContract
+  )
+}
 
 farcasterContract.on(
   farcasterContract.filters.PostSaved(),
