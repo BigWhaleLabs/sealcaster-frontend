@@ -525,7 +525,9 @@ export function LargeText({ children }: ChildrenProp) {
 
 const questionOfDayText = classnames(
   fontFamily('font-primary'),
-  fontWeight('font-bold'),
+  fontWeight('font-bold')
+)
+const questionOfDayTextColor = classnames(
   backgroundImage('bg-gradient-to-r'),
   textColor('text-transparent'),
   backgroundClip('bg-clip-text'),
@@ -533,5 +535,9 @@ const questionOfDayText = classnames(
 )
 
 export function QuestionOfDayText({ children }: ChildrenProp) {
-  return <h2 className={questionOfDayText}>{children}</h2>
+  return (
+    <h2 className={questionOfDayText}>
+      <span className={questionOfDayTextColor}>{children}</span>
+    </h2>
+  )
 }

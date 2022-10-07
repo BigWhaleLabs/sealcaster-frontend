@@ -52,12 +52,6 @@
     var(--primary-dark) 90deg,
     var(--primary-background) 0
   );
-
-  --tertiary-subheader: linear-gradient(
-    270deg,
-    var(--primary-bright) 3.96%,
-    var(--tertiary) 100%
-  );
 }
 
 *,

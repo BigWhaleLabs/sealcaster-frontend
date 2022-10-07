@@ -12,6 +12,7 @@ import classnames, {
   gap,
   justifyContent,
   width,
+  zIndex,
 } from 'classnames/tailwind'
 
 const hintWrapper = classnames(
@@ -53,16 +54,18 @@ export default function ({
             </div>
           </span>
         </AccentText>
-        <Button
-          loading={loading}
-          center
-          small
-          type="primary"
-          disabled={disabled}
-          onClick={onButtonClick}
-        >
-          Cast anonymously
-        </Button>
+        <div className={zIndex('z-10')}>
+          <Button
+            loading={loading}
+            center
+            small
+            type="primary"
+            disabled={disabled}
+            onClick={onButtonClick}
+          >
+            Cast anonymously
+          </Button>
+        </div>
         {!!error && <ErrorMessage small centered text={error} />}
       </div>
       {expanded && <HowItWorks />}
