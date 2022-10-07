@@ -1,4 +1,5 @@
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import Background from 'components/ui/Background'
 import Button from 'components/ui/Button'
 import classNamesToString from 'helpers/classNamesToString'
 import classnames, {
@@ -12,6 +13,7 @@ import classnames, {
   gap,
   justifyContent,
   margin,
+  position,
   textAlign,
   textColor,
   width,
@@ -61,6 +63,37 @@ function ReturnHomeButton() {
   )
 }
 
+function BackgroundBlur({ left }: { left?: boolean }) {
+  if (left)
+    return (
+      <Background
+        inView
+        width={625}
+        height={416}
+        background="var(--red-background)"
+        bottom={22}
+        left={-4}
+        rotate={-15}
+        blur={150}
+      />
+    )
+
+  return (
+    <div className={displayFromMd}>
+      <Background
+        inView
+        width={971}
+        height={646}
+        background="var(--red-background)"
+        bottom={-400}
+        left={-110}
+        rotate={-30}
+        blur={150}
+      />
+    </div>
+  )
+}
+
 export default function () {
   document.title = '🐙 OCTOCORP'
 
@@ -71,9 +104,13 @@ export default function () {
       <div className={octoBlock}>
         <div className={displayFromMd}>
           <span className={strokeText}>404</span>
+          <BackgroundBlur />
         </div>
         <img className={imageStyles} src="img/octo404.webp" />
-        <div className={strokeText}>404</div>
+        <div className={position('relative')}>
+          <span className={strokeText}>404</span>
+          <BackgroundBlur />
+        </div>
       </div>
       <span className={textStyles}>
         Initiate self-destruct sequence and return home to escape OCTOCORP!

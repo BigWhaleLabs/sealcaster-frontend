@@ -71,8 +71,7 @@ html {
 html[bg-theme='404'] {
   background-position: top, center, 0;
   background-size: auto auto, 100% 100%, 3rem 3rem;
-  background-image: url(), url('/img/bg-shadows-404-desktop.webp'),
-    var(--bg-grid);
+  background-image: url(), url(), var(--bg-grid);
 }
 
 @media screen and (max-width: 1280px) {
