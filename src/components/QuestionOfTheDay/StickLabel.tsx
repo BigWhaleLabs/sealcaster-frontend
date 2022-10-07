@@ -33,9 +33,10 @@ export default function ({ mobile }: { mobile?: boolean }) {
         perspective={500}
         onMove={({ tiltAngleX, tiltAngleY }) => {
           if (!badge.current) return
+          badge.current.style.filter =
+            'drop-shadow(0px 0px 2.125rem var(--accent-light-transparent)'
           setRotation(tiltAngleX + tiltAngleY)
         }}
-        className={dropShadow('drop-shadow-accent-light-transparent')}
       >
         <div ref={badge}>
           <QuestionOfTheDayLabel mobile={mobile} rotation={rotation} />
