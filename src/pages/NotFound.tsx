@@ -102,7 +102,7 @@ export default function () {
       <div className={octoBlock}>
         <div className={displayFromMd}>
           <span className={strokeText}>404</span>
-          <BackgroundBlur />
+          <BackgroundBlur left />
         </div>
         <img className={imageStyles} src="img/octo404.webp" />
         <div className={position('relative')}>
