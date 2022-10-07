@@ -6,6 +6,8 @@ export default function ([
   derivativeAddress,
   sender,
   timestamp,
+  threadId,
+  replyToId,
 ]: PostStructOutput) {
   return {
     id,
@@ -13,5 +15,7 @@ export default function ([
     derivativeAddress,
     sender,
     timestamp,
+    threadId,
+    replyToId,
   } as PostStructOutput
 }

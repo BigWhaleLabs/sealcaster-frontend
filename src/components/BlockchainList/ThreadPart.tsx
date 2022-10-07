@@ -1,3 +1,4 @@
+import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
@@ -10,11 +11,82 @@ const wrapper = classnames(
   gap('gap-y-3')
 )
 
+type CommentNode = {
+  id: number
+  timestamp: number
+  content: string
+  replier: string
+  repliedTo: string
+  replies: CommentNode[]
+}
+
+function makeCommentNode(
+  {
+    id,
+    timestamp,
+    repliedTo,
+    replier,
+    content,
+  }: {
+    id: number
+    timestamp: number
+    content: string
+    replier: string
+    repliedTo: string
+  },
+  posts: PostStructOutput[]
+): CommentNode {
+  return {
+    id,
+    timestamp,
+    replier,
+    content,
+    repliedTo,
+    replies: posts
+      .filter((post) => post.replyToId && +post.replyToId === id)
+      .map(({ id, timestamp, sender: replier, post: content }) =>
+        makeCommentNode(
+          {
+            id: +id,
+            replier,
+            content,
+            repliedTo,
+            timestamp: +timestamp,
+          },
+          posts
+        )
+      ),
+  }
+}
+
+function buildCommentsTree(
+  threadId: number,
+  threadCreator: string,
+  posts: PostStructOutput[]
+) {
+  return posts
+    .filter((post) => post.replyToId && +post.replyToId === threadId)
+    .map(({ id, timestamp, sender: replier, post: content }) =>
+      makeCommentNode(
+        {
+          id: +id,
+          replier,
+          content,
+          timestamp: +timestamp,
+          repliedTo: threadCreator,
+        },
+        posts
+      )
+    )
+}
+
 export default function ({
+  threadCreator,
   threadId,
   replyingTo,
   limitThread,
 }: {
+  threadCreator: string
   threadId: number
   replyingTo: string
   limitThread?: number
@@ -27,17 +99,12 @@ export default function ({
     return null
   }
 
-  const comments = Array.from(thread).map(
-    ({ timestamp, sender: replier, post: content, replyToId }) => ({
-      replier,
-      content,
-      timestamp: +timestamp,
-      repliedTo: replyToId,
-      replies: [],
-    })
+  const comments = buildCommentsTree(
+    threadId,
+    threadCreator,
+    Array.from(thread)
   )
 
-  // TODO: change repliedTo="author" with post address
   return (
     <div className={wrapper}>
       <Replies count={comments.length} replyingTo={replyingTo} />
@@ -49,7 +116,7 @@ export default function ({
                 timestamp={timestamp}
                 content={content}
                 replier={replier}
-                repliedTo="author"
+                repliedTo={repliedTo}
               />
             )
           ) : (
@@ -57,7 +124,7 @@ export default function ({
               timestamp={timestamp}
               content={content}
               replier={replier}
-              repliedTo="author"
+              repliedTo={repliedTo}
               replies={replies}
             />
           )
