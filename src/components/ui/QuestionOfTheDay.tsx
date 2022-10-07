@@ -1,16 +1,8 @@
-import {
-  AccentText,
-  HeaderText,
-  QuestionOfDayText,
-  StatusText,
-} from 'components/ui/Text'
+import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { useState } from 'preact/hooks'
-import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
-import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
-import ReplyIcon from 'icons/ReplyIcon'
+import Replies from 'components/BlockchainList/Replies'
 import Sender from 'components/BlockchainList/Sender'
 import StickLabel from 'components/QuestionOfTheDay/StickLabel'
 import classnames, {
@@ -21,7 +13,6 @@ import classnames, {
   gap,
   margin,
   position,
-  textColor,
 } from 'classnames/tailwind'
 
 const postInfo = classnames(
@@ -32,16 +23,7 @@ const postInfo = classnames(
   gap('gap-x-1')
 )
 
-const answerButtonWrapper = classnames(
-  display('flex'),
-  flexDirection('flex-row'),
-  gap('gap-x-1'),
-  alignItems('items-center')
-)
-
 export default function () {
-  const [inputOpen, setInputOpen] = useState(false)
-
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
       <Card>
@@ -67,30 +49,12 @@ export default function () {
           <Sender sender="Farcaster" />
         </span>
         <Delimiter horizontal color="bg-divider" />
-        <Button
-          type="tertiary"
-          onClick={() => {
-            setInputOpen(!inputOpen)
-          }}
-        >
-          <div className={answerButtonWrapper}>
-            <ReplyIcon />
-            <AccentText small color="text-formal-accent">
-              <span
-                className={textColor(
-                  inputOpen ? 'text-accent' : 'hover:text-accent'
-                )}
-              >
-                Answer anonymously
-              </span>
-            </AccentText>
-            {/* // TODO: add real logic with threads number here */}
-            <AccentText color="text-primary-semi-dimmed" extraSmall>
-              (0)
-            </AccentText>
-          </div>
-        </Button>
-        {inputOpen && <CastBlock placeHolder="Answer today’s question..." />}
+        {/* TODO: add real count */}
+        <Replies
+          count={0}
+          placeholder="Answer today’s question..."
+          withHowItWorks
+        />
       </Card>
     </div>
   )

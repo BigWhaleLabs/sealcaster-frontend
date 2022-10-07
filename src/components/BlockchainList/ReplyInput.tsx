@@ -1,50 +1,30 @@
 import { StatusText } from 'components/ui/Text'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useSnapshot } from 'valtio'
-import { useState } from 'preact/hooks'
-import Button from 'components/ui/Button'
-import TextArea from 'components/ui/TextArea'
-import TextareaInfo from 'components/Cast/TextareaInfo'
+import CastBlock from 'components/Cast/CastBlock'
 import walletStore from 'stores/WalletStore'
 
-const LeftBlock = ({ account }: { account: string }) => {
-  return (
-    <StatusText>Replying from {truncateMiddleIfNeeded(account, 12)}</StatusText>
-  )
-}
-
-const RightBlock = () => {
-  return (
-    <Button type="primary" small center>
-      Cast to reply
-    </Button>
-  )
-}
-
 export default function ({
-  replyingTo,
-  inputOpen,
+  placeholder,
+  withHowItWorks,
 }: {
-  replyingTo: string
-  inputOpen: boolean
+  placeholder?: string
+  withHowItWorks?: boolean
 }) {
   const { account } = useSnapshot(walletStore)
-  if (!account || !inputOpen) return null
 
-  const [text, setText] = useState('')
+  if (!account) return null
 
   return (
-    <>
-      <TextArea
-        text={text}
-        placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
-        onTextChange={setText}
-        maxLength={280}
-      />
-      <TextareaInfo
-        leftBlock={<LeftBlock account={account} />}
-        rightBlock={<RightBlock />}
-      />
-    </>
+    <CastBlock
+      placeHolder={placeholder}
+      leftBlock={
+        withHowItWorks ? undefined : (
+          <StatusText>
+            Replying from {truncateMiddleIfNeeded(account, 12)}
+          </StatusText>
+        )
+      }
+    />
   )
 }

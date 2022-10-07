@@ -3,6 +3,7 @@ import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
+import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
 
 const wrapper = classnames(
   display('flex'),
@@ -83,7 +84,10 @@ export default function ({
 
   return (
     <div className={wrapper}>
-      <Replies count={comments.length} replyingTo={replyingTo} />
+      <Replies
+        count={comments.length}
+        placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
+      />
       {comments.map(
         ({ timestamp, content, replier, repliedTo, replies }, index) =>
           limitThread ? (

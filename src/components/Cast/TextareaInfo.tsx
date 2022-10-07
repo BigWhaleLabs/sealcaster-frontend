@@ -36,14 +36,14 @@ export default function ({
   disabled,
   onButtonClick,
   leftBlock,
-  rightBlock,
+  buttonText,
 }: {
   error?: string
   loading?: boolean
   disabled?: boolean
   onButtonClick?: () => void
   leftBlock?: JSX.Element | string
-  rightBlock?: JSX.Element | string
+  buttonText?: string
 }) {
   const [expanded, setExpanded] = useState(false)
 
@@ -68,23 +68,19 @@ export default function ({
           </>
         )}
 
-        {rightBlock ? (
-          rightBlock
-        ) : (
-          <>
-            <Button
-              loading={loading}
-              center
-              small
-              type="primary"
-              disabled={disabled}
-              onClick={onButtonClick}
-            >
-              Cast anonymously
-            </Button>
-            {!!error && <ErrorMessage small centered text={error} />}
-          </>
-        )}
+        <>
+          <Button
+            loading={loading}
+            center
+            small
+            type="primary"
+            disabled={disabled}
+            onClick={onButtonClick}
+          >
+            {buttonText ? buttonText : 'Cast anonymously'}
+          </Button>
+          {!!error && <ErrorMessage small centered text={error} />}
+        </>
       </div>
       {expanded && <HowItWorks />}
     </>

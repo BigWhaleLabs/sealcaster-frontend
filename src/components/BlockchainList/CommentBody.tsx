@@ -1,14 +1,13 @@
-import { BodyText, LinkText, StatusText } from 'components/ui/Text'
+import { BodyText, LinkText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
-import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import BareCard from 'components/BareCard'
 import Delimiter from 'components/ui/Delimiter'
+import PostTime from 'components/BlockchainList/PostTime'
 import Reply from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
 import SmallArrow from 'components/ui/SmallArrow'
-import TimeStore from 'stores/TimeStore'
 import classnames, {
   alignItems,
   display,
@@ -16,7 +15,6 @@ import classnames, {
   gap,
   justifyContent,
 } from 'classnames/tailwind'
-import formatDate from 'helpers/formatDate'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 
 const commentWithReplyButton = classnames(
@@ -63,9 +61,7 @@ export default function ({
   repliedTo: string
   timestamp: number
 }) {
-  const { current } = useSnapshot(TimeStore)
   const [inputOpen, setInputOpen] = useState(false)
-  const formattedTime = formatDate(timestamp, current)
 
   return (
     // TODO: anchor should be real
@@ -78,7 +74,7 @@ export default function ({
             <SmallArrow />
             <TruncatedAddress address={repliedTo} />
             <Delimiter color="bg-formal-accent" />
-            <StatusText primary>{formattedTime}</StatusText>
+            <PostTime timestamp={timestamp} />
           </div>
         </div>
         <button
@@ -88,7 +84,11 @@ export default function ({
           <Reply />
         </button>
       </div>
-      <ReplyInput replyingTo={repliedTo} inputOpen={inputOpen} />
+      {inputOpen && (
+        <ReplyInput
+          placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 12)}`}
+        />
+      )}
     </BareCard>
   )
 }
