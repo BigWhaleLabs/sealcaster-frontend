@@ -9,7 +9,7 @@ import getErrorMessage from 'helpers/getErrorMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
 import walletStore from 'stores/WalletStore'
 
-export default function () {
+export default function (threadId: number, replayId: number) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<unknown>()
   const [text, setText] = useState('')
@@ -32,7 +32,7 @@ export default function () {
         delete PostIdsStatuses.lastUserPost[currentAccount]
 
       BurnerWalletStore.status = 'Posting cast'
-      const result = await PostStore.createPost(text)
+      const result = await PostStore.createPost(text, threadId, replayId)
       const numberOfPosts = await PostStore.postsAmount
       PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
       for (const { id } of result) {

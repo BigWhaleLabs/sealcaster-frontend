@@ -5,11 +5,13 @@ import {
   StatusText,
 } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
 import Card from 'components/ui/Card'
 import CastBlock from 'components/Cast/CastBlock'
 import Delimiter from 'components/ui/Delimiter'
+import PostStore from 'stores/PostStore'
 import ReplyIcon from 'icons/ReplyIcon'
 import Sender from 'components/BlockchainList/Sender'
 import StickLabel from 'components/QuestionOfTheDay/StickLabel'
@@ -41,6 +43,7 @@ const answerButtonWrapper = classnames(
 
 export default function () {
   const [inputOpen, setInputOpen] = useState(false)
+  const { replyAllAddress } = useSnapshot(PostStore)
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -90,7 +93,13 @@ export default function () {
             </AccentText>
           </div>
         </Button>
-        {inputOpen && <CastBlock placeHolder="Answer today’s question..." />}
+        {inputOpen && (
+          <CastBlock
+            threadId={0}
+            replayId={0}
+            placeHolder="Answer today’s question..."
+          />
+        )}
       </Card>
     </div>
   )

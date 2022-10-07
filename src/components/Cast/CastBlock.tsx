@@ -7,9 +7,20 @@ import TextareaInfo from 'components/Cast/TextareaInfo'
 import VerifyWallet from 'components/Cast/VerifyWallet'
 import usePost from 'hooks/usePost'
 
-export default function ({ placeHolder = 'Write something here...' }) {
+export default function ({
+  placeHolder = 'Write something here...',
+  threadId,
+  replayId,
+}: {
+  placeHolder?: string
+  threadId: number
+  replayId: number
+}) {
   const { status } = useSnapshot(BurnerWalletStore)
-  const { createPost, isLoading, error, text, setText, waitBurner } = usePost()
+  const { createPost, isLoading, error, text, setText, waitBurner } = usePost(
+    threadId,
+    replayId
+  )
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
 
