@@ -27,7 +27,7 @@ export default function () {
       <PostProcessing />
       <div className={space('space-y-6')}>
         <CastHeader />
-        <CastBlock threadId={0} replayId={0} />
+        <CastBlock threadId={0} replyToId={0} />
       </div>
       <div className={margin('mt-20', 'sm:mt-14')}>
         <BlockchainList />

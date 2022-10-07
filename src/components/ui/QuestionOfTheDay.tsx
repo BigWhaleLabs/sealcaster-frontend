@@ -4,6 +4,7 @@ import {
   QuestionOfDayText,
   StatusText,
 } from 'components/ui/Text'
+import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
@@ -41,9 +42,9 @@ const answerButtonWrapper = classnames(
   alignItems('items-center')
 )
 
-export default function () {
+function QuestionOfDaySuspended() {
   const [inputOpen, setInputOpen] = useState(false)
-  const { replyAllAddress } = useSnapshot(PostStore)
+  const { questionDay } = useSnapshot(PostStore)
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -57,17 +58,10 @@ export default function () {
           </div>
         </div>
         <QuestionOfDayText>Question of the day:</QuestionOfDayText>
-        <HeaderText size="medium">
-          Hey VCs, what should startup do to capture your attention?
-        </HeaderText>
+        <HeaderText size="medium">{questionDay.post}</HeaderText>
         <span className={postInfo}>
-          {/* // TODO: add real logic here with urls */}
           <StatusText>Posted by: </StatusText>
-          <Sender sender="Sealcaster" />
-          <div className={displayFrom('xs')}>
-            <Delimiter color="bg-formal-accent" />
-          </div>
-          <Sender sender="Farcaster" />
+          <Sender sender={questionDay.sender} />
         </span>
         <Delimiter horizontal color="bg-divider" />
         <Button
@@ -95,12 +89,20 @@ export default function () {
         </Button>
         {inputOpen && (
           <CastBlock
-            threadId={0}
-            replayId={0}
+            threadId={+questionDay.id}
+            replyToId={+questionDay.id}
             placeHolder="Answer today’s question..."
           />
         )}
       </Card>
     </div>
+  )
+}
+
+export default function () {
+  return (
+    <Suspense fallback="">
+      <QuestionOfDaySuspended />
+    </Suspense>
   )
 }

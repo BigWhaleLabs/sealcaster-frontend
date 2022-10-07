@@ -11,18 +11,19 @@ import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
 import parsePostLogData from 'helpers/parsePostLogData'
 import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
+import safeTransformPostOutput from 'helpers/safeTransformPostOutput'
 import walletStore from 'stores/WalletStore'
 
 interface PostStoreType {
   limit: number
-  replyAllAddress: Promise<string>
+  questionDay: Promise<PostStructOutput>
   posts: Promise<PostStructOutput[]>
   postsAmount: Promise<number>
   selectedToken?: string
   createPost: (
     text: string,
     threadId: number,
-    replayId: number
+    replyToId: number
   ) => Promise<Result[]>
   idToPostTx: Promise<string[]>
 }
@@ -33,7 +34,7 @@ const limit = 100
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  replyAllAddress: farcasterContract.replyAllAddress(),
+  questionDay: farcasterContract.posts(0).then(safeTransformPostOutput),
   postsAmount: safeGetPostsAmountFromContract(farcasterContract),
   posts: getMorePosts({
     contract: farcasterContract,
@@ -41,7 +42,7 @@ const PostStore = proxy<PostStoreType>({
   }),
   selectedToken: undefined,
   idToPostTx: getIdsToPostsTx(farcasterContract),
-  createPost: async (text: string, threadId: number, replayId: number) => {
+  createPost: async (text: string, threadId: number, replyToId: number) => {
     let signer = await BurnerWalletStore.getSigner()
 
     if (!signer && (await walletStore.hasFarcasterBadge))
@@ -58,7 +59,7 @@ const PostStore = proxy<PostStoreType>({
       text,
       'farcaster',
       threadId,
-      replayId
+      replyToId
     )
     const result = await transaction.wait()
 

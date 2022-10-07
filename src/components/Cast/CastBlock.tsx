@@ -10,16 +10,16 @@ import usePost from 'hooks/usePost'
 export default function ({
   placeHolder = 'Write something here...',
   threadId,
-  replayId,
+  replyToId,
 }: {
   placeHolder?: string
   threadId: number
-  replayId: number
+  replyToId: number
 }) {
   const { status } = useSnapshot(BurnerWalletStore)
   const { createPost, isLoading, error, text, setText, waitBurner } = usePost(
     threadId,
-    replayId
+    replyToId
   )
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
