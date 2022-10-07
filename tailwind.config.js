@@ -43,6 +43,7 @@ module.exports = {
         'primary-semi-dimmed-transparent':
           'var(--primary-semi-dimmed-transparent)',
 
+        'accent-light-transparent': 'var(--accent-light-transparent)',
         'accent-semi-transparent': 'var(--accent-semi-transparent)',
         'primary-semi-transparent': 'var(--primary-semi-transparent)',
         'secondary-semi-transparent': 'var(--secondary-semi-transparent)',
@@ -51,7 +52,6 @@ module.exports = {
           'var(--formal-accent-semi-transparent)',
         'light-formal-accent': 'var(--light-formal-accent)',
         'error-semi-transparent': 'var(--error-semi-transparent)',
-        'tertiary-subheader': 'var(--tertiary-subheader)',
         'primary-bright': 'var(--primary-bright)',
         divider: 'var(--divider)',
         'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
@@ -104,6 +104,8 @@ module.exports = {
         'accent-gradient': '1.25rem 1.25rem 4.62rem var(--accent-transparent)',
         'secondary-gradient':
           '-1.25rem -1.25rem 4.62rem var(--secondary-transparent)',
+        'accent-light-transparent':
+          '0rem 0rem 2.125rem var(--accent-light-transparent);',
       },
       strokeWidth: {
         1.5: '1.5',
@@ -123,8 +125,14 @@ module.exports = {
         'pulse-horizontal': 'pulse-horizontal 2s ease-in-out infinite',
         rotate: 'rotate linear 3.5s infinite',
       },
+      rotate: {
+        '-15': '-15deg',
+      },
       inset: {
         '-2.5': '-0.65rem',
+        '-12.5': '-3.125rem',
+        '-25': '-6.25rem',
+        '-27.5': '-6.875rem',
       },
       boxShadow: {
         'button-active': '0rem 0rem 0.375rem #000000',
@@ -135,11 +143,6 @@ module.exports = {
       },
       fontSize: {
         '3.5xl': '2rem',
-      },
-      margin: {
-        '-12.5': '-3.125rem',
-        '-30': '-7.5rem',
-        '-35': '-8.75rem',
       },
     },
     container: {

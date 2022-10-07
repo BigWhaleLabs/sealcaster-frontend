@@ -13,6 +13,7 @@ import classnames, {
   gap,
   justifyContent,
   width,
+  zIndex,
 } from 'classnames/tailwind'
 
 const hintWrapper = classnames(
