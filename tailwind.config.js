@@ -51,6 +51,7 @@ module.exports = {
         'primary-bright': 'var(--primary-bright)',
         divider: 'var(--divider)',
         'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
+        'primary-dark-transparent': 'var(--primary-dark-transparent)',
       },
       borderRadius: {
         avatar: '6rem',
@@ -139,6 +140,9 @@ module.exports = {
       },
       fontSize: {
         '3.5xl': '2rem',
+      },
+      letterSpacing: {
+        'extra-wide': '0.3em',
       },
     },
     container: {
