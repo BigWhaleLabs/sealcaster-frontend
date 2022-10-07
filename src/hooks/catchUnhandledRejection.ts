@@ -5,7 +5,6 @@ export default function catchUnhandledRejection(
 ) {
   useEffect(() => {
     const listener = ({ reason }: PromiseRejectionEvent) => {
-      console.error('Catch unhandledrejection:', reason.message)
       if (callback) callback(reason)
     }
 
