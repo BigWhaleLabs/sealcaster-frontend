@@ -1,12 +1,7 @@
 import { useRef, useState } from 'preact/hooks'
 import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import Tilt from 'react-parallax-tilt'
-import classnames, {
-  dropShadow,
-  inset,
-  position,
-  transforms,
-} from 'classnames/tailwind'
+import classnames, { inset, position, transforms } from 'classnames/tailwind'
 
 const badgeWrapper = (mobile?: boolean) =>
   classnames(
