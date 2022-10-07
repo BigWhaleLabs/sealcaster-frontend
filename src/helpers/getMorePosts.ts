@@ -4,6 +4,7 @@ import { handleError } from '@big-whale-labs/frontend-utils'
 import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
 import safeGetThreadFromContract from 'helpers/safeGetThreadFromContract'
 
+// TODO: add a pagination
 export default async function ({ contract }: { contract: SCPostStorage }) {
   try {
     const totalAmount = await safeGetPostsAmountFromContract(contract)

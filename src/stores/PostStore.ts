@@ -41,7 +41,6 @@ const PostStore = proxy<PostStoreType>({
   threads: {},
   posts: getMorePosts({
     contract: farcasterContract,
-    limitAmount: limit,
   }),
   selectedToken: undefined,
   idToPostTx: getIdsToPostsTx(farcasterContract),
