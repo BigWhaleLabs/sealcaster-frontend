@@ -553,8 +553,8 @@ const questionOfDayTextColor = classnames(
 
 export function QuestionOfDayText({ children }: ChildrenProp) {
   return (
-    <h2 className={questionOfDayText}>
+    <span className={questionOfDayText}>
       <span className={questionOfDayTextColor}>{children}</span>
-    </h2>
+    </span>
   )
 }
