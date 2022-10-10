@@ -39,6 +39,7 @@ const Replies = ({
   replies,
   threadId,
   replyToId,
+  isThreadOwned,
 }: Comment & ReplyModel) => {
   return (
     <CommentWithReplies
@@ -50,6 +51,7 @@ const Replies = ({
       repliedTo={repliedTo}
       timestamp={timestamp}
       replies={replies}
+      isThreadOwned={isThreadOwned}
     />
   )
 }
@@ -62,6 +64,7 @@ export default function CommentWithReplies({
   timestamp,
   replies,
   threadId,
+  isThreadOwned,
 }: Comment & ReplyModel) {
   const hasReplies = !!replies?.length
 
@@ -74,6 +77,7 @@ export default function CommentWithReplies({
         replier={replier}
         repliedTo={repliedTo}
         timestamp={timestamp}
+        isThreadOwned={isThreadOwned}
       />
 
       {hasReplies && (
@@ -81,7 +85,15 @@ export default function CommentWithReplies({
           <a className={commentLine} href={`#reply-${rootId}`} />
           <div className={repliesBlock}>
             {replies.map(
-              ({ id, content, replier, repliedTo, timestamp, replies }) => (
+              ({
+                id,
+                content,
+                replier,
+                repliedTo,
+                timestamp,
+                replies,
+                isThreadOwned,
+              }) => (
                 <Replies
                   id={id}
                   threadId={threadId}
@@ -91,6 +103,7 @@ export default function CommentWithReplies({
                   replyToId={rootId}
                   timestamp={timestamp}
                   replies={replies}
+                  isThreadOwned={isThreadOwned}
                 />
               )
             )}

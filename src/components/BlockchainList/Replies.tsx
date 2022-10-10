@@ -25,21 +25,27 @@ export default function ({
   replyText,
   threadId,
   replyToId,
+  isThreadOwned,
 }: {
   count: number
   placeholder: string
+  isThreadOwned: boolean
   replyText?: string
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
 
   return (
     <>
-      <Button type="tertiary" onClick={() => setInputOpen(!inputOpen)}>
+      <Button
+        type="tertiary"
+        onClick={() => setInputOpen(!inputOpen)}
+        disabled={!isThreadOwned}
+      >
         <div className={replyButtonWrapper}>
           <ReplyIcon />
           <AccentText small color="text-formal-accent">
             <span className={textColor({ 'text-accent': inputOpen })}>
-              {replyText ? replyText : 'Reply'}
+              {replyText ? replyText : isThreadOwned ? 'Reply' : 'Replies'}
             </span>
           </AccentText>
           <AccentText primary color="text-primary-semi-dimmed" extraSmall>

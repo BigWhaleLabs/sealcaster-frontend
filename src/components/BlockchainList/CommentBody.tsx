@@ -61,18 +61,21 @@ export default function ({
   timestamp,
   threadId,
   replyToId,
+  isThreadOwned,
 }: {
   content: string
   replier: string
   repliedTo: string
   timestamp: number
+  isThreadOwned?: boolean
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
   const ref = createRef()
   useClickOutside(ref, () => setInputOpen(false))
 
+  console.log('isThreadOwned', isThreadOwned)
+
   return (
-    // TODO: anchor should be real
     <BareCard data-anchor={`#reply=${replyToId}`}>
       <div className={space('space-y-4')} ref={ref}>
         <div className={commentWithReplyButton}>
@@ -87,7 +90,10 @@ export default function ({
             </div>
           </div>
           <button
-            className={display({ hidden: inputOpen }, 'md:flex')}
+            className={display(
+              { hidden: inputOpen || !isThreadOwned },
+              { 'md:flex': isThreadOwned }
+            )}
             onClick={() => setInputOpen(!inputOpen)}
           >
             <ReplyIcon />

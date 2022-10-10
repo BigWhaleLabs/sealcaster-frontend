@@ -61,7 +61,6 @@ export default function ({
   limitThread?: number
 }) {
   return (
-    // TODO: make it clickable only if user has an account with badge
     <div data-anchor={`#id=${blockchainId}`}>
       <Card>
         <div className={container}>

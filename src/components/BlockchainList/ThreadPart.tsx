@@ -7,6 +7,7 @@ import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import PostStore, { fetchThread } from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
+import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
   display('flex'),
@@ -20,6 +21,7 @@ type CommentNode = {
   content: string
   replier: string
   repliedTo: string
+  isThreadOwned?: boolean
   replies: CommentNode[]
 }
 
@@ -97,12 +99,15 @@ export default function ({
   limitThread?: number
 }) {
   const { threads } = useSnapshot(PostStore)
+  const { account } = useSnapshot(walletStore)
   const thread = threads[threadId]
 
   if (!thread) {
     fetchThread(threadId)
     return null
   }
+
+  const isThreadOwned = threadCreator === account
 
   const comments = buildCommentsTree(
     threadId,
@@ -119,6 +124,7 @@ export default function ({
         threadId={threadId}
         count={comments.length}
         placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
+        isThreadOwned={isThreadOwned}
       />
       {comments.map(
         ({ timestamp, content, replier, repliedTo, replies, id }, index) =>
@@ -132,6 +138,7 @@ export default function ({
                 content={content}
                 replier={replier}
                 repliedTo={repliedTo}
+                isThreadOwned={isThreadOwned}
               />
             )
           ) : (
@@ -144,6 +151,7 @@ export default function ({
               replier={replier}
               repliedTo={repliedTo}
               replies={replies}
+              isThreadOwned={isThreadOwned}
             />
           )
       )}

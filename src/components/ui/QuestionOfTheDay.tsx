@@ -58,6 +58,7 @@ function QuestionOfDaySuspended() {
           replyToId={questionDay}
           count={Array.from(thread).length}
           placeholder="Answer today’s question..."
+          isThreadOwned={true}
         />
       </Card>
     </div>
