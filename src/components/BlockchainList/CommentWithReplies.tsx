@@ -55,7 +55,7 @@ const Replies = ({
 }
 
 export default function CommentWithReplies({
-  id,
+  id: rootId,
   content,
   replier,
   repliedTo,
@@ -69,7 +69,7 @@ export default function CommentWithReplies({
     <div>
       <CommentBody
         threadId={threadId}
-        replyToId={id}
+        replyToId={rootId}
         content={content}
         replier={replier}
         repliedTo={repliedTo}
@@ -78,16 +78,17 @@ export default function CommentWithReplies({
 
       {hasReplies && (
         <div className={repliesWithLine}>
-          <a className={commentLine} href={`#reply-${id}`} />
+          <a className={commentLine} href={`#reply-${rootId}`} />
           <div className={repliesBlock}>
             {replies.map(
-              ({ content, replier, repliedTo, timestamp, replies, id }) => (
+              ({ id, content, replier, repliedTo, timestamp, replies }) => (
                 <Replies
                   id={id}
                   threadId={threadId}
                   content={content}
                   replier={replier}
                   repliedTo={repliedTo}
+                  replyToId={rootId}
                   timestamp={timestamp}
                   replies={replies}
                 />
