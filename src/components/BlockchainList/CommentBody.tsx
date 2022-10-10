@@ -1,4 +1,5 @@
 import { BodyText, LinkText } from 'components/ui/Text'
+import { createRef } from 'preact'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
@@ -17,6 +18,7 @@ import classnames, {
   space,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
+import useClickOutside from 'hooks/useClickOutside'
 
 const commentWithReplyButton = classnames(
   display('flex'),
@@ -63,11 +65,13 @@ export default function ({
   timestamp: number
 }) {
   const [inputOpen, setInputOpen] = useState(false)
+  const ref = createRef()
+  useClickOutside(ref, () => setInputOpen(false))
 
   return (
     // TODO: anchor should be real
     <BareCard data-anchor={`#reply=1`}>
-      <div className={space('space-y-4')}>
+      <div className={space('space-y-4')} ref={ref}>
         <div className={commentWithReplyButton}>
           <div className={commentWithData}>
             <BodyText>{content}</BodyText>
