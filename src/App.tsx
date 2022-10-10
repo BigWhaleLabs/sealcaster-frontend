@@ -8,6 +8,7 @@ import Navbar from 'components/navbar'
 import NotFound from 'pages/NotFound'
 import Privacy from 'pages/Privacy'
 import ScrollToTopButton from 'components/ui/ScrollToTopButton'
+import SliderTicker from 'components/ui/SliderTicker'
 import Terms from 'pages/Terms'
 import Thread from 'components/Thread'
 import classnames, {
@@ -45,6 +46,9 @@ export default function () {
     <Router>
       <Navbar />
       <div className={pageContainer}>
+        <SliderTicker
+          sentences={['spill your tea', 'snatch your burner wallet ']}
+        />
         <div className={bodyContainer(is404)}>
           <Switch>
             <Route path="/">
