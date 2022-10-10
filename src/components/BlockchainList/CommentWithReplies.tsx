@@ -1,6 +1,5 @@
 import Comment from 'models/Comment'
 import CommentBody from 'components/BlockchainList/CommentBody'
-import ReplyModel from 'models/ReplyModel'
 import classnames, {
   borderColor,
   borderWidth,
@@ -38,13 +37,11 @@ const Replies = ({
   timestamp,
   replies,
   threadId,
-  replyToId,
-}: Comment & ReplyModel) => {
+}: Comment) => {
   return (
     <CommentWithReplies
       threadId={threadId}
       id={id}
-      replyToId={replyToId}
       content={content}
       replier={replier}
       repliedTo={repliedTo}
@@ -62,7 +59,7 @@ export default function CommentWithReplies({
   timestamp,
   replies,
   threadId,
-}: Comment & ReplyModel) {
+}: Comment) {
   const hasReplies = !!replies?.length
 
   return (

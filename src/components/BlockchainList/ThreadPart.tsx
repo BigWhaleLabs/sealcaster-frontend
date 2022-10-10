@@ -1,27 +1,18 @@
 import { AccentText } from 'components/ui/Text'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
-import { useSnapshot } from 'valtio'
 import BareCard from 'components/BareCard'
+import Comment from 'models/Comment'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
-import PostStore, { fetchThread } from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
+import useThread from 'hooks/useThread'
 
 const wrapper = classnames(
   display('flex'),
   flexDirection('flex-col'),
   gap('gap-y-3')
 )
-
-type CommentNode = {
-  id: number
-  timestamp: number
-  content: string
-  replier: string
-  repliedTo: string
-  replies: CommentNode[]
-}
 
 function makeCommentNode(
   {
@@ -30,7 +21,9 @@ function makeCommentNode(
     repliedTo,
     replier,
     content,
+    threadId,
   }: {
+    threadId: number
     id: number
     timestamp: number
     content: string
@@ -38,9 +31,10 @@ function makeCommentNode(
     repliedTo: string
   },
   posts: PostStructOutput[]
-): CommentNode {
+): Comment {
   return {
     id,
+    threadId,
     timestamp,
     replier,
     content,
@@ -51,6 +45,7 @@ function makeCommentNode(
         makeCommentNode(
           {
             id: +id,
+            threadId,
             replier,
             content,
             repliedTo,
@@ -73,6 +68,7 @@ function buildCommentsTree(
       makeCommentNode(
         {
           id: +id,
+          threadId,
           replier,
           content,
           timestamp: +timestamp,
@@ -96,38 +92,33 @@ export default function ({
   postId: number
   limitThread?: number
 }) {
-  const { threads } = useSnapshot(PostStore)
-  const thread = threads[threadId]
+  const threadInfo = useThread(threadId)
 
-  if (!thread) {
-    fetchThread(threadId)
-    return null
-  }
+  if (!threadInfo) return null
 
-  const comments = buildCommentsTree(
+  const commentsTree = buildCommentsTree(
     threadId,
     threadCreator,
-    Array.from(thread)
+    threadInfo.thread
   )
 
-  const commentsLength = comments.length
+  const commentsLength = threadInfo.thread.length
 
   return (
     <div className={wrapper}>
       <Replies
         replyToId={postId}
         threadId={threadId}
-        count={comments.length}
+        count={commentsLength}
         placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
       />
-      {comments.map(
+      {commentsTree.map(
         ({ timestamp, content, replier, repliedTo, replies, id }, index) =>
           limitThread ? (
             index < limitThread && (
               <CommentWithReplies
                 threadId={threadId}
                 id={id}
-                replyToId={id}
                 timestamp={timestamp}
                 content={content}
                 replier={replier}
@@ -138,7 +129,6 @@ export default function ({
             <CommentWithReplies
               threadId={threadId}
               id={id}
-              replyToId={id}
               timestamp={timestamp}
               content={content}
               replier={replier}

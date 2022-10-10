@@ -11,10 +11,10 @@ export default function (threadId: number) {
     return null
   }
 
-  if (!post) {
-    fetchPost(threadId)
+  if (!post && threadId !== 0) {
+    fetchPost(threadId + 1)
     return null
   }
 
-  return { ...post, threadId, thread: Object.values(thread) }
+  return { ...post, threadId, thread: Array.from(thread) }
 }
