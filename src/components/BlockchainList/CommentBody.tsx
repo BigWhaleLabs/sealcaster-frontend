@@ -73,7 +73,7 @@ export default function ({
 
   return (
     // TODO: anchor should be real
-    <BareCard data-anchor={`#reply=${repliedTo}`}>
+    <BareCard data-anchor={`#reply=${replyToId}`}>
       <div className={space('space-y-4')} ref={ref}>
         <div className={commentWithReplyButton}>
           <div className={commentWithData}>
