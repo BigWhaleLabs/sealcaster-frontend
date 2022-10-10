@@ -53,7 +53,6 @@ function QuestionOfDaySuspended() {
         <Replies
           count={Array.from(thread).length}
           placeholder="Answer today’s question..."
-          withHowItWorks
         />
       </Card>
     </div>

@@ -1,5 +1,7 @@
 import { AccentText } from 'components/ui/Text'
 import { JSX } from 'preact/jsx-runtime'
+import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
+import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import Arrow from 'icons/Arrow'
 import Button from 'components/ui/Button'
@@ -9,11 +11,13 @@ import classnames, {
   alignItems,
   display,
   flexDirection,
+  fontFamily,
   fontSize,
   gap,
   justifyContent,
   width,
 } from 'classnames/tailwind'
+import walletStore from 'stores/WalletStore'
 
 const hintWrapper = classnames(
   display('inline-flex'),
@@ -47,6 +51,8 @@ export default function ({
 }) {
   const [expanded, setExpanded] = useState(false)
 
+  const { account } = useSnapshot(walletStore)
+
   return (
     <>
       <div className={textAreaInfoWrapper}>
@@ -55,15 +61,21 @@ export default function ({
         ) : (
           <>
             <AccentText extraSmall color="text-accent">
-              <span
-                className={hintWrapper}
-                onClick={() => setExpanded(!expanded)}
-              >
-                How is it done anonymously?{' '}
-                <div className={width('w-4')}>
-                  <Arrow pulseDisabled open={expanded} />
-                </div>
-              </span>
+              {account ? (
+                <span className={fontFamily('font-primary')}>
+                  Posting from: {truncateMiddleIfNeeded(account, 12)}
+                </span>
+              ) : (
+                <span
+                  className={hintWrapper}
+                  onClick={() => setExpanded(!expanded)}
+                >
+                  How is it done anonymously?{' '}
+                  <div className={width('w-4')}>
+                    <Arrow pulseDisabled open={expanded} />
+                  </div>
+                </span>
+              )}
             </AccentText>
           </>
         )}
