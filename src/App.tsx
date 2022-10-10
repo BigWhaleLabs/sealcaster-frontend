@@ -46,9 +46,11 @@ export default function () {
     <Router>
       <Navbar />
       <div className={pageContainer}>
-        <SliderTicker
-          sentences={['spill your tea', 'snatch your burner wallet ']}
-        />
+        {location === '/' && (
+          <SliderTicker
+            sentences={['spill your tea', 'snatch your burner wallet ']}
+          />
+        )}
         <div className={bodyContainer(is404)}>
           <Switch>
             <Route path="/">
