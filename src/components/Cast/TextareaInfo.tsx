@@ -9,6 +9,7 @@ import ErrorMessage from 'components/ui/ErrorMessage'
 import HowItWorks from 'components/HowItWorks'
 import classnames, {
   alignItems,
+  cursor,
   display,
   flexDirection,
   fontFamily,
@@ -23,7 +24,8 @@ const hintWrapper = classnames(
   display('inline-flex'),
   alignItems('items-center'),
   gap('gap-x-1'),
-  fontSize('text-xs')
+  fontSize('text-xs'),
+  cursor('cursor-pointer')
 )
 
 const textAreaInfoWrapper = (customBlock?: boolean) =>
