@@ -34,7 +34,7 @@ const cardContainer = (small?: boolean, blueBg?: boolean) => {
     zIndex('z-20')
   )
   // added via css because tailwind class overwrites by material-ui
-  return classNamesToString(card, 'shadow-card')
+  return classNamesToString(card, 'shadow-card', 'gradient-beauty')
 }
 
 export default function ({
