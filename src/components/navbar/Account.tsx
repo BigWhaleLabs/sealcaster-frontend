@@ -1,6 +1,5 @@
 import { AccentText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import { useLocation } from 'wouter'
 import ENSAddress from 'components/ui/ENSAddress'
 import Network from 'models/Network'
 import walletStore from 'stores/WalletStore'
@@ -14,8 +13,6 @@ export default function ({
   needNetworkChange: boolean
   eNSName?: string
 }) {
-  const [location, setLocation] = useLocation()
-
   const NotConnected = () =>
     needNetworkChange ? (
       <span>Change network</span>
@@ -23,8 +20,6 @@ export default function ({
       <div
         onClick={async () => {
           await walletStore.connect(true)
-          if ((await walletStore.hasFarcasterBadge) && location !== '/cast')
-            setLocation('/cast')
         }}
       >
         <span className={displayTo('lg')}>No wallet</span>
