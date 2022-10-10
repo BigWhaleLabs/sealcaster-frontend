@@ -257,10 +257,3 @@ circle {
     width: 140%;
   }
 }
-
-.gradient-beauty {
-  background: linear-gradient(var(--primary-dark), var(--primary-dark))
-      padding-box,
-    linear-gradient(90deg, #ff7bed 2.34%, #fed823 100%) border-box;
-  border: 1px solid transparent;
-}
