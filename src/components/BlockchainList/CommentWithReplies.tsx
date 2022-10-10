@@ -1,5 +1,6 @@
 import Comment from 'models/Comment'
 import CommentBody from 'components/BlockchainList/CommentBody'
+import ReplyModel from 'models/ReplyModel'
 import classnames, {
   borderColor,
   borderWidth,
@@ -30,14 +31,20 @@ const commentLine = classnames(
 )
 
 const Replies = ({
+  id,
   content,
   replier,
   repliedTo,
   timestamp,
   replies,
-}: Comment) => {
+  threadId,
+  replyToId,
+}: Comment & ReplyModel) => {
   return (
     <CommentWithReplies
+      threadId={threadId}
+      id={id}
+      replyToId={replyToId}
       content={content}
       replier={replier}
       repliedTo={repliedTo}
@@ -48,17 +55,21 @@ const Replies = ({
 }
 
 export default function CommentWithReplies({
+  id,
   content,
   replier,
   repliedTo,
   timestamp,
   replies,
-}: Comment) {
+  threadId,
+}: Comment & ReplyModel) {
   const hasReplies = !!replies?.length
 
   return (
     <div>
       <CommentBody
+        threadId={threadId}
+        replyToId={id}
         content={content}
         replier={replier}
         repliedTo={repliedTo}
@@ -71,8 +82,10 @@ export default function CommentWithReplies({
           <a className={commentLine} href="#reply-1" />
           <div className={repliesBlock}>
             {replies.map(
-              ({ content, replier, repliedTo, timestamp, replies }) => (
+              ({ content, replier, repliedTo, timestamp, replies, id }) => (
                 <Replies
+                  id={id}
+                  threadId={threadId}
                   content={content}
                   replier={replier}
                   repliedTo={repliedTo}

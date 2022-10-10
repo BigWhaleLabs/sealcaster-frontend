@@ -1,8 +1,10 @@
 import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { useSnapshot } from 'valtio'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
+import PostStore from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
 import Sender from 'components/BlockchainList/Sender'
 import StickLabel from 'components/QuestionOfTheDay/StickLabel'
@@ -26,7 +28,8 @@ const postInfo = classnames(
 )
 
 function QuestionOfDaySuspended() {
-  const data = useThread()
+  const { questionDay } = useSnapshot(PostStore)
+  const data = useThread(questionDay)
 
   if (!data) return null
 
@@ -51,6 +54,8 @@ function QuestionOfDaySuspended() {
         </span>
         <Delimiter horizontal color="bg-divider" />
         <Replies
+          threadId={questionDay}
+          replyToId={questionDay}
           count={Array.from(thread).length}
           placeholder="Answer today’s question..."
         />

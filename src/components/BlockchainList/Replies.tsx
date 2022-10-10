@@ -3,6 +3,7 @@ import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
 import ReplyIcon from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
+import ReplyModel from 'models/ReplyModel'
 import classnames, {
   alignItems,
   display,
@@ -22,11 +23,13 @@ export default function ({
   count,
   placeholder,
   replyText,
+  threadId,
+  replyToId,
 }: {
   count: number
   placeholder: string
   replyText?: string
-}) {
+} & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
 
   return (
@@ -44,7 +47,13 @@ export default function ({
           </AccentText>
         </div>
       </Button>
-      {inputOpen && <ReplyInput placeholder={placeholder} />}
+      {inputOpen && (
+        <ReplyInput
+          threadId={threadId}
+          replyToId={replyToId}
+          placeholder={placeholder}
+        />
+      )}
     </>
   )
 }

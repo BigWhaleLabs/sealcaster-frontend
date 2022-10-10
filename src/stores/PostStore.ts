@@ -7,7 +7,6 @@ import BurnerWalletStore from 'stores/BurnerWalletStore'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
-import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
 import parsePostLogData from 'helpers/parsePostLogData'
 import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
@@ -17,10 +16,9 @@ import walletStore from 'stores/WalletStore'
 
 interface PostStoreType {
   limit: number
-  questionDay: Promise<PostStructOutput>
-  posts: Promise<PostStructOutput[]>
+  questionDay: number
+  posts: { [postId: number]: Promise<PostStructOutput> }
   threads: { [threadId: number]: Promise<PostStructOutput[]> }
-  postsAmount: Promise<number>
   selectedToken?: string
   createPost: (
     text: string,
@@ -36,12 +34,9 @@ const limit = 100
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  questionDay: farcasterContract.posts(0).then(safeTransformPostOutput),
-  postsAmount: safeGetPostsAmountFromContract(farcasterContract),
+  questionDay: 0,
   threads: {},
-  posts: getMorePosts({
-    contract: farcasterContract,
-  }),
+  posts: {},
   selectedToken: undefined,
   idToPostTx: getIdsToPostsTx(farcasterContract),
   createPost: async (text: string, threadId: number, replyToId: number) => {
@@ -82,20 +77,24 @@ export function fetchThread(threadId: number) {
   )
 }
 
+export function fetchPost(postId: number) {
+  if (typeof PostStore.posts[postId] !== 'undefined') return
+  PostStore.posts[postId] = farcasterContract
+    .posts(postId)
+    .then(safeTransformPostOutput)
+}
+
 farcasterContract.on(
   farcasterContract.filters.PostSaved(),
-  async (id, post, derivativeAddress, sender, timestamp) => {
-    const posts = await PostStore.posts
-    PostStore.posts = Promise.resolve([
-      {
-        id,
-        post,
-        derivativeAddress,
-        sender,
-        timestamp,
-      } as PostStructOutput,
-      ...posts,
-    ])
+  (id, post, derivativeAddress, sender, timestamp) => {
+    PostStore.posts[id.toNumber()] = Promise.resolve({
+      id,
+      post,
+      derivativeAddress,
+      sender,
+      timestamp,
+    } as PostStructOutput)
+
     PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve({
       status: PostStatus.pending,
     })

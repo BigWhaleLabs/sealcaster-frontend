@@ -34,8 +34,6 @@ export default function (threadId: number, replyToId: number) {
 
       BurnerWalletStore.status = 'Posting cast'
       const result = await PostStore.createPost(text, threadId, replyToId)
-      const numberOfPosts = await PostStore.postsAmount
-      PostStore.postsAmount = Promise.resolve(numberOfPosts + result.length)
 
       for (const { id } of result) {
         const blockchainId = id.toNumber()

@@ -8,6 +8,7 @@ import Delimiter from 'components/ui/Delimiter'
 import PostTime from 'components/BlockchainList/PostTime'
 import ReplyIcon from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
+import ReplyModel from 'models/ReplyModel'
 import SmallArrow from 'components/ui/SmallArrow'
 import classnames, {
   alignItems,
@@ -58,12 +59,14 @@ export default function ({
   replier,
   repliedTo,
   timestamp,
+  threadId,
+  replyToId,
 }: {
   content: string
   replier: string
   repliedTo: string
   timestamp: number
-}) {
+} & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
   const ref = createRef()
   useClickOutside(ref, () => setInputOpen(false))
@@ -92,6 +95,8 @@ export default function ({
         </div>
         {inputOpen && (
           <ReplyInput
+            threadId={threadId}
+            replyToId={replyToId}
             placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 12)}`}
           />
         )}

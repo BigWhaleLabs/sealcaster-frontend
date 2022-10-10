@@ -11,7 +11,9 @@ const SuspendedThread = () => {
   const [location] = useLocation()
   const blockchainId = Number(location.split('/')[2])
   const { posts, idToPostTx } = useSnapshot(PostStore)
-  const postData = posts.find(({ id }) => Number(id) === blockchainId)
+  const postData = Object.values(posts).find(
+    ({ id }) => Number(id) === blockchainId
+  )
 
   if (!postData) return null
 

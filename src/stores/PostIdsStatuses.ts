@@ -71,8 +71,8 @@ async function checkStatuses({ ids, force }: CheckStatusesStoreProps) {
   }
 }
 
-async function updateStatusesForAllPosts() {
-  const ids = (await PostStore.posts).map(({ id }) => id.toNumber())
+function updateStatusesForAllPosts() {
+  const ids = Object.keys(PostStore.posts).map(Number)
   void checkStatuses({ ids, force: true })
 }
 

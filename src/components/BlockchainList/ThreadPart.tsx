@@ -115,14 +115,19 @@ export default function ({
   return (
     <div className={wrapper}>
       <Replies
+        replyToId={postId}
+        threadId={threadId}
         count={comments.length}
         placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
       />
       {comments.map(
-        ({ timestamp, content, replier, repliedTo, replies }, index) =>
+        ({ timestamp, content, replier, repliedTo, replies, id }, index) =>
           limitThread ? (
             index < limitThread && (
               <CommentWithReplies
+                threadId={threadId}
+                id={id}
+                replyToId={id}
                 timestamp={timestamp}
                 content={content}
                 replier={replier}
@@ -131,6 +136,9 @@ export default function ({
             )
           ) : (
             <CommentWithReplies
+              threadId={threadId}
+              id={id}
+              replyToId={id}
               timestamp={timestamp}
               content={content}
               replier={replier}

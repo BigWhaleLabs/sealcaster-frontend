@@ -1,56 +1,35 @@
-import { Suspense, useState } from 'preact/compat'
+import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import CustomizeCard from 'components/BlockchainList/CustomizeCard'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import LoadingList from 'components/BlockchainList/LoadingList'
 import NoPosts from 'components/BlockchainList/NoPosts'
 import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
-import classnames, { display, flexDirection, gap } from 'classnames/tailwind'
 import flashingPost from 'helpers/flashingPost'
-import getMorePosts from 'helpers/getMorePosts'
-import getPostStorage from 'helpers/getPostStorage'
 import useHashParams from 'hooks/useHashParams'
 import useScrollToAnchor from 'hooks/useScrollToAnchor'
-
-const scrollContainer = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  gap('gap-y-4')
-)
+import useThread from 'hooks/useThread'
 
 export function PostListSuspended() {
-  const { posts, selectedToken, postsAmount, limit, idToPostTx } =
-    useSnapshot(PostStore)
+  const data = useThread(0)
+  const { selectedToken, idToPostTx } = useSnapshot(PostStore)
   const hashId = useHashParams()
-  const [, setScrolledLimit] = useState(limit)
-  const amountOfLoadedPosts = posts.length
 
-  const postsLoaded = selectedToken
-    ? posts.filter(
-        ({ derivativeAddress }) => derivativeAddress === PostStore.selectedToken
-      )
-    : posts
+  const amountOfLoadedPosts = data ? data.thread.length : 0
 
   if (hashId && !!amountOfLoadedPosts)
     useScrollToAnchor({ callback: flashingPost })
 
-  return postsAmount > 0 ? (
-    <InfiniteScroll
-      next={async () => {
-        const newPosts = await getMorePosts({
-          contract: getPostStorage(),
-        })
-        PostStore.posts = Promise.resolve([...posts, ...newPosts])
-        setScrolledLimit(PostStore.limit)
-      }}
-      className={scrollContainer}
-      style={{ overflow: 'hidden' }}
-      dataLength={amountOfLoadedPosts}
-      hasMore={amountOfLoadedPosts < postsAmount}
-      loader={<LoadingList text="Fetching more posts..." />}
-      endMessage={postsAmount < 3 ? <CustomizeCard /> : undefined}
-    >
+  if (!data) return <></>
+
+  const postsLoaded = selectedToken
+    ? data.thread.filter(
+        ({ derivativeAddress }) => derivativeAddress === PostStore.selectedToken
+      )
+    : data.thread
+
+  return postsLoaded.length > 0 ? (
+    <>
       {postsLoaded.map((post, index) => (
         <>
           <Post
@@ -65,7 +44,7 @@ export function PostListSuspended() {
           {index === 2 && <CustomizeCard />}
         </>
       ))}
-    </InfiniteScroll>
+    </>
   ) : (
     <NoPosts />
   )
