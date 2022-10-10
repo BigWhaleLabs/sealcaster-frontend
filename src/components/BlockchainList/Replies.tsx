@@ -21,12 +21,10 @@ const replyButtonWrapper = classnames(
 export default function ({
   count,
   placeholder,
-  withHowItWorks,
   replyText,
 }: {
   count: number
   placeholder: string
-  withHowItWorks?: boolean
   replyText?: string
 }) {
   const [inputOpen, setInputOpen] = useState(false)
@@ -46,9 +44,7 @@ export default function ({
           </AccentText>
         </div>
       </Button>
-      {inputOpen && (
-        <ReplyInput placeholder={placeholder} withHowItWorks={withHowItWorks} />
-      )}
+      {inputOpen && <ReplyInput placeholder={placeholder} />}
     </>
   )
 }

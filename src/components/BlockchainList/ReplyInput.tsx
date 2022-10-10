@@ -5,13 +5,7 @@ import CastBlock from 'components/Cast/CastBlock'
 import useThread from 'hooks/useThread'
 import walletStore from 'stores/WalletStore'
 
-export default function ({
-  placeholder,
-  withHowItWorks,
-}: {
-  placeholder?: string
-  withHowItWorks?: boolean
-}) {
+export default function ({ placeholder }: { placeholder?: string }) {
   const { account } = useSnapshot(walletStore)
   const data = useThread()
 
@@ -19,19 +13,17 @@ export default function ({
 
   const { threadId } = data
 
-  if (!account) return null
-
   return (
     <CastBlock
       threadId={threadId}
       replyToId={threadId}
       placeHolder={placeholder}
       leftBlock={
-        withHowItWorks ? undefined : (
+        account ? (
           <StatusText>
             Replying from {truncateMiddleIfNeeded(account, 12)}
           </StatusText>
-        )
+        ) : undefined
       }
     />
   )
