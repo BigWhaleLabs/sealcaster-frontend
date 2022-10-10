@@ -7,7 +7,6 @@ import classnames, {
   letterSpacing,
   padding,
   textTransform,
-  userSelect,
   whitespace,
   willChange,
 } from 'classnames/tailwind'
@@ -19,8 +18,7 @@ const ticker = classnames(
   textTransform('uppercase'),
   backgroundColor('bg-primary-dark-transparent'),
   padding('py-2'),
-  letterSpacing('tracking-extra-wide'),
-  userSelect('select-none')
+  letterSpacing('tracking-extra-wide')
 )
 const oneLine = classnames(
   animation('animate-ticker'),
