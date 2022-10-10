@@ -25,8 +25,8 @@ const cardContainer = (
 ) => {
   const card = classnames(
     position('relative'),
-    borderWidth(blueBg ? 'border-0' : 'border'),
-    borderColor({ 'border-half-grey': !gradient }),
+    borderWidth(blueBg ? 'border-0' : { border: !gradient }),
+    borderColor('border-half-grey'),
     borderRadius('rounded-2xl'),
     backgroundColor(blueBg ? 'bg-primary-background' : 'bg-primary-dark'),
     padding(small ? 'p-4' : 'p-6'),
