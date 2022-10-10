@@ -1563,7 +1563,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/seal-cred-posts-contract@npm:^0.0.14-0":
+"@big-whale-labs/seal-cred-posts-contract@npm:0.0.14-0":
   version: 0.0.14-0
   resolution: "@big-whale-labs/seal-cred-posts-contract@npm:0.0.14-0"
   checksum: 4c7aaeb6ac7c96e4e4e8cbf453912b7a3d286004045bec69e779899a8d664233869e2b8ac67d5d175e06ad514f417b08e2d147ac4b57a790c3992546c1f11708
@@ -15911,7 +15911,7 @@ __metadata:
   dependencies:
     "@big-whale-labs/constants": ^0.1.35
     "@big-whale-labs/frontend-utils": ^0.0.10
-    "@big-whale-labs/seal-cred-posts-contract": ^0.0.14-0
+    "@big-whale-labs/seal-cred-posts-contract": 0.0.14-0
     "@big-whale-labs/stores": ^0.1.17
     "@coinbase/wallet-sdk": ^3.5.2
     "@esbuild-plugins/node-globals-polyfill": ^0.1.1
