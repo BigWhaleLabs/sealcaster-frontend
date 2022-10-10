@@ -26,13 +26,14 @@ const hintWrapper = classnames(
   fontSize('text-xs')
 )
 
-const textAreaInfoWrapper = classnames(
-  display('flex'),
-  justifyContent('justify-between'),
-  flexDirection('flex-col', 'md:flex-row'),
-  alignItems('md:items-center'),
-  gap('gap-y-4', 'md:gap-y-0')
-)
+const textAreaInfoWrapper = (customBlock?: boolean) =>
+  classnames(
+    display('flex'),
+    justifyContent('justify-between'),
+    flexDirection(customBlock ? 'flex-col' : 'flex-col-reverse', 'md:flex-row'),
+    alignItems('items-center'),
+    gap('gap-y-4', 'md:gap-y-0')
+  )
 
 export default function ({
   error,
@@ -55,7 +56,7 @@ export default function ({
 
   return (
     <>
-      <div className={textAreaInfoWrapper}>
+      <div className={textAreaInfoWrapper(!!leftBlock)}>
         {leftBlock ? (
           leftBlock
         ) : (
@@ -85,6 +86,7 @@ export default function ({
             loading={loading}
             center
             small
+            fullWidthOnMobile
             type="primary"
             disabled={disabled}
             onClick={onButtonClick}

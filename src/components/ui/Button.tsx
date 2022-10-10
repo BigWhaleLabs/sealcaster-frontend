@@ -37,6 +37,7 @@ import Loading from 'icons/Loading'
 const commonClasses = ({
   type,
   fullWidth,
+  fullWidthOnMobile,
   center,
   available,
   small,
@@ -45,6 +46,7 @@ const commonClasses = ({
 }: {
   type: ButtonType
   fullWidth?: boolean
+  fullWidthOnMobile?: boolean
   center?: boolean
   available?: boolean
   small?: boolean
@@ -71,7 +73,10 @@ const commonClasses = ({
           'active:shadow-button-active': available && !gradientFont,
         })
       : undefined,
-    width({ 'w-full': fullWidth }),
+    width({
+      'w-full': fullWidth || fullWidthOnMobile,
+      'md:w-fit': fullWidthOnMobile,
+    }),
     height({ 'h-fit': heightFit }),
     textAlign({ 'text-center': center }),
     fontSize(small ? 'text-sm' : 'text-lg'),
@@ -94,12 +99,14 @@ const button = ({
   type,
   small,
   gradientFont,
+  fullWidthOnMobile,
   heightFit,
 }: ButtonProps & { available?: boolean }) =>
   classnames(
     commonClasses({
       type,
       fullWidth,
+      fullWidthOnMobile,
       center,
       available,
       small,
@@ -180,6 +187,7 @@ interface ButtonProps {
   loadingOverflow?: boolean
   url?: string
   fullWidth?: boolean
+  fullWidthOnMobile?: boolean
   center?: boolean
   heightFit?: boolean
 }
@@ -188,6 +196,7 @@ type ButtonType = 'primary' | 'secondary' | 'tertiary'
 
 export default function ({
   fullWidth,
+  fullWidthOnMobile,
   center,
   small,
   withArrow,
@@ -208,6 +217,7 @@ export default function ({
     <button
       className={button({
         fullWidth,
+        fullWidthOnMobile,
         available,
         center,
         type,
