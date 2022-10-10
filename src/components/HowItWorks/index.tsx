@@ -29,7 +29,7 @@ export default function () {
   const hasBurnerWallet = !!privateKey
 
   return (
-    <Card>
+    <Card gradient>
       <div className={cardContainer}>
         <div className={width('w-14')}>
           <SealEye upsideDown={hasBurnerWallet} />

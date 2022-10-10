@@ -15,13 +15,18 @@ import {
   zIndex,
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
+import GradientBorder from 'components/ui/GradientBorder'
 import classNamesToString from 'helpers/classNamesToString'
 
-const cardContainer = (small?: boolean, blueBg?: boolean) => {
+const cardContainer = (
+  small?: boolean,
+  blueBg?: boolean,
+  gradient?: boolean
+) => {
   const card = classnames(
     position('relative'),
     borderWidth(blueBg ? 'border-0' : 'border'),
-    borderColor('border-half-grey'),
+    borderColor({ 'border-half-grey': !gradient }),
     borderRadius('rounded-2xl'),
     backgroundColor(blueBg ? 'bg-primary-background' : 'bg-primary-dark'),
     padding(small ? 'p-4' : 'p-6'),
@@ -41,6 +46,17 @@ export default function ({
   children,
   small,
   blueBg,
-}: ChildrenProp & { small?: boolean; blueBg?: boolean }) {
-  return <div className={cardContainer(small, blueBg)}>{children}</div>
+  gradient,
+}: ChildrenProp & { small?: boolean; blueBg?: boolean; gradient?: boolean }) {
+  const content = (
+    <div className={cardContainer(small, blueBg, gradient)}>{children}</div>
+  )
+
+  return gradient ? (
+    <GradientBorder smallRadius withoutShadow>
+      {content}
+    </GradientBorder>
+  ) : (
+    content
+  )
 }
