@@ -85,7 +85,6 @@ export default function CommentWithReplies({
                   content={content}
                   replier={replier}
                   repliedTo={repliedTo}
-                  replyToId={rootId}
                   timestamp={timestamp}
                   replies={replies}
                 />
