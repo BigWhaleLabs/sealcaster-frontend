@@ -25,7 +25,7 @@ export default function ({
       replyToId={threadId}
       placeHolder={placeholder}
       leftBlock={
-        withHowItWorks ? undefined : (
+        withHowItWorks || !account ? undefined : (
           <StatusText>
             Replying from {truncateMiddleIfNeeded(account, 12)}
           </StatusText>
