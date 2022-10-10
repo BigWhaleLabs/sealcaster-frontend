@@ -33,7 +33,7 @@ const limit = 100
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  questionDay: 0,
+  questionDay: 1,
   threads: {},
   posts: {},
   selectedToken: undefined,
@@ -78,8 +78,8 @@ export function fetchThread(threadId: number) {
 
 export function fetchPost(postId: number) {
   if (typeof PostStore.posts[postId] !== 'undefined') return
-  PostStore.posts[postId] = farcasterContract
-    .posts(postId)
+  PostStore.posts[postId - 1] = farcasterContract
+    .posts(postId - 1)
     .then(safeTransformPostOutput)
 }
 

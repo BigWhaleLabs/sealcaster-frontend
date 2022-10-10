@@ -5,32 +5,32 @@ import LoadingList from 'components/BlockchainList/LoadingList'
 import NoPosts from 'components/BlockchainList/NoPosts'
 import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
-import flashingPost from 'helpers/flashingPost'
+import flashingThread from 'helpers/flashingPost'
 import useHashParams from 'hooks/useHashParams'
 import useScrollToAnchor from 'hooks/useScrollToAnchor'
 import useThread from 'hooks/useThread'
 
 export function PostListSuspended() {
-  const data = useThread(0)
   const { selectedToken, idToPostTx } = useSnapshot(PostStore)
+  const threadInfo = useThread(0)
   const hashId = useHashParams()
 
-  const amountOfLoadedPosts = data ? data.thread.length : 0
+  const posts = threadInfo ? threadInfo.thread : []
 
-  if (hashId && !!amountOfLoadedPosts)
-    useScrollToAnchor({ callback: flashingPost })
-
-  if (!data) return <></>
-
-  const postsLoaded = selectedToken
-    ? data.thread.filter(
+  const filteredPosts = selectedToken
+    ? posts.filter(
         ({ derivativeAddress }) => derivativeAddress === PostStore.selectedToken
       )
-    : data.thread
+    : posts
 
-  return postsLoaded.length > 0 ? (
+  if (hashId && filteredPosts.length > 0)
+    useScrollToAnchor({ callback: flashingThread })
+
+  if (filteredPosts.length === 0) return <NoPosts />
+
+  return (
     <>
-      {postsLoaded.map((post, index) => (
+      {filteredPosts.map((post, index) => (
         <>
           <Post
             key={post.id}
@@ -45,8 +45,6 @@ export function PostListSuspended() {
         </>
       ))}
     </>
-  ) : (
-    <NoPosts />
   )
 }
 

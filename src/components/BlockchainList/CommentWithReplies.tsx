@@ -38,20 +38,20 @@ const Replies = ({
   timestamp,
   replies,
   threadId,
-  replyToId,
   isThreadOwned,
+  replyToId,
 }: Comment & ReplyModel) => {
   return (
     <CommentWithReplies
-      threadId={threadId}
       id={id}
-      replyToId={replyToId}
       content={content}
-      replier={replier}
       repliedTo={repliedTo}
+      replier={replier}
+      threadId={threadId}
       timestamp={timestamp}
       replies={replies}
       isThreadOwned={isThreadOwned}
+      replyToId={replyToId}
     />
   )
 }
@@ -64,6 +64,7 @@ export default function CommentWithReplies({
   timestamp,
   replies,
   threadId,
+  replyToId,
   isThreadOwned,
 }: Comment & ReplyModel) {
   const hasReplies = !!replies?.length
@@ -100,10 +101,10 @@ export default function CommentWithReplies({
                   content={content}
                   replier={replier}
                   repliedTo={repliedTo}
-                  replyToId={rootId}
                   timestamp={timestamp}
                   replies={replies}
                   isThreadOwned={isThreadOwned}
+                  replyToId={replyToId}
                 />
               )
             )}
