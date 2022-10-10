@@ -9,9 +9,12 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 
+const generalBorderRadius = (smallRadius?: boolean) =>
+  borderRadius(smallRadius ? 'rounded-2xl' : 'rounded-full')
+
 const parentButtonWrapper = (smallRadius?: boolean, withoutShadow?: boolean) =>
   classnames(
-    borderRadius(smallRadius ? 'rounded-2xl' : 'rounded-full'),
+    generalBorderRadius(smallRadius),
     backgroundImage('bg-gradient-to-r'),
     padding('p-px'),
     gradientColorStops('from-secondary', 'to-accent'),
@@ -26,7 +29,7 @@ const parentButtonWrapper = (smallRadius?: boolean, withoutShadow?: boolean) =>
 const innerButtonWrapper = (smallRadius?: boolean) =>
   classnames(
     width('w-full'),
-    borderRadius(smallRadius ? 'rounded-2xl' : 'rounded-full'),
+    generalBorderRadius(smallRadius),
     backgroundColor('bg-primary-dark')
   )
 
