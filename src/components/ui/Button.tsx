@@ -227,7 +227,7 @@ export default function ({
           {gradientFont ? (
             <span className={textGradient(available)}>{children}</span>
           ) : (
-            <div>{children}</div>
+            <>{children}</>
           )}
         </>
       )}

@@ -22,6 +22,7 @@ module.exports = {
         'error-dark': 'var(--error-dark)',
 
         'primary-dark': 'var(--primary-dark)',
+        'primary-semi-dark': 'var(--primary-semi-dark)',
         'primary-light': 'var(--primary-light)',
         'primary-dimmed': 'var(--primary-dimmed)',
         'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
