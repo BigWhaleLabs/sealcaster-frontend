@@ -19,8 +19,6 @@ export default function ({
 
   const { threadId } = data
 
-  if (!account) return null
-
   return (
     <CastBlock
       threadId={threadId}
