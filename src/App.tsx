@@ -43,10 +43,10 @@ export default function () {
   return (
     <Router>
       <Navbar />
-      <SliderTicker
-        sentences={['spill your tea', 'snatch your burner wallet']}
-      />
       <div className={pageContainer}>
+        <SliderTicker
+          sentences={['spill your tea', 'snatch your burner wallet ']}
+        />
         <div className={bodyContainer(is404)}>
           <Switch>
             <Route path="/">

@@ -117,10 +117,16 @@ module.exports = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        translateXNegativeFull: {
+          '100%': {
+            transform: 'translateX(-100%)',
+          },
+        },
       },
       animation: {
         'pulse-horizontal': 'pulse-horizontal 2s ease-in-out infinite',
         rotate: 'rotate linear 3.5s infinite',
+        ticker: 'translateXNegativeFull 12s linear infinite',
       },
       rotate: {
         '-15': '-15deg',

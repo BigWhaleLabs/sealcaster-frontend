@@ -4511,6 +4511,7 @@ export type TAnimation =
   | 'animate-bounce'
   | 'animate-pulse-horizontal'
   | 'animate-rotate'
+  | 'animate-ticker'
 
 export type TTransitionsAndAnimations =
   | TTransitionProperty

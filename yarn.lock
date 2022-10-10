@@ -15129,17 +15129,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-ticker@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "react-ticker@npm:1.3.2"
-  peerDependencies:
-    prop-types: ^15.8.0
-    react: ^17.0.2
-    react-dom: ^17.0.2
-  checksum: bdf0434886628b4f7e0bf5e75d374852e285877de73f821bca51a157d649c8ee5ec9b98ece6c98c05bbc34e7f70cd5bb4c245cd78cc329de99b0e27da194b307
-  languageName: node
-  linkType: hard
-
 "react-toastify@npm:^9.0.8":
   version: 9.0.8
   resolution: "react-toastify@npm:9.0.8"
@@ -15967,7 +15956,6 @@ __metadata:
     react-parallax-tilt: ^1.7.68
     react-scripts: ^5.0.1
     react-textarea-autosize: ^8.3.4
-    react-ticker: ^1.3.2
     react-toastify: ^9.0.8
     rollup-plugin-polyfill-node: ^0.10.2
     rollup-plugin-visualizer: ^5.8.1
