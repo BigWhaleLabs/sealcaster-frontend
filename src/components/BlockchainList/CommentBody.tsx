@@ -1,5 +1,4 @@
 import { BodyText, LinkText } from 'components/ui/Text'
-import { createRef } from 'preact'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
@@ -19,7 +18,6 @@ import classnames, {
   space,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
-import useClickOutside from 'hooks/useClickOutside'
 
 const commentWithReplyButton = classnames(
   display('flex'),
@@ -70,14 +68,9 @@ export default function ({
   isThreadOwned?: boolean
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
-  const ref = createRef()
-  useClickOutside(ref, () => setInputOpen(false))
-
-  console.log('isThreadOwned', isThreadOwned)
-
   return (
     <BareCard data-anchor={`#reply=${replyToId}`}>
-      <div className={space('space-y-4')} ref={ref}>
+      <div className={space('space-y-4')}>
         <div className={commentWithReplyButton}>
           <div className={commentWithData}>
             <BodyText>{content}</BodyText>
