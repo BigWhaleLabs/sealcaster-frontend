@@ -8,7 +8,6 @@ import Delimiter from 'components/ui/Delimiter'
 import PostTime from 'components/BlockchainList/PostTime'
 import ReplyIcon from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
-import SmallArrow from 'components/ui/SmallArrow'
 import classnames, {
   alignItems,
   display,
@@ -42,12 +41,12 @@ const TruncatedAddress = ({ address }: { address: string }) => (
   <>
     <div className={displayFrom('md')}>
       <LinkText url={getEtherscanAddressUrl(address)} extraSmall primary>
-        {truncateMiddleIfNeeded(address, 12)}
+        {truncateMiddleIfNeeded(address, 16)}
       </LinkText>
     </div>
     <div className={displayTo('md')}>
       <LinkText url={getEtherscanAddressUrl(address)} extraSmall primary>
-        {truncateMiddleIfNeeded(address, 8)}
+        {truncateMiddleIfNeeded(address, 12)}
       </LinkText>
     </div>
   </>
@@ -77,8 +76,6 @@ export default function ({
             <BodyText>{content}</BodyText>
             <div className={infoBlock}>
               <TruncatedAddress address={replier} />
-              <SmallArrow />
-              <TruncatedAddress address={repliedTo} />
               <Delimiter color="bg-formal-accent" />
               <PostTime timestamp={timestamp} />
             </div>
@@ -92,7 +89,7 @@ export default function ({
         </div>
         {inputOpen && (
           <ReplyInput
-            placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 12)}`}
+            placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 16)}`}
           />
         )}
       </div>
