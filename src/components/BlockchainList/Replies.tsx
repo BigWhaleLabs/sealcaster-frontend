@@ -37,16 +37,20 @@ export default function ({
   return (
     <>
       <div className={replyButtonWrapper}>
-        <Button type="tertiary" onClick={() => setInputOpen(!inputOpen)}>
-          <ReplyIcon />
+        <Button
+          type="tertiary"
+          onClick={() => setInputOpen(!inputOpen)}
+          disabled={!isThreadOwned}
+        >
+          {isThreadOwned && <ReplyIcon />}
           <AccentText small color="text-formal-accent">
             <span
               className={textColor(
                 { 'text-accent': inputOpen },
-                'hover:text-accent'
+                { 'hover:text-accent': isThreadOwned }
               )}
             >
-              {replyText ? replyText : 'Reply'}
+              {replyText ? replyText : isThreadOwned ? 'Reply' : 'Replies'}
             </span>
           </AccentText>
           <AccentText primary color="text-primary-semi-dimmed" extraSmall>
