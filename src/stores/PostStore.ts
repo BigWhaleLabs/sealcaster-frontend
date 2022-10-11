@@ -33,7 +33,7 @@ const limit = 100
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  questionDay: 1,
+  questionDay: 8,
   threads: {},
   posts: {},
   selectedToken: undefined,

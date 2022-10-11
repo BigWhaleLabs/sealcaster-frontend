@@ -92,7 +92,6 @@ export default function ({
 
         <ThreadPart
           threadId={blockchainId}
-          threadCreator={sender}
           replyingTo={sender}
           limitThread={limitThread}
           postId={blockchainId}

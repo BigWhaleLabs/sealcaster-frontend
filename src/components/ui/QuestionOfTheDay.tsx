@@ -33,7 +33,7 @@ function QuestionOfDaySuspended() {
 
   if (!data) return null
 
-  const { post, sender, thread } = data
+  const { post, sender, count } = data
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -56,7 +56,7 @@ function QuestionOfDaySuspended() {
         <Replies
           threadId={questionDay}
           replyToId={questionDay}
-          count={Array.from(thread).length}
+          count={count}
           placeholder="Answer today’s question..."
         />
       </Card>
