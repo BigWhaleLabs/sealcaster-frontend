@@ -78,8 +78,8 @@ export function fetchThread(threadId: number) {
 
 export function fetchPost(postId: number) {
   if (typeof PostStore.posts[postId] !== 'undefined') return
-  PostStore.posts[postId - 1] = farcasterContract
-    .posts(postId - 1)
+  PostStore.posts[postId] = farcasterContract
+    .posts(postId)
     .then(safeTransformPostOutput)
 }
 

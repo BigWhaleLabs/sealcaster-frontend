@@ -12,7 +12,7 @@ export default function (threadId: number) {
   }
 
   if (!post && threadId !== 0) {
-    fetchPost(threadId + 1)
+    fetchPost(threadId)
     return null
   }
 
