@@ -7,11 +7,7 @@ import Delimiter from 'components/ui/Delimiter'
 import PostTime from 'components/BlockchainList/PostTime'
 import ReplyIcon from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
-<<<<<<< HEAD
 import ReplyModel from 'models/ReplyModel'
-import SmallArrow from 'components/ui/SmallArrow'
-=======
->>>>>>> feat-cast-form
 import classnames, {
   alignItems,
   display,

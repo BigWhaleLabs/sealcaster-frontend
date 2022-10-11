@@ -32,7 +32,7 @@ function makeCommentNode(
     replier: string
     repliedTo: string
   },
-  posts: PostStructOutput[]
+  posts: readonly PostStructOutput[]
 ): Comment {
   return {
     id,
@@ -62,7 +62,7 @@ function makeCommentNode(
 function buildCommentsTree(
   threadId: number,
   threadCreator: string,
-  posts: PostStructOutput[]
+  posts: readonly PostStructOutput[]
 ) {
   return posts
     .filter((post) => post.replyToId && +post.replyToId === threadId)
