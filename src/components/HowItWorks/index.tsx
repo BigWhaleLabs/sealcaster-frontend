@@ -14,9 +14,9 @@ import classnames, {
 
 const cardContainer = classnames(
   display('flex'),
-  flexDirection('flex-col', 'xs:flex-row'),
-  alignItems('items-center', 'xs:items-start'),
-  gap('gap-y-4', 'xs:gap-x-4')
+  flexDirection('flex-col', 'md:flex-row'),
+  alignItems('items-start'),
+  gap('gap-y-4', 'md:gap-x-4')
 )
 const cardTextBox = classnames(
   display('flex'),

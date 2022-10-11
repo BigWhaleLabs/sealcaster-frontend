@@ -19,6 +19,7 @@
   --red-background: #ff416140;
 
   --primary-dark: #0d0030;
+  --primary-semi-dark: #17093d;
   --primary-bright: #01f5ff;
   --primary-light: #bff5fa;
   --primary-dimmed: #3a00d6;
@@ -50,6 +51,7 @@
 
   --accent-transparent: #fed8231a;
   --secondary-transparent: #ff7bed1a;
+  --primary-dark-transparent: #0d00304d;
 
   --bg-grid: conic-gradient(
     from 90deg at 0.06rem 0.06rem,

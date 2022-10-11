@@ -9,6 +9,7 @@ import ErrorMessage from 'components/ui/ErrorMessage'
 import HowItWorks from 'components/HowItWorks'
 import classnames, {
   alignItems,
+  cursor,
   display,
   flexDirection,
   fontFamily,
@@ -23,16 +24,18 @@ const hintWrapper = classnames(
   display('inline-flex'),
   alignItems('items-center'),
   gap('gap-x-1'),
-  fontSize('text-xs')
+  fontSize('text-xs'),
+  cursor('cursor-pointer')
 )
 
-const textAreaInfoWrapper = classnames(
-  display('flex'),
-  justifyContent('justify-between'),
-  flexDirection('flex-col', 'md:flex-row'),
-  alignItems('md:items-center'),
-  gap('gap-y-4', 'md:gap-y-0')
-)
+const textAreaInfoWrapper = (customBlock?: boolean) =>
+  classnames(
+    display('flex'),
+    justifyContent('justify-between'),
+    flexDirection(customBlock ? 'flex-col' : 'flex-col-reverse', 'md:flex-row'),
+    alignItems('items-center'),
+    gap('gap-y-4', 'md:gap-y-0')
+  )
 
 export default function ({
   error,
@@ -55,7 +58,7 @@ export default function ({
 
   return (
     <>
-      <div className={textAreaInfoWrapper}>
+      <div className={textAreaInfoWrapper(!!leftBlock)}>
         {leftBlock ? (
           leftBlock
         ) : (
@@ -85,6 +88,7 @@ export default function ({
             loading={loading}
             center
             small
+            fullWidthOnMobile
             type="primary"
             disabled={disabled}
             onClick={onButtonClick}

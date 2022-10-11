@@ -288,6 +288,7 @@ export type TBackgroundColor =
   | 'bg-error'
   | 'bg-error-dark'
   | 'bg-primary-dark'
+  | 'bg-primary-semi-dark'
   | 'bg-primary-light'
   | 'bg-primary-dimmed'
   | 'bg-primary-semi-dimmed'
@@ -311,6 +312,7 @@ export type TBackgroundColor =
   | 'bg-error-semi-transparent'
   | 'bg-primary-bright'
   | 'bg-divider'
+  | 'bg-primary-dark-transparent'
 
 export type TBackgroundPosition =
   | 'bg-bottom'
@@ -1048,6 +1050,9 @@ export type TGradientColorStops =
   | 'from-primary-dark'
   | 'via-primary-dark'
   | 'to-primary-dark'
+  | 'from-primary-semi-dark'
+  | 'via-primary-semi-dark'
+  | 'to-primary-semi-dark'
   | 'from-primary-light'
   | 'via-primary-light'
   | 'to-primary-light'
@@ -1117,6 +1122,9 @@ export type TGradientColorStops =
   | 'from-divider'
   | 'via-divider'
   | 'to-divider'
+  | 'from-primary-dark-transparent'
+  | 'via-primary-dark-transparent'
+  | 'to-primary-dark-transparent'
 
 export type TBackgrounds =
   | TBackgroundAttachment
@@ -2779,6 +2787,11 @@ export type TBorderColor =
   | 'border-r-primary-dark'
   | 'border-b-primary-dark'
   | 'border-l-primary-dark'
+  | 'border-primary-semi-dark'
+  | 'border-t-primary-semi-dark'
+  | 'border-r-primary-semi-dark'
+  | 'border-b-primary-semi-dark'
+  | 'border-l-primary-semi-dark'
   | 'border-primary-light'
   | 'border-t-primary-light'
   | 'border-r-primary-light'
@@ -2894,6 +2907,11 @@ export type TBorderColor =
   | 'border-r-divider'
   | 'border-b-divider'
   | 'border-l-divider'
+  | 'border-primary-dark-transparent'
+  | 'border-t-primary-dark-transparent'
+  | 'border-r-primary-dark-transparent'
+  | 'border-b-primary-dark-transparent'
+  | 'border-l-primary-dark-transparent'
 
 export type TBorderOpacity =
   | 'border-opacity-0'
@@ -3537,6 +3555,7 @@ export type TRingColor =
   | 'ring-error'
   | 'ring-error-dark'
   | 'ring-primary-dark'
+  | 'ring-primary-semi-dark'
   | 'ring-primary-light'
   | 'ring-primary-dimmed'
   | 'ring-primary-semi-dimmed'
@@ -3560,6 +3579,7 @@ export type TRingColor =
   | 'ring-error-semi-transparent'
   | 'ring-primary-bright'
   | 'ring-divider'
+  | 'ring-primary-dark-transparent'
 
 export type TRingWidth =
   | 'ring-0'
@@ -3826,6 +3846,7 @@ export type TRingOffsetColor =
   | 'ring-offset-error'
   | 'ring-offset-error-dark'
   | 'ring-offset-primary-dark'
+  | 'ring-offset-primary-semi-dark'
   | 'ring-offset-primary-light'
   | 'ring-offset-primary-dimmed'
   | 'ring-offset-primary-semi-dimmed'
@@ -3849,6 +3870,7 @@ export type TRingOffsetColor =
   | 'ring-offset-error-semi-transparent'
   | 'ring-offset-primary-bright'
   | 'ring-offset-divider'
+  | 'ring-offset-primary-dark-transparent'
 
 export type TRingOffsetWidth =
   | 'ring-offset-0'
@@ -4109,6 +4131,7 @@ export type TOutlineColor =
   | 'outline-error'
   | 'outline-error-dark'
   | 'outline-primary-dark'
+  | 'outline-primary-semi-dark'
   | 'outline-primary-light'
   | 'outline-primary-dimmed'
   | 'outline-primary-semi-dimmed'
@@ -4132,6 +4155,7 @@ export type TOutlineColor =
   | 'outline-error-semi-transparent'
   | 'outline-primary-bright'
   | 'outline-divider'
+  | 'outline-primary-dark-transparent'
 
 export type TBorders =
   | TBorderStyle
@@ -4445,6 +4469,7 @@ export type TBoxShadowColor =
   | 'shadow-error'
   | 'shadow-error-dark'
   | 'shadow-primary-dark'
+  | 'shadow-primary-semi-dark'
   | 'shadow-primary-light'
   | 'shadow-primary-dimmed'
   | 'shadow-primary-semi-dimmed'
@@ -4468,6 +4493,7 @@ export type TBoxShadowColor =
   | 'shadow-error-semi-transparent'
   | 'shadow-primary-bright'
   | 'shadow-divider'
+  | 'shadow-primary-dark-transparent'
 
 export type TOpacity =
   | 'opacity-0'
@@ -4537,6 +4563,7 @@ export type TAnimation =
   | 'animate-bounce'
   | 'animate-pulse-horizontal'
   | 'animate-rotate'
+  | 'animate-ticker'
 
 export type TTransitionsAndAnimations =
   | TTransitionProperty
@@ -6065,6 +6092,7 @@ export type TCaretColor =
   | 'caret-error'
   | 'caret-error-dark'
   | 'caret-primary-dark'
+  | 'caret-primary-semi-dark'
   | 'caret-primary-light'
   | 'caret-primary-dimmed'
   | 'caret-primary-semi-dimmed'
@@ -6088,6 +6116,7 @@ export type TCaretColor =
   | 'caret-error-semi-transparent'
   | 'caret-primary-bright'
   | 'caret-divider'
+  | 'caret-primary-dark-transparent'
 
 export type TWillChange =
   | 'will-change-auto'
@@ -6334,6 +6363,7 @@ export type TAccentColor =
   | 'accent-error'
   | 'accent-error-dark'
   | 'accent-primary-dark'
+  | 'accent-primary-semi-dark'
   | 'accent-primary-light'
   | 'accent-primary-dimmed'
   | 'accent-primary-semi-dimmed'
@@ -6357,6 +6387,7 @@ export type TAccentColor =
   | 'accent-error-semi-transparent'
   | 'accent-primary-bright'
   | 'accent-divider'
+  | 'accent-primary-dark-transparent'
 
 export type TScrollPadding =
   | 'scroll-p-0'
@@ -7679,6 +7710,7 @@ export type TFill =
   | 'fill-error'
   | 'fill-error-dark'
   | 'fill-primary-dark'
+  | 'fill-primary-semi-dark'
   | 'fill-primary-light'
   | 'fill-primary-dimmed'
   | 'fill-primary-semi-dimmed'
@@ -7702,6 +7734,7 @@ export type TFill =
   | 'fill-error-semi-transparent'
   | 'fill-primary-bright'
   | 'fill-divider'
+  | 'fill-primary-dark-transparent'
 
 export type TStroke =
   | 'stroke-inherit'
@@ -7743,6 +7776,7 @@ export type TStroke =
   | 'stroke-error'
   | 'stroke-error-dark'
   | 'stroke-primary-dark'
+  | 'stroke-primary-semi-dark'
   | 'stroke-primary-light'
   | 'stroke-primary-dimmed'
   | 'stroke-primary-semi-dimmed'
@@ -7766,6 +7800,7 @@ export type TStroke =
   | 'stroke-error-semi-transparent'
   | 'stroke-primary-bright'
   | 'stroke-divider'
+  | 'stroke-primary-dark-transparent'
 
 export type TStrokeWidth =
   | 'stroke-0'
@@ -8040,6 +8075,7 @@ export type TLetterSpacing =
   | 'tracking-wide'
   | 'tracking-wider'
   | 'tracking-widest'
+  | 'tracking-extra-wide'
 
 export type TLineHeight =
   | 'leading-3'
@@ -8299,6 +8335,7 @@ export type TPlaceholderColor =
   | 'placeholder-error'
   | 'placeholder-error-dark'
   | 'placeholder-primary-dark'
+  | 'placeholder-primary-semi-dark'
   | 'placeholder-primary-light'
   | 'placeholder-primary-dimmed'
   | 'placeholder-primary-semi-dimmed'
@@ -8322,6 +8359,7 @@ export type TPlaceholderColor =
   | 'placeholder-error-semi-transparent'
   | 'placeholder-primary-bright'
   | 'placeholder-divider'
+  | 'placeholder-primary-dark-transparent'
 
 export type TPlaceholderOpacity =
   | 'placeholder-opacity-0'
@@ -8578,6 +8616,7 @@ export type TTextColor =
   | 'text-error'
   | 'text-error-dark'
   | 'text-primary-dark'
+  | 'text-primary-semi-dark'
   | 'text-primary-light'
   | 'text-primary-dimmed'
   | 'text-primary-semi-dimmed'
@@ -8601,6 +8640,7 @@ export type TTextColor =
   | 'text-error-semi-transparent'
   | 'text-primary-bright'
   | 'text-divider'
+  | 'text-primary-dark-transparent'
 
 export type TTextOpacity =
   | 'text-opacity-0'
@@ -8898,6 +8938,7 @@ export type TTextDecorationColor =
   | 'decoration-error'
   | 'decoration-error-dark'
   | 'decoration-primary-dark'
+  | 'decoration-primary-semi-dark'
   | 'decoration-primary-light'
   | 'decoration-primary-dimmed'
   | 'decoration-primary-semi-dimmed'
@@ -8921,6 +8962,7 @@ export type TTextDecorationColor =
   | 'decoration-error-semi-transparent'
   | 'decoration-primary-bright'
   | 'decoration-divider'
+  | 'decoration-primary-dark-transparent'
 
 export type TTextDecorationThickness =
   | 'decoration-0'
