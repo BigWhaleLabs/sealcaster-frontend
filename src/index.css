@@ -72,19 +72,19 @@ html {
   scrollbar-width: thin;
   background-size: 100% auto, 100% auto, 3rem 3rem;
   background-repeat: no-repeat, no-repeat, repeat;
-  background-position: top, top, 0;
+  background-position: top, top, top;
   background-image: url(), url('/img/background.webp'), var(--bg-grid);
   caret-color: var(--primary);
 }
 html[bg-theme='404'] {
-  background-position: top, center, 0;
+  background-position: top, center, top;
   background-size: auto auto, 100% 100%, 3rem 3rem;
   background-image: url(), url(), var(--bg-grid);
 }
 
 @media screen and (max-width: 1280px) {
   html[bg-theme='404'] {
-    background-position: top, center, 0;
+    background-position: top, center, top;
     background-size: auto auto, 100% 100%, 3rem 3rem;
     background-image: url(),
       radial-gradient(var(--red-background), var(--transparent)), var(--bg-grid);
