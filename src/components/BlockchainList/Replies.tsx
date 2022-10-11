@@ -31,19 +31,24 @@ export default function ({
 
   return (
     <>
-      <Button type="tertiary" onClick={() => setInputOpen(!inputOpen)}>
-        <div className={replyButtonWrapper}>
+      <div className={replyButtonWrapper}>
+        <Button type="tertiary" onClick={() => setInputOpen(!inputOpen)}>
           <ReplyIcon />
           <AccentText small color="text-formal-accent">
-            <span className={textColor({ 'text-accent': inputOpen })}>
+            <span
+              className={textColor(
+                { 'text-accent': inputOpen },
+                'hover:text-accent'
+              )}
+            >
               {replyText ? replyText : 'Reply'}
             </span>
           </AccentText>
           <AccentText primary color="text-primary-semi-dimmed" extraSmall>
             ({count})
           </AccentText>
-        </div>
-      </Button>
+        </Button>
+      </div>
       {inputOpen && <ReplyInput placeholder={placeholder} />}
     </>
   )
