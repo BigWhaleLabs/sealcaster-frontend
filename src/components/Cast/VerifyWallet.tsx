@@ -5,27 +5,7 @@ import { useState } from 'preact/hooks'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import ConnectAndCreateButton from 'components/Landing/ConnectAndCreateButton'
 import ErrorMessage from 'components/ui/ErrorMessage'
-import classnames, {
-  alignItems,
-  backgroundColor,
-  borderRadius,
-  display,
-  flexDirection,
-  gap,
-  padding,
-  width,
-} from 'classnames/tailwind'
-
-const cardWrapper = classnames(
-  width('w-full'),
-  display('flex'),
-  flexDirection('flex-col'),
-  alignItems('items-center'),
-  gap('gap-y-4'),
-  backgroundColor('bg-primary-background'),
-  borderRadius('rounded-lg'),
-  padding('py-6', 'px-4', 'sm:px-6')
-)
+import LoadingBlock from 'components/ui/LoadingBlock'
 
 export default function ({
   onCreateBurner,
@@ -41,24 +21,31 @@ export default function ({
   const { privateKey } = useSnapshot(BurnerWalletStore)
 
   return (
-    <div className={cardWrapper}>
-      {error && <ErrorMessage withExclamation text={parseErrorText(error)} />}
-      {status && (
-        <AccentText small color="text-tertiary">
-          {status}
-        </AccentText>
-      )}
-      <BodyText center>{text}</BodyText>
-      {!loading && !privateKey && (
-        <div>
-          <ConnectAndCreateButton
-            onCreateBurner={onCreateBurner}
-            loading={loading}
-            onError={setError}
-            onLoading={setLoading}
-          />
-        </div>
-      )}
-    </div>
+    <LoadingBlock
+      loadingText="Preparing cast"
+      subtitle={
+        <>
+          {error && (
+            <ErrorMessage withExclamation text={parseErrorText(error)} />
+          )}
+          {status && (
+            <AccentText small color="text-tertiary">
+              {status}
+            </AccentText>
+          )}
+          <BodyText center>{text}</BodyText>
+          {!loading && !privateKey && (
+            <div>
+              <ConnectAndCreateButton
+                onCreateBurner={onCreateBurner}
+                loading={loading}
+                onError={setError}
+                onLoading={setLoading}
+              />
+            </div>
+          )}
+        </>
+      }
+    />
   )
 }

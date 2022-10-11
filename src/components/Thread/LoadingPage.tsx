@@ -1,8 +1,6 @@
-import { AccentText, BodyText } from 'components/ui/Text'
 import Delimiter from 'components/ui/Delimiter'
-import Spinner from 'icons/Spinner'
+import LoadingBlock from 'components/ui/LoadingBlock'
 import classnames, {
-  alignItems,
   animation,
   backgroundColor,
   backgroundImage,
@@ -14,27 +12,10 @@ import classnames, {
   gap,
   gradientColorStops,
   height,
-  justifyContent,
   padding,
   space,
   width,
 } from 'classnames/tailwind'
-
-const castLoading = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  backgroundColor('bg-primary-background'),
-  padding('p-6'),
-  alignItems('items-center'),
-  justifyContent('justify-between'),
-  borderRadius('rounded-lg'),
-  gap('gap-y-4')
-)
-const loadingBlock = classnames(
-  display('flex'),
-  alignItems('items-center'),
-  gap('gap-x-2')
-)
 
 const threadLoading = classnames(
   backgroundColor('bg-primary-dark'),
@@ -66,14 +47,7 @@ const thirdBlock = classnames(commonBlockStyles, height('h-8'), width('w-1/3'))
 export default function () {
   return (
     <div className={space('space-y-4')}>
-      <div className={castLoading}>
-        <AccentText color="text-tertiary">
-          <span className={loadingBlock}>
-            Loading <Spinner />
-          </span>
-        </AccentText>
-        <BodyText>Hang tight as we fetch content.</BodyText>
-      </div>
+      <LoadingBlock />
       <div className={threadLoading}>
         <div className={blocksLoading}>
           <div className={firstBlock} />
