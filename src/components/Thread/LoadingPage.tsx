@@ -27,6 +27,7 @@ const castLoading = classnames(
   padding('p-6'),
   alignItems('items-center'),
   justifyContent('justify-between'),
+  borderRadius('rounded-lg'),
   gap('gap-y-4')
 )
 const loadingBlock = classnames(

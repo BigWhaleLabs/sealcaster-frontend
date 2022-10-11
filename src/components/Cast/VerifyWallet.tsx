@@ -8,6 +8,7 @@ import ErrorMessage from 'components/ui/ErrorMessage'
 import classnames, {
   alignItems,
   backgroundColor,
+  borderRadius,
   display,
   flexDirection,
   gap,
@@ -22,6 +23,7 @@ const cardWrapper = classnames(
   alignItems('items-center'),
   gap('gap-y-4'),
   backgroundColor('bg-primary-background'),
+  borderRadius('rounded-lg'),
   padding('py-6', 'px-4', 'sm:px-6')
 )
 
