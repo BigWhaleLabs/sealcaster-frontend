@@ -35,6 +35,12 @@ const buttonsWrapper = classnames(
 
 const positionWrapper = classnames(display('flex'), flexDirection('flex-col'))
 
+const headerTextWrapper = classnames(
+  display('flex'),
+  flexDirection('flex-row'),
+  gap('gap-x-1')
+)
+
 export default function ({
   attentionText,
   mainText,
@@ -63,10 +69,17 @@ export default function ({
       </div>
       <div className={positionWrapper}>
         <div className={classnames(positionWrapper, gap('gap-y-1'))}>
-          <AccentText color="text-formal-accent" large bold>
-            <span className={textColor('text-secondary')}>{attentionText}</span>
-            {headerText}
-          </AccentText>
+          <div className={headerTextWrapper}>
+            <div className={displayTo('md')}>
+              <SmallInfoSeal />
+            </div>
+            <AccentText color="text-formal-accent" large bold>
+              <span className={textColor('text-secondary')}>
+                {attentionText}
+              </span>
+              {headerText}
+            </AccentText>
+          </div>
           <StatusText>{mainText}</StatusText>
         </div>
         <div className={buttonsWrapper}>
