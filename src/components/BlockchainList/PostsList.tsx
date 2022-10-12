@@ -12,10 +12,10 @@ import useThread from 'hooks/useThread'
 
 export function PostListSuspended() {
   const { selectedToken, idToPostTx } = useSnapshot(PostStore)
-  const threadInfo = useThread(0)
+  const thread = useThread(0)
   const hashId = useHashParams()
 
-  const posts = threadInfo ? threadInfo.thread : []
+  const posts = thread ? thread : []
 
   const filteredPosts = selectedToken
     ? posts.filter(

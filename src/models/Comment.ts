@@ -6,4 +6,5 @@ export default interface Comment {
   repliedTo: string
   content: string
   replies?: Comment[]
+  replyToId?: string
 }

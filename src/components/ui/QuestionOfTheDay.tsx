@@ -17,7 +17,7 @@ import classnames, {
   margin,
   position,
 } from 'classnames/tailwind'
-import useThread from 'hooks/useThread'
+import useComments from 'hooks/useComments'
 
 const postInfo = classnames(
   display('flex'),
@@ -29,11 +29,11 @@ const postInfo = classnames(
 
 function QuestionOfDaySuspended() {
   const { questionDay } = useSnapshot(PostStore)
-  const data = useThread(questionDay)
+  const data = useComments(questionDay)
 
   if (!data) return null
 
-  const { post, sender, count } = data
+  const { post, sender, count, cast } = data
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -53,9 +53,10 @@ function QuestionOfDaySuspended() {
           <Sender sender={sender} />
         </span>
         <Delimiter horizontal color="bg-divider" />
+
         <Replies
           threadId={questionDay}
-          replyToId={questionDay}
+          replyToId={cast?.merkleRoot}
           count={count}
           placeholder="Answer today’s question..."
         />

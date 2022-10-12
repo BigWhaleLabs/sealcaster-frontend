@@ -32,6 +32,8 @@ export default function ({
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
 
+  if (!replyToId) return null
+
   return (
     <>
       <Button type="tertiary" onClick={() => setInputOpen(!inputOpen)}>

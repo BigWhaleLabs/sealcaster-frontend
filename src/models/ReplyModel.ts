@@ -1,4 +1,4 @@
 export default interface ReplyModel {
-  replyToId: number
+  replyToId?: string
   threadId: number
 }

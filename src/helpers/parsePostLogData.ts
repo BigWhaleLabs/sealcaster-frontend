@@ -8,7 +8,7 @@ const transferEventInterface = new utils.Interface([
     address indexed sender,
     uint256 timestamp,
     uint256 threadId,
-    uint256 replyToId
+    bytes32 replyToId
   )`,
 ])
 

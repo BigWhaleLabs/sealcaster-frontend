@@ -22,7 +22,7 @@ interface PostStoreType {
   createPost: (
     text: string,
     threadId: number,
-    replyToId: number
+    replyToId?: string
   ) => Promise<Result[]>
   idToPostTx: Promise<string[]>
 }
@@ -33,12 +33,12 @@ const limit = 100
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  questionDay: 8,
+  questionDay: 1,
   threads: {},
   posts: {},
   selectedToken: undefined,
   idToPostTx: getIdsToPostsTx(farcasterContract),
-  createPost: async (text: string, threadId: number, replyToId: number) => {
+  createPost: async (text: string, threadId: number, replyToId?: string) => {
     let signer = await BurnerWalletStore.getSigner()
 
     if (!signer && (await walletStore.hasFarcasterBadge))
@@ -55,7 +55,8 @@ const PostStore = proxy<PostStoreType>({
       text,
       'farcaster',
       threadId,
-      replyToId
+      replyToId ||
+        '0x0000000000000000000000000000000000000000000000000000000000000000'
     )
     const result = await transaction.wait()
 
@@ -78,7 +79,7 @@ export function fetchThread(threadId: number) {
 
 export function fetchPost(postId: number) {
   if (typeof PostStore.posts[postId] !== 'undefined') return
-  PostStore.posts[postId - 1] = farcasterContract
+  PostStore.posts[postId] = farcasterContract
     .posts(postId - 1)
     .then(safeTransformPostOutput)
 }

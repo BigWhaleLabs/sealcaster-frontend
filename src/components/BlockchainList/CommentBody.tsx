@@ -19,7 +19,6 @@ import classnames, {
   space,
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
-import useClickOutside from 'hooks/useClickOutside'
 
 const commentWithReplyButton = classnames(
   display('flex'),
@@ -69,7 +68,6 @@ export default function ({
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
   const ref = createRef()
-  useClickOutside(ref, () => setInputOpen(false))
 
   return (
     // TODO: anchor should be real
@@ -86,12 +84,14 @@ export default function ({
               <PostTime timestamp={timestamp} />
             </div>
           </div>
-          <button
-            className={display({ hidden: inputOpen }, 'md:flex')}
-            onClick={() => setInputOpen(!inputOpen)}
-          >
-            <ReplyIcon />
-          </button>
+          {replyToId && (
+            <button
+              className={display({ hidden: inputOpen }, 'md:flex')}
+              onClick={() => setInputOpen(!inputOpen)}
+            >
+              <ReplyIcon />
+            </button>
+          )}
         </div>
         {inputOpen && (
           <ReplyInput
