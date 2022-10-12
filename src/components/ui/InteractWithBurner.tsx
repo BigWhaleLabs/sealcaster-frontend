@@ -53,7 +53,7 @@ const headerTextWrapper = (show: boolean) =>
     display('flex'),
     gap('gap-x-1'),
     justifyContent('justify-between'),
-    alignItems({ 'items-center': !show })
+    alignItems(show ? 'items-center' : 'items-start')
   )
 
 const contentWrapper = classnames(
@@ -149,13 +149,19 @@ export default function ({
                 </AccentText>
               </span>
               <Button
+                center
                 type="tertiary"
                 onClick={() => {
                   setShow(!show)
                 }}
               >
-                <div className={width('w-4')}>
-                  <Arrow pulseDisabled open={show} />
+                <div className={classnames(width('w-4'), margin('mt-2'))}>
+                  <span className={displayTo('md')}>
+                    <Arrow pulseDisabled open={show} />
+                  </span>
+                  <span className={displayFrom('md')}>
+                    <Arrow pulseDisabled open={!show} />
+                  </span>
                 </div>
               </Button>
             </div>
