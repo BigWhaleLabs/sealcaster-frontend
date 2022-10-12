@@ -93,7 +93,6 @@ export default function CommentWithReplies({
                 timestamp,
                 replies,
                 replyToId,
-                isThreadOwned,
               }) => (
                 <Replies
                   id={id}

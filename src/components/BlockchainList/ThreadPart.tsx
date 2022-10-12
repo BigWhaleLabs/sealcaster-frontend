@@ -1,12 +1,11 @@
 import { AccentText } from 'components/ui/Text'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
-import { useSnapshot } from 'valtio'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 import useComments from 'hooks/useComments'
-import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
   display('flex'),
@@ -25,12 +24,13 @@ export default function ({
   postId: number
   limitThread?: number
 }) {
-  const { account } = useSnapshot(walletStore)
+  const account = useBadgeAccount()
   const threadInfo = useComments(threadId)
 
   if (!threadInfo) return null
 
   const isThreadOwned = threadInfo.sender === account
+
   const commentsLength = threadInfo.count
 
   return (

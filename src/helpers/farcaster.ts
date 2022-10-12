@@ -1,7 +1,7 @@
 import axios from 'axios'
 import env from 'helpers/env'
 
-const baseURL = `https://api.farcaster.xyz`
+const baseURL = `${env.VITE_POSTER_URL}/farcaster`
 
 export type Cast = {
   threadMerkleRoot: string
