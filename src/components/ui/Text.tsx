@@ -36,7 +36,8 @@ const accentText = (
   small?: boolean,
   primary?: boolean,
   shadow?: TDropShadow,
-  extraSmall?: boolean
+  extraSmall?: boolean,
+  large?: boolean
 ) =>
   classnames(
     textColor(
@@ -49,6 +50,7 @@ const accentText = (
     fontSize({
       'text-sm': small,
       'text-xs': extraSmall,
+      'text-lg': large,
     }),
     dropShadow(shadow)
   )
@@ -60,6 +62,7 @@ export function AccentText({
   shadow,
   children,
   extraSmall,
+  large,
 }: ChildrenProp & {
   color: TTextColor
   bold?: boolean
@@ -67,10 +70,19 @@ export function AccentText({
   primary?: boolean
   shadow?: TDropShadow
   extraSmall?: boolean
+  large?: boolean
 }) {
   return (
     <span
-      className={accentText(color, bold, small, primary, shadow, extraSmall)}
+      className={accentText(
+        color,
+        bold,
+        small,
+        primary,
+        shadow,
+        extraSmall,
+        large
+      )}
     >
       {children}
     </span>
