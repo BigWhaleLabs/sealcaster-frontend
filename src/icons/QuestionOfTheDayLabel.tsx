@@ -56,7 +56,7 @@ export default function ({
             width: size,
             height: size,
             borderRadius: '100%',
-            filter: 'brightness(1.15)',
+            filter: 'brightness(1.15) saturate(1.75)',
             willChange: 'rotate',
             transitionDuration: '0.1s',
             rotate: `${rotation}deg`,
