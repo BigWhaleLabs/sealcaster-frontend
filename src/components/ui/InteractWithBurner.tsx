@@ -3,6 +3,7 @@ import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useState } from 'preact/hooks'
 import Arrow from 'icons/Arrow'
 import Button from 'components/ui/Button'
+import ButtonProps from 'models/ButtonProps'
 import InfoSeal from 'icons/InfoSeal'
 import SmallInfoSeal from 'icons/SmallInfoSeal'
 import classnames, {
@@ -52,12 +53,12 @@ const headerTextWrapper = (show: boolean) =>
     display('flex'),
     gap('gap-x-1'),
     justifyContent('justify-between'),
-    alignItems(show ? 'items-start' : 'items-center')
+    alignItems({ 'items-center': !show })
   )
 
 const contentWrapper = classnames(
   position('fixed'),
-  inset('right-0', 'lg:right-9', 'bottom-9'),
+  inset('left-0', 'lg:left-9', 'bottom-9'),
   zIndex('z-50'),
   padding('p-3')
 )
@@ -72,14 +73,8 @@ const ActionsButtons = ({
   tertiaryButton,
   primaryButton,
 }: {
-  tertiaryButton?: {
-    text: string
-    action: () => void
-  }
-  primaryButton?: {
-    text: string
-    action: () => void
-  }
+  tertiaryButton?: ButtonProps
+  primaryButton?: ButtonProps
 }) => {
   return (
     <div className={buttonsWrapper}>
@@ -110,14 +105,8 @@ export default function ({
 }: {
   mainText: string
   headerText: string
-  tertiaryButton?: {
-    text: string
-    action: () => void
-  }
-  primaryButton?: {
-    text: string
-    action: () => void
-  }
+  tertiaryButton?: ButtonProps
+  primaryButton?: ButtonProps
   sadSeal?: boolean
   showAttention?: boolean
 }) {
@@ -135,10 +124,8 @@ export default function ({
   return (
     <div className={contentWrapper}>
       <div className={backgroundWrapper}>
-        <div>
-          <div className={infoSealWrapper}>
-            <InfoSeal sadSeal={sadSeal} />
-          </div>
+        <div className={infoSealWrapper}>
+          <InfoSeal sadSeal={sadSeal} />
         </div>
         <div className={positionWrapper}>
           <div className={classnames(positionWrapper, gap('gap-y-1'))}>

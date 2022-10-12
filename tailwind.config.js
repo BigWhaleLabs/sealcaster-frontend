@@ -109,8 +109,8 @@ module.exports = {
           '-1.25rem -1.25rem 4.62rem var(--secondary-transparent)',
         'accent-light-transparent':
           '0rem 0rem 2.125rem var(--accent-light-transparent);',
-        'info-card': '0rem 0rem 4.5rem rgb(66 119 255 / 0.6)',
-        'info-seal': '0rem 0.125px 1.25px rgb(207 106 255 / 0.5))',
+        'info-card': '0rem 0rem 4.5rem var(--primary-dimmed-dark-transparent)',
+        'info-seal': '0rem 0.125px 1.25px var(--secondary-dimmed-transparent)',
       },
       strokeWidth: {
         1.5: '1.5',

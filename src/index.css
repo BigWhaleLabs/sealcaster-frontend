@@ -36,6 +36,8 @@
   --secondary-light-active-transparent: #ff7bed9e;
   --formal-accent-light-transparent: #efecd6cc;
   --primary-semi-dimmed-transparent: #3a00d640;
+  --primary-dimmed-dark-transparent: #4277ff99;
+  --secondary-dimmed-transparent: #cf6aff80;
 
   --accent-light-transparent: rgba(178, 249, 116, 0.4);
   --accent-semi-transparent: rgba(254, 216, 35, 0.4);
