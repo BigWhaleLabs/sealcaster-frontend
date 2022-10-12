@@ -11,6 +11,7 @@ type AllowedExtraClassnames =
   | 'hover-button-scroll'
   | 'shadow-card'
   | 'stroke-text-secondary'
+  | 'empty:hidden'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]

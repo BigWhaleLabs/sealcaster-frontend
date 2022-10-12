@@ -3,7 +3,6 @@ import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useSnapshot } from 'valtio'
 import Card from 'components/ui/Card'
-import Delimiter from 'components/ui/Delimiter'
 import PostStore from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
 import Sender from 'components/BlockchainList/Sender'
@@ -37,31 +36,32 @@ function QuestionOfDaySuspended() {
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
-      <Card>
-        <div className={displayFrom('xs')}>
-          <div className={displayTo('lg')}>
-            <StickLabel mobile />
+      <a href={`/thread/${questionDay}`}>
+        <Card hoverEffect>
+          <div className={displayFrom('xs')}>
+            <div className={displayTo('lg')}>
+              <StickLabel mobile />
+            </div>
+            <div className={displayFrom('lg')}>
+              <StickLabel />
+            </div>
           </div>
-          <div className={displayFrom('lg')}>
-            <StickLabel />
-          </div>
-        </div>
-        <QuestionOfDayText>Question of the day:</QuestionOfDayText>
-        <HeaderText size="medium">{post}</HeaderText>
-        <span className={postInfo}>
-          <StatusText>Posted by: </StatusText>
-          <Sender sender={sender} />
-        </span>
-        <Delimiter horizontal color="bg-divider" />
+          <QuestionOfDayText>Question of the day:</QuestionOfDayText>
+          <HeaderText size="medium">{post}</HeaderText>
+          <span className={postInfo}>
+            <StatusText>Posted by: </StatusText>
+            <Sender sender={sender} />
+          </span>
 
-        <Replies
-          threadId={questionDay}
-          replyToId={cast?.merkleRoot}
-          count={count}
-          placeholder="Answer today’s question..."
-          isThreadOwned={true}
-        />
-      </Card>
+          <Replies
+            threadId={questionDay}
+            replyToId={cast?.merkleRoot}
+            count={count}
+            placeholder="Answer today’s question..."
+            isThreadOwned={true}
+          />
+        </Card>
+      </a>
     </div>
   )
 }

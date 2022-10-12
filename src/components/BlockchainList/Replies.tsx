@@ -1,6 +1,7 @@
 import { AccentText } from 'components/ui/Text'
 import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
+import Delimiter from 'components/ui/Delimiter'
 import ReplyIcon from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
 import ReplyModel from 'models/ReplyModel'
@@ -38,6 +39,8 @@ export default function ({
 
   return (
     <>
+      <Delimiter horizontal color="bg-divider" />
+
       <div className={replyButtonWrapper}>
         <Button
           type="tertiary"

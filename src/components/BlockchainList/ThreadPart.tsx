@@ -4,14 +4,14 @@ import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Delimiter from 'components/ui/Delimiter'
 import Replies from 'components/BlockchainList/Replies'
+import classNamesToString from 'helpers/classNamesToString'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
 import useBadgeAccount from 'hooks/useBadgeAccount'
 import useComments from 'hooks/useComments'
 
-const wrapper = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  gap('gap-y-3')
+const wrapper = classNamesToString(
+  classnames(display('flex'), flexDirection('flex-col'), gap('gap-y-3')),
+  'empty:hidden'
 )
 
 export default function ({
