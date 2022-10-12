@@ -197,8 +197,6 @@ circle {
 }
 
 .colorful-text {
-  font-family: 'Space Grotesk';
-  font-weight: 700;
   line-height: 6rem;
   background: conic-gradient(
       from 180deg at 50% 50%,
@@ -230,9 +228,8 @@ circle {
   background-blend-mode: screen, difference, normal;
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
-  font-size: 6rem;
-  filter: saturate(2) drop-shadow(-0.25rem 0 0 var(--primary-dimmed));
+  filter: saturate(2) drop-shadow(-0.25rem 0 0 var(--primary-dimmed))
+    drop-shadow(0rem 0rem 1.25rem var(--formal-accent-semi-transparent));
 }
 
 @keyframes dots {
