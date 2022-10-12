@@ -88,9 +88,6 @@ export default function ({
             </div>
           </div>
         </a>
-
-        <Delimiter color="bg-half-grey" horizontal />
-
         <ThreadPart
           threadId={blockchainId}
           replyingTo={sender}

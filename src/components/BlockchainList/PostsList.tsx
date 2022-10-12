@@ -15,6 +15,7 @@ import classnames, {
 } from 'classnames/tailwind'
 import flashingThread from 'helpers/flashingPost'
 import useHashParams from 'hooks/useHashParams'
+import usePaginated from 'hooks/usePaginated'
 import useScrollToAnchor from 'hooks/useScrollToAnchor'
 import useThread from 'hooks/useThread'
 
@@ -40,29 +41,23 @@ export function PostListSuspended() {
       )
     : posts
 
+  const { paginated, skip, setSkip } = usePaginated(filteredPosts, limit)
+
   const filteredPostsLength = filteredPosts.length
 
   if (filteredPostsLength === 0) return <NoPosts />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
 
-  console.log(amountOfSeenPosts)
-  console.log(paginatedPosts)
-
   return (
     <InfiniteScroll
-      next={() => {
-        console.log('fetching next')
-        const newLimit = amountOfSeenPosts + limit
-        setPaginatedPosts(filteredPosts.slice(0, newLimit))
-        setAmountOfSeenPosts(newLimit)
-      }}
+      next={() => setSkip(skip + limit)}
       className={scrollContainer}
       dataLength={filteredPostsLength}
-      hasMore={amountOfSeenPosts < filteredPostsLength}
+      hasMore={skip < filteredPostsLength}
       loader={<LoadingList text="Fetching more posts..." />}
       endMessage={filteredPostsLength < 3 ? <CustomizeCard /> : undefined}
     >
-      {paginatedPosts.map(({ id, timestamp, post, sender }, index) => (
+      {paginated.map(({ id, timestamp, post, sender }, index) => (
         <>
           <Post
             key={id}

@@ -10,5 +10,5 @@ export default function (threadId: number) {
     return null
   }
 
-  return thread
+  return Array.from(thread)
 }
