@@ -16,11 +16,14 @@ import UnlockedBurner from 'components/ui/UnlockedBurner'
 import classnames, {
   display,
   flexDirection,
+  inset,
   margin,
   maxWidth,
   minHeight,
   overflow,
+  position,
   width,
+  zIndex,
 } from 'classnames/tailwind'
 
 const Landing = lazy(() => import('pages/Landing'))
@@ -38,6 +41,26 @@ const bodyContainer = (marginTop?: boolean) =>
     margin('mx-4', 'mb-auto', 'body:mx-auto', { 'mt-auto': marginTop })
   )
 
+function renderUnlock() {
+  return (
+    <div
+      className={classnames(
+        position('fixed'),
+        inset('right-9', 'bottom-9'),
+        zIndex('z-50')
+      )}
+    >
+      <UnlockedBurner
+        attentionText="Attention: "
+        headerText="Burner wallet unlocked"
+        mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
+        primaryButtonText="View burner"
+        tertiaryButtonText="Destroy burner"
+      />
+    </div>
+  )
+}
+
 export default function () {
   const [location] = useLocation()
   const displayScrollToTop =
@@ -46,7 +69,7 @@ export default function () {
 
   return (
     <Router>
-      <UnlockedBurner
+      {/* <UnlockedBurner
         attentionText="Attention: "
         headerText="Burner wallet unlocked"
         mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
@@ -64,7 +87,7 @@ export default function () {
         mainText="That’s okay! You can choose to cast with a different burner wallet each time."
         tertiaryButtonText="Got it"
         sadSeal
-      />
+      /> */}
       <Navbar />
       <div className={pageContainer}>
         {location === '/' && (
@@ -72,6 +95,25 @@ export default function () {
             sentences={['spill your tea', 'snatch your burner wallet ']}
           />
         )}
+        <UnlockedBurner
+          attentionText="Attention: "
+          headerText="Burner wallet unlocked"
+          mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
+          primaryButtonText="View burner"
+          tertiaryButtonText="Destroy burner"
+        />
+        <UnlockedBurner
+          headerText="Are you sure you want to destroy this burner?"
+          mainText="If you chose to destroy it or ignore this message, you will lose the wallet forever."
+          primaryButtonText="Yes, destroy it"
+          tertiaryButtonText="View it"
+        />
+        <UnlockedBurner
+          headerText="We all get destroyed eventually"
+          mainText="That’s okay! You can choose to cast with a different burner wallet each time."
+          tertiaryButtonText="Got it"
+          sadSeal
+        />
         <div className={bodyContainer(is404)}>
           <Switch>
             <Route path="/">

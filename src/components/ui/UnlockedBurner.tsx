@@ -10,10 +10,13 @@ import classnames, {
   display,
   flexDirection,
   gap,
+  inset,
   margin,
   maxWidth,
   padding,
+  position,
   textColor,
+  zIndex,
 } from 'classnames/tailwind'
 
 const backgroundWrapper = classnames(
@@ -21,7 +24,7 @@ const backgroundWrapper = classnames(
   padding('p-6'),
   display('flex'),
   borderRadius('rounded-lg'),
-  maxWidth('max-w-body'),
+  maxWidth('max-w-full', 'lg:max-w-body'),
   gap('gap-x-4')
 )
 
@@ -39,6 +42,13 @@ const headerTextWrapper = classnames(
   display('flex'),
   flexDirection('flex-row'),
   gap('gap-x-1')
+)
+
+const contentWrapper = classnames(
+  position('fixed'),
+  inset('right-0', 'lg:right-9', 'bottom-9'),
+  zIndex('z-50'),
+  padding('p-4')
 )
 
 export default function ({
@@ -61,41 +71,43 @@ export default function ({
   sadSeal?: boolean
 }) {
   return (
-    <div className={backgroundWrapper}>
-      <div>
-        <div className={displayFrom('md')}>
-          <InfoSeal sadSeal={sadSeal} />
-        </div>
-      </div>
-      <div className={positionWrapper}>
-        <div className={classnames(positionWrapper, gap('gap-y-1'))}>
-          <div className={headerTextWrapper}>
-            <div className={displayTo('md')}>
-              <SmallInfoSeal />
-            </div>
-            <AccentText color="text-formal-accent" large bold>
-              <span className={textColor('text-secondary')}>
-                {attentionText}
-              </span>
-              {headerText}
-            </AccentText>
+    <div className={contentWrapper}>
+      <div className={backgroundWrapper}>
+        <div>
+          <div className={displayFrom('md')}>
+            <InfoSeal sadSeal={sadSeal} />
           </div>
-          <StatusText>{mainText}</StatusText>
         </div>
-        <div className={buttonsWrapper}>
-          {primaryButtonText && (
-            <Button small type="primary" onClick={primaryButtonAction}>
-              {primaryButtonText}
+        <div className={positionWrapper}>
+          <div className={classnames(positionWrapper, gap('gap-y-1'))}>
+            <div className={headerTextWrapper}>
+              <div className={displayTo('md')}>
+                <SmallInfoSeal />
+              </div>
+              <AccentText color="text-formal-accent" large bold>
+                <span className={textColor('text-secondary')}>
+                  {attentionText}
+                </span>
+                {headerText}
+              </AccentText>
+            </div>
+            <StatusText>{mainText}</StatusText>
+          </div>
+          <div className={buttonsWrapper}>
+            {primaryButtonText && (
+              <Button small type="primary" onClick={primaryButtonAction}>
+                {primaryButtonText}
+              </Button>
+            )}
+            <Button
+              type="tertiary"
+              gradientFont
+              small
+              onClick={tertiaryButtonAction}
+            >
+              {tertiaryButtonText}
             </Button>
-          )}
-          <Button
-            type="tertiary"
-            gradientFont
-            small
-            onClick={tertiaryButtonAction}
-          >
-            {tertiaryButtonText}
-          </Button>
+          </div>
         </div>
       </div>
     </div>
