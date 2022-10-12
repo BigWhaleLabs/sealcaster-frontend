@@ -1,5 +1,7 @@
 import { AccentText, StatusText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { useState } from 'preact/hooks'
+import Arrow from 'icons/Arrow'
 import Button from 'components/ui/Button'
 import InfoSeal from 'icons/InfoSeal'
 import SmallInfoSeal from 'icons/SmallInfoSeal'
@@ -8,14 +10,17 @@ import classnames, {
   backgroundColor,
   borderRadius,
   display,
+  dropShadow,
   flexDirection,
   gap,
   inset,
+  justifyContent,
   margin,
   maxWidth,
   padding,
   position,
   textColor,
+  width,
   zIndex,
 } from 'classnames/tailwind'
 
@@ -25,7 +30,8 @@ const backgroundWrapper = classnames(
   display('flex'),
   borderRadius('rounded-lg'),
   maxWidth('max-w-full', 'lg:max-w-body'),
-  gap('gap-x-4')
+  width('w-full', 'md:w-body'),
+  dropShadow('drop-shadow-info-card')
 )
 
 const buttonsWrapper = classnames(
@@ -36,13 +42,20 @@ const buttonsWrapper = classnames(
   gap('gap-x-4')
 )
 
-const positionWrapper = classnames(display('flex'), flexDirection('flex-col'))
-
-const headerTextWrapper = classnames(
+const positionWrapper = classnames(
   display('flex'),
-  flexDirection('flex-row'),
-  gap('gap-x-1')
+  flexDirection('flex-col'),
+  width('w-full')
 )
+
+const headerTextWrapper = (show: boolean) =>
+  classnames(
+    display('flex'),
+    flexDirection('flex-row'),
+    gap('gap-x-1'),
+    justifyContent('justify-between'),
+    alignItems(show ? 'items-start' : 'items-center')
+  )
 
 const contentWrapper = classnames(
   position('fixed'),
@@ -50,6 +63,37 @@ const contentWrapper = classnames(
   zIndex('z-50'),
   padding('p-3')
 )
+
+const infoSealWrapper = classnames(
+  displayFrom('md'),
+  margin('mr-4'),
+  dropShadow('drop-shadow-info-seal')
+)
+
+const ActionsButtons = ({
+  primaryButtonText,
+  primaryButtonAction,
+  tertiaryButtonText,
+  tertiaryButtonAction,
+}: {
+  primaryButtonText?: string
+  tertiaryButtonText?: string
+  primaryButtonAction?: () => void
+  tertiaryButtonAction?: () => void
+}) => {
+  return (
+    <div className={buttonsWrapper}>
+      {primaryButtonText && (
+        <Button small type="primary" onClick={primaryButtonAction}>
+          {primaryButtonText}
+        </Button>
+      )}
+      <Button type="tertiary" gradientFont small onClick={tertiaryButtonAction}>
+        {tertiaryButtonText}
+      </Button>
+    </div>
+  )
+}
 
 export default function ({
   attentionText,
@@ -70,44 +114,61 @@ export default function ({
   tertiaryButtonAction?: () => void
   sadSeal?: boolean
 }) {
+  const [show, setShow] = useState(false)
+
+  function renderButtons() {
+    return (
+      <ActionsButtons
+        primaryButtonText={primaryButtonText}
+        tertiaryButtonText={tertiaryButtonText}
+        primaryButtonAction={primaryButtonAction}
+        tertiaryButtonAction={tertiaryButtonAction}
+      />
+    )
+  }
+
   return (
     <div className={contentWrapper}>
       <div className={backgroundWrapper}>
         <div>
-          <div className={displayFrom('md')}>
+          <div className={infoSealWrapper}>
             <InfoSeal sadSeal={sadSeal} />
           </div>
         </div>
         <div className={positionWrapper}>
           <div className={classnames(positionWrapper, gap('gap-y-1'))}>
-            <div className={headerTextWrapper}>
-              <div className={displayTo('md')}>
-                <SmallInfoSeal />
-              </div>
-              <AccentText color="text-formal-accent" large bold>
-                <span className={textColor('text-secondary')}>
-                  {attentionText}
-                </span>
-                {headerText}
-              </AccentText>
-            </div>
-            <StatusText>{mainText}</StatusText>
-          </div>
-          <div className={buttonsWrapper}>
-            {primaryButtonText && (
-              <Button small type="primary" onClick={primaryButtonAction}>
-                {primaryButtonText}
+            <div className={headerTextWrapper(show)}>
+              <span className={classnames(display('flex'), gap('gap-x-1'))}>
+                <div
+                  className={classnames(
+                    displayTo('md'),
+                    dropShadow('drop-shadow-info-seal')
+                  )}
+                >
+                  <SmallInfoSeal />
+                </div>
+                <AccentText color="text-formal-accent" large bold>
+                  <span className={textColor('text-secondary')}>
+                    {attentionText}
+                  </span>
+                  {headerText}
+                </AccentText>
+              </span>
+              <Button
+                type="tertiary"
+                onClick={() => {
+                  setShow(!show)
+                }}
+              >
+                <div className={width('w-4')}>
+                  <Arrow pulseDisabled open={show} />
+                </div>
               </Button>
-            )}
-            <Button
-              type="tertiary"
-              gradientFont
-              small
-              onClick={tertiaryButtonAction}
-            >
-              {tertiaryButtonText}
-            </Button>
+            </div>
+            {show && <StatusText>{mainText}</StatusText>}
           </div>
+          <div className={displayFrom('md')}>{renderButtons()}</div>
+          <div className={displayTo('md')}>{show && renderButtons()}</div>
         </div>
       </div>
     </div>
