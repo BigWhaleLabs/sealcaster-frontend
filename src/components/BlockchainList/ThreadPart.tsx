@@ -1,13 +1,11 @@
 import { AccentText } from 'components/ui/Text'
-import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import BareCard from 'components/BareCard'
-import Comment from 'models/Comment'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
-import useThread from 'hooks/useThread'
+import useComments from 'hooks/useComments'
 import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
@@ -16,120 +14,49 @@ const wrapper = classnames(
   gap('gap-y-3')
 )
 
-function makeCommentNode(
-  {
-    id,
-    timestamp,
-    repliedTo,
-    replier,
-    content,
-    threadId,
-  }: {
-    threadId: number
-    id: number
-    timestamp: number
-    content: string
-    replier: string
-    repliedTo: string
-  },
-  posts: readonly PostStructOutput[]
-): Comment {
-  return {
-    id,
-    threadId,
-    timestamp,
-    replier,
-    content,
-    repliedTo,
-    replies: posts
-      .filter((post) => post.replyToId && +post.replyToId === id)
-      .map(({ id, timestamp, sender: replier, post: content }) =>
-        makeCommentNode(
-          {
-            id: +id,
-            threadId,
-            replier,
-            content,
-            repliedTo,
-            timestamp: +timestamp,
-          },
-          posts
-        )
-      ),
-  }
-}
-
-function buildCommentsTree(
-  threadId: number,
-  threadCreator: string,
-  posts: readonly PostStructOutput[]
-) {
-  return posts
-    .filter((post) => post.replyToId && +post.replyToId === threadId)
-    .map(({ id, timestamp, sender: replier, post: content }) =>
-      makeCommentNode(
-        {
-          id: +id,
-          threadId,
-          replier,
-          content,
-          timestamp: +timestamp,
-          repliedTo: threadCreator,
-        },
-        posts
-      )
-    )
-}
-
 export default function ({
-  threadCreator,
   threadId,
   replyingTo,
   postId,
   limitThread,
 }: {
-  threadCreator: string
   threadId: number
   replyingTo: string
   postId: number
   limitThread?: number
 }) {
   const { account } = useSnapshot(walletStore)
-  const threadInfo = useThread(threadId)
+  const threadInfo = useComments(threadId)
 
   if (!threadInfo) return null
 
-  const isThreadOwned = threadCreator === account
-
-  const commentsTree = buildCommentsTree(
-    threadId,
-    threadCreator,
-    threadInfo.thread
-  )
-
-  const commentsLength = threadInfo.thread.length
+  const isThreadOwned = threadInfo.sender === account
+  const commentsLength = threadInfo.count
 
   return (
     <div className={wrapper}>
       <Replies
-        replyToId={postId}
+        replyToId={threadInfo.cast?.merkleRoot}
         threadId={threadId}
         count={commentsLength}
         placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
         isThreadOwned={isThreadOwned}
       />
-      {commentsTree.map(
-        ({ timestamp, content, replier, repliedTo, replies, id }, index) =>
+      {threadInfo.comments.map(
+        (
+          { timestamp, content, replier, repliedTo, replies, id, replyToId },
+          index
+        ) =>
           limitThread ? (
             index < limitThread && (
               <CommentWithReplies
                 threadId={threadId}
                 id={id}
-                replyToId={id}
                 timestamp={timestamp}
                 content={content}
                 replier={replier}
                 repliedTo={repliedTo}
+                replyToId={replyToId}
                 isThreadOwned={isThreadOwned}
               />
             )
@@ -137,12 +64,12 @@ export default function ({
             <CommentWithReplies
               threadId={threadId}
               id={id}
-              replyToId={id}
               timestamp={timestamp}
               content={content}
               replier={replier}
               repliedTo={repliedTo}
               replies={replies}
+              replyToId={replyToId}
               isThreadOwned={isThreadOwned}
             />
           )

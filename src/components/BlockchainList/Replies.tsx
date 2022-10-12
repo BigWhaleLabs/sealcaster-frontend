@@ -34,6 +34,8 @@ export default function ({
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
 
+  if (!replyToId) return null
+
   return (
     <>
       <div className={replyButtonWrapper}>

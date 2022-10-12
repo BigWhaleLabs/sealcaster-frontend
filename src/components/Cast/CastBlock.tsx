@@ -17,7 +17,7 @@ export default function ({
 }: {
   placeHolder?: string
   threadId: number
-  replyToId: number
+  replyToId?: string
   leftBlock?: JSX.Element | string
   buttonText?: string
 }) {

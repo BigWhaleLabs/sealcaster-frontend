@@ -67,6 +67,7 @@ export default function ({
   isThreadOwned?: boolean
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
+
   return (
     <BareCard data-anchor={`#reply=${replyToId}`}>
       <div className={space('space-y-4')}>
@@ -79,15 +80,17 @@ export default function ({
               <PostTime timestamp={timestamp} />
             </div>
           </div>
-          <button
-            className={display(
-              { hidden: inputOpen || !isThreadOwned },
-              { 'md:flex': isThreadOwned }
-            )}
-            onClick={() => setInputOpen(!inputOpen)}
-          >
-            <ReplyIcon />
-          </button>
+          {replyToId && (
+            <button
+              className={display(
+                { hidden: inputOpen || !isThreadOwned },
+                { 'md:flex': isThreadOwned }
+              )}
+              onClick={() => setInputOpen(!inputOpen)}
+            >
+              <ReplyIcon />
+            </button>
+          )}
         </div>
         {inputOpen && (
           <ReplyInput

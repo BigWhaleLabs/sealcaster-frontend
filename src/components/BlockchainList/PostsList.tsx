@@ -29,10 +29,10 @@ export function PostListSuspended() {
   const { selectedToken, idToPostTx, limit } = useSnapshot(PostStore)
   const [paginatedPosts, setPaginatedPosts] = useState<PostStructOutput[]>([])
   const [amountOfSeenPosts, setAmountOfSeenPosts] = useState(0)
-  const threadInfo = useThread(0)
+  const thread = useThread(0)
   const hashId = useHashParams()
 
-  const posts = threadInfo ? threadInfo.thread : []
+  const posts = thread ? thread : []
 
   const filteredPosts = selectedToken
     ? posts.filter(

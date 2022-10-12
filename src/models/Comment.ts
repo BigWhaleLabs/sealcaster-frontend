@@ -1,5 +1,5 @@
 export default interface Comment {
-  id: number
+  id: number | string
   threadId: number
   timestamp: number
   replier: string
@@ -7,4 +7,5 @@ export default interface Comment {
   content: string
   isThreadOwned?: boolean
   replies?: Comment[]
+  replyToId?: string
 }

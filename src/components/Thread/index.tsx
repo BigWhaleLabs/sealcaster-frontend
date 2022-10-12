@@ -5,18 +5,19 @@ import { useSnapshot } from 'valtio'
 import GoBackButton from 'components/Thread/GoBackButton'
 import LoadingPage from 'components/Thread/LoadingPage'
 import Post from 'components/BlockchainList/Post'
-import PostStore from 'stores/PostStore'
+import PostStore, { fetchPost } from 'stores/PostStore'
 
 const SuspendedThread = () => {
   const [location] = useLocation()
   const blockchainId = Number(location.split('/')[2])
   const { posts, idToPostTx } = useSnapshot(PostStore)
 
-  const postData = Object.values(posts).find(
-    ({ id }) => Number(id) === blockchainId
-  )
+  const postData = posts[blockchainId]
 
-  if (!postData) return null
+  if (!postData) {
+    fetchPost(blockchainId)
+    return null
+  }
 
   const { id, post, timestamp, sender } = postData
 

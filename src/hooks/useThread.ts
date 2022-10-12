@@ -1,20 +1,14 @@
 import { useSnapshot } from 'valtio'
-import PostStore, { fetchPost, fetchThread } from 'stores/PostStore'
+import PostStore, { fetchThread } from 'stores/PostStore'
 
 export default function (threadId: number) {
-  const { threads, posts } = useSnapshot(PostStore)
+  const { threads } = useSnapshot(PostStore)
   const thread = threads[threadId]
-  const post = posts[threadId]
 
   if (!thread) {
     fetchThread(threadId)
     return null
   }
 
-  if (!post && threadId !== 0) {
-    fetchPost(threadId)
-    return null
-  }
-
-  return { ...post, threadId, thread }
+  return thread
 }

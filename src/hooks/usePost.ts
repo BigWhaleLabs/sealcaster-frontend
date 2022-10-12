@@ -9,7 +9,7 @@ import getErrorMessage from 'helpers/getErrorMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
 import walletStore from 'stores/WalletStore'
 
-export default function (threadId: number, replyToId: number) {
+export default function (threadId: number, replyToId?: string) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<unknown>()
   const [text, setText] = useState('')
