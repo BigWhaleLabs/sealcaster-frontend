@@ -71,25 +71,32 @@ const infoSealWrapper = classnames(
 )
 
 const ActionsButtons = ({
-  primaryButtonText,
-  primaryButtonAction,
-  tertiaryButtonText,
-  tertiaryButtonAction,
+  tertiaryButton,
+  primaryButton,
 }: {
-  primaryButtonText?: string
-  tertiaryButtonText?: string
-  primaryButtonAction?: () => void
-  tertiaryButtonAction?: () => void
+  tertiaryButton?: {
+    text: string
+    action: () => void
+  }
+  primaryButton?: {
+    text: string
+    action: () => void
+  }
 }) => {
   return (
     <div className={buttonsWrapper}>
-      {primaryButtonText && (
-        <Button small type="primary" onClick={primaryButtonAction}>
-          {primaryButtonText}
+      {primaryButton?.text && (
+        <Button small type="primary" onClick={primaryButton.action}>
+          {primaryButton.text}
         </Button>
       )}
-      <Button type="tertiary" gradientFont small onClick={tertiaryButtonAction}>
-        {tertiaryButtonText}
+      <Button
+        type="tertiary"
+        gradientFont
+        small
+        onClick={tertiaryButton?.action}
+      >
+        {tertiaryButton?.text}
       </Button>
     </div>
   )
@@ -99,18 +106,20 @@ export default function ({
   showAttention,
   mainText,
   headerText,
-  primaryButtonText,
-  tertiaryButtonText,
-  primaryButtonAction,
-  tertiaryButtonAction,
+  primaryButton,
+  tertiaryButton,
   sadSeal,
 }: {
   mainText: string
   headerText: string
-  primaryButtonText?: string
-  tertiaryButtonText?: string
-  primaryButtonAction?: () => void
-  tertiaryButtonAction?: () => void
+  tertiaryButton?: {
+    text: string
+    action: () => void
+  }
+  primaryButton?: {
+    text: string
+    action: () => void
+  }
   sadSeal?: boolean
   showAttention?: boolean
 }) {
@@ -119,10 +128,8 @@ export default function ({
   function renderButtons() {
     return (
       <ActionsButtons
-        primaryButtonText={primaryButtonText}
-        tertiaryButtonText={tertiaryButtonText}
-        primaryButtonAction={primaryButtonAction}
-        tertiaryButtonAction={tertiaryButtonAction}
+        primaryButton={primaryButton}
+        tertiaryButton={tertiaryButton}
       />
     )
   }
