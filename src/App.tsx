@@ -45,25 +45,6 @@ export default function () {
 
   return (
     <Router>
-      <UnlockedBurner
-        attentionText="Attention: "
-        headerText="Burner wallet unlocked"
-        mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
-        primaryButtonText="View burner"
-        tertiaryButtonText="Destroy burner"
-      />
-      <UnlockedBurner
-        headerText="Are you sure you want to destroy this burner?"
-        mainText="If you chose to destroy it or ignore this message, you will lose the wallet forever."
-        primaryButtonText="Yes, destroy it"
-        tertiaryButtonText="View it"
-      />
-      <UnlockedBurner
-        headerText="We all get destroyed eventually"
-        mainText="That’s okay! You can choose to cast with a different burner wallet each time."
-        tertiaryButtonText="Got it"
-        sadSeal
-      />
       <Navbar />
       <div className={pageContainer}>
         {location === '/' && (
