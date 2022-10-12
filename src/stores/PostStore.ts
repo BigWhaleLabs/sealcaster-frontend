@@ -18,7 +18,6 @@ interface PostStoreType {
   questionDay: number
   posts: { [postId: number]: Promise<PostStructOutput> }
   threads: { [threadId: number]: Promise<PostStructOutput[]> }
-  selectedToken?: string
   createPost: (
     text: string,
     threadId: number,
@@ -36,7 +35,6 @@ const PostStore = proxy<PostStoreType>({
   questionDay: 1,
   threads: {},
   posts: {},
-  selectedToken: undefined,
   idToPostTx: getIdsToPostsTx(farcasterContract),
   createPost: async (text: string, threadId: number, replyToId?: string) => {
     let signer = await BurnerWalletStore.getSigner()

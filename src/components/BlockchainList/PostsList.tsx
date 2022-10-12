@@ -1,5 +1,4 @@
-import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
-import { Suspense, useState } from 'preact/compat'
+import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import CustomizeCard from 'components/BlockchainList/CustomizeCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -27,35 +26,27 @@ const scrollContainer = classnames(
 )
 
 export function PostListSuspended() {
-  const { selectedToken, idToPostTx, limit } = useSnapshot(PostStore)
-  const [paginatedPosts, setPaginatedPosts] = useState<PostStructOutput[]>([])
-  const [amountOfSeenPosts, setAmountOfSeenPosts] = useState(0)
+  const { idToPostTx, limit } = useSnapshot(PostStore)
   const thread = useThread(0)
   const hashId = useHashParams()
 
   const posts = thread ? thread : []
 
-  const filteredPosts = selectedToken
-    ? posts.filter(
-        ({ derivativeAddress }) => derivativeAddress === PostStore.selectedToken
-      )
-    : posts
+  const { paginated, skip, setSkip } = usePaginated(posts, limit)
 
-  const { paginated, skip, setSkip } = usePaginated(filteredPosts, limit)
+  const postsLength = posts.length
 
-  const filteredPostsLength = filteredPosts.length
-
-  if (filteredPostsLength === 0) return <NoPosts />
+  if (postsLength === 0) return <NoPosts />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
 
   return (
     <InfiniteScroll
       next={() => setSkip(skip + limit)}
       className={scrollContainer}
-      dataLength={filteredPostsLength}
-      hasMore={skip < filteredPostsLength}
+      dataLength={postsLength}
+      hasMore={skip < postsLength}
       loader={<LoadingList text="Fetching more posts..." />}
-      endMessage={filteredPostsLength < 3 ? <CustomizeCard /> : undefined}
+      endMessage={postsLength < 3 ? <CustomizeCard /> : undefined}
     >
       {paginated.map(({ id, timestamp, post, sender }, index) => (
         <>
