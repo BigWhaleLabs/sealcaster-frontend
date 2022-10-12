@@ -47,11 +47,7 @@ export default function ({
           style="mix-blend-mode:screen"
         />
       </g>
-      <foreignObject
-        width={size}
-        height={size}
-        clip-path={`url(#myClip_${id})`}
-      >
+      <foreignObject width={size} height={size}>
         <div
           style={{
             background:

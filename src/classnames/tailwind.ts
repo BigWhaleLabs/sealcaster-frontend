@@ -4622,6 +4622,7 @@ export type TDropShadow =
   | 'drop-shadow-accent-gradient'
   | 'drop-shadow-secondary-gradient'
   | 'drop-shadow-accent-light-transparent'
+  | 'drop-shadow-formal-accent'
 
 export type TGrayscale = 'grayscale-0' | 'grayscale'
 

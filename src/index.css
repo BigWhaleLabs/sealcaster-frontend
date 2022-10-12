@@ -195,6 +195,45 @@ circle {
   -webkit-text-stroke: 2px var(--secondary);
 }
 
+.colorful-text {
+  font-family: 'Space Grotesk';
+  font-weight: 700;
+  line-height: 6rem;
+  background: conic-gradient(
+      from 180deg at 50% 50%,
+      #000000 0deg,
+      rgba(255, 255, 255, 0.72) 17deg,
+      #000000 88deg,
+      rgba(255, 255, 255, 0.72) 152deg,
+      #000000 225deg,
+      rgba(255, 255, 255, 0.72) 289deg,
+      #000000 360deg
+    ),
+    conic-gradient(
+      from 180deg at 50% 50%,
+      #000000 0deg,
+      #ffffff 30deg,
+      #000000 96deg,
+      #ffffff 167deg,
+      #000000 229deg,
+      #ffffff 285deg,
+      #000000 360deg
+    ),
+    radial-gradient(
+      79.79% 80.25% at 10.11% 28.24%,
+      #f86efb 7.61%,
+      #7342ff 35.14%,
+      #42e8ff 63.45%,
+      #42ff6b 100%
+    );
+  background-blend-mode: screen, difference, normal;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 6rem;
+  filter: saturate(2) drop-shadow(-0.25rem 0 0 var(--primary-dimmed));
+}
+
 @keyframes dots {
   0%,
   20% {
