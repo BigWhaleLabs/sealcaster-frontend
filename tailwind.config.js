@@ -108,7 +108,8 @@ module.exports = {
           '-1.25rem -1.25rem 4.62rem var(--secondary-transparent)',
         'accent-light-transparent':
           '0rem 0rem 2.125rem var(--accent-light-transparent)',
-        'formal-accent': '0rem 0rem 0.625rem var(--formal-accent)',
+        'formal-accent':
+          '0rem 0rem 1.25rem var(--formal-accent-semi-transparent)',
       },
       strokeWidth: {
         1.5: '1.5',

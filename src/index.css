@@ -4,6 +4,7 @@
 
 :root {
   --orb: #ffffff;
+  --black: #000;
   --accent: #fed823;
   --accent-hover: #fed950;
   --primary: #15a1fc;
@@ -201,23 +202,23 @@ circle {
   line-height: 6rem;
   background: conic-gradient(
       from 180deg at 50% 50%,
-      #000000 0deg,
+      var(--black) 0deg,
       rgba(255, 255, 255, 0.72) 17deg,
-      #000000 88deg,
+      var(--black) 88deg,
       rgba(255, 255, 255, 0.72) 152deg,
-      #000000 225deg,
+      var(--black) 225deg,
       rgba(255, 255, 255, 0.72) 289deg,
-      #000000 360deg
+      var(--black) 360deg
     ),
     conic-gradient(
       from 180deg at 50% 50%,
-      #000000 0deg,
-      #ffffff 30deg,
-      #000000 96deg,
-      #ffffff 167deg,
-      #000000 229deg,
-      #ffffff 285deg,
-      #000000 360deg
+      var(--black) 0deg,
+      var(--orb) 30deg,
+      var(--black) 96deg,
+      var(--orb) 167deg,
+      var(--black) 229deg,
+      var(--orb) 285deg,
+      var(--black) 360deg
     ),
     radial-gradient(
       79.79% 80.25% at 10.11% 28.24%,
