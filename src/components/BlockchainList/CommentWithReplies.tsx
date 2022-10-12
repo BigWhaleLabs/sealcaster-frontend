@@ -1,6 +1,5 @@
 import Comment from 'models/Comment'
 import CommentBody from 'components/BlockchainList/CommentBody'
-import ReplyModel from 'models/ReplyModel'
 import classnames, {
   borderColor,
   borderWidth,

@@ -204,10 +204,12 @@ export default function (threadId: number) {
 
         cast = farcasterThread.find((cast) => cast.merkleRoot === serviceId)
 
+        const statusesCopy = { ...statuses }
+
         const unpublishedPosts = Array.from(thread).filter(
           (post) =>
-            !statuses[post.id.toNumber()] ||
-            !statuses[post.id.toNumber()].serviceId
+            !statusesCopy[post.id.toNumber()] ||
+            !statusesCopy[post.id.toNumber()].serviceId
         )
 
         castsComments = buildCastCommentTree(
