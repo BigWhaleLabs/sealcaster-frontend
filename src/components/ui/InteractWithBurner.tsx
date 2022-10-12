@@ -96,7 +96,7 @@ const ActionsButtons = ({
 }
 
 export default function ({
-  attentionText,
+  showAttention,
   mainText,
   headerText,
   primaryButtonText,
@@ -107,12 +107,12 @@ export default function ({
 }: {
   mainText: string
   headerText: string
-  attentionText?: string
   primaryButtonText?: string
   tertiaryButtonText?: string
   primaryButtonAction?: () => void
   tertiaryButtonAction?: () => void
   sadSeal?: boolean
+  showAttention?: boolean
 }) {
   const [show, setShow] = useState(false)
 
@@ -148,9 +148,11 @@ export default function ({
                   <SmallInfoSeal />
                 </div>
                 <AccentText color="text-formal-accent" large bold>
-                  <span className={textColor('text-secondary')}>
-                    {attentionText}
-                  </span>
+                  {showAttention && (
+                    <span className={textColor('text-secondary')}>
+                      Attention:{' '}
+                    </span>
+                  )}
                   {headerText}
                 </AccentText>
               </span>
