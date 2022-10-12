@@ -48,7 +48,7 @@ const contentWrapper = classnames(
   position('fixed'),
   inset('right-0', 'lg:right-9', 'bottom-9'),
   zIndex('z-50'),
-  padding('p-4')
+  padding('p-3')
 )
 
 export default function ({
