@@ -1,17 +1,34 @@
-import { Suspense } from 'preact/compat'
+import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
+import { Suspense, useState } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import CustomizeCard from 'components/BlockchainList/CustomizeCard'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import LoadingList from 'components/BlockchainList/LoadingList'
 import NoPosts from 'components/BlockchainList/NoPosts'
 import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
+import classnames, {
+  display,
+  flexDirection,
+  gap,
+  overflow,
+} from 'classnames/tailwind'
 import flashingThread from 'helpers/flashingPost'
 import useHashParams from 'hooks/useHashParams'
 import useScrollToAnchor from 'hooks/useScrollToAnchor'
 import useThread from 'hooks/useThread'
 
+const scrollContainer = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  gap('gap-y-4'),
+  overflow('overflow-hidden')
+)
+
 export function PostListSuspended() {
-  const { selectedToken, idToPostTx } = useSnapshot(PostStore)
+  const { selectedToken, idToPostTx, limit } = useSnapshot(PostStore)
+  const [paginatedPosts, setPaginatedPosts] = useState<PostStructOutput[]>([])
+  const [amountOfSeenPosts, setAmountOfSeenPosts] = useState(0)
   const thread = useThread(0)
   const hashId = useHashParams()
 
@@ -23,28 +40,44 @@ export function PostListSuspended() {
       )
     : posts
 
-  if (hashId && filteredPosts.length > 0)
-    useScrollToAnchor({ callback: flashingThread })
+  const filteredPostsLength = filteredPosts.length
 
-  if (filteredPosts.length === 0) return <NoPosts />
+  if (filteredPostsLength === 0) return <NoPosts />
+  if (hashId) useScrollToAnchor({ callback: flashingThread })
+
+  console.log(amountOfSeenPosts)
+  console.log(paginatedPosts)
 
   return (
-    <>
-      {filteredPosts.map((post, index) => (
+    <InfiniteScroll
+      next={() => {
+        console.log('fetching next')
+        const newLimit = amountOfSeenPosts + limit
+        setPaginatedPosts(filteredPosts.slice(0, newLimit))
+        setAmountOfSeenPosts(newLimit)
+      }}
+      className={scrollContainer}
+      dataLength={filteredPostsLength}
+      hasMore={amountOfSeenPosts < filteredPostsLength}
+      loader={<LoadingList text="Fetching more posts..." />}
+      endMessage={filteredPostsLength < 3 ? <CustomizeCard /> : undefined}
+    >
+      {paginatedPosts.map(({ id, timestamp, post, sender }, index) => (
         <>
           <Post
-            key={post.id}
-            blockchainId={Number(post.id)}
-            timestamp={Number(post.timestamp)}
-            text={post.post}
-            sender={post.sender}
-            tx={idToPostTx[Number(post.id)]}
+            key={id}
+            blockchainId={Number(id)}
+            timestamp={Number(timestamp)}
+            text={post}
+            sender={sender}
+            tx={idToPostTx[Number(id)]}
             limitThread={2}
+            clickablePost
           />
           {index === 2 && <CustomizeCard />}
         </>
       ))}
-    </>
+    </InfiniteScroll>
   )
 }
 

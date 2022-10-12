@@ -10,6 +10,7 @@ import {
   padding,
   position,
   space,
+  transitionProperty,
   width,
   wordBreak,
   zIndex,
@@ -21,14 +22,22 @@ import classNamesToString from 'helpers/classNamesToString'
 const cardContainer = (
   small?: boolean,
   blueBg?: boolean,
-  gradient?: boolean
+  gradient?: boolean,
+  hoverEffect?: boolean
 ) => {
   const card = classnames(
     position('relative'),
-    borderWidth(blueBg ? 'border-0' : 'border'),
-    borderColor({ 'border-half-grey': !gradient }),
+    borderWidth(blueBg ? 'border-0' : { border: !gradient }),
+    borderColor('border-half-grey'),
     borderRadius('rounded-2xl'),
-    backgroundColor(blueBg ? 'bg-primary-background' : 'bg-primary-dark'),
+    backgroundColor(
+      blueBg
+        ? 'bg-primary-background'
+        : {
+            'bg-primary-dark': true,
+            'hover:bg-primary-semi-dark': hoverEffect,
+          }
+    ),
     padding(small ? 'p-4' : 'p-6'),
     maxWidth('max-w-full'),
     maxHeight('max-h-full'),
@@ -36,7 +45,8 @@ const cardContainer = (
     width('w-full'),
     space('space-y-4'),
     wordBreak('break-words'),
-    zIndex('z-20')
+    zIndex('z-20'),
+    transitionProperty('transition-colors')
   )
   // added via css because tailwind class overwrites by material-ui
   return classNamesToString(card, 'shadow-card')
@@ -47,9 +57,17 @@ export default function ({
   small,
   blueBg,
   gradient,
-}: ChildrenProp & { small?: boolean; blueBg?: boolean; gradient?: boolean }) {
+  hoverEffect,
+}: ChildrenProp & {
+  small?: boolean
+  blueBg?: boolean
+  gradient?: boolean
+  hoverEffect?: boolean
+}) {
   const content = (
-    <div className={cardContainer(small, blueBg, gradient)}>{children}</div>
+    <div className={cardContainer(small, blueBg, gradient, hoverEffect)}>
+      {children}
+    </div>
   )
 
   return gradient ? (

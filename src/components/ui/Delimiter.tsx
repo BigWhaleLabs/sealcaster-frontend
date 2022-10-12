@@ -14,7 +14,7 @@ const delimiterContainer = (
     borderWidth('border-0'),
     backgroundColor(color),
     width(horizontal ? 'w-full' : 'w-px'),
-    height(horizontal ? 'h-px' : 'h-4')
+    height(horizontal ? 'h-px' : 'h-3')
   )
 
 export default function ({

@@ -1,10 +1,12 @@
 import { AccentText } from 'components/ui/Text'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
+import { useSnapshot } from 'valtio'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
 import useComments from 'hooks/useComments'
+import walletStore from 'stores/WalletStore'
 
 const wrapper = classnames(
   display('flex'),
@@ -23,10 +25,12 @@ export default function ({
   postId: number
   limitThread?: number
 }) {
+  const { account } = useSnapshot(walletStore)
   const threadInfo = useComments(threadId)
 
   if (!threadInfo) return null
 
+  const isThreadOwned = threadInfo.sender === account
   const commentsLength = threadInfo.count
 
   return (
@@ -36,6 +40,7 @@ export default function ({
         threadId={threadId}
         count={commentsLength}
         placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
+        isThreadOwned={isThreadOwned}
       />
       {threadInfo.comments.map(
         (
@@ -52,6 +57,7 @@ export default function ({
                 replier={replier}
                 repliedTo={repliedTo}
                 replyToId={replyToId}
+                isThreadOwned={isThreadOwned}
               />
             )
           ) : (
@@ -64,6 +70,7 @@ export default function ({
               repliedTo={repliedTo}
               replies={replies}
               replyToId={replyToId}
+              isThreadOwned={isThreadOwned}
             />
           )
       )}

@@ -1,5 +1,4 @@
 import { BodyText, LinkText } from 'components/ui/Text'
-import { createRef } from 'preact'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
@@ -9,7 +8,6 @@ import PostTime from 'components/BlockchainList/PostTime'
 import ReplyIcon from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
 import ReplyModel from 'models/ReplyModel'
-import SmallArrow from 'components/ui/SmallArrow'
 import classnames, {
   alignItems,
   display,
@@ -42,12 +40,12 @@ const TruncatedAddress = ({ address }: { address: string }) => (
   <>
     <div className={displayFrom('md')}>
       <LinkText url={getEtherscanAddressUrl(address)} extraSmall primary>
-        {truncateMiddleIfNeeded(address, 12)}
+        {truncateMiddleIfNeeded(address, 16)}
       </LinkText>
     </div>
     <div className={displayTo('md')}>
       <LinkText url={getEtherscanAddressUrl(address)} extraSmall primary>
-        {truncateMiddleIfNeeded(address, 8)}
+        {truncateMiddleIfNeeded(address, 12)}
       </LinkText>
     </div>
   </>
@@ -60,33 +58,34 @@ export default function ({
   timestamp,
   threadId,
   replyToId,
+  isThreadOwned,
 }: {
   content: string
   replier: string
   repliedTo: string
   timestamp: number
+  isThreadOwned?: boolean
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
-  const ref = createRef()
 
   return (
-    // TODO: anchor should be real
     <BareCard data-anchor={`#reply=${replyToId}`}>
-      <div className={space('space-y-4')} ref={ref}>
+      <div className={space('space-y-4')}>
         <div className={commentWithReplyButton}>
           <div className={commentWithData}>
             <BodyText>{content}</BodyText>
             <div className={infoBlock}>
               <TruncatedAddress address={replier} />
-              <SmallArrow />
-              <TruncatedAddress address={repliedTo} />
               <Delimiter color="bg-formal-accent" />
               <PostTime timestamp={timestamp} />
             </div>
           </div>
           {replyToId && (
             <button
-              className={display({ hidden: inputOpen }, 'md:flex')}
+              className={display(
+                { hidden: inputOpen || !isThreadOwned },
+                { 'md:flex': isThreadOwned }
+              )}
               onClick={() => setInputOpen(!inputOpen)}
             >
               <ReplyIcon />
@@ -97,7 +96,7 @@ export default function ({
           <ReplyInput
             threadId={threadId}
             replyToId={replyToId}
-            placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 12)}`}
+            placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 16)}`}
           />
         )}
       </div>

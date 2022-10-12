@@ -19,6 +19,7 @@
   --red-background: #ff416140;
 
   --primary-dark: #0d0030;
+  --primary-semi-dark: #17093d;
   --primary-bright: #01f5ff;
   --primary-light: #bff5fa;
   --primary-dimmed: #3a00d6;
@@ -50,6 +51,7 @@
 
   --accent-transparent: #fed8231a;
   --secondary-transparent: #ff7bed1a;
+  --primary-dark-transparent: #0d00304d;
 
   --bg-grid: conic-gradient(
     from 90deg at 0.06rem 0.06rem,
@@ -70,23 +72,14 @@ html {
   scrollbar-width: thin;
   background-size: 100% auto, 100% auto, 3rem 3rem;
   background-repeat: no-repeat, no-repeat, repeat;
-  background-position: top, top, 0;
+  background-position: top, top, top;
   background-image: url(), url('/img/background.webp'), var(--bg-grid);
   caret-color: var(--primary);
 }
 html[bg-theme='404'] {
-  background-position: top, center, 0;
+  background-position: top, center, top;
   background-size: auto auto, 100% 100%, 3rem 3rem;
   background-image: url(), url(), var(--bg-grid);
-}
-
-@media screen and (max-width: 1280px) {
-  html[bg-theme='404'] {
-    background-position: top, center, 0;
-    background-size: auto auto, 100% 100%, 3rem 3rem;
-    background-image: url(),
-      radial-gradient(var(--red-background), var(--transparent)), var(--bg-grid);
-  }
 }
 
 body {
@@ -98,19 +91,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: 'JetBrains Mono', monospace;
   color: var(--formal-accent);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .hover-tertiary:hover {
-    color: var(--tertiary);
-    text-decoration: underline;
-  }
-  .hover-secondary:hover {
-    color: var(--secondary-light-active-transparent);
-  }
-  .hover-button-scroll:hover {
-    opacity: 1;
-  }
 }
 
 svg:not(.Toastify__toast-icon svg) {
@@ -244,16 +224,38 @@ circle {
   }
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .hover-tertiary:hover {
+    color: var(--tertiary);
+    text-decoration: underline;
+  }
+  .hover-secondary:hover {
+    color: var(--secondary-light-active-transparent);
+  }
+  .hover-button-scroll:hover {
+    opacity: 1;
+  }
+}
+
 @media screen and (max-width: 600px) {
   /* Grid for mobiles */
   html {
     background-color: var(--primary-dark);
     background-size: auto auto, 100% 100%, 0/2rem, 2rem;
-    background-position: top, top, 0;
+    background-position: top, top, top;
     background-image: url(), url('/img/background.webp'), var(--bg-grid);
   }
   .animated-blur::before {
     top: 30%;
     width: 140%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  html[bg-theme='404'] {
+    background-position: top, center, top;
+    background-size: auto auto, 100% 100%, 3rem 3rem;
+    background-image: url(),
+      radial-gradient(var(--red-background), var(--transparent)), var(--bg-grid);
   }
 }

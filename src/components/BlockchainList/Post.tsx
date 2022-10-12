@@ -52,6 +52,7 @@ export default function ({
   sender,
   tx,
   limitThread,
+  clickablePost,
 }: {
   blockchainId: number
   timestamp: number
@@ -59,34 +60,34 @@ export default function ({
   sender: string
   tx: string
   limitThread?: number
+  clickablePost?: boolean
 }) {
   return (
-    // TODO: make it clickable only if user has an account with badge
     <div data-anchor={`#id=${blockchainId}`}>
-      <Card>
-        <div className={container}>
-          <a href={`/thread/${blockchainId}`}>
+      <Card hoverEffect={clickablePost}>
+        <a href={clickablePost ? `/thread/${blockchainId}` : undefined}>
+          <div className={container}>
             <PostText>{text}</PostText>
-          </a>
 
-          <div className={postBottom}>
-            <BodyText primary>
-              <span className={postInfo}>
-                <StatusText>Posted by: </StatusText>
-                <Sender sender={sender} />
-                <PostDelimiter />
-                <EtherScanLink tx={tx} />
-                <PostDelimiter />
-                <Status blockchainId={blockchainId} />
-              </span>
-            </BodyText>
-            <BodyText primary noWrap>
-              <span className={postInfo}>
-                <PostTime timestamp={timestamp} />
-              </span>
-            </BodyText>
+            <div className={postBottom}>
+              <BodyText primary>
+                <span className={postInfo}>
+                  <StatusText>Posted by: </StatusText>
+                  <Sender sender={sender} />
+                  <PostDelimiter />
+                  <EtherScanLink tx={tx} />
+                  <PostDelimiter />
+                  <Status blockchainId={blockchainId} />
+                </span>
+              </BodyText>
+              <BodyText primary noWrap>
+                <span className={postInfo}>
+                  <PostTime timestamp={timestamp} />
+                </span>
+              </BodyText>
+            </div>
           </div>
-        </div>
+        </a>
 
         <Delimiter color="bg-half-grey" horizontal />
 

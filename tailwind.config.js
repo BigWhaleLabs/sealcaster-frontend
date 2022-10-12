@@ -22,6 +22,7 @@ module.exports = {
         'error-dark': 'var(--error-dark)',
 
         'primary-dark': 'var(--primary-dark)',
+        'primary-semi-dark': 'var(--primary-semi-dark)',
         'primary-light': 'var(--primary-light)',
         'primary-dimmed': 'var(--primary-dimmed)',
         'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
@@ -55,6 +56,7 @@ module.exports = {
         'primary-bright': 'var(--primary-bright)',
         divider: 'var(--divider)',
         'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
+        'primary-dark-transparent': 'var(--primary-dark-transparent)',
       },
       borderRadius: {
         avatar: '6rem',
@@ -120,10 +122,16 @@ module.exports = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        translateXNegativeFull: {
+          '100%': {
+            transform: 'translateX(-100%)',
+          },
+        },
       },
       animation: {
         'pulse-horizontal': 'pulse-horizontal 2s ease-in-out infinite',
         rotate: 'rotate linear 3.5s infinite',
+        ticker: 'translateXNegativeFull 12s linear infinite',
       },
       rotate: {
         '-15': '-15deg',
@@ -143,6 +151,9 @@ module.exports = {
       },
       fontSize: {
         '3.5xl': '2rem',
+      },
+      letterSpacing: {
+        'extra-wide': '0.3em',
       },
     },
     container: {
