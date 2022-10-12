@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import BurnerWallet from 'pages/BurnerWallet'
 import Footer from 'components/Footer'
+import InteractWithBurner from 'components/ui/InteractWithBurner'
 import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
 import NotFound from 'pages/NotFound'
@@ -11,7 +12,6 @@ import ScrollToTopButton from 'components/ui/ScrollToTopButton'
 import SliderTicker from 'components/ui/SliderTicker'
 import Terms from 'pages/Terms'
 import Thread from 'components/Thread'
-import UnlockedBurner from 'components/ui/UnlockedBurner'
 import classnames, {
   display,
   flexDirection,
@@ -52,25 +52,25 @@ export default function () {
             sentences={['spill your tea', 'snatch your burner wallet ']}
           />
         )}
-        <UnlockedBurner
+        <InteractWithBurner
           attentionText="Attention: "
           headerText="Burner wallet unlocked"
           mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
           primaryButtonText="View burner"
           tertiaryButtonText="Destroy burner"
         />
-        <UnlockedBurner
+        {/* <InteractWithBurner
           headerText="Are you sure you want to destroy this burner?"
           mainText="If you chose to destroy it or ignore this message, you will lose the wallet forever."
           primaryButtonText="Yes, destroy it"
           tertiaryButtonText="View it"
         />
-        <UnlockedBurner
+        <InteractWithBurner
           headerText="We all get destroyed eventually"
           mainText="That’s okay! You can choose to cast with a different burner wallet each time."
           tertiaryButtonText="Got it"
           sadSeal
-        />
+        /> */}
         <div className={bodyContainer(is404)}>
           <Switch>
             <Route path="/">
