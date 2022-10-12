@@ -37,7 +37,6 @@ export default function ({
 
   return (
     <>
-      <Delimiter color="bg-half-grey" horizontal />
       <div className={wrapper}>
         <Replies
           replyToId={threadInfo.cast?.merkleRoot}
