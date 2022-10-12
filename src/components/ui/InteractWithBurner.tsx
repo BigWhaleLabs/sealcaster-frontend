@@ -36,7 +36,6 @@ const backgroundWrapper = classnames(
 
 const buttonsWrapper = classnames(
   display('flex'),
-  flexDirection('flex-row'),
   alignItems('items-center'),
   margin('mt-4'),
   gap('gap-x-4')
@@ -51,7 +50,6 @@ const positionWrapper = classnames(
 const headerTextWrapper = (show: boolean) =>
   classnames(
     display('flex'),
-    flexDirection('flex-row'),
     gap('gap-x-1'),
     justifyContent('justify-between'),
     alignItems(show ? 'items-start' : 'items-center')
