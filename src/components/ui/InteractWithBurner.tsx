@@ -69,6 +69,17 @@ const infoSealWrapper = classnames(
   dropShadow('drop-shadow-info-seal')
 )
 
+const headerContainerWrapper = classnames(display('flex'), gap('gap-x-1'))
+
+const smallInfoSealWrapepr = classnames(
+  displayTo('md'),
+  dropShadow('drop-shadow-info-seal')
+)
+
+const arrowWrapper = classnames(width('w-4'), margin('mt-2'))
+
+const positionWithGap = classnames(positionWrapper, gap('gap-y-1'))
+
 const ActionsButtons = ({
   tertiaryButton,
   primaryButton,
@@ -83,14 +94,16 @@ const ActionsButtons = ({
           {primaryButton.text}
         </Button>
       )}
-      <Button
-        type="tertiary"
-        gradientFont
-        small
-        onClick={tertiaryButton?.action}
-      >
-        {tertiaryButton?.text}
-      </Button>
+      {tertiaryButton?.text && (
+        <Button
+          type="tertiary"
+          gradientFont
+          small
+          onClick={tertiaryButton?.action}
+        >
+          {tertiaryButton?.text}
+        </Button>
+      )}
     </div>
   )
 }
@@ -112,14 +125,12 @@ export default function ({
 }) {
   const [show, setShow] = useState(false)
 
-  function renderButtons() {
-    return (
-      <ActionsButtons
-        primaryButton={primaryButton}
-        tertiaryButton={tertiaryButton}
-      />
-    )
-  }
+  const buttons = (
+    <ActionsButtons
+      primaryButton={primaryButton}
+      tertiaryButton={tertiaryButton}
+    />
+  )
 
   return (
     <div className={contentWrapper}>
@@ -128,15 +139,10 @@ export default function ({
           <InfoSeal sadSeal={sadSeal} />
         </div>
         <div className={positionWrapper}>
-          <div className={classnames(positionWrapper, gap('gap-y-1'))}>
+          <div className={positionWithGap}>
             <div className={headerTextWrapper(show)}>
-              <span className={classnames(display('flex'), gap('gap-x-1'))}>
-                <div
-                  className={classnames(
-                    displayTo('md'),
-                    dropShadow('drop-shadow-info-seal')
-                  )}
-                >
+              <span className={headerContainerWrapper}>
+                <div className={smallInfoSealWrapepr}>
                   <SmallInfoSeal />
                 </div>
                 <AccentText color="text-formal-accent" large bold>
@@ -155,7 +161,7 @@ export default function ({
                   setShow(!show)
                 }}
               >
-                <div className={classnames(width('w-4'), margin('mt-2'))}>
+                <div className={arrowWrapper}>
                   <span className={displayTo('md')}>
                     <Arrow pulseDisabled open={show} />
                   </span>
@@ -167,8 +173,8 @@ export default function ({
             </div>
             {show && <StatusText>{mainText}</StatusText>}
           </div>
-          <div className={displayFrom('md')}>{renderButtons()}</div>
-          <div className={displayTo('md')}>{show && renderButtons()}</div>
+          <div className={displayFrom('md')}>{buttons}</div>
+          <div className={displayTo('md')}>{show && buttons}</div>
         </div>
       </div>
     </div>
