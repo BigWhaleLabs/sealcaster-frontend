@@ -7,9 +7,11 @@ import useFarcasterThread from 'hooks/useFarcasterThread'
 export default function useCast(post?: PostStructOutput) {
   const { casts } = useSnapshot(farcasterStore)
   const { statuses } = useSnapshot(postIdsStatuses)
-  const serviceId = post
-    ? statuses[post.id.toNumber() - 1].serviceId
-    : undefined
+  const serviceId =
+    post && statuses[post.id.toNumber() - 1]
+      ? statuses[post.id.toNumber() - 1].serviceId
+      : undefined
+
   const farcasterThread = useFarcasterThread(serviceId)
 
   return {
