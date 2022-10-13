@@ -54,7 +54,7 @@ const headerTextWrapper = (show: boolean) =>
     gap('gap-x-1'),
     justifyContent('justify-between'),
     alignItems(
-      show ? alignItems('items-center', 'md:items-start') : 'items-start'
+      show ? { 'items-center': true, 'md:items-start': true } : 'items-start'
     )
   )
 
