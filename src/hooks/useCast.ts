@@ -6,6 +6,7 @@ import useFarcasterThread from 'hooks/useFarcasterThread'
 export default function useCast(postId: number) {
   const { casts } = useSnapshot(farcasterStore)
   const { idToMerkleRoot } = useSnapshot(postIdsStatuses)
+
   const serviceId = postId > 0 ? idToMerkleRoot[postId - 1] : undefined
 
   const farcasterThread = useFarcasterThread(serviceId)

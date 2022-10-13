@@ -50,5 +50,5 @@ export default function ({
         timestamp: +timestamp,
       })
     ),
-  ]
+  ].sort((a, b) => a.timestamp - b.timestamp)
 }

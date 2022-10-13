@@ -44,7 +44,7 @@ export function PostListSuspended() {
       next={() => setSkip(skip + limit)}
       className={scrollContainer}
       dataLength={postsLength}
-      hasMore={skip < postsLength}
+      hasMore={paginated.length < postsLength}
       loader={<LoadingList text="Fetching more posts..." />}
       endMessage={postsLength < 3 ? <CustomizeCard /> : undefined}
     >

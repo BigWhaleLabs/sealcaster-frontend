@@ -8,6 +8,7 @@ import PostIdsStatuses, { updateStatuses } from 'stores/PostIdsStatuses'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
 import getPostStorage from 'helpers/getPostStorage'
+import getQuestionOfTheDayIds from 'helpers/getQuestionOfTheDayIds'
 import parsePostLogData from 'helpers/parsePostLogData'
 import safeGetThreadFromContract from 'helpers/safeGetThreadFromContract'
 import safeTransformPostOutput from 'helpers/safeTransformPostOutput'
@@ -15,7 +16,7 @@ import walletStore from 'stores/WalletStore'
 
 interface PostStoreType {
   limit: number
-  questionDay: number
+  questionOfTheDayIds: Promise<number[]>
   posts: { [postId: number]: Promise<PostStructOutput> }
   threads: { [threadId: number]: Promise<number[]> }
   createPost: (
@@ -32,7 +33,7 @@ const limit = 20
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  questionDay: 1,
+  questionOfTheDayIds: getQuestionOfTheDayIds(farcasterContract),
   threads: {},
   posts: {},
   idToPostTx: getIdsToPostsTx(farcasterContract),
@@ -89,6 +90,7 @@ export function fetchPost(postId: number) {
   PostStore.posts[postId] = farcasterContract
     .posts(postId - 1)
     .then(safeTransformPostOutput)
+  void updateStatuses([postId])
 }
 
 farcasterContract.on(

@@ -27,10 +27,9 @@ const postInfo = classnames(
   gap('gap-x-1')
 )
 
-function QuestionOfDaySuspended() {
-  const { questionDay } = useSnapshot(PostStore)
-  const blockchainPost = usePost(questionDay)
-  const { cast } = useCast(questionDay)
+function QuestionOfDaySuspended({ id }: { id: number }) {
+  const blockchainPost = usePost(id)
+  const { cast } = useCast(id)
 
   if (!blockchainPost) return null
 
@@ -38,7 +37,7 @@ function QuestionOfDaySuspended() {
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
-      <a href={`/thread/${questionDay}`}>
+      <a href={`/thread/${id}`}>
         <Card hoverEffect>
           <div className={displayFrom('xs')}>
             <div className={displayTo('lg')}>
@@ -56,7 +55,7 @@ function QuestionOfDaySuspended() {
           </span>
 
           <Replies
-            threadId={questionDay}
+            threadId={id}
             replyToId={cast?.merkleRoot}
             placeholder="Answer today’s question..."
             isThreadOwned={true}
@@ -67,10 +66,19 @@ function QuestionOfDaySuspended() {
   )
 }
 
+function QuestionsOfDaySuspended() {
+  const { questionOfTheDayIds } = useSnapshot(PostStore)
+  const [questionDay] = questionOfTheDayIds.slice(-1)
+
+  if (!questionDay) return null
+
+  return <QuestionOfDaySuspended id={questionDay} />
+}
+
 export default function () {
   return (
     <Suspense fallback="">
-      <QuestionOfDaySuspended />
+      <QuestionsOfDaySuspended />
     </Suspense>
   )
 }
