@@ -5,7 +5,7 @@ export default async function (contract: SCPostStorage) {
   const posts = await contract.queryFilter(contract.filters.PostSaved())
   return posts.reduce(
     (ids, post, index) =>
-      post.args.sender === replyAllAddress ? [index, ...ids] : ids,
+      post.args.sender === replyAllAddress ? [index + 1, ...ids] : ids,
     [] as number[]
   )
 }

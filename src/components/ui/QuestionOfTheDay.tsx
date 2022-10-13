@@ -15,6 +15,7 @@ import classnames, {
   gap,
   margin,
   position,
+  space,
 } from 'classnames/tailwind'
 import useCast from 'hooks/useCast'
 import usePost from 'hooks/usePost'
@@ -37,8 +38,8 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
-      <a href={`/thread/${id}`}>
-        <Card hoverEffect>
+      <Card hoverEffect>
+        <a className={space('space-y-4')} href={`/thread/${id}`}>
           <div className={displayFrom('xs')}>
             <div className={displayTo('lg')}>
               <StickLabel mobile />
@@ -53,22 +54,21 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
             <StatusText>Posted by: </StatusText>
             <Sender sender={sender} />
           </span>
-
-          <Replies
-            threadId={id}
-            replyToId={cast?.merkleRoot}
-            placeholder="Answer today’s question..."
-            isThreadOwned={true}
-          />
-        </Card>
-      </a>
+        </a>
+        <Replies
+          threadId={id}
+          replyToId={cast?.merkleRoot}
+          placeholder="Answer today’s question..."
+          isThreadOwned={true}
+        />
+      </Card>
     </div>
   )
 }
 
 function QuestionsOfDaySuspended() {
   const { questionOfTheDayIds } = useSnapshot(PostStore)
-  const [questionDay] = questionOfTheDayIds.slice(-1)
+  const questionDay = Math.max(...questionOfTheDayIds)
 
   if (!questionDay) return null
 

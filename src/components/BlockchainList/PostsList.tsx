@@ -3,6 +3,7 @@ import { useSnapshot } from 'valtio'
 import CustomizeCard from 'components/BlockchainList/CustomizeCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import LoadingList from 'components/BlockchainList/LoadingList'
+import LoadingPost from 'components/Thread/LoadingPost'
 import NoPosts from 'components/BlockchainList/NoPosts'
 import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
@@ -50,16 +51,18 @@ export function PostListSuspended() {
     >
       {paginated.map(({ id, timestamp, post, sender }, index) => (
         <>
-          <Post
-            key={id}
-            blockchainId={Number(id)}
-            timestamp={Number(timestamp)}
-            text={post}
-            sender={sender}
-            tx={idToPostTx[Number(id)]}
-            limitThread={2}
-            clickablePost
-          />
+          <Suspense fallback={<LoadingPost />}>
+            <Post
+              key={id}
+              blockchainId={Number(id)}
+              timestamp={Number(timestamp)}
+              text={post}
+              sender={sender}
+              tx={idToPostTx[Number(id)]}
+              limitThread={2}
+              clickablePost
+            />
+          </Suspense>
           {index === 2 && <CustomizeCard />}
         </>
       ))}

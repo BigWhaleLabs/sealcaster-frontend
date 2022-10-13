@@ -95,13 +95,15 @@ export function fetchPost(postId: number) {
 
 farcasterContract.on(
   farcasterContract.filters.PostSaved(),
-  (id, post, derivativeAddress, sender, timestamp) => {
+  (id, post, derivativeAddress, sender, timestamp, threadId, replyToId) => {
     PostStore.posts[id.toNumber()] = Promise.resolve({
       id,
       post,
       derivativeAddress,
       sender,
       timestamp,
+      threadId,
+      replyToId,
     } as PostStructOutput)
 
     PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(
