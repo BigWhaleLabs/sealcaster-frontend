@@ -119,6 +119,9 @@ module.exports = {
         1.5: '1.5',
         4: '4',
       },
+      transitionDuration: {
+        0: '0ms',
+      },
       keyframes: {
         'pulse-horizontal': {
           '0%, 100%': { transform: 'translateX(0.5rem)' },

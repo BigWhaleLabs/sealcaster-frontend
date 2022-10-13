@@ -4529,6 +4529,7 @@ export type TTransitionProperty =
   | 'transition-transform'
 
 export type TTransitionDuration =
+  | 'duration-0'
   | 'duration-75'
   | 'duration-100'
   | 'duration-150'

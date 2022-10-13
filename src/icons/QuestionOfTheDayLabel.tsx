@@ -8,6 +8,7 @@ import classnames, {
   saturate,
   stroke,
   strokeWidth,
+  transitionDuration,
   width,
   willChange,
 } from 'classnames/tailwind'
@@ -29,6 +30,7 @@ const backgroundGradient = classNamesToString(
     filter('filter'),
     brightness('brightness-110'),
     saturate('saturate-200'),
+    transitionDuration('duration-100', 'lg:duration-0'),
     size
   )
 )
