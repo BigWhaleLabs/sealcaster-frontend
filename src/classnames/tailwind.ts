@@ -4625,6 +4625,8 @@ export type TDropShadow =
   | 'drop-shadow-accent-light-transparent'
   | 'drop-shadow-formal-accent'
   | 'drop-shadow-text-shadow'
+  | 'drop-shadow-info-card'
+  | 'drop-shadow-info-seal'
 
 export type TGrayscale = 'grayscale-0' | 'grayscale'
 
@@ -7513,6 +7515,7 @@ export type TWidth =
   | 'w-fit'
   | 'w-full-105'
   | 'w-seal-grid'
+  | 'w-body'
   | 'w-7.5'
 
 export type TMinWidth =

@@ -64,6 +64,7 @@ module.exports = {
       width: {
         'full-105': '105%',
         'seal-grid': '25.313rem',
+        body: '40.375rem',
       },
       maxWidth: {
         14: '3.5rem',
@@ -114,6 +115,8 @@ module.exports = {
           '-0.25rem 0 0 var(--primary-dimmed)',
           '0rem 0rem 1.25rem var(--formal-accent-semi-transparent)',
         ],
+        'info-card': '0rem 0rem 4.5rem var(--primary-dimmed-dark-transparent)',
+        'info-seal': '0rem 0.125px 1.25px var(--secondary-dimmed-transparent)',
       },
       strokeWidth: {
         1.5: '1.5',
