@@ -1,6 +1,4 @@
-import { useSnapshot } from 'valtio'
 import Comment from 'models/Comment'
-import postIdsStatuses from 'stores/PostIdsStatuses'
 import useFarcasterThread from 'hooks/useFarcasterThread'
 import useThread from 'hooks/useThread'
 
@@ -15,7 +13,10 @@ export default function ({
 }): Comment[] {
   const blockchainThread = useThread(threadId)
   const farcasterThread = useFarcasterThread(threadMerkleRoot)
-  const { idToMerkleRoot } = useSnapshot(postIdsStatuses)
+
+  const farcasterThreadPostIds = farcasterThread
+    ? farcasterThread.map((cast) => cast.postId)
+    : []
 
   const farcasterReplies = farcasterThread
     ? farcasterThread.filter(
@@ -23,12 +24,11 @@ export default function ({
       )
     : []
 
-  const idToMerkleRootCopy = { ...idToMerkleRoot }
   const blockchainReplies = blockchainThread
     ? blockchainThread.filter(
         (post) =>
           post.replyToId === replyToId &&
-          !idToMerkleRootCopy[post.id.toNumber()]
+          !farcasterThreadPostIds.includes(post.id.toNumber())
       )
     : []
 
