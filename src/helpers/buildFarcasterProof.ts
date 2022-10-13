@@ -52,7 +52,7 @@ export default async function build(
 ): Promise<ProofResult> {
   return snarkjs.groth16.fullProve(
     await generateInput(publicKey, addressSignature, farcaterSignature),
-    'zk/FarcasterChecker.wasm',
-    'zk/FarcasterChecker_final.zkey'
+    '/zk/FarcasterChecker.wasm',
+    '/zk/FarcasterChecker_final.zkey'
   )
 }

@@ -3,15 +3,15 @@ import { proxy } from 'valtio'
 import getPostStatuses from 'helpers/getPostStatuses'
 
 export interface LastUserPostData {
-  blockchainId: number
+  id: number
   status: PostStatus
   serviceId?: string
 }
 
 interface PostStatusStoreType {
   lastUserPost?: { [account: string]: LastUserPostData }
-  statuses: { [blockchainId: number]: Promise<PostStatus> }
-  idToMerkleRoot: { [blockchainId: number]: Promise<string | undefined> }
+  statuses: { [postId: number]: Promise<PostStatus> }
+  idToMerkleRoot: { [postId: number]: Promise<string | undefined> }
 }
 
 interface CheckStatusesStoreProps {
@@ -30,9 +30,9 @@ export async function updateStatuses(ids: number[]) {
 
   const updatedStatuses = await getPostStatuses(ids)
 
-  for (const { blockchainId, status, serviceId } of updatedStatuses) {
-    postStatusStore.statuses[blockchainId] = Promise.resolve(status)
-    postStatusStore.idToMerkleRoot[blockchainId] = Promise.resolve(serviceId)
+  for (const { id, status, serviceId } of updatedStatuses) {
+    postStatusStore.statuses[id] = Promise.resolve(status)
+    postStatusStore.idToMerkleRoot[id] = Promise.resolve(serviceId)
 
     const lastUserPost = postStatusStore.lastUserPost
     if (!lastUserPost) continue
@@ -41,12 +41,12 @@ export async function updateStatuses(ids: number[]) {
     Object.keys(lastUserPost).filter((account) => {
       if (
         !lastUserPost[account] ||
-        !(lastUserPost[account].blockchainId === blockchainId) ||
+        !(lastUserPost[account].id === id) ||
         !postStatusStore.lastUserPost
       )
         return
       postStatusStore.lastUserPost[account] = {
-        blockchainId,
+        id,
         status,
         serviceId,
       }
@@ -72,10 +72,10 @@ setInterval(async () => {
 
   await Promise.all(
     Object.entries(postStatusStore.statuses).map(
-      async ([blockchainId, promiseStatus]) => {
+      async ([postId, promiseStatus]) => {
         const status = await promiseStatus
         if (status === PostStatus.pending || status === PostStatus.approved)
-          ids.push(Number(blockchainId))
+          ids.push(Number(postId))
       }
     )
   )

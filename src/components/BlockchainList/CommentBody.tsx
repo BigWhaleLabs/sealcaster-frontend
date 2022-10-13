@@ -57,13 +57,12 @@ export default function ({
   timestamp,
   threadId,
   replyToId,
-  isThreadOwned,
   repliedTo = '',
+  canReply,
 }: {
   content: string
   replier: string
   timestamp: number
-  isThreadOwned?: boolean
   repliedTo?: string
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
@@ -80,17 +79,15 @@ export default function ({
               <PostTime timestamp={timestamp} />
             </div>
           </div>
-          {replyToId && (
-            <button
-              className={display(
-                { hidden: inputOpen || !isThreadOwned },
-                { 'md:flex': isThreadOwned }
-              )}
-              onClick={() => setInputOpen(!inputOpen)}
-            >
-              <ReplyIcon />
-            </button>
-          )}
+          <button
+            className={display(
+              { hidden: inputOpen || (!!replyToId && canReply) },
+              { 'md:flex': !!replyToId && canReply }
+            )}
+            onClick={() => setInputOpen(!inputOpen)}
+          >
+            <ReplyIcon />
+          </button>
         </div>
         {inputOpen && (
           <ReplyInput

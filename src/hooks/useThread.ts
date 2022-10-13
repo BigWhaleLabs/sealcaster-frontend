@@ -11,5 +11,7 @@ export default function (threadId: number) {
   }
 
   const postsCopy = { ...posts }
-  return Array.from(thread).map((id) => postsCopy[id])
+  return Array.from(thread)
+    .map((id) => postsCopy[id])
+    .sort((a, b) => b.timestamp.toNumber() - a.timestamp.toNumber())
 }

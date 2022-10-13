@@ -6,7 +6,6 @@ import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
 import classNamesToString from 'helpers/classNamesToString'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
-import useBadgeAccount from 'hooks/useBadgeAccount'
 import useCast from 'hooks/useCast'
 import useReplies from 'hooks/useReplies'
 
@@ -21,14 +20,14 @@ function ThreadPart({
   postId,
   limitThread,
   threadMerkleRoot,
-  isOwner,
+  canReply,
 }: {
   threadId: number
   replyingTo: string
   postId: number
   limitThread?: number
   threadMerkleRoot: string
-  isOwner: boolean
+  canReply?: boolean
 }) {
   const comments = useReplies({
     threadId,
@@ -37,7 +36,6 @@ function ThreadPart({
   })
 
   const commentsLength = comments.length
-  if (commentsLength === 0) return null
 
   return (
     <>
@@ -46,7 +44,7 @@ function ThreadPart({
           replyToId={threadMerkleRoot}
           threadId={threadId}
           placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
-          isThreadOwned={isOwner}
+          canReply={canReply}
         />
         {comments.map(
           (
@@ -61,7 +59,7 @@ function ThreadPart({
                   content={content}
                   replier={replier}
                   replyToId={replyToId}
-                  isThreadOwned={isOwner}
+                  canReply={canReply}
                 />
               )
             ) : (
@@ -75,7 +73,7 @@ function ThreadPart({
                 repliedTo={repliedTo}
                 replies={replies}
                 replyToId={replyToId}
-                isThreadOwned={isOwner}
+                canReply={canReply}
               />
             )
         )}
@@ -99,18 +97,17 @@ export default function ({
   postId,
   limitThread,
   owner,
+  canReply,
 }: {
   threadId: number
   postId: number
   limitThread?: number
   owner: string
+  canReply?: boolean
 }) {
-  const { cast } = useCast(postId + 1)
+  const { cast } = useCast(postId)
 
   if (!cast || !cast?.merkleRoot) return null
-
-  const account = useBadgeAccount()
-  const isOwner = owner === account
 
   return (
     <ThreadPart
@@ -118,7 +115,7 @@ export default function ({
       threadId={threadId}
       postId={postId}
       limitThread={limitThread}
-      isOwner={isOwner}
+      canReply={canReply}
       threadMerkleRoot={cast.merkleRoot}
     />
   )

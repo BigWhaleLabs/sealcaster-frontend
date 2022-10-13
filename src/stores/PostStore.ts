@@ -87,6 +87,7 @@ export function fetchThread(threadId: number) {
 
 export function fetchPost(postId: number) {
   if (typeof PostStore.posts[postId] !== 'undefined') return
+  // Numbering in .posts() starts from zero
   PostStore.posts[postId] = farcasterContract
     .posts(postId - 1)
     .then(safeTransformPostOutput)
@@ -95,7 +96,15 @@ export function fetchPost(postId: number) {
 
 farcasterContract.on(
   farcasterContract.filters.PostSaved(),
-  (id, post, derivativeAddress, sender, timestamp, threadId, replyToId) => {
+  async (
+    id,
+    post,
+    derivativeAddress,
+    sender,
+    timestamp,
+    threadId,
+    replyToId
+  ) => {
     PostStore.posts[id.toNumber()] = Promise.resolve({
       id,
       post,
@@ -105,6 +114,13 @@ farcasterContract.on(
       threadId,
       replyToId,
     } as PostStructOutput)
+
+    const thread = (await PostStore.threads[threadId.toNumber()]) || []
+
+    PostStore.threads[threadId.toNumber()] = Promise.resolve([
+      ...thread,
+      id.toNumber(),
+    ])
 
     PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(
       PostStatus.pending

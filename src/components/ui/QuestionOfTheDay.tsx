@@ -59,7 +59,7 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
           threadId={id}
           replyToId={cast?.merkleRoot}
           placeholder="Answer today’s question..."
-          isThreadOwned={true}
+          canReply
         />
       </Card>
     </div>

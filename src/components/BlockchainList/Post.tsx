@@ -1,4 +1,11 @@
-import { BodyText, PostText, StatusText } from 'components/ui/Text'
+import {
+  BodyText,
+  PostText,
+  QuestionOfDayText,
+  StatusText,
+} from 'components/ui/Text'
+import { LoadingReplies } from 'components/Thread/LoadingPost'
+import { Suspense } from 'preact/compat'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
@@ -46,6 +53,7 @@ function PostDelimiter() {
 }
 
 export default function ({
+  isQuestionOfTheDay,
   blockchainId,
   timestamp,
   text,
@@ -53,7 +61,9 @@ export default function ({
   tx,
   limitThread,
   clickablePost,
+  canReply,
 }: {
+  isQuestionOfTheDay?: boolean
   blockchainId: number
   timestamp: number
   text: string
@@ -61,12 +71,16 @@ export default function ({
   tx: string
   limitThread?: number
   clickablePost?: boolean
+  canReply?: boolean
 }) {
   return (
     <div data-anchor={`#id=${blockchainId}`}>
       <Card hoverEffect={clickablePost}>
         <a href={clickablePost ? `/thread/${blockchainId}` : undefined}>
           <div className={container}>
+            {isQuestionOfTheDay && (
+              <QuestionOfDayText>Question of the day:</QuestionOfDayText>
+            )}
             <PostText>{text}</PostText>
 
             <div className={postBottom}>
@@ -77,7 +91,7 @@ export default function ({
                   <PostDelimiter />
                   <EtherScanLink tx={tx} />
                   <PostDelimiter />
-                  <Status blockchainId={blockchainId} />
+                  <Status postId={blockchainId} />
                 </span>
               </BodyText>
               <BodyText primary noWrap>
@@ -88,12 +102,15 @@ export default function ({
             </div>
           </div>
         </a>
-        <ThreadPart
-          owner={sender}
-          threadId={blockchainId}
-          limitThread={limitThread}
-          postId={blockchainId}
-        />
+        <Suspense fallback={<LoadingReplies />}>
+          <ThreadPart
+            owner={sender}
+            threadId={blockchainId}
+            limitThread={limitThread}
+            postId={blockchainId}
+            canReply={canReply}
+          />
+        </Suspense>
       </Card>
     </div>
   )

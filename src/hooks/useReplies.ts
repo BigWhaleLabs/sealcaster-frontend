@@ -28,7 +28,7 @@ export default function ({
     ? blockchainThread.filter(
         (post) =>
           post.replyToId === replyToId &&
-          !idToMerkleRootCopy[post.id.toNumber() - 1]
+          !idToMerkleRootCopy[post.id.toNumber()]
       )
     : []
 
@@ -50,5 +50,5 @@ export default function ({
         timestamp: +timestamp,
       })
     ),
-  ].sort((a, b) => a.timestamp - b.timestamp)
+  ].sort((a, b) => b.timestamp - a.timestamp)
 }

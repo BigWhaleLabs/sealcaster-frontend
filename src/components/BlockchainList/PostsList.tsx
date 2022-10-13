@@ -14,6 +14,7 @@ import classnames, {
   overflow,
 } from 'classnames/tailwind'
 import flashingThread from 'helpers/flashingPost'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 import useHashParams from 'hooks/useHashParams'
 import usePaginated from 'hooks/usePaginated'
 import useScrollToAnchor from 'hooks/useScrollToAnchor'
@@ -27,7 +28,8 @@ const scrollContainer = classnames(
 )
 
 export function PostListSuspended() {
-  const { idToPostTx, limit } = useSnapshot(PostStore)
+  const account = useBadgeAccount()
+  const { idToPostTx, limit, questionOfTheDayIds } = useSnapshot(PostStore)
   const thread = useThread(0)
   const hashId = useHashParams()
 
@@ -53,6 +55,11 @@ export function PostListSuspended() {
         <>
           <Suspense fallback={<LoadingPost />}>
             <Post
+              isQuestionOfTheDay={questionOfTheDayIds.includes(id.toNumber())}
+              canReply={
+                questionOfTheDayIds.includes(id.toNumber()) ||
+                sender === account
+              }
               key={id}
               blockchainId={Number(id)}
               timestamp={Number(timestamp)}

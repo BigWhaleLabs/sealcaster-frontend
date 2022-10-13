@@ -42,6 +42,8 @@ const secondBlock = classnames(
 )
 const thirdBlock = classnames(commonBlockStyles, height('h-8'), width('w-1/3'))
 
+export const LoadingReplies = () => <div className={firstBlock} />
+
 export default function () {
   return (
     <div className={threadLoading}>
@@ -50,7 +52,7 @@ export default function () {
         <div className={secondBlock} />
         <div className={thirdBlock} />
         <Delimiter color="bg-half-grey" horizontal />
-        <div className={firstBlock} />
+        <LoadingReplies />
       </div>
     </div>
   )

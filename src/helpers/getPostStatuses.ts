@@ -7,7 +7,7 @@ const baseURL = `${env.VITE_POSTER_URL}/posts`
 export default async function (ids: number[]) {
   const { data } = await axios.post<
     {
-      blockchainId: number
+      id: number
       status: PostStatus
       serviceId: string
     }[]

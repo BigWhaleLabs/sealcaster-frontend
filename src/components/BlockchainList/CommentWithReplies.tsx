@@ -39,10 +39,11 @@ const Replies = ({
   timestamp,
   replies,
   threadId,
-  isThreadOwned,
   replyToId,
+  canReply,
 }: Comment & {
   threadMerkleRoot: string
+  canReply?: boolean
 }) => {
   if (!replyToId) {
     return (
@@ -53,7 +54,7 @@ const Replies = ({
         replier={replier}
         repliedTo={repliedTo}
         timestamp={timestamp}
-        isThreadOwned={isThreadOwned}
+        canReply={canReply}
       />
     )
   }
@@ -68,8 +69,8 @@ const Replies = ({
       threadId={threadId}
       timestamp={timestamp}
       replies={replies}
-      isThreadOwned={isThreadOwned}
       replyToId={replyToId}
+      canReply={canReply}
     />
   )
 }
@@ -82,11 +83,12 @@ export function CommentWithReplies({
   timestamp,
   threadId,
   replyToId,
-  isThreadOwned,
   threadMerkleRoot,
+  canReply,
 }: Comment & {
   threadMerkleRoot: string
   replyToId: string
+  canReply?: boolean
 }) {
   const replies = useReplies({
     threadId,
@@ -105,7 +107,7 @@ export function CommentWithReplies({
         replier={replier}
         repliedTo={repliedTo}
         timestamp={timestamp}
-        isThreadOwned={isThreadOwned}
+        canReply={canReply}
       />
 
       {hasReplies && (
@@ -130,9 +132,9 @@ export function CommentWithReplies({
                   repliedTo={repliedTo}
                   timestamp={timestamp}
                   replies={replies}
-                  isThreadOwned={isThreadOwned}
                   replyToId={replyToId}
                   threadMerkleRoot={threadMerkleRoot}
+                  canReply={canReply}
                 />
               )
             )}
@@ -146,6 +148,7 @@ export function CommentWithReplies({
 export default function (
   props: Comment & {
     threadMerkleRoot: string
+    canReply?: boolean
   }
 ) {
   if (props.replyToId)

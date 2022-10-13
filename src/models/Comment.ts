@@ -5,7 +5,6 @@ export default interface Comment {
   replier: string
   content: string
   repliedTo?: string
-  isThreadOwned?: boolean
   replies?: Comment[]
   replyToId?: string
 }

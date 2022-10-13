@@ -47,11 +47,11 @@ export default function () {
 
   if (!account || !lastUserPost || !lastUserPost[account]) return null
 
-  const { status, blockchainId } = lastUserPost[account]
+  const { status, id } = lastUserPost[account]
 
   return (
     <div className={cardWrapper}>
-      <CastState status={status} castId={blockchainId} />
+      <CastState status={status} castId={id} />
     </div>
   )
 }

@@ -36,13 +36,12 @@ export default function (threadId: number, replyToId?: string) {
       const result = await PostStore.createPost(text, threadId, replyToId)
 
       for (const { id } of result) {
-        const blockchainId = id.toNumber()
         const status = PostStatus.pending
 
         PostIdsStatuses.lastUserPost = {
           ...PostIdsStatuses.lastUserPost,
           [currentAccount]: {
-            blockchainId,
+            id: id.toNumber(),
             status,
           },
         }
