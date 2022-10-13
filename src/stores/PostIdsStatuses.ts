@@ -1,12 +1,6 @@
 import { PostStatus } from 'models/PostStatus'
 import { proxy } from 'valtio'
-import PostStore from 'stores/PostStore'
 import getPostStatuses from 'helpers/getPostStatuses'
-
-interface PostData {
-  status: PostStatus
-  serviceId?: string | undefined
-}
 
 export interface LastUserPostData {
   blockchainId: number
@@ -16,7 +10,8 @@ export interface LastUserPostData {
 
 interface PostStatusStoreType {
   lastUserPost?: { [account: string]: LastUserPostData }
-  statuses: { [blockchainId: number]: Promise<PostData> }
+  statuses: { [blockchainId: number]: Promise<PostStatus> }
+  idToMerkleRoot: { [blockchainId: number]: Promise<string | undefined> }
 }
 
 interface CheckStatusesStoreProps {
@@ -27,16 +22,17 @@ interface CheckStatusesStoreProps {
 const postStatusStore = proxy<PostStatusStoreType>({
   lastUserPost: undefined,
   statuses: {},
+  idToMerkleRoot: {},
 })
 
-async function updateStatuses(ids: number[]) {
+export async function updateStatuses(ids: number[]) {
+  if (ids.length === 0) return
+
   const updatedStatuses = await getPostStatuses(ids)
 
   for (const { blockchainId, status, serviceId } of updatedStatuses) {
-    postStatusStore.statuses[blockchainId] = Promise.resolve({
-      status,
-      serviceId,
-    })
+    postStatusStore.statuses[blockchainId] = Promise.resolve(status)
+    postStatusStore.idToMerkleRoot[blockchainId] = Promise.resolve(serviceId)
 
     const lastUserPost = postStatusStore.lastUserPost
     if (!lastUserPost) continue
@@ -71,19 +67,13 @@ async function checkStatuses({ ids, force }: CheckStatusesStoreProps) {
   }
 }
 
-async function updateStatusesForAllPosts() {
-  const ids = (await PostStore.posts).map(({ id }) => id.toNumber())
-  void checkStatuses({ ids, force: true })
-}
-
 setInterval(async () => {
-  if (!postStatusStore.statuses) return
   const ids: number[] = []
 
   await Promise.all(
     Object.entries(postStatusStore.statuses).map(
-      async ([blockchainId, postData]) => {
-        const { status } = await postData
+      async ([blockchainId, promiseStatus]) => {
+        const status = await promiseStatus
         if (status === PostStatus.pending || status === PostStatus.approved)
           ids.push(Number(blockchainId))
       }
@@ -96,7 +86,5 @@ setInterval(async () => {
     force: false,
   })
 }, 5000)
-
-void updateStatusesForAllPosts()
 
 export default postStatusStore

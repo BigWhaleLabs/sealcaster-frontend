@@ -63,7 +63,6 @@ export default function ({
   clickablePost?: boolean
 }) {
   return (
-    // TODO: make it clickable only if user has an account with badge
     <div data-anchor={`#id=${blockchainId}`}>
       <Card hoverEffect={clickablePost}>
         <a href={clickablePost ? `/thread/${blockchainId}` : undefined}>
@@ -89,13 +88,9 @@ export default function ({
             </div>
           </div>
         </a>
-
-        <Delimiter color="bg-half-grey" horizontal />
-
         <ThreadPart
+          owner={sender}
           threadId={blockchainId}
-          threadCreator={sender}
-          replyingTo={sender}
           limitThread={limitThread}
           postId={blockchainId}
         />

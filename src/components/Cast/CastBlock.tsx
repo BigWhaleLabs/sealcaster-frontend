@@ -6,7 +6,7 @@ import BurnerWalletStore from 'stores/BurnerWalletStore'
 import TextArea from 'components/ui/TextArea'
 import TextareaInfo from 'components/Cast/TextareaInfo'
 import VerifyWallet from 'components/Cast/VerifyWallet'
-import usePost from 'hooks/usePost'
+import useCreatePost from 'hooks/useCreatePost'
 
 export default function ({
   placeHolder = 'Write something here...',
@@ -17,15 +17,13 @@ export default function ({
 }: {
   placeHolder?: string
   threadId: number
-  replyToId: number
+  replyToId?: string
   leftBlock?: JSX.Element | string
   buttonText?: string
 }) {
   const { status } = useSnapshot(BurnerWalletStore)
-  const { createPost, isLoading, error, text, setText, waitBurner } = usePost(
-    threadId,
-    replyToId
-  )
+  const { createPost, isLoading, error, text, setText, waitBurner } =
+    useCreatePost(threadId, replyToId)
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
 

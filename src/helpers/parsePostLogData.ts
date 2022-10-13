@@ -6,7 +6,9 @@ const transferEventInterface = new utils.Interface([
     string post,
     address indexed derivativeAddress,
     address indexed sender,
-    uint256 timestamp
+    uint256 timestamp,
+    uint256 threadId,
+    bytes32 replyToId
   )`,
 ])
 

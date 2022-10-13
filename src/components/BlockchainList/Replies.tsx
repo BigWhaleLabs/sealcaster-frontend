@@ -1,8 +1,10 @@
 import { AccentText } from 'components/ui/Text'
 import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
+import Delimiter from 'components/ui/Delimiter'
 import ReplyIcon from 'icons/ReplyIcon'
 import ReplyInput from 'components/BlockchainList/ReplyInput'
+import ReplyModel from 'models/ReplyModel'
 import classnames, {
   alignItems,
   display,
@@ -22,34 +24,54 @@ export default function ({
   count,
   placeholder,
   replyText,
+  threadId,
+  replyToId,
+  isThreadOwned,
 }: {
-  count: number
+  count?: number
   placeholder: string
+  isThreadOwned: boolean
   replyText?: string
-}) {
+} & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
+
+  if (!replyToId) return null
 
   return (
     <>
+      <Delimiter horizontal color="bg-divider" />
+
       <div className={replyButtonWrapper}>
-        <Button type="tertiary" onClick={() => setInputOpen(!inputOpen)}>
-          <ReplyIcon />
+        <Button
+          type="tertiary"
+          onClick={() => setInputOpen(!inputOpen)}
+          disabled={!isThreadOwned}
+        >
+          {isThreadOwned && <ReplyIcon />}
           <AccentText small color="text-formal-accent">
             <span
               className={textColor(
                 { 'text-accent': inputOpen },
-                'hover:text-accent'
+                { 'hover:text-accent': isThreadOwned }
               )}
             >
-              {replyText ? replyText : 'Reply'}
+              {replyText ? replyText : isThreadOwned ? 'Reply' : 'Replies'}
             </span>
           </AccentText>
-          <AccentText primary color="text-primary-semi-dimmed" extraSmall>
-            ({count})
-          </AccentText>
+          {count && (
+            <AccentText primary color="text-primary-semi-dimmed" extraSmall>
+              ({count})
+            </AccentText>
+          )}
         </Button>
       </div>
-      {inputOpen && <ReplyInput placeholder={placeholder} />}
+      {inputOpen && (
+        <ReplyInput
+          threadId={threadId}
+          replyToId={replyToId}
+          placeholder={placeholder}
+        />
+      )}
     </>
   )
 }
