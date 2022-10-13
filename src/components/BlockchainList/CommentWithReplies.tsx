@@ -11,6 +11,7 @@ import classnames, {
   transitionProperty,
   width,
 } from 'classnames/tailwind'
+import useReplies from 'hooks/useReplies'
 
 const repliesWithLine = classnames(display('flex'), margin('mt-3'))
 const repliesBlock = classnames(
@@ -30,6 +31,7 @@ const commentLine = classnames(
 )
 
 const Replies = ({
+  threadMerkleRoot,
   id,
   content,
   replier,
@@ -39,9 +41,26 @@ const Replies = ({
   threadId,
   isThreadOwned,
   replyToId,
-}: Comment) => {
+}: Comment & {
+  threadMerkleRoot: string
+}) => {
+  if (!replyToId) {
+    return (
+      <CommentBody
+        threadId={threadId}
+        replyToId={replyToId}
+        content={content}
+        replier={replier}
+        repliedTo={repliedTo}
+        timestamp={timestamp}
+        isThreadOwned={isThreadOwned}
+      />
+    )
+  }
+
   return (
     <CommentWithReplies
+      threadMerkleRoot={threadMerkleRoot}
       id={id}
       content={content}
       repliedTo={repliedTo}
@@ -55,18 +74,27 @@ const Replies = ({
   )
 }
 
-export default function CommentWithReplies({
+export function CommentWithReplies({
   id: rootId,
   content,
   replier,
   repliedTo,
   timestamp,
-  replies,
   threadId,
   replyToId,
   isThreadOwned,
-}: Comment) {
-  const hasReplies = !!replies?.length
+  threadMerkleRoot,
+}: Comment & {
+  threadMerkleRoot: string
+  replyToId: string
+}) {
+  const replies = useReplies({
+    threadId,
+    threadMerkleRoot,
+    replyToId,
+  })
+
+  const hasReplies = replies.length > 0
 
   return (
     <div>
@@ -104,6 +132,7 @@ export default function CommentWithReplies({
                   replies={replies}
                   isThreadOwned={isThreadOwned}
                   replyToId={replyToId}
+                  threadMerkleRoot={threadMerkleRoot}
                 />
               )
             )}
@@ -112,4 +141,15 @@ export default function CommentWithReplies({
       )}
     </div>
   )
+}
+
+export default function (
+  props: Comment & {
+    threadMerkleRoot: string
+  }
+) {
+  if (props.replyToId)
+    return <CommentWithReplies {...props} replyToId={props.replyToId} />
+
+  return <CommentBody {...props} />
 }

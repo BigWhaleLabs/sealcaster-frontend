@@ -17,7 +17,7 @@ interface PostStoreType {
   limit: number
   questionDay: number
   posts: { [postId: number]: Promise<PostStructOutput> }
-  threads: { [threadId: number]: Promise<PostStructOutput[]> }
+  threads: { [threadId: number]: Promise<number[]> }
   createPost: (
     text: string,
     threadId: number,
@@ -69,10 +69,18 @@ const PostStore = proxy<PostStoreType>({
 
 export function fetchThread(threadId: number) {
   if (typeof PostStore.threads[threadId] !== 'undefined') return
-  PostStore.threads[threadId] = safeGetThreadFromContract(
-    threadId,
-    farcasterContract
+
+  const request = safeGetThreadFromContract(threadId, farcasterContract)
+
+  PostStore.threads[threadId] = request.then((posts) =>
+    posts.map((post) => post.id.toNumber())
   )
+
+  void request.then((posts) => {
+    for (const post of posts) {
+      PostStore.posts[post.id.toNumber()] = Promise.resolve(post)
+    }
+  })
 }
 
 export function fetchPost(postId: number) {

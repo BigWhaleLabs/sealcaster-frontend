@@ -28,7 +28,7 @@ export default function ({
   replyToId,
   isThreadOwned,
 }: {
-  count: number
+  count?: number
   placeholder: string
   isThreadOwned: boolean
   replyText?: string
@@ -58,9 +58,11 @@ export default function ({
               {replyText ? replyText : isThreadOwned ? 'Reply' : 'Replies'}
             </span>
           </AccentText>
-          <AccentText primary color="text-primary-semi-dimmed" extraSmall>
-            ({count})
-          </AccentText>
+          {count && (
+            <AccentText primary color="text-primary-semi-dimmed" extraSmall>
+              ({count})
+            </AccentText>
+          )}
         </Button>
       </div>
       {inputOpen && (

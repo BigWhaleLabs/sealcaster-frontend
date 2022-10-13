@@ -2,7 +2,7 @@ import { useSnapshot } from 'valtio'
 import PostStore, { fetchThread } from 'stores/PostStore'
 
 export default function (threadId: number) {
-  const { threads } = useSnapshot(PostStore)
+  const { threads, posts } = useSnapshot(PostStore)
   const thread = threads[threadId]
 
   if (!thread) {
@@ -10,5 +10,6 @@ export default function (threadId: number) {
     return null
   }
 
-  return Array.from(thread)
+  const postsCopy = { ...posts }
+  return Array.from(thread).map((id) => postsCopy[id])
 }

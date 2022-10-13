@@ -16,7 +16,8 @@ import classnames, {
   margin,
   position,
 } from 'classnames/tailwind'
-import useComments from 'hooks/useComments'
+import useCast from 'hooks/useCast'
+import usePost from 'hooks/usePost'
 
 const postInfo = classnames(
   display('flex'),
@@ -28,11 +29,12 @@ const postInfo = classnames(
 
 function QuestionOfDaySuspended() {
   const { questionDay } = useSnapshot(PostStore)
-  const data = useComments(questionDay)
+  const blockchainPost = usePost(questionDay)
+  const { cast } = useCast(blockchainPost)
 
-  if (!data) return null
+  if (!blockchainPost) return null
 
-  const { post, sender, count, cast } = data
+  const { post, sender } = blockchainPost
 
   return (
     <div className={classnames(margin('mt-24'), position('relative'))}>
@@ -56,7 +58,6 @@ function QuestionOfDaySuspended() {
           <Replies
             threadId={questionDay}
             replyToId={cast?.merkleRoot}
-            count={count}
             placeholder="Answer today’s question..."
             isThreadOwned={true}
           />

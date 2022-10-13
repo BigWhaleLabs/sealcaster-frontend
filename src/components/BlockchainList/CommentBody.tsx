@@ -54,17 +54,17 @@ const TruncatedAddress = ({ address }: { address: string }) => (
 export default function ({
   content,
   replier,
-  repliedTo,
   timestamp,
   threadId,
   replyToId,
   isThreadOwned,
+  repliedTo = '',
 }: {
   content: string
   replier: string
-  repliedTo: string
   timestamp: number
   isThreadOwned?: boolean
+  repliedTo?: string
 } & ReplyModel) {
   const [inputOpen, setInputOpen] = useState(false)
 
