@@ -218,10 +218,10 @@ circle {
       var(--black) 360deg
     ),
     radial-gradient(
-      79% 80.25% at 10.11% 28.24%,
-      #f86efb 7.61%,
-      #7342ff 35.14%,
-      #42e8ff 63.45%,
+      79% 80% at 10% 28%,
+      #f86efb 8%,
+      #7342ff 35%,
+      #42e8ff 64%,
       #42ff6b 100%
     );
   background-blend-mode: screen, difference, normal;
