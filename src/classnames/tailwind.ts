@@ -4529,6 +4529,7 @@ export type TTransitionProperty =
   | 'transition-transform'
 
 export type TTransitionDuration =
+  | 'duration-0'
   | 'duration-75'
   | 'duration-100'
   | 'duration-150'
@@ -4622,6 +4623,8 @@ export type TDropShadow =
   | 'drop-shadow-accent-gradient'
   | 'drop-shadow-secondary-gradient'
   | 'drop-shadow-accent-light-transparent'
+  | 'drop-shadow-formal-accent'
+  | 'drop-shadow-text-shadow'
   | 'drop-shadow-info-card'
   | 'drop-shadow-info-seal'
 
@@ -6125,6 +6128,7 @@ export type TWillChange =
   | 'will-change-scroll'
   | 'will-change-contents'
   | 'will-change-transform'
+  | 'will-change-rotate'
 
 export type TAccentColor =
   | 'accent-inherit'

@@ -1,154 +1,125 @@
 import { AccentText } from 'components/ui/Text'
-import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
-import { useSnapshot } from 'valtio'
 import BareCard from 'components/BareCard'
+import CommentBody from 'components/BlockchainList/CommentBody'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
-import PostStore, { fetchThread } from 'stores/PostStore'
 import Replies from 'components/BlockchainList/Replies'
+import classNamesToString from 'helpers/classNamesToString'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
+import useBadgeAccount from 'hooks/useBadgeAccount'
+import useCast from 'hooks/useCast'
+import useReplies from 'hooks/useReplies'
 
-const wrapper = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  gap('gap-y-3')
+const wrapper = classNamesToString(
+  classnames(display('flex'), flexDirection('flex-col'), gap('gap-y-3')),
+  'empty:hidden'
 )
 
-type CommentNode = {
-  id: number
-  timestamp: number
-  content: string
-  replier: string
-  repliedTo: string
-  replies: CommentNode[]
-}
-
-function makeCommentNode(
-  {
-    id,
-    timestamp,
-    repliedTo,
-    replier,
-    content,
-  }: {
-    id: number
-    timestamp: number
-    content: string
-    replier: string
-    repliedTo: string
-  },
-  posts: PostStructOutput[]
-): CommentNode {
-  return {
-    id,
-    timestamp,
-    replier,
-    content,
-    repliedTo,
-    replies: posts
-      .filter((post) => post.replyToId && +post.replyToId === id)
-      .map(({ id, timestamp, sender: replier, post: content }) =>
-        makeCommentNode(
-          {
-            id: +id,
-            replier,
-            content,
-            repliedTo,
-            timestamp: +timestamp,
-          },
-          posts
-        )
-      ),
-  }
-}
-
-function buildCommentsTree(
-  threadId: number,
-  threadCreator: string,
-  posts: PostStructOutput[]
-) {
-  return posts
-    .filter((post) => post.replyToId && +post.replyToId === threadId)
-    .map(({ id, timestamp, sender: replier, post: content }) =>
-      makeCommentNode(
-        {
-          id: +id,
-          replier,
-          content,
-          timestamp: +timestamp,
-          repliedTo: threadCreator,
-        },
-        posts
-      )
-    )
-}
-
-export default function ({
-  threadCreator,
+function ThreadPart({
   threadId,
   replyingTo,
   postId,
   limitThread,
+  threadMerkleRoot,
+  isOwner,
 }: {
-  threadCreator: string
   threadId: number
   replyingTo: string
   postId: number
   limitThread?: number
+  threadMerkleRoot: string
+  isOwner: boolean
 }) {
-  const { threads } = useSnapshot(PostStore)
-  const thread = threads[threadId]
-
-  if (!thread) {
-    fetchThread(threadId)
-    return null
-  }
-
-  const comments = buildCommentsTree(
+  const comments = useReplies({
     threadId,
-    threadCreator,
-    Array.from(thread)
-  )
+    threadMerkleRoot,
+    replyToId: threadMerkleRoot,
+  })
 
   const commentsLength = comments.length
+  if (commentsLength === 0) return null
 
   return (
-    <div className={wrapper}>
-      <Replies
-        count={comments.length}
-        placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
-      />
-      {comments.map(
-        ({ timestamp, content, replier, repliedTo, replies }, index) =>
-          limitThread ? (
-            index < limitThread && (
+    <>
+      <div className={wrapper}>
+        <Replies
+          replyToId={threadMerkleRoot}
+          threadId={threadId}
+          placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
+          isThreadOwned={isOwner}
+        />
+        {comments.map(
+          (
+            { timestamp, content, replier, repliedTo, replies, id, replyToId },
+            index
+          ) =>
+            limitThread ? (
+              index < limitThread && (
+                <CommentBody
+                  threadId={threadId}
+                  timestamp={timestamp}
+                  content={content}
+                  replier={replier}
+                  replyToId={replyToId}
+                  isThreadOwned={isOwner}
+                />
+              )
+            ) : (
               <CommentWithReplies
+                threadMerkleRoot={threadMerkleRoot}
+                threadId={threadId}
+                id={id}
                 timestamp={timestamp}
                 content={content}
                 replier={replier}
                 repliedTo={repliedTo}
+                replies={replies}
+                replyToId={replyToId}
+                isThreadOwned={isOwner}
               />
             )
-          ) : (
-            <CommentWithReplies
-              timestamp={timestamp}
-              content={content}
-              replier={replier}
-              repliedTo={repliedTo}
-              replies={replies}
-            />
-          )
-      )}
-      {limitThread && commentsLength > 3 && (
-        <a href={`/thread/${postId}`}>
-          <BareCard smallPaddings>
-            <AccentText color="text-accent" small>
-              + {commentsLength - limitThread}{' '}
-              {commentsLength - limitThread > 1 ? 'replies' : 'reply'}
-            </AccentText>
-          </BareCard>
-        </a>
-      )}
-    </div>
+        )}
+        {limitThread && commentsLength > 3 && (
+          <a href={`/thread/${postId}`}>
+            <BareCard smallPaddings>
+              <AccentText color="text-accent" small>
+                + {commentsLength - limitThread}{' '}
+                {commentsLength - limitThread > 1 ? 'replies' : 'reply'}
+              </AccentText>
+            </BareCard>
+          </a>
+        )}
+      </div>
+    </>
+  )
+}
+
+export default function ({
+  threadId,
+  postId,
+  limitThread,
+  owner,
+}: {
+  threadId: number
+  postId: number
+  limitThread?: number
+  owner: string
+}) {
+  const { cast } = useCast(postId + 1)
+
+  if (!cast || !cast?.merkleRoot) return null
+
+  const account = useBadgeAccount()
+  const isOwner = owner === account
+
+  return (
+    <ThreadPart
+      replyingTo={owner}
+      threadId={threadId}
+      postId={postId}
+      limitThread={limitThread}
+      isOwner={isOwner}
+      threadMerkleRoot={cast.merkleRoot}
+    />
   )
 }

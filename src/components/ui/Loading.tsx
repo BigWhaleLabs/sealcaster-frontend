@@ -5,12 +5,10 @@ import classnames, {
   borderRadius,
   borderWidth,
   height,
-  overflow,
   padding,
   position,
 } from 'classnames/tailwind'
 
-const loader = classnames(position('relative'), overflow('overflow-hidden'))
 const loaderDiv = classnames(
   height('h-full'),
   borderRadius('rounded-full'),
@@ -22,7 +20,7 @@ const loaderDiv = classnames(
 
 export default function () {
   return (
-    <div className={loader}>
+    <div className={position('relative')}>
       <div className={classNamesToString(loaderDiv, 'loading-pause')}>
         <div className={classNamesToString(loaderDiv, 'loading-pause')}>
           <div className={classNamesToString(loaderDiv, 'loading-pause')}>

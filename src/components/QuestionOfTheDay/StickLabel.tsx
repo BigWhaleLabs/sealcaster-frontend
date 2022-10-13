@@ -34,7 +34,7 @@ export default function ({ mobile }: { mobile?: boolean }) {
         }}
       >
         <div ref={badge}>
-          <QuestionOfTheDayLabel mobile={mobile} rotation={rotation} />
+          <QuestionOfTheDayLabel rotation={rotation} />
         </div>
       </Tilt>
     </div>

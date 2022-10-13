@@ -4,47 +4,40 @@ import { Result } from 'ethers/lib/utils'
 import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract'
 import { proxy } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
-import PostIdsStatuses from 'stores/PostIdsStatuses'
+import PostIdsStatuses, { updateStatuses } from 'stores/PostIdsStatuses'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
-import getMorePosts from 'helpers/getMorePosts'
 import getPostStorage from 'helpers/getPostStorage'
+import getQuestionOfTheDayIds from 'helpers/getQuestionOfTheDayIds'
 import parsePostLogData from 'helpers/parsePostLogData'
-import safeGetPostsAmountFromContract from 'helpers/safeGetPostsAmountFromContract'
 import safeGetThreadFromContract from 'helpers/safeGetThreadFromContract'
 import safeTransformPostOutput from 'helpers/safeTransformPostOutput'
 import walletStore from 'stores/WalletStore'
 
 interface PostStoreType {
   limit: number
-  questionDay: Promise<PostStructOutput>
-  posts: Promise<PostStructOutput[]>
-  threads: { [threadId: number]: Promise<PostStructOutput[]> }
-  postsAmount: Promise<number>
-  selectedToken?: string
+  questionOfTheDayIds: Promise<number[]>
+  posts: { [postId: number]: Promise<PostStructOutput> }
+  threads: { [threadId: number]: Promise<number[]> }
   createPost: (
     text: string,
     threadId: number,
-    replyToId: number
+    replyToId?: string
   ) => Promise<Result[]>
   idToPostTx: Promise<string[]>
 }
 
 const farcasterContract = getPostStorage()
 
-const limit = 100
+const limit = 20
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  questionDay: farcasterContract.posts(0).then(safeTransformPostOutput),
-  postsAmount: safeGetPostsAmountFromContract(farcasterContract),
+  questionOfTheDayIds: getQuestionOfTheDayIds(farcasterContract),
   threads: {},
-  posts: getMorePosts({
-    contract: farcasterContract,
-  }),
-  selectedToken: undefined,
+  posts: {},
   idToPostTx: getIdsToPostsTx(farcasterContract),
-  createPost: async (text: string, threadId: number, replyToId: number) => {
+  createPost: async (text: string, threadId: number, replyToId?: string) => {
     let signer = await BurnerWalletStore.getSigner()
 
     if (!signer && (await walletStore.hasFarcasterBadge))
@@ -61,7 +54,8 @@ const PostStore = proxy<PostStoreType>({
       text,
       'farcaster',
       threadId,
-      replyToId
+      replyToId ||
+        '0x0000000000000000000000000000000000000000000000000000000000000000'
     )
     const result = await transaction.wait()
 
@@ -76,29 +70,45 @@ const PostStore = proxy<PostStoreType>({
 
 export function fetchThread(threadId: number) {
   if (typeof PostStore.threads[threadId] !== 'undefined') return
-  PostStore.threads[threadId] = safeGetThreadFromContract(
-    threadId,
-    farcasterContract
+
+  const request = safeGetThreadFromContract(threadId, farcasterContract)
+
+  PostStore.threads[threadId] = request.then((posts) =>
+    posts.map((post) => post.id.toNumber())
   )
+
+  void request.then((posts) => {
+    for (const post of posts) {
+      PostStore.posts[post.id.toNumber()] = Promise.resolve(post)
+    }
+    void updateStatuses(posts.map((post) => post.id.toNumber()))
+  })
+}
+
+export function fetchPost(postId: number) {
+  if (typeof PostStore.posts[postId] !== 'undefined') return
+  PostStore.posts[postId] = farcasterContract
+    .posts(postId - 1)
+    .then(safeTransformPostOutput)
+  void updateStatuses([postId])
 }
 
 farcasterContract.on(
   farcasterContract.filters.PostSaved(),
-  async (id, post, derivativeAddress, sender, timestamp) => {
-    const posts = await PostStore.posts
-    PostStore.posts = Promise.resolve([
-      {
-        id,
-        post,
-        derivativeAddress,
-        sender,
-        timestamp,
-      } as PostStructOutput,
-      ...posts,
-    ])
-    PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve({
-      status: PostStatus.pending,
-    })
+  (id, post, derivativeAddress, sender, timestamp, threadId, replyToId) => {
+    PostStore.posts[id.toNumber()] = Promise.resolve({
+      id,
+      post,
+      derivativeAddress,
+      sender,
+      timestamp,
+      threadId,
+      replyToId,
+    } as PostStructOutput)
+
+    PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(
+      PostStatus.pending
+    )
   }
 )
 

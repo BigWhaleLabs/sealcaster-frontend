@@ -18,7 +18,7 @@
 | `SC_FARCASTER_POSTS_CONTRACT_ADDRESS`  | SealCred Farcaster Posts Storage contract address (defaults to @bwl/constants) |
 | `VITE_GSN_PAYMASTER_CONTRACT_ADDRESS`  | GSN Paymaster contract address (defaults to @bwl/constants)                    |
 | `VITE_GSN_SC_RELAY`                    | Relay URL (defaults to @bwl/constants)                                         |
-| `VITE_FARCASTER_PROFILE_URL`           | Farcaster profile url                                                          |
+| `VITE_FARCASTER_PROFILE_ADDRESS`       | Farcaster profile address                                                      |
 
 Also, please, consider looking at `.env.sample`.
 
