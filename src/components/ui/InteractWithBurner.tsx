@@ -3,7 +3,6 @@ import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useState } from 'preact/hooks'
 import Arrow from 'icons/Arrow'
 import Button from 'components/ui/Button'
-import ButtonProps from 'models/ButtonProps'
 import InfoSeal from 'icons/InfoSeal'
 import SmallInfoSeal from 'icons/SmallInfoSeal'
 import classnames, {
@@ -81,6 +80,11 @@ const smallInfoSealWrapepr = classnames(
 const arrowWrapper = classnames(width('w-4'), margin('mt-2'))
 
 const positionWithGap = classnames(positionWrapper, gap('gap-y-1'))
+
+interface ButtonProps {
+  text: string
+  action: () => void
+}
 
 const ActionsButtons = ({
   tertiaryButton,
