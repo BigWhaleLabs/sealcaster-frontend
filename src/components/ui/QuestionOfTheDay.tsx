@@ -68,7 +68,8 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
 
 function QuestionsOfDaySuspended() {
   const { questionOfTheDayIds } = useSnapshot(PostStore)
-  const questionDay = Math.max(...questionOfTheDayIds)
+  const questionDay =
+    questionOfTheDayIds.length > 0 ? Math.max(...questionOfTheDayIds) : null
 
   if (!questionDay) return null
 
