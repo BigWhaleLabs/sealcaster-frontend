@@ -22,9 +22,9 @@ const statusColor = (status: PostStatus) => {
 }
 
 export function StatusSuspended({ blockchainId }: { blockchainId: number }) {
-  const { statuses } = useSnapshot(postIdsStatuses)
-  const status = statuses[blockchainId]?.status
-  const serviceId = statuses[blockchainId]?.serviceId
+  const { statuses, idToMerkleRoot } = useSnapshot(postIdsStatuses)
+  const status = statuses[blockchainId]
+  const serviceId = idToMerkleRoot[blockchainId]
 
   const statusOrLoading = PostStatusText[status] || <LoadingWithDots />
   const farcasterCastUrl = `farcaster://casts/${serviceId}`

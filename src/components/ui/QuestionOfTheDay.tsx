@@ -30,7 +30,7 @@ const postInfo = classnames(
 function QuestionOfDaySuspended() {
   const { questionDay } = useSnapshot(PostStore)
   const blockchainPost = usePost(questionDay)
-  const { cast } = useCast(blockchainPost)
+  const { cast } = useCast(questionDay)
 
   if (!blockchainPost) return null
 

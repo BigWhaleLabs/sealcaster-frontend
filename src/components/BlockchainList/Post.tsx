@@ -89,8 +89,8 @@ export default function ({
           </div>
         </a>
         <ThreadPart
+          owner={sender}
           threadId={blockchainId}
-          replyingTo={sender}
           limitThread={limitThread}
           postId={blockchainId}
         />

@@ -4,7 +4,7 @@ import { Result } from 'ethers/lib/utils'
 import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract'
 import { proxy } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
-import PostIdsStatuses from 'stores/PostIdsStatuses'
+import PostIdsStatuses, { updateStatuses } from 'stores/PostIdsStatuses'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
 import getPostStorage from 'helpers/getPostStorage'
@@ -80,6 +80,7 @@ export function fetchThread(threadId: number) {
     for (const post of posts) {
       PostStore.posts[post.id.toNumber()] = Promise.resolve(post)
     }
+    void updateStatuses(posts.map((post) => post.id.toNumber()))
   })
 }
 
@@ -101,9 +102,9 @@ farcasterContract.on(
       timestamp,
     } as PostStructOutput)
 
-    PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve({
-      status: PostStatus.pending,
-    })
+    PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(
+      PostStatus.pending
+    )
   }
 )
 

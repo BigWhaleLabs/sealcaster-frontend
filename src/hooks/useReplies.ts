@@ -15,7 +15,7 @@ export default function ({
 }): Comment[] {
   const blockchainThread = useThread(threadId)
   const farcasterThread = useFarcasterThread(threadMerkleRoot)
-  const { statuses } = useSnapshot(postIdsStatuses)
+  const { idToMerkleRoot } = useSnapshot(postIdsStatuses)
 
   const farcasterReplies = farcasterThread
     ? farcasterThread.filter(
@@ -23,13 +23,12 @@ export default function ({
       )
     : []
 
-  const statusesCopy = { ...statuses }
+  const idToMerkleRootCopy = { ...idToMerkleRoot }
   const blockchainReplies = blockchainThread
     ? blockchainThread.filter(
         (post) =>
           post.replyToId === replyToId &&
-          (!statusesCopy[post.id.toNumber() - 1] ||
-            !statusesCopy[post.id.toNumber() - 1].serviceId)
+          !idToMerkleRootCopy[post.id.toNumber() - 1]
       )
     : []
 

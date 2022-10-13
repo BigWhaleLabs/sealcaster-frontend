@@ -8,7 +8,6 @@ import classNamesToString from 'helpers/classNamesToString'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
 import useBadgeAccount from 'hooks/useBadgeAccount'
 import useCast from 'hooks/useCast'
-import usePost from 'hooks/usePost'
 import useReplies from 'hooks/useReplies'
 
 const wrapper = classNamesToString(
@@ -22,14 +21,14 @@ function ThreadPart({
   postId,
   limitThread,
   threadMerkleRoot,
-  owner,
+  isOwner,
 }: {
   threadId: number
   replyingTo: string
   postId: number
   limitThread?: number
   threadMerkleRoot: string
-  owner: boolean
+  isOwner: boolean
 }) {
   const comments = useReplies({
     threadId,
@@ -47,7 +46,7 @@ function ThreadPart({
           replyToId={threadMerkleRoot}
           threadId={threadId}
           placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
-          isThreadOwned={owner}
+          isThreadOwned={isOwner}
         />
         {comments.map(
           (
@@ -62,7 +61,7 @@ function ThreadPart({
                   content={content}
                   replier={replier}
                   replyToId={replyToId}
-                  isThreadOwned={owner}
+                  isThreadOwned={isOwner}
                 />
               )
             ) : (
@@ -76,7 +75,7 @@ function ThreadPart({
                 repliedTo={repliedTo}
                 replies={replies}
                 replyToId={replyToId}
-                isThreadOwned={owner}
+                isThreadOwned={isOwner}
               />
             )
         )}
@@ -97,30 +96,29 @@ function ThreadPart({
 
 export default function ({
   threadId,
-  replyingTo,
   postId,
   limitThread,
+  owner,
 }: {
   threadId: number
-  replyingTo: string
   postId: number
   limitThread?: number
+  owner: string
 }) {
-  const post = usePost(threadId + 1)
-  const { cast } = useCast(post)
+  const { cast } = useCast(postId + 1)
 
-  if (!post || !cast || !cast?.merkleRoot) return null
+  if (!cast || !cast?.merkleRoot) return null
 
   const account = useBadgeAccount()
-  const owner = post.sender === account
+  const isOwner = owner === account
 
   return (
     <ThreadPart
-      replyingTo={replyingTo}
+      replyingTo={owner}
       threadId={threadId}
       postId={postId}
       limitThread={limitThread}
-      owner={owner}
+      isOwner={isOwner}
       threadMerkleRoot={cast.merkleRoot}
     />
   )
