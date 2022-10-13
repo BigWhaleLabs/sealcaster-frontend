@@ -110,6 +110,10 @@ module.exports = {
           '0rem 0rem 2.125rem var(--accent-light-transparent)',
         'formal-accent':
           '0rem 0rem 1.25rem var(--formal-accent-semi-transparent)',
+        'text-shadow': [
+          '-0.25rem 0 0 var(--primary-dimmed)',
+          '0rem 0rem 1.25rem var(--formal-accent-semi-transparent)',
+        ],
       },
       strokeWidth: {
         1.5: '1.5',
@@ -134,6 +138,9 @@ module.exports = {
         'pulse-horizontal': 'pulse-horizontal 2s ease-in-out infinite',
         rotate: 'rotate linear 3.5s infinite',
         ticker: 'translateXNegativeFull 12s linear infinite',
+      },
+      willChange: {
+        rotate: 'rotate',
       },
       rotate: {
         '-15': '-15deg',

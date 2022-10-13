@@ -1,34 +1,39 @@
-import { dropShadow } from 'classnames/tailwind'
+import classNamesToString from 'helpers/classNamesToString'
+import classnames, {
+  brightness,
+  dropShadow,
+  filter,
+  height,
+  saturate,
+  width,
+} from 'classnames/tailwind'
+
+const size = classnames(width('w-28'), height('h-24'))
+
+const svgStyles = classnames(size, dropShadow('drop-shadow-formal-accent'))
+
+const backgroundStyles = classNamesToString(
+  'colorful-gradient',
+  classnames(
+    filter('filter'),
+    brightness('brightness-110'),
+    saturate('saturate-200'),
+    size
+  )
+)
 
 export default function () {
-  const size = { w: 116, h: 95 }
-
   return (
     <svg
-      width={size.w}
-      height={size.h}
       viewBox="0 0 116 95"
       xmlns="http://www.w3.org/2000/svg"
-      className={dropShadow('drop-shadow-formal-accent')}
+      className={svgStyles}
     >
       <clipPath id="rounded_triangle">
         <path d="M0.714642 85.9158L51.586 2.59194C53.1454 0.0377262 56.8546 0.0377171 58.414 2.59193L109.285 85.9158C110.913 88.5813 108.994 92.0002 105.871 92.0002H4.12866C1.00571 92.0002 -0.912686 88.5813 0.714642 85.9158Z" />
       </clipPath>
-      <foreignObject
-        width={size.w}
-        height={size.h}
-        clip-path="url(#rounded_triangle)"
-      >
-        <div
-          style={{
-            background:
-              'conic-gradient(from 180deg at 50% 50%, #000000 0deg, rgba(255, 255, 255, 0.72) 17deg, #000000 88deg, rgba(255, 255, 255, 0.72) 152deg, #000000 225deg, rgba(255, 255, 255, 0.72) 289deg, #000000 360deg), conic-gradient(from 180deg at 50% 50%, #000000 0deg, #FFFFFF 30deg, #000000 96deg, #FFFFFF 168.75deg, #000000 229deg, #FFFFFF 285deg, #000000 360deg), radial-gradient(79.79% 80.25% at 10.11% 28.24%, #F86EFB 7.61%, #7342FF 35.14%, #42E8FF 63.45%, #42FF6B 100%)',
-            backgroundBlendMode: 'screen, difference, normal',
-            width: size.w,
-            height: size.h,
-            filter: 'brightness(1.15) saturate(2)',
-          }}
-        />
+      <foreignObject clip-path="url(#rounded_triangle)" className={size}>
+        <div className={backgroundStyles} />
       </foreignObject>
 
       <svg x="-2">

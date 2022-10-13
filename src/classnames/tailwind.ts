@@ -4623,6 +4623,7 @@ export type TDropShadow =
   | 'drop-shadow-secondary-gradient'
   | 'drop-shadow-accent-light-transparent'
   | 'drop-shadow-formal-accent'
+  | 'drop-shadow-text-shadow'
 
 export type TGrayscale = 'grayscale-0' | 'grayscale'
 
@@ -6124,6 +6125,7 @@ export type TWillChange =
   | 'will-change-scroll'
   | 'will-change-contents'
   | 'will-change-transform'
+  | 'will-change-rotate'
 
 export type TAccentColor =
   | 'accent-inherit'

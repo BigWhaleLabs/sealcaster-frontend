@@ -11,7 +11,7 @@ type AllowedExtraClassnames =
   | 'hover-button-scroll'
   | 'shadow-card'
   | 'stroke-text-secondary'
-  | 'colorful-text'
+  | 'colorful-gradient'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]
