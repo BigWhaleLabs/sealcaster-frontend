@@ -53,7 +53,9 @@ const headerTextWrapper = (show: boolean) =>
     display('flex'),
     gap('gap-x-1'),
     justifyContent('justify-between'),
-    alignItems(show ? 'items-center' : 'items-start')
+    alignItems(
+      show ? alignItems('items-center', 'md:items-start') : 'items-start'
+    )
   )
 
 const contentWrapper = classnames(
