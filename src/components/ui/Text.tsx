@@ -165,22 +165,33 @@ export function LinkText({
   )
 }
 
-const bodyText = (
-  primary?: boolean,
-  bold?: boolean,
-  semiBold?: boolean,
-  small?: boolean,
-  noWrap?: boolean,
-  center?: boolean,
+interface BodyTextProps {
+  primary?: boolean
+  bold?: boolean
+  semiBold?: boolean
+  small?: boolean
+  large?: boolean
+  noWrap?: boolean
+  center?: boolean
   inheritColor?: boolean
-) =>
+}
+const bodyText = ({
+  primary,
+  bold,
+  semiBold,
+  small,
+  large,
+  noWrap,
+  center,
+  inheritColor,
+}: BodyTextProps) =>
   classnames(
     fontFamily({ 'font-primary': primary }),
     textColor(inheritColor ? 'text-inherit' : 'text-formal-accent'),
     textAlign({ 'text-center': center }),
     fontWeight({ 'font-bold': bold, 'font-semibold': semiBold }),
     lineHeight('!leading-5'),
-    fontSize(small ? 'text-xs' : 'text-sm'),
+    fontSize({ 'text-xs': small, 'text-sm': !large }),
     whitespace({ 'whitespace-nowrap': noWrap })
   )
 export function BodyText({
@@ -188,30 +199,24 @@ export function BodyText({
   bold,
   semiBold,
   small,
+  large,
   noWrap,
   center,
   children,
   inheritColor,
-}: ChildrenProp & {
-  primary?: boolean
-  bold?: boolean
-  semiBold?: boolean
-  small?: boolean
-  noWrap?: boolean
-  center?: boolean
-  inheritColor?: boolean
-}) {
+}: ChildrenProp & BodyTextProps) {
   return (
     <p
-      className={bodyText(
+      className={bodyText({
         primary,
         bold,
         semiBold,
         small,
+        large,
         noWrap,
         center,
-        inheritColor
-      )}
+        inheritColor,
+      })}
     >
       {children}
     </p>

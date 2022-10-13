@@ -4,6 +4,7 @@
 
 :root {
   --orb: #ffffff;
+  --black: #000;
   --accent: #fed823;
   --accent-hover: #fed950;
   --primary: #15a1fc;
@@ -193,6 +194,37 @@ circle {
 
 .stroke-text-secondary {
   -webkit-text-stroke: 2px var(--secondary);
+}
+
+.colorful-gradient {
+  background-image: conic-gradient(
+      from 180deg at 50% 50%,
+      var(--black) 0deg,
+      rgba(255, 255, 255, 0.72) 17deg,
+      var(--black) 88deg,
+      rgba(255, 255, 255, 0.72) 152deg,
+      var(--black) 225deg,
+      rgba(255, 255, 255, 0.72) 289deg,
+      var(--black) 360deg
+    ),
+    conic-gradient(
+      from 180deg at 50% 50%,
+      var(--black) 0deg,
+      var(--orb) 30deg,
+      var(--black) 96deg,
+      var(--orb) 167deg,
+      var(--black) 229deg,
+      var(--orb) 285deg,
+      var(--black) 360deg
+    ),
+    radial-gradient(
+      79% 80% at 10% 28%,
+      #f86efb 8%,
+      #7342ff 35%,
+      #42e8ff 64%,
+      #42ff6b 100%
+    );
+  background-blend-mode: screen, difference, normal;
 }
 
 @keyframes dots {
