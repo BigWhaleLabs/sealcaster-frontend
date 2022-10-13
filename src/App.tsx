@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import BurnerWallet from 'pages/BurnerWallet'
 import Footer from 'components/Footer'
-import InteractWithBurner from 'components/ui/InteractWithBurner'
 import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
 import NotFound from 'pages/NotFound'
@@ -52,50 +51,6 @@ export default function () {
             sentences={['spill your tea', 'snatch your burner wallet ']}
           />
         )}
-        <InteractWithBurner
-          showAttention
-          headerText="Burner wallet unlocked"
-          mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
-          primaryButton={{
-            text: 'View burner wallet',
-            action: () => {
-              // TODO: add logic
-            },
-          }}
-          tertiaryButton={{
-            text: 'Destroy burner wallet',
-            action: () => {
-              // TODO: add logic
-            },
-          }}
-        />
-        <InteractWithBurner
-          headerText="Are you sure you want to destroy this burner?"
-          mainText="If you chose to destroy it or ignore this message, you will lose the wallet forever."
-          primaryButton={{
-            text: 'Yes, destroy it',
-            action: () => {
-              // TODO: add logic
-            },
-          }}
-          tertiaryButton={{
-            text: 'View it',
-            action: () => {
-              // TODO: add logic
-            },
-          }}
-        />
-        {/* <InteractWithBurner
-          tertiaryButton={{
-            text: 'Got it',
-            action: () => {
-              // TODO: add logic
-            },
-          }}
-          headerText="We all get destroyed eventually"
-          mainText="That’s okay! You can choose to cast with a different burner wallet each time."
-          sadSeal
-        /> */}
         <div className={bodyContainer(is404)}>
           <Switch>
             <Route path="/">
