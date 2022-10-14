@@ -6,7 +6,7 @@ export default function usePost(postId: number) {
   const post = posts[postId]
 
   if (!post) {
-    fetchPost(postId)
+    void fetchPost(postId)
     return
   }
 
