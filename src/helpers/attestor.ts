@@ -1,4 +1,5 @@
 import BalanceSignature from 'models/BalanceSignature'
+import FarcasterSignature from 'models/FarcasterSignature'
 import Network from 'models/Network'
 import PublicKey from 'models/PublicKey'
 import Signature from 'models/Signature'
@@ -32,9 +33,12 @@ export async function requestBalanceAttestation(
 }
 
 export async function requestFarcasterAttestation(address: string) {
-  const { data } = await axios.post<BalanceSignature>(`${baseURL}/farcaster`, {
-    address,
-  })
+  const { data } = await axios.post<FarcasterSignature>(
+    `${baseURL}/farcaster`,
+    {
+      address,
+    }
+  )
   return data
 }
 

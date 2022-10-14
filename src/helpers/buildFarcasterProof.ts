@@ -1,4 +1,5 @@
 import { utils } from 'ethers'
+import FarcasterSignature from 'models/FarcasterSignature'
 import ProofResult from 'models/ProofResult'
 import PublicKey from 'models/PublicKey'
 import Signature from 'models/Signature'
@@ -30,19 +31,15 @@ async function getAddressSignatureInputs(
 
 async function getFarcasterSignatureInputs(
   publicKey: PublicKey,
-  signature: Signature,
-  address: string
+  signature: FarcasterSignature
 ) {
-  const farcasterBytes = utils.toUtf8Bytes('farcaster')
-  const message = [0, address, ...farcasterBytes]
-  const messageBytes = utils.toUtf8Bytes(signature.message)
   const { R8x, R8y, S } = await unpackSignature(
-    messageBytes,
+    signature.message,
     signature.signature
   )
 
   return {
-    farcasterMessage: message,
+    farcasterMessage: signature.message,
     farcasterPubKeyX: publicKey.x,
     farcasterPubKeyY: publicKey.y,
     farcasterR8x: R8x,
@@ -54,17 +51,13 @@ async function getFarcasterSignatureInputs(
 async function generateInput(
   publicKey: PublicKey,
   addressSignature: Signature,
-  farcaterSignature: Signature
+  farcaterSignature: FarcasterSignature
 ) {
   const nonce = generateNonce()
 
   return {
     ...(await getAddressSignatureInputs(publicKey, addressSignature)),
-    ...(await getFarcasterSignatureInputs(
-      publicKey,
-      farcaterSignature,
-      addressSignature.message
-    )),
+    ...(await getFarcasterSignatureInputs(publicKey, farcaterSignature)),
     nonce,
   }
 }
@@ -72,7 +65,7 @@ async function generateInput(
 export default async function build(
   publicKey: PublicKey,
   addressSignature: Signature,
-  farcaterSignature: Signature
+  farcaterSignature: FarcasterSignature
 ): Promise<ProofResult> {
   return snarkjs.groth16.fullProve(
     await generateInput(publicKey, addressSignature, farcaterSignature),
