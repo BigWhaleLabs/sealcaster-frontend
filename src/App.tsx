@@ -28,15 +28,17 @@ const Landing = lazy(() => import('pages/Landing'))
 const pageContainer = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  alignItems('items-center'),
   overflow('overflow-x-hidden'),
   minHeight('min-h-screen')
 )
 const bodyContainer = (marginTop?: boolean) =>
   classnames(
+    display('flex'),
+    flexDirection('flex-col'),
+    alignItems('items-center'),
     width('xs:w-full'),
     maxWidth('max-w-fit', 'body:max-w-body'),
-    margin('mx-4', 'mb-auto', 'body:mx-auto', { 'mt-auto': marginTop })
+    margin('mx-4', 'body:mx-auto', { 'mt-auto': marginTop })
   )
 
 export default function () {
@@ -47,43 +49,45 @@ export default function () {
 
   return (
     <Router>
-      <Navbar />
       <div className={pageContainer}>
+        <Navbar />
         {location === '/' && (
           <SliderTicker
             sentences={['spill your tea', 'snatch your burner wallet ']}
           />
         )}
         <div className={bodyContainer(is404)}>
-          <Switch>
-            <Route path="/">
-              <LazyComponent lazyImported={<Landing />} />
-            </Route>
-            <Route path="/terms">
-              <Terms />
-            </Route>
-            <Route path="/privacy">
-              <Privacy />
-            </Route>
-            <Route path="/wallet">
-              <BurnerWallet />
-            </Route>
-            <Route path="/thread/:blockchainId">
-              <Thread />
-            </Route>
-            <Route path="/404">
-              <NotFound />
-            </Route>
-            <Route path="">
-              <Redirect to="/404" />
-            </Route>
-          </Switch>
+          <div className={width('w-full')}>
+            <Switch>
+              <Route path="/">
+                <LazyComponent lazyImported={<Landing />} />
+              </Route>
+              <Route path="/terms">
+                <Terms />
+              </Route>
+              <Route path="/privacy">
+                <Privacy />
+              </Route>
+              <Route path="/wallet">
+                <BurnerWallet />
+              </Route>
+              <Route path="/thread/:blockchainId">
+                <Thread />
+              </Route>
+              <Route path="/404">
+                <NotFound />
+              </Route>
+              <Route path="">
+                <Redirect to="/404" />
+              </Route>
+            </Switch>
+          </div>
         </div>
+        <Footer />
         {displayScrollToTop && <ScrollToTopButton />}
       </div>
       <InteractWithBurner />
       <ToastContainer position="bottom-right" theme="dark" />
-      <Footer />
     </Router>
   )
 }
