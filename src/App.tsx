@@ -12,6 +12,7 @@ import SliderTicker from 'components/ui/SliderTicker'
 import Terms from 'pages/Terms'
 import Thread from 'components/Thread'
 import classnames, {
+  alignItems,
   display,
   flexDirection,
   margin,
@@ -26,7 +27,8 @@ const Landing = lazy(() => import('pages/Landing'))
 const pageContainer = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  overflow('overflow-hidden'),
+  alignItems('items-center'),
+  overflow('overflow-x-hidden'),
   minHeight('min-h-screen')
 )
 const bodyContainer = (marginTop?: boolean) =>
@@ -76,10 +78,10 @@ export default function () {
             </Route>
           </Switch>
         </div>
-        <Footer />
         {displayScrollToTop && <ScrollToTopButton />}
       </div>
       <ToastContainer position="bottom-right" theme="dark" />
+      <Footer />
     </Router>
   )
 }
