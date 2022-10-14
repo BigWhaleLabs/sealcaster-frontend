@@ -36,8 +36,7 @@ const bodyContainer = (marginTop?: boolean) =>
     display('flex'),
     flexDirection('flex-col'),
     alignItems('items-center'),
-    width('xs:w-full'),
-    maxWidth('max-w-fit', 'body:max-w-body'),
+    maxWidth('body:max-w-body'),
     margin('mx-4', 'body:mx-auto', { 'mt-auto': marginTop })
   )
 
