@@ -1,5 +1,5 @@
 export type Cast = {
-  postId: number
+  postId?: number
   threadMerkleRoot: string
   merkleRoot: string
   sequence: number

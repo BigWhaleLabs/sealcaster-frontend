@@ -1,3 +1,8 @@
+import { Cast } from 'models/Cast'
+import { LoadingReplies } from 'components/Thread/LoadingPost'
+import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
+import { Suspense } from 'preact/compat'
+import { useSnapshot } from 'valtio'
 import Comment from 'models/Comment'
 import CommentBody from 'components/BlockchainList/CommentBody'
 import classnames, {
@@ -11,6 +16,9 @@ import classnames, {
   transitionProperty,
   width,
 } from 'classnames/tailwind'
+import farcasterStore from 'stores/FarcasterStore'
+import postIdsStatuses from 'stores/PostIdsStatuses'
+import postStore from 'stores/PostStore'
 import useReplies from 'hooks/useReplies'
 
 const repliesWithLine = classnames(display('flex'), margin('mt-3'))
@@ -30,31 +38,90 @@ const commentLine = classnames(
   transitionProperty('transition-colors')
 )
 
+function makeComment(post?: PostStructOutput, cast?: Cast) {
+  if (post && cast) {
+    const id = cast?.merkleRoot || post?.id.toNumber()
+    const content = cast?.body.data.text || post?.post
+    const timestamp = cast?.body.publishedAt
+      ? (cast?.body.publishedAt / 1000) ^ 0
+      : post?.timestamp.toNumber()
+
+    const replier = post?.sender || `@${cast?.body.username}`
+
+    return {
+      id,
+      replyToId: cast.merkleRoot,
+      content,
+      timestamp,
+      replier,
+    }
+  }
+
+  if (post) {
+    return {
+      id: post.id.toNumber(),
+      replier: post.sender,
+      content: post.post,
+      timestamp: post.timestamp.toNumber(),
+    }
+  }
+
+  if (cast) {
+    return {
+      id: cast.merkleRoot,
+      replyToId: cast.merkleRoot,
+      replier: `@${cast.body.username}`,
+      content: cast.body.data.text,
+      timestamp: (cast.body.publishedAt / 1000) ^ 0,
+    }
+  }
+
+  return null
+}
+
 const Replies = ({
-  threadMerkleRoot,
-  id,
-  content,
-  replier,
-  repliedTo,
-  timestamp,
-  replies,
+  castId,
+  postId,
   threadId,
-  replyToId,
+  threadMerkleRoot,
   canReply,
-}: Comment & {
+  hideReplies,
+}: {
+  castId?: string
+  postId?: number
+  threadId: number
   threadMerkleRoot: string
   canReply?: boolean
+  hideReplies?: boolean
 }) => {
-  if (!replyToId) {
+  const { casts } = useSnapshot(farcasterStore)
+  const { posts } = useSnapshot(postStore)
+  const { idToMerkleRoot } = useSnapshot(postIdsStatuses)
+
+  const cast = castId ? casts[castId] : undefined
+  const post = postId ? posts[postId] : undefined
+
+  const data = makeComment(post, cast)
+
+  if (!data) return null
+
+  if (!data.replyToId && postId) {
+    const roots = { ...idToMerkleRoot }
+    data.replyToId = roots[postId]
+  }
+
+  const { id, content, replier, timestamp, replyToId } = data
+
+  if (!replyToId || hideReplies) {
     return (
       <CommentBody
         threadId={threadId}
-        replyToId={replyToId}
         content={content}
         replier={replier}
-        repliedTo={repliedTo}
         timestamp={timestamp}
         canReply={canReply}
+        replyToId={replyToId}
+        repliedTo={replier}
       />
     )
   }
@@ -64,14 +131,28 @@ const Replies = ({
       threadMerkleRoot={threadMerkleRoot}
       id={id}
       content={content}
-      repliedTo={repliedTo}
       replier={replier}
       threadId={threadId}
       timestamp={timestamp}
-      replies={replies}
       replyToId={replyToId}
       canReply={canReply}
+      repliedTo={replier}
     />
+  )
+}
+
+function SuspensedReplies(props: {
+  castId?: string
+  postId?: number
+  threadId: number
+  threadMerkleRoot: string
+  canReply?: boolean
+  hideReplies?: boolean
+}) {
+  return (
+    <Suspense fallback={<LoadingReplies />}>
+      <Replies {...props} />
+    </Suspense>
   )
 }
 
@@ -114,30 +195,15 @@ export function CommentWithReplies({
         <div className={repliesWithLine}>
           <a className={commentLine} href={`#reply-${rootId}`} />
           <div className={repliesBlock}>
-            {replies.map(
-              ({
-                id,
-                content,
-                replier,
-                repliedTo,
-                timestamp,
-                replies,
-                replyToId,
-              }) => (
-                <Replies
-                  id={id}
-                  threadId={threadId}
-                  content={content}
-                  replier={replier}
-                  repliedTo={repliedTo}
-                  timestamp={timestamp}
-                  replies={replies}
-                  replyToId={replyToId}
-                  threadMerkleRoot={threadMerkleRoot}
-                  canReply={canReply}
-                />
-              )
-            )}
+            {replies.map(({ castId, postId }) => (
+              <SuspensedReplies
+                castId={castId}
+                postId={postId}
+                threadId={threadId}
+                threadMerkleRoot={threadMerkleRoot}
+                canReply={canReply}
+              />
+            ))}
           </div>
         </div>
       )}
@@ -145,14 +211,4 @@ export function CommentWithReplies({
   )
 }
 
-export default function (
-  props: Comment & {
-    threadMerkleRoot: string
-    canReply?: boolean
-  }
-) {
-  if (props.replyToId)
-    return <CommentWithReplies {...props} replyToId={props.replyToId} />
-
-  return <CommentBody {...props} />
-}
+export default SuspensedReplies

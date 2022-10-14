@@ -1,4 +1,3 @@
-import Comment from 'models/Comment'
 import useFarcasterThread from 'hooks/useFarcasterThread'
 import useThread from 'hooks/useThread'
 
@@ -10,13 +9,18 @@ export default function ({
   threadId: number
   threadMerkleRoot?: string
   replyToId: string
-}): Comment[] {
+}): { castId?: string; postId?: number; timestamp: number }[] {
   const blockchainThread = useThread(threadId)
   const farcasterThread = useFarcasterThread(threadMerkleRoot)
 
   const farcasterThreadPostIds = farcasterThread
-    ? farcasterThread.map((cast) => cast.postId)
-    : []
+    ? new Set(
+        farcasterThread.reduce(
+          (ids, cast) => (cast.postId ? [cast.postId, ...ids] : ids),
+          [] as number[]
+        )
+      )
+    : new Set()
 
   const farcasterReplies = farcasterThread
     ? farcasterThread.filter(
@@ -28,27 +32,19 @@ export default function ({
     ? blockchainThread.filter(
         (post) =>
           post.replyToId === replyToId &&
-          !farcasterThreadPostIds.includes(post.id.toNumber())
+          !farcasterThreadPostIds.has(post.id.toNumber())
       )
     : []
 
   return [
     ...farcasterReplies.map((cast) => ({
-      id: cast.merkleRoot,
-      threadId,
-      replier: cast.body.username,
-      content: cast.body.data.text,
+      castId: cast.merkleRoot,
+      postId: cast.postId,
       timestamp: (cast.body.publishedAt / 1000) ^ 0,
-      replyToId: cast.merkleRoot,
     })),
-    ...blockchainReplies.map(
-      ({ id, timestamp, sender: replier, post: content }) => ({
-        id: +id,
-        threadId,
-        replier,
-        content,
-        timestamp: +timestamp,
-      })
-    ),
+    ...blockchainReplies.map(({ id, timestamp }) => ({
+      postId: +id,
+      timestamp: timestamp.toNumber(),
+    })),
   ].sort((a, b) => b.timestamp - a.timestamp)
 }

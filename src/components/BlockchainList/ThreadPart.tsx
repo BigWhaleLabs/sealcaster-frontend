@@ -29,13 +29,15 @@ function ThreadPart({
   threadMerkleRoot: string
   canReply?: boolean
 }) {
-  const comments = useReplies({
+  const replies = useReplies({
     threadId,
     threadMerkleRoot,
     replyToId: threadMerkleRoot,
   })
 
-  const commentsLength = comments.length
+  const repliesLength = replies.length
+
+  if (!canReply && repliesLength === 0) return null
 
   return (
     <>
@@ -46,43 +48,34 @@ function ThreadPart({
           placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
           canReply={canReply}
         />
-        {comments.map(
-          (
-            { timestamp, content, replier, repliedTo, replies, id, replyToId },
-            index
-          ) =>
-            limitThread ? (
-              index < limitThread && (
-                <CommentBody
-                  threadId={threadId}
-                  timestamp={timestamp}
-                  content={content}
-                  replier={replier}
-                  replyToId={replyToId}
-                  canReply={canReply}
-                />
-              )
-            ) : (
+        {replies.map(({ castId, postId }, index) =>
+          limitThread ? (
+            index < limitThread && (
               <CommentWithReplies
-                threadMerkleRoot={threadMerkleRoot}
+                castId={castId}
+                postId={postId}
                 threadId={threadId}
-                id={id}
-                timestamp={timestamp}
-                content={content}
-                replier={replier}
-                repliedTo={repliedTo}
-                replies={replies}
-                replyToId={replyToId}
+                threadMerkleRoot={threadMerkleRoot}
                 canReply={canReply}
+                hideReplies
               />
             )
+          ) : (
+            <CommentWithReplies
+              castId={castId}
+              postId={postId}
+              threadId={threadId}
+              threadMerkleRoot={threadMerkleRoot}
+              canReply={canReply}
+            />
+          )
         )}
-        {limitThread && commentsLength > 3 && (
+        {limitThread && repliesLength > 3 && (
           <a href={`/thread/${postId}`}>
             <BareCard smallPaddings>
               <AccentText color="text-accent" small>
-                + {commentsLength - limitThread}{' '}
-                {commentsLength - limitThread > 1 ? 'replies' : 'reply'}
+                + {repliesLength - limitThread}{' '}
+                {repliesLength - limitThread > 1 ? 'replies' : 'reply'}
               </AccentText>
             </BareCard>
           </a>

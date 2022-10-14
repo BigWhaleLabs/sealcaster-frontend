@@ -20,9 +20,11 @@ export function fetchFarcasterThread(threadId: string) {
   void request.then((casts) => {
     for (const cast of casts) {
       farcasterStore.casts[cast.merkleRoot] = Promise.resolve(cast)
-      postIdsStatuses.idToMerkleRoot[cast.postId] = Promise.resolve(
-        cast.merkleRoot
-      )
+      if (cast.postId) {
+        postIdsStatuses.idToMerkleRoot[cast.postId] = Promise.resolve(
+          cast.merkleRoot
+        )
+      }
     }
   })
 }
