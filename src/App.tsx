@@ -6,7 +6,6 @@ import Footer from 'components/Footer'
 import InteractWithBurner from 'components/ui/InteractWithBurner'
 import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
-import NoBurner from 'components/BurnerWalletCard/NoBurner'
 import NotFound from 'pages/NotFound'
 import Privacy from 'pages/Privacy'
 import ScrollToTopButton from 'components/ui/ScrollToTopButton'
@@ -58,7 +57,6 @@ export default function () {
         <div className={bodyContainer(is404)}>
           <Switch>
             <Route path="/">
-              <NoBurner />
               <LazyComponent lazyImported={<Landing />} />
             </Route>
             <Route path="/terms">
