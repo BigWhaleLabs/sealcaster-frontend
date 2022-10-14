@@ -1,188 +1,75 @@
-import { AccentText, StatusText } from 'components/ui/Text'
-import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { useLocation } from 'wouter'
+import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
-import Arrow from 'icons/Arrow'
-import Button from 'components/ui/Button'
-import InfoSeal from 'icons/InfoSeal'
-import SmallInfoSeal from 'icons/SmallInfoSeal'
-import classnames, {
-  alignItems,
-  backgroundColor,
-  borderRadius,
-  display,
-  dropShadow,
-  flexDirection,
-  gap,
-  inset,
-  justifyContent,
-  margin,
-  maxWidth,
-  padding,
-  position,
-  textColor,
-  width,
-  zIndex,
-} from 'classnames/tailwind'
+import BurnerInteractionStore from 'stores/BurnerInteractionStore'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
+import InteractWithBurnerModal from 'components/ui/InteractWithBurnerModal'
 
-const backgroundWrapper = classnames(
-  backgroundColor('bg-primary-dimmed'),
-  padding('p-6'),
-  display('flex'),
-  borderRadius('rounded-lg'),
-  maxWidth('max-w-full', 'lg:max-w-body'),
-  width('w-full', 'md:w-body'),
-  dropShadow('drop-shadow-info-card')
-)
+export default function () {
+  const [, setLocation] = useLocation()
+  const { interactionClosed } = useSnapshot(BurnerInteractionStore)
+  const [destroyBurner, setDestroyBurner] = useState(false)
+  const [burnerDestroyed, setBurnerDestroyed] = useState(false)
 
-const buttonsWrapper = classnames(
-  display('flex'),
-  alignItems('items-center'),
-  margin('mt-4'),
-  gap('gap-x-4')
-)
+  if (interactionClosed) return null
 
-const positionWrapper = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  width('w-full')
-)
-
-const headerTextWrapper = (show: boolean) =>
-  classnames(
-    display('flex'),
-    gap('gap-x-1'),
-    justifyContent('justify-between'),
-    alignItems(
-      show ? { 'items-center': true, 'md:items-start': true } : 'items-start'
+  if (burnerDestroyed) {
+    return (
+      <InteractWithBurnerModal
+        sadSeal
+        headerText="Nothing lasts forever"
+        mainText="That’s okay! You can choose to cast with a different burner wallet each time."
+        tertiaryButton={{
+          text: 'Got it',
+          action: () => {
+            BurnerInteractionStore.interactionClosed = true
+          },
+        }}
+      />
     )
-  )
+  }
 
-const contentWrapper = classnames(
-  position('fixed'),
-  inset('left-0', 'lg:left-9', 'bottom-9'),
-  zIndex('z-50'),
-  padding('p-3')
-)
+  if (destroyBurner) {
+    return (
+      <InteractWithBurnerModal
+        headerText="Are you sure you want to destroy this burner?"
+        mainText="If you chose to destroy it or ignore this message, you will lose the wallet forever."
+        primaryButton={{
+          text: 'Yes, destroy it',
+          action: () => {
+            BurnerWalletStore.burn()
+            setBurnerDestroyed(true)
+          },
+        }}
+        tertiaryButton={{
+          text: 'View it',
+          action: () => {
+            BurnerInteractionStore.interactionClosed = true
+            setLocation('/wallet')
+          },
+        }}
+      />
+    )
+  }
 
-const infoSealWrapper = classnames(
-  displayFrom('md'),
-  margin('mr-4'),
-  dropShadow('drop-shadow-info-seal')
-)
-
-const headerContainerWrapper = classnames(display('flex'), gap('gap-x-1'))
-
-const smallInfoSealWrapepr = classnames(
-  displayTo('md'),
-  dropShadow('drop-shadow-info-seal')
-)
-
-const arrowWrapper = classnames(width('w-4'), margin('mt-2'))
-
-const positionWithGap = classnames(positionWrapper, gap('gap-y-1'))
-
-interface ButtonProps {
-  text: string
-  action: () => void
-}
-
-const ActionsButtons = ({
-  tertiaryButton,
-  primaryButton,
-}: {
-  tertiaryButton?: ButtonProps
-  primaryButton?: ButtonProps
-}) => {
   return (
-    <div className={buttonsWrapper}>
-      {primaryButton?.text && (
-        <Button small type="primary" onClick={primaryButton.action}>
-          {primaryButton.text}
-        </Button>
-      )}
-      {tertiaryButton?.text && (
-        <Button
-          type="tertiary"
-          gradientFont
-          small
-          onClick={tertiaryButton?.action}
-        >
-          {tertiaryButton?.text}
-        </Button>
-      )}
-    </div>
-  )
-}
-
-export default function ({
-  showAttention,
-  mainText,
-  headerText,
-  primaryButton,
-  tertiaryButton,
-  sadSeal,
-}: {
-  mainText: string
-  headerText: string
-  tertiaryButton?: ButtonProps
-  primaryButton?: ButtonProps
-  sadSeal?: boolean
-  showAttention?: boolean
-}) {
-  const [show, setShow] = useState(false)
-
-  const buttons = (
-    <ActionsButtons
-      primaryButton={primaryButton}
-      tertiaryButton={tertiaryButton}
+    <InteractWithBurnerModal
+      showAttention
+      headerText="Burner wallet unlocked"
+      mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
+      primaryButton={{
+        text: 'View burner wallet',
+        action: () => {
+          BurnerInteractionStore.interactionClosed = true
+          setLocation('/wallet')
+        },
+      }}
+      tertiaryButton={{
+        text: 'Destroy burner wallet',
+        action: () => {
+          setDestroyBurner(true)
+        },
+      }}
     />
-  )
-
-  return (
-    <div className={contentWrapper}>
-      <div className={backgroundWrapper}>
-        <div className={infoSealWrapper}>
-          <InfoSeal sadSeal={sadSeal} />
-        </div>
-        <div className={positionWrapper}>
-          <div className={positionWithGap}>
-            <div className={headerTextWrapper(show)}>
-              <span className={headerContainerWrapper}>
-                <div className={smallInfoSealWrapepr}>
-                  <SmallInfoSeal />
-                </div>
-                <AccentText color="text-formal-accent" large bold>
-                  {showAttention && (
-                    <span className={textColor('text-secondary')}>
-                      Attention:{' '}
-                    </span>
-                  )}
-                  {headerText}
-                </AccentText>
-              </span>
-              <Button
-                center
-                type="tertiary"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                <div className={arrowWrapper}>
-                  <span className={displayTo('md')}>
-                    <Arrow pulseDisabled open={show} />
-                  </span>
-                  <span className={displayFrom('md')}>
-                    <Arrow pulseDisabled open={!show} />
-                  </span>
-                </div>
-              </Button>
-            </div>
-            {show && <StatusText>{mainText}</StatusText>}
-          </div>
-          <div className={displayFrom('md')}>{buttons}</div>
-          <div className={displayTo('md')}>{show && buttons}</div>
-        </div>
-      </div>
-    </div>
   )
 }

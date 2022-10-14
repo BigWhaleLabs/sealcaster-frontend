@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import BurnerWallet from 'pages/BurnerWallet'
 import Footer from 'components/Footer'
+import InteractWithBurner from 'components/ui/InteractWithBurner'
 import LazyComponent from 'components/LazyComponent'
 import Navbar from 'components/navbar'
 import NotFound from 'pages/NotFound'
@@ -80,6 +81,7 @@ export default function () {
         </div>
         {displayScrollToTop && <ScrollToTopButton />}
       </div>
+      <InteractWithBurner />
       <ToastContainer position="bottom-right" theme="dark" />
       <Footer />
     </Router>
