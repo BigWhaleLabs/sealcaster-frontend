@@ -1,6 +1,5 @@
 import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
-import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useSnapshot } from 'valtio'
 import Card from 'components/ui/Card'
 import PostStore from 'stores/PostStore'
@@ -13,7 +12,6 @@ import classnames, {
   flexDirection,
   flexWrap,
   gap,
-  margin,
   position,
   space,
 } from 'classnames/tailwind'
@@ -37,17 +35,9 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
   const { post, sender } = blockchainPost
 
   return (
-    <div className={classnames(margin('mt-24'), position('relative'))}>
+    <div className={position('relative')}>
       <Card hoverEffect>
         <a className={space('space-y-4')} href={`/thread/${id}`}>
-          <div className={displayFrom('xs')}>
-            <div className={displayTo('lg')}>
-              <StickLabel mobile />
-            </div>
-            <div className={displayFrom('lg')}>
-              <StickLabel />
-            </div>
-          </div>
           <QuestionOfDayText>Question of the day:</QuestionOfDayText>
           <HeaderText size="medium">{post}</HeaderText>
           <span className={postInfo}>
@@ -55,6 +45,7 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
             <Sender sender={sender} />
           </span>
         </a>
+        <StickLabel />
         <Replies
           threadId={id}
           replyToId={cast?.merkleRoot}
@@ -68,12 +59,12 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
 
 function QuestionsOfDaySuspended() {
   const { questionOfTheDayIds } = useSnapshot(PostStore)
-  const questionDay =
-    questionOfTheDayIds.length > 0 ? Math.max(...questionOfTheDayIds) : null
 
-  if (!questionDay) return null
+  if (!questionOfTheDayIds.length) return null
 
-  return <QuestionOfDaySuspended id={questionDay} />
+  const lastQuestionDay = Math.max(...questionOfTheDayIds)
+
+  return <QuestionOfDaySuspended id={lastQuestionDay} />
 }
 
 export default function () {

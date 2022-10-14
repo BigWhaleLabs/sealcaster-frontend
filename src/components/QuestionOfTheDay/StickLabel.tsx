@@ -3,23 +3,25 @@ import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import Tilt from 'react-parallax-tilt'
 import classnames, { inset, position, transforms } from 'classnames/tailwind'
 
-const badgeWrapper = (mobile?: boolean) =>
-  classnames(
-    position('absolute'),
-    inset(
-      'xs:-right-2.5',
-      mobile ? 'body:-right-12.5' : 'body:-right-25',
-      mobile ? '-bottom-27.5' : '-top-2.5'
-    ),
-    transforms('-rotate-15')
-  )
+const badgeWrapper = classnames(
+  position('absolute'),
+  inset(
+    '-right-2.5',
+    'body:-right-12.5',
+    'lg:!-right-25',
+    'top-44',
+    'sm:top-32',
+    'lg:!-top-2.5'
+  ),
+  transforms('-rotate-15')
+)
 
-export default function ({ mobile }: { mobile?: boolean }) {
+export default function () {
   const badge = useRef<HTMLDivElement>(null)
   const [rotation, setRotation] = useState(0)
 
   return (
-    <div className={badgeWrapper(mobile)}>
+    <div className={badgeWrapper}>
       <Tilt
         glareEnable
         glareMaxOpacity={0.4}

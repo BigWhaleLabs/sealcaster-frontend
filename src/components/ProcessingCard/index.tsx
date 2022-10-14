@@ -15,7 +15,6 @@ import walletStore from 'stores/WalletStore'
 
 const cardWrapper = classnames(
   width('w-full'),
-
   backgroundColor('bg-primary-background'),
   padding('py-6', 'px-4', 'sm:px-6'),
   borderRadius('rounded-2xl')

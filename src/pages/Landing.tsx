@@ -3,35 +3,35 @@ import CastBlock from 'components/Cast/CastBlock'
 import CastHeader from 'components/Cast/CastHeader'
 import PostProcessing from 'components/ProcessingCard'
 import QuestionOfTheDay from 'components/ui/QuestionOfTheDay'
-import classnames, {
-  display,
-  flexDirection,
-  gap,
-  margin,
-  space,
-} from 'classnames/tailwind'
+import classnames, { margin, space } from 'classnames/tailwind'
 import useScrollToTop from 'hooks/useScrollToTop'
 
-const processingCardWrapper = classnames(
-  flexDirection('flex-col'),
-  display('flex'),
-  gap('gap-y-6', 'sm:gap-y-12')
+const questionBlockWrapper = classnames(
+  margin('mt-9', 'md:mt-24'),
+  space('space-y-6')
+)
+
+const castBlockWrapper = classnames(
+  space('space-y-9'),
+  margin('mt-36', 'sm:mt-24')
 )
 
 export default function () {
   useScrollToTop()
 
   return (
-    <div className={processingCardWrapper}>
-      <QuestionOfTheDay />
-      <PostProcessing />
-      <div className={space('space-y-6')}>
+    <>
+      <div className={questionBlockWrapper}>
+        <QuestionOfTheDay />
+        <PostProcessing />
+      </div>
+      <div className={castBlockWrapper}>
         <CastHeader />
         <CastBlock threadId={0} />
       </div>
-      <div className={margin('mt-20', 'sm:mt-14')}>
+      <div className={margin('mt-11')}>
         <BlockchainList />
       </div>
-    </div>
+    </>
   )
 }
