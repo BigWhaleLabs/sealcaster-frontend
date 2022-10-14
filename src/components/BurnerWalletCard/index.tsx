@@ -38,6 +38,7 @@ const container = classnames(
 const privateContainer = classnames(
   display('flex'),
   flexDirection('flex-col'),
+  alignItems('items-center'),
   gap('gap-y-4'),
   padding('p-0', 'xs:p-2.5')
 )
@@ -81,8 +82,8 @@ const cardContainer = classnames(
 
 const deleteBurnerWrapper = classnames(
   display('flex'),
-  alignItems('items-center'),
   flexDirection('flex-col'),
+  alignItems('items-center'),
   gap('gap-y-2')
 )
 
@@ -156,11 +157,7 @@ export default function ({ privateKey }: { privateKey: string }) {
                 </span>
               </AccentText>
             </Button>
-            <AccentText
-              color="text-formal-accent-half-transparent"
-              extraSmall
-              primary
-            >
+            <AccentText color="text-formal-accent-dimmed" extraSmall primary>
               (Clear this private key and erase all trace of it.)
             </AccentText>
           </div>

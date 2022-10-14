@@ -57,8 +57,6 @@ module.exports = {
         divider: 'var(--divider)',
         'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
         'primary-dark-transparent': 'var(--primary-dark-transparent)',
-        'formal-accent-half-transparent':
-          'var(--formal-accent-half-transparent)',
       },
       borderRadius: {
         avatar: '6rem',
