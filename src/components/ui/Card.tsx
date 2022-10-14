@@ -19,17 +19,28 @@ import ChildrenProp from 'models/ChildrenProp'
 import GradientBorder from 'components/ui/GradientBorder'
 import classNamesToString from 'helpers/classNamesToString'
 
-const cardContainer = (
-  small?: boolean,
-  blueBg?: boolean,
-  gradient?: boolean,
+interface CardProps {
+  small?: boolean
+  blueBg?: boolean
+  gradient?: boolean
   hoverEffect?: boolean
-) => {
+  error?: boolean
+  smallRadius?: boolean
+}
+
+const cardContainer = ({
+  small,
+  blueBg,
+  gradient,
+  hoverEffect,
+  error,
+  smallRadius,
+}: CardProps) => {
   const card = classnames(
     position('relative'),
     borderWidth(blueBg ? 'border-0' : { border: !gradient }),
-    borderColor('border-half-grey'),
-    borderRadius('rounded-2xl'),
+    borderColor(error ? 'border-error' : 'border-half-grey'),
+    borderRadius(smallRadius ? 'rounded-lg' : 'rounded-2xl'),
     backgroundColor(
       blueBg
         ? 'bg-primary-background'
@@ -58,14 +69,27 @@ export default function ({
   blueBg,
   gradient,
   hoverEffect,
+  error,
+  smallRadius,
 }: ChildrenProp & {
   small?: boolean
   blueBg?: boolean
   gradient?: boolean
   hoverEffect?: boolean
+  error?: boolean
+  smallRadius?: boolean
 }) {
   const content = (
-    <div className={cardContainer(small, blueBg, gradient, hoverEffect)}>
+    <div
+      className={cardContainer({
+        small,
+        blueBg,
+        gradient,
+        hoverEffect,
+        error,
+        smallRadius,
+      })}
+    >
       {children}
     </div>
   )

@@ -1,6 +1,7 @@
 import BlockchainList from 'components/BlockchainList'
 import CastBlock from 'components/Cast/CastBlock'
 import CastHeader from 'components/Cast/CastHeader'
+import NoBurner from 'components/BurnerWalletCard/NoBurner'
 import PostProcessing from 'components/ProcessingCard'
 import QuestionOfTheDay from 'components/ui/QuestionOfTheDay'
 import classnames, { margin, space } from 'classnames/tailwind'
@@ -21,6 +22,7 @@ export default function () {
 
   return (
     <>
+      <NoBurner />
       <div className={questionBlockWrapper}>
         <QuestionOfTheDay />
         <PostProcessing />
