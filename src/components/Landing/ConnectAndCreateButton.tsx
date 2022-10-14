@@ -2,7 +2,6 @@ import { handleError } from '@big-whale-labs/frontend-utils'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import getErrorMessage from 'helpers/getErrorMessage'
-import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
 import walletStore from 'stores/WalletStore'
 
 export default function ({
@@ -25,7 +24,6 @@ export default function ({
     try {
       if (!walletStore.account) await walletStore.connect(true)
       if (!walletStore.account) return onError('Please connect the wallet')
-      if (!(await hasFarcasterBadge(walletStore.account))) return
       await BurnerWalletStore.generateBurnerWallet(walletStore.account)
       walletStore.exit()
       onCreateBurner()
