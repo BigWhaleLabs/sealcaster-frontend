@@ -85,8 +85,12 @@ export function fetchThread(threadId: number) {
   })
 }
 
-export function fetchPost(postId: number) {
-  if (typeof PostStore.posts[postId] !== 'undefined') return
+export async function fetchPost(postId: number) {
+  if (
+    typeof PostStore.posts[postId] !== 'undefined' ||
+    Number(await farcasterContract.currentPostId()) < postId
+  )
+    return
   // Numbering in .posts() starts from zero
   PostStore.posts[postId] = farcasterContract
     .posts(postId - 1)
