@@ -13,17 +13,16 @@ import {
   classnames,
   cursor,
   display,
-  flexDirection,
   fontFamily,
   fontSize,
   fontWeight,
+  gap,
   gradientColorStops,
   height,
   justifyContent,
   lineHeight,
   opacity,
   padding,
-  space,
   textAlign,
   textColor,
   transitionDuration,
@@ -56,7 +55,7 @@ const commonClasses = ({
   const isNotTertiary = type !== 'tertiary'
   return classnames(
     display('flex'),
-    flexDirection('flex-row'),
+    gap('gap-x-2'),
     justifyContent({ 'justify-center': center }),
     alignItems('items-center'),
     fontWeight('font-bold'),
@@ -87,8 +86,7 @@ const commonClasses = ({
             ? { 'py-2': true, 'px-4': true }
             : { 'py-4': true, 'px-6': true }
         )
-      : undefined,
-    space('space-x-2')
+      : undefined
   )
 }
 
