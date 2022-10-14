@@ -1,4 +1,5 @@
 import { handleError } from '@big-whale-labs/frontend-utils'
+import BurnerInteractionStore from 'stores/BurnerInteractionStore'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import getErrorMessage from 'helpers/getErrorMessage'
@@ -26,6 +27,7 @@ export default function ({
       if (!walletStore.account) return onError('Please connect the wallet')
       await BurnerWalletStore.generateBurnerWallet(walletStore.account)
       walletStore.exit()
+      BurnerInteractionStore.interactionClosed = false
       onCreateBurner()
     } catch (error) {
       let errorMessage = getErrorMessage(error)
