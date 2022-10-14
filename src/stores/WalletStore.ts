@@ -15,6 +15,7 @@ let provider: Web3Provider
 class WalletStore extends PersistableStore {
   account?: string
   hasFarcasterBadge?: Promise<boolean>
+  acceptedNotBurner = false
   walletLoading = false
   needNetworkChange = false
 
@@ -23,6 +24,7 @@ class WalletStore extends PersistableStore {
     this.hasFarcasterBadge = account
       ? hasFarcasterBadge(account)
       : Promise.resolve(false)
+    this.acceptedNotBurner = false
   }
 
   replacer = (key: string, value: unknown) => {

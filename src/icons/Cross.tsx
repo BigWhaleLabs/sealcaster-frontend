@@ -1,6 +1,8 @@
+import { cursor } from 'classnames/tailwind'
+
 export default function ({ onClick }: { onClick: () => void }) {
   return (
-    <div onClick={onClick}>
+    <div onClick={onClick} className={cursor('cursor-pointer')}>
       <svg
         width="16"
         height="16"
