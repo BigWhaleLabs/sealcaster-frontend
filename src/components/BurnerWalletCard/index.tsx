@@ -1,8 +1,9 @@
-import { AccentText, BodyText, HeaderText } from 'components/ui/Text'
+import { AccentText, BodyText, HeaderText, LinkText } from 'components/ui/Text'
 import { toast } from 'react-toastify'
 import { useState } from 'preact/hooks'
 import BurnerWalletDivider from 'icons/BurnerWalletDivider'
 import BurnerWalletHeaderLogo from 'components/BurnerWalletCard/BurnerWalletHeaderLogo'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import ColorfulEye from 'icons/ColorfulEye'
 import Copy from 'icons/Copy'
@@ -19,6 +20,7 @@ import classnames, {
   gap,
   justifyContent,
   padding,
+  textDecoration,
   transitionProperty,
   userSelect,
   width,
@@ -135,7 +137,34 @@ export default function ({ privateKey }: { privateKey: string }) {
             never know this key. However, unless you clean the website data,
             this key will persist between page reloads in your browser.
           </BodyText>
-          <CreateFirstCastButton />
+          <div
+            className={classnames(
+              display('flex'),
+              alignItems('items-center'),
+              flexDirection('flex-col'),
+              gap('gap-y-2')
+            )}
+          >
+            <Button
+              type="tertiary"
+              onClick={() => {
+                BurnerWalletStore.burn()
+              }}
+            >
+              <AccentText color="text-secondary" extraSmall primary>
+                <span className={textDecoration('underline')}>
+                  Destroy burner
+                </span>
+              </AccentText>
+            </Button>
+            <AccentText
+              color="text-formal-accent-half-transparent"
+              extraSmall
+              primary
+            >
+              (Clear this private key and erase all trace of it.)
+            </AccentText>
+          </div>
           <BurnerWalletDivider />
         </div>
       </div>
