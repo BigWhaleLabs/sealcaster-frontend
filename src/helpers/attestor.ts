@@ -5,7 +5,7 @@ import Signature from 'models/Signature'
 import axios from 'axios'
 import env from 'helpers/env'
 
-const baseURL = `${env.VITE_VERIFY_URL}/v0.2.1/verify`
+const baseURL = `${env.VITE_VERIFY_URL}/v0.2.2/verify`
 
 export async function requestAddressOwnershipAttestation(
   signature: string,
