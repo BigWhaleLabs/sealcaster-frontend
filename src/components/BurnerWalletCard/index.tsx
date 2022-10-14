@@ -1,4 +1,4 @@
-import { AccentText, BodyText, HeaderText, LinkText } from 'components/ui/Text'
+import { AccentText, BodyText, HeaderText } from 'components/ui/Text'
 import { toast } from 'react-toastify'
 import { useState } from 'preact/hooks'
 import BurnerWalletDivider from 'icons/BurnerWalletDivider'
@@ -7,7 +7,6 @@ import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import ColorfulEye from 'icons/ColorfulEye'
 import Copy from 'icons/Copy'
-import CreateFirstCastButton from 'components/BurnerWalletCard/CreateFirstCastButton'
 import MagicCardWrapper from 'components/ui/MagicCardWrapper'
 import classnames, {
   alignItems,
@@ -80,6 +79,13 @@ const cardContainer = classnames(
   padding('py-6', 'px-6', 'xs:py-10')
 )
 
+const deleteBurnerWrapper = classnames(
+  display('flex'),
+  alignItems('items-center'),
+  flexDirection('flex-col'),
+  gap('gap-y-2')
+)
+
 export default function ({ privateKey }: { privateKey: string }) {
   const [isKeyClosed, setKeyClosed] = useState(true)
   const fakePrivateKey =
@@ -137,14 +143,7 @@ export default function ({ privateKey }: { privateKey: string }) {
             never know this key. However, unless you clean the website data,
             this key will persist between page reloads in your browser.
           </BodyText>
-          <div
-            className={classnames(
-              display('flex'),
-              alignItems('items-center'),
-              flexDirection('flex-col'),
-              gap('gap-y-2')
-            )}
-          >
+          <div className={deleteBurnerWrapper}>
             <Button
               type="tertiary"
               onClick={() => {
