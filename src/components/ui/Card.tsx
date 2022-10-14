@@ -25,6 +25,7 @@ interface CardProps {
   gradient?: boolean
   hoverEffect?: boolean
   error?: boolean
+  smallRadius?: boolean
 }
 
 const cardContainer = ({
@@ -33,12 +34,13 @@ const cardContainer = ({
   gradient,
   hoverEffect,
   error,
+  smallRadius,
 }: CardProps) => {
   const card = classnames(
     position('relative'),
     borderWidth(blueBg ? 'border-0' : { border: !gradient }),
     borderColor(error ? 'border-error' : 'border-half-grey'),
-    borderRadius('rounded-2xl'),
+    borderRadius(smallRadius ? 'rounded-lg' : 'rounded-2xl'),
     backgroundColor(
       blueBg
         ? 'bg-primary-background'
@@ -68,16 +70,25 @@ export default function ({
   gradient,
   hoverEffect,
   error,
+  smallRadius,
 }: ChildrenProp & {
   small?: boolean
   blueBg?: boolean
   gradient?: boolean
   hoverEffect?: boolean
   error?: boolean
+  smallRadius?: boolean
 }) {
   const content = (
     <div
-      className={cardContainer({ small, blueBg, gradient, hoverEffect, error })}
+      className={cardContainer({
+        small,
+        blueBg,
+        gradient,
+        hoverEffect,
+        error,
+        smallRadius,
+      })}
     >
       {children}
     </div>

@@ -1,6 +1,6 @@
 export default function ({ onClick }: { onClick: () => void }) {
   return (
-    <button onClick={onClick}>
+    <div onClick={onClick}>
       <svg
         width="16"
         height="16"
@@ -10,6 +10,6 @@ export default function ({ onClick }: { onClick: () => void }) {
         <path d="M3 3L13 13" stroke="#EFECD6" stroke-width="2" />
         <path d="M13 3L3 13" stroke="#EFECD6" stroke-width="2" />
       </svg>
-    </button>
+    </div>
   )
 }
