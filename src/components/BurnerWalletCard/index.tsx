@@ -3,10 +3,10 @@ import { toast } from 'react-toastify'
 import { useState } from 'preact/hooks'
 import BurnerWalletDivider from 'icons/BurnerWalletDivider'
 import BurnerWalletHeaderLogo from 'components/BurnerWalletCard/BurnerWalletHeaderLogo'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import ColorfulEye from 'icons/ColorfulEye'
 import Copy from 'icons/Copy'
-import CreateFirstCastButton from 'components/BurnerWalletCard/CreateFirstCastButton'
 import MagicCardWrapper from 'components/ui/MagicCardWrapper'
 import classnames, {
   alignItems,
@@ -19,6 +19,7 @@ import classnames, {
   gap,
   justifyContent,
   padding,
+  textDecoration,
   transitionProperty,
   userSelect,
   width,
@@ -37,6 +38,7 @@ const container = classnames(
 const privateContainer = classnames(
   display('flex'),
   flexDirection('flex-col'),
+  alignItems('items-center'),
   gap('gap-y-4'),
   padding('p-0', 'xs:p-2.5')
 )
@@ -76,6 +78,13 @@ const cardContainer = classnames(
   zIndex('z-20'),
   backgroundColor('bg-primary-background'),
   padding('py-6', 'px-6', 'xs:py-10')
+)
+
+const deleteBurnerWrapper = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  alignItems('items-center'),
+  gap('gap-y-2')
 )
 
 export default function ({ privateKey }: { privateKey: string }) {
@@ -135,7 +144,23 @@ export default function ({ privateKey }: { privateKey: string }) {
             never know this key. However, unless you clean the website data,
             this key will persist between page reloads in your browser.
           </BodyText>
-          <CreateFirstCastButton />
+          <div className={deleteBurnerWrapper}>
+            <Button
+              type="tertiary"
+              onClick={() => {
+                BurnerWalletStore.burn()
+              }}
+            >
+              <AccentText color="text-secondary" extraSmall primary>
+                <span className={textDecoration('underline')}>
+                  Destroy burner
+                </span>
+              </AccentText>
+            </Button>
+            <AccentText color="text-formal-accent-dimmed" extraSmall primary>
+              (Clear this private key and erase all trace of it.)
+            </AccentText>
+          </div>
           <BurnerWalletDivider />
         </div>
       </div>

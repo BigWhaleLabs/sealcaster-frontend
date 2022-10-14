@@ -313,6 +313,7 @@ export type TBackgroundColor =
   | 'bg-primary-bright'
   | 'bg-divider'
   | 'bg-primary-dark-transparent'
+  | 'bg-formal-accent-half-transparent'
 
 export type TBackgroundPosition =
   | 'bg-bottom'
@@ -1125,6 +1126,9 @@ export type TGradientColorStops =
   | 'from-primary-dark-transparent'
   | 'via-primary-dark-transparent'
   | 'to-primary-dark-transparent'
+  | 'from-formal-accent-half-transparent'
+  | 'via-formal-accent-half-transparent'
+  | 'to-formal-accent-half-transparent'
 
 export type TBackgrounds =
   | TBackgroundAttachment
@@ -2912,6 +2916,11 @@ export type TBorderColor =
   | 'border-r-primary-dark-transparent'
   | 'border-b-primary-dark-transparent'
   | 'border-l-primary-dark-transparent'
+  | 'border-formal-accent-half-transparent'
+  | 'border-t-formal-accent-half-transparent'
+  | 'border-r-formal-accent-half-transparent'
+  | 'border-b-formal-accent-half-transparent'
+  | 'border-l-formal-accent-half-transparent'
 
 export type TBorderOpacity =
   | 'border-opacity-0'
@@ -3580,6 +3589,7 @@ export type TRingColor =
   | 'ring-primary-bright'
   | 'ring-divider'
   | 'ring-primary-dark-transparent'
+  | 'ring-formal-accent-half-transparent'
 
 export type TRingWidth =
   | 'ring-0'
@@ -3871,6 +3881,7 @@ export type TRingOffsetColor =
   | 'ring-offset-primary-bright'
   | 'ring-offset-divider'
   | 'ring-offset-primary-dark-transparent'
+  | 'ring-offset-formal-accent-half-transparent'
 
 export type TRingOffsetWidth =
   | 'ring-offset-0'
@@ -4156,6 +4167,7 @@ export type TOutlineColor =
   | 'outline-primary-bright'
   | 'outline-divider'
   | 'outline-primary-dark-transparent'
+  | 'outline-formal-accent-half-transparent'
 
 export type TBorders =
   | TBorderStyle
@@ -4494,6 +4506,7 @@ export type TBoxShadowColor =
   | 'shadow-primary-bright'
   | 'shadow-divider'
   | 'shadow-primary-dark-transparent'
+  | 'shadow-formal-accent-half-transparent'
 
 export type TOpacity =
   | 'opacity-0'
@@ -6122,6 +6135,7 @@ export type TCaretColor =
   | 'caret-primary-bright'
   | 'caret-divider'
   | 'caret-primary-dark-transparent'
+  | 'caret-formal-accent-half-transparent'
 
 export type TWillChange =
   | 'will-change-auto'
@@ -6394,6 +6408,7 @@ export type TAccentColor =
   | 'accent-primary-bright'
   | 'accent-divider'
   | 'accent-primary-dark-transparent'
+  | 'accent-formal-accent-half-transparent'
 
 export type TScrollPadding =
   | 'scroll-p-0'
@@ -7742,6 +7757,7 @@ export type TFill =
   | 'fill-primary-bright'
   | 'fill-divider'
   | 'fill-primary-dark-transparent'
+  | 'fill-formal-accent-half-transparent'
 
 export type TStroke =
   | 'stroke-inherit'
@@ -7808,6 +7824,7 @@ export type TStroke =
   | 'stroke-primary-bright'
   | 'stroke-divider'
   | 'stroke-primary-dark-transparent'
+  | 'stroke-formal-accent-half-transparent'
 
 export type TStrokeWidth =
   | 'stroke-0'
@@ -8367,6 +8384,7 @@ export type TPlaceholderColor =
   | 'placeholder-primary-bright'
   | 'placeholder-divider'
   | 'placeholder-primary-dark-transparent'
+  | 'placeholder-formal-accent-half-transparent'
 
 export type TPlaceholderOpacity =
   | 'placeholder-opacity-0'
@@ -8648,6 +8666,7 @@ export type TTextColor =
   | 'text-primary-bright'
   | 'text-divider'
   | 'text-primary-dark-transparent'
+  | 'text-formal-accent-half-transparent'
 
 export type TTextOpacity =
   | 'text-opacity-0'
@@ -8970,6 +8989,7 @@ export type TTextDecorationColor =
   | 'decoration-primary-bright'
   | 'decoration-divider'
   | 'decoration-primary-dark-transparent'
+  | 'decoration-formal-accent-half-transparent'
 
 export type TTextDecorationThickness =
   | 'decoration-0'
