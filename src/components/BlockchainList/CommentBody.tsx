@@ -82,7 +82,7 @@ export default function ({
           <button
             className={display(
               { hidden: !replyToId || !canReply },
-              { 'md:flex': replyToId && canReply }
+              { 'md:flex': !!replyToId && canReply }
             )}
             onClick={() => setInputOpen(!inputOpen)}
           >
