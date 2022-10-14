@@ -1,7 +1,6 @@
 import { AccentText } from 'components/ui/Text'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
 import BareCard from 'components/BareCard'
-import CommentBody from 'components/BlockchainList/CommentBody'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
 import classNamesToString from 'helpers/classNamesToString'
