@@ -1,41 +1,22 @@
-import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { handleError } from '@big-whale-labs/frontend-utils'
-import { requestFarcasterAttestation } from 'helpers/attestor'
-import { useLocation } from 'wouter'
+import BurnerInteractionStore from 'stores/BurnerInteractionStore'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
 import getErrorMessage from 'helpers/getErrorMessage'
 import walletStore from 'stores/WalletStore'
 
 export default function ({
-  account,
   loading,
   onError,
   onLoading,
+  onCreateBurner,
 }: {
-  account?: string
   loading: boolean
   onError: (error: string) => void
   onLoading: (loading: boolean) => void
+  onCreateBurner: () => void
 }) {
-  const [, setLocation] = useLocation()
-  const buttonTitle = account
-    ? 'Create burner wallet'
-    : 'Connect & create burner wallet'
-
-  const checkBadgeAndSignature = async (address: string) => {
-    BurnerWalletStore.burnerLoading = true
-    try {
-      BurnerWalletStore.status = 'Checking Farcaster account...'
-      await requestFarcasterAttestation(address)
-      return true
-    } catch (error) {
-      return false
-    } finally {
-      BurnerWalletStore.burnerLoading = false
-      BurnerWalletStore.status = ''
-    }
-  }
+  const buttonTitle = 'Connect wallet to verify'
 
   const createBurnerWallet = async () => {
     onError('')
@@ -44,16 +25,10 @@ export default function ({
     try {
       if (!walletStore.account) await walletStore.connect(true)
       if (!walletStore.account) return onError('Please connect the wallet')
-      const hasFarcaster = await checkBadgeAndSignature(walletStore.account)
-      if (!hasFarcaster) {
-        if (await walletStore.hasFarcasterBadge) {
-          setLocation('/cast')
-          return
-        }
-      }
       await BurnerWalletStore.generateBurnerWallet(walletStore.account)
       walletStore.exit()
-      setLocation('/wallet')
+      BurnerInteractionStore.interactionClosed = false
+      onCreateBurner()
     } catch (error) {
       let errorMessage = getErrorMessage(error)
       if (
@@ -78,32 +53,16 @@ export default function ({
   }
 
   return (
-    <>
-      <div className={displayTo('md')}>
-        <Button
-          small
-          center
-          fullWidth
-          loadingOverflow
-          type="primary"
-          loading={loading}
-          onClick={createBurnerWallet}
-        >
-          {buttonTitle}
-        </Button>
-      </div>
-      <div className={displayFrom('md')}>
-        <Button
-          center
-          fullWidth
-          loadingOverflow
-          type="primary"
-          loading={loading}
-          onClick={createBurnerWallet}
-        >
-          {buttonTitle}
-        </Button>
-      </div>
-    </>
+    <Button
+      small
+      center
+      fullWidth
+      loadingOverflow
+      type="primary"
+      loading={loading}
+      onClick={createBurnerWallet}
+    >
+      {buttonTitle}
+    </Button>
   )
 }

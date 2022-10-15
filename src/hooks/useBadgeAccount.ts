@@ -4,13 +4,8 @@ import BurnerWalletStore from 'stores/BurnerWalletStore'
 import walletStore from 'stores/WalletStore'
 
 export default function () {
-  const { account, hasFarcasterBadge, walletLoading } = useSnapshot(walletStore)
+  const { account } = useSnapshot(walletStore)
   const { privateKey } = useSnapshot(BurnerWalletStore)
 
-  return {
-    account: privateKey ? new Wallet(privateKey).address : account,
-    isBurner: !!privateKey,
-    hasFarcasterBadge: hasFarcasterBadge || !!privateKey,
-    walletLoading,
-  }
+  return privateKey ? new Wallet(privateKey).address : account
 }

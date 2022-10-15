@@ -1,74 +1,79 @@
-import { Suspense, useState } from 'preact/compat'
+import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import CustomizeCard from 'components/BlockchainList/CustomizeCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import LoadingList from 'components/BlockchainList/LoadingList'
+import LoadingPost from 'components/Thread/LoadingPost'
 import NoPosts from 'components/BlockchainList/NoPosts'
 import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
-import classnames, { display, flexDirection, gap } from 'classnames/tailwind'
-import flashingPost from 'helpers/flashingPost'
-import getMorePosts from 'helpers/getMorePosts'
-import getPostStorage from 'helpers/getPostStorage'
+import classnames, {
+  display,
+  flexDirection,
+  gap,
+  overflow,
+} from 'classnames/tailwind'
+import flashingThread from 'helpers/flashingPost'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 import useHashParams from 'hooks/useHashParams'
+import usePaginated from 'hooks/usePaginated'
 import useScrollToAnchor from 'hooks/useScrollToAnchor'
+import useThread from 'hooks/useThread'
 
 const scrollContainer = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  gap('gap-y-4')
+  gap('gap-y-4'),
+  overflow('overflow-hidden')
 )
 
 export function PostListSuspended() {
-  const { posts, selectedToken, postsAmount, limit, idToPostTx } =
-    useSnapshot(PostStore)
+  const account = useBadgeAccount()
+  const { idToPostTx, limit, questionOfTheDayIds } = useSnapshot(PostStore)
+  const thread = useThread(0)
   const hashId = useHashParams()
-  const [scrolledLimit, setScrolledLimit] = useState(limit)
-  const amountOfLoadedPosts = posts.length
 
-  const postsLoaded = selectedToken
-    ? posts.filter(
-        ({ derivativeAddress }) => derivativeAddress === PostStore.selectedToken
-      )
-    : posts
+  const posts = thread ? thread : []
 
-  if (hashId && !!amountOfLoadedPosts)
-    useScrollToAnchor({ callback: flashingPost })
+  const { paginated, skip, setSkip } = usePaginated(posts, limit)
 
-  return postsAmount > 0 ? (
+  const postsLength = posts.length
+
+  if (postsLength === 0) return <NoPosts />
+  if (hashId) useScrollToAnchor({ callback: flashingThread })
+
+  return (
     <InfiniteScroll
-      next={async () => {
-        const newPosts = await getMorePosts({
-          contract: getPostStorage(),
-          limitAmount: scrolledLimit,
-          loadedPostAmount: amountOfLoadedPosts,
-        })
-        PostStore.posts = Promise.resolve([...posts, ...newPosts])
-        setScrolledLimit(PostStore.limit)
-      }}
+      next={() => setSkip(skip + limit)}
       className={scrollContainer}
-      style={{ overflow: 'hidden' }}
-      dataLength={amountOfLoadedPosts}
-      hasMore={amountOfLoadedPosts < postsAmount}
+      dataLength={postsLength}
+      hasMore={paginated.length < postsLength}
       loader={<LoadingList text="Fetching more posts..." />}
-      endMessage={postsAmount < 3 ? <CustomizeCard /> : undefined}
+      endMessage={postsLength < 3 ? <CustomizeCard /> : undefined}
     >
-      {postsLoaded.map((post, index) => (
+      {paginated.map(({ id, timestamp, post, sender }, index) => (
         <>
-          <Post
-            key={post.id}
-            blockchainId={Number(post.id)}
-            timestamp={Number(post.timestamp)}
-            text={post.post}
-            sender={post.sender}
-            tx={idToPostTx[Number(post.id)]}
-          />
+          <Suspense fallback={<LoadingPost />}>
+            <Post
+              isQuestionOfTheDay={questionOfTheDayIds.includes(id.toNumber())}
+              canReply={
+                questionOfTheDayIds.includes(id.toNumber()) ||
+                sender === account
+              }
+              key={id}
+              blockchainId={Number(id)}
+              timestamp={Number(timestamp)}
+              text={post}
+              sender={sender}
+              tx={idToPostTx[Number(id)]}
+              limitThread={2}
+              clickablePost
+            />
+          </Suspense>
           {index === 2 && <CustomizeCard />}
         </>
       ))}
     </InfiniteScroll>
-  ) : (
-    <NoPosts />
   )
 }
 

@@ -1,44 +1,111 @@
-import classnames, { stroke, strokeWidth } from 'classnames/tailwind'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import classnames, {
+  TStroke,
+  stroke,
+  strokeWidth,
+  width,
+} from 'classnames/tailwind'
 
-const strokeSecondary = classnames(
-  stroke('stroke-secondary-dimmed'),
-  strokeWidth('stroke-2')
-)
-const strokeTertiary = classnames(
-  stroke('stroke-tertiary'),
-  strokeWidth('stroke-2')
-)
+const triangle = (strokeColor: TStroke) =>
+  classnames(
+    stroke(strokeColor),
+    strokeWidth('stroke-1', 'md:stroke-2'),
+    width('w-8', 'md:w-16')
+  )
 
-export default function () {
+const sealStroke = (strokeColor: TStroke) =>
+  classnames(stroke(strokeColor), strokeWidth('stroke-1', 'md:stroke-2'))
+
+export default function ({
+  triangleColor = 'stroke-secondary-dimmed',
+  sealColor = 'stroke-tertiary',
+}: {
+  triangleColor?: TStroke
+  sealColor?: TStroke
+}) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="80"
-      height="65"
-      viewBox="0 0 80 65"
-    >
-      <path
-        d="M55.4429 34.035C55.4429 37.0132 53.0938 39.4274 50.1961 39.4274C47.2983 39.4274 44.9492 37.0132 44.9492 34.035C44.9492 31.0569 47.2983 34.035 50.1961 34.035C53.0938 34.035 55.4429 31.0569 55.4429 34.035Z"
-        stroke="#01FEB6"
-        stroke-width="2"
-      />
-      <path
-        d="M39.8761 47.9278C41.8369 47.9278 43.4265 48.1628 43.4265 45.9137C43.4265 43.6646 41.8369 41.8414 39.8761 41.8414C37.9153 41.8414 36.3258 43.6646 36.3258 45.9137C36.3258 48.1628 37.9153 47.9278 39.8761 47.9278ZM39.8761 47.9278C39.8761 49.2803 39.8761 52.2897 39.8761 53.5069M39.8761 53.5069C39.8761 57.5646 46.4004 54.0449 46.4004 58.3112M39.8761 53.5069C39.8761 57.5645 33.6004 53.5069 33.6004 58.3115"
-        stroke="#01FEB6"
-        stroke-width="2"
-      />
-      <path
-        d="M35.1578 34.0365C35.1578 37.0146 32.8087 39.4289 29.9109 39.4289C27.0132 39.4289 24.6641 37.0146 24.6641 34.0365C24.6641 31.0584 27.0132 34.0365 29.9109 34.0365C32.8087 34.0365 35.1578 31.0584 35.1578 34.0365Z"
-        className={strokeTertiary}
-      />
-      <path d="M56.1059 47.9282L50.0195 48.9426" className={strokeTertiary} />
-      <path d="M50.023 51.9849L56.1094 52.9993" className={strokeTertiary} />
-      <path d="M23.6441 47.9282L29.7305 48.9426" className={strokeTertiary} />
-      <path d="M29.7309 51.9868L23.6445 53.0012" className={strokeTertiary} />
-      <path
-        d="M4.60776 57.9142L36.5867 5.58512C38.1464 3.03285 41.8532 3.03284 43.4129 5.58511L75.3918 57.9142C77.0207 60.5796 75.1024 64 71.9787 64H8.0209C4.89718 64 2.9789 60.5796 4.60776 57.9142Z"
-        className={strokeSecondary}
-      />
-    </svg>
+    <div>
+      <svg
+        width="80"
+        height="65"
+        viewBox="0 0 80 65"
+        xmlns="http://www.w3.org/2000/svg"
+        className={displayFrom('md')}
+      >
+        <path
+          d="M54.5533 34.035C54.5533 37.0132 52.2042 39.4274 49.3064 39.4274C46.4087 39.4274 44.0596 37.0132 44.0596 34.035C44.0596 31.0569 46.4087 34.035 49.3064 34.035C52.2042 34.035 54.5533 31.0569 54.5533 34.035Z"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M38.9865 47.9278C40.9473 47.9278 42.5368 48.1628 42.5368 45.9137C42.5368 43.6646 40.9473 41.8414 38.9865 41.8414C37.0257 41.8414 35.4361 43.6646 35.4361 45.9137C35.4361 48.1628 37.0257 47.9278 38.9865 47.9278ZM38.9865 47.9278C38.9865 49.2803 38.9865 52.2897 38.9865 53.5069M38.9865 53.5069C38.9865 57.5646 45.5107 54.0449 45.5107 58.3112M38.9865 53.5069C38.9865 57.5645 32.7107 53.5069 32.7107 58.3115"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M34.2701 34.0365C34.2701 37.0146 31.921 39.4289 29.0232 39.4289C26.1255 39.4289 23.7764 37.0146 23.7764 34.0365C23.7764 31.0584 26.1255 34.0365 29.0232 34.0365C31.921 34.0365 34.2701 31.0584 34.2701 34.0365Z"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M55.2172 47.9282L49.1309 48.9426"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M49.1334 51.9849L55.2197 52.9993"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M22.7564 47.9282L28.8428 48.9426"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M28.8432 51.9868L22.7568 53.0012"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M3.71909 57.9142L35.698 5.58512C37.2577 3.03285 40.9645 3.03284 42.5242 5.58511L74.5031 57.9142C76.132 60.5796 74.2137 64 71.09 64H7.13223C4.00851 64 2.09023 60.5796 3.71909 57.9142Z"
+          className={triangle(triangleColor)}
+        />
+      </svg>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="33"
+        viewBox="0 0 40 33"
+        className={displayTo('md')}
+      >
+        <path
+          d="M27.2761 17.0178C27.2761 18.5068 26.1016 19.7139 24.6527 19.7139C23.2038 19.7139 22.0293 18.5068 22.0293 17.0178C22.0293 15.5287 23.2038 17.0177 24.6527 17.0177C26.1016 17.0177 27.2761 15.5287 27.2761 17.0178Z"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M19.4928 23.9644C20.4732 23.9644 21.2679 24.0819 21.2679 22.9574C21.2679 21.8328 20.4732 20.9212 19.4927 20.9212C18.5123 20.9212 17.7176 21.8328 17.7176 22.9574C17.7176 24.0819 18.5123 23.9644 19.4928 23.9644ZM19.4928 23.9644C19.4928 24.6406 19.4928 26.1453 19.4928 26.754M19.4928 26.754C19.4928 28.7828 22.7549 27.0229 22.7549 29.1561M19.4928 26.754C19.4928 28.7828 16.3549 26.754 16.3549 29.1563"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M17.1336 17.0183C17.1336 18.5073 15.959 19.7144 14.5101 19.7144C13.0613 19.7144 11.8867 18.5073 11.8867 17.0183C11.8867 15.5292 13.0613 17.0182 14.5101 17.0182C15.959 17.0182 17.1336 15.5292 17.1336 17.0183Z"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M27.6076 23.9644L24.5645 24.4716"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M24.5652 25.9927L27.6084 26.4999"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M11.3758 23.9648L14.4189 24.472"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M14.4191 25.9941L11.376 26.5013"
+          className={sealStroke(sealColor)}
+        />
+        <path
+          d="M3.7191 25.9142L16.1424 5.58512C17.7021 3.03285 21.409 3.03284 22.9687 5.58511L35.392 25.9142C37.0209 28.5796 35.1026 32 31.9789 32H7.13223C4.00851 32 2.09023 28.5796 3.7191 25.9142Z"
+          className={triangle(triangleColor)}
+        />
+      </svg>
+    </div>
   )
 }

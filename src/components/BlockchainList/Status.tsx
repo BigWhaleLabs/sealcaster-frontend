@@ -21,10 +21,10 @@ const statusColor = (status: PostStatus) => {
   }
 }
 
-export function StatusSuspended({ blockchainId }: { blockchainId: number }) {
-  const { statuses } = useSnapshot(postIdsStatuses)
-  const status = statuses[blockchainId]?.status
-  const serviceId = statuses[blockchainId]?.serviceId
+export function StatusSuspended({ postId }: { postId: number }) {
+  const { statuses, idToMerkleRoot } = useSnapshot(postIdsStatuses)
+  const status = statuses[postId]
+  const serviceId = idToMerkleRoot[postId]
 
   const statusOrLoading = PostStatusText[status] || <LoadingWithDots />
   const farcasterCastUrl = `farcaster://casts/${serviceId}`
@@ -42,7 +42,7 @@ export function StatusSuspended({ blockchainId }: { blockchainId: number }) {
   )
 }
 
-export default function ({ blockchainId }: { blockchainId: number }) {
+export default function ({ postId }: { postId: number }) {
   return (
     <Suspense
       fallback={
@@ -53,7 +53,7 @@ export default function ({ blockchainId }: { blockchainId: number }) {
         </div>
       }
     >
-      <StatusSuspended blockchainId={blockchainId} />
+      <StatusSuspended postId={postId} />
     </Suspense>
   )
 }

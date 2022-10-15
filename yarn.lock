@@ -1538,10 +1538,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/constants@npm:^0.1.35":
-  version: 0.1.35
-  resolution: "@big-whale-labs/constants@npm:0.1.35"
-  checksum: aad97bad3aca86ad7d08b9e9786ce2409e43108223331429b4224aedf1d96a2bd17aee6f95d07bc49ad595aba3782fc00e2a6f318185394d6dfd4604c28f206a
+"@big-whale-labs/constants@npm:^0.1.36":
+  version: 0.1.36
+  resolution: "@big-whale-labs/constants@npm:0.1.36"
+  checksum: 33c9e312045d1e758b2c6a3ac7846cd1d63daacf6c8cc4dfb640a99c764c71535ac18ddc967f5833ba37dd28be898d5f0c72cd630a59c97c3135d57538b84f42
   languageName: node
   linkType: hard
 
@@ -1556,30 +1556,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/seal-cred-ledger-contract@npm:^0.2.8":
-  version: 0.2.8
-  resolution: "@big-whale-labs/seal-cred-ledger-contract@npm:0.2.8"
-  checksum: d0c424ef663302fe27bffb6df4aceeed168c73f04371a086c4ceaae8226c1a281964b7a66dcea755b7566300185d78139312ab5a9bdc891d460d648e497171e5
+"@big-whale-labs/seal-cred-ledger-contract@npm:^0.2.9-0":
+  version: 0.2.9-0
+  resolution: "@big-whale-labs/seal-cred-ledger-contract@npm:0.2.9-0"
+  checksum: 120be8c609e5aa04c25dd1197f17ba7f2be0e8c59da2bf4f977a88bcae52e4907de69339421e93f2e481bdff9acf0e4d8b5a43119608ea84703dd61b69c1401b
   languageName: node
   linkType: hard
 
-"@big-whale-labs/seal-cred-posts-contract@npm:^0.0.13":
-  version: 0.0.13
-  resolution: "@big-whale-labs/seal-cred-posts-contract@npm:0.0.13"
-  checksum: 4e75febd842c9e904442d98d178f6e23844eae51b2d64aa752308101d224c6e2f2b591c21418a39f14d0bb76aec141647034c2b6403afc4e0b940b6b0853f0ad
+"@big-whale-labs/seal-cred-posts-contract@npm:0.0.15-2":
+  version: 0.0.15-2
+  resolution: "@big-whale-labs/seal-cred-posts-contract@npm:0.0.15-2"
+  checksum: 0eb1c4bff0f3fc7a22ddd1a9c35d882b969de513445a953d19448cf08a0b6d675b00bdf3f2576ebaa0971ca584bd2dd624b3d0dbf29d0c678363022eceaa154b
   languageName: node
   linkType: hard
 
-"@big-whale-labs/stores@npm:^0.1.17":
-  version: 0.1.17
-  resolution: "@big-whale-labs/stores@npm:0.1.17"
+"@big-whale-labs/stores@npm:^0.1.18-0":
+  version: 0.1.18-0
+  resolution: "@big-whale-labs/stores@npm:0.1.18-0"
   dependencies:
     "@big-whale-labs/constants": ^0.1.29
-    "@big-whale-labs/seal-cred-ledger-contract": ^0.2.8
+    "@big-whale-labs/seal-cred-ledger-contract": ^0.2.9-0
     ethers: ^5.7.0
     secure-ls: ^1.2.6
     valtio: ^1.7.0
-  checksum: fcda98be204159b965864b97eab4fc1673d59485f5f328fe754a0b8ca2b5d4a35dc6dcaa72247dcbf2b7d4273643e18b90ed1ec039c3f8dbd3a22082722d7291
+  checksum: 013ad8de3167f3b2af9df8c710044ab14b4ec3fcae19d3138fb309a24dd7308f5054b257e3463a7f5251eee15ae87607d6aaf08f9b7d081594a44aee12545912
   languageName: node
   linkType: hard
 
@@ -15025,6 +15025,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-parallax-tilt@npm:^1.7.68":
+  version: 1.7.68
+  resolution: "react-parallax-tilt@npm:1.7.68"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 55b6b4009efdd34b4041125eb8dbd8ade330900bbe3eb31dbf42c771f4588e96b74f270e7f629e1b881d3319fd6ff546373d182701f14a6c6540b156843ec495
+  languageName: node
+  linkType: hard
+
 "react-refresh@npm:^0.11.0":
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
@@ -15899,10 +15909,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "sealcaster-frontend@workspace:."
   dependencies:
-    "@big-whale-labs/constants": ^0.1.35
+    "@big-whale-labs/constants": ^0.1.36
     "@big-whale-labs/frontend-utils": ^0.0.10
-    "@big-whale-labs/seal-cred-posts-contract": ^0.0.13
-    "@big-whale-labs/stores": ^0.1.17
+    "@big-whale-labs/seal-cred-posts-contract": 0.0.15-2
+    "@big-whale-labs/stores": ^0.1.18-0
     "@coinbase/wallet-sdk": ^3.5.2
     "@esbuild-plugins/node-globals-polyfill": ^0.1.1
     "@esbuild-plugins/node-modules-polyfill": ^0.1.4
@@ -15943,6 +15953,7 @@ __metadata:
     preact: ^10.11.0
     prettier: ^2.7.1
     react-infinite-scroll-component: ^6.1.0
+    react-parallax-tilt: ^1.7.68
     react-scripts: ^5.0.1
     react-textarea-autosize: ^8.3.4
     react-toastify: ^9.0.8

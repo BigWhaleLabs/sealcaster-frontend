@@ -23,10 +23,10 @@
     ]
   },
   "dependencies": {
-    "@big-whale-labs/constants": "^0.1.35",
+    "@big-whale-labs/constants": "^0.1.36",
     "@big-whale-labs/frontend-utils": "^0.0.10",
-    "@big-whale-labs/seal-cred-posts-contract": "^0.0.13",
-    "@big-whale-labs/stores": "^0.1.17",
+    "@big-whale-labs/seal-cred-posts-contract": "0.0.15-2",
+    "@big-whale-labs/stores": "^0.1.18-0",
     "@coinbase/wallet-sdk": "^3.5.2",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@lottiefiles/react-lottie-player": "^3.4.7",
@@ -45,6 +45,7 @@
     "ffjavascript": "^0.2.56",
     "preact": "^10.11.0",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-parallax-tilt": "^1.7.68",
     "react-textarea-autosize": "^8.3.4",
     "react-toastify": "^9.0.8",
     "valtio": "^1.7.0",

@@ -1,6 +1,6 @@
 import { AccentText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
-import LastDelimiter from 'components/ui/LastDelimiter'
+import Delimiter from 'components/ui/Delimiter'
 import Logo from 'components/navbar/Logo'
 import SealVerse from 'components/navbar/SealVerse'
 import SocialLinks from 'components/navbar/SocialLinks'
@@ -33,7 +33,9 @@ export default function () {
     <div className={walletContainer}>
       <SocialLinks />
       <SealVerse />
-      <LastDelimiter />
+      <div className={displayFrom('xs')}>
+        <Delimiter />
+      </div>
       <div className={walletAccount}>
         <AccentText small color="text-primary-semi-dimmed">
           <span className={displayTo('lg')}>Fetching...</span>

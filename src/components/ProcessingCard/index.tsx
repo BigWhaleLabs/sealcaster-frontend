@@ -15,7 +15,6 @@ import walletStore from 'stores/WalletStore'
 
 const cardWrapper = classnames(
   width('w-full'),
-
   backgroundColor('bg-primary-background'),
   padding('py-6', 'px-4', 'sm:px-6'),
   borderRadius('rounded-2xl')
@@ -47,11 +46,11 @@ export default function () {
 
   if (!account || !lastUserPost || !lastUserPost[account]) return null
 
-  const { status, blockchainId } = lastUserPost[account]
+  const { status, id } = lastUserPost[account]
 
   return (
     <div className={cardWrapper}>
-      <CastState status={status} castId={blockchainId} />
+      <CastState status={status} castId={id} />
     </div>
   )
 }

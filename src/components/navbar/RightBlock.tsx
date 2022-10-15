@@ -1,10 +1,11 @@
 import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useLocation } from 'wouter'
+import { useSnapshot } from 'valtio'
 import AccountAndLogo from 'components/navbar/AccountAndLogo'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
+import Delimiter from 'components/ui/Delimiter'
 import Dropdown from 'components/Dropdown'
-import LastDelimiter from 'components/ui/LastDelimiter'
 import NavLoading from 'components/navbar/NavLoading'
 import Network from 'models/Network'
 import SealVerse from 'components/navbar/SealVerse'
@@ -19,7 +20,6 @@ import classnames, {
 } from 'classnames/tailwind'
 import getEtherscanAddressUrl from 'helpers/network/getEtherscanAddressUrl'
 import getWalletOption from 'helpers/getWalletOption'
-import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const walletContainer = classnames(
   display('flex'),
@@ -54,7 +54,7 @@ const AccountContainer = ({
   eNSName?: string
 }) => {
   const [, setLocation] = useLocation()
-  const { isBurner } = useBadgeAccount()
+  const { privateKey } = useSnapshot(BurnerWalletStore)
 
   const onSelectOption = (selectedValue: string) => {
     switch (selectedValue) {
@@ -81,13 +81,14 @@ const AccountContainer = ({
       />
     </div>
   )
+
   if (account)
     return (
       <Dropdown
         extraSpacing
         fitToItemSize
         currentValue={window.location.origin}
-        options={getWalletOption(isBurner)}
+        options={getWalletOption(!!privateKey)}
         staticPlaceholder={content}
         onChange={onSelectOption}
       />
@@ -136,7 +137,9 @@ export default function ({
       <div className={walletContainer}>
         <SocialLinks />
         <SealVerse />
-        <LastDelimiter />
+        <div className={displayFrom('xs')}>
+          <Delimiter />
+        </div>
         <SuspendedAccount
           account={account}
           needNetworkChange={needNetworkChange}

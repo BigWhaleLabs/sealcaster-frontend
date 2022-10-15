@@ -36,7 +36,8 @@ const accentText = (
   small?: boolean,
   primary?: boolean,
   shadow?: TDropShadow,
-  extraSmall?: boolean
+  extraSmall?: boolean,
+  large?: boolean
 ) =>
   classnames(
     textColor(
@@ -49,6 +50,7 @@ const accentText = (
     fontSize({
       'text-sm': small,
       'text-xs': extraSmall,
+      'text-lg': large,
     }),
     dropShadow(shadow)
   )
@@ -60,6 +62,7 @@ export function AccentText({
   shadow,
   children,
   extraSmall,
+  large,
 }: ChildrenProp & {
   color: TTextColor
   bold?: boolean
@@ -67,14 +70,35 @@ export function AccentText({
   primary?: boolean
   shadow?: TDropShadow
   extraSmall?: boolean
+  large?: boolean
 }) {
   return (
     <span
-      className={accentText(color, bold, small, primary, shadow, extraSmall)}
+      className={accentText(
+        color,
+        bold,
+        small,
+        primary,
+        shadow,
+        extraSmall,
+        large
+      )}
     >
       {children}
     </span>
   )
+}
+
+const gradientText = classnames(
+  textColor('text-transparent', 'hover:text-accent', 'active:text-secondary'),
+  backgroundImage('bg-gradient-to-r'),
+  backgroundClip('bg-clip-text'),
+  gradientColorStops('from-secondary', 'to-accent'),
+  fontWeight('font-bold'),
+  fontFamily('font-primary')
+)
+export function GradientText({ children }: ChildrenProp) {
+  return <span className={gradientText}>{children}</span>
 }
 
 const linkText = (
@@ -83,10 +107,12 @@ const linkText = (
   bold?: boolean,
   gradientFrom?: TGradientColorStops,
   gradientTo?: TGradientColorStops,
-  underline?: boolean
+  underline?: boolean,
+  primary?: boolean
 ) =>
   classnames(
     textDecoration({ underline }),
+    fontFamily({ 'font-primary': primary }),
     textColor(gradientFrom && gradientTo ? 'text-transparent' : 'text-primary'),
     backgroundImage(
       gradientFrom && gradientTo ? 'bg-gradient-to-r' : undefined
@@ -108,6 +134,7 @@ export function LinkText({
   gradientFrom,
   gradientTo,
   underline,
+  primary,
 }: ChildrenProp & {
   url: string
   small?: boolean
@@ -118,6 +145,7 @@ export function LinkText({
   gradientFrom?: TGradientColorStops
   gradientTo?: TGradientColorStops
   underline?: boolean
+  primary?: boolean
 }) {
   const linkClassnames = linkText(
     small,
@@ -125,7 +153,8 @@ export function LinkText({
     bold,
     gradientFrom,
     gradientTo,
-    underline
+    underline,
+    primary
   )
 
   if (internal)
@@ -148,22 +177,33 @@ export function LinkText({
   )
 }
 
-const bodyText = (
-  primary?: boolean,
-  bold?: boolean,
-  semiBold?: boolean,
-  small?: boolean,
-  noWrap?: boolean,
-  center?: boolean,
+interface BodyTextProps {
+  primary?: boolean
+  bold?: boolean
+  semiBold?: boolean
+  small?: boolean
+  large?: boolean
+  noWrap?: boolean
+  center?: boolean
   inheritColor?: boolean
-) =>
+}
+const bodyText = ({
+  primary,
+  bold,
+  semiBold,
+  small,
+  large,
+  noWrap,
+  center,
+  inheritColor,
+}: BodyTextProps) =>
   classnames(
     fontFamily({ 'font-primary': primary }),
     textColor(inheritColor ? 'text-inherit' : 'text-formal-accent'),
     textAlign({ 'text-center': center }),
     fontWeight({ 'font-bold': bold, 'font-semibold': semiBold }),
     lineHeight('!leading-5'),
-    fontSize(small ? 'text-xs' : 'text-sm'),
+    fontSize({ 'text-xs': small, 'text-sm': !large }),
     whitespace({ 'whitespace-nowrap': noWrap })
   )
 export function BodyText({
@@ -171,30 +211,24 @@ export function BodyText({
   bold,
   semiBold,
   small,
+  large,
   noWrap,
   center,
   children,
   inheritColor,
-}: ChildrenProp & {
-  primary?: boolean
-  bold?: boolean
-  semiBold?: boolean
-  small?: boolean
-  noWrap?: boolean
-  center?: boolean
-  inheritColor?: boolean
-}) {
+}: ChildrenProp & BodyTextProps) {
   return (
     <p
-      className={bodyText(
+      className={bodyText({
         primary,
         bold,
         semiBold,
         small,
+        large,
         noWrap,
         center,
-        inheritColor
-      )}
+        inheritColor,
+      })}
     >
       {children}
     </p>
@@ -521,4 +555,23 @@ const largeText = classnames(
 )
 export function LargeText({ children }: ChildrenProp) {
   return <h2 className={largeText}>{children}</h2>
+}
+
+const questionOfDayText = classnames(
+  fontFamily('font-primary'),
+  fontWeight('font-bold')
+)
+const questionOfDayTextColor = classnames(
+  backgroundImage('bg-gradient-to-r'),
+  textColor('text-transparent'),
+  backgroundClip('bg-clip-text'),
+  gradientColorStops('from-tertiary', 'to-primary-bright')
+)
+
+export function QuestionOfDayText({ children }: ChildrenProp) {
+  return (
+    <span className={questionOfDayText}>
+      <span className={questionOfDayTextColor}>{children}</span>
+    </span>
+  )
 }

@@ -1,8 +1,19 @@
 import ChildrenProp from 'models/ChildrenProp'
+import classnames, { alignItems, display } from 'classnames/tailwind'
 
-export default function ({ url, children }: ChildrenProp & { url: string }) {
+const commonClasses = classnames(display('flex'), alignItems('items-center'))
+
+export default function ({
+  url,
+  children,
+}: ChildrenProp & { url: string; small?: boolean }) {
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={commonClasses}
+    >
       {children}
     </a>
   )

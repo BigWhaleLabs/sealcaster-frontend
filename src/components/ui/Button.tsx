@@ -13,17 +13,16 @@ import {
   classnames,
   cursor,
   display,
-  flexDirection,
   fontFamily,
   fontSize,
   fontWeight,
+  gap,
   gradientColorStops,
   height,
   justifyContent,
   lineHeight,
   opacity,
   padding,
-  space,
   textAlign,
   textColor,
   transitionDuration,
@@ -37,6 +36,7 @@ import Loading from 'icons/Loading'
 const commonClasses = ({
   type,
   fullWidth,
+  fullWidthOnMobile,
   center,
   available,
   small,
@@ -45,6 +45,7 @@ const commonClasses = ({
 }: {
   type: ButtonType
   fullWidth?: boolean
+  fullWidthOnMobile?: boolean
   center?: boolean
   available?: boolean
   small?: boolean
@@ -54,7 +55,7 @@ const commonClasses = ({
   const isNotTertiary = type !== 'tertiary'
   return classnames(
     display('flex'),
-    flexDirection('flex-row'),
+    gap('gap-x-2'),
     justifyContent({ 'justify-center': center }),
     alignItems('items-center'),
     fontWeight('font-bold'),
@@ -71,7 +72,10 @@ const commonClasses = ({
           'active:shadow-button-active': available && !gradientFont,
         })
       : undefined,
-    width({ 'w-full': fullWidth }),
+    width({
+      'w-full': fullWidth || fullWidthOnMobile,
+      'md:w-fit': fullWidthOnMobile,
+    }),
     height({ 'h-fit': heightFit }),
     textAlign({ 'text-center': center }),
     fontSize(small ? 'text-sm' : 'text-lg'),
@@ -82,8 +86,7 @@ const commonClasses = ({
             ? { 'py-2': true, 'px-4': true }
             : { 'py-4': true, 'px-6': true }
         )
-      : undefined,
-    space('space-x-2')
+      : undefined
   )
 }
 
@@ -94,12 +97,14 @@ const button = ({
   type,
   small,
   gradientFont,
+  fullWidthOnMobile,
   heightFit,
 }: ButtonProps & { available?: boolean }) =>
   classnames(
     commonClasses({
       type,
       fullWidth,
+      fullWidthOnMobile,
       center,
       available,
       small,
@@ -180,6 +185,7 @@ interface ButtonProps {
   loadingOverflow?: boolean
   url?: string
   fullWidth?: boolean
+  fullWidthOnMobile?: boolean
   center?: boolean
   heightFit?: boolean
 }
@@ -188,6 +194,7 @@ type ButtonType = 'primary' | 'secondary' | 'tertiary'
 
 export default function ({
   fullWidth,
+  fullWidthOnMobile,
   center,
   small,
   withArrow,
@@ -208,6 +215,7 @@ export default function ({
     <button
       className={button({
         fullWidth,
+        fullWidthOnMobile,
         available,
         center,
         type,
@@ -227,7 +235,7 @@ export default function ({
           {gradientFont ? (
             <span className={textGradient(available)}>{children}</span>
           ) : (
-            <div>{children}</div>
+            <>{children}</>
           )}
         </>
       )}

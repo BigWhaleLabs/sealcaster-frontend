@@ -1,5 +1,5 @@
 import { SocialLink } from 'components/ui/Text'
-import { displayTo } from 'helpers/visibilityClassnames'
+import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import Delimiter from 'components/ui/Delimiter'
 import Discord from 'icons/Discord'
 import FooterButton from 'components/Footer/FooterButton'
@@ -8,8 +8,9 @@ import Twitter from 'icons/Twitter'
 import classnames, {
   alignItems,
   display,
+  flex,
   flexDirection,
-  margin,
+  justifyContent,
   padding,
   space,
 } from 'classnames/tailwind'
@@ -17,10 +18,12 @@ import classnames, {
 const commonClasses = classnames(display('flex'), alignItems('items-center'))
 const socialContainerCard = classnames(
   commonClasses,
+  flex('flex-1'),
+  alignItems('md:items-end'),
+  justifyContent('justify-end', 'md:justify-start'),
   flexDirection('flex-col', 'md:flex-row'),
   padding('py-8', 'px-4', 'lg:px-25'),
-  space('space-y-4', 'md:space-x-4', 'md:space-y-0'),
-  margin('mt-20')
+  space('space-y-4', 'md:space-x-4', 'md:space-y-0')
 )
 
 const socialContainer = classnames(
@@ -48,7 +51,9 @@ export default function () {
               content={FooterOptions[key].text}
             />
             {linkList.length - 1 !== index && (
-              <Delimiter color="dimmed" showFrom="md" />
+              <div className={displayFrom('md')}>
+                <Delimiter />
+              </div>
             )}
           </>
         ))}

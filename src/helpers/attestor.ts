@@ -1,11 +1,12 @@
 import BalanceSignature from 'models/BalanceSignature'
+import FarcasterSignature from 'models/FarcasterSignature'
 import Network from 'models/Network'
 import PublicKey from 'models/PublicKey'
 import Signature from 'models/Signature'
 import axios from 'axios'
 import env from 'helpers/env'
 
-const baseURL = `${env.VITE_VERIFY_URL}/v0.2.1/verify`
+const baseURL = `${env.VITE_VERIFY_URL}/v0.2.2/verify`
 
 export async function requestAddressOwnershipAttestation(
   signature: string,
@@ -32,9 +33,12 @@ export async function requestBalanceAttestation(
 }
 
 export async function requestFarcasterAttestation(address: string) {
-  const { data } = await axios.post<BalanceSignature>(`${baseURL}/farcaster`, {
-    address,
-  })
+  const { data } = await axios.post<FarcasterSignature>(
+    `${baseURL}/farcaster`,
+    {
+      address,
+    }
+  )
   return data
 }
 
