@@ -28,7 +28,7 @@ const contentWrapper = classnames(
   position('fixed'),
   inset('left-0', 'lg:left-9', 'bottom-9'),
   zIndex('z-50'),
-  width('w-screen', 'body:!w-body'),
+  width('w-screen', 'body:w-body'),
   padding('p-3')
 )
 
