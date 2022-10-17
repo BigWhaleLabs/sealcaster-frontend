@@ -1,4 +1,4 @@
-import { Suspense } from 'preact/compat'
+import { Suspense, SuspenseList } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import CustomizeCard from 'components/BlockchainList/CustomizeCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -53,7 +53,7 @@ export function PostListSuspended() {
     >
       {paginated.map(({ id, timestamp, post, sender }, index) => (
         <>
-          <Suspense fallback={<LoadingPost />}>
+          <SuspenseList revealOrder="forwards">
             <Post
               isQuestionOfTheDay={questionOfTheDayIds.includes(id.toNumber())}
               canReply={
@@ -69,7 +69,7 @@ export function PostListSuspended() {
               limitThread={2}
               clickablePost
             />
-          </Suspense>
+          </SuspenseList>
           {index === 2 && <CustomizeCard />}
         </>
       ))}
