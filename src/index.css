@@ -79,9 +79,21 @@ html {
   caret-color: var(--primary);
 }
 html[bg-theme='404'] {
-  background-position: top, center, top;
-  background-size: auto auto, 100% 100%, 3rem 3rem;
-  background-image: url(), url(), var(--bg-grid);
+  background-position: center, center, center, top;
+  background-size: auto auto, auto auto, auto auto, 3rem 3rem;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-image: url(),
+    radial-gradient(
+      625px 416px at 85% center,
+      var(--red-background) 0%,
+      var(--transparent) 100%
+    ),
+    radial-gradient(
+      971px 646px at 20% center,
+      var(--red-background) 0%,
+      var(--transparent) 100%
+    ),
+    var(--bg-grid);
 }
 
 body {
@@ -288,6 +300,7 @@ circle {
   html[bg-theme='404'] {
     background-position: top, center, top;
     background-size: auto auto, 100% 100%, 3rem 3rem;
+    background-repeat: no-repeat, no-repeat, repeat;
     background-image: url(),
       radial-gradient(var(--red-background), var(--transparent)), var(--bg-grid);
   }

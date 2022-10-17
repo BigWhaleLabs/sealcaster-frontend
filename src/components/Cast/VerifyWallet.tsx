@@ -1,4 +1,4 @@
-import { AccentText, BodyText } from 'components/ui/Text'
+import { BodyText } from 'components/ui/Text'
 import { parseErrorText } from '@big-whale-labs/frontend-utils'
 import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
@@ -22,16 +22,11 @@ export default function ({
 
   return (
     <LoadingBlock
-      loadingText="Preparing cast"
+      loadingText={status || 'Preparing cast'}
       subtitle={
         <>
           {error && (
             <ErrorMessage withExclamation text={parseErrorText(error)} />
-          )}
-          {status && (
-            <AccentText small color="text-tertiary">
-              {status}
-            </AccentText>
           )}
           <BodyText center>{text}</BodyText>
           {!loading && !privateKey && (

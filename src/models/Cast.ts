@@ -2,7 +2,6 @@ export type Cast = {
   postId?: number
   threadMerkleRoot: string
   merkleRoot: string
-  sequence: number
   body: {
     publishedAt: number
     username: string
