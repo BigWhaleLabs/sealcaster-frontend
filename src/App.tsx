@@ -17,9 +17,7 @@ import classnames, {
   display,
   flexDirection,
   margin,
-  maxWidth,
   minHeight,
-  minWidth,
   overflow,
   width,
 } from 'classnames/tailwind'
