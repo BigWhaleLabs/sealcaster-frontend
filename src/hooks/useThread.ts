@@ -7,7 +7,7 @@ export default function (threadId: number) {
 
   if (!thread) {
     void fetchThread(threadId)
-    return null
+    return
   }
 
   const postsCopy = { ...posts }
