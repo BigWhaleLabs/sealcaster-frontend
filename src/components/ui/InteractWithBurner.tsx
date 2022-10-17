@@ -58,14 +58,14 @@ export default function () {
       headerText="Burner wallet unlocked"
       mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
       primaryButton={{
-        text: 'View burner wallet',
+        text: 'View burner',
         action: () => {
           BurnerInteractionStore.interactionClosed = true
           setLocation('/wallet')
         },
       }}
       tertiaryButton={{
-        text: 'Destroy burner wallet',
+        text: 'Destroy burner',
         action: () => {
           setDestroyBurner(true)
         },
