@@ -127,4 +127,6 @@ farcasterContract.on(
   }
 )
 
+void fetchThread(0)
+
 export default PostStore
