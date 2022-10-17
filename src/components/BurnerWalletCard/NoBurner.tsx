@@ -1,6 +1,8 @@
 import { AccentText, BodyText } from 'components/ui/Text'
+import { Suspense } from 'preact/compat'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useSnapshot } from 'valtio'
+import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Card from 'components/ui/Card'
 import Cross from 'icons/Cross'
 import SealSad from 'icons/SealSad'
@@ -12,6 +14,7 @@ import classnames, {
   gap,
   margin,
 } from 'classnames/tailwind'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const desktopWrapper = classnames(
   display('flex'),
@@ -30,11 +33,23 @@ const mobileTitle = classnames(
   alignItems('items-center')
 )
 
-export default function () {
-  const { account, acceptedNotBurner, hasFarcasterBadge } =
-    useSnapshot(WalletStore)
+export function NoNurnerSuspended() {
+  const {
+    account: walletStoreAccount,
+    acceptedNotBurner,
+    hasFarcasterBadge,
+  } = useSnapshot(WalletStore)
+  const account = useBadgeAccount()
+  const { generateMode } = useSnapshot(BurnerWalletStore)
 
-  if (!account || acceptedNotBurner || hasFarcasterBadge) return null
+  if (
+    generateMode ||
+    !account ||
+    account !== walletStoreAccount ||
+    acceptedNotBurner ||
+    hasFarcasterBadge
+  )
+    return null
 
   return (
     <div className={margin('mt-8')}>
@@ -65,5 +80,13 @@ export default function () {
         </div>
       </Card>
     </div>
+  )
+}
+
+export default function () {
+  return (
+    <Suspense fallback="">
+      <NoNurnerSuspended />
+    </Suspense>
   )
 }

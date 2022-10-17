@@ -49,6 +49,7 @@ export default function ({
       )
     } finally {
       onLoading(false)
+      walletStore.exit()
     }
   }
 

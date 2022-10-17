@@ -22,16 +22,11 @@ export default function ({
 
   return (
     <LoadingBlock
-      loadingText="Preparing cast"
+      loadingText={status || 'Preparing cast'}
       subtitle={
         <>
           {error && (
             <ErrorMessage withExclamation text={parseErrorText(error)} />
-          )}
-          {status && (
-            <AccentText small color="text-tertiary">
-              {status}
-            </AccentText>
           )}
           <BodyText center>{text}</BodyText>
           {!loading && !privateKey && (
