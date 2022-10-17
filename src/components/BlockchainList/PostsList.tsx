@@ -27,9 +27,9 @@ const scrollContainer = classnames(
 )
 
 export function PostListSuspended() {
+  const thread = useThread(0)
   const account = useBadgeAccount()
   const { idToPostTx, limit, questionOfTheDayIds } = useSnapshot(PostStore)
-  const thread = useThread(0)
   const hashId = useHashParams()
 
   const posts = thread ? thread : []
