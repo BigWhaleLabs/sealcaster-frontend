@@ -38,7 +38,7 @@ export function PostListSuspended() {
 
   const postsLength = posts.length
 
-  if (postsLength < 1) return <NoPosts />
+  if (postsLength === 0) return <NoPosts />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
 
   return (
