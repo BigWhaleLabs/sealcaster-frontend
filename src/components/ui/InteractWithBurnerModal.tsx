@@ -16,7 +16,6 @@ import classnames, {
   inset,
   justifyContent,
   margin,
-  maxWidth,
   padding,
   position,
   textColor,
@@ -24,27 +23,40 @@ import classnames, {
   zIndex,
 } from 'classnames/tailwind'
 
+const contentWrapper = classnames(
+  position('fixed'),
+  inset('left-0', 'lg:left-9', 'bottom-9'),
+  zIndex('z-50'),
+  width('w-screen', 'body:w-body'),
+  padding('p-3')
+)
+
 const backgroundWrapper = classnames(
   backgroundColor('bg-primary-dimmed'),
   padding('p-6'),
   display('flex'),
   borderRadius('rounded-lg'),
-  maxWidth('max-w-full', 'lg:max-w-body'),
-  width('w-full', 'md:w-body'),
   dropShadow('drop-shadow-info-card')
 )
 
 const buttonsWrapper = classnames(
   display('flex'),
   alignItems('items-center'),
-  margin('mt-4'),
+  margin('mt-3'),
   gap('gap-x-4')
 )
 
 const positionWrapper = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  width('w-full')
+  width('w-full'),
+  gap('gap-y-1')
+)
+
+const smallSealWithText = classnames(
+  display('flex'),
+  gap('gap-x-1'),
+  alignItems('items-start')
 )
 
 const headerTextWrapper = (show: boolean) =>
@@ -53,16 +65,9 @@ const headerTextWrapper = (show: boolean) =>
     gap('gap-x-1'),
     justifyContent('justify-between'),
     alignItems(
-      show ? { 'items-center': true, 'md:items-start': true } : 'items-start'
+      show ? { 'items-start': true, 'sm:items-center': true } : 'items-center'
     )
   )
-
-const contentWrapper = classnames(
-  position('fixed'),
-  inset('left-0', 'lg:left-9', 'bottom-9'),
-  zIndex('z-50'),
-  padding('p-3')
-)
 
 const infoSealWrapper = classnames(
   displayFrom('md'),
@@ -70,16 +75,10 @@ const infoSealWrapper = classnames(
   dropShadow('drop-shadow-info-seal')
 )
 
-const headerContainerWrapper = classnames(display('flex'), gap('gap-x-1'))
-
-const smallInfoSealWrapepr = classnames(
+const smallInfoSealWrapper = classnames(
   displayTo('md'),
   dropShadow('drop-shadow-info-seal')
 )
-
-const arrowWrapper = classnames(width('w-4'), margin('mt-2'))
-
-const positionWithGap = classnames(positionWrapper, gap('gap-y-1'))
 
 interface ButtonProps {
   text: string
@@ -145,40 +144,33 @@ export default function ({
           <InfoSeal sadSeal={sadSeal} />
         </div>
         <div className={positionWrapper}>
-          <div className={positionWithGap}>
-            <div className={headerTextWrapper(show)}>
-              <span className={headerContainerWrapper}>
-                <div className={smallInfoSealWrapepr}>
-                  <SmallInfoSeal />
-                </div>
-                <AccentText color="text-formal-accent" large bold>
-                  {showAttention && (
-                    <span className={textColor('text-secondary')}>
-                      Attention:{' '}
-                    </span>
-                  )}
-                  {headerText}
-                </AccentText>
-              </span>
-              <Button
-                center
-                type="tertiary"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                <div className={arrowWrapper}>
-                  <span className={displayTo('md')}>
-                    <Arrow pulseDisabled open={show} />
+          <div className={headerTextWrapper(show)}>
+            <div className={smallSealWithText}>
+              <div className={smallInfoSealWrapper}>
+                <SmallInfoSeal />
+              </div>
+              <AccentText color="text-formal-accent" large bold>
+                {showAttention && (
+                  <span className={textColor('text-secondary')}>
+                    Attention:{' '}
                   </span>
-                  <span className={displayFrom('md')}>
-                    <Arrow pulseDisabled open={!show} />
-                  </span>
-                </div>
-              </Button>
+                )}
+                {headerText}
+              </AccentText>
             </div>
-            {show && <StatusText>{mainText}</StatusText>}
+            <Button
+              center
+              type="tertiary"
+              onClick={() => {
+                setShow(!show)
+              }}
+            >
+              <div className={width('w-4')}>
+                <Arrow pulseDisabled open={show} reversedOnMobiles />
+              </div>
+            </Button>
           </div>
+          {show && <StatusText>{mainText}</StatusText>}
           <div className={displayFrom('md')}>{buttons}</div>
           <div className={displayTo('md')}>{show && buttons}</div>
         </div>

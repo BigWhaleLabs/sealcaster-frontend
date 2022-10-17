@@ -102,21 +102,20 @@ module.exports = {
         'button-active': '0rem 0rem 0.375rem rgb(0 0 0 / 1)',
       },
       dropShadow: {
-        'primary-dimmed': '0rem 0rem 4rem var(--primary-dimmed)',
-        secondary: '0rem 0rem 0.625rem var(--secondary)',
+        'primary-dimmed': '0 0 4rem var(--primary-dimmed)',
+        secondary: '0 0 0.625rem var(--secondary)',
         'accent-gradient': '1.25rem 1.25rem 4.62rem var(--accent-transparent)',
         'secondary-gradient':
           '-1.25rem -1.25rem 4.62rem var(--secondary-transparent)',
         'accent-light-transparent':
-          '0rem 0rem 2.125rem var(--accent-light-transparent)',
-        'formal-accent':
-          '0rem 0rem 1.25rem var(--formal-accent-semi-transparent)',
+          '0 0 2.125rem var(--accent-light-transparent)',
+        'formal-accent': '0 0 1.25rem var(--formal-accent-semi-transparent)',
         'text-shadow': [
           '-0.25rem 0 0 var(--primary-dimmed)',
           '0rem 0rem 1.25rem var(--formal-accent-semi-transparent)',
         ],
-        'info-card': '0rem 0rem 4.5rem var(--primary-dimmed-dark-transparent)',
-        'info-seal': '0rem 0.125px 1.25px var(--secondary-dimmed-transparent)',
+        'info-card': '0 0 4.5rem var(--primary-dimmed-dark-transparent)',
+        'info-seal': '0 0 0.4rem var(--secondary-dimmed-transparent)',
       },
       strokeWidth: {
         1.5: '1.5',
