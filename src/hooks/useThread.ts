@@ -6,7 +6,7 @@ export default function (threadId: number) {
   const thread = threads[threadId]
 
   if (!thread) {
-    fetchThread(threadId)
+    void fetchThread(threadId)
     return null
   }
 
