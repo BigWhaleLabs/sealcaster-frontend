@@ -55,7 +55,7 @@ export default function () {
           />
         )}
         <div className={bodyContainer(is404)}>
-          <div className={width('w-full')}>
+          <main className={width('w-full')}>
             <Switch>
               <Route path="/">
                 <LazyComponent lazyImported={<Landing />} />
@@ -79,7 +79,7 @@ export default function () {
                 <Redirect to="/404" />
               </Route>
             </Switch>
-          </div>
+          </main>
         </div>
         <Footer />
         {displayScrollToTop && <ScrollToTopButton />}
