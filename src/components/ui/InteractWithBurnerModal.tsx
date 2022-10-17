@@ -1,4 +1,5 @@
 import { AccentText, StatusText } from 'components/ui/Text'
+import { StateUpdater } from 'preact/hooks'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import { useState } from 'preact/hooks'
 import Arrow from 'icons/Arrow'
@@ -16,7 +17,6 @@ import classnames, {
   inset,
   justifyContent,
   margin,
-  maxWidth,
   padding,
   position,
   textColor,
@@ -24,13 +24,19 @@ import classnames, {
   zIndex,
 } from 'classnames/tailwind'
 
+const contentWrapper = classnames(
+  position('fixed'),
+  inset('left-0', 'lg:left-9', 'bottom-9'),
+  zIndex('z-50'),
+  width('w-screen', 'body:!w-body'),
+  padding('p-3')
+)
+
 const backgroundWrapper = classnames(
   backgroundColor('bg-primary-dimmed'),
   padding('p-6'),
   display('flex'),
   borderRadius('rounded-lg'),
-  maxWidth('max-w-full', 'lg:max-w-body'),
-  width('w-full', 'md:w-body'),
   dropShadow('drop-shadow-info-card')
 )
 
@@ -57,29 +63,28 @@ const headerTextWrapper = (show: boolean) =>
     )
   )
 
-const contentWrapper = classnames(
-  position('fixed'),
-  inset('left-0', 'lg:left-9', 'bottom-9'),
-  zIndex('z-50'),
-  padding('p-3')
-)
-
 const infoSealWrapper = classnames(
   displayFrom('md'),
   margin('mr-4'),
   dropShadow('drop-shadow-info-seal')
 )
 
-const headerContainerWrapper = classnames(display('flex'), gap('gap-x-1'))
+const headerContainerWrapper = classnames(
+  display('flex'),
+  width('w-full'),
+  gap('gap-x-1'),
+  alignItems('items-center'),
+  justifyContent('justify-between', 'md:justify-start')
+)
 
-const smallInfoSealWrapepr = classnames(
+const smallInfoSealWrapper = classnames(
   displayTo('md'),
   dropShadow('drop-shadow-info-seal')
 )
 
-const arrowWrapper = classnames(width('w-4'), margin('mt-2'))
+const arrowWrapper = classnames(width('w-4'), margin('md:mt-2'))
 
-const positionWithGap = classnames(positionWrapper, gap('gap-y-1'))
+const positionWithGap = classnames(positionWrapper, gap('gap-y-2'))
 
 interface ButtonProps {
   text: string
@@ -111,6 +116,30 @@ const ActionsButtons = ({
         </Button>
       )}
     </div>
+  )
+}
+
+const ArrowButton = ({
+  setShow,
+  show,
+  mobile,
+}: {
+  setShow: StateUpdater<boolean>
+  show: boolean
+  mobile?: boolean
+}) => {
+  return (
+    <Button
+      center
+      type="tertiary"
+      onClick={() => {
+        setShow(!show)
+      }}
+    >
+      <div className={arrowWrapper}>
+        <Arrow pulseDisabled open={show} reversed={mobile} />
+      </div>
+    </Button>
   )
 }
 
@@ -147,8 +176,8 @@ export default function ({
         <div className={positionWrapper}>
           <div className={positionWithGap}>
             <div className={headerTextWrapper(show)}>
-              <span className={headerContainerWrapper}>
-                <div className={smallInfoSealWrapepr}>
+              <div className={headerContainerWrapper}>
+                <div className={smallInfoSealWrapper}>
                   <SmallInfoSeal />
                 </div>
                 <AccentText color="text-formal-accent" large bold>
@@ -159,23 +188,13 @@ export default function ({
                   )}
                   {headerText}
                 </AccentText>
-              </span>
-              <Button
-                center
-                type="tertiary"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                <div className={arrowWrapper}>
-                  <span className={displayTo('md')}>
-                    <Arrow pulseDisabled open={show} />
-                  </span>
-                  <span className={displayFrom('md')}>
-                    <Arrow pulseDisabled open={!show} />
-                  </span>
+                <div className={displayTo('md')}>
+                  <ArrowButton show={show} setShow={setShow} mobile />
                 </div>
-              </Button>
+              </div>
+              <div className={displayFrom('md')}>
+                <ArrowButton show={show} setShow={setShow} />
+              </div>
             </div>
             {show && <StatusText>{mainText}</StatusText>}
           </div>
