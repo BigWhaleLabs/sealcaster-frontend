@@ -40,10 +40,10 @@ export function NoNurnerSuspended() {
     hasFarcasterBadge,
   } = useSnapshot(WalletStore)
   const account = useBadgeAccount()
-  const { generateMode } = useSnapshot(BurnerWalletStore)
+  const { generatingBurner } = useSnapshot(BurnerWalletStore)
 
   if (
-    generateMode ||
+    generatingBurner ||
     !account ||
     account !== walletStoreAccount ||
     acceptedNotBurner ||
