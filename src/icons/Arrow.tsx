@@ -7,22 +7,21 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 
-const arrowAnimation = (
-  pulseDisabled?: boolean,
-  openDisabled?: boolean,
-  open?: boolean
-) =>
+const arrowAnimation = ({ pulseDisabled, openDisabled, open }: ArrowProps) =>
   classnames(
     animation({ 'animate-pulse-horizontal': !pulseDisabled }),
     rotate({ 'rotate-180': !openDisabled && open }),
     transitionDuration('duration-300')
   )
-const svgInnerWrapper = (reversed?: boolean) =>
+const svgInnerWrapper = (reversed?: boolean, reversedOnMobiles?: boolean) =>
   classnames(
     width('w-full'),
     height('h-auto'),
     dropShadow('drop-shadow-secondary'),
-    rotate({ 'rotate-180': reversed })
+    rotate({
+      'rotate-180': reversed || reversedOnMobiles,
+      'md:rotate-0': reversedOnMobiles,
+    })
   )
 
 interface ArrowProps {
@@ -31,6 +30,7 @@ interface ArrowProps {
   horizontal?: boolean
   open?: boolean
   reversed?: boolean
+  reversedOnMobiles?: boolean
 }
 
 export default function ({
@@ -39,16 +39,21 @@ export default function ({
   openDisabled,
   open,
   reversed,
+  reversedOnMobiles,
 }: ArrowProps) {
   // same id of <linearGradient> will break multiple usage of this icon
   const strokeId = Math.random().toString()
 
   return (
-    <div className={svgInnerWrapper(reversed)}>
+    <div className={svgInnerWrapper(reversed, reversedOnMobiles)}>
       <svg
         viewBox={horizontal ? '0 0 7 14' : '0 0 14 7'}
         xmlns="http://www.w3.org/2000/svg"
-        className={arrowAnimation(pulseDisabled, openDisabled, open)}
+        className={arrowAnimation({
+          pulseDisabled,
+          openDisabled,
+          open,
+        })}
       >
         <path
           d="M10.75 1.25L6.25 5.75L1.75 1.25"
