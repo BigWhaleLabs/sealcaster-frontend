@@ -68,20 +68,15 @@ const PostStore = proxy<PostStoreType>({
   },
 })
 
-export function fetchThread(threadId: number) {
+export async function fetchThread(threadId: number) {
   if (typeof PostStore.threads[threadId] !== 'undefined') return
 
-  const request = safeGetThreadFromContract(threadId, farcasterContract)
-
-  PostStore.threads[threadId] = request.then((posts) =>
-    posts.map((post) => post.id.toNumber())
-  )
-
-  void request.then((posts) => {
-    for (const post of posts) {
-      PostStore.posts[post.id.toNumber()] = Promise.resolve(post)
-    }
-    void updateStatuses(posts.map((post) => post.id.toNumber()))
+  const posts = await safeGetThreadFromContract(threadId, farcasterContract)
+  const postsIds = posts.map((post) => post.id.toNumber())
+  await updateStatuses(postsIds)
+  PostStore.threads[threadId] = Promise.resolve(postsIds)
+  posts.forEach((post) => {
+    PostStore.posts[post.id.toNumber()] = Promise.resolve(post)
   })
 }
 
