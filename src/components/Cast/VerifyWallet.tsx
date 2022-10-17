@@ -1,4 +1,4 @@
-import { AccentText, BodyText } from 'components/ui/Text'
+import { BodyText } from 'components/ui/Text'
 import { parseErrorText } from '@big-whale-labs/frontend-utils'
 import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
