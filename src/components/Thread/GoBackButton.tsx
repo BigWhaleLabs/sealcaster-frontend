@@ -1,4 +1,4 @@
-import { GradientText, LinkText } from 'components/ui/Text'
+import { GradientText } from 'components/ui/Text'
 import Arrow from 'icons/Arrow'
 import classnames, {
   alignItems,
@@ -18,13 +18,13 @@ const wrapper = classnames(
 
 export default function () {
   return (
-    <LinkText internal url="/">
+    <a href={'/'}>
       <div className={wrapper} href="/">
         <div className={width('w-2')}>
           <Arrow horizontal reversed pulseDisabled />
         </div>
         <GradientText>Back</GradientText>
       </div>
-    </LinkText>
+    </a>
   )
 }
