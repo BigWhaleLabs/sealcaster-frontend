@@ -53,6 +53,12 @@ const positionWrapper = classnames(
   gap('gap-y-1')
 )
 
+const smallSealWithText = classnames(
+  display('flex'),
+  gap('gap-x-1'),
+  alignItems('items-start')
+)
+
 const headerTextWrapper = (show: boolean) =>
   classnames(
     display('flex'),
@@ -139,15 +145,19 @@ export default function ({
         </div>
         <div className={positionWrapper}>
           <div className={headerTextWrapper(show)}>
-            <div className={smallInfoSealWrapper}>
-              <SmallInfoSeal />
+            <div className={smallSealWithText}>
+              <div className={smallInfoSealWrapper}>
+                <SmallInfoSeal />
+              </div>
+              <AccentText color="text-formal-accent" large bold>
+                {showAttention && (
+                  <span className={textColor('text-secondary')}>
+                    Attention:{' '}
+                  </span>
+                )}
+                {headerText}
+              </AccentText>
             </div>
-            <AccentText color="text-formal-accent" large bold>
-              {showAttention && (
-                <span className={textColor('text-secondary')}>Attention: </span>
-              )}
-              {headerText}
-            </AccentText>
             <Button
               center
               type="tertiary"
