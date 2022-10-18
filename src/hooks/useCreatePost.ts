@@ -12,10 +12,14 @@ import walletStore from 'stores/WalletStore'
 
 export default function (threadId: number, replyToId?: string) {
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<unknown>()
+  const [error, setError] = useState('')
   const [text, setText] = useState('')
 
+  const burnerGenerationError =
+    'An error occurred while creating the burner wallet, please try again'
+
   async function createPost() {
+    setError('')
     setIsLoading(true)
 
     let currentAccount
@@ -25,22 +29,18 @@ export default function (threadId: number, replyToId?: string) {
     if (privateKey) currentAccount = new Wallet(privateKey).address
     if (account && (await hasFarcasterBadge(account))) currentAccount = account
 
-    setError(null)
-
     try {
       if (!currentAccount) {
         if (!account) await walletStore.connect(true)
         if (!walletStore.account) throw 'Please, connect the wallet'
         await BurnerWalletStore.generateBurnerWallet(walletStore.account)
-        if (!BurnerWalletStore.privateKey)
-          throw 'Failed to generate burner wallet'
+        if (!BurnerWalletStore.privateKey) throw burnerGenerationError
         currentAccount = new Wallet(BurnerWalletStore.privateKey).address
         walletStore.exit()
         BurnerInteractionStore.interactionClosed = false
       }
 
-      if (!currentAccount)
-        throw 'An error occurred while creating the burner wallet'
+      if (!currentAccount) throw burnerGenerationError
 
       if (PostIdsStatuses.lastUserPost)
         delete PostIdsStatuses.lastUserPost[currentAccount]

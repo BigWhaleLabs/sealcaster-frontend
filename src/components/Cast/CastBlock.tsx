@@ -38,7 +38,7 @@ export default function ({
         onTextChange={setText}
         maxLength={maxLength}
       />
-      {isLoading ? (
+      {isLoading || error ? (
         <VerifyWallet
           status={status}
           text={
@@ -46,6 +46,7 @@ export default function ({
               ? 'Hang tight! We’re casting now.'
               : 'We need to verify that you are indeed a Farcaster user. Please connect the wallet you have connected to Farcaster to attest your identity. Don’t worry, we will not use this wallet to post or to point back to you in any way.'
           }
+          error={error}
         />
       ) : (
         <TextareaInfo
