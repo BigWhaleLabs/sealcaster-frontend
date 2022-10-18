@@ -17,6 +17,7 @@ import Status from 'components/BlockchainList/Status'
 import ThreadPart from 'components/BlockchainList/ThreadPart'
 import classnames, {
   alignItems,
+  cursor,
   display,
   flexDirection,
   flexWrap,
@@ -28,7 +29,8 @@ import classnames, {
 const container = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  space('space-y-4')
+  space('space-y-4'),
+  cursor('cursor-pointer')
 )
 const postBottom = classnames(
   display('flex'),
