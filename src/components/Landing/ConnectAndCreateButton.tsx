@@ -1,4 +1,3 @@
-import { handleError } from '@big-whale-labs/frontend-utils'
 import BurnerInteractionStore from 'stores/BurnerInteractionStore'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import Button from 'components/ui/Button'
@@ -12,7 +11,7 @@ export default function ({
   onCreateBurner,
 }: {
   loading: boolean
-  onError: (error: string) => void
+  onError: (error: Error | string) => void
   onLoading: (loading: boolean) => void
   onCreateBurner: () => void
 }) {
@@ -39,13 +38,8 @@ export default function ({
       }
       onError(
         typeof errorMessage === 'string'
-          ? errorMessage
-          : 'We could not match the username with the wallet you have connected. Please review them and try again.'
-      )
-      handleError(
-        typeof errorMessage === 'string'
           ? new Error(errorMessage)
-          : errorMessage
+          : 'We could not match the username with the wallet you have connected. Please review them and try again.'
       )
     } finally {
       onLoading(false)
