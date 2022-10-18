@@ -27,6 +27,7 @@ const Landing = lazy(() => import('pages/Landing'))
 const pageContainer = classnames(
   display('flex'),
   flexDirection('flex-col'),
+  overflow('overflow-x-hidden'),
   minHeight('min-h-screen')
 )
 const bodyContainer = (marginTop?: boolean) =>
@@ -37,7 +38,6 @@ const bodyContainer = (marginTop?: boolean) =>
     width('body:w-body'),
     margin('mx-4', 'body:mx-auto', { 'mt-auto': marginTop })
   )
-const sliderWrapper = classnames(overflow('overflow-x-hidden'), width('w-full'))
 
 export default function () {
   const [location] = useLocation()
@@ -47,14 +47,12 @@ export default function () {
 
   return (
     <Router>
+      <Navbar />
       <div className={pageContainer}>
-        <Navbar />
         {location === '/' && (
-          <div className={sliderWrapper}>
-            <SliderTicker
-              sentences={['spill your tea', 'snatch your burner wallet ']}
-            />
-          </div>
+          <SliderTicker
+            sentences={['spill your tea', 'snatch your burner wallet ']}
+          />
         )}
         <div className={bodyContainer(is404)}>
           <div className={width('w-full')}>
