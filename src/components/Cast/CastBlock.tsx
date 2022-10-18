@@ -7,7 +7,7 @@ import TextArea from 'components/ui/TextArea'
 import TextFormStore from 'stores/TextFormStore'
 import TextareaInfo from 'components/Cast/TextareaInfo'
 import VerifyWallet from 'components/Cast/VerifyWallet'
-import useCreatePost from 'hooks/useCreatePost'
+import createPost from 'helpers/createPost'
 
 export default function ({
   placeHolder = 'Write something here...',
@@ -22,11 +22,10 @@ export default function ({
   leftBlock?: JSX.Element | string
   buttonText?: string
 }) {
+  const { text, waitBurner, loading, error } = useSnapshot(TextFormStore, {
+    sync: true,
+  })
   const { status } = useSnapshot(BurnerWalletStore)
-  const { createPost, loading, error, text, waitBurner } = useCreatePost(
-    threadId,
-    replyToId
-  )
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
 
@@ -43,7 +42,9 @@ export default function ({
       />
       {waitBurner ? (
         <VerifyWallet
-          onCreateBurner={createPost}
+          onCreateBurner={() => {
+            void createPost(text, threadId, replyToId)
+          }}
           status={status}
           text={
             BurnerWalletStore.status === 'Posting cast'
@@ -54,7 +55,9 @@ export default function ({
       ) : (
         <TextareaInfo
           loading={loading}
-          onButtonClick={createPost}
+          onButtonClick={() => {
+            void createPost(text, threadId, replyToId)
+          }}
           disabled={!text}
           error={errorMessage}
           leftBlock={leftBlock}
