@@ -31,6 +31,9 @@ export default async function ({
   if (privateKey) currentAccount = new Wallet(privateKey).address
   if (account && (await hasFarcasterBadge(account))) currentAccount = account
 
+  const burnerWalletError =
+    'An error occurred while creating the burner wallet, please try again'
+
   try {
     if (!currentAccount) {
       if (!account && askReconnect) account = await walletStore.connect(true)
@@ -39,15 +42,13 @@ export default async function ({
       const newPrivateKey = await BurnerWalletStore.generateBurnerWallet(
         account
       )
-      if (!newPrivateKey)
-        throw 'An error occurred while creating the burner wallet, please try again'
+      if (!newPrivateKey) throw burnerWalletError
       currentAccount = new Wallet(newPrivateKey).address
       walletStore.exit()
       BurnerInteractionStore.interactionClosed = false
     }
 
-    if (!currentAccount)
-      throw 'An error ocurred while using your burner wallet, please try again'
+    if (!currentAccount) throw burnerWalletError
 
     if (PostIdsStatuses.lastUserPost)
       delete PostIdsStatuses.lastUserPost[currentAccount]
