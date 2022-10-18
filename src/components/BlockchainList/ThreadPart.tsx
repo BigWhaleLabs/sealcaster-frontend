@@ -5,7 +5,7 @@ import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
 import classNamesToString from 'helpers/classNamesToString'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
-import useCast from 'hooks/useCast'
+import useMerkleRoot from 'hooks/useMerkleRoot'
 import useReplies from 'hooks/useReplies'
 
 const wrapper = classNamesToString(
@@ -30,7 +30,6 @@ function ThreadPart({
 }) {
   const replies = useReplies({
     threadId,
-    threadMerkleRoot,
     replyToId: threadMerkleRoot,
   })
 
@@ -54,7 +53,6 @@ function ThreadPart({
                 castId={castId}
                 postId={postId}
                 threadId={threadId}
-                threadMerkleRoot={threadMerkleRoot}
                 canReply={canReply}
                 hideReplies
               />
@@ -64,7 +62,6 @@ function ThreadPart({
               castId={castId}
               postId={postId}
               threadId={threadId}
-              threadMerkleRoot={threadMerkleRoot}
               canReply={canReply}
             />
           )
@@ -97,9 +94,9 @@ export default function ({
   owner: string
   canReply?: boolean
 }) {
-  const { cast } = useCast(postId)
+  const threadMerkleRoot = useMerkleRoot(postId)
 
-  if (!cast || !cast?.merkleRoot) return null
+  if (!threadMerkleRoot) return null
 
   return (
     <ThreadPart
@@ -108,7 +105,7 @@ export default function ({
       postId={postId}
       limitThread={limitThread}
       canReply={canReply}
-      threadMerkleRoot={cast.merkleRoot}
+      threadMerkleRoot={threadMerkleRoot}
     />
   )
 }

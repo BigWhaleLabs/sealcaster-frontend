@@ -1,23 +1,25 @@
 import { Cast } from 'models/Cast'
 import { proxy } from 'valtio'
-import fetchThreadById from 'helpers/farcaster'
+import fetchThreadByPostId from 'helpers/farcaster'
 import postIdsStatuses from 'stores/PostIdsStatuses'
 
 const farcasterStore = proxy<{
   casts: { [merkleRoot: string]: Promise<Cast> }
-  threads: { [threadId: string]: Promise<string[]> }
+  threads: { [postId: number]: Promise<string[]> }
 }>({
   casts: {},
   threads: {},
 })
 
-export function fetchFarcasterThread(threadId: string) {
-  if (typeof farcasterStore.threads[threadId] !== 'undefined') return
-  const request = fetchThreadById(threadId)
-  farcasterStore.threads[threadId] = request.then((casts) =>
+export function fetchFarcasterThread(postId: number) {
+  if (typeof farcasterStore.threads[postId] !== 'undefined') return
+  const request = fetchThreadByPostId(postId)
+  farcasterStore.threads[postId] = request.then(({ casts }) =>
     casts.map((cast) => cast.merkleRoot)
   )
-  void request.then((casts) => {
+  void request.then(({ casts, merkleRoot }) => {
+    if (merkleRoot)
+      postIdsStatuses.idToMerkleRoot[postId] = Promise.resolve(merkleRoot)
     for (const cast of casts) {
       farcasterStore.casts[cast.merkleRoot] = Promise.resolve(cast)
       if (cast.postId) {

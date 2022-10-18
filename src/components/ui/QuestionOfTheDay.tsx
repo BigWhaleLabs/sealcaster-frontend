@@ -15,7 +15,7 @@ import classnames, {
   position,
   space,
 } from 'classnames/tailwind'
-import useCast from 'hooks/useCast'
+import useMerkleRoot from 'hooks/useMerkleRoot'
 import usePost from 'hooks/usePost'
 
 const postInfo = classnames(
@@ -28,9 +28,9 @@ const postInfo = classnames(
 
 function QuestionOfDaySuspended({ id }: { id: number }) {
   const blockchainPost = usePost(id)
-  const { cast } = useCast(id)
+  const threadMerkleRoot = useMerkleRoot(id)
 
-  if (!blockchainPost) return null
+  if (!threadMerkleRoot || !blockchainPost) return null
 
   const { post, sender } = blockchainPost
 
@@ -48,7 +48,7 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
         <StickLabel />
         <Replies
           threadId={id}
-          replyToId={cast?.merkleRoot}
+          replyToId={threadMerkleRoot}
           placeholder="Answer today’s question..."
           canReply
         />
