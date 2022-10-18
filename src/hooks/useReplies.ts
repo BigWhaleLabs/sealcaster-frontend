@@ -3,15 +3,13 @@ import useThread from 'hooks/useThread'
 
 export default function ({
   threadId,
-  threadMerkleRoot,
   replyToId,
 }: {
   threadId: number
-  threadMerkleRoot?: string
   replyToId: string
 }): { castId?: string; postId?: number; timestamp: number }[] {
   const blockchainThread = useThread(threadId)
-  const farcasterThread = useFarcasterThread(threadMerkleRoot)
+  const farcasterThread = useFarcasterThread(threadId)
 
   const farcasterThreadPostIds = farcasterThread
     ? new Set(

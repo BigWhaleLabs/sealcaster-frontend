@@ -83,14 +83,12 @@ const Replies = ({
   castId,
   postId,
   threadId,
-  threadMerkleRoot,
   canReply,
   hideReplies,
 }: {
   castId?: string
   postId?: number
   threadId: number
-  threadMerkleRoot: string
   canReply?: boolean
   hideReplies?: boolean
 }) => {
@@ -128,7 +126,6 @@ const Replies = ({
 
   return (
     <CommentWithReplies
-      threadMerkleRoot={threadMerkleRoot}
       id={id}
       content={content}
       replier={replier}
@@ -145,7 +142,6 @@ function SuspensedReplies(props: {
   castId?: string
   postId?: number
   threadId: number
-  threadMerkleRoot: string
   canReply?: boolean
   hideReplies?: boolean
 }) {
@@ -164,16 +160,13 @@ export function CommentWithReplies({
   timestamp,
   threadId,
   replyToId,
-  threadMerkleRoot,
   canReply,
 }: Comment & {
-  threadMerkleRoot: string
   replyToId: string
   canReply?: boolean
 }) {
   const replies = useReplies({
     threadId,
-    threadMerkleRoot,
     replyToId,
   })
 
@@ -200,7 +193,6 @@ export function CommentWithReplies({
                 castId={castId}
                 postId={postId}
                 threadId={threadId}
-                threadMerkleRoot={threadMerkleRoot}
                 canReply={canReply}
               />
             ))}
