@@ -22,8 +22,10 @@ export default function ({
   buttonText?: string
 }) {
   const { status } = useSnapshot(BurnerWalletStore)
-  const { createPost, isLoading, error, text, setText, waitBurner } =
-    useCreatePost(threadId, replyToId)
+  const { createPost, isLoading, error, text, setText } = useCreatePost(
+    threadId,
+    replyToId
+  )
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
 
@@ -31,14 +33,13 @@ export default function ({
     <div className={space('md:space-y-4', 'space-y-8')}>
       <TextArea
         text={text}
-        disabled={isLoading || waitBurner}
+        disabled={isLoading}
         placeholder={placeHolder}
         onTextChange={setText}
         maxLength={maxLength}
       />
-      {waitBurner ? (
+      {isLoading ? (
         <VerifyWallet
-          onCreateBurner={createPost}
           status={status}
           text={
             BurnerWalletStore.status === 'Posting cast'

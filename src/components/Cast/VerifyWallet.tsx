@@ -1,26 +1,16 @@
 import { BodyText, ErrorText } from 'components/ui/Text'
-import { useSnapshot } from 'valtio'
-import { useState } from 'preact/hooks'
-import BurnerWalletStore from 'stores/BurnerWalletStore'
-import ConnectAndCreateButton from 'components/Landing/ConnectAndCreateButton'
 import LoadingBlock from 'components/ui/LoadingBlock'
 import SealSad from 'icons/SealSad'
 
 export default function ({
-  onCreateBurner,
   text,
   status,
+  error,
 }: {
   status: string
-  onCreateBurner: () => void
   text: string
+  error?: string
 }) {
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const { privateKey } = useSnapshot(BurnerWalletStore)
-
-  setError('error')
-
   return (
     <LoadingBlock
       loadingText={status || 'Preparing cast'}
@@ -39,21 +29,7 @@ export default function ({
           </>
         )
       }
-      subtitle={
-        <>
-          <BodyText center>{text}</BodyText>
-          {!loading && !privateKey && (
-            <div>
-              <ConnectAndCreateButton
-                onCreateBurner={onCreateBurner}
-                loading={loading}
-                onError={setError}
-                onLoading={setLoading}
-              />
-            </div>
-          )}
-        </>
-      }
+      subtitle={<BodyText center>{text}</BodyText>}
     />
   )
 }
