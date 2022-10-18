@@ -9,8 +9,10 @@ import PostStore from 'stores/PostStore'
 import ThreadNotFound from 'components/Thread/ThreadNotFound'
 import useBadgeAccount from 'hooks/useBadgeAccount'
 import usePost from 'hooks/usePost'
+import useScrollToTop from 'hooks/useScrollToTop'
 
 const SuspendedThread = () => {
+  useScrollToTop()
   const [location] = useLocation()
   const { questionOfTheDayIds } = useSnapshot(PostStore)
   const account = useBadgeAccount()
