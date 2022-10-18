@@ -58,46 +58,43 @@ export default function ({
 
   return (
     <>
+      {!!error && <ErrorMessage small text={error} />}
       <div className={textAreaInfoWrapper(!!leftBlock)}>
         {leftBlock ? (
           leftBlock
         ) : (
-          <>
-            <AccentText extraSmall color="text-accent">
-              {account ? (
-                <span className={fontFamily('font-primary')}>
-                  Posting from: {truncateMiddleIfNeeded(account, 12)}
-                </span>
-              ) : (
-                <span
-                  className={hintWrapper}
-                  onClick={() => setExpanded(!expanded)}
-                >
-                  How is it done anonymously?{' '}
-                  <div className={width('w-4')}>
-                    <Arrow pulseDisabled open={expanded} />
-                  </div>
-                </span>
-              )}
-            </AccentText>
-          </>
+          <AccentText extraSmall color="text-accent">
+            {account ? (
+              <span className={fontFamily('font-primary')}>
+                Posting from: {truncateMiddleIfNeeded(account, 12)}
+              </span>
+            ) : (
+              <span
+                className={hintWrapper}
+                onClick={() => setExpanded(!expanded)}
+              >
+                How is it done anonymously?{' '}
+                <div className={width('w-4')}>
+                  <Arrow pulseDisabled open={expanded} />
+                </div>
+              </span>
+            )}
+          </AccentText>
         )}
 
-        <>
-          <Button
-            loading={loading}
-            center
-            small
-            fullWidthOnMobile
-            type="primary"
-            disabled={disabled}
-            onClick={onButtonClick}
-          >
-            {buttonText ? buttonText : 'Cast anonymously'}
-          </Button>
-          {!!error && <ErrorMessage small centered text={error} />}
-        </>
+        <Button
+          loading={loading}
+          center
+          small
+          fullWidthOnMobile
+          type="primary"
+          disabled={disabled}
+          onClick={onButtonClick}
+        >
+          {buttonText ? buttonText : 'Cast anonymously'}
+        </Button>
       </div>
+
       {expanded && <HowItWorks />}
     </>
   )
