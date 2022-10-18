@@ -32,14 +32,17 @@ const loadingBlock = classnames(
 export default function ({
   loadingText = 'Loading',
   subtitle = 'Hang tight! We’re fetching the content.',
+  errorBlock,
   completed,
 }: {
   loadingText?: string
   subtitle?: string | JSX.Element
+  errorBlock?: string | JSX.Element
   completed?: boolean
 }) {
   return (
     <div className={castLoading}>
+      {errorBlock}
       <AccentText color="text-tertiary" small>
         <span className={loadingBlock}>
           {loadingText} {completed ? <Checkmark /> : <Spinner />}

@@ -1,11 +1,10 @@
-import { BodyText } from 'components/ui/Text'
-import { parseErrorText } from '@big-whale-labs/frontend-utils'
+import { BodyText, ErrorText } from 'components/ui/Text'
 import { useSnapshot } from 'valtio'
 import { useState } from 'preact/hooks'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import ConnectAndCreateButton from 'components/Landing/ConnectAndCreateButton'
-import ErrorMessage from 'components/ui/ErrorMessage'
 import LoadingBlock from 'components/ui/LoadingBlock'
+import SealSad from 'icons/SealSad'
 
 export default function ({
   onCreateBurner,
@@ -20,14 +19,28 @@ export default function ({
   const [loading, setLoading] = useState(false)
   const { privateKey } = useSnapshot(BurnerWalletStore)
 
+  setError('error')
+
   return (
     <LoadingBlock
       loadingText={status || 'Preparing cast'}
+      errorBlock={
+        error && (
+          <>
+            <SealSad
+              triangleColor="stroke-error"
+              sealColor="stroke-accent"
+              noMobile
+            />
+            <ErrorText centered>
+              Verification failed. Please double check that the wallet you’re
+              connecting is the same as the one you have connected to Farcaster.
+            </ErrorText>
+          </>
+        )
+      }
       subtitle={
         <>
-          {error && (
-            <ErrorMessage withExclamation text={parseErrorText(error)} />
-          )}
           <BodyText center>{text}</BodyText>
           {!loading && !privateKey && (
             <div>
