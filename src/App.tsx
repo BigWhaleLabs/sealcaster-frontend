@@ -47,8 +47,8 @@ export default function () {
 
   return (
     <Router>
+      <Navbar />
       <div className={pageContainer}>
-        <Navbar />
         {location === '/' && (
           <SliderTicker
             sentences={['spill your tea', 'snatch your burner wallet ']}
