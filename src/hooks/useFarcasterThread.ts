@@ -1,15 +1,15 @@
 import { useSnapshot } from 'valtio'
 import farcasterStore, { fetchFarcasterThread } from 'stores/FarcasterStore'
 
-export default function (threadMerkleRoot?: string) {
+export default function (postId: number) {
   const { threads, casts } = useSnapshot(farcasterStore)
 
-  if (!threadMerkleRoot) return []
+  if (!postId) return []
 
-  const thread = threads[threadMerkleRoot]
+  const thread = threads[postId]
 
   if (!thread) {
-    fetchFarcasterThread(threadMerkleRoot)
+    fetchFarcasterThread(postId)
     return null
   }
 

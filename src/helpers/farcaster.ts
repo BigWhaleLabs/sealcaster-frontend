@@ -4,9 +4,18 @@ import env from 'helpers/env'
 
 const baseURL = `${env.VITE_POSTER_URL}`
 
-export default async function fetchThreadById(threadId: string) {
-  const { data } = await axios.get<Cast[]>(
-    `${baseURL}/farcaster/${env.VITE_SC_FARCASTER_POSTS_CONTRACT_ADDRESS}/${threadId}`
-  )
-  return data
+type FarcasterResponse = { merkleRoot?: string; casts: Cast[] }
+
+export default async function fetchThreadByPostId(postId: number) {
+  try {
+    const { data } = await axios.get<FarcasterResponse>(
+      `${baseURL}/farcaster/${env.VITE_SC_FARCASTER_POSTS_CONTRACT_ADDRESS}/${postId}`
+    )
+
+    return data
+  } catch (e) {
+    console.error(e)
+  }
+
+  return { casts: [] } as FarcasterResponse
 }
