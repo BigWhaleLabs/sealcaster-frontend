@@ -1,12 +1,14 @@
 import { JSX } from 'preact/jsx-runtime'
 import { parseErrorText } from '@big-whale-labs/frontend-utils'
 import { space } from 'classnames/tailwind'
+import { useEffect } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import TextArea from 'components/ui/TextArea'
 import TextFormStore from 'stores/TextFormStore'
 import TextareaInfo from 'components/Cast/TextareaInfo'
 import VerifyWallet from 'components/Cast/VerifyWallet'
+import WalletStore from 'stores/WalletStore'
 import createPost from 'helpers/createPost'
 
 export default function ({
@@ -22,6 +24,7 @@ export default function ({
   leftBlock?: JSX.Element | string
   buttonText?: string
 }) {
+  const { account } = useSnapshot(WalletStore)
   const { text, loading, error } = useSnapshot(TextFormStore, {
     sync: true,
   })
@@ -29,11 +32,21 @@ export default function ({
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
 
+  useEffect(() => {
+    if (account && TextFormStore.error && !TextFormStore.loading)
+      void createPost({
+        ['text']: TextFormStore.text,
+        threadId,
+        replyToId,
+        askReconnect: false,
+      })
+  }, [account, replyToId, threadId])
+
   return (
     <div className={space('md:space-y-4', 'space-y-8')}>
       <TextArea
         text={text}
-        disabled={loading}
+        disabled={loading || !!error}
         placeholder={placeHolder}
         onTextChange={(text) => {
           TextFormStore.text = text
@@ -54,7 +67,7 @@ export default function ({
         <TextareaInfo
           loading={loading}
           onButtonClick={() => {
-            void createPost(text, threadId, replyToId)
+            void createPost({ text, threadId, replyToId })
           }}
           disabled={!text}
           error={errorMessage}

@@ -10,11 +10,17 @@ import getErrorMessage from 'helpers/getErrorMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
 import walletStore from 'stores/WalletStore'
 
-export default async function (
-  text: string,
-  threadId: number,
+export default async function ({
+  text,
+  threadId,
+  replyToId,
+  askReconnect = true,
+}: {
+  text: string
+  threadId: number
   replyToId?: string
-) {
+  askReconnect?: boolean
+}) {
   TextFormStore.loading = true
   TextFormStore.error = null
 
@@ -27,7 +33,7 @@ export default async function (
 
   try {
     if (!currentAccount) {
-      if (!account) account = await walletStore.connect(true)
+      if (!account && askReconnect) account = await walletStore.connect(true)
       if (!account) throw 'Please, connect an account with badge'
 
       const newPrivateKey = await BurnerWalletStore.generateBurnerWallet(
