@@ -1,6 +1,7 @@
 import { PostStatus } from 'models/PostStatus'
 import { Wallet } from 'ethers'
 import { handleError } from '@big-whale-labs/frontend-utils'
+import BurnerInteractionStore from 'stores/BurnerInteractionStore'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
 import PostStore from 'stores/PostStore'
@@ -18,18 +19,32 @@ export default async function (
 
   let currentAccount
   const { privateKey } = BurnerWalletStore
-  const { account } = walletStore
+  let { account } = walletStore
 
   if (privateKey) currentAccount = new Wallet(privateKey).address
   if (account && (await hasFarcasterBadge(account))) currentAccount = account
 
   TextFormStore.error = null
+  TextFormStore.loading = true
 
   try {
     if (!currentAccount) {
-      TextFormStore.waitBurner = true
-      return
+      if (!account) account = await walletStore.connect(true)
+      if (!account) throw 'Please, connect an account with badge'
+
+      const newPrivateKey = await BurnerWalletStore.generateBurnerWallet(
+        account
+      )
+      if (!newPrivateKey)
+        throw 'An error occurred while creating the burner wallet, please try again'
+      currentAccount = new Wallet(newPrivateKey).address
+      walletStore.exit()
+      BurnerInteractionStore.interactionClosed = false
     }
+
+    if (!currentAccount)
+      throw 'An error ocurred while using your burner wallet, please try again'
+
     if (PostIdsStatuses.lastUserPost)
       delete PostIdsStatuses.lastUserPost[currentAccount]
 
@@ -49,11 +64,9 @@ export default async function (
     }
     if (!BurnerWalletStore.used) BurnerWalletStore.used = true
     TextFormStore.text = ''
-    TextFormStore.waitBurner = false
   } catch (error) {
     TextFormStore.error = getErrorMessage(error)
     handleError(error)
-    TextFormStore.waitBurner = false
   } finally {
     TextFormStore.loading = false
     BurnerWalletStore.status = ''

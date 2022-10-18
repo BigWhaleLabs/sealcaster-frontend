@@ -22,7 +22,7 @@ export default function ({
   leftBlock?: JSX.Element | string
   buttonText?: string
 }) {
-  const { text, waitBurner, loading, error } = useSnapshot(TextFormStore, {
+  const { text, loading, error } = useSnapshot(TextFormStore, {
     sync: true,
   })
   const { status } = useSnapshot(BurnerWalletStore)
@@ -33,24 +33,22 @@ export default function ({
     <div className={space('md:space-y-4', 'space-y-8')}>
       <TextArea
         text={text}
-        disabled={loading || waitBurner}
+        disabled={loading}
         placeholder={placeHolder}
         onTextChange={(text) => {
           TextFormStore.text = text
         }}
         maxLength={maxLength}
       />
-      {waitBurner ? (
+      {loading || error ? (
         <VerifyWallet
-          onCreateBurner={() => {
-            void createPost(text, threadId, replyToId)
-          }}
           status={status}
           text={
             BurnerWalletStore.status === 'Posting cast'
               ? 'Hang tight! We’re casting now.'
               : 'We need to verify that you are indeed a Farcaster user. Please connect the wallet you have connected to Farcaster to attest your identity. Don’t worry, we will not use this wallet to post or to point back to you in any way.'
           }
+          error={error}
         />
       ) : (
         <TextareaInfo
