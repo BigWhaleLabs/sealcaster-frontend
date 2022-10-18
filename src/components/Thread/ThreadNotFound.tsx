@@ -1,4 +1,5 @@
 import { BodyText } from 'components/ui/Text'
+import { Link } from 'wouter'
 import BareCard from 'components/BareCard'
 import Button from 'components/ui/Button'
 import SadSealColorful from 'icons/SadSealColorful'
@@ -38,11 +39,11 @@ export default function () {
         We were unable to locate the thread you were looking for. Please check
         retry your link or check out the latest.
       </BodyText>
-      <a href="/">
+      <Link to="/">
         <Button type="primary" small center>
           View recent casts
         </Button>
-      </a>
+      </Link>
     </BareCard>
   )
 }

@@ -4,6 +4,7 @@ import {
   QuestionOfDayText,
   StatusText,
 } from 'components/ui/Text'
+import { Link } from 'wouter'
 import { LoadingReplies } from 'components/Thread/LoadingPost'
 import { Suspense } from 'preact/compat'
 import { displayFrom } from 'helpers/visibilityClassnames'
@@ -76,7 +77,7 @@ export default function ({
   return (
     <div data-anchor={`#id=${blockchainId}`}>
       <Card hoverEffect={clickablePost}>
-        <a href={clickablePost ? `/thread/${blockchainId}` : undefined}>
+        <Link to={`/thread/${blockchainId}`}>
           <div className={container}>
             {isQuestionOfTheDay && (
               <QuestionOfDayText>Question of the day:</QuestionOfDayText>
@@ -101,7 +102,7 @@ export default function ({
               </BodyText>
             </div>
           </div>
-        </a>
+        </Link>
         <Suspense fallback={<LoadingReplies />}>
           <ThreadPart
             owner={sender}

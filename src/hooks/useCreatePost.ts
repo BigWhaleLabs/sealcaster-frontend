@@ -1,22 +1,20 @@
 import { PostStatus } from 'models/PostStatus'
 import { Wallet } from 'ethers'
 import { handleError } from '@big-whale-labs/frontend-utils'
-import { useState } from 'preact/hooks'
+import { useSnapshot } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
 import PostStore from 'stores/PostStore'
+import TextFormStore from 'stores/TextFormStore'
 import getErrorMessage from 'helpers/getErrorMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
 import walletStore from 'stores/WalletStore'
 
 export default function (threadId: number, replyToId?: string) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<unknown>()
-  const [text, setText] = useState('')
-  const [waitBurner, setWaitBurner] = useState(false)
+  const { text, waitBurner, loading, error } = useSnapshot(TextFormStore)
 
   async function createPost() {
-    setIsLoading(true)
+    TextFormStore.loading = true
 
     let currentAccount
     const { privateKey } = BurnerWalletStore
@@ -25,10 +23,10 @@ export default function (threadId: number, replyToId?: string) {
     if (privateKey) currentAccount = new Wallet(privateKey).address
     if (account && (await hasFarcasterBadge(account))) currentAccount = account
 
-    setError(null)
+    TextFormStore.error = null
 
     try {
-      if (!currentAccount) return setWaitBurner(true)
+      if (!currentAccount) return (TextFormStore.waitBurner = true)
       if (PostIdsStatuses.lastUserPost)
         delete PostIdsStatuses.lastUserPost[currentAccount]
 
@@ -47,24 +45,23 @@ export default function (threadId: number, replyToId?: string) {
         }
       }
       if (!BurnerWalletStore.used) BurnerWalletStore.used = true
-      setText('')
-      setWaitBurner(false)
+      TextFormStore.text = ''
+      TextFormStore.waitBurner = false
     } catch (error) {
-      setError(getErrorMessage(error))
+      TextFormStore.error = getErrorMessage(error)
       handleError(error)
-      setWaitBurner(false)
+      TextFormStore.waitBurner = false
     } finally {
-      setIsLoading(false)
+      TextFormStore.loading = false
       BurnerWalletStore.status = ''
     }
   }
 
   return {
     createPost,
-    isLoading,
+    loading,
     error,
     waitBurner,
     text,
-    setText,
   }
 }

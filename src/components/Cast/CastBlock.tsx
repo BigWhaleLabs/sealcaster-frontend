@@ -4,6 +4,7 @@ import { space } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import TextArea from 'components/ui/TextArea'
+import TextFormStore from 'stores/TextFormStore'
 import TextareaInfo from 'components/Cast/TextareaInfo'
 import VerifyWallet from 'components/Cast/VerifyWallet'
 import useCreatePost from 'hooks/useCreatePost'
@@ -22,8 +23,10 @@ export default function ({
   buttonText?: string
 }) {
   const { status } = useSnapshot(BurnerWalletStore)
-  const { createPost, isLoading, error, text, setText, waitBurner } =
-    useCreatePost(threadId, replyToId)
+  const { createPost, loading, error, text, waitBurner } = useCreatePost(
+    threadId,
+    replyToId
+  )
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
 
@@ -31,9 +34,11 @@ export default function ({
     <div className={space('md:space-y-4', 'space-y-8')}>
       <TextArea
         text={text}
-        disabled={isLoading || waitBurner}
+        disabled={loading || waitBurner}
         placeholder={placeHolder}
-        onTextChange={setText}
+        onTextChange={(text) => {
+          TextFormStore.text = text
+        }}
         maxLength={maxLength}
       />
       {waitBurner ? (
@@ -48,7 +53,7 @@ export default function ({
         />
       ) : (
         <TextareaInfo
-          loading={isLoading}
+          loading={loading}
           onButtonClick={createPost}
           disabled={!text}
           error={errorMessage}
