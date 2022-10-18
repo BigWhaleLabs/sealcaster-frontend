@@ -38,6 +38,7 @@ export function PostListSuspended() {
 
   const postsLength = posts.length
 
+  if (!thread) return <LoadingList text="Fetching posts..." />
   if (postsLength === 0) return <NoPosts />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
 
