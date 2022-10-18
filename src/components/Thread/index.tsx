@@ -12,10 +12,9 @@ import usePost from 'hooks/usePost'
 
 const SuspendedThread = () => {
   const [location] = useLocation()
-  const { questionOfTheDayIds } = useSnapshot(PostStore)
-  const account = useBadgeAccount()
   const blockchainId = Number(location.split('/')[2])
-  const { idToPostTx } = useSnapshot(PostStore)
+  const account = useBadgeAccount()
+  const { questionOfTheDayIds, idToPostTx } = useSnapshot(PostStore)
   const postData = usePost(blockchainId)
 
   if (!postData) return <ThreadNotFound />

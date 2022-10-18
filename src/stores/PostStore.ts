@@ -86,11 +86,12 @@ export async function fetchPost(postId: number) {
     Number(await farcasterContract.currentPostId()) < postId
   )
     return
+
+  await updateStatuses([postId])
   // Numbering in .posts() starts from zero
   PostStore.posts[postId] = farcasterContract
     .posts(postId - 1)
     .then(safeTransformPostOutput)
-  void updateStatuses([postId])
 }
 
 farcasterContract.on(
@@ -126,7 +127,5 @@ farcasterContract.on(
     )
   }
 )
-
-void fetchThread(0)
 
 export default PostStore
