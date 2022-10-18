@@ -16,6 +16,7 @@ export default async function (
   replyToId?: string
 ) {
   TextFormStore.loading = true
+  TextFormStore.error = null
 
   let currentAccount
   const { privateKey } = BurnerWalletStore
@@ -23,9 +24,6 @@ export default async function (
 
   if (privateKey) currentAccount = new Wallet(privateKey).address
   if (account && (await hasFarcasterBadge(account))) currentAccount = account
-
-  TextFormStore.error = null
-  TextFormStore.loading = true
 
   try {
     if (!currentAccount) {
