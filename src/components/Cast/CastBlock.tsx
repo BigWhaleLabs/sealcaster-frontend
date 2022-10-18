@@ -4,9 +4,10 @@ import { space } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import TextArea from 'components/ui/TextArea'
+import TextFormStore from 'stores/TextFormStore'
 import TextareaInfo from 'components/Cast/TextareaInfo'
 import VerifyWallet from 'components/Cast/VerifyWallet'
-import useCreatePost from 'hooks/useCreatePost'
+import createPost from 'helpers/createPost'
 
 export default function ({
   placeHolder = 'Write something here...',
@@ -21,9 +22,10 @@ export default function ({
   leftBlock?: JSX.Element | string
   buttonText?: string
 }) {
+  const { text, waitBurner, loading, error } = useSnapshot(TextFormStore, {
+    sync: true,
+  })
   const { status } = useSnapshot(BurnerWalletStore)
-  const { createPost, isLoading, error, text, setText, waitBurner } =
-    useCreatePost(threadId, replyToId)
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
 
@@ -31,14 +33,18 @@ export default function ({
     <div className={space('md:space-y-4', 'space-y-8')}>
       <TextArea
         text={text}
-        disabled={isLoading || waitBurner}
+        disabled={loading || waitBurner}
         placeholder={placeHolder}
-        onTextChange={setText}
+        onTextChange={(text) => {
+          TextFormStore.text = text
+        }}
         maxLength={maxLength}
       />
       {waitBurner ? (
         <VerifyWallet
-          onCreateBurner={createPost}
+          onCreateBurner={() => {
+            void createPost(text, threadId, replyToId)
+          }}
           status={status}
           text={
             BurnerWalletStore.status === 'Posting cast'
@@ -48,8 +54,10 @@ export default function ({
         />
       ) : (
         <TextareaInfo
-          loading={isLoading}
-          onButtonClick={createPost}
+          loading={loading}
+          onButtonClick={() => {
+            void createPost(text, threadId, replyToId)
+          }}
           disabled={!text}
           error={errorMessage}
           leftBlock={leftBlock}

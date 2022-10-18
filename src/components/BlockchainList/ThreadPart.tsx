@@ -1,4 +1,5 @@
 import { AccentText } from 'components/ui/Text'
+import { Link } from 'wouter'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
@@ -67,14 +68,14 @@ function ThreadPart({
           )
         )}
         {limitThread && repliesLength > 3 && (
-          <a href={`/thread/${postId}`}>
+          <Link to={`/thread/${postId}`}>
             <BareCard smallPaddings>
               <AccentText color="text-accent" small>
                 + {repliesLength - limitThread}{' '}
                 {repliesLength - limitThread > 1 ? 'replies' : 'reply'}
               </AccentText>
             </BareCard>
-          </a>
+          </Link>
         )}
       </div>
     </>

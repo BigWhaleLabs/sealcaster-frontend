@@ -1,4 +1,5 @@
 import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
+import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import Card from 'components/ui/Card'
@@ -37,14 +38,14 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
   return (
     <div className={position('relative')}>
       <Card hoverEffect>
-        <a className={space('space-y-4')} href={`/thread/${id}`}>
+        <Link className={space('space-y-4')} to={`/thread/${id}`}>
           <QuestionOfDayText>Question of the day:</QuestionOfDayText>
           <HeaderText size="medium">{post}</HeaderText>
           <span className={postInfo}>
             <StatusText>Posted by: </StatusText>
             <Sender sender={sender} />
           </span>
-        </a>
+        </Link>
         <StickLabel />
         <Replies
           threadId={id}
