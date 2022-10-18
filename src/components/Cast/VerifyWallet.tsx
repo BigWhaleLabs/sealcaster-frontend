@@ -16,7 +16,7 @@ export default function ({
   onCreateBurner: () => void
   text: string
 }) {
-  const [error, setError] = useState('')
+  const [error, setError] = useState<Error | string>('')
   const [loading, setLoading] = useState(false)
   const { privateKey } = useSnapshot(BurnerWalletStore)
 
