@@ -47,6 +47,7 @@ function makeComment(post?: PostStructOutput, cast?: Cast) {
       : post?.timestamp.toNumber()
 
     const replier = post?.sender || `@${cast?.body.username}`
+    const replierAddress = post?.derivativeAddress || cast?.body.address
 
     return {
       id,
@@ -54,6 +55,7 @@ function makeComment(post?: PostStructOutput, cast?: Cast) {
       content,
       timestamp,
       replier,
+      replierAddress,
     }
   }
 
@@ -61,6 +63,7 @@ function makeComment(post?: PostStructOutput, cast?: Cast) {
     return {
       id: post.id.toNumber(),
       replier: post.sender,
+      replierAddress: post.derivativeAddress,
       content: post.post,
       timestamp: post.timestamp.toNumber(),
     }
@@ -71,6 +74,7 @@ function makeComment(post?: PostStructOutput, cast?: Cast) {
       id: cast.merkleRoot,
       replyToId: cast.merkleRoot,
       replier: `@${cast.body.username}`,
+      replierAddress: cast.body.address,
       content: cast.body.data.text,
       timestamp: (cast.body.publishedAt / 1000) ^ 0,
     }
@@ -83,14 +87,12 @@ const Replies = ({
   castId,
   postId,
   threadId,
-  threadMerkleRoot,
   canReply,
   hideReplies,
 }: {
   castId?: string
   postId?: number
   threadId: number
-  threadMerkleRoot: string
   canReply?: boolean
   hideReplies?: boolean
 }) => {
@@ -110,7 +112,7 @@ const Replies = ({
     data.replyToId = roots[postId]
   }
 
-  const { id, content, replier, timestamp, replyToId } = data
+  const { id, content, replier, replierAddress, timestamp, replyToId } = data
 
   if (!replyToId || hideReplies) {
     return (
@@ -118,6 +120,7 @@ const Replies = ({
         threadId={threadId}
         content={content}
         replier={replier}
+        replierAddress={replierAddress}
         timestamp={timestamp}
         canReply={canReply}
         replyToId={replyToId}
@@ -128,10 +131,10 @@ const Replies = ({
 
   return (
     <CommentWithReplies
-      threadMerkleRoot={threadMerkleRoot}
       id={id}
       content={content}
       replier={replier}
+      replierAddress={replierAddress}
       threadId={threadId}
       timestamp={timestamp}
       replyToId={replyToId}
@@ -145,7 +148,6 @@ function SuspensedReplies(props: {
   castId?: string
   postId?: number
   threadId: number
-  threadMerkleRoot: string
   canReply?: boolean
   hideReplies?: boolean
 }) {
@@ -160,20 +162,19 @@ export function CommentWithReplies({
   id: rootId,
   content,
   replier,
+  replierAddress,
   repliedTo,
   timestamp,
   threadId,
   replyToId,
-  threadMerkleRoot,
   canReply,
 }: Comment & {
-  threadMerkleRoot: string
   replyToId: string
+  replierAddress: string
   canReply?: boolean
 }) {
   const replies = useReplies({
     threadId,
-    threadMerkleRoot,
     replyToId,
   })
 
@@ -186,11 +187,11 @@ export function CommentWithReplies({
         replyToId={replyToId}
         content={content}
         replier={replier}
+        replierAddress={replierAddress}
         repliedTo={repliedTo}
         timestamp={timestamp}
         canReply={canReply}
       />
-
       {hasReplies && (
         <div className={repliesWithLine}>
           <a className={commentLine} href={`#reply-${rootId}`} />
@@ -200,7 +201,6 @@ export function CommentWithReplies({
                 castId={castId}
                 postId={postId}
                 threadId={threadId}
-                threadMerkleRoot={threadMerkleRoot}
                 canReply={canReply}
               />
             ))}

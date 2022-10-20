@@ -1,4 +1,5 @@
 import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
+import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import Card from 'components/ui/Card'
@@ -15,7 +16,7 @@ import classnames, {
   position,
   space,
 } from 'classnames/tailwind'
-import useCast from 'hooks/useCast'
+import useMerkleRoot from 'hooks/useMerkleRoot'
 import usePost from 'hooks/usePost'
 
 const postInfo = classnames(
@@ -28,27 +29,27 @@ const postInfo = classnames(
 
 function QuestionOfDaySuspended({ id }: { id: number }) {
   const blockchainPost = usePost(id)
-  const { cast } = useCast(id)
+  const threadMerkleRoot = useMerkleRoot(id)
 
-  if (!blockchainPost) return null
+  if (!threadMerkleRoot || !blockchainPost) return null
 
   const { post, sender } = blockchainPost
 
   return (
     <div className={position('relative')}>
       <Card hoverEffect>
-        <a className={space('space-y-4')} href={`/thread/${id}`}>
+        <Link className={space('space-y-4')} to={`/thread/${id}`}>
           <QuestionOfDayText>Question of the day:</QuestionOfDayText>
           <HeaderText size="medium">{post}</HeaderText>
           <span className={postInfo}>
             <StatusText>Posted by: </StatusText>
             <Sender sender={sender} />
           </span>
-        </a>
+        </Link>
         <StickLabel />
         <Replies
           threadId={id}
-          replyToId={cast?.merkleRoot}
+          replyToId={threadMerkleRoot}
           placeholder="Answer today’s question..."
           canReply
         />

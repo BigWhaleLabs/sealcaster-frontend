@@ -1,3 +1,4 @@
+import { BigNumber } from 'ethers'
 import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Result } from 'ethers/lib/utils'
@@ -16,6 +17,7 @@ import walletStore from 'stores/WalletStore'
 
 interface PostStoreType {
   limit: number
+  countPosts: Promise<BigNumber>
   questionOfTheDayIds: Promise<number[]>
   posts: { [postId: number]: Promise<PostStructOutput> }
   threads: { [threadId: number]: Promise<number[]> }
@@ -33,6 +35,7 @@ const limit = 20
 
 const PostStore = proxy<PostStoreType>({
   limit,
+  countPosts: farcasterContract.currentPostId(),
   questionOfTheDayIds: getQuestionOfTheDayIds(farcasterContract),
   threads: {},
   posts: {},
@@ -83,7 +86,7 @@ export async function fetchThread(threadId: number) {
 export async function fetchPost(postId: number) {
   if (
     typeof PostStore.posts[postId] !== 'undefined' ||
-    Number(await farcasterContract.currentPostId()) < postId
+    (await PostStore.countPosts).lt(postId)
   )
     return
 
@@ -105,6 +108,7 @@ farcasterContract.on(
     threadId,
     replyToId
   ) => {
+    PostStore.countPosts = Promise.resolve(id)
     PostStore.posts[id.toNumber()] = Promise.resolve({
       id,
       post,

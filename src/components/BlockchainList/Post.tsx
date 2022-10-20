@@ -4,6 +4,7 @@ import {
   QuestionOfDayText,
   StatusText,
 } from 'components/ui/Text'
+import { Link } from 'wouter'
 import { LoadingReplies } from 'components/Thread/LoadingPost'
 import { Suspense } from 'preact/compat'
 import { displayFrom } from 'helpers/visibilityClassnames'
@@ -16,6 +17,7 @@ import Status from 'components/BlockchainList/Status'
 import ThreadPart from 'components/BlockchainList/ThreadPart'
 import classnames, {
   alignItems,
+  cursor,
   display,
   flexDirection,
   flexWrap,
@@ -27,7 +29,8 @@ import classnames, {
 const container = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  space('space-y-4')
+  space('space-y-4'),
+  cursor('cursor-pointer')
 )
 const postBottom = classnames(
   display('flex'),
@@ -76,7 +79,7 @@ export default function ({
   return (
     <div data-anchor={`#id=${blockchainId}`}>
       <Card hoverEffect={clickablePost}>
-        <a href={clickablePost ? `/thread/${blockchainId}` : undefined}>
+        <Link to={`/thread/${blockchainId}`}>
           <div className={container}>
             {isQuestionOfTheDay && (
               <QuestionOfDayText>Question of the day:</QuestionOfDayText>
@@ -101,7 +104,7 @@ export default function ({
               </BodyText>
             </div>
           </div>
-        </a>
+        </Link>
         <Suspense fallback={<LoadingReplies />}>
           <ThreadPart
             owner={sender}
