@@ -58,6 +58,7 @@ class WalletStore extends PersistableStore {
       const account = (await provider.listAccounts())[0]
       this.changeAccount(account)
       this.subscribeProvider(instance)
+      return account
     } catch (error) {
       if (error === 'Modal closed by user') return
       handleError(error)

@@ -1,6 +1,7 @@
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import classnames, {
   TStroke,
+  display,
   stroke,
   strokeWidth,
   width,
@@ -19,9 +20,11 @@ const sealStroke = (strokeColor: TStroke) =>
 export default function ({
   triangleColor = 'stroke-secondary-dimmed',
   sealColor = 'stroke-tertiary',
+  noMobile,
 }: {
   triangleColor?: TStroke
   sealColor?: TStroke
+  noMobile?: boolean
 }) {
   return (
     <div>
@@ -30,7 +33,7 @@ export default function ({
         height="65"
         viewBox="0 0 80 65"
         xmlns="http://www.w3.org/2000/svg"
-        className={displayFrom('md')}
+        className={noMobile ? undefined : displayFrom('md')}
       >
         <path
           d="M54.5533 34.035C54.5533 37.0132 52.2042 39.4274 49.3064 39.4274C46.4087 39.4274 44.0596 37.0132 44.0596 34.035C44.0596 31.0569 46.4087 34.035 49.3064 34.035C52.2042 34.035 54.5533 31.0569 54.5533 34.035Z"
@@ -71,7 +74,7 @@ export default function ({
         width="40"
         height="33"
         viewBox="0 0 40 33"
-        className={displayTo('md')}
+        className={noMobile ? display('hidden') : displayTo('md')}
       >
         <path
           d="M27.2761 17.0178C27.2761 18.5068 26.1016 19.7139 24.6527 19.7139C23.2038 19.7139 22.0293 18.5068 22.0293 17.0178C22.0293 15.5287 23.2038 17.0177 24.6527 17.0177C26.1016 17.0177 27.2761 15.5287 27.2761 17.0178Z"
