@@ -82,11 +82,13 @@ export default function ({
     <div data-anchor={`#id=${blockchainId}`}>
       <Card hoverEffect={clickablePost}>
         <a
-          onClick={(e: MouseEvent) => {
-            if (e.target instanceof HTMLAnchorElement) {
-              e.target?.dispatchEvent(new MouseEvent('click'))
+          onClick={({ target }) => {
+            if (
+              target instanceof HTMLAnchorElement ||
+              target instanceof HTMLButtonElement
+            )
               return
-            }
+
             setLocation(`/thread/${blockchainId}`)
           }}
         >
@@ -115,6 +117,7 @@ export default function ({
             </div>
           </div>
         </a>
+
         <Suspense fallback={<LoadingReplies />}>
           <ThreadPart
             owner={sender}
