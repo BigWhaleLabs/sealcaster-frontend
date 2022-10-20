@@ -26,12 +26,13 @@ import classnames, {
   space,
 } from 'classnames/tailwind'
 
-const container = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  space('space-y-4'),
-  cursor('cursor-pointer')
-)
+const container = (clickablePost?: boolean) =>
+  classnames(
+    display('flex'),
+    flexDirection('flex-col'),
+    space('space-y-4'),
+    cursor({ 'cursor-pointer': clickablePost })
+  )
 const postBottom = classnames(
   display('flex'),
   flexDirection('flex-row'),
@@ -81,7 +82,7 @@ export default function ({
   return (
     <div data-anchor={`#id=${blockchainId}`}>
       <Card hoverEffect={clickablePost}>
-        <a
+        <div
           onClick={({ target }) => {
             if (
               target instanceof HTMLAnchorElement ||
@@ -91,32 +92,31 @@ export default function ({
 
             setLocation(`/thread/${blockchainId}`)
           }}
+          className={container(clickablePost)}
         >
-          <div className={container}>
-            {isQuestionOfTheDay && (
-              <QuestionOfDayText>Question of the day:</QuestionOfDayText>
-            )}
-            <PostText>{text}</PostText>
+          {isQuestionOfTheDay && (
+            <QuestionOfDayText>Question of the day:</QuestionOfDayText>
+          )}
+          <PostText>{text}</PostText>
 
-            <div className={postBottom}>
-              <BodyText primary>
-                <span className={postInfo}>
-                  <StatusText>Posted by: </StatusText>
-                  <Sender sender={sender} />
-                  <PostDelimiter />
-                  <EtherScanLink tx={tx} />
-                  <PostDelimiter />
-                  <Status postId={blockchainId} />
-                </span>
-              </BodyText>
-              <BodyText primary noWrap>
-                <span className={postInfo}>
-                  <PostTime timestamp={timestamp} />
-                </span>
-              </BodyText>
-            </div>
+          <div className={postBottom}>
+            <BodyText primary>
+              <span className={postInfo}>
+                <StatusText>Posted by: </StatusText>
+                <Sender sender={sender} />
+                <PostDelimiter />
+                <EtherScanLink tx={tx} />
+                <PostDelimiter />
+                <Status postId={blockchainId} />
+              </span>
+            </BodyText>
+            <BodyText primary noWrap>
+              <span className={postInfo}>
+                <PostTime timestamp={timestamp} />
+              </span>
+            </BodyText>
           </div>
-        </a>
+        </div>
 
         <Suspense fallback={<LoadingReplies />}>
           <ThreadPart
