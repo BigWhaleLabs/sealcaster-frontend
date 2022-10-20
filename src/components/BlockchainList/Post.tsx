@@ -4,10 +4,10 @@ import {
   QuestionOfDayText,
   StatusText,
 } from 'components/ui/Text'
-import { Link } from 'wouter'
 import { LoadingReplies } from 'components/Thread/LoadingPost'
 import { Suspense } from 'preact/compat'
 import { displayFrom } from 'helpers/visibilityClassnames'
+import { useLocation } from 'wouter'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
 import EtherScanLink from 'components/BlockchainList/EtherScanLink'
@@ -76,10 +76,22 @@ export default function ({
   clickablePost?: boolean
   canReply?: boolean
 }) {
+  const [, setLocation] = useLocation()
+
   return (
     <div data-anchor={`#id=${blockchainId}`}>
       <Card hoverEffect={clickablePost}>
-        <Link to={`/thread/${blockchainId}`}>
+        <a
+          onClick={({ target }) => {
+            if (
+              target instanceof HTMLAnchorElement ||
+              target instanceof HTMLButtonElement
+            )
+              return
+
+            setLocation(`/thread/${blockchainId}`)
+          }}
+        >
           <div className={container}>
             {isQuestionOfTheDay && (
               <QuestionOfDayText>Question of the day:</QuestionOfDayText>
@@ -104,7 +116,8 @@ export default function ({
               </BodyText>
             </div>
           </div>
-        </Link>
+        </a>
+
         <Suspense fallback={<LoadingReplies />}>
           <ThreadPart
             owner={sender}
