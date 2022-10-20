@@ -16,7 +16,6 @@ import classnames, {
   justifyContent,
   space,
 } from 'classnames/tailwind'
-import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 
 const commentWithReplyButton = classnames(
   display('flex'),
@@ -36,16 +35,22 @@ const infoBlock = classnames(
   gap('gap-x-2')
 )
 
-const TruncatedAddress = ({ address }: { address: string }) => (
+const TruncatedAddress = ({
+  address,
+  name,
+}: {
+  address: string
+  name: string
+}) => (
   <>
     <div className={displayFrom('md')}>
-      <LinkText url={getEtherscanAddressUrl(address)} extraSmall primary>
-        {truncateMiddleIfNeeded(address, 16)}
+      <LinkText url={`farcaster://profiles/${address}`} extraSmall primary>
+        {truncateMiddleIfNeeded(name, 16)}
       </LinkText>
     </div>
     <div className={displayTo('md')}>
-      <LinkText url={getEtherscanAddressUrl(address)} extraSmall primary>
-        {truncateMiddleIfNeeded(address, 12)}
+      <LinkText url={`farcaster://profiles/${address}`} extraSmall primary>
+        {truncateMiddleIfNeeded(name, 12)}
       </LinkText>
     </div>
   </>
@@ -54,6 +59,7 @@ const TruncatedAddress = ({ address }: { address: string }) => (
 export default function ({
   content,
   replier,
+  replierAddress,
   timestamp,
   threadId,
   replyToId,
@@ -62,6 +68,7 @@ export default function ({
 }: {
   content: string
   replier: string
+  replierAddress: string
   timestamp: number
   repliedTo?: string
 } & ReplyModel) {
@@ -74,7 +81,7 @@ export default function ({
           <div className={commentWithData}>
             <BodyText>{content}</BodyText>
             <div className={infoBlock}>
-              <TruncatedAddress address={replier} />
+              <TruncatedAddress address={replierAddress} name={replier} />
               <Delimiter color="bg-formal-accent" />
               <PostTime timestamp={timestamp} />
             </div>

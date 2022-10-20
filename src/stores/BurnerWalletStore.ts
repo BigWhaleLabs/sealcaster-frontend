@@ -90,6 +90,7 @@ class BurnerWalletStore extends PersistableStore {
           this.privateKey = wallet.privateKey
           this.used = false
         }
+        return this.privateKey
       } finally {
         this.proof = undefined
       }
