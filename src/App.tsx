@@ -15,6 +15,7 @@ import Thread from 'components/Thread'
 import classnames, {
   alignItems,
   display,
+  flex,
   flexDirection,
   margin,
   minHeight,
@@ -24,11 +25,16 @@ import classnames, {
 
 const Landing = lazy(() => import('pages/Landing'))
 
+const overallWrapper = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  minHeight('min-h-screen')
+)
 const pageContainer = classnames(
   display('flex'),
   flexDirection('flex-col'),
-  overflow('overflow-x-hidden'),
-  minHeight('min-h-screen')
+  flex('flex-1'),
+  overflow('overflow-x-hidden')
 )
 const bodyContainer = (marginTop?: boolean) =>
   classnames(
@@ -47,42 +53,44 @@ export default function () {
 
   return (
     <Router>
-      <Navbar />
-      <div className={pageContainer}>
-        {location === '/' && (
-          <SliderTicker
-            sentences={['spill your tea', 'snatch your burner wallet ']}
-          />
-        )}
-        <div className={bodyContainer(is404)}>
-          <div className={width('w-full')}>
-            <Switch>
-              <Route path="/">
-                <LazyComponent lazyImported={<Landing />} />
-              </Route>
-              <Route path="/terms">
-                <Terms />
-              </Route>
-              <Route path="/privacy">
-                <Privacy />
-              </Route>
-              <Route path="/wallet">
-                <BurnerWallet />
-              </Route>
-              <Route path="/thread/:blockchainId">
-                <Thread />
-              </Route>
-              <Route path="/404">
-                <NotFound />
-              </Route>
-              <Route path="">
-                <Redirect to="/404" />
-              </Route>
-            </Switch>
+      <div className={overallWrapper}>
+        <Navbar />
+        <div className={pageContainer}>
+          {location === '/' && (
+            <SliderTicker
+              sentences={['spill your tea', 'snatch your burner wallet ']}
+            />
+          )}
+          <div className={bodyContainer(is404)}>
+            <div className={width('w-full')}>
+              <Switch>
+                <Route path="/">
+                  <LazyComponent lazyImported={<Landing />} />
+                </Route>
+                <Route path="/terms">
+                  <Terms />
+                </Route>
+                <Route path="/privacy">
+                  <Privacy />
+                </Route>
+                <Route path="/wallet">
+                  <BurnerWallet />
+                </Route>
+                <Route path="/thread/:blockchainId">
+                  <Thread />
+                </Route>
+                <Route path="/404">
+                  <NotFound />
+                </Route>
+                <Route path="">
+                  <Redirect to="/404" />
+                </Route>
+              </Switch>
+            </div>
           </div>
+          {displayScrollToTop && <ScrollToTopButton />}
         </div>
         <Footer />
-        {displayScrollToTop && <ScrollToTopButton />}
       </div>
       <InteractWithBurner />
       <ToastContainer position="bottom-right" theme="dark" />
