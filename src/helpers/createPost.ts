@@ -5,6 +5,7 @@ import BurnerInteractionStore from 'stores/BurnerInteractionStore'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
 import PostStore from 'stores/PostStore'
+import ReplyIdDefault from 'models/ReplyId'
 import TextFormStore from 'stores/TextFormStore'
 import getErrorMessage from 'helpers/getErrorMessage'
 import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
@@ -13,7 +14,7 @@ import walletStore from 'stores/WalletStore'
 export default async function ({
   text,
   threadId,
-  replyToId,
+  replyToId = ReplyIdDefault,
   askReconnect = true,
 }: {
   text: string
@@ -68,7 +69,7 @@ export default async function ({
       }
     }
     if (!BurnerWalletStore.used) BurnerWalletStore.used = true
-    TextFormStore.text = ''
+    TextFormStore.replyToText[replyToId] = ''
   } catch (error) {
     TextFormStore.error = getErrorMessage(error)
     handleError(error)

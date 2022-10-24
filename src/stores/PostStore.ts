@@ -6,6 +6,7 @@ import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract
 import { proxy } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import PostIdsStatuses, { updateStatuses } from 'stores/PostIdsStatuses'
+import ReplyIdDefault from 'models/ReplyId'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
 import getPostStorage from 'helpers/getPostStorage'
@@ -57,8 +58,7 @@ const PostStore = proxy<PostStoreType>({
       text,
       'farcaster',
       threadId,
-      replyToId ||
-        '0x0000000000000000000000000000000000000000000000000000000000000000'
+      replyToId || ReplyIdDefault
     )
     const result = await transaction.wait()
 
