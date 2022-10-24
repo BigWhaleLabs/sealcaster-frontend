@@ -38,13 +38,14 @@ export function PostListSuspended() {
 
   if (!thread) return <LoadingList text="Fetching thread posts..." />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
+  const paginatedLength = paginated.length
 
-  return paginated.length > 0 ? (
+  return paginatedLength > 0 ? (
     <InfiniteScroll
       next={() => setSkip(skip + limit)}
       className={scrollContainer}
-      dataLength={paginated.length}
-      hasMore={paginated.length < postsLength}
+      dataLength={paginatedLength}
+      hasMore={paginatedLength < postsLength}
       loader={<LoadingList text="Fetching more posts..." />}
       endMessage={postsLength < 3 ? <CustomizeCard /> : undefined}
     >
