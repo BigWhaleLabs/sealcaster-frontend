@@ -1,6 +1,12 @@
 import { AccentText } from 'components/ui/Text'
 import { Link } from 'wouter'
-import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
+import {
+  classnames,
+  cursor,
+  display,
+  flexDirection,
+  gap,
+} from 'classnames/tailwind'
 import { memo } from 'preact/compat'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
@@ -63,12 +69,14 @@ export default memo<{
       )}
       {limitThread && repliesLength > 3 && (
         <Link to={`/thread/${postId}`}>
-          <BareCard smallPaddings>
-            <AccentText color="text-accent" small>
-              + {repliesLength - limitThread}{' '}
-              {repliesLength - limitThread > 1 ? 'replies' : 'reply'}
-            </AccentText>
-          </BareCard>
+          <div className={cursor('cursor-pointer')}>
+            <BareCard smallPaddings>
+              <AccentText color="text-accent" small>
+                + {repliesLength - limitThread}{' '}
+                {repliesLength - limitThread > 1 ? 'replies' : 'reply'}
+              </AccentText>
+            </BareCard>
+          </div>
         </Link>
       )}
     </div>
