@@ -31,7 +31,7 @@ interface PostStoreType {
 
 const farcasterContract = getPostStorage()
 
-const limit = 20
+const limit = 5
 
 const PostStore = proxy<PostStoreType>({
   limit,

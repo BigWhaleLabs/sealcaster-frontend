@@ -1,8 +1,7 @@
 import { AccentText } from 'components/ui/Text'
 import { Link } from 'wouter'
-import { LoadingReplies } from 'components/Thread/LoadingPost'
-import { Suspense } from 'preact/compat'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
+import { memo } from 'preact/compat'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
 import Replies from 'components/BlockchainList/Replies'
@@ -16,26 +15,20 @@ const wrapper = classNamesToString(
   'empty:hidden'
 )
 
-function ThreadRepliesSuspended({
-  threadId,
-  replyingTo,
-  postId,
-  limitThread,
-  threadMerkleRoot,
-  canReply,
-}: {
+export default memo<{
   threadId: number
-  replyingTo: string
   postId: number
   limitThread?: number
-  threadMerkleRoot: string
+  owner: string
   canReply?: boolean
-}) {
+}>(({ threadId, postId, limitThread, owner, canReply }) => {
+  const threadMerkleRoot = useMerkleRoot(postId)
+  if (!threadMerkleRoot) return null
+
   const replies = useReplies({
     threadId,
     replyToId: threadMerkleRoot,
   })
-
   const repliesLength = replies.length
 
   if (!canReply && repliesLength === 0) return null
@@ -45,7 +38,7 @@ function ThreadRepliesSuspended({
       <Replies
         replyToId={threadMerkleRoot}
         threadId={threadId}
-        placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
+        placeholder={`Reply to ${truncateMiddleIfNeeded(owner, 12)}`}
         canReply={canReply}
       />
       {replies.map(({ castId, postId }, index) =>
@@ -80,84 +73,26 @@ function ThreadRepliesSuspended({
       )}
     </div>
   )
-}
+})
 
-function ThreadReplies({
-  threadId,
-  replyingTo,
-  postId,
-  limitThread,
-  threadMerkleRoot,
-  canReply,
-}: {
-  threadId: number
-  replyingTo: string
-  postId: number
-  limitThread?: number
-  threadMerkleRoot: string
-  canReply?: boolean
-}) {
-  const props = {
-    threadId,
-    replyingTo,
-    postId,
-    limitThread,
-    threadMerkleRoot,
-    canReply,
-  }
-  return (
-    <Suspense fallback={<LoadingReplies />}>
-      <ThreadRepliesSuspended {...props} />
-    </Suspense>
-  )
-}
+// export default function ({
+//   threadId,
+//   postId,
+//   limitThread,
+//   owner,
+//   canReply,
+// }: {
+//   threadId: number
+//   postId: number
+//   limitThread?: number
+//   owner: string
+//   canReply?: boolean
+// }) {
+//   const props = { threadId, postId, limitThread, owner, canReply }
 
-function ThreadPartSuspended({
-  threadId,
-  postId,
-  limitThread,
-  owner,
-  canReply,
-}: {
-  threadId: number
-  postId: number
-  limitThread?: number
-  owner: string
-  canReply?: boolean
-}) {
-  const threadMerkleRoot = useMerkleRoot(postId)
-  if (!threadMerkleRoot) return null
-
-  return (
-    <ThreadReplies
-      replyingTo={owner}
-      threadId={threadId}
-      postId={postId}
-      limitThread={limitThread}
-      canReply={canReply}
-      threadMerkleRoot={threadMerkleRoot}
-    />
-  )
-}
-
-export default function ({
-  threadId,
-  postId,
-  limitThread,
-  owner,
-  canReply,
-}: {
-  threadId: number
-  postId: number
-  limitThread?: number
-  owner: string
-  canReply?: boolean
-}) {
-  const props = { threadId, postId, limitThread, owner, canReply }
-
-  return (
-    <Suspense fallback={<LoadingReplies />}>
-      <ThreadPartSuspended {...props} />
-    </Suspense>
-  )
-}
+//   return (
+//     <Suspense fallback={<LoadingReplies />}>
+//       <ThreadPartSuspended {...props} />
+//     </Suspense>
+//   )
+// }
