@@ -32,6 +32,7 @@ function ThreadPart({
   const replies = useReplies({
     threadId,
     replyToId: threadMerkleRoot,
+    allowFetch: true,
   })
 
   const repliesLength = replies.length
