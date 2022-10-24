@@ -11,22 +11,19 @@ const farcasterStore = proxy<{
   threads: {},
 })
 
-export function fetchFarcasterThread(postId: number) {
+export async function fetchFarcasterThread(postId: number) {
   if (typeof farcasterStore.threads[postId] !== 'undefined') return
-  const request = fetchThreadByPostId(postId)
-  farcasterStore.threads[postId] = request.then(({ casts }) =>
-    casts.map((cast) => cast.merkleRoot)
-  )
-  void request.then(({ casts, merkleRoot }) => {
-    if (merkleRoot)
-      postIdsStatuses.idToMerkleRoot[postId] = Promise.resolve(merkleRoot)
-    for (const cast of casts) {
-      farcasterStore.casts[cast.merkleRoot] = Promise.resolve(cast)
-      if (cast.postId) {
-        postIdsStatuses.idToMerkleRoot[cast.postId] = Promise.resolve(
-          cast.merkleRoot
-        )
-      }
+  const { casts, merkleRoot } = await fetchThreadByPostId(postId)
+  const merkles = casts.map((cast) => cast.merkleRoot)
+  farcasterStore.threads[postId] = Promise.resolve(merkles)
+  if (merkleRoot)
+    postIdsStatuses.idToMerkleRoot[postId] = Promise.resolve(merkleRoot)
+  casts.forEach((cast) => {
+    farcasterStore.casts[cast.merkleRoot] = Promise.resolve(cast)
+    if (cast.postId) {
+      postIdsStatuses.idToMerkleRoot[cast.postId] = Promise.resolve(
+        cast.merkleRoot
+      )
     }
   })
 }

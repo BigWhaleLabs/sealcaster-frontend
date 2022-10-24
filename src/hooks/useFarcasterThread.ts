@@ -9,7 +9,7 @@ export default function (postId: number) {
   const thread = threads[postId]
 
   if (!thread) {
-    fetchFarcasterThread(postId)
+    void fetchFarcasterThread(postId)
     return null
   }
 
