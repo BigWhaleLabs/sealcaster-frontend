@@ -1,5 +1,7 @@
 import { AccentText } from 'components/ui/Text'
 import { Link } from 'wouter'
+import { LoadingReplies } from 'components/Thread/LoadingPost'
+import { Suspense } from 'preact/compat'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
@@ -82,7 +84,7 @@ function ThreadPart({
   )
 }
 
-export default function ({
+function ThreadPartSuspended({
   threadId,
   postId,
   limitThread,
@@ -96,7 +98,6 @@ export default function ({
   canReply?: boolean
 }) {
   const threadMerkleRoot = useMerkleRoot(postId)
-
   if (!threadMerkleRoot) return null
 
   return (
@@ -108,5 +109,27 @@ export default function ({
       canReply={canReply}
       threadMerkleRoot={threadMerkleRoot}
     />
+  )
+}
+
+export default function ({
+  threadId,
+  postId,
+  limitThread,
+  owner,
+  canReply,
+}: {
+  threadId: number
+  postId: number
+  limitThread?: number
+  owner: string
+  canReply?: boolean
+}) {
+  const props = { threadId, postId, limitThread, owner, canReply }
+
+  return (
+    <Suspense fallback={<LoadingReplies />}>
+      <ThreadPartSuspended {...props} />
+    </Suspense>
   )
 }

@@ -4,8 +4,6 @@ import {
   QuestionOfDayText,
   StatusText,
 } from 'components/ui/Text'
-import { LoadingReplies } from 'components/Thread/LoadingPost'
-import { Suspense } from 'preact/compat'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { useLocation } from 'wouter'
 import Card from 'components/ui/Card'
@@ -118,15 +116,13 @@ export default function ({
           </div>
         </div>
 
-        <Suspense fallback={<LoadingReplies />}>
-          <ThreadPart
-            owner={sender}
-            threadId={blockchainId}
-            limitThread={limitThread}
-            postId={blockchainId}
-            canReply={canReply}
-          />
-        </Suspense>
+        <ThreadPart
+          owner={sender}
+          threadId={blockchainId}
+          limitThread={limitThread}
+          postId={blockchainId}
+          canReply={canReply}
+        />
       </Card>
     </div>
   )
