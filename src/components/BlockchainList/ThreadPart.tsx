@@ -16,7 +16,7 @@ const wrapper = classNamesToString(
   'empty:hidden'
 )
 
-function ThreadPart({
+function ThreadRepliesSuspended({
   threadId,
   replyingTo,
   postId,
@@ -41,46 +41,74 @@ function ThreadPart({
   if (!canReply && repliesLength === 0) return null
 
   return (
-    <>
-      <div className={wrapper}>
-        <Replies
-          replyToId={threadMerkleRoot}
-          threadId={threadId}
-          placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
-          canReply={canReply}
-        />
-        {replies.map(({ castId, postId }, index) =>
-          limitThread ? (
-            index < limitThread && (
-              <CommentWithReplies
-                castId={castId}
-                postId={postId}
-                threadId={threadId}
-                canReply={canReply}
-                hideReplies
-              />
-            )
-          ) : (
+    <div className={wrapper}>
+      <Replies
+        replyToId={threadMerkleRoot}
+        threadId={threadId}
+        placeholder={`Reply to ${truncateMiddleIfNeeded(replyingTo, 12)}`}
+        canReply={canReply}
+      />
+      {replies.map(({ castId, postId }, index) =>
+        limitThread ? (
+          index < limitThread && (
             <CommentWithReplies
               castId={castId}
               postId={postId}
               threadId={threadId}
               canReply={canReply}
+              hideReplies
             />
           )
-        )}
-        {limitThread && repliesLength > 3 && (
-          <Link to={`/thread/${postId}`}>
-            <BareCard smallPaddings>
-              <AccentText color="text-accent" small>
-                + {repliesLength - limitThread}{' '}
-                {repliesLength - limitThread > 1 ? 'replies' : 'reply'}
-              </AccentText>
-            </BareCard>
-          </Link>
-        )}
-      </div>
-    </>
+        ) : (
+          <CommentWithReplies
+            castId={castId}
+            postId={postId}
+            threadId={threadId}
+            canReply={canReply}
+          />
+        )
+      )}
+      {limitThread && repliesLength > 3 && (
+        <Link to={`/thread/${postId}`}>
+          <BareCard smallPaddings>
+            <AccentText color="text-accent" small>
+              + {repliesLength - limitThread}{' '}
+              {repliesLength - limitThread > 1 ? 'replies' : 'reply'}
+            </AccentText>
+          </BareCard>
+        </Link>
+      )}
+    </div>
+  )
+}
+
+function ThreadReplies({
+  threadId,
+  replyingTo,
+  postId,
+  limitThread,
+  threadMerkleRoot,
+  canReply,
+}: {
+  threadId: number
+  replyingTo: string
+  postId: number
+  limitThread?: number
+  threadMerkleRoot: string
+  canReply?: boolean
+}) {
+  const props = {
+    threadId,
+    replyingTo,
+    postId,
+    limitThread,
+    threadMerkleRoot,
+    canReply,
+  }
+  return (
+    <Suspense fallback={<LoadingReplies />}>
+      <ThreadRepliesSuspended {...props} />
+    </Suspense>
   )
 }
 
@@ -101,7 +129,7 @@ function ThreadPartSuspended({
   if (!threadMerkleRoot) return null
 
   return (
-    <ThreadPart
+    <ThreadReplies
       replyingTo={owner}
       threadId={threadId}
       postId={postId}
