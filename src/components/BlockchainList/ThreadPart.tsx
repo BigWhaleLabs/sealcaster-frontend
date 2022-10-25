@@ -1,5 +1,6 @@
 import { AccentText } from 'components/ui/Text'
 import { Link } from 'wouter'
+import { LoadingReplies } from 'components/Thread/LoadingPost'
 import { Suspense, memo } from 'preact/compat'
 import {
   classnames,
@@ -8,11 +9,12 @@ import {
   flexDirection,
   gap,
 } from 'classnames/tailwind'
+import { useSnapshot } from 'valtio'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
-import LoadingReplies from 'components/Thread/LoadingPost'
 import Replies from 'components/BlockchainList/Replies'
 import classNamesToString from 'helpers/classNamesToString'
+import farcasterStore from 'stores/FarcasterStore'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
 import useMerkleRoot from 'hooks/useMerkleRoot'
 import useReplies from 'hooks/useReplies'
@@ -35,7 +37,9 @@ function ThreadPartSuspended({
   owner: string
   canReply?: boolean
 }) {
+  const { requested } = useSnapshot(farcasterStore)
   const threadMerkleRoot = useMerkleRoot(postId)
+  requested[postId]
   if (!threadMerkleRoot) return null
 
   const replies = useReplies({
