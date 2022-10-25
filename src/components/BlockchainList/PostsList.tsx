@@ -36,7 +36,7 @@ export function PostListSuspended() {
   const postsLength = posts.length
   const { paginated, skip, setSkip } = usePaginated(posts, limit)
 
-  if (!thread) return <LoadingList text="Fetching thread posts..." />
+  if (!thread) return <LoadingList text="Fetching posts..." />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
   const paginatedLength = paginated.length
 
