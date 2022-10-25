@@ -4,6 +4,7 @@ import { space } from 'classnames/tailwind'
 import { useEffect } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
+import ReplyIdDefault from 'models/ReplyId'
 import TextArea from 'components/ui/TextArea'
 import TextFormStore from 'stores/TextFormStore'
 import TextareaInfo from 'components/Cast/TextareaInfo'
@@ -14,7 +15,7 @@ import createPost from 'helpers/createPost'
 export default function ({
   placeHolder = 'Write something here...',
   threadId,
-  replyToId,
+  replyToId = ReplyIdDefault,
   buttonText,
   leftBlock,
 }: {
@@ -25,9 +26,10 @@ export default function ({
   buttonText?: string
 }) {
   const { account } = useSnapshot(WalletStore)
-  const { text, loading, error } = useSnapshot(TextFormStore, {
+  const { replyToText, loading, error } = useSnapshot(TextFormStore, {
     sync: true,
   })
+  const text = replyToText[replyToId] || ''
   const { status } = useSnapshot(BurnerWalletStore)
   const maxLength = 279
   const errorMessage = error ? parseErrorText(error) : ''
@@ -35,7 +37,7 @@ export default function ({
   useEffect(() => {
     if (account && TextFormStore.error && !TextFormStore.loading)
       void createPost({
-        ['text']: TextFormStore.text,
+        ['text']: TextFormStore.replyToText[replyToId] || '',
         threadId,
         replyToId,
         askReconnect: false,
@@ -49,7 +51,7 @@ export default function ({
         disabled={loading || !!error}
         placeholder={placeHolder}
         onTextChange={(text) => {
-          TextFormStore.text = text
+          TextFormStore.replyToText[replyToId] = text
         }}
         maxLength={maxLength}
       />

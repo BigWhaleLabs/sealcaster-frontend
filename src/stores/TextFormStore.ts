@@ -1,10 +1,10 @@
 import { proxy } from 'valtio'
 
 export default proxy<{
-  text: string
+  replyToText: { [replyToId: string]: string }
   loading: boolean
   error?: unknown
 }>({
-  text: '',
+  replyToText: {} as { [replyToId: string]: string },
   loading: false,
 })
