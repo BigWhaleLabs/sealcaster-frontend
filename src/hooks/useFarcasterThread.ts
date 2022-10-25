@@ -14,5 +14,5 @@ export default function (postId: number, allowFetch = true) {
   }
 
   const castsCopy = { ...casts }
-  return Array.from(thread).map((id) => castsCopy[id])
+  return Array.from(thread ?? [], (id) => castsCopy[id])
 }

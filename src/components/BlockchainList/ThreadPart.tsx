@@ -24,19 +24,21 @@ const wrapper = classNamesToString(
   'empty:hidden'
 )
 
+interface ThreadProps {
+  threadId: number
+  postId: number
+  limitThread?: number
+  owner: string
+  canReply?: boolean
+}
+
 function ThreadPartSuspended({
   threadId,
   postId,
   limitThread,
   owner,
   canReply,
-}: {
-  threadId: number
-  postId: number
-  limitThread?: number
-  owner: string
-  canReply?: boolean
-}) {
+}: ThreadProps) {
   const threadMerkleRoot = useMerkleRoot(postId)
   if (!threadMerkleRoot) return null
 
@@ -93,23 +95,19 @@ function ThreadPartSuspended({
   )
 }
 
-export default memo<{
-  threadId: number
-  postId: number
-  limitThread?: number
-  owner: string
-  canReply?: boolean
-}>(({ threadId, postId, limitThread, owner, canReply }) => {
-  const { requested } = useSnapshot(farcasterStore)
-  const props = { threadId, postId, limitThread, owner, canReply }
+export default memo<ThreadProps>(
+  ({ threadId, postId, limitThread, owner, canReply }) => {
+    const { requested } = useSnapshot(farcasterStore)
+    const props = { threadId, postId, limitThread, owner, canReply }
 
-  return (
-    <Suspense fallback={<LoadingReplies />}>
-      {requested[postId] ? (
-        <LoadingReplies />
-      ) : (
-        <ThreadPartSuspended {...props} />
-      )}
-    </Suspense>
-  )
-})
+    return (
+      <Suspense fallback={<LoadingReplies />}>
+        {requested[postId] ? (
+          <LoadingReplies />
+        ) : (
+          <ThreadPartSuspended {...props} />
+        )}
+      </Suspense>
+    )
+  }
+)
