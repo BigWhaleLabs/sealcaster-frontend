@@ -21,6 +21,7 @@ interface PostStoreType {
   countPosts: Promise<BigNumber>
   questionOfTheDayIds: Promise<number[]>
   posts: { [postId: number]: Promise<PostStructOutput> }
+  requested: { [postId: number]: boolean }
   threads: { [threadId: number]: Promise<number[]> }
   createPost: (
     text: string,
@@ -40,6 +41,7 @@ const PostStore = proxy<PostStoreType>({
   questionOfTheDayIds: getQuestionOfTheDayIds(farcasterContract),
   threads: {},
   posts: {},
+  requested: {},
   idToPostTx: getIdsToPostsTx(farcasterContract),
   createPost: async (text: string, threadId: number, replyToId?: string) => {
     let signer = await BurnerWalletStore.getSigner()
@@ -85,15 +87,20 @@ subscribeKey(PostStore, 'posts', (posts) => {
 })
 
 export async function fetchThread(threadId: number) {
-  if (typeof PostStore.threads[threadId] !== 'undefined') return
+  if (PostStore.requested[threadId]) return
 
-  const posts = await safeGetThreadFromContract(threadId, farcasterContract)
-  const postsIds = posts.map((post) => post.id.toNumber())
-  // await updateStatuses(postsIds)
-  PostStore.threads[threadId] = Promise.resolve(postsIds)
-  posts.forEach((post) => {
-    PostStore.posts[post.id.toNumber()] = Promise.resolve(post)
-  })
+  PostStore.requested[threadId] = true
+
+  try {
+    const posts = await safeGetThreadFromContract(threadId, farcasterContract)
+    const postsIds = posts.map((post) => post.id.toNumber())
+    PostStore.threads[threadId] = Promise.resolve(postsIds)
+    posts.forEach((post) => {
+      PostStore.posts[post.id.toNumber()] = Promise.resolve(post)
+    })
+  } finally {
+    PostStore.requested[threadId] = false
+  }
 }
 
 export async function fetchPost(postId: number) {
@@ -102,11 +109,11 @@ export async function fetchPost(postId: number) {
     (await PostStore.countPosts).lt(postId)
   )
     return
+
   // Numbering in .posts() starts from zero
   PostStore.posts[postId] = farcasterContract
     .posts(postId - 1)
     .then(safeTransformPostOutput)
-  // void updateStatuses([postId])
 }
 
 farcasterContract.on(

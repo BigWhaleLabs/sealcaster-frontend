@@ -176,6 +176,7 @@ export function CommentWithReplies({
   const replies = useReplies({
     threadId,
     replyToId,
+    allowFetch: false,
   })
 
   const hasReplies = replies.length > 0

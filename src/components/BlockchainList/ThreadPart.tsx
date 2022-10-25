@@ -36,12 +36,12 @@ function ThreadPartSuspended({
   canReply?: boolean
 }) {
   const threadMerkleRoot = useMerkleRoot(postId)
-  console.log(postId, 'threadMerkleRoot', threadMerkleRoot)
   if (!threadMerkleRoot) return null
 
   const replies = useReplies({
     threadId,
     replyToId: threadMerkleRoot,
+    allowFetch: true,
   })
   const repliesLength = replies.length
 
