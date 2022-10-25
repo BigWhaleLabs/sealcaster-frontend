@@ -8,7 +8,7 @@ export default function ({
 }: {
   threadId: number
   replyToId: string
-  allowFetch: boolean
+  allowFetch?: boolean
 }): { castId?: string; postId?: number; timestamp: number }[] {
   const blockchainThread = useThread(threadId, allowFetch)
   const farcasterThread = useFarcasterThread(threadId, allowFetch)
