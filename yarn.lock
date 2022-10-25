@@ -2958,6 +2958,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@opengsn/common@patch:@opengsn/common@npm%3A3.0.0-beta.1#./.yarn/patches/@opengsn-common-npm-3.0.0-beta.1-79cb41f503.patch::locator=sealcaster-frontend%40workspace%3A.":
+  version: 3.0.0-beta.1
+  resolution: "@opengsn/common@patch:@opengsn/common@npm%3A3.0.0-beta.1#./.yarn/patches/@opengsn-common-npm-3.0.0-beta.1-79cb41f503.patch::version=3.0.0-beta.1&hash=17823f&locator=sealcaster-frontend%40workspace%3A."
+  dependencies:
+    "@ethereumjs/common": ^2.6.5
+    "@ethereumjs/tx": ^3.2.0
+    "@metamask/eth-sig-util": ^4.0.1
+    "@opengsn/contracts": ^3.0.0-beta.1
+    "@types/bn.js": ^5.1.0
+    "@types/semver": ^7.3.4
+    axios: ^0.21.1
+    bignumber.js: ^9.0.2
+    bn.js: ^5.2.0
+    chalk: ^4.1.2
+    ethereumjs-util: ^7.1.0
+    ow: ^0.28.1
+    rlp: ^2.2.6
+    semver: ^7.3.2
+    web3: ^1.7.3
+    web3-core: ^1.7.3
+    web3-core-helpers: ^1.7.3
+    web3-eth: ^1.7.3
+    web3-eth-abi: ^1.7.3
+    web3-eth-contract: ^1.7.3
+    web3-utils: ^1.7.3
+  checksum: e25ee5a746cf6e2804b032a210127aeb3474e1aa0be49f6303ca21c2d4c47af1456ce47320b62a32676ef6984cd98d749446279381be2bd478356f1691b5fe4b
+  languageName: node
+  linkType: hard
+
 "@opengsn/contracts@npm:^3.0.0-beta.1":
   version: 3.0.0-beta.1
   resolution: "@opengsn/contracts@npm:3.0.0-beta.1"
