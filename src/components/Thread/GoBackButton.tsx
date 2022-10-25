@@ -19,8 +19,8 @@ const wrapper = classnames(
 
 export default function () {
   return (
-    <Link to={'/'}>
-      <div className={wrapper} href="/">
+    <Link to="/">
+      <div className={wrapper}>
         <div className={width('w-2')}>
           <Arrow horizontal reversed pulseDisabled />
         </div>
