@@ -114,15 +114,15 @@ export default function ({
               </span>
             </BodyText>
           </div>
-
-          <ThreadPart
-            owner={sender}
-            threadId={blockchainId}
-            limitThread={limitThread}
-            postId={blockchainId}
-            canReply={canReply}
-          />
         </div>
+
+        <ThreadPart
+          owner={sender}
+          threadId={blockchainId}
+          limitThread={limitThread}
+          postId={blockchainId}
+          canReply={canReply}
+        />
       </Card>
     </div>
   )
