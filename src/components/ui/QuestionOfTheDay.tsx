@@ -27,9 +27,13 @@ const postInfo = classnames(
   gap('gap-x-1')
 )
 
-function QuestionOfDaySuspended({ id }: { id: number }) {
-  const blockchainPost = usePost(id)
-  const threadMerkleRoot = useMerkleRoot(id)
+function QuestionsOfDaySuspended() {
+  const { questionOfTheDayIds } = useSnapshot(PostStore)
+
+  if (!questionOfTheDayIds.length) return null
+  const lastQuestionDay = Math.max(...questionOfTheDayIds)
+  const blockchainPost = usePost(lastQuestionDay)
+  const threadMerkleRoot = useMerkleRoot(lastQuestionDay)
 
   if (!threadMerkleRoot || !blockchainPost) return null
 
@@ -38,7 +42,7 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
   return (
     <div className={position('relative')}>
       <Card hoverEffect>
-        <Link className={space('space-y-4')} to={`/thread/${id}`}>
+        <Link className={space('space-y-4')} to={`/thread/${lastQuestionDay}`}>
           <QuestionOfDayText>Question of the day:</QuestionOfDayText>
           <HeaderText size="medium">{post}</HeaderText>
           <span className={postInfo}>
@@ -48,7 +52,7 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
         </Link>
         <StickLabel />
         <Replies
-          threadId={id}
+          threadId={lastQuestionDay}
           replyToId={threadMerkleRoot}
           placeholder="Answer today’s question..."
           canReply
@@ -58,19 +62,9 @@ function QuestionOfDaySuspended({ id }: { id: number }) {
   )
 }
 
-function QuestionsOfDaySuspended() {
-  const { questionOfTheDayIds } = useSnapshot(PostStore)
-
-  if (!questionOfTheDayIds.length) return null
-
-  const lastQuestionDay = Math.max(...questionOfTheDayIds)
-
-  return <QuestionOfDaySuspended id={lastQuestionDay} />
-}
-
 export default function () {
   return (
-    <Suspense fallback="">
+    <Suspense fallback={null}>
       <QuestionsOfDaySuspended />
     </Suspense>
   )

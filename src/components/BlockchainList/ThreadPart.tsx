@@ -1,9 +1,10 @@
 import { AccentText } from 'components/ui/Text'
 import { Link } from 'wouter'
+import { Suspense, memo } from 'preact/compat'
 import { classnames, display, flexDirection, gap } from 'classnames/tailwind'
-import { memo } from 'preact/compat'
 import BareCard from 'components/BareCard'
 import CommentWithReplies from 'components/BlockchainList/CommentWithReplies'
+import LoadingReplies from 'components/Thread/LoadingPost'
 import Replies from 'components/BlockchainList/Replies'
 import classNamesToString from 'helpers/classNamesToString'
 import truncateMiddleIfNeeded from 'helpers/network/truncateMiddleIfNeeded'
@@ -15,14 +16,21 @@ const wrapper = classNamesToString(
   'empty:hidden'
 )
 
-export default memo<{
+function ThreadPartSuspended({
+  threadId,
+  postId,
+  limitThread,
+  owner,
+  canReply,
+}: {
   threadId: number
   postId: number
   limitThread?: number
   owner: string
   canReply?: boolean
-}>(({ threadId, postId, limitThread, owner, canReply }) => {
+}) {
   const threadMerkleRoot = useMerkleRoot(postId)
+  console.log(postId, 'threadMerkleRoot', threadMerkleRoot)
   if (!threadMerkleRoot) return null
 
   const replies = useReplies({
@@ -73,26 +81,20 @@ export default memo<{
       )}
     </div>
   )
+}
+
+export default memo<{
+  threadId: number
+  postId: number
+  limitThread?: number
+  owner: string
+  canReply?: boolean
+}>(({ threadId, postId, limitThread, owner, canReply }) => {
+  const props = { threadId, postId, limitThread, owner, canReply }
+
+  return (
+    <Suspense fallback={<LoadingReplies />}>
+      <ThreadPartSuspended {...props} />
+    </Suspense>
+  )
 })
-
-// export default function ({
-//   threadId,
-//   postId,
-//   limitThread,
-//   owner,
-//   canReply,
-// }: {
-//   threadId: number
-//   postId: number
-//   limitThread?: number
-//   owner: string
-//   canReply?: boolean
-// }) {
-//   const props = { threadId, postId, limitThread, owner, canReply }
-
-//   return (
-//     <Suspense fallback={<LoadingReplies />}>
-//       <ThreadPartSuspended {...props} />
-//     </Suspense>
-//   )
-// }

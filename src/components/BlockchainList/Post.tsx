@@ -12,9 +12,7 @@ import EtherScanLink from 'components/BlockchainList/EtherScanLink'
 import PostTime from 'components/BlockchainList/PostTime'
 import Sender from 'components/BlockchainList/Sender'
 import Status from 'components/BlockchainList/Status'
-// import ThreadPart from 'components/BlockchainList/ThreadPart'
-import { LoadingReplies } from 'components/Thread/LoadingPost'
-import { Suspense, lazy } from 'preact/compat'
+import ThreadPart from 'components/BlockchainList/ThreadPart'
 import classnames, {
   alignItems,
   cursor,
@@ -25,8 +23,6 @@ import classnames, {
   justifyContent,
   space,
 } from 'classnames/tailwind'
-
-const ThreadPart = lazy(() => import('components/BlockchainList/ThreadPart'))
 
 const container = (clickablePost?: boolean) =>
   classnames(
@@ -120,15 +116,13 @@ export default function ({
           </div>
         </div>
 
-        <Suspense fallback={<LoadingReplies />}>
-          <ThreadPart
-            owner={sender}
-            threadId={blockchainId}
-            limitThread={limitThread}
-            postId={blockchainId}
-            canReply={canReply}
-          />
-        </Suspense>
+        <ThreadPart
+          owner={sender}
+          threadId={blockchainId}
+          limitThread={limitThread}
+          postId={blockchainId}
+          canReply={canReply}
+        />
       </Card>
     </div>
   )

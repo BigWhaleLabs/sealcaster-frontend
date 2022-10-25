@@ -4,8 +4,9 @@ import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/
 import { Result } from 'ethers/lib/utils'
 import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract'
 import { proxy } from 'valtio'
+import { subscribeKey } from 'valtio/utils'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
-import PostIdsStatuses, { updateStatuses } from 'stores/PostIdsStatuses'
+import PostIdsStatuses from 'stores/PostIdsStatuses'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
 import getPostStorage from 'helpers/getPostStorage'
@@ -71,12 +72,24 @@ const PostStore = proxy<PostStoreType>({
   },
 })
 
+subscribeKey(PostStore, 'posts', (posts) => {
+  const postsIds = Object.keys(posts).map((id) => +id)
+  const statuses = { ...PostIdsStatuses.statuses }
+  const idWithoutStatus = postsIds
+    .filter((id) => !statuses[id])
+    .reduce((acc, id) => {
+      acc[id] = Promise.resolve(PostStatus.pending)
+      return acc
+    }, {} as { [postId: number]: Promise<PostStatus> })
+  PostIdsStatuses.statuses = { ...statuses, ...idWithoutStatus }
+})
+
 export async function fetchThread(threadId: number) {
   if (typeof PostStore.threads[threadId] !== 'undefined') return
 
   const posts = await safeGetThreadFromContract(threadId, farcasterContract)
   const postsIds = posts.map((post) => post.id.toNumber())
-  await updateStatuses(postsIds)
+  // await updateStatuses(postsIds)
   PostStore.threads[threadId] = Promise.resolve(postsIds)
   posts.forEach((post) => {
     PostStore.posts[post.id.toNumber()] = Promise.resolve(post)
@@ -93,7 +106,7 @@ export async function fetchPost(postId: number) {
   PostStore.posts[postId] = farcasterContract
     .posts(postId - 1)
     .then(safeTransformPostOutput)
-  void updateStatuses([postId])
+  // void updateStatuses([postId])
 }
 
 farcasterContract.on(
