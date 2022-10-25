@@ -4,12 +4,14 @@ import useThread from 'hooks/useThread'
 export default function ({
   threadId,
   replyToId,
+  allowFetch = true,
 }: {
   threadId: number
   replyToId: string
+  allowFetch?: boolean
 }): { castId?: string; postId?: number; timestamp: number }[] {
-  const blockchainThread = useThread(threadId)
-  const farcasterThread = useFarcasterThread(threadId)
+  const blockchainThread = useThread(threadId, allowFetch)
+  const farcasterThread = useFarcasterThread(threadId, allowFetch)
 
   const farcasterThreadPostIds = farcasterThread
     ? new Set(
