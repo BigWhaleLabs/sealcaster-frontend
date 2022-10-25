@@ -39,7 +39,6 @@ function ThreadPartSuspended({
 }) {
   const { requested } = useSnapshot(farcasterStore)
   const threadMerkleRoot = useMerkleRoot(postId)
-  requested[postId]
   if (!threadMerkleRoot) return null
 
   const replies = useReplies({
@@ -103,8 +102,11 @@ export default memo<{
   canReply?: boolean
 }>(({ threadId, postId, limitThread, owner, canReply }) => {
   const props = { threadId, postId, limitThread, owner, canReply }
+  const { requested } = useSnapshot(farcasterStore)
 
-  return (
+  return requested[postId] ? (
+    <LoadingReplies />
+  ) : (
     <Suspense fallback={<LoadingReplies />}>
       <ThreadPartSuspended {...props} />
     </Suspense>
