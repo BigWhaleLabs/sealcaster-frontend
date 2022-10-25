@@ -2929,7 +2929,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opengsn/common@npm:3.0.0-beta.1, @opengsn/common@npm:^3.0.0-beta.1":
+"@opengsn/common@npm:3.0.0-beta.1":
   version: 3.0.0-beta.1
   resolution: "@opengsn/common@npm:3.0.0-beta.1"
   dependencies:
@@ -2958,7 +2958,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opengsn/contracts@npm:3.0.0-beta.1, @opengsn/contracts@npm:^3.0.0-beta.1":
+"@opengsn/contracts@npm:^3.0.0-beta.1":
   version: 3.0.0-beta.1
   resolution: "@opengsn/contracts@npm:3.0.0-beta.1"
   dependencies:
@@ -15918,8 +15918,6 @@ __metadata:
     "@esbuild-plugins/node-modules-polyfill": ^0.1.4
     "@lottiefiles/react-lottie-player": ^3.4.7
     "@material-tailwind/react": ^1.2.4
-    "@opengsn/common": 3.0.0-beta.1
-    "@opengsn/contracts": 3.0.0-beta.1
     "@opengsn/provider": 3.0.0-beta.1
     "@originjs/vite-plugin-commonjs": ^1.0.3
     "@preact/preset-vite": ^2.4.0

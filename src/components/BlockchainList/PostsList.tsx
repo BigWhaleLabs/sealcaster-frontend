@@ -33,21 +33,19 @@ export function PostListSuspended() {
   const hashId = useHashParams()
 
   const posts = thread ? thread : []
-
+  const postsLength = posts.length
   const { paginated, skip, setSkip } = usePaginated(posts, limit)
 
-  const postsLength = posts.length
-
-  if (!thread) return <LoadingList text="Fetching thread posts..." />
-  if (postsLength === 0) return <NoPosts />
+  if (!thread) return <LoadingList text="Fetching posts..." />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
+  const paginatedLength = paginated.length
 
-  return (
+  return paginatedLength > 0 ? (
     <InfiniteScroll
       next={() => setSkip(skip + limit)}
       className={scrollContainer}
-      dataLength={postsLength}
-      hasMore={paginated.length < postsLength}
+      dataLength={paginatedLength}
+      hasMore={paginatedLength < postsLength}
       loader={<LoadingList text="Fetching more posts..." />}
       endMessage={postsLength < 3 ? <CustomizeCard /> : undefined}
     >
@@ -72,6 +70,8 @@ export function PostListSuspended() {
         </>
       ))}
     </InfiniteScroll>
+  ) : (
+    <NoPosts />
   )
 }
 
