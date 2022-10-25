@@ -36,7 +36,7 @@ const SuspendedThread = () => {
         timestamp={Number(timestamp)}
         text={post}
         sender={sender}
-        tx={idToPostTx[Number(id)]}
+        tx={idToPostTx[Number(id) - 1]}
       />
     </div>
   )

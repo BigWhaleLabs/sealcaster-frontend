@@ -1,4 +1,4 @@
-import { Suspense, SuspenseList } from 'preact/compat'
+import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import CustomizeCard from 'components/BlockchainList/CustomizeCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -38,7 +38,7 @@ export function PostListSuspended() {
 
   const postsLength = posts.length
 
-  if (!thread) return <LoadingList text="Fetching posts..." />
+  if (!thread) return <LoadingList text="Fetching thread posts..." />
   if (postsLength === 0) return <NoPosts />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
 
@@ -53,23 +53,21 @@ export function PostListSuspended() {
     >
       {paginated.map(({ id, timestamp, post, sender }, index) => (
         <>
-          <SuspenseList revealOrder="forwards">
-            <Post
-              isQuestionOfTheDay={questionOfTheDayIds.includes(id.toNumber())}
-              canReply={
-                questionOfTheDayIds.includes(id.toNumber()) ||
-                sender === account
-              }
-              key={id}
-              blockchainId={Number(id)}
-              timestamp={Number(timestamp)}
-              text={post}
-              sender={sender}
-              tx={idToPostTx[Number(id)]}
-              limitThread={2}
-              clickablePost
-            />
-          </SuspenseList>
+          <Post
+            isQuestionOfTheDay={questionOfTheDayIds.includes(id.toNumber())}
+            canReply={
+              questionOfTheDayIds.includes(id.toNumber()) || sender === account
+            }
+            key={id}
+            blockchainId={Number(id)}
+            timestamp={Number(timestamp)}
+            text={post}
+            sender={sender}
+            tx={idToPostTx[Number(id) - 1]}
+            limitThread={2}
+            clickablePost
+          />
+
           {index === 2 && <CustomizeCard />}
         </>
       ))}
