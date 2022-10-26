@@ -13,6 +13,7 @@ type AllowedExtraClassnames =
   | 'stroke-text-secondary'
   | 'empty:hidden'
   | 'colorful-gradient'
+  | 'clip-background'
 
 export default function (
   ...classNames: (AllowedExtraClassnames | TTailwindString | undefined | null)[]
