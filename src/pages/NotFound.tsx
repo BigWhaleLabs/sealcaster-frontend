@@ -1,3 +1,4 @@
+import { Link } from 'wouter'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
 import Button from 'components/ui/Button'
 import classNamesToString from 'helpers/classNamesToString'
@@ -49,14 +50,16 @@ const displayFromMd = display('hidden', 'xl:block')
 function ReturnHomeButton() {
   return (
     <>
-      <a href="/" className={displayTo('sm')}>
-        <Button small type="primary">
-          Self destruct and leave
-        </Button>
-      </a>
-      <a href="/" className={displayFrom('sm')}>
-        <Button type="primary">Self destruct and leave</Button>
-      </a>
+      <Link to="/">
+        <div className={displayTo('sm')}>
+          <Button small type="primary">
+            Self destruct and leave
+          </Button>
+        </div>
+        <div className={displayFrom('sm')}>
+          <Button type="primary">Self destruct and leave</Button>
+        </div>
+      </Link>
     </>
   )
 }

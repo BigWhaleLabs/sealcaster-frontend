@@ -30,20 +30,20 @@ const overallWrapper = classnames(
   flexDirection('flex-col'),
   minHeight('min-h-screen')
 )
-const pageContainer = classnames(
-  display('flex'),
-  flexDirection('flex-col'),
-  flex('flex-1'),
-  overflow('overflow-x-hidden')
-)
-const bodyContainer = (marginTop?: boolean) =>
+const pageContainer = (noOverflow: boolean) =>
   classnames(
     display('flex'),
     flexDirection('flex-col'),
-    alignItems('items-center'),
-    width('body:w-body'),
-    margin('mx-4', 'body:mx-auto', { 'mt-auto': marginTop })
+    flex('flex-1'),
+    overflow({ 'overflow-x-hidden': noOverflow })
   )
+const bodyContainer = classnames(
+  display('flex'),
+  flexDirection('flex-col'),
+  alignItems('items-center'),
+  width('body:w-body'),
+  margin('mx-4', 'body:mx-auto')
+)
 
 export default function () {
   const [location] = useLocation()
@@ -55,13 +55,13 @@ export default function () {
     <Router>
       <div className={overallWrapper}>
         <Navbar />
-        <div className={pageContainer}>
+        <div className={pageContainer(!is404)}>
           {location === '/' && (
             <SliderTicker
               sentences={['spill your tea', 'snatch your burner wallet ']}
             />
           )}
-          <div className={bodyContainer(is404)}>
+          <div className={bodyContainer}>
             <div className={width('w-full')}>
               <Switch>
                 <Route path="/">
@@ -80,7 +80,7 @@ export default function () {
                   <Thread />
                 </Route>
                 <Route path="/404">
-                  <NotFound />
+                  <LazyComponent lazyImported={<NotFound />} />
                 </Route>
                 <Route path="">
                   <Redirect to="/404" />
