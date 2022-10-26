@@ -14,6 +14,7 @@ export default function relayProvider(
       paymasterAddress: env.VITE_GSN_PAYMASTER_CONTRACT_ADDRESS,
       preferredRelays: [env.VITE_GSN_SC_RELAY],
       blacklistedRelays: ['https://goerli.v3.opengsn.org/v3'],
+      requiredVersionRange: '3.0.0-beta.0',
     },
   }).init()
 }
