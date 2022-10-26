@@ -58,6 +58,9 @@ module.exports = {
         'primary-semi-dimmed': 'var(--primary-semi-dimmed)',
         'primary-dark-transparent': 'var(--primary-dark-transparent)',
       },
+      zIndex: {
+        minus: '-1',
+      },
       borderRadius: {
         avatar: '6rem',
       },

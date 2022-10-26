@@ -7391,6 +7391,7 @@ export type TZIndex =
   | 'z-40'
   | 'z-50'
   | 'z-auto'
+  | 'z-minus'
 
 export type TAspectRatio = 'aspect-auto' | 'aspect-square' | 'aspect-video'
 
