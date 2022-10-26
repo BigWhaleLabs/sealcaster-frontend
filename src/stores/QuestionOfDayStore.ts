@@ -1,7 +1,7 @@
 import { derive } from 'valtio/utils'
-import { farcasterContract } from 'stores/PostStore'
 import { proxy } from 'valtio'
 import getPostStatuses from 'helpers/getPostStatuses'
+import getPostStorage from 'helpers/getPostStorage'
 import getQuestionOfTheDayIds from 'helpers/getQuestionOfTheDayIds'
 import safeTransformPostOutput from 'helpers/safeTransformPostOutput'
 
@@ -10,9 +10,11 @@ interface QodStoreType {
   lastQoDId: Promise<number>
 }
 
+const contract = getPostStorage()
+
 const state = proxy<QodStoreType>({
-  qodAddress: farcasterContract.replyAllAddress(),
-  lastQoDId: getQuestionOfTheDayIds(farcasterContract).then((ids: number[]) =>
+  qodAddress: contract.replyAllAddress(),
+  lastQoDId: getQuestionOfTheDayIds(contract).then((ids: number[]) =>
     Math.max(...ids)
   ),
 })
@@ -25,7 +27,7 @@ const QodStore = derive(
 
       if (!merkleRoot.length) return
 
-      const post = await farcasterContract
+      const post = await contract
         .posts(lastId - 1)
         .then(safeTransformPostOutput)
       return { qod: post, merkleRoot: merkleRoot[0].serviceId }
@@ -34,14 +36,11 @@ const QodStore = derive(
   { proxy: state }
 )
 
-farcasterContract.on(
-  farcasterContract.filters.PostSaved(),
-  async (id, sender) => {
-    const replyToAll = await QodStore.qodAddress
-    if (sender !== replyToAll) return
+contract.on(contract.filters.PostSaved(), async (id, sender) => {
+  const replyToAll = await QodStore.qodAddress
+  if (sender !== replyToAll) return
 
-    QodStore.lastQoDId = Promise.resolve(id.toNumber())
-  }
-)
+  QodStore.lastQoDId = Promise.resolve(id.toNumber())
+})
 
 export default QodStore

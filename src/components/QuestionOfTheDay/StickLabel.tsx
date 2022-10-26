@@ -11,8 +11,7 @@ const badgeWrapper = classnames(
     '-right-2.5',
     'body:-right-12.5',
     'lg:!-right-25',
-    '-bottom-29',
-    'md:-bottom-30',
+    '-bottom-30',
     'lg:bottom-auto',
     'lg:!-top-2.5'
   ),
