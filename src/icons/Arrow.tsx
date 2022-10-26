@@ -9,6 +9,7 @@ import classnames, {
 
 const arrowAnimation = ({ pulseDisabled, openDisabled, open }: ArrowProps) =>
   classnames(
+    dropShadow('drop-shadow-secondary'),
     animation({ 'animate-pulse-horizontal': !pulseDisabled }),
     rotate({ 'rotate-180': !openDisabled && open }),
     transitionDuration('duration-300')
@@ -48,24 +49,17 @@ export default function ({
       <svg
         viewBox={horizontal ? '0 0 7 14' : '0 0 14 7'}
         xmlns="http://www.w3.org/2000/svg"
-        className={classnames(
-          arrowAnimation({
-            pulseDisabled,
-            openDisabled,
-            open,
-          }),
-          dropShadow('drop-shadow-secondary')
-        )}
+        className={arrowAnimation({
+          pulseDisabled,
+          openDisabled,
+          open,
+        })}
       >
         <path
           d="M10.75 1.25L6.25 5.75L1.75 1.25"
           stroke={`url(#${strokeId})`}
           stroke-width="2"
           transform={horizontal ? 'rotate(-90 7 7)' : undefined}
-          // className={classnames(
-          //   boxShadow('shadow-lg'),
-          //   boxShadowColor('shadow-secondary')
-          // )}
         />
         <defs>
           <linearGradient
