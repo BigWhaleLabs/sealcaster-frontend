@@ -22,12 +22,12 @@ export default async function ({
   replyToId?: string
   askReconnect?: boolean
 }) {
-  TextFormStore.loading = true
-  TextFormStore.error = null
+  TextFormStore.loading[replyToId] = true
+  TextFormStore.error[replyToId] = null
 
   let currentAccount
   const { privateKey } = BurnerWalletStore
-  let { account } = walletStore
+  const { account } = walletStore
 
   if (privateKey) currentAccount = new Wallet(privateKey).address
   if (account && (await hasFarcasterBadge(account))) currentAccount = account
@@ -71,10 +71,10 @@ export default async function ({
     if (!BurnerWalletStore.used) BurnerWalletStore.used = true
     TextFormStore.replyToText[replyToId] = ''
   } catch (error) {
-    TextFormStore.error = getErrorMessage(error)
+    TextFormStore.error[replyToId] = getErrorMessage(error)
     handleError(error)
   } finally {
-    TextFormStore.loading = false
+    TextFormStore.loading[replyToId] = false
     BurnerWalletStore.status = ''
   }
 }
