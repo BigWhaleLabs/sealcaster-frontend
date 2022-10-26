@@ -1,3 +1,4 @@
+import { displayFrom } from 'helpers/visibilityClassnames'
 import { useRef, useState } from 'preact/hooks'
 import QuestionOfTheDayLabel from 'icons/QuestionOfTheDayLabel'
 import Tilt from 'react-parallax-tilt'
@@ -5,12 +6,14 @@ import classnames, { inset, position, transforms } from 'classnames/tailwind'
 
 const badgeWrapper = classnames(
   position('absolute'),
+  displayFrom('xs'),
   inset(
     '-right-2.5',
     'body:-right-12.5',
     'lg:!-right-25',
-    'top-44',
-    'sm:top-32',
+    '-bottom-29',
+    'md:-bottom-30',
+    'lg:bottom-auto',
     'lg:!-top-2.5'
   ),
   transforms('-rotate-15')

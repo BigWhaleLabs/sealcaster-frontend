@@ -32,7 +32,7 @@ interface PostStoreType {
   idToPostTx: Promise<string[]>
 }
 
-const farcasterContract = getPostStorage()
+export const farcasterContract = getPostStorage()
 
 const limit = 20
 

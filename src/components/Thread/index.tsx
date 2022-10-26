@@ -6,6 +6,7 @@ import GoBackButton from 'components/Thread/GoBackButton'
 import LoadingPage from 'components/Thread/LoadingPage'
 import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
+import QuestionOfDayStore from 'stores/QuestionOfDayStore'
 import ThreadNotFound from 'components/Thread/ThreadNotFound'
 import useBadgeAccount from 'hooks/useBadgeAccount'
 import usePost from 'hooks/usePost'
@@ -13,7 +14,7 @@ import useScrollToTop from 'hooks/useScrollToTop'
 
 const SuspendedThread = () => {
   const [location] = useLocation()
-  const { questionOfTheDayIds } = useSnapshot(PostStore)
+  const { lastQoDId } = useSnapshot(QuestionOfDayStore)
   const account = useBadgeAccount()
   const blockchainId = Number(location.split('/')[2])
   const { idToPostTx } = useSnapshot(PostStore)
@@ -23,7 +24,7 @@ const SuspendedThread = () => {
   if (!postData) return <ThreadNotFound />
 
   const { id, post, timestamp, sender } = postData
-  const isQuestionOfTheDay = questionOfTheDayIds.includes(id.toNumber())
+  const isQuestionOfTheDay = lastQoDId === id.toNumber()
 
   return (
     <div className={space('space-y-5')}>

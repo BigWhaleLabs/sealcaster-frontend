@@ -158,6 +158,8 @@ module.exports = {
         '-12.5': '-3.125rem',
         '-25': '-6.25rem',
         '-27.5': '-6.875rem',
+        '-29': '-6.563rem',
+        '-30': '-7.5rem',
       },
       boxShadow: {
         'button-active': '0rem 0rem 0.375rem #000000',

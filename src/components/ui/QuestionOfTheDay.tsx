@@ -3,7 +3,8 @@ import { Link } from 'wouter'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import Card from 'components/ui/Card'
-import PostStore from 'stores/PostStore'
+import LoadingPost from 'components/Thread/LoadingPost'
+import QuestionOfDayStore from 'stores/QuestionOfDayStore'
 import Replies from 'components/BlockchainList/Replies'
 import Sender from 'components/BlockchainList/Sender'
 import StickLabel from 'components/QuestionOfTheDay/StickLabel'
@@ -16,8 +17,6 @@ import classnames, {
   position,
   space,
 } from 'classnames/tailwind'
-import useMerkleRoot from 'hooks/useMerkleRoot'
-import usePost from 'hooks/usePost'
 
 const postInfo = classnames(
   display('flex'),
@@ -28,32 +27,25 @@ const postInfo = classnames(
 )
 
 function QuestionsOfDaySuspended() {
-  const { questionOfTheDayIds } = useSnapshot(PostStore)
-
-  if (!questionOfTheDayIds.length) return null
-  const lastQuestionDay = Math.max(...questionOfTheDayIds)
-  const blockchainPost = usePost(lastQuestionDay)
-  const threadMerkleRoot = useMerkleRoot(lastQuestionDay)
-
-  if (!threadMerkleRoot || !blockchainPost) return null
-
-  const { post, sender } = blockchainPost
+  const { lastQoDId, lastQoDPost } = useSnapshot(QuestionOfDayStore)
+  if (!lastQoDPost || !lastQoDId) return null
+  const { qod, merkleRoot } = lastQoDPost
 
   return (
     <div className={position('relative')}>
       <Card hoverEffect>
-        <Link className={space('space-y-4')} to={`/thread/${lastQuestionDay}`}>
+        <Link className={space('space-y-4')} to={`/thread/${lastQoDId}`}>
           <QuestionOfDayText>Question of the day:</QuestionOfDayText>
-          <HeaderText size="medium">{post}</HeaderText>
+          <HeaderText size="medium">{qod.post}</HeaderText>
           <span className={postInfo}>
             <StatusText>Posted by: </StatusText>
-            <Sender sender={sender} />
+            <Sender sender={qod.sender} />
           </span>
         </Link>
         <StickLabel />
         <Replies
-          threadId={lastQuestionDay}
-          replyToId={threadMerkleRoot}
+          threadId={lastQoDId}
+          replyToId={merkleRoot}
           placeholder="Answer today’s question..."
           canReply
         />
@@ -64,7 +56,7 @@ function QuestionsOfDaySuspended() {
 
 export default function () {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<LoadingPost isQoD />}>
       <QuestionsOfDaySuspended />
     </Suspense>
   )
