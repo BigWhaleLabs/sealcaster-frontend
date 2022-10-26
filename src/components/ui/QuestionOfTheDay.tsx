@@ -1,5 +1,9 @@
-import { HeaderText, QuestionOfDayText, StatusText } from 'components/ui/Text'
 import { Link } from 'wouter'
+import {
+  QuestionOfDayPostText,
+  QuestionOfDayText,
+  StatusText,
+} from 'components/ui/Text'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import Card from 'components/ui/Card'
@@ -36,7 +40,7 @@ function QuestionsOfDaySuspended() {
       <Card hoverEffect>
         <Link className={space('space-y-4')} to={`/thread/${lastQoDId}`}>
           <QuestionOfDayText>Question of the day:</QuestionOfDayText>
-          <HeaderText size="medium">{qod.post}</HeaderText>
+          <QuestionOfDayPostText>{qod.post}</QuestionOfDayPostText>
           <span className={postInfo}>
             <StatusText>Posted by: </StatusText>
             <Sender sender={qod.sender} />
