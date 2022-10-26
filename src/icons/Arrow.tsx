@@ -17,7 +17,6 @@ const svgInnerWrapper = (reversed?: boolean, reversedOnMobiles?: boolean) =>
   classnames(
     width('w-full'),
     height('h-auto'),
-    dropShadow('drop-shadow-secondary'),
     rotate({
       'rotate-180': reversed || reversedOnMobiles,
       'md:rotate-0': reversedOnMobiles,
@@ -49,17 +48,24 @@ export default function ({
       <svg
         viewBox={horizontal ? '0 0 7 14' : '0 0 14 7'}
         xmlns="http://www.w3.org/2000/svg"
-        className={arrowAnimation({
-          pulseDisabled,
-          openDisabled,
-          open,
-        })}
+        className={classnames(
+          arrowAnimation({
+            pulseDisabled,
+            openDisabled,
+            open,
+          }),
+          dropShadow('drop-shadow-secondary')
+        )}
       >
         <path
           d="M10.75 1.25L6.25 5.75L1.75 1.25"
           stroke={`url(#${strokeId})`}
           stroke-width="2"
           transform={horizontal ? 'rotate(-90 7 7)' : undefined}
+          // className={classnames(
+          //   boxShadow('shadow-lg'),
+          //   boxShadowColor('shadow-secondary')
+          // )}
         />
         <defs>
           <linearGradient
