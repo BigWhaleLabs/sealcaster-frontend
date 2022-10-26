@@ -27,7 +27,7 @@ export default async function ({
 
   let currentAccount
   const { privateKey } = BurnerWalletStore
-  const { account } = walletStore
+  let { account } = walletStore
 
   if (privateKey) currentAccount = new Wallet(privateKey).address
   if (account && (await hasFarcasterBadge(account))) currentAccount = account
