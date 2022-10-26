@@ -80,7 +80,7 @@ export default function () {
                   <Thread />
                 </Route>
                 <Route path="/404">
-                  <LazyComponent lazyImported={<NotFound />} />
+                  <NotFound />
                 </Route>
                 <Route path="">
                   <Redirect to="/404" />

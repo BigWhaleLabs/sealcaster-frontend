@@ -49,18 +49,21 @@ const displayFromMd = display('hidden', 'xl:block')
 
 function ReturnHomeButton() {
   return (
-    <>
-      <Link to="/">
-        <div className={displayTo('sm')}>
-          <Button small type="primary">
-            Self destruct and leave
-          </Button>
-        </div>
-        <div className={displayFrom('sm')}>
-          <Button type="primary">Self destruct and leave</Button>
-        </div>
-      </Link>
-    </>
+    <Link
+      to="/"
+      onClick={() => {
+        document.title = 'Sealcaster'
+      }}
+    >
+      <div className={displayTo('sm')}>
+        <Button small type="primary">
+          Self destruct and leave
+        </Button>
+      </div>
+      <div className={displayFrom('sm')}>
+        <Button type="primary">Self destruct and leave</Button>
+      </div>
+    </Link>
   )
 }
 
