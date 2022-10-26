@@ -32,10 +32,15 @@ export default function ({
   const text = replyToText[replyToId] || ''
   const { status } = useSnapshot(BurnerWalletStore)
   const maxLength = 279
-  const errorMessage = error ? parseErrorText(error) : ''
+  const errorMessage = error[replyToId] ? parseErrorText(error[replyToId]) : ''
+  const showStatus = loading[replyToId] || !!error[replyToId]
 
   useEffect(() => {
-    if (account && TextFormStore.error && !TextFormStore.loading)
+    if (
+      account &&
+      TextFormStore.error[replyToId] &&
+      !TextFormStore.loading[replyToId]
+    )
       void createPost({
         ['text']: TextFormStore.replyToText[replyToId] || '',
         threadId,
@@ -48,14 +53,14 @@ export default function ({
     <div className={space('md:space-y-4', 'space-y-8')}>
       <TextArea
         text={text}
-        disabled={loading || !!error}
+        disabled={showStatus}
         placeholder={placeHolder}
         onTextChange={(text) => {
           TextFormStore.replyToText[replyToId] = text
         }}
         maxLength={maxLength}
       />
-      {loading || error ? (
+      {showStatus ? (
         <VerifyWallet
           status={status}
           text={
@@ -63,11 +68,11 @@ export default function ({
               ? 'Hang tight! We’re casting now.'
               : 'We need to verify that you are indeed a Farcaster user. Please connect the wallet you have connected to Farcaster to attest your identity. Don’t worry, we will not use this wallet to post or to point back to you in any way.'
           }
-          error={error}
+          error={error[replyToId]}
         />
       ) : (
         <TextareaInfo
-          loading={loading}
+          loading={loading[replyToId]}
           onButtonClick={() => {
             void createPost({ text, threadId, replyToId })
           }}
