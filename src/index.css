@@ -164,6 +164,11 @@ circle {
   box-shadow: inset 0rem 0rem 0.5rem 0 var(--light-formal-accent);
 }
 
+.clip-background {
+  clip-path: inset(1px);
+  padding: 1px;
+}
+
 .animated-border::before {
   content: '';
   position: absolute;

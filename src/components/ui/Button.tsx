@@ -32,6 +32,7 @@ import {
 } from 'classnames/tailwind'
 import Arrow from 'icons/Arrow'
 import Loading from 'icons/Loading'
+import classNamesToString from 'helpers/classNamesToString'
 
 const commonClasses = ({
   type,
@@ -53,6 +54,7 @@ const commonClasses = ({
   heightFit?: boolean
 }) => {
   const isNotTertiary = type !== 'tertiary'
+
   return classnames(
     display('flex'),
     gap('gap-x-2'),
@@ -174,6 +176,8 @@ const textGradient = (available?: boolean) =>
     backgroundImage('bg-gradient-to-r'),
     gradientColorStops('from-secondary', 'to-accent')
   )
+const textGradientClasses = (available?: boolean) =>
+  classNamesToString(textGradient(available), 'clip-background')
 
 interface ButtonProps {
   type: ButtonType
@@ -233,7 +237,7 @@ export default function ({
       {showContent && (
         <>
           {gradientFont ? (
-            <span className={textGradient(available)}>{children}</span>
+            <span className={textGradientClasses(available)}>{children}</span>
           ) : (
             <>{children}</>
           )}
