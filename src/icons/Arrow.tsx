@@ -9,6 +9,7 @@ import classnames, {
 
 const arrowAnimation = ({ pulseDisabled, openDisabled, open }: ArrowProps) =>
   classnames(
+    dropShadow('drop-shadow-secondary'),
     animation({ 'animate-pulse-horizontal': !pulseDisabled }),
     rotate({ 'rotate-180': !openDisabled && open }),
     transitionDuration('duration-300')
@@ -17,7 +18,6 @@ const svgInnerWrapper = (reversed?: boolean, reversedOnMobiles?: boolean) =>
   classnames(
     width('w-full'),
     height('h-auto'),
-    dropShadow('drop-shadow-secondary'),
     rotate({
       'rotate-180': reversed || reversedOnMobiles,
       'md:rotate-0': reversedOnMobiles,
