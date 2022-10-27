@@ -8,7 +8,7 @@ export default function () {
   const { privateKey, generatingBurner } = useSnapshot(BurnerWalletStore)
 
   if (generatingBurner || privateKey)
-    return privateKey ? new Wallet(privateKey).address : undefined
+    return privateKey ? new Wallet(privateKey).address : account
 
   return account
 }
