@@ -1,4 +1,4 @@
-import { derive, subscribeKey } from 'valtio/utils'
+import { derive } from 'valtio/utils'
 import { proxy } from 'valtio'
 import getPostStatuses from 'helpers/getPostStatuses'
 import getPostStorage from 'helpers/getPostStorage'
@@ -8,7 +8,6 @@ import safeTransformPostOutput from 'helpers/safeTransformPostOutput'
 interface QodStoreType {
   qodAddress: Promise<string>
   allQodPostIds: Promise<number[]>
-  lastQoDId: Promise<number | undefined>
 }
 
 const contract = getPostStorage()
@@ -16,20 +15,13 @@ const contract = getPostStorage()
 const state = proxy<QodStoreType>({
   qodAddress: contract.replyAllAddress(),
   allQodPostIds: getQuestionOfTheDayIds(contract),
-  lastQoDId: Promise.resolve(undefined),
-})
-
-subscribeKey(state, 'allQodPostIds', async (allQodPostIds) => {
-  const listOfIds = await allQodPostIds
-  state.lastQoDId = Promise.resolve(
-    listOfIds.length ? Math.max(...listOfIds) : undefined
-  )
 })
 
 const QodStore = derive(
   {
     lastQoDPost: async (get) => {
-      const lastId = await get(state).lastQoDId
+      const qodIds = await get(state).allQodPostIds
+      const lastId = qodIds.length ? Math.max(...qodIds) : undefined
       if (!lastId) return
 
       const merkleRoot = await getPostStatuses([lastId])
