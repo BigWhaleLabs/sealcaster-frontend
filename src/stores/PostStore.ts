@@ -7,6 +7,7 @@ import { proxy } from 'valtio'
 import { subscribeKey } from 'valtio/utils'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
+import QuestionOfDayStore from 'stores/QuestionOfDayStore'
 import ReplyIdDefault from 'models/ReplyId'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
@@ -145,6 +146,17 @@ farcasterContract.on(
     PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(
       PostStatus.pending
     )
+
+    /* Check if sender is the `replayAll` address */
+    const replyToAll = await QuestionOfDayStore.qodAddress
+    if (sender !== replyToAll) return
+
+    /* Add new post as QoD */
+    const allQodPostIds = await QuestionOfDayStore.allQodPostIds
+    QuestionOfDayStore.allQodPostIds = Promise.resolve([
+      ...allQodPostIds,
+      id.toNumber(),
+    ])
   }
 )
 

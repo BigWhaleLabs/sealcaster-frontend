@@ -31,7 +31,8 @@ const postInfo = classnames(
 )
 
 function QuestionsOfDaySuspended() {
-  const { lastQoDId, lastQoDPost } = useSnapshot(QuestionOfDayStore)
+  const { allQodPostIds, lastQoDPost } = useSnapshot(QuestionOfDayStore)
+  const lastQoDId = Math.max(...allQodPostIds)
   if (!lastQoDPost || !lastQoDId) return null
   const { qod, merkleRoot } = lastQoDPost
 

@@ -14,7 +14,7 @@ import useScrollToTop from 'hooks/useScrollToTop'
 
 const SuspendedThread = () => {
   const [location] = useLocation()
-  const { lastQoDId } = useSnapshot(QuestionOfDayStore)
+  const { allQodPostIds } = useSnapshot(QuestionOfDayStore)
   const account = useBadgeAccount()
   const blockchainId = Number(location.split('/')[2])
   const { idToPostTx } = useSnapshot(PostStore)
@@ -24,7 +24,7 @@ const SuspendedThread = () => {
   if (!postData) return <ThreadNotFound />
 
   const { id, post, timestamp, sender } = postData
-  const isQuestionOfTheDay = lastQoDId === id.toNumber()
+  const isQuestionOfTheDay = allQodPostIds.includes(id.toNumber())
 
   return (
     <div className={space('space-y-5')}>

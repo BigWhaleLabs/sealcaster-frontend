@@ -30,7 +30,7 @@ const scrollContainer = classnames(
 export function PostListSuspended() {
   const account = useBadgeAccount()
   const { idToPostTx, limit } = useSnapshot(PostStore)
-  const { lastQoDId } = useSnapshot(QuestionOfDayStore)
+  const { allQodPostIds } = useSnapshot(QuestionOfDayStore)
   const thread = useThread(0)
   const hashId = useHashParams()
 
@@ -54,8 +54,10 @@ export function PostListSuspended() {
       {paginated.map(({ id, timestamp, post, sender }, index) => (
         <>
           <Post
-            isQuestionOfTheDay={lastQoDId === id.toNumber()}
-            canReply={lastQoDId === id.toNumber() || sender === account}
+            isQuestionOfTheDay={allQodPostIds.includes(id.toNumber())}
+            canReply={
+              allQodPostIds.includes(id.toNumber()) || sender === account
+            }
             key={id}
             blockchainId={Number(id)}
             timestamp={Number(timestamp)}
