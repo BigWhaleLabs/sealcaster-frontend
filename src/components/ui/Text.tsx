@@ -580,7 +580,8 @@ const questionOfDayPostText = classnames(
   fontFamily('font-primary'),
   fontWeight('font-bold'),
   fontSize('text-2xl'),
-  lineHeight('!leading-8')
+  lineHeight('!leading-8'),
+  whitespace('whitespace-pre-wrap')
 )
 export function QuestionOfDayPostText({ children }: ChildrenProp) {
   return <h1 className={questionOfDayPostText}>{children}</h1>
