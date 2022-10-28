@@ -21,7 +21,7 @@ const QodStore = derive(
   {
     lastQoDPost: async (get) => {
       const qodIds = await get(state).allQodPostIds
-      const lastId = qodIds.length ? Math.max(...qodIds) : undefined
+      const lastId = !!qodIds.length && Math.max(...qodIds)
       if (!lastId) return
 
       const merkleRoot = await getPostStatuses([lastId])

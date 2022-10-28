@@ -147,15 +147,13 @@ farcasterContract.on(
       PostStatus.pending
     )
 
-    /* Check if sender is the `replayAll` address */
     const replyToAll = await QuestionOfDayStore.qodAddress
     if (sender !== replyToAll) return
 
-    /* Add new post as QoD */
     const allQodPostIds = await QuestionOfDayStore.allQodPostIds
     QuestionOfDayStore.allQodPostIds = Promise.resolve([
-      ...allQodPostIds,
       id.toNumber(),
+      ...allQodPostIds,
     ])
   }
 )
