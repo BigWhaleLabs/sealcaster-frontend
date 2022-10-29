@@ -31,7 +31,7 @@ export default function ({
   })
   const text = replyToText[replyToId] || ''
   const { status } = useSnapshot(BurnerWalletStore)
-  const maxLength = 319
+  const maxLength = 279
   const errorMessage = error[replyToId] ? parseErrorText(error[replyToId]) : ''
   const showStatus = loading[replyToId] || !!error[replyToId]
 
