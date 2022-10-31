@@ -112,7 +112,7 @@ const Replies = ({
     data.replyToId = roots[postId]
   }
 
-  const { id, content, replier, replierAddress, timestamp, replyToId } = data
+  const { id, content, replier, timestamp, replyToId } = data
 
   if (!replyToId || hideReplies) {
     return (
@@ -120,7 +120,6 @@ const Replies = ({
         threadId={threadId}
         content={content}
         replier={replier}
-        replierAddress={replierAddress}
         timestamp={timestamp}
         canReply={canReply}
         replyToId={replyToId}
@@ -134,7 +133,6 @@ const Replies = ({
       id={id}
       content={content}
       replier={replier}
-      replierAddress={replierAddress}
       threadId={threadId}
       timestamp={timestamp}
       replyToId={replyToId}
@@ -162,7 +160,6 @@ export function CommentWithReplies({
   id: rootId,
   content,
   replier,
-  replierAddress,
   repliedTo,
   timestamp,
   threadId,
@@ -170,7 +167,6 @@ export function CommentWithReplies({
   canReply,
 }: Comment & {
   replyToId: string
-  replierAddress: string
   canReply?: boolean
 }) {
   const replies = useReplies({
@@ -188,7 +184,6 @@ export function CommentWithReplies({
         replyToId={replyToId}
         content={content}
         replier={replier}
-        replierAddress={replierAddress}
         repliedTo={repliedTo}
         timestamp={timestamp}
         canReply={canReply}
