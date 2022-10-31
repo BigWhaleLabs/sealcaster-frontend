@@ -17,7 +17,6 @@ class WalletStore extends PersistableStore {
   hasFarcasterBadge?: Promise<boolean>
   acceptedNotBurner = false
   walletLoading = false
-  needNetworkChange = false
 
   changeAccount(account?: string) {
     this.account = account
@@ -42,19 +41,26 @@ class WalletStore extends PersistableStore {
     return web3Modal.cachedProvider
   }
 
-  async connect(clearCachedProvider = false) {
+  async connect(clearCachedProvider = false, checkNetwork = false) {
     this.walletLoading = true
     try {
       if (clearCachedProvider) web3Modal.clearCachedProvider()
 
       const instance = await web3Modal.connect()
       provider = new Web3Provider(instance)
-      const userNetwork = (await provider.getNetwork()).name
-      await this.checkNetwork(provider, userNetwork)
-      if (this.needNetworkChange)
+      if (
+        checkNetwork &&
+        !(await this.checkNetwork()) &&
+        !(await this.requestChangeNetwork())
+      ) {
+        console.log('checkNetwork')
         throw new Error(
-          ErrorList.wrongNetwork(userNetwork, env.VITE_ETH_NETWORK)
+          ErrorList.wrongNetwork(
+            await walletStore.currentNetwork(),
+            env.VITE_ETH_NETWORK
+          )
         )
+      }
       const account = (await provider.listAccounts())[0]
       this.changeAccount(account)
       this.subscribeProvider(instance)
@@ -68,30 +74,36 @@ class WalletStore extends PersistableStore {
     }
   }
 
-  private async checkNetwork(provider: Web3Provider, userNetwork: string) {
-    const network = env.VITE_ETH_NETWORK
-    if (userNetwork === network) return (this.needNetworkChange = false)
-
-    this.needNetworkChange = true
-    await this.requestChangeNetwork(provider)
+  async currentNetwork() {
+    if (!provider) throw new Error(ErrorList.noProvider)
+    return (await provider.getNetwork()).name
   }
 
-  private async requestChangeNetwork(provider: Web3Provider) {
+  async checkNetwork() {
+    if (!provider) throw new Error(ErrorList.noProvider)
+    const userNetwork = await this.currentNetwork()
+    const network = env.VITE_ETH_NETWORK
+
+    return userNetwork === network
+  }
+
+  private async requestChangeNetwork() {
+    if (!provider) throw new Error(ErrorList.noProvider)
     const index = Object.values(networkChainIdToName).findIndex(
       (name) => name === env.VITE_ETH_NETWORK
     )
+
     const chainId = Object.keys(networkChainIdToName)[index]
 
     try {
       await provider.send('wallet_switchEthereumChain', [{ chainId }])
-      this.needNetworkChange = false
     } catch (error) {
       const code = serializeError(error).code
-      if (code !== 4902) return
+      if (code !== 4902) return false
 
       await provider.send('wallet_addEthereumChain', [chainForWallet()])
-      this.needNetworkChange = false
     }
+    return true
   }
 
   private async handleAccountChanged() {

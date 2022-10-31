@@ -13,19 +13,22 @@ export default function ({
   needNetworkChange: boolean
   eNSName?: string
 }) {
-  const NotConnected = () =>
-    needNetworkChange ? (
-      <span>Change network</span>
-    ) : (
-      <div
-        onClick={async () => {
-          await walletStore.connect(true)
-        }}
-      >
-        <span className={displayTo('lg')}>No wallet</span>
-        <span className={displayFrom('lg')}>Connect burner wallet</span>
-      </div>
-    )
+  const NotConnected = () => (
+    <div
+      onClick={async () => {
+        await walletStore.connect(true, true)
+      }}
+    >
+      {needNetworkChange ? (
+        <span>Change network</span>
+      ) : (
+        <>
+          <span className={displayTo('lg')}>No wallet</span>
+          <span className={displayFrom('lg')}>Connect burner wallet</span>
+        </>
+      )}
+    </div>
+  )
 
   return (
     <AccentText
