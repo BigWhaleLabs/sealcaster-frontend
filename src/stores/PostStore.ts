@@ -47,8 +47,10 @@ const PostStore = proxy<PostStoreType>({
   createPost: async (text: string, threadId: number, replyToId?: string) => {
     let signer = await BurnerWalletStore.getSigner()
 
-    if (!signer && (await walletStore.hasFarcasterBadge))
+    if (!signer && (await walletStore.hasFarcasterBadge)) {
+      await walletStore.checkNetowrkAndRequestChange()
       signer = await walletStore.getSigner()
+    }
 
     if (!signer) throw new Error('Not found burner wallet!')
 
