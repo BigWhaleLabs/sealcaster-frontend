@@ -1,5 +1,4 @@
 import { BigNumber } from 'ethers'
-import { ErrorList } from '@big-whale-labs/frontend-utils'
 import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Result } from 'ethers/lib/utils'
@@ -49,19 +48,8 @@ const PostStore = proxy<PostStoreType>({
     let signer = await BurnerWalletStore.getSigner()
 
     if (!signer && (await walletStore.hasFarcasterBadge)) {
-      if (
-        (await walletStore.checkNetwork()) ||
-        (await walletStore.requestChangeNetwork())
-      ) {
-        signer = await walletStore.getSigner()
-      } else {
-        throw new Error(
-          ErrorList.wrongNetwork(
-            await walletStore.currentNetwork(),
-            env.VITE_ETH_NETWORK
-          )
-        )
-      }
+      await walletStore.checkNetowrkAndRequestChange()
+      signer = await walletStore.getSigner()
     }
 
     if (!signer) throw new Error('Not found burner wallet!')

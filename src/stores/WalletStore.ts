@@ -41,26 +41,19 @@ class WalletStore extends PersistableStore {
     return web3Modal.cachedProvider
   }
 
-  async connect(clearCachedProvider = false, checkNetwork = false) {
+  async connect(options?: {
+    clearCachedProvider?: boolean
+    checkNetwork?: boolean
+  }) {
+    const { clearCachedProvider = false, checkNetwork = false } = options || {}
+
     this.walletLoading = true
     try {
       if (clearCachedProvider) web3Modal.clearCachedProvider()
 
       const instance = await web3Modal.connect()
       provider = new Web3Provider(instance)
-      if (
-        checkNetwork &&
-        !(await this.checkNetwork()) &&
-        !(await this.requestChangeNetwork())
-      ) {
-        console.log('checkNetwork')
-        throw new Error(
-          ErrorList.wrongNetwork(
-            await walletStore.currentNetwork(),
-            env.VITE_ETH_NETWORK
-          )
-        )
-      }
+      if (checkNetwork) await this.checkNetowrkAndRequestChange()
       const account = (await provider.listAccounts())[0]
       this.changeAccount(account)
       this.subscribeProvider(instance)
@@ -81,14 +74,30 @@ class WalletStore extends PersistableStore {
 
   async checkNetwork() {
     if (!provider) throw new Error(ErrorList.noProvider)
+
     const userNetwork = await this.currentNetwork()
     const network = env.VITE_ETH_NETWORK
 
     return userNetwork === network
   }
 
-  private async requestChangeNetwork() {
+  async checkNetowrkAndRequestChange() {
+    if (
+      !(await walletStore.checkNetwork()) &&
+      !(await walletStore.requestChangeNetwork())
+    ) {
+      throw new Error(
+        ErrorList.wrongNetwork(
+          await walletStore.currentNetwork(),
+          env.VITE_ETH_NETWORK
+        )
+      )
+    }
+  }
+
+  async requestChangeNetwork() {
     if (!provider) throw new Error(ErrorList.noProvider)
+
     const index = Object.values(networkChainIdToName).findIndex(
       (name) => name === env.VITE_ETH_NETWORK
     )
