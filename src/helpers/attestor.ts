@@ -1,6 +1,4 @@
-import BalanceSignature from 'models/BalanceSignature'
 import FarcasterSignature from 'models/FarcasterSignature'
-import Network from 'models/Network'
 import PublicKey from 'models/PublicKey'
 import Signature from 'models/Signature'
 import axios from 'axios'
@@ -15,19 +13,6 @@ export async function requestAddressOwnershipAttestation(
   const { data } = await axios.post<Signature>(`${baseURL}/ethereum-address`, {
     signature,
     message,
-  })
-  return data
-}
-
-export async function requestBalanceAttestation(
-  tokenAddress: string,
-  network: Network,
-  ownerAddress: string
-) {
-  const { data } = await axios.post<BalanceSignature>(`${baseURL}/balance`, {
-    tokenAddress,
-    network,
-    ownerAddress,
   })
   return data
 }
