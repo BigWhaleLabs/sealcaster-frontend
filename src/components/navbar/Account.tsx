@@ -16,7 +16,10 @@ export default function ({
   const NotConnected = () => (
     <div
       onClick={async () => {
-        await walletStore.connect(true, true)
+        await walletStore.connect({
+          clearCachedProvider: true,
+          checkNetwork: true,
+        })
       }}
     >
       {needNetworkChange ? (

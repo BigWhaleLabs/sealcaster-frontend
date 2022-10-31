@@ -37,7 +37,10 @@ export default async function ({
 
   try {
     if (!currentAccount) {
-      if (!account && askReconnect) account = await walletStore.connect(true)
+      if (!account && askReconnect)
+        account = await walletStore.connect({
+          clearCachedProvider: true,
+        })
       if (!account) throw 'Please, connect an account with badge'
 
       const newPrivateKey = await BurnerWalletStore.generateBurnerWallet(
