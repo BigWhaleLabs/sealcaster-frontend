@@ -1,5 +1,6 @@
 import { BodyText, LinkText } from 'components/ui/Text'
 import { displayFrom, displayTo } from 'helpers/visibilityClassnames'
+import { isAddress } from 'ethers/lib/utils'
 import { truncateMiddleIfNeeded } from '@big-whale-labs/frontend-utils'
 import { useState } from 'preact/hooks'
 import BareCard from 'components/BareCard'
@@ -16,6 +17,7 @@ import classnames, {
   justifyContent,
   space,
 } from 'classnames/tailwind'
+import getEtherscanAddressUrl from 'helpers/getEtherscanAddressUrl'
 
 const commentWithReplyButton = classnames(
   display('flex'),
@@ -35,31 +37,31 @@ const infoBlock = classnames(
   gap('gap-x-2')
 )
 
-const TruncatedAddress = ({
-  address,
-  name,
-}: {
-  address: string
-  name: string
-}) => (
-  <>
-    <div className={displayFrom('md')}>
-      <LinkText url={`farcaster://profiles/${address}`} extraSmall primary>
-        {truncateMiddleIfNeeded(name, 16)}
-      </LinkText>
-    </div>
-    <div className={displayTo('md')}>
-      <LinkText url={`farcaster://profiles/${address}`} extraSmall primary>
-        {truncateMiddleIfNeeded(name, 12)}
-      </LinkText>
-    </div>
-  </>
-)
+const TruncatedAddress = ({ name }: { name: string }) => {
+  const isEthAddress = isAddress(name)
+  const linkToUser = isEthAddress
+    ? getEtherscanAddressUrl(name)
+    : `farcaster://profiles/${name}`
+
+  return (
+    <>
+      <div className={displayFrom('md')}>
+        <LinkText url={linkToUser} extraSmall primary>
+          {truncateMiddleIfNeeded(name, 16)}
+        </LinkText>
+      </div>
+      <div className={displayTo('md')}>
+        <LinkText url={linkToUser} extraSmall primary>
+          {truncateMiddleIfNeeded(name, 12)}
+        </LinkText>
+      </div>
+    </>
+  )
+}
 
 export default function ({
   content,
   replier,
-  replierAddress,
   timestamp,
   threadId,
   replyToId,
@@ -68,7 +70,6 @@ export default function ({
 }: {
   content: string
   replier: string
-  replierAddress: string
   timestamp: number
   repliedTo?: string
 } & ReplyModel) {
@@ -81,7 +82,7 @@ export default function ({
           <div className={commentWithData}>
             <BodyText>{content}</BodyText>
             <div className={infoBlock}>
-              <TruncatedAddress address={replierAddress} name={replier} />
+              <TruncatedAddress name={replier} />
               <Delimiter color="bg-formal-accent" />
               <PostTime timestamp={timestamp} />
             </div>
