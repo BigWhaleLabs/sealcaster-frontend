@@ -76,7 +76,7 @@ export default function () {
                 <Route path="/wallet">
                   <BurnerWallet />
                 </Route>
-                <Route path="/thread/:blockchainId">
+                <Route path="/thread">
                   <Thread />
                 </Route>
                 <Route path="/404">

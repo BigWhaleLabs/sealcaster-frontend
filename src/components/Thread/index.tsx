@@ -1,6 +1,5 @@
 import { Suspense } from 'preact/compat'
 import { space } from 'classnames/tailwind'
-import { useLocation } from 'wouter'
 import { useSnapshot } from 'valtio'
 import GoBackButton from 'components/Thread/GoBackButton'
 import LoadingPage from 'components/Thread/LoadingPage'
@@ -8,14 +7,16 @@ import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
 import ThreadNotFound from 'components/Thread/ThreadNotFound'
 import useBadgeAccount from 'hooks/useBadgeAccount'
+import useHashParams from 'hooks/useHashParams'
 import usePost from 'hooks/usePost'
 import useScrollToTop from 'hooks/useScrollToTop'
 
 const SuspendedThread = () => {
-  const [location] = useLocation()
+  const hashId = useHashParams()
+  if (!hashId) return <ThreadNotFound />
   const { questionOfTheDayIds } = useSnapshot(PostStore)
   const account = useBadgeAccount()
-  const blockchainId = Number(location.split('/')[2])
+  const blockchainId = Number(hashId)
   const { idToPostTx } = useSnapshot(PostStore)
   const postData = usePost(blockchainId)
   useScrollToTop()
