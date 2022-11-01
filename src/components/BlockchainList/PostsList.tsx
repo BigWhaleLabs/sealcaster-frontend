@@ -6,6 +6,7 @@ import LoadingList from 'components/BlockchainList/LoadingList'
 import NoPosts from 'components/BlockchainList/NoPosts'
 import Post from 'components/BlockchainList/Post'
 import PostStore from 'stores/PostStore'
+import QuestionOfDayStore from 'stores/QuestionOfDayStore'
 import classnames, {
   display,
   flexDirection,
@@ -28,7 +29,8 @@ const scrollContainer = classnames(
 
 export function PostListSuspended() {
   const account = useBadgeAccount()
-  const { idToPostTx, limit, questionOfTheDayIds } = useSnapshot(PostStore)
+  const { idToPostTx, limit } = useSnapshot(PostStore)
+  const { allQodPostIds } = useSnapshot(QuestionOfDayStore)
   const thread = useThread(0)
   const hashId = useHashParams()
 
@@ -52,9 +54,9 @@ export function PostListSuspended() {
       {paginated.map(({ id, timestamp, post, sender }, index) => (
         <>
           <Post
-            isQuestionOfTheDay={questionOfTheDayIds.includes(id.toNumber())}
+            isQuestionOfTheDay={allQodPostIds.includes(id.toNumber())}
             canReply={
-              questionOfTheDayIds.includes(id.toNumber()) || sender === account
+              allQodPostIds.includes(id.toNumber()) || sender === account
             }
             key={id}
             blockchainId={Number(id)}

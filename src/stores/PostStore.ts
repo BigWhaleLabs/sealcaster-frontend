@@ -7,11 +7,11 @@ import { proxy } from 'valtio'
 import { subscribeKey } from 'valtio/utils'
 import BurnerWalletStore from 'stores/BurnerWalletStore'
 import PostIdsStatuses from 'stores/PostIdsStatuses'
+import QuestionOfDayStore from 'stores/QuestionOfDayStore'
 import ReplyIdDefault from 'models/ReplyId'
 import env from 'helpers/env'
 import getIdsToPostsTx from 'helpers/getIdsToPostsTx'
 import getPostStorage from 'helpers/getPostStorage'
-import getQuestionOfTheDayIds from 'helpers/getQuestionOfTheDayIds'
 import parsePostLogData from 'helpers/parsePostLogData'
 import safeGetThreadFromContract from 'helpers/safeGetThreadFromContract'
 import safeTransformPostOutput from 'helpers/safeTransformPostOutput'
@@ -20,7 +20,6 @@ import walletStore from 'stores/WalletStore'
 interface PostStoreType {
   limit: number
   countPosts: Promise<BigNumber>
-  questionOfTheDayIds: Promise<number[]>
   posts: { [postId: number]: Promise<PostStructOutput> }
   requested: { [postId: number]: boolean }
   threads: { [threadId: number]: Promise<number[]> }
@@ -39,7 +38,6 @@ const limit = 20
 const PostStore = proxy<PostStoreType>({
   limit,
   countPosts: farcasterContract.currentPostId(),
-  questionOfTheDayIds: getQuestionOfTheDayIds(farcasterContract),
   threads: {},
   posts: {},
   requested: {},
@@ -150,6 +148,15 @@ farcasterContract.on(
     PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(
       PostStatus.pending
     )
+
+    const replyToAll = await QuestionOfDayStore.qodAddress
+    if (sender !== replyToAll) return
+
+    const allQodPostIds = await QuestionOfDayStore.allQodPostIds
+    QuestionOfDayStore.allQodPostIds = Promise.resolve([
+      id.toNumber(),
+      ...allQodPostIds,
+    ])
   }
 )
 

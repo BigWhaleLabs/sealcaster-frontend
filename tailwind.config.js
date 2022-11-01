@@ -155,9 +155,9 @@ module.exports = {
       },
       inset: {
         '-2.5': '-0.65rem',
-        '-12.5': '-3.125rem',
+        '-12.5': '-3.12rem',
         '-25': '-6.25rem',
-        '-27.5': '-6.875rem',
+        '-30': '-7.5rem',
       },
       boxShadow: {
         'button-active': '0rem 0rem 0.375rem #000000',
