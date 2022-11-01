@@ -22,6 +22,7 @@ import classnames, {
   overflow,
   width,
 } from 'classnames/tailwind'
+import useHashLocation from 'hooks/useHashLocation'
 
 const Landing = lazy(() => import('pages/Landing'))
 
@@ -52,7 +53,7 @@ export default function () {
   const is404 = location === '/404'
 
   return (
-    <Router>
+    <Router hook={useHashLocation}>
       <div className={overallWrapper}>
         <Navbar />
         <div className={pageContainer(!is404)}>
