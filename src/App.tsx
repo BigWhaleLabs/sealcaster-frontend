@@ -1,4 +1,4 @@
-import { Redirect, Route, Router, Switch, useLocation } from 'wouter'
+import { Redirect, Route, Router, Switch } from 'wouter'
 import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import BurnerWallet from 'pages/BurnerWallet'
@@ -22,6 +22,7 @@ import classnames, {
   overflow,
   width,
 } from 'classnames/tailwind'
+import useHashLocation from 'hooks/useHashLocation'
 
 const Landing = lazy(() => import('pages/Landing'))
 
@@ -46,13 +47,13 @@ const bodyContainer = classnames(
 )
 
 export default function () {
-  const [location] = useLocation()
+  const [location] = useHashLocation()
   const displayScrollToTop =
     location === '/' || location === '/cast' || location === '/thread'
   const is404 = location === '/404'
 
   return (
-    <Router>
+    <Router hook={useHashLocation}>
       <div className={overallWrapper}>
         <Navbar />
         <div className={pageContainer(!is404)}>
