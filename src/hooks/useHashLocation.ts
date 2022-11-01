@@ -9,17 +9,17 @@ const currentLocation = () => {
 const navigate = (to: string) => (window.location.hash = to)
 
 const useHashLocation: BaseLocationHook = () => {
-  const [loc, setLoc] = useState(currentLocation())
+  const [location, setLocation] = useState(currentLocation())
 
   useEffect(() => {
-    const handler = () => setLoc(currentLocation())
+    const handler = () => setLocation(currentLocation())
 
     // subscribe to hash changes
     window.addEventListener('hashchange', handler)
     return () => window.removeEventListener('hashchange', handler)
   }, [])
 
-  return [loc, navigate]
+  return [location, navigate]
 }
 
 export default useHashLocation
