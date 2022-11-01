@@ -1,4 +1,4 @@
-import { Redirect, Route, Router, Switch, useLocation } from 'wouter'
+import { Redirect, Route, Router, Switch } from 'wouter'
 import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import BurnerWallet from 'pages/BurnerWallet'
@@ -47,7 +47,7 @@ const bodyContainer = classnames(
 )
 
 export default function () {
-  const [location] = useLocation()
+  const [location] = useHashLocation()
   const displayScrollToTop =
     location === '/' || location === '/cast' || location === '/thread'
   const is404 = location === '/404'

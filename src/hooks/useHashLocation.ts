@@ -1,12 +1,10 @@
 import { BaseLocationHook } from 'wouter'
-import { useEffect, useState } from 'preact/hooks'
+import { useCallback, useEffect, useState } from 'preact/hooks'
 
 // returns the current hash location in a normalized form
 const currentLocation = () => {
   return window.location.hash.replace(/^#/, '') || '/'
 }
-
-const navigate = (to: string) => (window.location.hash = to)
 
 const useHashLocation: BaseLocationHook = () => {
   const [location, setLocation] = useState(currentLocation())
@@ -19,6 +17,7 @@ const useHashLocation: BaseLocationHook = () => {
     return () => window.removeEventListener('hashchange', handler)
   }, [])
 
+  const navigate = useCallback((to: string) => (window.location.hash = to), [])
   return [location, navigate]
 }
 
