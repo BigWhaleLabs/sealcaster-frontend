@@ -9,7 +9,6 @@ import removeConsole from 'vite-plugin-remove-console'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 
 export default defineConfig({
-  base: '/',
   plugins: [preact(), tsconfigPaths()],
   resolve: { alias: { assert: 'assert-browserify' } },
   build: {
