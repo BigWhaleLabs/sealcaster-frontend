@@ -79,7 +79,7 @@ function ThreadPartSuspended({
         )
       )}
       {limitThread && repliesLength > 3 && (
-        <Link to={`/thread/${postId}`}>
+        <Link to={`#/thread/${postId}`}>
           <div className={cursor('cursor-pointer')}>
             <BareCard smallPaddings>
               <AccentText color="text-accent" small>

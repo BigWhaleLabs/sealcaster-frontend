@@ -88,7 +88,7 @@ export default function ({
             )
               return
 
-            setLocation(`/thread/${blockchainId}`)
+            setLocation(`#/thread/${blockchainId}`)
           }}
           className={container(clickablePost)}
         >

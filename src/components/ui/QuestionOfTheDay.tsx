@@ -39,7 +39,7 @@ function QuestionsOfDaySuspended() {
   return (
     <div className={position('relative')}>
       <Card hoverEffect>
-        <Link className={space('space-y-4')} to={`/thread/${lastQoDId}`}>
+        <Link className={space('space-y-4')} href={`#/thread/${lastQoDId}`}>
           <QuestionOfDayText>Question of the day:</QuestionOfDayText>
           <QuestionOfDayPostText>{qod.post}</QuestionOfDayPostText>
           <span className={postInfo}>

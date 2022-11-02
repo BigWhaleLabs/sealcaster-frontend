@@ -97,7 +97,7 @@ export default function () {
             <CardSubheader>Your Privacy</CardSubheader>
             <CardParagraph>
               Please read our{' '}
-              <LinkText internal url="/privacy">
+              <LinkText internal url="#/privacy">
                 Privacy Policy
               </LinkText>
               .
