@@ -1,5 +1,4 @@
 import { BodyText, ErrorText } from 'components/ui/Text'
-import { useState } from 'preact/hooks'
 import Button from 'components/ui/Button'
 import LoadingBlock from 'components/ui/LoadingBlock'
 import SealSad from 'icons/SealSad'
@@ -15,23 +14,16 @@ export default function ({
   error?: unknown
   onButtonClick?: () => void
 }) {
-  const [isGSNError, setIsGSNError] = useState(
-    error && typeof error === 'string' && error.includes('Failed to relay call')
-  )
-
   const CardSubtitle = () => (
     <>
       <BodyText center>{text}</BodyText>
-      {isGSNError && onButtonClick && (
+      {error && onButtonClick && (
         <Button
           center
           small
           fullWidthOnMobile
           type="primary"
-          onClick={() => {
-            setIsGSNError(false)
-            onButtonClick()
-          }}
+          onClick={onButtonClick}
         >
           Retry to cast
         </Button>

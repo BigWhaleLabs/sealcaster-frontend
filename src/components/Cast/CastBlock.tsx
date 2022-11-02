@@ -70,7 +70,7 @@ export default function ({
           }
           error={error[replyToId]}
           onButtonClick={() => {
-            void createPost({ text, threadId, replyToId })
+            TextFormStore.error[replyToId] = null
           }}
         />
       ) : (
