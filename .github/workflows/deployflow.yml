@@ -1,10 +1,10 @@
-name: Build & Deploy app
+name: Build and deploy app
 on:
   push:
     branches:
       - main
 jobs:
-  deploy:
+  build-and-deploy-app:
     permissions:
       pages: write
       id-token: write
@@ -19,13 +19,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           persist-credentials: false
-      - name: Install & Build
-        run: |
-          yarn
-          yarn build
+      - uses: c-hive/gha-yarn-cache@v2
+      - name: Install modules
+        run: yarn
+        shell: bash
+      - name: Build code
         env:
           VITE_APP_NAME: ${{ secrets.VITE_APP_NAME }}
           VITE_ENCRYPT_KEY: ${{ secrets.VITE_ENCRYPT_KEY }}
+        run: yarn build
+        shell: bash
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
