@@ -1,4 +1,5 @@
 import { useEffect } from 'preact/hooks'
+import getHashComponent from 'helpers/getHashComponent'
 
 interface ScrollToAnchorProps {
   offset?: number
@@ -12,9 +13,9 @@ type FlashingCallback = (
 ) => void
 
 export const getHashElement = () =>
-  window.location.hash
+  getHashComponent().externalId
     ? document.querySelector<HTMLAnchorElement>(
-        `div[data-anchor="${window.location.hash}"]`
+        `div[data-anchor="${getHashComponent().externalId}"]`
       ) ?? undefined
     : undefined
 

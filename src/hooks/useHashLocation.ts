@@ -1,7 +1,9 @@
 import { BaseLocationHook } from 'wouter'
 import { useCallback, useEffect, useState } from 'preact/hooks'
+import getHashComponent from 'helpers/getHashComponent'
 
-const currentLocation = () => window.location.hash.replace(/^#/, '') || '/'
+const currentLocation = () =>
+  getHashComponent().path ? `/${getHashComponent().path}` : '/'
 
 const useHashLocation = () => {
   const [location, setLocation] = useState(currentLocation())
@@ -11,9 +13,11 @@ const useHashLocation = () => {
 
     window.addEventListener('hashchange', handler)
     window.addEventListener('popstate', handler)
+    window.addEventListener('pushState', handler)
     return () => {
       window.removeEventListener('hashchange', handler)
       window.removeEventListener('popstate', handler)
+      window.removeEventListener('pushState', handler)
     }
   }, [])
 

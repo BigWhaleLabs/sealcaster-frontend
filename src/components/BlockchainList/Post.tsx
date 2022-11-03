@@ -78,7 +78,7 @@ export default function ({
   const [, setLocation] = useLocation()
 
   return (
-    <div data-anchor={`#id=${blockchainId}`}>
+    <div data-anchor={blockchainId}>
       <Card hoverEffect={clickablePost}>
         <div
           onClick={({ target }) => {
