@@ -80,7 +80,9 @@ export default function ({
       <div className={space('space-y-4')}>
         <div className={commentWithReplyButton}>
           <div className={commentWithData}>
-            <BodyText>{content}</BodyText>
+            <BodyText primary preWrap>
+              {content}
+            </BodyText>
             <div className={infoBlock}>
               <TruncatedAddress name={replier} />
               <Delimiter color="bg-formal-accent" />
