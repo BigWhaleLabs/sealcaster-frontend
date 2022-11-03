@@ -35,7 +35,7 @@ export default function ({ logoText }: { logoText: VNode | string }) {
   const lottieRef = useRef<Player>()
 
   return (
-    <Link to="/" className={classNamesToString(logoContainer)}>
+    <Link href="#/" className={classNamesToString(logoContainer)}>
       <div
         className={logoWrapper}
         onTouchStart={() => {

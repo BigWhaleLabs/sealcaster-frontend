@@ -60,10 +60,10 @@ const AccountContainer = ({
     switch (selectedValue) {
       case 'disconnect':
         BurnerWalletStore.burn()
-        setLocation('/')
+        setLocation('#/')
         break
       case 'wallet':
-        setLocation('/wallet')
+        setLocation('#/wallet')
         break
       default:
         account &&

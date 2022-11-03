@@ -47,7 +47,7 @@ export default function () {
         {linkList.map((key, index) => (
           <>
             <FooterButton
-              url={FooterOptions[key].url}
+              url={`#${FooterOptions[key].url}`}
               content={FooterOptions[key].text}
             />
             {linkList.length - 1 !== index && (

@@ -159,7 +159,7 @@ export function LinkText({
 
   if (internal)
     return (
-      <Link to={url} className={linkClassnames}>
+      <Link href={url} className={linkClassnames}>
         {children}
       </Link>
     )
@@ -360,7 +360,7 @@ export function FooterLink({
     const [isActive] = useRoute(url)
 
     return (
-      <Link to={url} className={footerLink(isActive)}>
+      <Link href={url} className={footerLink(isActive)}>
         {children}
       </Link>
     )

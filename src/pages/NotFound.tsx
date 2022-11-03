@@ -50,7 +50,7 @@ const displayFromMd = display('hidden', 'xl:block')
 function ReturnHomeButton() {
   return (
     <Link
-      to="/"
+      href="#/"
       onClick={() => {
         document.title = 'Sealcaster'
       }}

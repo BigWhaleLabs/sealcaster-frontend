@@ -9,7 +9,7 @@ export default function () {
   const firstCastMessage = `Create your ${used ? '' : 'first'} cast`
 
   return (
-    <Link href="/">
+    <Link href="#/">
       <div className={displayTo('xs')}>
         <Button small type="primary">
           {firstCastMessage}

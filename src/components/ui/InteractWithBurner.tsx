@@ -45,7 +45,7 @@ export default function () {
           text: 'View it',
           action: () => {
             BurnerInteractionStore.interactionClosed = true
-            setLocation('/wallet')
+            setLocation('#/wallet')
           },
         }}
       />
@@ -61,7 +61,7 @@ export default function () {
         text: 'View burner',
         action: () => {
           BurnerInteractionStore.interactionClosed = true
-          setLocation('/wallet')
+          setLocation('#/wallet')
         },
       }}
       tertiaryButton={{

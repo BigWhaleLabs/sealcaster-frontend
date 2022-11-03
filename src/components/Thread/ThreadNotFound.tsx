@@ -39,7 +39,7 @@ export default function () {
         We were unable to locate the thread you were looking for. Please check
         retry your link or check out the latest.
       </BodyText>
-      <Link to="/">
+      <Link href="#/">
         <Button type="primary" small center>
           View recent casts
         </Button>
