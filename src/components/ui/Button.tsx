@@ -244,7 +244,7 @@ export default function ({
         </>
       )}
       {withArrow && (
-        <div className={width('w-4')}>
+        <div className={width('w-2')}>
           <Arrow horizontal />
         </div>
       )}
