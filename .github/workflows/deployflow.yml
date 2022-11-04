@@ -46,7 +46,7 @@ jobs:
           nodetail: true
           title: 'Success'
           description: |
-            ✅ [sealcaster.xyz](https://sealcaster.xyz) deployed
+            [sealcaster.xyz](https://sealcaster.xyz) deployed
       - uses: sarisia/actions-status-discord@v1
         if: failure()
         env:
@@ -55,4 +55,4 @@ jobs:
           nodetail: true
           title: 'Failed'
           description: |
-            💥 [sealcaster.xyz](https://sealcaster.xyz) failed to deploy <@&975961160488718386>
+            [sealcaster.xyz](https://sealcaster.xyz) failed to deploy <@&975961160488718386>
