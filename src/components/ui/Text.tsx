@@ -184,6 +184,7 @@ interface BodyTextProps {
   small?: boolean
   large?: boolean
   noWrap?: boolean
+  preWrap?: boolean
   center?: boolean
   inheritColor?: boolean
 }
@@ -194,6 +195,7 @@ const bodyText = ({
   small,
   large,
   noWrap,
+  preWrap,
   center,
   inheritColor,
 }: BodyTextProps) =>
@@ -204,7 +206,7 @@ const bodyText = ({
     fontWeight({ 'font-bold': bold, 'font-semibold': semiBold }),
     lineHeight('!leading-5'),
     fontSize({ 'text-xs': small, 'text-sm': !large }),
-    whitespace({ 'whitespace-nowrap': noWrap })
+    whitespace({ 'whitespace-nowrap': noWrap, 'whitespace-pre-wrap': preWrap })
   )
 export function BodyText({
   primary,
@@ -213,6 +215,7 @@ export function BodyText({
   small,
   large,
   noWrap,
+  preWrap,
   center,
   children,
   inheritColor,
@@ -226,6 +229,7 @@ export function BodyText({
         small,
         large,
         noWrap,
+        preWrap,
         center,
         inheritColor,
       })}
