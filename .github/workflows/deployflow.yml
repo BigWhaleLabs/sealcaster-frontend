@@ -44,6 +44,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           nodetail: true
+          title: 'Success'
           description: |
             ✅ [sealcaster.xyz](https://sealcaster.xyz) deployed
       - uses: sarisia/actions-status-discord@v1
@@ -52,5 +53,6 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           nodetail: true
+          title: 'Failed'
           description: |
             💥 [sealcaster.xyz](https://sealcaster.xyz) failed to deploy @dev
