@@ -38,3 +38,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+      - uses: sarisia/actions-status-discord@v1
+        if: success()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          nodetail: true
+          title: 'Success'
+          description: |
+            ✅ [sealcaster.xyz](https://sealcaster.xyz) deployed
+      - uses: sarisia/actions-status-discord@v1
+        if: failure()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          nodetail: true
+          title: 'Failed'
+          description: |
+            💥 [sealcaster.xyz](https://sealcaster.xyz) failed to deploy <@&975961160488718386>
