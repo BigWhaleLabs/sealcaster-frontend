@@ -54,4 +54,5 @@ jobs:
         with:
           nodetail: true
           title: 'Failed'
-          description: 'sealcaster.xyz failed to deploy <@&975961160488718386>'
+          description: |
+            💥 [sealcaster.xyz](https://sealcaster.xyz) failed to deploy <@&975961160488718386>
