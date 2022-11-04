@@ -63,6 +63,7 @@ export default async function ({
     for (const { id } of result) {
       const status = PostStatus.pending
 
+      PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(status)
       PostIdsStatuses.lastUserPost = {
         ...PostIdsStatuses.lastUserPost,
         [currentAccount]: {

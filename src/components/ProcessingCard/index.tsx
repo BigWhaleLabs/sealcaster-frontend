@@ -11,7 +11,7 @@ import classnames, {
   padding,
   width,
 } from 'classnames/tailwind'
-import walletStore from 'stores/WalletStore'
+import useBadgeAccount from 'hooks/useBadgeAccount'
 
 const cardWrapper = classnames(
   width('w-full'),
@@ -42,7 +42,7 @@ const CastState = ({
 
 export default function () {
   const { lastUserPost } = useSnapshot(PostIdsStatuses)
-  const { account } = useSnapshot(walletStore)
+  const account = useBadgeAccount()
 
   if (!account || !lastUserPost || !lastUserPost[account]) return null
 
