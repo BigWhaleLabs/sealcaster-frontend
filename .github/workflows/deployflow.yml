@@ -50,9 +50,9 @@ jobs:
       - uses: satak/webrequest-action@master
         if: failure()
         env:
-          deploy_url: ${{ steps.deployment.outputs.page_url }}
+          repository: ${{ github.repository }}
         with:
           url: https://discord.com/api/webhooks/${{ secrets.DISCORD_CHANNEL_ID }}/${{ secrets.DISCORD_BOT_ID }}
           method: POST
           headers: '{"Authorization": "Bot ${{ secrets.DISCORD_BOT_ID }}"}'
-          payload: '{"content": "💥 `${{ env.deploy_url }}` failed to deploy <@&975961160488718386>"}'
+          payload: '{"content": "💥 `${{ env.repository }}` failed to deploy <@&975961160488718386>"}'
