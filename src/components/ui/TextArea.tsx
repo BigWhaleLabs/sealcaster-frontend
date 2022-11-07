@@ -20,7 +20,7 @@ import {
   transitionProperty,
   width,
 } from 'classnames/tailwind'
-import { parseErrorText } from '@big-whale-labs/frontend-utils'
+import { parseError } from '@big-whale-labs/frontend-utils'
 import SuffixBlock from 'components/ui/SuffixBlock'
 import TextareaAutosize, {
   TextareaAutosizeProps,
@@ -101,7 +101,7 @@ export default function ({
       </div>
       {error && (
         <ErrorText visible={!!error} withExclamation>
-          {parseErrorText(error)}
+          {parseError(error)}
         </ErrorText>
       )}
     </div>
