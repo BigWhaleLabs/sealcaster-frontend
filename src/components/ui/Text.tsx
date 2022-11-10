@@ -1,4 +1,4 @@
-import { Link, useRoute } from 'wouter'
+import { Link } from 'wouter'
 import {
   TDropShadow,
   TGradientColorStops,
@@ -28,6 +28,7 @@ import {
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
 import ExclamationInCircle from 'icons/ExclamationInCircle'
+import checkIsLinkActive from 'helpers/checkIsLinkActive'
 import classNamesToString from 'helpers/classNamesToString'
 
 const accentText = (
@@ -361,7 +362,7 @@ export function FooterLink({
   internal,
 }: ChildrenProp & { url: string; internal?: boolean }) {
   if (internal) {
-    const [isActive] = useRoute(url)
+    const isActive = checkIsLinkActive(url)
 
     return (
       <Link href={url} className={footerLink(isActive)}>
