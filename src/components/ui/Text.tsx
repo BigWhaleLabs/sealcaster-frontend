@@ -28,8 +28,8 @@ import {
 } from 'classnames/tailwind'
 import ChildrenProp from 'models/ChildrenProp'
 import ExclamationInCircle from 'icons/ExclamationInCircle'
+import checkIsLinkActive from 'helpers/checkIsLinkActive'
 import classNamesToString from 'helpers/classNamesToString'
-import useHashLocation from 'hooks/useHashLocation'
 
 const accentText = (
   color: TTextColor,
@@ -362,8 +362,7 @@ export function FooterLink({
   internal,
 }: ChildrenProp & { url: string; internal?: boolean }) {
   if (internal) {
-    const [location] = useHashLocation()
-    const isActive = location === url.replace(/^#/, '')
+    const isActive = checkIsLinkActive(url)
 
     return (
       <Link href={url} className={footerLink(isActive)}>
