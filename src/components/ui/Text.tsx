@@ -1,4 +1,4 @@
-import { Link, useRoute } from 'wouter'
+import { Link } from 'wouter'
 import {
   TDropShadow,
   TGradientColorStops,
@@ -29,6 +29,7 @@ import {
 import ChildrenProp from 'models/ChildrenProp'
 import ExclamationInCircle from 'icons/ExclamationInCircle'
 import classNamesToString from 'helpers/classNamesToString'
+import useHashLocation from 'hooks/useHashLocation'
 
 const accentText = (
   color: TTextColor,
@@ -361,7 +362,8 @@ export function FooterLink({
   internal,
 }: ChildrenProp & { url: string; internal?: boolean }) {
   if (internal) {
-    const [isActive] = useRoute(url)
+    const [location] = useHashLocation()
+    const isActive = location === url.replace(/^#/, '')
 
     return (
       <Link href={url} className={footerLink(isActive)}>
