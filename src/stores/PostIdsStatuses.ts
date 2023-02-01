@@ -82,7 +82,7 @@ setInterval(async () => {
   if (!ids.length) return
 
   await checkStatuses({
-    ids,
+    ids: [...new Set(ids)], // to remove duplicates
     force: false,
   })
 }, 5000)

@@ -1,5 +1,5 @@
 import { JSX } from 'preact/jsx-runtime'
-import { parseErrorText } from '@big-whale-labs/frontend-utils'
+import { parseError } from '@big-whale-labs/frontend-utils'
 import { space } from 'classnames/tailwind'
 import { useEffect } from 'preact/hooks'
 import { useSnapshot } from 'valtio'
@@ -32,7 +32,7 @@ export default function ({
   const text = replyToText[replyToId] || ''
   const { status } = useSnapshot(BurnerWalletStore)
   const maxLength = 279
-  const errorMessage = error[replyToId] ? parseErrorText(error[replyToId]) : ''
+  const errorMessage = error[replyToId] ? parseError(error[replyToId]) : ''
   const showStatus = loading[replyToId] || !!error[replyToId]
 
   useEffect(() => {
