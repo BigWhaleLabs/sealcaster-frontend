@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "@big-whale-labs/constants": "^0.1.36",
+    "@big-whale-labs/constants": "^0.1.54",
     "@big-whale-labs/frontend-utils": "^0.0.10",
     "@big-whale-labs/seal-cred-posts-contract": "0.0.15-2",
     "@big-whale-labs/stores": "^0.1.18-0",
@@ -31,7 +31,7 @@
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@lottiefiles/react-lottie-player": "^3.4.7",
     "@material-tailwind/react": "^1.2.4",
-    "@opengsn/provider": "3.0.0-beta.1",
+    "@opengsn/provider": "3.0.0-beta.3",
     "@vitejs/plugin-react": "^2.1.0",
     "@walletconnect/web3-provider": "^1.8.0",
     "assert-browserify": "^2.0.0",
@@ -85,9 +85,5 @@
     "vite-plugin-remove-console": "^1.1.0",
     "vite-tsconfig-paths": "^3.5.0"
   },
-  "packageManager": "yarn@3.2.3",
-  "resolutions": {
-    "@opengsn/provider/@opengsn/common": "patch:@opengsn/common@npm%3A3.0.0-beta.1#./.yarn/patches/@opengsn-common-npm-3.0.0-beta.1-79cb41f503.patch",
-    "@opengsn/provider/@opengsn/contracts": "3.0.0-beta.1"
-  }
+  "packageManager": "yarn@3.2.3"
 }
