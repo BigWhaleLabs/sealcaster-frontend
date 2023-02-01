@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@big-whale-labs/constants": "^0.1.55",
-    "@big-whale-labs/frontend-utils": "^0.0.10",
+    "@big-whale-labs/frontend-utils": "^0.1.2",
     "@big-whale-labs/seal-cred-posts-contract": "0.0.15-2",
     "@big-whale-labs/stores": "^0.1.18-0",
     "@coinbase/wallet-sdk": "^3.5.2",
@@ -85,5 +85,10 @@
     "vite-plugin-remove-console": "^1.1.0",
     "vite-tsconfig-paths": "^3.5.0"
   },
-  "packageManager": "yarn@3.2.3"
+  "packageManager": "yarn@3.2.3",
+  "resolutions": {
+    "@babel/core": "^7.20.2",
+    "@opengsn/provider/@opengsn/common": "patch:@opengsn/common@npm%3A3.0.0-beta.3#./.yarn/patches/@opengsn-common-npm-3.0.0-beta.3-79cb41f503.patch",
+    "@opengsn/provider/@opengsn/contracts": "3.0.0-beta.3"
+  }
 }

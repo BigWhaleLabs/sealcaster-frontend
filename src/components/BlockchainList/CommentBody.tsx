@@ -37,11 +37,17 @@ const infoBlock = classnames(
   gap('gap-x-2')
 )
 
-const TruncatedAddress = ({ name }: { name: string }) => {
+const TruncatedAddress = ({
+  address,
+  name,
+}: {
+  address?: string
+  name: string
+}) => {
   const isEthAddress = isAddress(name)
   const linkToUser = isEthAddress
     ? getEtherscanAddressUrl(name)
-    : `farcaster://profiles/${name}`
+    : `farcaster://profiles/${address ?? name}`
 
   return (
     <>
@@ -65,11 +71,13 @@ export default function ({
   timestamp,
   threadId,
   replyToId,
+  replierAddress,
   repliedTo = '',
   canReply,
 }: {
   content: string
   replier: string
+  replierAddress: string
   timestamp: number
   repliedTo?: string
 } & ReplyModel) {
@@ -80,9 +88,11 @@ export default function ({
       <div className={space('space-y-4')}>
         <div className={commentWithReplyButton}>
           <div className={commentWithData}>
-            <BodyText>{content}</BodyText>
+            <BodyText primary preWrap>
+              {content}
+            </BodyText>
             <div className={infoBlock}>
-              <TruncatedAddress name={replier} />
+              <TruncatedAddress address={replierAddress} name={replier} />
               <Delimiter color="bg-formal-accent" />
               <PostTime timestamp={timestamp} />
             </div>
