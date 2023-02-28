@@ -27,7 +27,7 @@ export function StatusSuspended({ postId }: { postId: number }) {
   const serviceId = idToMerkleRoot[postId]
 
   const statusOrLoading = PostStatusText[status] || <LoadingWithDots />
-  const farcasterCastUrl = `farcaster://casts/${serviceId}`
+  const farcasterCastUrl = `https://warpcast.com/sealcaster/${serviceId}`
 
   return (
     <div className={statusContainer}>
