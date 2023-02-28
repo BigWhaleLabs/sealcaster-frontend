@@ -34,7 +34,7 @@ function QuestionsOfDaySuspended() {
   const { allQodPostIds, lastQoDPost } = useSnapshot(QuestionOfDayStore)
   const lastQoDId = Math.max(...allQodPostIds)
   if (!lastQoDPost || !lastQoDId) return null
-  const { qod, merkleRoot } = lastQoDPost
+  const { qod, hash } = lastQoDPost
 
   return (
     <div className={position('relative')}>
@@ -50,7 +50,7 @@ function QuestionsOfDaySuspended() {
         <StickLabel />
         <Replies
           threadId={lastQoDId}
-          replyToId={merkleRoot}
+          replyToId={hash}
           placeholder="Answer today’s question..."
           canReply
         />

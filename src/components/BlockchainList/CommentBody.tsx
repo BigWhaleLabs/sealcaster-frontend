@@ -47,7 +47,7 @@ const TruncatedAddress = ({
   const isEthAddress = isAddress(name)
   const linkToUser = isEthAddress
     ? getEtherscanAddressUrl(name)
-    : `https://warpcast.com/${address ?? name}`
+    : `https://warpcast.com/${address ?? name.replace(/^@/, '')}`
 
   return (
     <>
@@ -77,7 +77,7 @@ export default function ({
 }: {
   content: string
   replier: string
-  replierAddress: string
+  replierAddress?: string
   timestamp: number
   repliedTo?: string
 } & ReplyModel) {

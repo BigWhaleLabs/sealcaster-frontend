@@ -1,6 +1,4 @@
-import { Cast } from 'models/Cast'
 import { LoadingReplies } from 'components/Thread/LoadingPost'
-import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import Comment from 'models/Comment'
@@ -17,6 +15,7 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 import farcasterStore from 'stores/FarcasterStore'
+import makeComment from 'helpers/makeComment'
 import postIdsStatuses from 'stores/PostIdsStatuses'
 import postStore from 'stores/PostStore'
 import useReplies from 'hooks/useReplies'
@@ -37,51 +36,6 @@ const commentLine = classnames(
   ),
   transitionProperty('transition-colors')
 )
-
-function makeComment(post?: PostStructOutput, cast?: Cast) {
-  if (post && cast) {
-    const id = cast?.merkleRoot || post?.id.toNumber()
-    const content = cast?.body.data.text || post?.post
-    const timestamp = cast?.body.publishedAt
-      ? (cast?.body.publishedAt / 1000) ^ 0
-      : post?.timestamp.toNumber()
-
-    const replier = post?.sender || `@${cast?.body.username}`
-    const replierAddress = post?.derivativeAddress || cast?.body.address
-
-    return {
-      id,
-      replyToId: cast.merkleRoot,
-      content,
-      timestamp,
-      replier,
-      replierAddress,
-    }
-  }
-
-  if (post) {
-    return {
-      id: post.id.toNumber(),
-      replier: post.sender,
-      replierAddress: post.derivativeAddress,
-      content: post.post,
-      timestamp: post.timestamp.toNumber(),
-    }
-  }
-
-  if (cast) {
-    return {
-      id: cast.merkleRoot,
-      replyToId: cast.merkleRoot,
-      replier: `@${cast.body.username}`,
-      replierAddress: cast.body.address,
-      content: cast.body.data.text,
-      timestamp: (cast.body.publishedAt / 1000) ^ 0,
-    }
-  }
-
-  return null
-}
 
 const Replies = ({
   castId,
@@ -170,7 +124,7 @@ export function CommentWithReplies({
   canReply,
 }: Comment & {
   replyToId: string
-  replierAddress: string
+  replierAddress?: string
   canReply?: boolean
 }) {
   const replies = useReplies({
