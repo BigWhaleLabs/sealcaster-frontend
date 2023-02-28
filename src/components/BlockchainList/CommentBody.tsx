@@ -47,7 +47,7 @@ const TruncatedAddress = ({
   const isEthAddress = isAddress(name)
   const linkToUser = isEthAddress
     ? getEtherscanAddressUrl(name)
-    : `farcaster://profiles/${address ?? name}`
+    : `https://warpcast.com/${address ?? name}`
 
   return (
     <>
