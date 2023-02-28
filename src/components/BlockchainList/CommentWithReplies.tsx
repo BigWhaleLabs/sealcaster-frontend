@@ -17,6 +17,7 @@ import classnames, {
   width,
 } from 'classnames/tailwind'
 import farcasterStore from 'stores/FarcasterStore'
+import makeComment from 'helpers/makeComment'
 import postIdsStatuses from 'stores/PostIdsStatuses'
 import postStore from 'stores/PostStore'
 import useReplies from 'hooks/useReplies'
@@ -37,50 +38,6 @@ const commentLine = classnames(
   ),
   transitionProperty('transition-colors')
 )
-
-function makeComment(post?: PostStructOutput, cast?: Cast) {
-  if (post && cast) {
-    const id = cast?.hash || post?.id.toNumber()
-    const content = cast?.text || post?.post
-    const timestamp = cast?.timestamp
-      ? (cast?.timestamp / 1000) ^ 0
-      : post?.timestamp.toNumber()
-
-    const replier = post?.sender || `@${cast?.author.username}`
-    const replierAddress = post?.derivativeAddress || ''
-
-    return {
-      id,
-      replyToId: cast.hash,
-      content,
-      timestamp,
-      replier,
-      replierAddress,
-    }
-  }
-
-  if (post) {
-    return {
-      id: post.id.toNumber(),
-      replier: post.sender,
-      replierAddress: post.derivativeAddress,
-      content: post.post,
-      timestamp: post.timestamp.toNumber(),
-    }
-  }
-
-  if (cast) {
-    return {
-      id: cast.hash,
-      replyToId: cast.hash,
-      replier: `@${cast.author.username}`,
-      content: cast?.text,
-      timestamp: (cast.timestamp / 1000) ^ 0,
-    }
-  }
-
-  return null
-}
 
 const Replies = ({
   castId,
