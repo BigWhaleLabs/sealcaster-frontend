@@ -1,6 +1,4 @@
-import { Cast } from 'models/Cast'
 import { LoadingReplies } from 'components/Thread/LoadingPost'
-import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
 import { Suspense } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import Comment from 'models/Comment'
