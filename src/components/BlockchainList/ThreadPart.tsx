@@ -39,12 +39,12 @@ function ThreadPartSuspended({
   owner,
   canReply,
 }: ThreadProps) {
-  const threadMerkleRoot = useMerkleRoot(postId)
-  if (!threadMerkleRoot) return null
+  const threadHash = useMerkleRoot(postId)
+  if (!threadHash) return null
 
   const replies = useReplies({
     threadId,
-    replyToId: threadMerkleRoot,
+    replyToId: threadHash,
   })
   const repliesLength = replies.length
 
@@ -53,7 +53,7 @@ function ThreadPartSuspended({
   return (
     <div className={wrapper}>
       <Replies
-        replyToId={threadMerkleRoot}
+        replyToId={threadHash}
         threadId={threadId}
         placeholder={`Reply to ${truncateMiddleIfNeeded(owner, 12)}`}
         canReply={canReply}

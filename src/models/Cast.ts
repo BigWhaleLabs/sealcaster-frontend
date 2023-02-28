@@ -1,14 +1,12 @@
 export type Cast = {
   postId?: number
-  threadMerkleRoot: string
-  merkleRoot: string
-  body: {
-    publishedAt: number
+  hash: string
+  threadHash: string
+  parentHash: string
+  timestamp: number
+  text: string
+  author: {
+    fid: number
     username: string
-    address: string
-    data: {
-      text: string
-      replyParentMerkleRoot: string
-    }
   }
 }

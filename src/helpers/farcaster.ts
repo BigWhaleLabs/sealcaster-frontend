@@ -4,7 +4,7 @@ import env from 'helpers/env'
 
 const baseURL = `${env.VITE_POSTER_URL}`
 
-type FarcasterResponse = { merkleRoot?: string; casts: Cast[] }
+type FarcasterResponse = { hash?: string; casts: Cast[] }
 
 export default async function fetchThreadByPostId(postId: number) {
   try {

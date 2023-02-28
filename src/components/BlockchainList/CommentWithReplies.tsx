@@ -40,18 +40,18 @@ const commentLine = classnames(
 
 function makeComment(post?: PostStructOutput, cast?: Cast) {
   if (post && cast) {
-    const id = cast?.merkleRoot || post?.id.toNumber()
-    const content = cast?.body.data.text || post?.post
-    const timestamp = cast?.body.publishedAt
-      ? (cast?.body.publishedAt / 1000) ^ 0
+    const id = cast?.hash || post?.id.toNumber()
+    const content = cast?.text || post?.post
+    const timestamp = cast?.timestamp
+      ? (cast?.timestamp / 1000) ^ 0
       : post?.timestamp.toNumber()
 
-    const replier = post?.sender || `@${cast?.body.username}`
-    const replierAddress = post?.derivativeAddress || cast?.body.address
+    const replier = post?.sender || `@${cast?.author.username}`
+    const replierAddress = post?.derivativeAddress || ''
 
     return {
       id,
-      replyToId: cast.merkleRoot,
+      replyToId: cast.hash,
       content,
       timestamp,
       replier,
@@ -71,12 +71,11 @@ function makeComment(post?: PostStructOutput, cast?: Cast) {
 
   if (cast) {
     return {
-      id: cast.merkleRoot,
-      replyToId: cast.merkleRoot,
-      replier: `@${cast.body.username}`,
-      replierAddress: cast.body.address,
-      content: cast.body.data.text,
-      timestamp: (cast.body.publishedAt / 1000) ^ 0,
+      id: cast.hash,
+      replyToId: cast.hash,
+      replier: `@${cast.author.username}`,
+      content: cast?.text,
+      timestamp: (cast.timestamp / 1000) ^ 0,
     }
   }
 
@@ -170,7 +169,7 @@ export function CommentWithReplies({
   canReply,
 }: Comment & {
   replyToId: string
-  replierAddress: string
+  replierAddress?: string
   canReply?: boolean
 }) {
   const replies = useReplies({

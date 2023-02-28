@@ -23,9 +23,7 @@ export default function ({
     : new Set()
 
   const farcasterReplies = farcasterThread
-    ? farcasterThread.filter(
-        (cast) => cast.body.data.replyParentMerkleRoot === replyToId
-      )
+    ? farcasterThread.filter((cast) => cast.parentHash === replyToId)
     : []
 
   const blockchainReplies = blockchainThread
@@ -38,9 +36,9 @@ export default function ({
 
   return [
     ...farcasterReplies.map((cast) => ({
-      castId: cast.merkleRoot,
+      castId: cast.hash,
       postId: cast.postId,
-      timestamp: (cast.body.publishedAt / 1000) ^ 0,
+      timestamp: (cast.timestamp / 1000) ^ 0,
     })),
     ...blockchainReplies.map(({ id, timestamp }) => ({
       postId: +id,

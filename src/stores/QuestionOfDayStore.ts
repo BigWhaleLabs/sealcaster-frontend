@@ -24,13 +24,13 @@ const QodStore = derive(
       const lastId = !!qodIds.length && Math.max(...qodIds)
       if (!lastId) return
 
-      const merkleRoot = await getPostStatuses([lastId])
-      if (!merkleRoot.length) return
+      const hash = await getPostStatuses([lastId])
+      if (!hash.length) return
 
       const post = await contract
         .posts(lastId - 1)
         .then(safeTransformPostOutput)
-      return { qod: post, merkleRoot: merkleRoot[0].serviceId }
+      return { qod: post, hash: hash[0].serviceId }
     },
   },
   { proxy: state }
