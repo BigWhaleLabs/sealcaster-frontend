@@ -65,6 +65,14 @@ const PostStore = proxy<PostStoreType>({
     )
     const result = await transaction.wait()
 
+    if (result.events) {
+      const savedTx = await PostStore.idToPostTx
+      PostStore.idToPostTx = Promise.resolve([
+        ...savedTx,
+        result.events[0].transactionHash,
+      ])
+    }
+
     return Promise.all(
       result.logs
         .filter(({ address }) => address === contract.address)
@@ -148,6 +156,9 @@ farcasterContract.on(
     PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(
       PostStatus.pending
     )
+
+    const postsTx = await getIdsToPostsTx(farcasterContract)
+    PostStore.idToPostTx = Promise.resolve(postsTx)
 
     const replyToAll = await QuestionOfDayStore.qodAddress
     if (sender !== replyToAll) return
