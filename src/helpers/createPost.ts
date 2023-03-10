@@ -57,30 +57,21 @@ export default async function ({
     if (PostIdsStatuses.lastUserPost)
       delete PostIdsStatuses.lastUserPost[currentAccount]
 
-    let counter = 0
-    setInterval(async () => {
-      BurnerWalletStore.status = 'Posting cast'
-      const result = await PostStore.createPost(
-        `Progress ${counter}/10000`,
-        threadId,
-        replyToId
-      )
+    BurnerWalletStore.status = 'Posting cast'
+    const result = await PostStore.createPost(text, threadId, replyToId)
 
-      for (const { id } of result) {
-        const status = PostStatus.pending
+    for (const { id } of result) {
+      const status = PostStatus.pending
 
-        PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(status)
-        PostIdsStatuses.lastUserPost = {
-          ...PostIdsStatuses.lastUserPost,
-          [currentAccount]: {
-            id: id.toNumber(),
-            status,
-          },
-        }
+      PostIdsStatuses.statuses[id.toNumber()] = Promise.resolve(status)
+      PostIdsStatuses.lastUserPost = {
+        ...PostIdsStatuses.lastUserPost,
+        [currentAccount]: {
+          id: id.toNumber(),
+          status,
+        },
       }
-
-      counter += 1
-    }, 20000)
+    }
     if (!BurnerWalletStore.used) BurnerWalletStore.used = true
     TextFormStore.replyToText[replyToId] = ''
   } catch (error) {
