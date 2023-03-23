@@ -52,7 +52,7 @@ const arrowWrapper = (shown: boolean, fromMd?: boolean) =>
 
 export default function () {
   const [visible, setVisible] = useState(false)
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+  const scrollToTop = () => window.scrollTo({ behavior: 'smooth', top: 0 })
   const onScroll = useCallback(() => {
     setVisible(document.documentElement.scrollTop > 150)
   }, [])

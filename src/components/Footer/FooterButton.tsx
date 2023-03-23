@@ -16,7 +16,7 @@ const footerLogo = classnames(
   space('space-x-4')
 )
 
-export default function ({ url, content }: { url: string; content?: string }) {
+export default function ({ content, url }: { url: string; content?: string }) {
   const BlogButton = () => (
     <div className={footerLogo}>
       <FooterLogo />

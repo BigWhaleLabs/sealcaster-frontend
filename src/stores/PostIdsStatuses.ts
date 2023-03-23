@@ -20,9 +20,9 @@ interface CheckStatusesStoreProps {
 }
 
 const postStatusStore = proxy<PostStatusStoreType>({
+  idToMerkleRoot: {},
   lastUserPost: undefined,
   statuses: {},
-  idToMerkleRoot: {},
 })
 
 export async function updateStatuses(ids: number[]) {
@@ -30,7 +30,7 @@ export async function updateStatuses(ids: number[]) {
 
   const updatedStatuses = await getPostStatuses(ids)
 
-  for (const { id, status, serviceId } of updatedStatuses) {
+  for (const { id, serviceId, status } of updatedStatuses) {
     postStatusStore.statuses[id] = Promise.resolve(status)
     postStatusStore.idToMerkleRoot[id] = Promise.resolve(serviceId)
 
@@ -47,15 +47,15 @@ export async function updateStatuses(ids: number[]) {
         return
       postStatusStore.lastUserPost[account] = {
         id,
-        status,
         serviceId,
+        status,
       }
     })
   }
 }
 
 let checkingStatuses = false
-async function checkStatuses({ ids, force }: CheckStatusesStoreProps) {
+async function checkStatuses({ force, ids }: CheckStatusesStoreProps) {
   if (checkingStatuses && !force) return
   checkingStatuses = true
   try {
@@ -82,8 +82,9 @@ setInterval(async () => {
   if (!ids.length) return
 
   await checkStatuses({
-    ids: [...new Set(ids)], // to remove duplicates
+    // to remove duplicates
     force: false,
+    ids: [...new Set(ids)],
   })
 }, 5000)
 

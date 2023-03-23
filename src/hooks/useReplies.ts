@@ -2,9 +2,9 @@ import useFarcasterThread from 'hooks/useFarcasterThread'
 import useThread from 'hooks/useThread'
 
 export default function ({
-  threadId,
-  replyToId,
   allowFetch = true,
+  replyToId,
+  threadId,
 }: {
   threadId: number
   replyToId: string

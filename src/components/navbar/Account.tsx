@@ -6,8 +6,8 @@ import walletStore from 'stores/WalletStore'
 
 export default function ({
   account,
-  needNetworkChange,
   eNSName,
+  needNetworkChange,
 }: {
   account?: string
   needNetworkChange: boolean
@@ -17,8 +17,8 @@ export default function ({
     <div
       onClick={async () => {
         await walletStore.connect({
-          clearCachedProvider: true,
           checkNetwork: true,
+          clearCachedProvider: true,
         })
       }}
     >
@@ -41,8 +41,8 @@ export default function ({
       {account ? (
         <ENSAddress
           address={account}
-          network={Network.Goerli}
           eNSName={eNSName}
+          network={Network.Goerli}
         />
       ) : (
         <NotConnected />

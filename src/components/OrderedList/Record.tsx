@@ -15,8 +15,8 @@ const recordContainer = classnames(
 )
 
 export default function ({
-  index,
   children,
+  index,
 }: { index: number } & ChildrenProp) {
   return (
     <p className={recordContainer}>

@@ -12,38 +12,38 @@ const strokes = classnames(
 export default function () {
   return (
     <svg
-      width="13"
+      className={flexShrink('shrink-0')}
+      fill="none"
       height="13"
       viewBox="0 0 13 13"
-      fill="none"
+      width="13"
       xmlns="http://www.w3.org/2000/svg"
-      className={flexShrink('shrink-0')}
     >
       <circle
+        className={strokes}
         cx="6.50065"
         cy="6.50016"
         r="5.41667"
-        className={strokes}
         stroke-linecap="round"
         stroke-linejoin="round"
       />
       <line
+        className={strokes}
+        stroke-linecap="round"
+        stroke-linejoin="round"
         x1="6.50065"
+        x2="6.50065"
         y1="3.79167"
-        x2="6.50065"
         y2="6.5"
-        className={strokes}
-        stroke-linecap="round"
-        stroke-linejoin="round"
       />
       <line
-        x1="6.50065"
-        y1="8.66667"
-        x2="6.50065"
-        y2="9.20833"
         className={strokes}
         stroke-linecap="round"
         stroke-linejoin="round"
+        x1="6.50065"
+        x2="6.50065"
+        y1="8.66667"
+        y2="9.20833"
       />
     </svg>
   )

@@ -5,7 +5,7 @@ export default function <T>(entries: T[], limit: number) {
 
   return {
     paginated: entries.slice(0, skip + limit),
-    skip,
     setSkip,
+    skip,
   }
 }

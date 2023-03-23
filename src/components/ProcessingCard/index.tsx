@@ -21,8 +21,8 @@ const cardWrapper = classnames(
 )
 
 const CastState = ({
-  status,
   castId,
+  status,
 }: {
   status: PostStatus
   castId?: number
@@ -46,11 +46,11 @@ export default function () {
 
   if (!account || !lastUserPost || !lastUserPost[account]) return null
 
-  const { status, id } = lastUserPost[account]
+  const { id, status } = lastUserPost[account]
 
   return (
     <div className={cardWrapper}>
-      <CastState status={status} castId={id} />
+      <CastState castId={id} status={status} />
     </div>
   )
 }

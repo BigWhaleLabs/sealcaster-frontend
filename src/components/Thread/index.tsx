@@ -23,20 +23,20 @@ const SuspendedThread = () => {
 
   if (!postData) return <ThreadNotFound />
 
-  const { id, post, timestamp, sender } = postData
+  const { id, post, sender, timestamp } = postData
   const isQuestionOfTheDay = allQodPostIds.includes(id.toNumber())
 
   return (
     <div className={space('space-y-5')}>
       <GoBackButton />
       <Post
-        key={id}
-        isQuestionOfTheDay={isQuestionOfTheDay}
-        canReply={account === sender || isQuestionOfTheDay}
         blockchainId={Number(id)}
-        timestamp={Number(timestamp)}
-        text={post}
+        canReply={account === sender || isQuestionOfTheDay}
+        isQuestionOfTheDay={isQuestionOfTheDay}
+        key={id}
         sender={sender}
+        text={post}
+        timestamp={Number(timestamp)}
         tx={idToPostTx[Number(id) - 1]}
       />
     </div>

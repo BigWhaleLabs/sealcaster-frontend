@@ -6,14 +6,14 @@ function NavBarSuspended() {
   const account = useBadgeAccount()
 
   return (
-    <Navbar account={account} needNetworkChange={true} logoText="Sealcaster" />
+    <Navbar account={account} logoText="Sealcaster" needNetworkChange={true} />
   )
 }
 
 export default function () {
   return (
     <Suspense
-      fallback={<Navbar needNetworkChange={true} logoText="Sealcaster" />}
+      fallback={<Navbar logoText="Sealcaster" needNetworkChange={true} />}
     >
       <NavBarSuspended />
     </Suspense>

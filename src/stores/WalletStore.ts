@@ -45,7 +45,7 @@ class WalletStore extends PersistableStore {
     clearCachedProvider?: boolean
     checkNetwork?: boolean
   }) {
-    const { clearCachedProvider = false, checkNetwork = false } = options || {}
+    const { checkNetwork = false, clearCachedProvider = false } = options || {}
 
     this.walletLoading = true
     try {

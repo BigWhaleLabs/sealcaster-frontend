@@ -25,14 +25,14 @@ const backgroundStyles = classNamesToString(
 export default function () {
   return (
     <svg
+      className={svgStyles}
       viewBox="0 0 116 95"
       xmlns="http://www.w3.org/2000/svg"
-      className={svgStyles}
     >
       <clipPath id="rounded_triangle">
         <path d="M0.714642 85.9158L51.586 2.59194C53.1454 0.0377262 56.8546 0.0377171 58.414 2.59193L109.285 85.9158C110.913 88.5813 108.994 92.0002 105.871 92.0002H4.12866C1.00571 92.0002 -0.912686 88.5813 0.714642 85.9158Z" />
       </clipPath>
-      <foreignObject clip-path="url(#rounded_triangle)" className={size}>
+      <foreignObject className={size} clip-path="url(#rounded_triangle)">
         <div className={backgroundStyles} />
       </foreignObject>
 

@@ -49,21 +49,21 @@ const accentText = (
     fontFamily(primary ? 'font-primary' : undefined),
     fontWeight(bold ? 'font-bold' : 'font-normal'),
     fontSize({
+      'text-lg': large,
       'text-sm': small,
       'text-xs': extraSmall,
-      'text-lg': large,
     }),
     dropShadow(shadow)
   )
 export function AccentText({
-  color,
   bold,
-  small,
-  primary,
-  shadow,
   children,
+  color,
   extraSmall,
   large,
+  primary,
+  shadow,
+  small,
 }: ChildrenProp & {
   color: TTextColor
   bold?: boolean
@@ -125,17 +125,17 @@ const linkText = (
     lineHeight(small ? 'leading-4' : 'leading-5')
   )
 export function LinkText({
-  url,
   bold,
-  small,
-  extraSmall,
-  internal,
-  title,
   children,
+  extraSmall,
   gradientFrom,
   gradientTo,
-  underline,
+  internal,
   primary,
+  small,
+  title,
+  underline,
+  url,
 }: ChildrenProp & {
   url: string
   small?: boolean
@@ -160,7 +160,7 @@ export function LinkText({
 
   if (internal)
     return (
-      <Link href={url} className={linkClassnames}>
+      <Link className={linkClassnames} href={url}>
         {children}
       </Link>
     )
@@ -169,9 +169,9 @@ export function LinkText({
     <a
       className={linkClassnames}
       href={url}
-      title={title}
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
+      title={title}
     >
       {children}
     </a>
@@ -190,15 +190,15 @@ interface BodyTextProps {
   inheritColor?: boolean
 }
 const bodyText = ({
-  primary,
   bold,
-  semiBold,
-  small,
+  center,
+  inheritColor,
   large,
   noWrap,
   preWrap,
-  center,
-  inheritColor,
+  primary,
+  semiBold,
+  small,
 }: BodyTextProps) =>
   classnames(
     fontFamily({ 'font-primary': primary }),
@@ -206,33 +206,33 @@ const bodyText = ({
     textAlign({ 'text-center': center }),
     fontWeight({ 'font-bold': bold, 'font-semibold': semiBold }),
     lineHeight('!leading-5'),
-    fontSize({ 'text-xs': small, 'text-sm': !large }),
+    fontSize({ 'text-sm': !large, 'text-xs': small }),
     whitespace({ 'whitespace-nowrap': noWrap, 'whitespace-pre-wrap': preWrap })
   )
 export function BodyText({
-  primary,
   bold,
-  semiBold,
-  small,
-  large,
-  noWrap,
-  preWrap,
   center,
   children,
   inheritColor,
+  large,
+  noWrap,
+  preWrap,
+  primary,
+  semiBold,
+  small,
 }: ChildrenProp & BodyTextProps) {
   return (
     <p
       className={bodyText({
-        primary,
         bold,
-        semiBold,
-        small,
+        center,
+        inheritColor,
         large,
         noWrap,
         preWrap,
-        center,
-        inheritColor,
+        primary,
+        semiBold,
+        small,
       })}
     >
       {children}
@@ -251,8 +251,8 @@ const headerText = (
     fontWeight('font-bold'),
     fontSize(
       {
-        'text-3.5xl': size === 'large',
         'text-2xl': size === 'medium',
+        'text-3.5xl': size === 'large',
         'text-xl': size === 'small',
       },
       size === 'small' ? 'xs:text-2xl' : 'xs:text-3.5xl'
@@ -266,9 +266,9 @@ const headerText = (
 export function HeaderText({
   accent,
   center,
+  children,
   extraLeading,
   size,
-  children,
 }: ChildrenProp & {
   accent?: boolean
   center?: boolean
@@ -310,19 +310,19 @@ const statusText = (
     lineHeight('leading-4'),
     textColor({
       'text-accent': color === 'accent',
-      'text-primary': color === 'primary',
-      'text-tertiary': color === 'tertiary',
       'text-error': color === 'error',
       'text-formal-accent': color === 'default',
+      'text-primary': color === 'primary',
       'text-primary-dimmed': color === 'dimmed',
+      'text-tertiary': color === 'tertiary',
     }),
     textAlign({ 'text-right': textRight })
   )
 export function StatusText({
+  children,
   color = 'default',
   primary,
   textRight,
-  children,
 }: ChildrenProp & {
   primary?: boolean
   color?: 'accent' | 'primary' | 'error' | 'dimmed' | 'default' | 'tertiary'
@@ -342,8 +342,8 @@ const postText = (small?: boolean) =>
     'break-words'
   )
 export function PostText({
-  small,
   children,
+  small,
 }: ChildrenProp & { small?: boolean }) {
   return <p className={postText(small)}>{children}</p>
 }
@@ -352,20 +352,20 @@ const footerLink = (active?: boolean) =>
   classnames(
     fontSize('text-sm'),
     fontWeight('font-semibold'),
-    textDecoration({ underline: active, 'hover:underline': true }),
-    textColor({ 'text-accent': active, 'hover:text-accent': true }),
+    textDecoration({ 'hover:underline': true, underline: active }),
+    textColor({ 'hover:text-accent': true, 'text-accent': active }),
     transitionProperty('transition-colors')
   )
 export function FooterLink({
-  url,
   children,
   internal,
+  url,
 }: ChildrenProp & { url: string; internal?: boolean }) {
   if (internal) {
     const isActive = checkIsLinkActive(url)
 
     return (
-      <Link href={url} className={footerLink(isActive)}>
+      <Link className={footerLink(isActive)} href={url}>
         {children}
       </Link>
     )
@@ -375,8 +375,8 @@ export function FooterLink({
     <a
       className={footerLink()}
       href={url}
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       {children}
     </a>
@@ -431,13 +431,13 @@ const socialLink = classnames(
   textDecoration('no-underline', 'active:underline'),
   textColor('hover:text-tertiary', 'text-formal-accent')
 )
-export function SocialLink({ url, children }: ChildrenProp & { url: string }) {
+export function SocialLink({ children, url }: ChildrenProp & { url: string }) {
   return (
     <a
       className={classNamesToString(socialLink, 'hover-tertiary')}
       href={url}
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       {children}
     </a>
@@ -450,15 +450,15 @@ const textareaText = (dark?: boolean) =>
     fontFamily('font-primary'),
     alignItems('items-center'),
     textColor({
-      'text-formal-accent-semi-transparent': dark,
       'text-formal-accent': !dark,
+      'text-formal-accent-semi-transparent': dark,
     }),
     placeholderColor('placeholder-formal-accent-dimmed'),
     caretColor('caret-primary')
   )
 export function TextareaText({
-  dark,
   children,
+  dark,
 }: ChildrenProp & { dark?: boolean }) {
   return <div className={textareaText(dark)}>{children}</div>
 }
@@ -481,11 +481,11 @@ const errorText = (centered?: boolean, small?: boolean) =>
   )
 const exclamation = margin('mt-1.5')
 export function ErrorText({
+  centered,
   children,
-  withExclamation,
   small,
   visible,
-  centered,
+  withExclamation,
 }: ChildrenProp & {
   centered?: boolean
   small?: boolean

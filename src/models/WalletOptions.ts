@@ -1,5 +1,5 @@
 export default {
-  wallet: 'Wallet',
-  etherscan: 'Etherscan',
   disconnect: 'Disconnect',
+  etherscan: 'Etherscan',
+  wallet: 'Wallet',
 } as { [name: string]: string }

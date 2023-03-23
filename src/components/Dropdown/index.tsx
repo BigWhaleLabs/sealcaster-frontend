@@ -43,14 +43,14 @@ const button = classnames(
 const container = classnames(position('relative'), margin('my-2'))
 
 export default function ({
-  disabled,
-  currentValue,
-  options,
-  onChange,
-  staticPlaceholder,
-  fitToItemSize,
   colorfulCurrentValue,
+  currentValue,
+  disabled,
   extraSpacing,
+  fitToItemSize,
+  onChange,
+  options,
+  staticPlaceholder,
   withArrow,
 }: {
   currentValue: string
@@ -70,9 +70,9 @@ export default function ({
 
   const selectedElement = (
     <button
-      onClick={() => options.length && setOpen(!open)}
       className={button}
       disabled={disabled}
+      onClick={() => options.length && setOpen(!open)}
     >
       <span className={textStyles(colorfulCurrentValue)}>
         {staticPlaceholder || currentValue}
@@ -89,15 +89,15 @@ export default function ({
     <div className={container} ref={ref}>
       {selectedElement}
       <Menu
+        extraSpacing={extraSpacing}
+        fitToItemSize={fitToItemSize}
         open={open}
         options={options}
         selected={currentValue}
-        onSelect={({ value, label }) => {
+        onSelect={({ label, value }) => {
           onChange(value || label)
           setOpen(false)
         }}
-        fitToItemSize={fitToItemSize}
-        extraSpacing={extraSpacing}
       />
     </div>
   )

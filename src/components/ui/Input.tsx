@@ -63,9 +63,9 @@ const inputContainer = (
   )
 
 export default function ({
-  value,
-  isError,
   disabled,
+  isError,
+  value,
   ...rest
 }: {
   value?: string
@@ -75,9 +75,9 @@ export default function ({
   return (
     <div className={groupContainer(isError, disabled)}>
       <input
-        value={value}
-        disabled={disabled}
         className={inputContainer(isError, disabled)}
+        disabled={disabled}
+        value={value}
         {...rest}
       />
     </div>
