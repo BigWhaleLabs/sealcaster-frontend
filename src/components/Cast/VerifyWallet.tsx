@@ -4,10 +4,10 @@ import LoadingBlock from 'components/ui/LoadingBlock'
 import SealSad from 'icons/SealSad'
 
 export default function ({
-  text,
-  status,
   error,
   onButtonClick,
+  status,
+  text,
 }: {
   status: string
   text: string
@@ -20,8 +20,8 @@ export default function ({
       {error && onButtonClick && (
         <Button
           center
-          small
           fullWidthOnMobile
+          small
           type="primary"
           onClick={onButtonClick}
         >
@@ -34,13 +34,14 @@ export default function ({
   return (
     <LoadingBlock
       loadingText={status || 'Preparing cast'}
+      subtitle={<CardSubtitle />}
       errorBlock={
         error ? (
           <>
             <SealSad
-              triangleColor="stroke-error"
-              sealColor="stroke-accent"
               noMobile
+              sealColor="stroke-accent"
+              triangleColor="stroke-error"
             />
             <ErrorText centered>
               Verification failed. Please double check that the wallet you’re
@@ -49,7 +50,6 @@ export default function ({
           </>
         ) : undefined
       }
-      subtitle={<CardSubtitle />}
     />
   )
 }

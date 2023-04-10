@@ -55,15 +55,15 @@ function PostDelimiter() {
 }
 
 export default function ({
-  isQuestionOfTheDay,
   blockchainId,
-  timestamp,
-  text,
-  sender,
-  tx,
-  limitThread,
-  clickablePost,
   canReply,
+  clickablePost,
+  isQuestionOfTheDay,
+  limitThread,
+  sender,
+  text,
+  timestamp,
+  tx,
 }: {
   isQuestionOfTheDay?: boolean
   blockchainId: number
@@ -81,6 +81,7 @@ export default function ({
     <div data-anchor={blockchainId}>
       <Card hoverEffect={clickablePost}>
         <div
+          className={container(clickablePost)}
           onClick={({ target }) => {
             if (
               target instanceof HTMLAnchorElement ||
@@ -90,7 +91,6 @@ export default function ({
 
             setLocation(`#/thread/${blockchainId}`)
           }}
-          className={container(clickablePost)}
         >
           {isQuestionOfTheDay && (
             <QuestionOfDayText>Question of the day:</QuestionOfDayText>
@@ -108,7 +108,7 @@ export default function ({
                 <Status postId={blockchainId} />
               </span>
             </BodyText>
-            <BodyText primary noWrap>
+            <BodyText noWrap primary>
               <span className={postInfo}>
                 <PostTime timestamp={timestamp} />
               </span>
@@ -117,11 +117,11 @@ export default function ({
         </div>
 
         <ThreadPart
-          owner={sender}
-          threadId={blockchainId}
-          limitThread={limitThread}
-          postId={blockchainId}
           canReply={canReply}
+          limitThread={limitThread}
+          owner={sender}
+          postId={blockchainId}
+          threadId={blockchainId}
         />
       </Card>
     </div>

@@ -52,12 +52,12 @@ const TruncatedAddress = ({
   return (
     <>
       <div className={displayFrom('md')}>
-        <LinkText url={linkToUser} extraSmall primary>
+        <LinkText extraSmall primary url={linkToUser}>
           {truncateMiddleIfNeeded(name, 16)}
         </LinkText>
       </div>
       <div className={displayTo('md')}>
-        <LinkText url={linkToUser} extraSmall primary>
+        <LinkText extraSmall primary url={linkToUser}>
           {truncateMiddleIfNeeded(name, 12)}
         </LinkText>
       </div>
@@ -66,14 +66,14 @@ const TruncatedAddress = ({
 }
 
 export default function ({
-  content,
-  replier,
-  timestamp,
-  threadId,
-  replyToId,
-  replierAddress,
-  repliedTo = '',
   canReply,
+  content,
+  repliedTo = '',
+  replier,
+  replierAddress,
+  replyToId,
+  threadId,
+  timestamp,
 }: {
   content: string
   replier: string
@@ -88,7 +88,7 @@ export default function ({
       <div className={space('space-y-4')}>
         <div className={commentWithReplyButton}>
           <div className={commentWithData}>
-            <BodyText primary preWrap>
+            <BodyText preWrap primary>
               {content}
             </BodyText>
             <div className={infoBlock}>
@@ -109,9 +109,9 @@ export default function ({
         </div>
         {inputOpen && (
           <ReplyInput
-            threadId={threadId}
-            replyToId={replyToId}
             placeholder={`Reply to ${truncateMiddleIfNeeded(repliedTo, 16)}`}
+            replyToId={replyToId}
+            threadId={threadId}
           />
         )}
       </div>

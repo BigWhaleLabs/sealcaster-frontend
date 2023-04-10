@@ -33,18 +33,18 @@ interface ThreadProps {
 }
 
 function ThreadPartSuspended({
-  threadId,
-  postId,
+  canReply,
   limitThread,
   owner,
-  canReply,
+  postId,
+  threadId,
 }: ThreadProps) {
   const threadHash = useMerkleRoot(postId)
   if (!threadHash) return null
 
   const replies = useReplies({
-    threadId,
     replyToId: threadHash,
+    threadId,
   })
   const repliesLength = replies.length
 
@@ -53,28 +53,28 @@ function ThreadPartSuspended({
   return (
     <div className={wrapper}>
       <Replies
+        canReply={canReply}
+        placeholder={`Reply to ${truncateMiddleIfNeeded(owner, 12)}`}
         replyToId={threadHash}
         threadId={threadId}
-        placeholder={`Reply to ${truncateMiddleIfNeeded(owner, 12)}`}
-        canReply={canReply}
       />
       {replies.map(({ castId, postId }, index) =>
         limitThread ? (
           index < limitThread && (
             <CommentWithReplies
+              hideReplies
+              canReply={canReply}
               castId={castId}
               postId={postId}
               threadId={threadId}
-              canReply={canReply}
-              hideReplies
             />
           )
         ) : (
           <CommentWithReplies
+            canReply={canReply}
             castId={castId}
             postId={postId}
             threadId={threadId}
-            canReply={canReply}
           />
         )
       )}
@@ -82,7 +82,7 @@ function ThreadPartSuspended({
         <Link to={`#/thread/${postId}`}>
           <div className={cursor('cursor-pointer')}>
             <BareCard smallPaddings>
-              <AccentText color="text-accent" small>
+              <AccentText small color="text-accent">
                 + {repliesLength - limitThread}{' '}
                 {repliesLength - limitThread > 1 ? 'replies' : 'reply'}
               </AccentText>
@@ -95,9 +95,9 @@ function ThreadPartSuspended({
 }
 
 export default memo<ThreadProps>(
-  ({ threadId, postId, limitThread, owner, canReply }) => {
+  ({ canReply, limitThread, owner, postId, threadId }) => {
     const { requested } = useSnapshot(farcasterStore)
-    const props = { threadId, postId, limitThread, owner, canReply }
+    const props = { canReply, limitThread, owner, postId, threadId }
 
     return (
       <Suspense fallback={<LoadingReplies />}>

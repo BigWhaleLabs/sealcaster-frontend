@@ -77,9 +77,9 @@ const atSign = (noValue: boolean) =>
   )
 
 export default function ({
-  value,
-  errorMessage,
   disabled,
+  errorMessage,
+  value,
   withAtSign,
   ...rest
 }: {
@@ -95,15 +95,15 @@ export default function ({
       <div className={groupContainer(isError, disabled)}>
         {withAtSign && <span className={atSign(!value)}>@</span>}
         <input
+          className={inputContainer(isError)}
+          disabled={disabled}
           placeholder="username"
           value={value}
-          disabled={disabled}
-          className={inputContainer(isError)}
           {...rest}
         />
       </div>
       {isError && (
-        <ErrorText visible={isError} withExclamation>
+        <ErrorText withExclamation visible={isError}>
           {errorMessage}
         </ErrorText>
       )}

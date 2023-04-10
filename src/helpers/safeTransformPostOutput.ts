@@ -10,12 +10,12 @@ export default function ([
   replyToId,
 ]: PostStructOutput) {
   return {
+    derivativeAddress,
     id,
     post,
-    derivativeAddress,
-    sender,
-    timestamp,
-    threadId,
     replyToId,
+    sender,
+    threadId,
+    timestamp,
   } as PostStructOutput
 }

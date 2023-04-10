@@ -12,10 +12,10 @@ import hasFarcasterBadge from 'helpers/hasFarcasterBadge'
 import walletStore from 'stores/WalletStore'
 
 export default async function ({
+  askReconnect = true,
+  replyToId = ReplyIdDefault,
   text,
   threadId,
-  replyToId = ReplyIdDefault,
-  askReconnect = true,
 }: {
   text: string
   threadId: number

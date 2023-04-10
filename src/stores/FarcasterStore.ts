@@ -9,8 +9,8 @@ const farcasterStore = proxy<{
   requested: { [postId: number]: boolean }
 }>({
   casts: {},
-  threads: {},
   requested: {},
+  threads: {},
 })
 
 export async function fetchFarcasterThread(postId: number) {

@@ -1,9 +1,9 @@
 export default function ({ sadSeal }: { sadSeal?: boolean }) {
   return sadSeal ? (
     <svg
-      width="78"
       height="65"
       viewBox="0 0 78 65"
+      width="78"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -50,9 +50,9 @@ export default function ({ sadSeal }: { sadSeal?: boolean }) {
     </svg>
   ) : (
     <svg
-      width="78"
       height="65"
       viewBox="0 0 78 65"
+      width="78"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

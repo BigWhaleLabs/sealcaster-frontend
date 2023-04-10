@@ -74,7 +74,7 @@ export default function ({
   return (
     <div className={container}>
       <div className={overlay} />
-      <div ref={ref} className={cardContainer}>
+      <div className={cardContainer} ref={ref}>
         <Card>
           <div className={warningCard}>
             <SealWarning />
@@ -94,7 +94,7 @@ export default function ({
             )}
             <div className={warningCardBottom}>
               <GradientBorder>
-                <Button small gradientFont type="secondary" onClick={onReject}>
+                <Button gradientFont small type="secondary" onClick={onReject}>
                   I'm not sure
                 </Button>
               </GradientBorder>

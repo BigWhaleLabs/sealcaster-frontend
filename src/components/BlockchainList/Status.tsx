@@ -22,7 +22,7 @@ const statusColor = (status: PostStatus) => {
 }
 
 export function StatusSuspended({ postId }: { postId: number }) {
-  const { statuses, idToMerkleRoot } = useSnapshot(postIdsStatuses)
+  const { idToMerkleRoot, statuses } = useSnapshot(postIdsStatuses)
   const status = statuses[postId]
   const serviceId = idToMerkleRoot[postId]
 

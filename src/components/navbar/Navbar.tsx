@@ -35,11 +35,11 @@ const navbar = (visible?: boolean, withoutRightBlock?: boolean) =>
   )
 
 export default function ({
-  logoText,
   account,
-  needNetworkChange,
   eNSName,
   hideWalletPart,
+  logoText,
+  needNetworkChange,
 }: {
   logoText: VNode | string
   account?: string
@@ -60,9 +60,9 @@ export default function ({
       {is404 ? <OctoLogo /> : <SiteLogo logoText={logoText} />}
       {!hideWalletPart && (
         <RightBlock
+          account={account}
           eNSName={eNSName}
           needNetworkChange={needNetworkChange}
-          account={account}
         />
       )}
     </nav>

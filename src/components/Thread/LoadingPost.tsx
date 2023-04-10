@@ -59,7 +59,7 @@ export default function ({ isQoD }: { isQoD?: boolean }) {
         {!isQoD && <div className={firstBlock} />}
         <div className={secondBlock} />
         <div className={thirdBlock} />
-        <Delimiter color="bg-half-grey" horizontal />
+        <Delimiter horizontal color="bg-half-grey" />
         <LoadingReplies />
       </div>
       {isQoD && <StickLabel />}

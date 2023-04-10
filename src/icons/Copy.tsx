@@ -8,47 +8,47 @@ const fillClasses = classnames(
 export default function () {
   return (
     <svg
-      width="15"
+      fill="none"
       height="18"
       viewBox="0 0 15 18"
-      fill="none"
+      width="15"
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect
+        className={fillClasses}
+        height="13"
+        stroke="url(#paint0_linear_57_19969)"
+        width="10"
         x="4"
         y="4"
-        width="10"
-        height="13"
-        className={fillClasses}
-        stroke="url(#paint0_linear_57_19969)"
       />
       <rect
+        className={fillClasses}
+        height="13"
+        stroke="url(#paint1_linear_57_19969)"
+        width="10"
         x="1"
         y="1"
-        width="10"
-        height="13"
-        className={fillClasses}
-        stroke="url(#paint1_linear_57_19969)"
       />
       <defs>
         <linearGradient
+          gradientUnits="userSpaceOnUse"
           id="paint0_linear_57_19969"
           x1="5.5"
-          y1="10.5"
           x2="14"
+          y1="10.5"
           y2="10.5"
-          gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="var(--secondary)" />
           <stop offset="1" stop-color="var(--accent)" />
         </linearGradient>
         <linearGradient
+          gradientUnits="userSpaceOnUse"
           id="paint1_linear_57_19969"
           x1="2.5"
-          y1="7.5"
           x2="11"
+          y1="7.5"
           y2="7.5"
-          gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="var(--secondary)" />
           <stop offset="1" stop-color="var(--accent)" />

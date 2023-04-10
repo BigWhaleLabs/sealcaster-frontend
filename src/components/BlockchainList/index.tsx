@@ -35,7 +35,7 @@ export default function () {
           <OpenEye />
           <BodyText>Recent Casts</BodyText>
         </div>
-        <AccentText small primary color="text-primary-semi-dimmed">
+        <AccentText primary small color="text-primary-semi-dimmed">
           These casts are unfiltered blockchain data. They are not curated or
           censored.
         </AccentText>

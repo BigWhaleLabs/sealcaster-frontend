@@ -32,7 +32,7 @@ export default function () {
           B using anonymous but verified, soulbound zkNFTs or ZK badges.
         </PostText>
       </div>
-      <Button type="primary" small url="https://sealcred.xyz">
+      <Button small type="primary" url="https://sealcred.xyz">
         Try it out.
       </Button>
     </Card>

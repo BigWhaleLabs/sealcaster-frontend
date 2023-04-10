@@ -4,7 +4,6 @@ export default {
       id: 'maskComp_ViewBox_306C968E-1F62-4C95-B731-C09F0EBBFFB6',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -20,9 +19,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 16.0,
@@ -39,26 +38,24 @@ export default {
           parent: 15.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'ViewBox-background',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -67,18 +64,20 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'ViewBox-mask',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
           td: 1.0,
+          ty: 4.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -96,6 +95,7 @@ export default {
           refId: 'comp_ViewBox_306C968E-1F62-4C95-B731-C09F0EBBFFB6',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
       ],
@@ -104,7 +104,6 @@ export default {
       id: 'comp_ViewBox_306C968E-1F62-4C95-B731-C09F0EBBFFB6',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -120,9 +119,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -140,10 +139,10 @@ export default {
           refId: 'comp_Path_080783E0-154D-4B07-BE8F-F497E3F32AEB',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -161,10 +160,10 @@ export default {
           refId: 'comp_Path_0D1D6243-D6BA-48B9-9B4B-CB871FB70AFC',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -182,10 +181,10 @@ export default {
           refId: 'comp_Path_D803965D-1BD2-44E5-BA4E-883E82559342',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -203,10 +202,10 @@ export default {
           refId: 'comp_Path_F20269AB-20FD-4B19-97A0-6E6078EBDD6B',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -224,10 +223,10 @@ export default {
           refId: 'comp_Line_23765FAC-B5AA-4024-847C-A2C7A80C6D23',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -245,10 +244,10 @@ export default {
           refId: 'comp_Line_7286CCEB-837B-4FF3-A552-268E9D2BEC41',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -266,10 +265,10 @@ export default {
           refId: 'comp_Circle_7420814B-9259-403C-8308-28693DF29FF0',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -287,10 +286,10 @@ export default {
           refId: 'comp_Path_A4A17214-C9F5-4B06-8457-6FC5A2539CE1',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -308,10 +307,10 @@ export default {
           refId: 'comp_Path_C41AB9EE-E339-46DB-A2F3-309523EDDA75',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -329,10 +328,10 @@ export default {
           refId: 'comp_Path_0E8FB7B2-B9C2-4D8B-B7B1-D3B26FE7CDF0',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -350,10 +349,10 @@ export default {
           refId: 'comp_Path_F772311E-A128-48BC-B306-3B97A6862996',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -371,10 +370,10 @@ export default {
           refId: 'comp_Path_F5782AA8-F046-40E3-A8F5-7F945CC50108',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -392,10 +391,10 @@ export default {
           refId: 'comp_Path_1239FAA4-C00D-4434-9200-9BAF8B4AF633',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -413,10 +412,10 @@ export default {
           refId: 'comp_Path_6CC8069B-C4B5-4000-AFA0-C993BAAD3C70',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -434,10 +433,10 @@ export default {
           refId: 'comp_Path_0A2521F6-3635-403A-8AC4-6C565FC6FAC5',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -455,10 +454,10 @@ export default {
           refId: 'comp_Path_ACC83AEF-69C3-4CEB-B9BF-47974CADBCC5',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
         {
-          ty: 0.0,
           ao: 0.0,
           ddd: 0.0,
           h: 55.0,
@@ -476,6 +475,7 @@ export default {
           refId: 'comp_Path_9B54A460-D829-4BA8-AC26-CEED80D06B04',
           sr: 1.0,
           st: 0.0,
+          ty: 0.0,
           w: 56.0,
         },
       ],
@@ -484,7 +484,6 @@ export default {
       id: 'comp_Path_9B54A460-D829-4BA8-AC26-CEED80D06B04',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -500,9 +499,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 25.0,
@@ -519,9 +518,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 28.0,
@@ -537,26 +536,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -565,17 +562,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 21.0,
@@ -592,11 +591,9 @@ export default {
           parent: 25.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -626,9 +623,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -636,10 +633,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -667,9 +664,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -678,17 +675,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 24.0,
@@ -705,11 +704,9 @@ export default {
           parent: 25.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -739,16 +736,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -757,14 +754,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -772,7 +772,6 @@ export default {
       id: 'comp_Path_ACC83AEF-69C3-4CEB-B9BF-47974CADBCC5',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -788,9 +787,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 35.0,
@@ -807,9 +806,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 38.0,
@@ -825,26 +824,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -853,17 +850,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 31.0,
@@ -880,11 +879,9 @@ export default {
           parent: 35.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -914,9 +911,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -937,9 +934,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -960,9 +957,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -983,9 +980,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -993,10 +990,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -1024,9 +1021,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1035,17 +1032,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 34.0,
@@ -1062,11 +1061,9 @@ export default {
           parent: 35.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1096,9 +1093,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1119,9 +1116,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1142,9 +1139,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1165,16 +1162,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1183,14 +1180,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -1198,7 +1198,6 @@ export default {
       id: 'comp_Path_0A2521F6-3635-403A-8AC4-6C565FC6FAC5',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -1214,9 +1213,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 45.0,
@@ -1233,9 +1232,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 48.0,
@@ -1251,26 +1250,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1279,17 +1276,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 41.0,
@@ -1306,11 +1305,9 @@ export default {
           parent: 45.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1340,9 +1337,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -1350,10 +1347,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -1381,9 +1378,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1392,17 +1389,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 44.0,
@@ -1419,11 +1418,9 @@ export default {
           parent: 45.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1453,16 +1450,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1471,14 +1468,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -1486,7 +1486,6 @@ export default {
       id: 'comp_Path_6CC8069B-C4B5-4000-AFA0-C993BAAD3C70',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -1502,9 +1501,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 55.0,
@@ -1521,9 +1520,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 58.0,
@@ -1539,26 +1538,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1567,17 +1564,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 51.0,
@@ -1594,11 +1593,9 @@ export default {
           parent: 55.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1619,9 +1616,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -1629,10 +1626,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -1660,9 +1657,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1671,17 +1668,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 54.0,
@@ -1698,11 +1697,9 @@ export default {
           parent: 55.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1723,16 +1720,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1741,14 +1738,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -1756,7 +1756,6 @@ export default {
       id: 'comp_Path_1239FAA4-C00D-4434-9200-9BAF8B4AF633',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -1772,9 +1771,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 65.0,
@@ -1795,9 +1794,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 68.0,
@@ -1813,26 +1812,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1841,17 +1838,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 61.0,
@@ -1868,11 +1867,9 @@ export default {
           parent: 65.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1893,9 +1890,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -1903,10 +1900,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -1934,9 +1931,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -1945,17 +1942,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 64.0,
@@ -1972,11 +1971,9 @@ export default {
           parent: 65.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -1997,16 +1994,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2015,14 +2012,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -2030,7 +2030,6 @@ export default {
       id: 'comp_Path_F5782AA8-F046-40E3-A8F5-7F945CC50108',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -2046,9 +2045,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 75.0,
@@ -2065,9 +2064,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 78.0,
@@ -2083,26 +2082,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2111,17 +2108,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 71.0,
@@ -2138,11 +2137,9 @@ export default {
           parent: 75.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -2163,9 +2160,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -2173,10 +2170,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -2204,9 +2201,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2215,17 +2212,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 74.0,
@@ -2242,11 +2241,9 @@ export default {
           parent: 75.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -2267,16 +2264,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2285,14 +2282,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -2300,7 +2300,6 @@ export default {
       id: 'comp_Path_F772311E-A128-48BC-B306-3B97A6862996',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -2316,9 +2315,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 85.0,
@@ -2339,9 +2338,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 88.0,
@@ -2357,26 +2356,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2385,17 +2382,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 81.0,
@@ -2412,11 +2411,9 @@ export default {
           parent: 85.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -2437,9 +2434,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -2447,10 +2444,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -2478,9 +2475,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2489,17 +2486,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 84.0,
@@ -2516,11 +2515,9 @@ export default {
           parent: 85.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -2541,16 +2538,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2559,14 +2556,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -2574,7 +2574,6 @@ export default {
       id: 'comp_Path_0E8FB7B2-B9C2-4D8B-B7B1-D3B26FE7CDF0',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -2590,9 +2589,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 95.0,
@@ -2609,9 +2608,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 98.0,
@@ -2627,26 +2626,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2655,17 +2652,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 91.0,
@@ -2682,11 +2681,9 @@ export default {
           parent: 95.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -2725,9 +2722,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.812, 0.41600000000000004, 1.0, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -2735,10 +2732,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -2766,9 +2763,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2777,17 +2774,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 94.0,
@@ -2804,11 +2803,9 @@ export default {
           parent: 95.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -2847,16 +2844,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2865,14 +2862,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -2880,7 +2880,6 @@ export default {
       id: 'comp_Path_C41AB9EE-E339-46DB-A2F3-309523EDDA75',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -2896,9 +2895,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 105.0,
@@ -2915,9 +2914,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 108.0,
@@ -2933,26 +2932,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -2961,17 +2958,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 101.0,
@@ -2988,11 +2987,9 @@ export default {
           parent: 105.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -3025,9 +3022,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.812, 0.41600000000000004, 1.0, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -3035,10 +3032,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -3066,9 +3063,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3077,17 +3074,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 104.0,
@@ -3104,11 +3103,9 @@ export default {
           parent: 105.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -3141,16 +3138,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3159,14 +3156,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -3174,7 +3174,6 @@ export default {
       id: 'comp_Path_A4A17214-C9F5-4B06-8457-6FC5A2539CE1',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -3190,9 +3189,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 115.0,
@@ -3209,9 +3208,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 118.0,
@@ -3227,26 +3226,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3255,17 +3252,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 111.0,
@@ -3282,11 +3281,9 @@ export default {
           parent: 115.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -3322,9 +3319,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -3332,10 +3329,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -3363,9 +3360,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3374,17 +3371,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 114.0,
@@ -3401,11 +3400,9 @@ export default {
           parent: 115.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -3441,16 +3438,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3459,14 +3456,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -3474,7 +3474,6 @@ export default {
       id: 'comp_Circle_7420814B-9259-403C-8308-28693DF29FF0',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -3490,9 +3489,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 125.0,
@@ -3509,9 +3508,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 128.0,
@@ -3527,26 +3526,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3555,17 +3552,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Circle-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 121.0,
@@ -3582,11 +3581,9 @@ export default {
           parent: 125.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -3613,9 +3610,9 @@ export default {
                     },
                   },
                   nm: 'Circle-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.996, 0.847, 0.137, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -3623,10 +3620,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -3654,9 +3651,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3665,17 +3662,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Circle-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 124.0,
@@ -3692,11 +3691,9 @@ export default {
           parent: 125.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -3723,16 +3720,16 @@ export default {
                     },
                   },
                   nm: 'Circle-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3741,14 +3738,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Circle-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -3756,7 +3756,6 @@ export default {
       id: 'comp_Line_7286CCEB-837B-4FF3-A552-268E9D2BEC41',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -3772,9 +3771,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 135.0,
@@ -3791,9 +3790,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 138.0,
@@ -3809,26 +3808,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3837,17 +3834,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Line-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 131.0,
@@ -3864,11 +3863,9 @@ export default {
           parent: 135.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -3889,9 +3886,9 @@ export default {
                     },
                   },
                   nm: 'Line-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.812, 0.41600000000000004, 1.0, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -3899,10 +3896,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -3930,9 +3927,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -3941,17 +3938,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Line-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 134.0,
@@ -3968,11 +3967,9 @@ export default {
           parent: 135.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -3993,16 +3990,16 @@ export default {
                     },
                   },
                   nm: 'Line-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4011,14 +4008,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Line-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -4026,7 +4026,6 @@ export default {
       id: 'comp_Line_23765FAC-B5AA-4024-847C-A2C7A80C6D23',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -4042,9 +4041,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 145.0,
@@ -4061,9 +4060,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 148.0,
@@ -4079,26 +4078,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4107,17 +4104,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Line-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 141.0,
@@ -4134,11 +4133,9 @@ export default {
           parent: 145.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -4159,9 +4156,9 @@ export default {
                     },
                   },
                   nm: 'Line-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.812, 0.41600000000000004, 1.0, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: -0.0 } }],
                   lc: 2.0,
@@ -4169,10 +4166,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: -1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -4200,9 +4197,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4211,17 +4208,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Line-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 144.0,
@@ -4238,11 +4237,9 @@ export default {
           parent: 145.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -4263,16 +4260,16 @@ export default {
                     },
                   },
                   nm: 'Line-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4281,14 +4278,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Line-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -4296,7 +4296,6 @@ export default {
       id: 'comp_Path_F20269AB-20FD-4B19-97A0-6E6078EBDD6B',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -4312,9 +4311,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 155.0,
@@ -4331,9 +4330,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 158.0,
@@ -4349,26 +4348,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4377,17 +4374,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 151.0,
@@ -4404,11 +4403,9 @@ export default {
           parent: 155.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -4429,9 +4426,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.812, 0.41600000000000004, 1.0, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -4439,10 +4436,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -4470,9 +4467,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4481,17 +4478,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 154.0,
@@ -4508,11 +4507,9 @@ export default {
           parent: 155.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -4533,16 +4530,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4551,14 +4548,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -4566,7 +4566,6 @@ export default {
       id: 'comp_Path_D803965D-1BD2-44E5-BA4E-883E82559342',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -4582,9 +4581,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 165.0,
@@ -4601,9 +4600,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 168.0,
@@ -4619,26 +4618,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4647,17 +4644,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 161.0,
@@ -4674,11 +4673,9 @@ export default {
           parent: 165.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -4699,9 +4696,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.812, 0.41600000000000004, 1.0, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -4709,10 +4706,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -4740,9 +4737,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4751,17 +4748,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 164.0,
@@ -4778,11 +4777,9 @@ export default {
           parent: 165.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -4803,16 +4800,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4821,14 +4818,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -4836,7 +4836,6 @@ export default {
       id: 'comp_Path_0D1D6243-D6BA-48B9-9B4B-CB871FB70AFC',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -4852,9 +4851,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 175.0,
@@ -4871,9 +4870,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 178.0,
@@ -4889,26 +4888,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -4917,17 +4914,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 171.0,
@@ -4944,11 +4943,9 @@ export default {
           parent: 175.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -4969,9 +4966,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.812, 0.41600000000000004, 1.0, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -4979,10 +4976,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -5010,9 +5007,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -5021,17 +5018,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 174.0,
@@ -5048,11 +5047,9 @@ export default {
           parent: 175.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -5073,16 +5070,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -5091,14 +5088,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -5106,7 +5106,6 @@ export default {
       id: 'comp_Path_080783E0-154D-4B07-BE8F-F497E3F32AEB',
       layers: [
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 15.0,
@@ -5122,9 +5121,9 @@ export default {
           op: 91.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 3.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 185.0,
@@ -5141,9 +5140,9 @@ export default {
           parent: 15.0,
           sr: 1.0,
           st: 0.0,
+          ty: 3.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 188.0,
@@ -5159,26 +5158,24 @@ export default {
           op: 91.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'rc',
                   d: 1.0,
                   nm: 'sizeElement',
                   p: { a: 0.0, k: [28.0, 27.5] },
                   r: { a: 0.0, k: 0.0 },
                   s: { a: 0.0, k: [56.0, 55.0] },
+                  ty: 'rc',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 0.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -5187,17 +5184,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-size',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 181.0,
@@ -5214,11 +5213,9 @@ export default {
           parent: 185.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -5239,9 +5236,9 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'st',
                   c: { a: 0.0, k: [0.812, 0.41600000000000004, 1.0, 1.0] },
                   d: [{ n: 'o', nm: 'offset', v: { a: 0.0, k: 0.0 } }],
                   lc: 2.0,
@@ -5249,10 +5246,10 @@ export default {
                   ml: 4.0,
                   nm: 'Stroke 1',
                   o: { a: 0.0, k: 100.0 },
+                  ty: 'st',
                   w: { a: 0.0, k: 1.5 },
                 },
                 {
-                  ty: 'tm',
                   e: { a: 0.0, k: 100.0 },
                   m: 2.0,
                   nm: 'Trim Paths 1',
@@ -5280,9 +5277,9 @@ export default {
                       },
                     ],
                   },
+                  ty: 'tm',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -5291,17 +5288,19 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-stroke',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
         {
-          ty: 4.0,
           ao: 0.0,
           ddd: 0.0,
           ind: 184.0,
@@ -5318,11 +5317,9 @@ export default {
           parent: 185.0,
           shapes: [
             {
-              ty: 'gr',
               cix: 2.0,
               it: [
                 {
-                  ty: 'sh',
                   ind: 0.0,
                   ks: {
                     a: 0.0,
@@ -5343,16 +5340,16 @@ export default {
                     },
                   },
                   nm: 'Path-path',
+                  ty: 'sh',
                 },
                 {
-                  ty: 'fl',
                   c: { a: 0.0, k: [0.0, 0.0, 0.0, 1.0] },
                   nm: 'Fill 1',
                   o: { a: 0.0, k: 0.0 },
                   r: 1.0,
+                  ty: 'fl',
                 },
                 {
-                  ty: 'tr',
                   a: { a: 0.0, k: [0.0, 0.0] },
                   nm: 'Transform',
                   o: { a: 0.0, k: 100.0 },
@@ -5361,14 +5358,17 @@ export default {
                   s: { a: 0.0, k: [100.0, 100.0] },
                   sa: { a: 0.0, k: 0.0 },
                   sk: { a: 0.0, k: 0.0 },
+                  ty: 'tr',
                 },
               ],
               nm: 'Path-content',
               np: 3.0,
+              ty: 'gr',
             },
           ],
           sr: 1.0,
           st: 0.0,
+          ty: 4.0,
         },
       ],
     },
@@ -5380,7 +5380,6 @@ export default {
   ip: 0.0,
   layers: [
     {
-      ty: 0.0,
       ao: 0.0,
       ddd: 0.0,
       h: 55.0,
@@ -5398,10 +5397,10 @@ export default {
       refId: 'maskComp_ViewBox_306C968E-1F62-4C95-B731-C09F0EBBFFB6',
       sr: 1.0,
       st: 0.0,
+      ty: 0.0,
       w: 56.0,
     },
     {
-      ty: 4.0,
       ao: 0.0,
       ddd: 0.0,
       ind: 2.0,
@@ -5417,26 +5416,24 @@ export default {
       op: 91.0,
       shapes: [
         {
-          ty: 'gr',
           cix: 2.0,
           it: [
             {
-              ty: 'rc',
               d: 1.0,
               nm: 'sealcaster-background',
               p: { a: 0.0, k: [28.0, 27.5] },
               r: { a: 0.0, k: 0.0 },
               s: { a: 0.0, k: [56.0, 55.0] },
+              ty: 'rc',
             },
             {
-              ty: 'fl',
               c: { a: 0.0, k: [1.0, 1.0, 1.0, 1.0] },
               nm: 'Fill 1',
               o: { a: 0.0, k: 0.0 },
               r: 1.0,
+              ty: 'fl',
             },
             {
-              ty: 'tr',
               a: { a: 0.0, k: [0.0, 0.0] },
               nm: 'Transform',
               o: { a: 0.0, k: 100.0 },
@@ -5445,14 +5442,17 @@ export default {
               s: { a: 0.0, k: [100.0, 100.0] },
               sa: { a: 0.0, k: 0.0 },
               sk: { a: 0.0, k: 0.0 },
+              ty: 'tr',
             },
           ],
           nm: 'sealcaster-background',
           np: 3.0,
+          ty: 'gr',
         },
       ],
       sr: 1.0,
       st: 0.0,
+      ty: 4.0,
     },
   ],
   meta: { a: '', d: 'Timeline', g: 'Flow 1.13.0', k: '', tc: '' },

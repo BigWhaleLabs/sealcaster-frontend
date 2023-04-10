@@ -27,7 +27,7 @@ export default function () {
         <HeaderText center extraLeading size="large">
           It looks like you connected a wallet without a correct ZK badge
         </HeaderText>
-        <SubHeaderText small primary>
+        <SubHeaderText primary small>
           Create a burner wallet with a Farcaster ZK badge to continue, or
           reconnect with a correct burner wallet
         </SubHeaderText>

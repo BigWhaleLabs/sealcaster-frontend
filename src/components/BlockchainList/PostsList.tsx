@@ -36,7 +36,7 @@ export function PostListSuspended() {
 
   const posts = thread ? thread : []
   const postsLength = posts.length
-  const { paginated, skip, setSkip } = usePaginated(posts, limit)
+  const { paginated, setSkip, skip } = usePaginated(posts, limit)
 
   if (!thread) return <LoadingList text="Fetching posts..." />
   if (hashId) useScrollToAnchor({ callback: flashingThread })
@@ -44,28 +44,28 @@ export function PostListSuspended() {
 
   return paginatedLength > 0 ? (
     <InfiniteScroll
-      next={() => setSkip(skip + limit)}
       className={scrollContainer}
       dataLength={paginatedLength}
+      endMessage={postsLength < 3 ? <CustomizeCard /> : undefined}
       hasMore={paginatedLength < postsLength}
       loader={<LoadingList text="Fetching more posts..." />}
-      endMessage={postsLength < 3 ? <CustomizeCard /> : undefined}
+      next={() => setSkip(skip + limit)}
     >
-      {paginated.map(({ id, timestamp, post, sender }, index) => (
+      {paginated.map(({ id, post, sender, timestamp }, index) => (
         <>
           <Post
+            clickablePost
+            blockchainId={Number(id)}
             isQuestionOfTheDay={allQodPostIds.includes(id.toNumber())}
+            key={id}
+            limitThread={2}
+            sender={sender}
+            text={post}
+            timestamp={Number(timestamp)}
+            tx={idToPostTx[Number(id) - 1]}
             canReply={
               allQodPostIds.includes(id.toNumber()) || sender === account
             }
-            key={id}
-            blockchainId={Number(id)}
-            timestamp={Number(timestamp)}
-            text={post}
-            sender={sender}
-            tx={idToPostTx[Number(id) - 1]}
-            limitThread={2}
-            clickablePost
           />
 
           {index === 2 && <CustomizeCard />}

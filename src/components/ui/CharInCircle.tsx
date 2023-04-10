@@ -53,9 +53,9 @@ const CharInCircle = forwardRef<
     disabled?: boolean
     char: CharTypes
   }
->(({ size, disabled, char }, ref) => {
+>(({ char, disabled, size }, ref) => {
   return (
-    <div ref={ref} className={borderWrapper(size)}>
+    <div className={borderWrapper(size)} ref={ref}>
       <div className={questionStyles(size, disabled)}>{char}</div>
     </div>
   )
