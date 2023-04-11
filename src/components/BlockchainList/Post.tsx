@@ -1,6 +1,5 @@
 import {
   BodyText,
-  PostText,
   QuestionOfDayText,
   StatusText,
 } from 'components/ui/Text'
@@ -23,6 +22,7 @@ import classnames, {
   justifyContent,
   space,
 } from 'classnames/tailwind'
+import PostTextWithLinks from './PostTextWithLinks'
 
 const container = (clickablePost?: boolean) =>
   classnames(
@@ -95,7 +95,7 @@ export default function ({
           {isQuestionOfTheDay && (
             <QuestionOfDayText>Question of the day:</QuestionOfDayText>
           )}
-          <PostText>{text}</PostText>
+          <PostTextWithLinks text={text} />
 
           <div className={postBottom}>
             <BodyText primary>
