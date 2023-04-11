@@ -1,9 +1,9 @@
 import { ErrorText } from 'components/ui/Text'
 
 export default function ({
-  text,
   centered,
   small,
+  text,
   withExclamation,
 }: {
   text: string

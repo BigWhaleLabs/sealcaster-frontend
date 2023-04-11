@@ -26,9 +26,9 @@ export default function () {
     <div className={badgeWrapper}>
       <Tilt
         glareEnable
-        glareMaxOpacity={0.4}
-        glareBorderRadius="100%"
         tiltReverse
+        glareBorderRadius="100%"
+        glareMaxOpacity={0.4}
         perspective={500}
         onMove={({ tiltAngleX, tiltAngleY }) => {
           if (!badge.current) return

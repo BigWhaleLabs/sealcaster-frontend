@@ -38,11 +38,11 @@ const commentLine = classnames(
 )
 
 const Replies = ({
+  canReply,
   castId,
+  hideReplies,
   postId,
   threadId,
-  canReply,
-  hideReplies,
 }: {
   castId?: string
   postId?: number
@@ -66,34 +66,34 @@ const Replies = ({
     data.replyToId = roots[postId]
   }
 
-  const { id, content, replier, timestamp, replyToId, replierAddress } = data
+  const { content, id, replier, replierAddress, replyToId, timestamp } = data
 
   if (!replyToId || hideReplies) {
     return (
       <CommentBody
-        threadId={threadId}
+        canReply={canReply}
         content={content}
+        repliedTo={replier}
         replier={replier}
         replierAddress={replierAddress}
-        timestamp={timestamp}
-        canReply={canReply}
         replyToId={replyToId}
-        repliedTo={replier}
+        threadId={threadId}
+        timestamp={timestamp}
       />
     )
   }
 
   return (
     <CommentWithReplies
-      id={id}
+      canReply={canReply}
       content={content}
+      id={id}
+      repliedTo={replier}
       replier={replier}
-      threadId={threadId}
-      timestamp={timestamp}
       replierAddress={replierAddress}
       replyToId={replyToId}
-      canReply={canReply}
-      repliedTo={replier}
+      threadId={threadId}
+      timestamp={timestamp}
     />
   )
 }
@@ -113,24 +113,24 @@ function SuspensedReplies(props: {
 }
 
 export function CommentWithReplies({
-  id: rootId,
-  content,
-  replier,
-  repliedTo,
-  timestamp,
-  threadId,
-  replyToId,
-  replierAddress,
   canReply,
+  content,
+  id: rootId,
+  repliedTo,
+  replier,
+  replierAddress,
+  replyToId,
+  threadId,
+  timestamp,
 }: Comment & {
   replyToId: string
   replierAddress?: string
   canReply?: boolean
 }) {
   const replies = useReplies({
-    threadId,
-    replyToId,
     allowFetch: false,
+    replyToId,
+    threadId,
   })
 
   const hasReplies = replies.length > 0
@@ -138,14 +138,14 @@ export function CommentWithReplies({
   return (
     <div>
       <CommentBody
-        threadId={threadId}
-        replyToId={replyToId}
-        content={content}
-        replier={replier}
-        repliedTo={repliedTo}
-        replierAddress={replierAddress}
-        timestamp={timestamp}
         canReply={canReply}
+        content={content}
+        repliedTo={repliedTo}
+        replier={replier}
+        replierAddress={replierAddress}
+        replyToId={replyToId}
+        threadId={threadId}
+        timestamp={timestamp}
       />
       {hasReplies && (
         <div className={repliesWithLine}>
@@ -153,10 +153,10 @@ export function CommentWithReplies({
           <div className={repliesBlock}>
             {replies.map(({ castId, postId }) => (
               <SuspensedReplies
+                canReply={canReply}
                 castId={castId}
                 postId={postId}
                 threadId={threadId}
-                canReply={canReply}
               />
             ))}
           </div>

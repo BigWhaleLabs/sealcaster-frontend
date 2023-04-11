@@ -29,11 +29,11 @@ interface CardProps {
 }
 
 const cardContainer = ({
-  small,
   blueBg,
+  error,
   gradient,
   hoverEffect,
-  error,
+  small,
   smallRadius,
 }: CardProps) => {
   const card = classnames(
@@ -64,12 +64,12 @@ const cardContainer = ({
 }
 
 export default function ({
-  children,
-  small,
   blueBg,
+  children,
+  error,
   gradient,
   hoverEffect,
-  error,
+  small,
   smallRadius,
 }: ChildrenProp & {
   small?: boolean
@@ -82,11 +82,11 @@ export default function ({
   const content = (
     <div
       className={cardContainer({
-        small,
         blueBg,
+        error,
         gradient,
         hoverEffect,
-        error,
+        small,
         smallRadius,
       })}
     >

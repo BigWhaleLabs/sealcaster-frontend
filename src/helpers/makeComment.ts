@@ -18,31 +18,31 @@ export default function makeComment(post?: PostStructOutput, cast?: Cast) {
     const replyToId = cast.hash
 
     return {
-      id,
-      replyToId,
       content,
-      timestamp,
+      id,
       replier,
       replierAddress,
+      replyToId,
+      timestamp,
     }
   }
 
   if (post) {
     return {
+      content: post.post,
       id: post.id.toNumber(),
       replier: post.sender,
       replierAddress: post.derivativeAddress,
-      content: post.post,
       timestamp: post.timestamp.toNumber(),
     }
   }
 
   if (cast) {
     return {
-      id: cast.hash,
-      replyToId: cast.hash,
-      replier: `@${cast.author.username}`,
       content: cast?.text,
+      id: cast.hash,
+      replier: `@${cast.author.username}`,
+      replyToId: cast.hash,
       timestamp: parseCastTimestamp(cast.timestamp),
     }
   }

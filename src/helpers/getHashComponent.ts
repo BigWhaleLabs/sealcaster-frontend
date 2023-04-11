@@ -7,8 +7,8 @@ export default function () {
   const [path, anchor] = hash.split('#')
 
   return {
-    path,
     anchor,
     externalId,
+    path,
   }
 }

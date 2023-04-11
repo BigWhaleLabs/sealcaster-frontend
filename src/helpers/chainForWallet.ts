@@ -17,13 +17,13 @@ export default function () {
   const currency = `${firstCapitalName}ETH`
 
   return {
+    blockExplorerUrls: [blockExplorerUrl],
     chainId,
-    rpcUrls: [`https://${name}.infura.io/v3/`],
     chainName: `${firstCapitalName} Test Network`,
     nativeCurrency: {
       name: currency,
       symbol: currency,
     },
-    blockExplorerUrls: [blockExplorerUrl],
+    rpcUrls: [`https://${name}.infura.io/v3/`],
   }
 }

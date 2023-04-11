@@ -38,12 +38,12 @@ const textAreaInfoWrapper = (customBlock?: boolean) =>
   )
 
 export default function ({
-  error,
-  loading,
-  disabled,
-  onButtonClick,
-  leftBlock,
   buttonText,
+  disabled,
+  error,
+  leftBlock,
+  loading,
+  onButtonClick,
 }: {
   error?: string
   loading?: boolean
@@ -83,12 +83,12 @@ export default function ({
         )}
 
         <Button
-          loading={loading}
           center
-          small
           fullWidthOnMobile
-          type="primary"
+          small
           disabled={disabled}
+          loading={loading}
+          type="primary"
           onClick={onButtonClick}
         >
           {buttonText ? buttonText : 'Cast anonymously'}

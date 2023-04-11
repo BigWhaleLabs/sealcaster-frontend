@@ -86,8 +86,8 @@ interface ButtonProps {
 }
 
 const ActionsButtons = ({
-  tertiaryButton,
   primaryButton,
+  tertiaryButton,
 }: {
   tertiaryButton?: ButtonProps
   primaryButton?: ButtonProps
@@ -101,9 +101,9 @@ const ActionsButtons = ({
       )}
       {tertiaryButton?.text && (
         <Button
-          type="tertiary"
           gradientFont
           small
+          type="tertiary"
           onClick={tertiaryButton?.action}
         >
           {tertiaryButton?.text}
@@ -114,12 +114,12 @@ const ActionsButtons = ({
 }
 
 export default function ({
-  showAttention,
-  mainText,
   headerText,
+  mainText,
   primaryButton,
-  tertiaryButton,
   sadSeal,
+  showAttention,
+  tertiaryButton,
 }: {
   mainText: string
   headerText: string
@@ -149,7 +149,7 @@ export default function ({
               <div className={smallInfoSealWrapper}>
                 <SmallInfoSeal />
               </div>
-              <AccentText color="text-formal-accent" large bold>
+              <AccentText bold large color="text-formal-accent">
                 {showAttention && (
                   <span className={textColor('text-secondary')}>
                     Attention:{' '}
@@ -166,7 +166,7 @@ export default function ({
               }}
             >
               <div className={width('w-4')}>
-                <Arrow pulseDisabled open={show} reversedOnMobiles />
+                <Arrow pulseDisabled reversedOnMobiles open={show} />
               </div>
             </Button>
           </div>

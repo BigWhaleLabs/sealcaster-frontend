@@ -44,9 +44,9 @@ interface AccountProps {
 
 const AccountContainer = ({
   account,
-  onChangeNetwork,
-  needNetworkChange,
   eNSName,
+  needNetworkChange,
+  onChangeNetwork,
 }: {
   account?: string
   onChangeNetwork?: () => Promise<void>
@@ -74,10 +74,10 @@ const AccountContainer = ({
   const content = (
     <div className={accountLinkContainer}>
       <AccountAndLogo
-        needNetworkChange={needNetworkChange}
         account={account}
-        eNSName={eNSName}
         connected={true}
+        eNSName={eNSName}
+        needNetworkChange={needNetworkChange}
       />
     </div>
   )
@@ -97,9 +97,9 @@ const AccountContainer = ({
   return (
     <div className={accountLinkContainer} onClick={onChangeNetwork}>
       <AccountAndLogo
+        connected={false}
         eNSName={eNSName}
         needNetworkChange={needNetworkChange}
-        connected={false}
       />
     </div>
   )
@@ -107,8 +107,8 @@ const AccountContainer = ({
 
 const SuspendedAccount = ({
   account,
-  needNetworkChange,
   eNSName,
+  needNetworkChange,
 }: AccountProps) => {
   return (
     <Suspense
@@ -119,9 +119,9 @@ const SuspendedAccount = ({
       }
     >
       <AccountContainer
+        account={account}
         eNSName={eNSName}
         needNetworkChange={needNetworkChange}
-        account={account}
       />
     </Suspense>
   )
@@ -129,8 +129,8 @@ const SuspendedAccount = ({
 
 export default function ({
   account,
-  needNetworkChange,
   eNSName,
+  needNetworkChange,
 }: AccountProps) {
   return (
     <>
@@ -142,16 +142,16 @@ export default function ({
         </div>
         <SuspendedAccount
           account={account}
-          needNetworkChange={needNetworkChange}
           eNSName={eNSName}
+          needNetworkChange={needNetworkChange}
         />
       </div>
 
       <div className={displayTo('xs')}>
         <SuspendedAccount
           account={account}
-          needNetworkChange={needNetworkChange}
           eNSName={eNSName}
+          needNetworkChange={needNetworkChange}
         />
       </div>
       <div className={displayTo('xs')}>

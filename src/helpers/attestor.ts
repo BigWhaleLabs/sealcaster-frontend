@@ -11,8 +11,8 @@ export async function requestAddressOwnershipAttestation(
   message: string
 ) {
   const { data } = await axios.post<Signature>(`${baseURL}/ethereum-address`, {
-    signature,
     message,
+    signature,
   })
   return data
 }

@@ -5,7 +5,7 @@ export default proxy<{
   loading: { [replyToId: string]: boolean }
   error: { [replyToId: string]: unknown }
 }>({
-  replyToText: {} as { [replyToId: string]: string },
-  loading: {},
   error: {},
+  loading: {},
+  replyToText: {} as { [replyToId: string]: string },
 })

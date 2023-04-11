@@ -19,10 +19,10 @@ interface BareCardProps {
 }
 
 const bareCard = ({
-  smallPaddings,
+  bigPaddings,
   centered,
   gapY,
-  bigPaddings,
+  smallPaddings,
 }: BareCardProps) =>
   classnames(
     display('flex'),
@@ -34,24 +34,24 @@ const bareCard = ({
     borderRadius('rounded-lg'),
 
     padding({
-      'py-2': smallPaddings,
-      'px-4': smallPaddings,
-      'p-6': bigPaddings,
       'p-4': !smallPaddings && !bigPaddings,
+      'p-6': bigPaddings,
+      'px-4': smallPaddings,
+      'py-2': smallPaddings,
     })
   )
 
 export default function ({
-  children,
-  smallPaddings,
   bigPaddings,
   centered,
+  children,
   gapY,
+  smallPaddings,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & BareCardProps & ChildrenProp) {
   return (
     <div
-      className={bareCard({ smallPaddings, centered, gapY, bigPaddings })}
+      className={bareCard({ bigPaddings, centered, gapY, smallPaddings })}
       {...rest}
     >
       {children}

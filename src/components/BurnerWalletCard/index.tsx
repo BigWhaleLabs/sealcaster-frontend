@@ -105,7 +105,7 @@ export default function ({ privateKey }: { privateKey: string }) {
               </BodyText>
               <div className={privateKeyBlur(isKeyClosed)}>
                 <AccentText color="text-secondary">
-                  <BodyText center semiBold inheritColor>
+                  <BodyText center inheritColor semiBold>
                     {isKeyClosed ? fakePrivateKey : privateKey}
                   </BodyText>
                 </AccentText>
@@ -117,7 +117,7 @@ export default function ({ privateKey }: { privateKey: string }) {
                 onClick={() => setKeyClosed(!isKeyClosed)}
               >
                 <ColorfulEye open={isKeyClosed} />
-                <Button small gradientFont type="tertiary">
+                <Button gradientFont small type="tertiary">
                   {isKeyClosed ? 'Reveal key' : 'Hide key'}
                 </Button>
               </div>
@@ -129,7 +129,7 @@ export default function ({ privateKey }: { privateKey: string }) {
                 }}
               >
                 <Copy />
-                <Button small gradientFont type="tertiary">
+                <Button gradientFont small type="tertiary">
                   Copy key
                 </Button>
               </div>
@@ -151,13 +151,13 @@ export default function ({ privateKey }: { privateKey: string }) {
                 BurnerWalletStore.burn()
               }}
             >
-              <AccentText color="text-secondary" extraSmall primary>
+              <AccentText extraSmall primary color="text-secondary">
                 <span className={textDecoration('underline')}>
                   Destroy burner
                 </span>
               </AccentText>
             </Button>
-            <AccentText color="text-formal-accent-dimmed" extraSmall primary>
+            <AccentText extraSmall primary color="text-formal-accent-dimmed">
               (Clear this private key and erase all trace of it.)
             </AccentText>
           </div>

@@ -12,9 +12,9 @@ interface ENSAddressProps {
 
 function ENSAddressSuspended({
   address,
+  eNSName,
   truncate,
   truncateSize,
-  eNSName,
 }: ENSAddressProps & {
   truncate?: boolean
   truncateSize: number
@@ -30,33 +30,33 @@ function ENSAddressSuspended({
 
 function ENSAddress({
   address,
+  eNSName,
   network,
   truncateSize,
-  eNSName,
 }: ENSAddressProps & { truncateSize: number }) {
   return (
     <Suspense fallback={truncateMiddleIfNeeded(address, truncateSize)}>
       <ENSAddressSuspended
         truncate
         address={address}
+        eNSName={eNSName}
         network={network}
         truncateSize={truncateSize}
-        eNSName={eNSName}
       />
     </Suspense>
   )
 }
 
 export default memo<ENSAddressProps & { truncateSize?: number }>(
-  ({ address, network, truncateSize, eNSName }) => {
+  ({ address, eNSName, network, truncateSize }) => {
     // Used for gradient link. It won't work if we wrap it with a span
     if (truncateSize)
       return (
         <ENSAddress
           address={address}
+          eNSName={eNSName}
           network={network}
           truncateSize={truncateSize}
-          eNSName={eNSName}
         />
       )
 
@@ -64,24 +64,24 @@ export default memo<ENSAddressProps & { truncateSize?: number }>(
       <>
         <span className={displayTo('md')}>
           <ENSAddress
-            eNSName={eNSName}
             address={address}
+            eNSName={eNSName}
             network={network}
             truncateSize={11}
           />
         </span>
         <span className={display(displayFrom('md'), 'lg:hidden')}>
           <ENSAddress
-            eNSName={eNSName}
             address={address}
+            eNSName={eNSName}
             network={network}
             truncateSize={17}
           />
         </span>
         <span className={displayFrom('lg')}>
           <ENSAddress
-            eNSName={eNSName}
             address={address}
+            eNSName={eNSName}
             network={network}
             truncateSize={25}
           />
