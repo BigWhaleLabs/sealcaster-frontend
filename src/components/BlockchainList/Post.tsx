@@ -1,14 +1,10 @@
-import {
-  BodyText,
-  PostText,
-  QuestionOfDayText,
-  StatusText,
-} from 'components/ui/Text'
+import { BodyText, QuestionOfDayText, StatusText } from 'components/ui/Text'
 import { displayFrom } from 'helpers/visibilityClassnames'
 import { useLocation } from 'wouter'
 import Card from 'components/ui/Card'
 import Delimiter from 'components/ui/Delimiter'
 import EtherScanLink from 'components/BlockchainList/EtherScanLink'
+import PostTextWithLinks from 'components/BlockchainList/PostTextWithLinks'
 import PostTime from 'components/BlockchainList/PostTime'
 import Sender from 'components/BlockchainList/Sender'
 import Status from 'components/BlockchainList/Status'
@@ -95,7 +91,7 @@ export default function ({
           {isQuestionOfTheDay && (
             <QuestionOfDayText>Question of the day:</QuestionOfDayText>
           )}
-          <PostText>{text}</PostText>
+          <PostTextWithLinks text={text} />
 
           <div className={postBottom}>
             <BodyText primary>
