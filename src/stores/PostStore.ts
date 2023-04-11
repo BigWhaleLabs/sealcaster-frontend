@@ -1,7 +1,7 @@
 import { BigNumber } from 'ethers'
 import { PostStatus } from 'models/PostStatus'
 import { PostStructOutput } from '@big-whale-labs/seal-cred-posts-contract/dist/typechain/contracts/SCPostStorage'
-import { Result } from 'ethers/lib/utils'
+import { Result, hexZeroPad } from 'ethers/lib/utils'
 import { SCPostStorage__factory } from '@big-whale-labs/seal-cred-posts-contract'
 import { proxy } from 'valtio'
 import { subscribeKey } from 'valtio/utils'
@@ -56,7 +56,7 @@ const PostStore = proxy<PostStoreType>({
       text,
       'farcaster',
       threadId,
-      replyToId || ReplyIdDefault
+      hexZeroPad(replyToId || ReplyIdDefault, 32)
     )
     const result = await transaction.wait()
 
