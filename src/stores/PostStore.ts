@@ -32,16 +32,17 @@ interface PostStoreType {
 }
 
 const farcasterContract = getPostStorage()
+const heavyFarcasterContract = getPostStorage(false)
 
 const limit = 20
 
 const PostStore = proxy<PostStoreType>({
   limit,
-  countPosts: farcasterContract.currentPostId(),
+  countPosts: heavyFarcasterContract.currentPostId(),
   threads: {},
   posts: {},
   requested: {},
-  idToPostTx: getIdsToPostsTx(farcasterContract),
+  idToPostTx: getIdsToPostsTx(heavyFarcasterContract),
   createPost: async (text: string, threadId: number, replyToId?: string) => {
     let signer = await BurnerWalletStore.getSigner()
 
@@ -100,7 +101,10 @@ export async function fetchThread(threadId: number) {
   PostStore.requested[threadId] = true
 
   try {
-    const posts = await safeGetThreadFromContract(threadId, farcasterContract)
+    const posts = await safeGetThreadFromContract(
+      threadId,
+      heavyFarcasterContract
+    )
     const postsIds = posts.map((post) => post.id.toNumber())
     PostStore.threads[threadId] = Promise.resolve(postsIds)
     posts.forEach((post) => {
