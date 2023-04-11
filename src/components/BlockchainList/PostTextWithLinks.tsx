@@ -1,8 +1,8 @@
-import Linkify from 'react-linkify'
 import { LinkText, PostText } from 'components/ui/Text'
+import Linkify from 'react-linkify'
 
 const componentDecorator = (href: string, text: string, key: number) => (
-  <LinkText url={href} key={key}>
+  <LinkText key={key} url={href}>
     {text}
   </LinkText>
 )
