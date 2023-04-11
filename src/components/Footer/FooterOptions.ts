@@ -2,12 +2,12 @@ export default {
   blog: {
     url: 'https://blog.bigwhalelabs.com',
   },
-  terms: {
-    url: '/terms',
-    text: 'Terms of service',
-  },
   privacy: {
-    url: '/privacy',
     text: 'Privacy policy',
+    url: '/privacy',
+  },
+  terms: {
+    text: 'Terms of service',
+    url: '/terms',
   },
 } as { [key: string]: { url: string; text?: string } }

@@ -7,7 +7,7 @@ interface LinkButtonProps {
   approved?: boolean
 }
 
-export default function ({ url, approved }: LinkButtonProps) {
+export default function ({ approved, url }: LinkButtonProps) {
   const [, setLocation] = useLocation()
 
   const linkTitle = approved
@@ -16,9 +16,9 @@ export default function ({ url, approved }: LinkButtonProps) {
 
   return (
     <Button
+      gradientFont
       small
       withArrow
-      gradientFont
       type="tertiary"
       onClick={() => {
         setLocation(url)

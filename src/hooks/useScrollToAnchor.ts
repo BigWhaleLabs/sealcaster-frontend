@@ -32,17 +32,17 @@ export const scrollToHashElement = (
     position = offsetTop - window.innerHeight / 2 - offset
 
   window.scrollTo({
-    top: position,
     behavior: 'smooth',
+    top: position,
   })
 
   if (callback) callback(elementToScroll, position)
 }
 
 export default function useScrollToAnchor({
+  callback,
   offset = 0,
   trigger = true,
-  callback,
 }: ScrollToAnchorProps) {
   useEffect(() => {
     scrollToHashElement(offset, callback)

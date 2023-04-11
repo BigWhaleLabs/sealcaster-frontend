@@ -21,12 +21,12 @@ const replyButtonWrapper = classnames(
 )
 
 export default function ({
+  canReply,
   count,
   placeholder,
   replyText,
-  threadId,
   replyToId,
-  canReply,
+  threadId,
 }: {
   count?: number
   placeholder: string
@@ -42,9 +42,9 @@ export default function ({
 
       <div className={replyButtonWrapper}>
         <Button
+          disabled={!canReply}
           type="tertiary"
           onClick={() => setInputOpen(!inputOpen)}
-          disabled={!canReply}
         >
           {canReply && <ReplyIcon />}
           <AccentText small color="text-formal-accent">
@@ -58,7 +58,7 @@ export default function ({
             </span>
           </AccentText>
           {count && (
-            <AccentText primary color="text-primary-semi-dimmed" extraSmall>
+            <AccentText extraSmall primary color="text-primary-semi-dimmed">
               ({count})
             </AccentText>
           )}
@@ -66,9 +66,9 @@ export default function ({
       </div>
       {inputOpen && (
         <ReplyInput
-          threadId={threadId}
-          replyToId={replyToId}
           placeholder={placeholder}
+          replyToId={replyToId}
+          threadId={threadId}
         />
       )}
     </>

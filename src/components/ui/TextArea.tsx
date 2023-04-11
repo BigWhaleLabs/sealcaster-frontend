@@ -69,11 +69,11 @@ interface TextAreaProps {
 }
 
 export default function ({
-  text,
-  onTextChange,
   disabled,
   error,
   maxLength,
+  onTextChange,
+  text,
   ...restProps
 }: TextAreaProps & TextareaAutosizeProps) {
   const isValid = !error && text.length <= maxLength
@@ -85,14 +85,14 @@ export default function ({
           <TextareaText dark={disabled}>
             <TextareaAutosize
               className={textBox}
-              value={text}
-              onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
-                onTextChange(event.currentTarget.value)
-              }}
               disabled={disabled}
               maxLength={maxLength}
               minRows={3}
               spellcheck={true}
+              value={text}
+              onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
+                onTextChange(event.currentTarget.value)
+              }}
               {...restProps}
             />
           </TextareaText>
@@ -100,7 +100,7 @@ export default function ({
         </div>
       </div>
       {error && (
-        <ErrorText visible={!!error} withExclamation>
+        <ErrorText withExclamation visible={!!error}>
           {parseError(error)}
         </ErrorText>
       )}

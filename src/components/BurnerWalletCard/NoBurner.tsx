@@ -35,8 +35,8 @@ const mobileTitle = classnames(
 
 export function NoNurnerSuspended() {
   const {
-    account: walletStoreAccount,
     acceptedNotBurner,
+    account: walletStoreAccount,
     hasFarcasterBadge,
   } = useSnapshot(WalletStore)
   const account = useBadgeAccount()
@@ -66,11 +66,11 @@ export function NoNurnerSuspended() {
                   triangleColor="stroke-error"
                 />
               </div>
-              <AccentText color="text-error" primary large bold>
+              <AccentText bold large primary color="text-error">
                 You didn’t connect a burner.
               </AccentText>
             </div>
-            <BodyText primary large>
+            <BodyText large primary>
               That’s okay, you can still post with a burner wallet. Or you can
               disconnect your wallet and connect a burner.
             </BodyText>

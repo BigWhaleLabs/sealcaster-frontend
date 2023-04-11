@@ -37,12 +37,7 @@ const heavyFarcasterContract = getPostStorage(false)
 const limit = 20
 
 const PostStore = proxy<PostStoreType>({
-  limit,
   countPosts: heavyFarcasterContract.currentPostId(),
-  threads: {},
-  posts: {},
-  requested: {},
-  idToPostTx: getIdsToPostsTx(heavyFarcasterContract),
   createPost: async (text: string, threadId: number, replyToId?: string) => {
     let signer = await BurnerWalletStore.getSigner()
 
@@ -81,6 +76,11 @@ const PostStore = proxy<PostStoreType>({
         .map(({ args }) => args)
     )
   },
+  idToPostTx: getIdsToPostsTx(heavyFarcasterContract),
+  limit,
+  posts: {},
+  requested: {},
+  threads: {},
 })
 
 subscribeKey(PostStore, 'posts', (posts) => {
@@ -141,13 +141,13 @@ farcasterContract.on(
   ) => {
     PostStore.countPosts = Promise.resolve(id)
     PostStore.posts[id.toNumber()] = Promise.resolve({
+      derivativeAddress,
       id,
       post,
-      derivativeAddress,
-      sender,
-      timestamp,
-      threadId,
       replyToId,
+      sender,
+      threadId,
+      timestamp,
     } as PostStructOutput)
 
     const thread = (await PostStore.threads[threadId.toNumber()]) || []

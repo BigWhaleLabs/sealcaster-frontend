@@ -36,7 +36,7 @@ export default function ({ sentences }: { sentences: string[] }) {
     <div className={ticker}>
       {texts.map((text) => (
         <span className={oneLine}>
-          <AccentText color="text-tertiary" bold extraSmall>
+          <AccentText bold extraSmall color="text-tertiary">
             {text}
           </AccentText>
         </span>

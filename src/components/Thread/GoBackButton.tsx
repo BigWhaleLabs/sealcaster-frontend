@@ -22,7 +22,7 @@ export default function () {
     <Link href="#/">
       <div className={wrapper}>
         <div className={width('w-2')}>
-          <Arrow horizontal reversed pulseDisabled />
+          <Arrow horizontal pulseDisabled reversed />
         </div>
         <GradientText>Back</GradientText>
       </div>

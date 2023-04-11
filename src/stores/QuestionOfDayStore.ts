@@ -13,8 +13,8 @@ interface QodStoreType {
 const contract = getPostStorage(false)
 
 const state = proxy<QodStoreType>({
-  qodAddress: contract.replyAllAddress(),
   allQodPostIds: getQuestionOfTheDayIds(contract),
+  qodAddress: contract.replyAllAddress(),
 })
 
 const QodStore = derive(
@@ -30,7 +30,7 @@ const QodStore = derive(
       const post = await contract
         .posts(lastId - 1)
         .then(safeTransformPostOutput)
-      return { qod: post, hash: hash[0].serviceId }
+      return { hash: hash[0].serviceId, qod: post }
     },
   },
   { proxy: state }

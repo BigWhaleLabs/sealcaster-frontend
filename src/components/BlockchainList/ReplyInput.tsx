@@ -16,9 +16,9 @@ export default function ({
 
   return (
     <CastBlock
-      threadId={threadId}
-      replyToId={replyToId}
       placeHolder={placeholder}
+      replyToId={replyToId}
+      threadId={threadId}
       leftBlock={
         account ? (
           <StatusText>

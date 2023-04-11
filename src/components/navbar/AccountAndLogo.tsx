@@ -10,8 +10,8 @@ const walletAccount = classnames(
 export default function ({
   account,
   connected,
-  needNetworkChange,
   eNSName,
+  needNetworkChange,
 }: {
   account?: string
   needNetworkChange: boolean
@@ -22,8 +22,8 @@ export default function ({
     <>
       <div className={walletAccount}>
         <Account
-          eNSName={eNSName}
           account={account}
+          eNSName={eNSName}
           needNetworkChange={needNetworkChange}
         />
       </div>

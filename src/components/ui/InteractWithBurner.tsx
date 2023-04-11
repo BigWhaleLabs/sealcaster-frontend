@@ -20,10 +20,10 @@ export default function () {
         headerText="Nothing lasts forever"
         mainText="That’s okay! You can choose to cast with a different burner wallet each time."
         tertiaryButton={{
-          text: 'Got it',
           action: () => {
             BurnerInteractionStore.interactionClosed = true
           },
+          text: 'Got it',
         }}
       />
     )
@@ -35,18 +35,18 @@ export default function () {
         headerText="Are you sure you want to destroy this burner?"
         mainText="If you chose to destroy it or ignore this message, you will lose the wallet forever."
         primaryButton={{
-          text: 'Yes, destroy it',
           action: () => {
             BurnerWalletStore.burn()
             setBurnerDestroyed(true)
           },
+          text: 'Yes, destroy it',
         }}
         tertiaryButton={{
-          text: 'View it',
           action: () => {
             BurnerInteractionStore.interactionClosed = true
             setLocation('#/wallet')
           },
+          text: 'View it',
         }}
       />
     )
@@ -58,17 +58,17 @@ export default function () {
       headerText="Burner wallet unlocked"
       mainText="You’ve casted using a new burner wallet. This wallet contains a ZK badge that verifies its owner is a Farcaster user, but is completely anonymous. Feel free to keep it or destory it. If you chose to destroy it or ignore this message, you will lose the wallet forever."
       primaryButton={{
-        text: 'View burner',
         action: () => {
           BurnerInteractionStore.interactionClosed = true
           setLocation('#/wallet')
         },
+        text: 'View burner',
       }}
       tertiaryButton={{
-        text: 'Destroy burner',
         action: () => {
           setDestroyBurner(true)
         },
+        text: 'Destroy burner',
       }}
     />
   )

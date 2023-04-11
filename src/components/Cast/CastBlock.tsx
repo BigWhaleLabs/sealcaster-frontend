@@ -13,11 +13,11 @@ import WalletStore from 'stores/WalletStore'
 import createPost from 'helpers/createPost'
 
 export default function ({
-  placeHolder = 'Write something here...',
-  threadId,
-  replyToId = ReplyIdDefault,
   buttonText,
   leftBlock,
+  placeHolder = 'Write something here...',
+  replyToId = ReplyIdDefault,
+  threadId,
 }: {
   placeHolder?: string
   threadId: number
@@ -26,7 +26,7 @@ export default function ({
   buttonText?: string
 }) {
   const { account } = useSnapshot(WalletStore)
-  const { replyToText, loading, error } = useSnapshot(TextFormStore, {
+  const { error, loading, replyToText } = useSnapshot(TextFormStore, {
     sync: true,
   })
   const text = replyToText[replyToId] || ''
@@ -42,47 +42,47 @@ export default function ({
       !TextFormStore.loading[replyToId]
     )
       void createPost({
+        askReconnect: false,
+        replyToId,
         ['text']: TextFormStore.replyToText[replyToId] || '',
         threadId,
-        replyToId,
-        askReconnect: false,
       })
   }, [account, replyToId, threadId])
 
   return (
     <div className={space('md:space-y-4', 'space-y-8')}>
       <TextArea
-        text={text}
         disabled={showStatus}
+        maxLength={maxLength}
         placeholder={placeHolder}
+        text={text}
         onTextChange={(text) => {
           TextFormStore.replyToText[replyToId] = text
         }}
-        maxLength={maxLength}
       />
       {showStatus ? (
         <VerifyWallet
+          error={error[replyToId]}
           status={status}
           text={
             BurnerWalletStore.status === 'Posting cast'
               ? 'Hang tight! We’re casting now.'
               : 'We need to verify that you are indeed a Farcaster user. Please connect the wallet you have connected to Farcaster to attest your identity. Don’t worry, we will not use this wallet to post or to point back to you in any way.'
           }
-          error={error[replyToId]}
           onButtonClick={() => {
             TextFormStore.error[replyToId] = null
           }}
         />
       ) : (
         <TextareaInfo
-          loading={loading[replyToId]}
-          onButtonClick={() => {
-            void createPost({ text, threadId, replyToId })
-          }}
+          buttonText={buttonText}
           disabled={!text}
           error={errorMessage}
           leftBlock={leftBlock}
-          buttonText={buttonText}
+          loading={loading[replyToId]}
+          onButtonClick={() => {
+            void createPost({ replyToId, text, threadId })
+          }}
         />
       )}
     </div>

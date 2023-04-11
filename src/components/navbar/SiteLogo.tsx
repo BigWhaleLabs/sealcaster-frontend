@@ -35,14 +35,14 @@ export default function ({ logoText }: { logoText: VNode | string }) {
   const lottieRef = useRef<Player>()
 
   return (
-    <Link href="#/" className={classNamesToString(logoContainer)}>
+    <Link className={classNamesToString(logoContainer)} href="#/">
       <div
         className={logoWrapper}
         onTouchStart={() => {
           lottieRef.current?.play()
         }}
       >
-        <Player ref={lottieRef} hover src={AnimatedLogo} />
+        <Player hover ref={lottieRef} src={AnimatedLogo} />
       </div>
       <div className={logoWithVersion}>
         {typeof logoText === 'string' ? (

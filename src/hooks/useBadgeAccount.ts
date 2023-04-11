@@ -5,7 +5,7 @@ import walletStore from 'stores/WalletStore'
 
 export default function () {
   const { account } = useSnapshot(walletStore)
-  const { privateKey, generatingBurner } = useSnapshot(BurnerWalletStore)
+  const { generatingBurner, privateKey } = useSnapshot(BurnerWalletStore)
 
   if (generatingBurner || privateKey)
     return privateKey ? new Wallet(privateKey).address : account

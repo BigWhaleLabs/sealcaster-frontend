@@ -30,7 +30,7 @@ const uhOhText = classnames(
 
 export default function () {
   return (
-    <BareCard centered gapY bigPaddings>
+    <BareCard bigPaddings centered gapY>
       <SadSealColorful />
       <h1 className={classNamesToString('colorful-gradient', uhOhText)}>
         UH-OH
@@ -40,7 +40,7 @@ export default function () {
         retry your link or check out the latest.
       </BodyText>
       <Link href="#/">
-        <Button type="primary" small center>
+        <Button center small type="primary">
           View recent casts
         </Button>
       </Link>

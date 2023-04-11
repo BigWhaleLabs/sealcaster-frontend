@@ -34,7 +34,7 @@ function QuestionsOfDaySuspended() {
   const { allQodPostIds, lastQoDPost } = useSnapshot(QuestionOfDayStore)
   const lastQoDId = Math.max(...allQodPostIds)
   if (!lastQoDPost || !lastQoDId) return null
-  const { qod, hash } = lastQoDPost
+  const { hash, qod } = lastQoDPost
 
   return (
     <div className={position('relative')}>
@@ -49,10 +49,10 @@ function QuestionsOfDaySuspended() {
         </Link>
         <StickLabel />
         <Replies
-          threadId={lastQoDId}
-          replyToId={hash}
-          placeholder="Answer today’s question..."
           canReply
+          placeholder="Answer today’s question..."
+          replyToId={hash}
+          threadId={lastQoDId}
         />
       </Card>
     </div>
