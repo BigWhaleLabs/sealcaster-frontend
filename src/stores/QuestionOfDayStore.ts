@@ -10,7 +10,7 @@ interface QodStoreType {
   allQodPostIds: Promise<number[]>
 }
 
-const contract = getPostStorage()
+const contract = getPostStorage(false)
 
 const state = proxy<QodStoreType>({
   allQodPostIds: getQuestionOfTheDayIds(contract),
