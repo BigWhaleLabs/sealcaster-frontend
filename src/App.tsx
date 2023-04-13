@@ -2,6 +2,7 @@ import { Redirect, Route, Router, Switch } from 'wouter'
 import { ToastContainer } from 'react-toastify'
 import { lazy } from 'preact/compat'
 import BurnerWallet from 'pages/BurnerWallet'
+import Cookie from 'components/ui/Cookie'
 import Footer from 'components/Footer'
 import InteractWithBurner from 'components/ui/InteractWithBurner'
 import LazyComponent from 'components/LazyComponent'
@@ -91,6 +92,7 @@ export default function () {
           </div>
           {displayScrollToTop && <ScrollToTopButton />}
         </div>
+        <Cookie />
         <Footer />
       </div>
       <InteractWithBurner />

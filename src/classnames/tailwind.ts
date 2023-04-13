@@ -7552,6 +7552,7 @@ export type TMaxWidth =
   | 'max-w-screen-lg'
   | 'max-w-screen-xl'
   | 'max-w-screen-2xl'
+  | 'max-w-cookie'
   | 'max-w-processing-content'
   | 'max-w-body'
   | 'max-w-screen-xxs'

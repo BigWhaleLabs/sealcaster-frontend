@@ -160,6 +160,15 @@ circle {
   padding: 0.15rem;
   isolation: isolate;
 }
+.shadow-card-glow {
+  box-shadow: var(--transparent) 0px 0px 0px 0px,
+    var(--transparent) 0px 0px 0px 0px,
+    var(--primary-semi-transparent) 0px 4px 44px 0px,
+    var(--primary-semi-transparent) 0px 0px 16px 0px inset;
+  /* --tw-shadow-colored: 0rem 0.25rem 2.75rem 0rem var(--tw-shadow-color), inset 0px 0px 1rem var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); */
+}
+
 .shadow-card {
   box-shadow: inset 0rem 0rem 0.5rem 0 var(--light-formal-accent);
 }
