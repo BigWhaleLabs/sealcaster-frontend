@@ -10,6 +10,7 @@ type AllowedExtraClassnames =
   | 'animated-border'
   | 'hover-button-scroll'
   | 'shadow-card'
+  | 'shadow-card-glow'
   | 'stroke-text-secondary'
   | 'empty:hidden'
   | 'colorful-gradient'

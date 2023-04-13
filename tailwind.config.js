@@ -72,6 +72,7 @@ module.exports = {
       maxWidth: {
         14: '3.5rem',
         84: '21rem',
+        cookie: '25.625rem',
         'processing-content': '27.875rem',
         body: '40.375rem',
       },
@@ -103,6 +104,7 @@ module.exports = {
         md: '0rem 0rem 0.375rem 0rem rgb(0 0 0 / 0.25)',
         button: '0rem 0rem 1.625rem rgb(0 0 0 / 1)',
         'button-active': '0rem 0rem 0.375rem rgb(0 0 0 / 1)',
+        card: '0rem 0.25rem 2.75rem 0rem rgb(0 0 0 / 0.25), inset 0px 0px 1rem rgb(0 0 0 / 0.25)',
       },
       dropShadow: {
         'primary-dimmed': '0 0 4rem var(--primary-dimmed)',

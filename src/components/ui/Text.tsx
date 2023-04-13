@@ -591,3 +591,14 @@ const questionOfDayPostText = classnames(
 export function QuestionOfDayPostText({ children }: ChildrenProp) {
   return <h1 className={questionOfDayPostText}>{children}</h1>
 }
+
+const cookieText = classnames(
+  textColor('text-formal-accent'),
+  fontFamily('font-primary'),
+  fontSize('text-base', 'sm:text-lg'),
+  fontWeight('font-bold'),
+  lineHeight('leading-6')
+)
+export function CookieText({ children }: ChildrenProp) {
+  return <p className={cookieText}>{children}</p>
+}
