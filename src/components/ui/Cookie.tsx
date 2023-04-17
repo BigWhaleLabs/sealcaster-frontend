@@ -26,22 +26,22 @@ const basicCardStyles = classnames(
   flexDirection('flex-col'),
   position('fixed'),
   inset(
-    'left-8',
-    'right-8',
+    'left-1',
+    'right-1',
     'bottom-3',
-    'sm:right-auto',
-    'sm:bottom-24',
-    'md:bottom-10'
+    'sm:left-auto',
+    'sm:right-5',
+    'md:bottom-9'
   ),
   gap('gap-y-3', 'sm:gap-y-6'),
   backgroundColor('bg-primary-dark'),
-  padding('p-6'),
+  padding('p-4', 'sm:p-6'),
   borderRadius('rounded-2xl'),
   borderWidth('border'),
   borderColor('border-primary'),
   boxShadowColor('shadow-primary-semi-transparent'),
   maxWidth('max-w-full', 'sm:max-w-cookie'),
-  zIndex('z-20')
+  zIndex('z-40')
 )
 const button = (small?: boolean) =>
   classnames(
