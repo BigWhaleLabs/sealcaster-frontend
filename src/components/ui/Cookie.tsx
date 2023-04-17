@@ -29,9 +29,9 @@ const basicCardStyles = classnames(
     'left-1',
     'right-1',
     'bottom-3',
-    'sm:right-auto',
-    'sm:left-8',
-    'md:bottom-10'
+    'sm:left-auto',
+    'sm:right-5',
+    'md:bottom-9'
   ),
   gap('gap-y-3', 'sm:gap-y-6'),
   backgroundColor('bg-primary-dark'),
@@ -41,7 +41,7 @@ const basicCardStyles = classnames(
   borderColor('border-primary'),
   boxShadowColor('shadow-primary-semi-transparent'),
   maxWidth('max-w-full', 'sm:max-w-cookie'),
-  zIndex('z-20')
+  zIndex('z-40')
 )
 const button = (small?: boolean) =>
   classnames(
